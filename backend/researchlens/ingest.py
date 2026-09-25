@@ -2,6 +2,7 @@
 
 This initial extractor accepts text only. PDF extraction and license-reviewed
 """
+
 import hashlib
 import json
 from pathlib import Path
