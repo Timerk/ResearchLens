@@ -1,0 +1,55 @@
+<header>
+  <a class="brand" href="/">ResearchLens<span> / lab</span></a>
+  <span class="badge">Local preview · No API charges</span>
+</header>
+<main>
+  <p class="eyebrow">Technical innovation research</p>
+  <h1>Explore the evidence.<br><span>Inspect the source.</span></h1>
+  <p class="intro">Search a small document collection and read the passages behind each result.</p>
+  <aside class="notice">
+    <strong>Development corpus</strong>
+    These three documents are invented test fixtures, not technical evidence.
+    This version uses word matching and does not generate LLM answers.
+  </aside>
+  <form (ngSubmit)="ask()">
+    <label for="question">Your research question</label>
+    <textarea id="question" name="question" [(ngModel)]="question" rows="3"
+      required minlength="3" maxlength="2000" [disabled]="pending()"></textarea>
+    <div class="form-footer">
+      <span>Try a method, defect type, or reported limitation.</span>
+      <button type="submit" [disabled]="pending() || question.trim().length < 3">
+        {{ pending() ? 'Searching…' : 'Find passages →' }}
+      </button>
+    </div>
+  </form>
+  @if (error()) { <p role="alert" class="notice error">{{ error() }}</p> }
+  <section aria-live="polite" aria-atomic="true">
+    @if (answer(); as result) {
+      <div class="result-heading">
+        <h2>{{ result.status === 'no_matches' ? 'No matching passages' : 'Retrieved passages' }}</h2>
+        <span>{{ result.latency_ms }} ms server time</span>
+      </div>
+      <p>{{ result.message }}</p>
+      @for (passage of result.passages; track passage.id) {
+        <article>
+          <p class="eyebrow">{{ passage.kind }} · Paragraph {{ passage.paragraph }}</p>
+          <h3>{{ passage.title }}</h3>
+          <blockquote>{{ passage.text }}</blockquote>
+          <details>
+            <summary>Inspect reference</summary>
+            <dl>
+              <dt>Passage ID</dt><dd>{{ passage.id }}</dd>
+              <dt>License</dt><dd>{{ passage.license }}</dd>
+              <dt>Source</dt><dd>
+                @if (passage.source_url; as url) {
+                  <a [href]="url" target="_blank" rel="noopener noreferrer">Original document ↗</a>
+                } @else { Local synthetic fixture; no external publication }
+              </dd>
+            </dl>
+          </details>
+        </article>
+      }
+    }
+  </section>
+  <footer>Independent portfolio project.</footer>
+</main>
