@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fixture-bright-field",
+    "title": "Synthetic fixture: bright-field inspection",
+    "source_url": null,
+    "license": "CC0-1.0",
+    "kind": "synthetic",
+    "text": "This is invented software test material, not a technical publication.\n\nIn this fictional experiment, bright-field imaging detected surface scratches when they produced intensity contrast. Uneven illumination caused false detections. The experiment did not measure a minimum detectable defect size."
+  },
+  {
+    "id": "fixture-dark-field",
+    "title": "Synthetic fixture: dark-field inspection",
+    "source_url": null,
+    "license": "CC0-1.0",
+    "kind": "synthetic",
+    "text": "This is invented software test material, not a technical publication.\n\nIn this fictional experiment, dark-field imaging detected small surface defects through scattered light. Dust also scattered light and caused false positives. No comparison of detection accuracy against bright-field imaging was performed."
+  },
+  {
+    "id": "fixture-learning",
+    "title": "Synthetic fixture: learned anomaly detection",
+    "source_url": null,
+    "license": "CC0-1.0",
+    "kind": "synthetic",
+    "text": "This is invented software test material, not a technical publication.\n\nIn this fictional experiment, an anomaly detection model trained on defect-free surface images flagged unusual textures. A change in camera illumination reduced reliability. The experiment did not evaluate unseen material types or report inference latency."
+  }
+]
