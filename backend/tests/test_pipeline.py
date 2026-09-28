@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from researchlens.api import create_app
+from researchlens.config import Settings
 from researchlens.ingest import CORPUS, build_index, chunk_documents
 from researchlens.models import Document
 from researchlens.retrieval import Retriever
@@ -10,7 +11,7 @@ from researchlens.retrieval import Retriever
 def client(tmp_path):
     index = tmp_path / "index.json"
     build_index(CORPUS, index)
-    with TestClient(create_app(Retriever.from_path(index))) as client:
+    with TestClient(create_app(Retriever.from_path(index), settings=Settings())) as client:
         yield client
 
 

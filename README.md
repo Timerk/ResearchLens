@@ -1,13 +1,14 @@
 # ResearchLens
 
 An independent portfolio project for exploring a curated technical document collection.
-The intended application will answer research questions with
-inspectable supporting passages and distinguish findings from suggestions.
+The application answers research questions from retrieved document passages,
+with inspectable citations and explicit insufficient-evidence responses.
 
-The first slice runs Angular and FastAPI end to end with three **synthetic test documents**.
-It retrieves passages using TF-IDF word matching. It does not yet call an LLM, compute
-semantic embeddings, or determine whether evidence is sufficient. Do not treat the
-fixtures as technical findings.
+Angular and FastAPI run end to end with three **synthetic test documents**.
+Retrieval uses TF-IDF word matching. Local mode shows matching passages; OpenAI mode
+generates document-only answers with validated passage references. Semantic embeddings
+are not implemented. Do not treat the fixtures as technical findings or valid citation
+IDs as proof that a claim is supported.
 
 ## Run locally
 
@@ -29,11 +30,45 @@ rtk npm start
 Open <http://127.0.0.1:4200>. API documentation is at <http://127.0.0.1:8000/docs>.
 RTK is the workspace command wrapper; if it is not installed on another machine,
 run the underlying commands without `rtk` or `rtk proxy`.
-No API key is needed. `.env.example` explains the current configuration status;
-the preview does not load an environment file.
+Local mode needs no API key. The backend reads `.env` from the repository root;
+process environment variables take precedence. On Windows, `py -m uv` can replace
+`uv` if it is installed as a Python module but not on PATH.
+
+### Enable document-only OpenAI answers
+
+Create `.env` using `.env.example` as a guide (preserve your existing key if present):
+
+```dotenv
+ANSWER_PROVIDER=openai
+OPENAI_API_KEY=your-key-here
+OPENAI_MODEL=gpt-6-luna
+```
+
+Restart the backend after changing settings. `.env` is ignored by Git. The key stays
+on the backend and is never included in frontend responses. OpenAI mode fails at
+startup when the key or model is empty. Model access and key validity are checked by
+the first API request. Set `ANSWER_PROVIDER=local` to return to the free preview.
+The header shows the active mode from `/api/health`.
+
+OpenAI requests use the Responses API with **medium reasoning**, no automatic retries,
+a 45-second network timeout, and at most 2,000 output tokens including reasoning.
+Questions are limited to 2,000 characters. Context is capped at four passages,
+3,000 characters per passage and 16,000 serialized context characters in total.
+The question and selected passage text are sent to OpenAI with `store=false`;
+no conversation history, tools, or full-corpus upload is used. Account-level data
+retention rules still apply.
+
+Answers contain cited sections or an explicit abstention. Unknown citation IDs,
+uncited sections, malformed output, and incomplete responses are rejected. No
+matching passages means no API request. Failed API requests surface an error;
+the app does not silently fall back to preview mode. Response metadata includes
+model, latency and token usage; `estimated_api_cost_usd` is `null` for paid requests
+because billing rates are not hardcoded, and zero when no API call was made.
 
 Try `Does dust cause false positives?` and inspect the first reference. Then try
 `Who composed Beethoven symphonies?` for the no-match state.
+In OpenAI mode, try `What is the minimum detectable defect size in micrometers for
+bright-field imaging?` for an insufficient-evidence response.
 
 ## Verify
 
@@ -58,8 +93,9 @@ Angular → POST /api/ask → TF-IDF retrieval → answer provider → passage r
   and writes a corpus hash and deterministic passage IDs. Rebuild after corpus edits.
 - `retrieval.py` rebuilds a small TF-IDF matrix at startup. Cosine similarity ranks
   shared words. A positive score is not proof of answerability.
-- `answers.py` defines the provider boundary and an honest local preview. A later
-  provider will receive the question and retrieved passages, never the entire corpus.
+- `answers.py` implements the local preview and OpenAI provider, structured output,
+  bounded context, document-only instructions and citation validation.
+- `config.py` reads backend-only configuration without modifying the process environment.
 - `api.py` owns HTTP validation and request timing. Missing or corrupt indexes
   stop startup with an actionable message.
 - Angular displays plain text and expandable reference metadata. Its development
@@ -75,28 +111,29 @@ until a concrete requirement justifies them.
 
 ## Milestones
 
-1. Local preview: complete implementation and automated checks. Browser verification
+1. Local preview and document-only OpenAI integration: implemented and checked with
+   automated tests and a small Luna/medium live smoke test. Browser verification
    is pending because no browser connection was available in the development session.
 2. Baseline RAG: curate 15–30 authorized documents; record source URL, author, date,
    license and permission evidence. Add PDF/text extraction with page references,
-   local embeddings, and an LLM provider with structured citations, timeouts,
-   token accounting and explicit insufficient-evidence responses.
+   and local embeddings. Evaluate the implemented LLM provider's citations and
+   insufficient-evidence behavior on the reviewed corpus.
 3. Evaluation: review roughly 20 held-out questions, run retrieval and answer
    evaluation, report failures and costs, and capture a demonstration.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 
-Available budget is approximately $5 each on OpenAI and Anthropic. Start with
-`gpt-6-luna`, subject to account availability, and reserve Haiku for comparison.
-No API calls have been made. Before paid runs, cap output, disable uncontrolled
-retries, and check a projected run budget. Application estimates do not enforce a
-provider-wide hard spending cap.
+Available budget is approximately $5 each on OpenAI and Anthropic. The default is
+`gpt-6-luna`; the implementation smoke test used only Luna with medium reasoning.
+Before larger paid runs, check a projected run budget. Per-request limits do not
+enforce a provider-wide hard spending cap or limit the number of user submissions.
 
 The [official Luna model page](https://developers.openai.com/api/docs/models/gpt-6-luna),
-checked on 2026-09-25, lists standard rates of $0.10 per million input tokens and $0.50
-per million output tokens. At 4,000 input and 600 output tokens, a request would cost
-$0.0007, before additional reasoning tokens, retries or other charges. This is a
-planning example, not measured project usage. Recheck rates before the paid baseline.
+checked on 2026-09-28, lists standard rates of $0.10 per million input tokens and $0.50
+per million output tokens. The two live implementation checks reported 929 input
+and 82 output tokens in total, an estimated $0.000134 at those rates, not an invoice.
+Recheck rates before the paid baseline. The provider follows the official
+[structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs).
 
 ## Learning checkpoint
 
