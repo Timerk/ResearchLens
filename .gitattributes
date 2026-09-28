@@ -1,0 +1,3 @@
+# Corpus hashes must be identical on Windows and Linux.
+data/*.json text eol=lf
+evaluation/datasets/*.json text eol=lf

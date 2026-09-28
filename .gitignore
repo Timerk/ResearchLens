@@ -7,3 +7,4 @@ node_modules/
 dist/
 .angular/
 data/index.json
+evaluation/runs/
