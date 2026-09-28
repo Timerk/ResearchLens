@@ -5,28 +5,28 @@ from fastapi import FastAPI, HTTPException
 
 from researchlens.answers import AnswerProvider, LocalPreview, OpenAIProvider, ProviderError
 from researchlens.config import Settings
-from researchlens.ingest import INDEX
 from researchlens.models import Answer, Question
-from researchlens.retrieval import Retriever
+from researchlens.retrieval import PassageRetriever, load_retriever
 
 
 def create_app(
-    retriever: Retriever | None = None,
+    retriever: PassageRetriever | None = None,
     settings: Settings | None = None,
     provider: AnswerProvider | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
+        active_settings = settings if settings is not None else Settings.from_env()
         app.state.retriever = retriever
         if app.state.retriever is None:
             try:
-                app.state.retriever = Retriever.from_path(INDEX)
-            except (OSError, ValueError, KeyError) as exc:
-                raise RuntimeError(
-                    "Index missing or invalid. Run: "
-                    "uv run --directory backend python -m researchlens.ingest"
-                ) from exc
-        active_settings = settings if settings is not None else Settings.from_env()
+                app.state.retriever = load_retriever(
+                    active_settings.retrieval,
+                    active_settings.index_path,
+                    source=active_settings.corpus_path,
+                )
+            except ValueError as exc:
+                raise RuntimeError(str(exc)) from exc
         app.state.mode = "openai" if active_settings.provider == "openai" else "local_preview"
         app.state.provider = (
             provider
@@ -52,7 +52,7 @@ def create_app(
     @app.post("/api/ask", response_model=Answer)
     def ask(request: Question) -> Answer:
         started = perf_counter()
-        active_retriever: Retriever | None = app.state.retriever
+        active_retriever: PassageRetriever | None = app.state.retriever
         if active_retriever is None:
             raise HTTPException(status_code=503, detail="Document index is unavailable")
         passages = active_retriever.search(request.question)

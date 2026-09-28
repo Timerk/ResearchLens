@@ -90,11 +90,11 @@ class LocalPreview:
         return Answer(
             status="passages_found" if passages else "no_matches",
             message=(
-                "These passages share terms with your question. Review them below; "
+                "These passages were retrieved for your question. Review them below; "
                 "this preview cannot determine whether they answer it."
                 if passages
                 else "No matching passages were found. This does not prove the corpus "
-                "has no answer: lexical search can miss synonyms."
+                "has no answer: retrieval can miss relevant evidence."
             ),
             passages=passages,
             latency_ms=0,
@@ -131,7 +131,7 @@ class OpenAIProvider:
                 mode="openai",
                 model=self.model,
                 message="No matching passages were found. No OpenAI request was made. "
-                "Word matching can miss relevant passages phrased differently.",
+                "Retrieval can miss relevant passages phrased differently.",
                 passages=[],
                 latency_ms=0,
                 estimated_api_cost_usd=0,
