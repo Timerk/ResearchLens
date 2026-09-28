@@ -6,10 +6,10 @@ with inspectable citations and explicit insufficient-evidence responses.
 
 Angular and FastAPI run end to end with four **CC BY 4.0 technical papers** by default.
 The original three synthetic documents remain available as a separate regression corpus.
-Retrieval uses TF-IDF word matching. Local mode shows matching passages; OpenAI mode
-generates document-only answers with validated passage references. Semantic embeddings
-are not implemented on this branch. Do not treat the fixtures as technical findings or
-valid citation IDs as proof that a claim is supported. The technical corpus has not yet
+Retrieval offers TF-IDF word matching (the default baseline) and optional local CPU
+embeddings. Local mode shows retrieved passages; OpenAI mode generates document-only
+answers with validated passage references. Do not treat the fixtures as technical findings
+or valid citation IDs as proof that a claim is supported. The technical corpus has not yet
 received human scientific review.
 
 ## Run locally
@@ -35,6 +35,27 @@ run the underlying commands without `rtk` or `rtk proxy`.
 Local mode needs no API key. The backend reads `.env` from the repository root;
 process environment variables take precedence. On Windows, `py -m uv` can replace
 `uv` if it is installed as a Python module but not on PATH.
+
+### Enable local embedding retrieval
+
+```sh
+rtk proxy uv sync --locked --extra embeddings --python 3.13
+rtk proxy uv run --extra embeddings --directory backend python -m researchlens.ingest --retrieval embeddings
+```
+
+Set `RETRIEVAL_BACKEND=embeddings` in `.env`, then start the backend with the extra:
+
+```sh
+rtk proxy uv run --extra embeddings --directory backend uvicorn researchlens.api:app --host 127.0.0.1 --port 8000
+```
+
+The first ingestion downloads the pinned Apache-2.0 English `all-MiniLM-L6-v2` model
+(about 91 MB); encoding runs locally on CPU. Startup uses only cached model files.
+No embedding API, key, PyTorch installation or vector database is required.
+Set `RETRIEVAL_BACKEND=tfidf` to select the baseline again; it can use the same artifact.
+Keep `ANSWER_PROVIDER=local` for a free passage preview in either retrieval mode.
+See [embedding setup and integration](docs/embeddings.md) for model conventions,
+custom corpus paths, stale-index recovery and the evaluation runner interface.
 
 ### Enable document-only OpenAI answers
 
@@ -104,6 +125,9 @@ backend. The two corpora are not mixed. `CORPUS` and the Python `build_index()` 
 the sample corpus for compatibility with existing tests; the ingestion CLI defaults to
 technical. Questions such as `Does dust cause false positives?` retain their original test
 meaning only against the fixture corpus. Rebuild and restart after switching corpora.
+In sample TF-IDF mode, try `Who composed Beethoven symphonies?` for the no-match state. Embeddings return
+nearest neighbors even for unrelated questions, so OpenAI mode may make a paid request
+and must rely on the answer provider's abstention behavior. Similarity is not answerability.
 
 ## Verify
 
@@ -133,15 +157,16 @@ for actual browser coverage, screenshots and limitations.
 ## Architecture and boundaries
 
 ```text
-JSON documents → paragraph/word chunking → versioned passage artifact
+JSON documents → paragraph/word chunking → passage artifact + optional local vectors
                                                    ↓
-Angular → POST /api/ask → TF-IDF retrieval → answer provider → passage references
+Angular → POST /api/ask → selected retriever → answer provider → passage references
 ```
 
 - `backend/researchlens/ingest.py` validates text documents, preserves metadata,
   and writes a corpus hash and deterministic passage IDs. Rebuild after corpus edits.
-- `retrieval.py` rebuilds a small TF-IDF matrix at startup. Cosine similarity ranks
-  shared words. A positive score is not proof of answerability.
+- `retrieval.py` exposes a common search interface for TF-IDF and local embeddings.
+  Startup checks the corpus hash and artifact compatibility, then builds the lexical
+  matrix or loads saved vectors and one cached CPU encoder. Scores are not proof of answerability.
 - `answers.py` implements the local preview and OpenAI provider, structured output,
   bounded context, document-only instructions and citation validation.
 - `config.py` reads backend-only configuration without modifying the process environment.
@@ -169,7 +194,7 @@ until a concrete requirement justifies them.
    host; that limitation and the Chrome follow-up are recorded above.
 2. Baseline RAG: expand the four-paper starter set to 15–30 authorized documents; record source URL, author, date,
    license and permission evidence. Add PDF/text extraction with page references,
-   and local embeddings. Evaluate the implemented LLM provider's citations and
+   and evaluate the implemented local embeddings. Evaluate the LLM provider's citations and
    insufficient-evidence behavior on the reviewed corpus.
 3. Evaluation foundation: pinned synthetic smoke tests and source-reviewed technical
    questions, schema-1/2 validation, selectable retrieval adapters, controlled
@@ -202,7 +227,8 @@ Read `Retriever.search` and the chunking test. With `--corpus sample`, compare
 Explain why lexical matching can behave differently for equivalent questions.
 Then explain why a passage matching `illumination` cannot establish a numerical
 defect-size limit. These are two different problems: retrieval recall and evidence
-sufficiency. We will use both observations when adding embeddings and generation.
+sufficiency. See the [local implementation checks](docs/retrieval-checks.md) for observed
+rankings and limitations; reviewed retrieval and answer-quality comparisons are pending.
 
 ## Development disclosure
 
