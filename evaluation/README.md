@@ -1,7 +1,7 @@
 # Evaluation procedure
 
 No technical evaluation results exist yet. The three synthetic documents and backend
-tests are development material, not a held-out evaluation set. Seven passing tests do
+tests are development material, not a held-out evaluation set. Passing tests do
 not demonstrate RAG answer quality.
 
 After the authorized corpus is fixed, draft 20 questions: eight factual, eight
@@ -55,3 +55,24 @@ claim statistical certainty or model superiority from 20 examples.
 
 These are implementation checks only. Replace this section with a linked, reproducible
 evaluation artifact when the real corpus and reviewed questions are ready.
+
+## OpenAI integration verification, 2026-09-28
+
+- Backend: 27 tests passed, covering configuration, citation validation, abstention,
+  no-call retrieval misses, request limits, and safe API failures. Tests use mocks;
+  the real `.env` cannot turn the automated suite into paid requests.
+- Angular production build and backend lint/format checks: passed.
+- Two live requests through FastAPI's test client used only `gpt-6-luna`, with
+  `reasoning.effort=medium`, at most 2,000 output tokens and no automatic retries:
+  - `Does dust cause false positives?` returned `answered`, citing
+    `fixture-dark-field:p2:w0` and explicitly describing a fictional experiment.
+    Usage: 428 input / 48 output tokens; server latency: 4,056.97 ms.
+  - `What is the minimum detectable defect size in micrometers for bright-field imaging?`
+    returned `insufficient_evidence` with no generated claims.
+    Usage: 501 input / 34 output tokens; server latency: 1,876.17 ms.
+- `Who composed Beethoven symphonies?` returned `no_matches`, with no API request.
+- Total measured usage: 929 input / 82 output tokens. Estimated cost: $0.000134,
+  using the [Luna model page](https://developers.openai.com/api/docs/models/gpt-6-luna)
+  rates checked that day ($0.10/M input, $0.50/M output). This is not billed usage verification.
+- Browser rendering and interactions remain unverified: no browser was connected.
+- These synthetic smoke questions are development cases, not held-out quality evaluation.
