@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "synthetic-development",
+  "version": "1",
+  "split": "development",
+  "material": "synthetic",
+  "status": "draft",
+  "corpus_sha256": "220769f04b408f2475065106410261651051091a4afe827b8ee6e9b66f363c33",
+  "notes": "AI-authored development examples against invented software fixtures. No human source review. Not technical findings or a quality benchmark. Page numbers are unavailable for these text fixtures.",
+  "cases": [
+    {
+      "id": "dev-dust",
+      "question": "In the synthetic dark-field experiment, what caused false positives?",
+      "category": "factual",
+      "expected_source_ids": ["fixture-dark-field"],
+      "references": [{"source_id": "fixture-dark-field", "passage_id": "fixture-dark-field:p2:w0", "paragraph": 2, "page": null}],
+      "required_claims": ["Dust scattered light and caused false positives in the fictional experiment."],
+      "required_qualifications": ["Identify the experiment as synthetic or fictional."],
+      "forbidden_claims": ["Measured false-positive rates.", "Generalization to real inspection systems."],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "dev-compare-imaging",
+      "question": "How do the synthetic bright-field and dark-field fixtures describe detection and false detections?",
+      "category": "comparison",
+      "expected_source_ids": ["fixture-bright-field", "fixture-dark-field"],
+      "references": [
+        {"source_id": "fixture-bright-field", "passage_id": "fixture-bright-field:p2:w0", "paragraph": 2, "page": null},
+        {"source_id": "fixture-dark-field", "passage_id": "fixture-dark-field:p2:w0", "paragraph": 2, "page": null}
+      ],
+      "required_claims": ["Bright-field detected scratches producing intensity contrast; uneven illumination caused false detections.", "Dark-field detected small surface defects through scattered light; dust caused false positives."],
+      "required_qualifications": ["Both descriptions are fictional test fixtures.", "No comparative detection accuracy was measured."],
+      "forbidden_claims": ["One method is more accurate.", "A quantitative sensitivity or size threshold."],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "dev-missing-size",
+      "question": "What is the minimum detectable defect size in micrometers for bright-field imaging?",
+      "category": "unanswerable",
+      "expected_source_ids": ["fixture-bright-field"],
+      "references": [{"source_id": "fixture-bright-field", "passage_id": "fixture-bright-field:p2:w0", "paragraph": 2, "page": null}],
+      "required_claims": [],
+      "required_qualifications": ["The fixture explicitly does not measure a minimum size; related text is not sufficient evidence."],
+      "forbidden_claims": ["Any numerical minimum defect size.", "A threshold inferred from general knowledge."],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    }
+  ]
+}

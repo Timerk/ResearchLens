@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "real-corpus-held-out",
+  "version": "0-pending",
+  "split": "held-out",
+  "material": "real-corpus",
+  "status": "pending-real-corpus",
+  "corpus_sha256": null,
+  "notes": "Pending authorized real corpus and human source review. Target 20 questions: 8 factual, 8 cross-document comparisons, 4 plausible in-domain unanswerable requests. Do not populate from synthetic fixtures or use held-out questions for tuning.",
+  "cases": []
+}

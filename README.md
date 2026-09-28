@@ -171,8 +171,10 @@ until a concrete requirement justifies them.
    license and permission evidence. Add PDF/text extraction with page references,
    and local embeddings. Evaluate the implemented LLM provider's citations and
    insufficient-evidence behavior on the reviewed corpus.
-3. Evaluation: review roughly 20 held-out questions, run retrieval and answer
-   evaluation, report failures and costs, and capture a demonstration.
+3. Evaluation tooling: implemented with pinned datasets, an offline runner, pluggable
+   retrieval, human-review artifacts and comparison reports. The examples are synthetic
+   and unreviewed; creation and human review of roughly 20 real-corpus held-out
+   questions, answer-quality evaluation and a demonstration remain pending.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 
@@ -212,5 +214,5 @@ preferences and API budget. Manual code review, technical-source review and eval
 judgments by the owner are still pending. Record subsequent contributions accurately;
 do not present generated code as independently authored work.
 
-See [the evaluation procedure](evaluation/README.md) for what remains before reporting
-answer quality.
+See [the evaluation workflow](evaluation/README.md) for reproducible free runs,
+the retrieval adapter interface, human review and remaining corpus work.
