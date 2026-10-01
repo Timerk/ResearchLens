@@ -5,6 +5,7 @@ import json
 
 import pytest
 from pydantic import TypeAdapter
+from researchlens.artifacts import canonical_hash
 from researchlens.evaluation import load_dataset
 from researchlens.evaluation_evidence import (
     EvidenceLabels,
@@ -47,19 +48,52 @@ def test_ai_fix_record_preserves_review_pins_and_separate_approval(evidence):
     directory = ROOT / "evaluation/reviews/2026-10-01-pr8"
     record = json.loads((directory / "evidence-fixes.json").read_bytes())
     review = json.loads((directory / "evidence-review.json").read_bytes())
+    approval = json.loads((directory / "evidence-human-review.json").read_bytes())
     labels = evidence[0]
     assert record["input_labels_sha256"] == review["labels_file_sha256"]
     assert (
-        record["output_labels_sha256"]
+        approval["approved_labels_sha256"]
         == hashlib.sha256(
             (ROOT / "evaluation/labels/technical-development.json").read_bytes()
         ).hexdigest()
     )
+    assert approval["previous_labels_sha256"] == record["output_labels_sha256"]
+    previous = labels.model_dump(mode="json")
+    previous.update(
+        review_status="unreviewed",
+        reviewer=None,
+        review_date=None,
+        notes=approval["previous_notes"],
+    )
+    draft_bytes = (json.dumps(previous, indent=2, ensure_ascii=False) + "\n").encode()
+    assert hashlib.sha256(draft_bytes).hexdigest() == approval["previous_labels_sha256"]
+    semantic_keys = (
+        "schema_version",
+        "dataset_sha256",
+        "corpus_sha256",
+        "shared_passage_sha256",
+        "cases",
+    )
+    assert (
+        canonical_hash({k: previous[k] for k in semantic_keys})
+        == approval["unchanged_evidence_content_sha256"]
+    )
+    assert approval["approved_labels_canonical_sha256"] == canonical_hash(
+        labels.model_dump(mode="json")
+    )
+    for name, checksum in approval["preserved_archive_sha256"].items():
+        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == checksum
     for name, checksum in record["review_files_sha256"].items():
         assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == checksum
     assert record["pins"] == {name: getattr(labels, name) for name in record["pins"]}
-    assert labels.review_status == "unreviewed"
-    assert labels.reviewer is labels.review_date is None
+    assert record["labels_review_status"] == "unreviewed"  # Historical AI fix state is preserved.
+    assert labels.review_status == approval["review_status"] == "approved"
+    assert labels.reviewer == approval["reviewer"]
+    assert labels.review_date.isoformat() == approval["review_date"] == "2026-10-01"
+    assert approval["reviewer_type"] == "human"
+    assert approval["approved_cases"] == [
+        dict(case_id=c.case_id, group_ids=[g.id for g in c.groups]) for c in labels.cases
+    ]
     assert record["substantive_findings_addressed"] == [f"F{i:02d}" for i in range(1, 15)]
     assert [d["proposal_number"] for d in record["recommendation_decisions"]] == list(range(1, 42))
     assert record["after"] == dict(cases=36, groups=92, alternatives=140, span_occurrences=165)

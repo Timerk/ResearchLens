@@ -6,7 +6,7 @@ technical questions on 2026-10-01 after the recorded AI source review.
 The three synthetic cases remain smoke tests. Retrieval-only development checks verify
 the tooling. They do not establish model superiority or generated-answer quality.
 Nearest neighbors and valid citation IDs are not proof of support. The new development
-evidence-group annotations have separate, pending review.
+evidence-group annotations received separate project-owner approval on 2026-10-01.
 
 ## Run free development diagnostics
 
@@ -153,8 +153,10 @@ annotations, including review provenance, requires rerunning every comparison mo
 cases with 92 factual groups after the recorded AI evidence-review fixes. They pin
 the canonical dataset hash, corpus and shared
 passage identity. The approved question files and held-out freeze remain unchanged.
-These AI-authored annotations are `unreviewed`; the human question approval does not
-approve new alternatives or offsets. Review them before using coverage to select settings.
+The project owner explicitly approved these revised annotations separately from the
+question review. [Evidence approval](reviews/2026-10-01-pr8/evidence-human-review.json)
+records reviewer/date, all approved group IDs and previous/current hashes. Approval
+changed metadata only; every requirement, alternative and span remains unchanged.
 The original evidence audit remains unchanged; separate
 [fix records](reviews/2026-10-01-pr8/evidence-fixes.md) explain semantic/context
 corrections and distinguish factual qualifications from unscored answer-review guards.
@@ -312,8 +314,8 @@ supplied/omitted/truncated IDs and visible character counts in `context_diagnost
 Retrieval-only previews are potential provider input, not generated answers. Other
 providers may use different context policies and must report their own actual context.
 
-Before hybrid settings selection, review the new evidence labels and predefine a small
-development-only configuration set with candidate counts and fusion settings. Run each
+Before hybrid settings selection, predefine a small development-only configuration
+set with candidate counts and fusion settings using the approved evidence labels. Run each
 through the retrieval factory in a fresh process with the same labels and protocol.
 Actual hybrid/model runs depend on retrieval adapters and are not performed by this PR.
 Keep held-out questions and rankings untouched until selection is complete. Generated
