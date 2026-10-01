@@ -8,6 +8,7 @@ from researchlens.ingest import ROOT, TECHNICAL_CORPUS
 
 DATASET = ROOT / "evaluation/datasets/technical-development.json"
 OTHER = ROOT / "evaluation/datasets/held-out.json"
+LABELS = ROOT / "evaluation/labels/technical-development.json"
 
 
 def test_comparison_delegates_to_existing_runner_in_fresh_processes(tmp_path, monkeypatch):
@@ -39,6 +40,54 @@ def test_comparison_delegates_to_existing_runner_in_fresh_processes(tmp_path, mo
             output, models=["minilm"], source=TECHNICAL_CORPUS, dataset=DATASET, other_split=OTHER
         )
     assert process.call_count == 6
+
+
+def test_comparison_uses_same_evidence_and_cutoffs_for_every_mode(tmp_path, monkeypatch):
+    process = Mock(return_value=Mock(returncode=0))
+    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    manifest = compare(
+        tmp_path / "labeled",
+        models=["minilm"],
+        source=TECHNICAL_CORPUS,
+        dataset=DATASET,
+        other_split=OTHER,
+        evidence_labels=LABELS,
+        limit=10,
+        cutoffs=[10, 4, 1, 4],
+    )
+    calls = [call.args[0] for call in process.call_args_list]
+    for call in (calls[1], calls[3], calls[4]):
+        assert call[call.index("--evidence-labels") + 1] == str(LABELS.resolve())
+        assert call[call.index("--cutoffs") + 1 :] == ["1", "4", "10"]
+        assert call[call.index("--limit") + 1] == "10"
+    assert "--paired-output" in calls[-1]
+    assert manifest["cutoffs"] == [1, 4, 10]
+    assert len(manifest["evidence_labels_sha256"]) == 64
+
+
+def test_stale_labels_and_unavailable_cutoffs_fail_before_ingestion(tmp_path, monkeypatch):
+    process = Mock()
+    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    labels = json.loads(LABELS.read_bytes())
+    labels["dataset_sha256"] = "0" * 64
+    stale = tmp_path / "stale.json"
+    stale.write_text(json.dumps(labels), encoding="utf-8")
+    for options, message in (
+        ({"evidence_labels": stale}, "do not match"),
+        ({"cutoffs": [1, 4, 10]}, "cutoffs"),
+        ({"repeats": 101}, "limits"),
+    ):
+        with pytest.raises(ValueError, match=message):
+            compare(
+                tmp_path / "invalid",
+                models=["minilm"],
+                source=TECHNICAL_CORPUS,
+                dataset=DATASET,
+                other_split=OTHER,
+                **options,
+            )
+    process.assert_not_called()
+    assert not (tmp_path / "invalid").exists()
 
 
 def test_failed_ingestion_is_recorded_and_not_retried(tmp_path, monkeypatch):
