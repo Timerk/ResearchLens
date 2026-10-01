@@ -13,7 +13,7 @@ from openai import (
     AuthenticationError,
     RateLimitError,
 )
-from researchlens.answers import OpenAIProvider, ProviderError
+from researchlens.answers import OpenAIProvider, ProviderError, prepare_answer_context
 from researchlens.api import create_app
 from researchlens.config import Settings
 from researchlens.models import GeneratedAnswer, SearchHit
@@ -142,6 +142,31 @@ def test_context_bound_and_only_supplied_citations(sdk, hit):
     assert len(context) == 4
     assert len(json.dumps(context)) <= OpenAIProvider.MAX_CONTEXT_CHARS
     assert all(len(item["text"]) <= 3000 for item in context)
+
+
+def test_actual_request_context_matches_recorded_truncation_and_omissions(sdk, hit):
+    hits = [hit.model_copy(update={"text": "x" * 3100})] + [
+        hit.model_copy(update={"id": f"passage-{i}", "text": "y" * 100}) for i in range(5)
+    ]
+    result = provider(sdk).answer("Question", hits)
+    items = json.loads(sdk.responses.parse.call_args.kwargs["input"])["passages"]
+    context = result.context_diagnostics
+    assert context.passage_ids == [item["id"] for item in items]
+    assert context.visible_chars == {item["id"]: len(item["text"]) for item in items}
+    assert context.serialized_chars == len(json.dumps(items, ensure_ascii=True))
+    assert context.truncated_passage_ids == [hit.id]
+    assert context.omitted_passage_ids == ["passage-3", "passage-4"]
+    assert len(result.passages[0].text) == 3100  # Full source retained for citation inspection.
+    sdk.responses.parse.assert_called_once()
+
+
+def test_context_preview_accounts_for_json_escaping_and_skips_oversized_passages(hit):
+    oversized = hit.model_copy(update={"id": "too-long", "text": "é" * 3000})
+    prepared = prepare_answer_context([oversized, hit])
+    assert prepared.diagnostics.omitted_passage_ids == ["too-long"]
+    assert prepared.diagnostics.passage_ids == [hit.id]
+    assert prepared.diagnostics.visible_chars == {hit.id: len(hit.text)}
+    assert prepared.items == [{"id": hit.id, "kind": hit.kind, "text": hit.text}]
 
 
 @pytest.mark.parametrize(

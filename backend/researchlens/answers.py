@@ -1,5 +1,6 @@
 import json
 import logging
+from dataclasses import dataclass
 from time import perf_counter
 from typing import Protocol
 
@@ -13,7 +14,7 @@ from openai import (
 )
 
 from researchlens.config import Settings
-from researchlens.models import Answer, GeneratedAnswer, SearchHit
+from researchlens.models import Answer, AnswerContext, GeneratedAnswer, SearchHit
 
 # Inherit Uvicorn's INFO handler so usage is recorded by the documented server command.
 logger = logging.getLogger("uvicorn.error.researchlens")
@@ -42,6 +43,46 @@ class AnswerProvider(Protocol):
     def answer(self, question: str, passages: list[SearchHit]) -> Answer: ...
 
 
+@dataclass
+class PreparedContext:
+    items: list[dict]
+    supplied: list[SearchHit]
+    diagnostics: AnswerContext
+
+
+def prepare_answer_context(
+    passages: list[SearchHit],
+    *,
+    max_passages: int = 4,
+    max_passage_chars: int = 3000,
+    max_context_chars: int = 16000,
+) -> PreparedContext:
+    """Use the actual provider's context budget, without an API call."""
+    if min(max_passages, max_passage_chars, max_context_chars) < 1:
+        raise ValueError("Context budgets must be positive")
+    items, supplied = [], []
+    for passage in passages[:max_passages]:
+        item = {"id": passage.id, "kind": passage.kind, "text": passage.text[:max_passage_chars]}
+        if len(json.dumps([*items, item], ensure_ascii=True)) <= max_context_chars:
+            items.append(item)
+            supplied.append(passage)
+    ids = {p.id for p in supplied}
+    return PreparedContext(
+        items,
+        supplied,
+        AnswerContext(
+            max_passages=max_passages,
+            max_passage_chars=max_passage_chars,
+            max_context_chars=max_context_chars,
+            serialized_chars=len(json.dumps(items, ensure_ascii=True)),
+            passage_ids=[p.id for p in supplied],
+            omitted_passage_ids=[p.id for p in passages if p.id not in ids],
+            truncated_passage_ids=[p.id for p in supplied if len(p.text) > max_passage_chars],
+            visible_chars={item["id"]: len(item["text"]) for item in items},
+        ),
+    )
+
+
 class LocalPreview:
     """Return evidence for inspection without pretending to generate an LLM answer."""
 
@@ -62,6 +103,8 @@ class LocalPreview:
 
 
 class OpenAIProvider:
+    MAX_PASSAGES = 4
+    MAX_PASSAGE_CHARS = 3000
     MAX_CONTEXT_CHARS = 16000
     MAX_OUTPUT_TOKENS = 2000
 
@@ -95,13 +138,13 @@ class OpenAIProvider:
             )
 
         # Bound serialized context, including IDs and escaping. Keep references to full originals.
-        context = []
-        supplied = []
-        for passage in passages[:4]:
-            item = {"id": passage.id, "kind": passage.kind, "text": passage.text[:3000]}
-            if len(json.dumps([*context, item], ensure_ascii=True)) <= self.MAX_CONTEXT_CHARS:
-                context.append(item)
-                supplied.append(passage)
+        prepared = prepare_answer_context(
+            passages,
+            max_passages=self.MAX_PASSAGES,
+            max_passage_chars=self.MAX_PASSAGE_CHARS,
+            max_context_chars=self.MAX_CONTEXT_CHARS,
+        )
+        context, supplied = prepared.items, prepared.supplied
         if not supplied:
             raise ProviderError("Retrieved passages exceed the supported context size.")
 
@@ -176,4 +219,5 @@ class OpenAIProvider:
             latency_ms=0,
             input_tokens=usage.input_tokens if usage else None,
             output_tokens=usage.output_tokens if usage else None,
+            context_diagnostics=prepared.diagnostics,
         )

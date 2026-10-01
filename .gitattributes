@@ -2,6 +2,7 @@
 data/*.json text eol=lf
 evaluation/datasets/*.json text eol=lf
 
+evaluation/labels/*.json text eol=lf
 evaluation/reviews/**/*.json text eol=lf
 # Preserve downloaded article bytes so manifest checksums survive checkout on every OS.
 data/technical/originals/*.xml -text

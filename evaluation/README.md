@@ -3,9 +3,10 @@
 This workflow compares retrieval implementations on fixed questions and passages.
 Four technical papers are available. The project owner approved the 86 accepted
 technical questions on 2026-10-01 after the recorded AI source review.
-The three synthetic cases remain smoke tests. Model quality and generated-answer
-quality have not been evaluated on this human-approved set. Nearest neighbors and valid citation
-IDs are not proof of support.
+The three synthetic cases remain smoke tests. Retrieval-only development checks verify
+the tooling. They do not establish model superiority or generated-answer quality.
+Nearest neighbors and valid citation IDs are not proof of support. The new development
+evidence-group annotations have separate, pending review.
 
 ## Run free development diagnostics
 
@@ -14,9 +15,9 @@ From the repository root (Python 3.13 and committed `uv.lock`):
 ```sh
 rtk proxy uv sync --locked --python 3.13
 rtk proxy uv run --directory backend python -m researchlens.ingest --corpus technical
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k4
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --limit 1 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k1
-rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-k1 --output ../evaluation/runs/technical-comparison.md
+rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --cutoffs 1 4 10 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-ranking
+rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --limit 4 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k4
+rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-ranking --output ../evaluation/runs/technical-comparison.md --paired-output ../evaluation/runs/technical-paired.json
 ```
 
 To run the original smoke tests, ingest `--corpus sample`, select
@@ -33,6 +34,13 @@ which does not generate answers. Each new output directory receives `run.json`,
 `evaluation/runs/` is ignored by Git; archive deliberately selected, reviewed artifacts
 when publishing results. Review licensed/private passage text before sharing it.
 Never save API credentials.
+
+`--cutoffs 1 4 10` queries once at limit 10 and scores prefixes of that ranking. It
+does not measure three independent requests. k=4 is the primary application metric.
+Use a separate `--limit 4` process for actual application-limit timing. Without an
+explicit limit, requesting cutoffs raises the query limit to the largest cutoff.
+An explicit limit smaller than a cutoff fails. Missing cutoffs are unavailable,
+never guessed. `--other-split` validates separation; it does not execute held-out queries.
 
 ## Datasets and source review
 
@@ -135,6 +143,52 @@ and shared passage identity. Model vectors/encoding may differ and receive separ
 full embedding-artifact and encoding hashes. Changing any shared input blocks a
 controlled comparison. Old run schema 1 retains its strict full-artifact check;
 regenerate legacy runs before mixing with new ones.
+Evidence-label hashes and scoring-contract versions must also match. Runs made before
+this scoring contract cannot be compared with new runs until regenerated. Changing
+annotations, including review provenance, requires rerunning every comparison mode.
+
+## Alternatives and complete evidence
+
+[Development evidence labels](labels/README.md) cover all 36 answerable development
+cases with 83 factual groups. They pin the canonical dataset hash, corpus and shared
+passage identity. The approved question files and held-out freeze remain unchanged.
+These AI-authored annotations are `unreviewed`; the human question approval does not
+approve new alternatives or offsets. Review them before using coverage to select settings.
+
+Each group identifies a required claim index and exact canonical-text character spans.
+An alternative is sufficient when all its spans are present. Any sufficient alternative
+satisfies the group. Every group must be satisfied for complete evidence. Multiple groups
+can split a composite claim into separately required parts:
+
+```text
+required claim A
+  group A1: passage P1 OR passage P2
+  group A2: passage P3 AND passage P4
+required claim B
+  group B1: passage P5
+complete evidence requires A1 AND A2 AND B1
+```
+
+Reports show mean group coverage and the proportion of labeled cases with complete
+evidence at k=1, 4 and 10. Labeled failures remain in the denominator with zero
+coverage. Unlabeled cases remain unknown, with the labeled-case count exposed.
+MRR uses passage IDs in the evidence groups when supplied, including new alternatives;
+otherwise it uses the dataset references. A first-ranked relevant fragment can still
+leave complete evidence false. Legacy passage recall retains its reference-list
+denominator and can undercount alternatives. Group coverage is the alternative-aware
+measure; source presence is not proof of factual support.
+
+`report --paired-output path.json` saves per-case metrics, passage IDs, errors and
+deltas against the first baseline, at each cutoff. Markdown reports identify improved,
+worsened, unchanged, mixed, failed, recovered and unavailable cases. Mixed means at
+least one ranking/coverage measure improved while another regressed. Negative cases
+remain visible but unscored. Use the paired record to inspect regressions hidden by
+an aggregate mean, including hybrid-versus-embedding or hybrid-versus-lexical runs.
+
+The seven reviewed missing-evidence development negatives already include plausible
+absent limits, unsupported comparisons and evidence omitted from the papers. Preserve
+them alongside unrelated questions. Returning nearest neighbors for these questions
+is not automatically a retrieval failure or a successful abstention.
 
 ## Retrieval adapter and model configuration
 
@@ -199,8 +253,12 @@ measured `--ingestion-time-ms` or ExecutionConfig duration; omission means unkno
 Warmups are separate from timed query attempts. Repeats call local retrieval only;
 answer generation is called at most once per case. Each timed attempt records latency,
 IDs and errors; changed rankings are flagged. Failure stops remaining repeats without
-retry and remains in the result set. Reports show sample counts, median/max query
+retry and remains in the result set. Reports show sample counts, median/p95/max query
 latency, whole-case duration and setup costs. Use identical timing protocols in comparisons.
+The p95 uses the nearest-rank percentile across successful timed attempts, excluding
+warmups and failed attempts. Failed attempts have a separate count. A few samples
+provide a coarse percentile, not a stable tail estimate. Use fresh processes per
+configuration, fixed repeats/warmups and the same machine/load for CPU comparisons.
 
 `--measure-memory` records native process lifetime peak RSS (Windows peak working set;
 Unix `ru_maxrss`). This includes native allocations, but is a coarse high-water mark
@@ -208,6 +266,55 @@ rather than isolated per-model/per-query memory. Unavailable measurements are nu
 Use a fresh process per model and distinguish cache-only/cold model load from warmed
 queries. CPU speed and RAM feasibility for the 4B model require measurement in retrieval
 work. API cost is zero for local runs; CPU time and RAM still matter.
+
+## Encoding and answer-context truncation
+
+`evaluation_evidence.py` defines a strict, model-independent `EncodingDiagnostics`
+contract. The retrieval adapter may expose an optional measurement hook:
+
+```python
+class MeasuredSearch(Search):
+    def get_encoding_diagnostics(self) -> dict | None: ...
+```
+
+Alternatively supply `--encoding-diagnostics measurements.json`. Explicit sidecars
+take precedence over the hook. The original `search(question, limit)` interface is
+unchanged. The adapter owns tokenization and measurements; evaluation never loads
+an encoder to reconstruct them. Schema, artifact/encoding/text hashes, token counts,
+canonical-text ranges and truncation flags are validated before querying.
+
+Each measurement records the actual encoder input/encoded token counts, including
+instructions and special tokens, plus retained half-open character ranges in the
+canonical passage text. Ranges describe retained text regions, including whitespace
+between retained tokens; they are not individual token offsets. A prefix token limit
+usually yields one range. Instructions have no passage-text offsets. Adapters must
+account for their true preprocessing rather than guess offsets from a token count.
+See [the contract example](labels/README.md#encoder-measurement-format).
+
+Runs report corpus measured/unmeasured/truncated passage counts and measured truncation
+rate. Per-cutoff encoder coverage reports lost and unknown evidence groups. Evidence
+visibility without measured ranges remains null. Missing retrieved passages are misses;
+retrieved passages with unknown encoding ranges are unknown. For hybrid runs this
+describes only the embedding representation, not what the lexical component can see.
+This branch tests the contract with mocks; actual adapter measurements remain retrieval
+integration work. No truncation frequency for a real embedding model is claimed here.
+
+The runner also computes a free preview using the OpenAI provider's actual context
+builder: first four passages, first 3,000 characters each, and at most 16,000 serialized
+JSON characters including escaping and IDs. Coverage uses the visible character
+regions, not full returned source text. Separate diagnostics identify groups lost
+through passage selection versus text truncation. Actual OpenAI answers record their
+supplied/omitted/truncated IDs and visible character counts in `context_diagnostics`.
+Retrieval-only previews are potential provider input, not generated answers. Other
+providers may use different context policies and must report their own actual context.
+
+Before hybrid settings selection, review the new evidence labels and predefine a small
+development-only configuration set with candidate counts and fusion settings. Run each
+through the retrieval factory in a fresh process with the same labels and protocol.
+Actual hybrid/model runs depend on retrieval adapters and are not performed by this PR.
+Keep held-out questions and rankings untouched until selection is complete. Generated
+answer correctness, citation support and abstention need a separate evaluation with
+generation settings fixed across retrieval modes.
 
 ## Optional generated-answer review
 

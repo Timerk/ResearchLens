@@ -80,6 +80,19 @@ class GeneratedAnswer(BaseModel):
     sections: list[AnswerSection] = Field(max_length=6)
 
 
+class AnswerContext(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    max_passages: int
+    max_passage_chars: int
+    max_context_chars: int
+    serialized_chars: int
+    passage_ids: list[str]
+    omitted_passage_ids: list[str]
+    truncated_passage_ids: list[str]
+    visible_chars: dict[str, int]
+
+
 class Answer(BaseModel):
     status: Literal["passages_found", "no_matches", "answered", "insufficient_evidence"]
     mode: Literal["local_preview", "openai"] = "local_preview"
@@ -91,3 +104,4 @@ class Answer(BaseModel):
     input_tokens: int | None = None
     output_tokens: int | None = None
     estimated_api_cost_usd: float | None = None
+    context_diagnostics: AnswerContext | None = None
