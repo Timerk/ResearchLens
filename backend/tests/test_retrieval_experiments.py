@@ -217,3 +217,33 @@ def test_failure_oracle_detects_four_passage_budget_impossibility(tmp_path):
     run["dataset"]["split"] = "held-out"
     with pytest.raises(ValueError, match="development"):
         analyze_run(run)
+
+
+def test_partial_labels_keep_unlabeled_answerable_cases_unknown(tmp_path):
+    dataset, artifact, labels, hits = labeled_run(tmp_path, [[0]])
+    extra = dataset.cases[0].model_copy(update={"id": "unlabeled", "question": "Another question?"})
+    dataset = dataset.model_copy(update={"cases": [*dataset.cases, extra]})
+    labels = labels.model_copy(update={"dataset_sha256": dataset_digest(dataset)})
+    retriever = Mock()
+    retriever.search.return_value = hits[:4]
+    run = run_evaluation(
+        dataset,
+        artifact,
+        retriever,
+        RetrievalConfig(implementation="mock", version="1"),
+        evidence_labels=labels,
+    )
+    analysis = analyze_run(run)
+    assert analysis["failure_counts"] == {"complete-at-four": 1, "unlabeled-answerable": 1}
+    assert analysis["context_summary"]["4"]["answerable_cases"] == 2
+    assert analysis["context_summary"]["4"]["evidence_labeled_cases"] == 1
+    assert analysis["cases"][1]["contexts"]["4"]["coverage"]["complete_evidence"] is None
+    empty = labels.model_copy(update={"cases": []})
+    run = run_evaluation(
+        dataset,
+        artifact,
+        retriever,
+        RetrievalConfig(implementation="mock", version="1"),
+        evidence_labels=empty,
+    )
+    assert analyze_run(run)["context_summary"]["4"]["mean_group_coverage"] is None

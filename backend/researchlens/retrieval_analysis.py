@@ -66,7 +66,7 @@ def analyze_run(run: dict) -> dict:
         minimum = min(map(len, supports)) if supports else None
         candidate_minimum = min(map(len, within_candidates)) if within_candidates else None
         if entry is None:
-            failure = "negative-unscored"
+            failure = "negative-unscored" if case["expected_abstention"] else "unlabeled-answerable"
         elif row["error"]:
             failure = "retrieval-error"
         elif row["metrics_at_k"]["4"]["complete_evidence"]:
@@ -123,14 +123,17 @@ def analyze_run(run: dict) -> dict:
     for budget in (4, 6, 8):
         key = str(budget)
         context_summary[key] = {
-            "answerable_cases": len(answerable),
+            "answerable_cases": sum(not case["expected_abstention"] for case in cases.values()),
+            "evidence_labeled_cases": len(answerable),
             "complete_evidence_cases": sum(
                 row["contexts"][key]["coverage"]["complete_evidence"] is True for row in answerable
             ),
             "mean_group_coverage": sum(
                 row["contexts"][key]["coverage"]["group_coverage"] for row in answerable
             )
-            / len(answerable),
+            / len(answerable)
+            if answerable
+            else None,
             "mean_serialized_chars_all_cases": sum(
                 row["contexts"][key]["diagnostics"]["serialized_chars"] for row in results
             )
