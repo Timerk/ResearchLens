@@ -75,6 +75,8 @@ the second scores ranking prefixes at 1, 4 and 10. Each saves a paired per-quest
 report against TF-IDF. Both use fresh processes and may download pinned weights on
 first ingestion. Held-out questions are not executed. See [evaluation readiness](docs/retrieval-readiness.md)
 and the [historical preliminary comparison](docs/model-comparison.md).
+The [approved development results](docs/approved-model-comparison.md) report all nine
+configurations, complete evidence, paired regressions and CPU costs on the reviewed set.
 
 ### Enable document-only OpenAI answers
 
