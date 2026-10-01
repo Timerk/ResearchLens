@@ -127,6 +127,25 @@ class RerankerConfig(StrictModel):
     diversity: float = Field(default=0.0, ge=0, le=1, allow_inf_nan=False)
 
 
+class VulkanRerankerConfig(RerankerConfig):
+    """Evaluation-only local runtime provenance; separate from the CPU adapter contract."""
+
+    runtime: Literal["llama.cpp"]
+    runtime_version: str
+    device: Literal["Vulkan0"]
+    precision: Literal["float16"]
+    truncation: Literal["reject-overflow"]
+    score: Literal["raw-relevance-logit", "yes-no-softmax"]
+    weights_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    runtime_binary_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    runtime_commit: str = Field(pattern=r"^[a-f0-9]{40}$")
+    device_name: Literal["AMD Radeon RX 6800"]
+    context_tokens: int = Field(ge=1)
+    batch_tokens: int = Field(ge=1)
+    gpu_layers: int = Field(ge=1)
+    prompt_template_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
 class RetrievalConfig(StrictModel):
     implementation: str
     version: str
@@ -163,7 +182,7 @@ class RetrievalConfig(StrictModel):
     rrf_k: int | None = Field(default=None, ge=1)
     lexical_weight: float | None = Field(default=None, ge=0, le=1)
     embedding_weight: float | None = Field(default=None, ge=0, le=1)
-    reranker: RerankerConfig | None = None
+    reranker: RerankerConfig | VulkanRerankerConfig | None = None
 
     @model_validator(mode="after")
     def hybrid_settings(self) -> Self:
