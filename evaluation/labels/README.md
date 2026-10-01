@@ -1,10 +1,17 @@
 # Development evidence labels
 
-`technical-development.json` adds 83 draft evidence groups for the 36 answerable
+`technical-development.json` contains 92 draft evidence groups for the 36 answerable
 development questions. Both approved datasets and their review records are unchanged.
 The labels are AI-authored and unreviewed. They are not included in the project owner's
 prior question approval. No held-out evidence labels, retrieval results or rankings
 were used to create them.
+
+The [AI evidence audit](../reviews/2026-10-01-pr8/evidence-review.md) reviewed the
+original 83 groups and identified semantic/context fixes. The
+[fix record](../reviews/2026-10-01-pr8/evidence-fixes.md) records the source checks,
+changes and decisions on all 41 recommendations. The revised labels contain 140
+alternatives and 165 exact span occurrences. Both audit files remain unchanged.
+These corrections do not constitute human approval.
 
 The draft uses exact sentences or sentence fragments from the pinned extracted
 passages. Alternatives are conservative and incomplete. Some facts need complementary
@@ -22,6 +29,12 @@ vector artifact hash. The file has its own review status, reviewer and date.
 Each case has groups with a unique ID, required claim index and factual description.
 Every required claim needs at least one group. Composite claims may need several
 groups. Alternatives are lists of supporting spans:
+
+Source-supported factual qualifications can form required groups associated with the
+claim they qualify. These include fixed-line-frequency bounds, an incomplete-noise
+correction and conflicting architecture prose. Generic limits on generalization,
+unreported numerical values, forbidden claims and reasoned non-comparability remain
+answer-review rules. Passage retention does not establish compliance with those rules.
 
 ```json
 {
