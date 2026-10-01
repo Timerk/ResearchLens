@@ -6,7 +6,12 @@
     "start": "ng serve --host 127.0.0.1 --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch=false",
+    "test:watch": "ng test --watch",
+    "test:smoke": "playwright test",
+    "test:smoke:install": "playwright install chromium",
+    "start:mock": "node testing/mock-server.mjs",
+    "check": "tsc --project tsconfig.smoke.json --noEmit && prettier --check src/app/app.{ts,html,css,spec.ts} testing e2e playwright.config.ts tsconfig.smoke.json"
   },
   "private": true,
   "packageManager": "npm@11.17.0",
@@ -24,7 +29,11 @@
     "@angular/build": "^21.2.24",
     "@angular/cli": "^21.2.24",
     "@angular/compiler-cli": "^21.2.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.19.0",
+    "jsdom": "^27.4.0",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vitest": "^4.1.11"
   }
 }

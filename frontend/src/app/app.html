@@ -1,33 +1,69 @@
 <header>
   <a class="brand" href="/">ResearchLens<span> / lab</span></a>
-  <span class="badge">{{ mode() === 'openai' ? 'OpenAI · Document-only answers' :
-    mode() === 'local_preview' ? 'Local preview · No API charges' : 'Connecting to backend…' }}</span>
+  <span class="badge">{{
+    mode() === 'openai'
+      ? 'OpenAI · Document-only answers'
+      : mode() === 'local_preview'
+        ? 'Local preview · No API charges'
+        : mode() === 'connecting'
+          ? 'Connecting to backend…'
+          : 'Backend status unavailable'
+  }}</span>
 </header>
 <main>
   <p class="eyebrow">Technical innovation research</p>
-  <h1>Explore the evidence.<br><span>Inspect the source.</span></h1>
+  <h1>Explore the evidence.<br /><span>Inspect the source.</span></h1>
   <p class="intro">Search a small document collection and read the passages behind each result.</p>
   <aside class="notice">
     <strong>Inspect the evidence</strong>
-    Read each source and its experimental conditions before drawing conclusions.
-    Technical papers report their authors' findings; synthetic fixtures, when loaded, are labeled.
-    Retrieval uses word matching and may miss differently phrased evidence.
-    @if (mode() === 'openai') { Answers use only retrieved passages. OpenAI API charges apply. }
-    @else if (mode() === 'local_preview') { Local preview displays passages without generating answers. }
+    Read each source and its experimental conditions before drawing conclusions. Technical papers
+    report their authors' findings; synthetic fixtures, when loaded, are labeled. Retrieval may miss
+    relevant evidence. Citation references identify passages; they do not prove factual support.
+    @if (mode() === 'openai') {
+      Generated answers use retrieved passages as context. OpenAI API charges apply.
+    } @else if (mode() === 'local_preview') {
+      Local preview displays passages without generating answers.
+    }
   </aside>
-  <form (ngSubmit)="ask()">
+  <form (ngSubmit)="ask()" novalidate>
     <label for="question">Your research question</label>
-    <textarea id="question" name="question" [(ngModel)]="question" rows="3"
-      required minlength="3" maxlength="2000" [disabled]="pending()"></textarea>
+    <textarea
+      id="question"
+      name="question"
+      [(ngModel)]="question"
+      rows="3"
+      required
+      minlength="3"
+      maxlength="2000"
+      [readOnly]="pending()"
+      aria-describedby="question-help question-validation"
+      [attr.aria-invalid]="questionError() ? 'true' : 'false'"
+    ></textarea>
+    <p id="question-validation" class="validation" aria-live="polite">{{ questionError() }}</p>
     <div class="form-footer">
-      <span>Try a method, defect type, or reported limitation.</span>
-      <button type="submit" [disabled]="pending() || question.trim().length < 3">
+      <span id="question-help"
+        >Try a method, defect type, or reported limitation. 3–2,000 characters.</span
+      >
+      <button
+        type="submit"
+        [disabled]="!!questionError()"
+        [attr.aria-disabled]="pending() || !!questionError()"
+      >
         {{ pending() ? 'Working…' : mode() === 'openai' ? 'Ask documents →' : 'Find passages →' }}
       </button>
     </div>
   </form>
-  @if (error()) { <p role="alert" class="notice error">{{ error() }}</p> }
-  <section aria-live="polite" aria-atomic="true">
+  <p class="request-status" role="status" aria-live="polite" aria-atomic="true">
+    @if (pending()) {
+      Searching documents…
+    } @else if (answer(); as result) {
+      {{ heading(result.status) }} ready.
+    }
+  </p>
+  @if (error()) {
+    <p role="alert" class="notice error">{{ error() }}</p>
+  }
+  <section aria-label="Research results" [attr.aria-busy]="pending()">
     @if (answer(); as result) {
       <div class="result-heading">
         <h2>{{ heading(result.status) }}</h2>
@@ -47,38 +83,64 @@
         </article>
       }
       @if (result.input_tokens !== null) {
-        <p>{{ result.model }} · {{ result.input_tokens }} input tokens ·
-          {{ result.output_tokens }} output tokens (including reasoning)</p>
+        <p>
+          {{ result.model }} · {{ result.input_tokens }} input tokens ·
+          {{ result.output_tokens }} output tokens (including reasoning)
+        </p>
       }
-      @if (result.passages.length && result.mode === 'openai') { <h3>Retrieved passages</h3> }
+      @if (result.passages.length && result.mode === 'openai') {
+        <h3>Retrieved passages</h3>
+      }
       @for (passage of result.passages; track passage.id) {
         <article>
           <p class="eyebrow">{{ passage.kind }} · Paragraph {{ passage.paragraph }}</p>
           <h3>{{ passage.title }}</h3>
           <blockquote>{{ passage.text }}</blockquote>
           <details>
-            <summary>Inspect reference</summary>
+            <summary
+              [attr.aria-label]="
+                'Inspect reference: ' + passage.title + ', paragraph ' + passage.paragraph
+              "
+            >
+              Inspect reference
+            </summary>
             <dl>
-              <dt>Passage ID</dt><dd>{{ passage.id }}</dd>
+              <dt>Passage ID</dt>
+              <dd>{{ passage.id }}</dd>
               @if (passage.source_section) {
-                <dt>Section</dt><dd>{{ passage.source_section }}</dd>
-                <dt>Source XML location</dt><dd>{{ passage.source_locator }}</dd>
+                <dt>Section</dt>
+                <dd>{{ passage.source_section }}</dd>
+                <dt>Source XML location</dt>
+                <dd>{{ passage.source_locator }}</dd>
               }
               @if (passage.attribution; as attribution) {
-                <dt>Authors</dt><dd>{{ attribution.authors.join(', ') }}</dd>
-                <dt>Published</dt><dd>{{ attribution.publication_date }}</dd>
-                <dt>DOI</dt><dd>{{ attribution.doi }}</dd>
-                <dt>Copyright</dt><dd>{{ attribution.copyright }}</dd>
-                <dt>License</dt><dd><a [href]="attribution.license_url" target="_blank"
-                  rel="noopener noreferrer">{{ passage.license }}</a></dd>
-                <dt>Text preparation</dt><dd>{{ attribution.changes }}</dd>
+                <dt>Authors</dt>
+                <dd>{{ attribution.authors.join(', ') }}</dd>
+                <dt>Published</dt>
+                <dd>{{ attribution.publication_date }}</dd>
+                <dt>DOI</dt>
+                <dd>{{ attribution.doi }}</dd>
+                <dt>Copyright</dt>
+                <dd>{{ attribution.copyright }}</dd>
+                <dt>License</dt>
+                <dd>
+                  <a [href]="attribution.license_url" target="_blank" rel="noopener noreferrer">{{
+                    passage.license
+                  }}</a>
+                </dd>
+                <dt>Text preparation</dt>
+                <dd>{{ attribution.changes }}</dd>
               } @else {
-                <dt>License</dt><dd>{{ passage.license }}</dd>
+                <dt>License</dt>
+                <dd>{{ passage.license }}</dd>
               }
-              <dt>Source</dt><dd>
+              <dt>Source</dt>
+              <dd>
                 @if (passage.source_url; as url) {
                   <a [href]="url" target="_blank" rel="noopener noreferrer">Original document ↗</a>
-                } @else { Local synthetic fixture; no external publication }
+                } @else {
+                  Local synthetic fixture; no external publication
+                }
               </dd>
             </dl>
           </details>
