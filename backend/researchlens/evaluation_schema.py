@@ -106,6 +106,27 @@ class Dataset(StrictModel):
         return self
 
 
+class RerankerConfig(StrictModel):
+    model: str
+    revision: str
+    runtime: str
+    runtime_version: str | None
+    device: Literal["cpu"]
+    precision: Literal["float32"]
+    quantization: Literal["none"]
+    weights: str
+    tokenizer: str
+    max_tokens: int = Field(ge=1)
+    truncation: Literal["longest-first"]
+    batch_size: int = Field(ge=1)
+    intra_op_threads: int = Field(ge=1)
+    inter_op_threads: int = Field(ge=1)
+    pair_order: Literal["question-passage"]
+    score: Literal["raw-relevance-logit"]
+    candidates: int = Field(default=40, ge=1, le=100)
+    diversity: float = Field(default=0.0, ge=0, le=1, allow_inf_nan=False)
+
+
 class RetrievalConfig(StrictModel):
     implementation: str
     version: str
@@ -142,9 +163,14 @@ class RetrievalConfig(StrictModel):
     rrf_k: int | None = Field(default=None, ge=1)
     lexical_weight: float | None = Field(default=None, ge=0, le=1)
     embedding_weight: float | None = Field(default=None, ge=0, le=1)
+    reranker: RerankerConfig | None = None
 
     @model_validator(mode="after")
     def hybrid_settings(self) -> Self:
+        if self.reranker and (
+            self.backend not in ("embeddings", "hybrid") or self.limit > self.reranker.candidates
+        ):
+            raise ValueError("Reranking requires embedding retrieval and enough candidates for k")
         if self.backend == "hybrid" and (
             self.lexical_candidates is None
             or self.embedding_candidates is None

@@ -37,6 +37,7 @@ from researchlens.evaluation_evidence import (
     ranking_metrics,
     validate_encoding_diagnostics,
     validate_labels,
+    validate_pair_diagnostics,
 )
 from researchlens.evaluation_memory import process_peak_rss_bytes
 from researchlens.evaluation_metrics import (
@@ -188,10 +189,19 @@ def validate_retrieval_config(config: RetrievalConfig, artifact: dict) -> Retrie
     return config.model_copy(update={"artifact_sha256": artifact_hash})
 
 
-def default_retrieval_config(backend: str, artifact: dict, implementation: str) -> RetrievalConfig:
+def default_retrieval_config(
+    backend: str,
+    artifact: dict,
+    implementation: str,
+    adapter=None,
+) -> RetrievalConfig:
     settings = encoding_settings(artifact) if backend != "tfidf" else {}
     if backend == "hybrid":
         settings.update(HYBRID_DEFAULTS)
+        if adapter is not None:
+            settings.update(adapter.retrieval_settings)
+    if adapter is not None and hasattr(adapter, "reranking_settings"):
+        settings["reranker"] = adapter.reranking_settings
     return RetrievalConfig(
         implementation=implementation,
         version="tfidf-word-unigram-bigram-english-stopwords-v1"
@@ -356,6 +366,7 @@ def run_evaluation(
             "answer_context_truncation_loss": None,
             "encoder_truncated_passage_ids": [],
             "encoder_unmeasured_passage_ids": [],
+            "reranker_passage_diagnostics": None,
         }
         stage = "retrieval"
         hits = None
@@ -400,6 +411,17 @@ def run_evaluation(
             )
             row["retrieved_passage_ids"] = [p.id for p in hits]
             row["retrieved_passages"] = [p.model_dump() for p in hits]
+            if retrieval.reranker is not None:
+                hook = getattr(retriever, "get_reranking_diagnostics", None)
+                if callable(hook):
+                    measurements = validate_pair_diagnostics(
+                        hook(case.question),
+                        passages,
+                        retrieval.reranker.max_tokens,
+                    )
+                    if not {p.id for p in hits} <= {p["passage_id"] for p in measurements}:
+                        raise ValueError("Reranker diagnostics omit returned passages")
+                    row["reranker_passage_diagnostics"] = measurements
             # Related references for unanswerable cases are context, not answer evidence.
             if not case.expected_abstention:
                 metrics = ranking_metrics(case, hits, labels.get(case.id))
@@ -910,11 +932,16 @@ def main() -> None:
                 else None
             )
             hybrid = (
-                {key: getattr(declared, key) for key in HYBRID_DEFAULTS}
+                {
+                    key: getattr(declared, key) if getattr(declared, key) is not None else default
+                    for key, default in HYBRID_DEFAULTS.items()
+                }
                 if declared is not None and args.retriever == "hybrid"
                 else None
             )
             factory_options = {"hybrid_settings": hybrid} if hybrid is not None else {}
+            if declared is not None and declared.reranker is not None:
+                factory_options["reranker_settings"] = declared.reranker.model_dump()
             retriever = load_retriever(
                 args.retriever, args.index, source=args.source, **factory_options
             )
@@ -923,7 +950,7 @@ def main() -> None:
             retrieval = (
                 declared
                 if declared is not None
-                else default_retrieval_config(args.retriever, artifact, implementation)
+                else default_retrieval_config(args.retriever, artifact, implementation, retriever)
             )
             if retrieval.backend != args.retriever or retrieval.implementation != implementation:
                 raise ValueError("Retrieval config does not match selected factory adapter")

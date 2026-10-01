@@ -1,4 +1,5 @@
 import hashlib
+import math
 from pathlib import Path
 from typing import Protocol
 
@@ -90,6 +91,8 @@ class EmbeddingRetriever:
         self.encoding = encoding
         self.matrix = validate_vectors(vectors, len(passages), encoding["dimensions"])
         self.encoder = encoder
+        self._diagnostics = None
+        self._artifact = None
 
     @classmethod
     def from_path(cls, path: Path, *, source: Path | None = None) -> "EmbeddingRetriever":
@@ -120,7 +123,20 @@ class EmbeddingRetriever:
             threads=encoding["intra_op_threads"],
             precision=encoding["precision"],
         )
-        return cls(passages, vectors, encoder, encoding)
+        retriever = cls(passages, vectors, encoder, encoding)
+        retriever._artifact = artifact
+        return retriever
+
+    def get_encoding_diagnostics(self) -> dict | None:
+        from researchlens.encoding_diagnostics import diagnostic_artifact
+
+        measure = getattr(self.encoder, "measure_documents", None)
+        if self._artifact is None or not callable(measure):
+            return None
+        if self._diagnostics is None:
+            rows = measure([passage.text for passage in self.passages])
+            self._diagnostics = diagnostic_artifact(self._artifact, rows)
+        return self._diagnostics
 
     def search(self, question: str, limit: int = 4) -> list[SearchHit]:
         if limit < 1:
@@ -144,6 +160,8 @@ HYBRID_DEFAULTS = {
     "embedding_candidates": 20,
     "fusion_method": "rrf",
     "rrf_k": 60,
+    "lexical_weight": 1.0,
+    "embedding_weight": 1.0,
 }
 
 
@@ -158,11 +176,21 @@ class HybridRetriever:
         embedding_candidates: int = 20,
         fusion_method: str = "rrf",
         rrf_k: int = 60,
+        lexical_weight: float = 1.0,
+        embedding_weight: float = 1.0,
     ) -> None:
         if min(lexical_candidates, embedding_candidates, rrf_k) < 1 or fusion_method != "rrf":
             raise ValueError(
                 "Hybrid retrieval requires positive candidate counts/RRF k and rrf fusion"
             )
+        if (
+            any(
+                not math.isfinite(weight) or not 0 <= weight <= 1
+                for weight in (lexical_weight, embedding_weight)
+            )
+            or lexical_weight + embedding_weight == 0
+        ):
+            raise ValueError("Fusion weights must be finite, within 0..1 and not both zero")
         self.embeddings = embeddings
         self.lexical = TfidfRetriever(embeddings.passages)
         self.passages = embeddings.passages
@@ -171,18 +199,33 @@ class HybridRetriever:
             "embedding_candidates": embedding_candidates,
             "fusion_method": fusion_method,
             "rrf_k": rrf_k,
+            "lexical_weight": lexical_weight,
+            "embedding_weight": embedding_weight,
         }
+
+    def get_encoding_diagnostics(self) -> dict | None:
+        return self.embeddings.get_encoding_diagnostics()
 
     def search(self, question: str, limit: int = 4) -> list[SearchHit]:
         if limit < 1:
             raise ValueError("limit must be positive")
         scores: dict[str, float] = {}
-        for retriever, count in (
-            (self.lexical, self.retrieval_settings["lexical_candidates"]),
-            (self.embeddings, self.retrieval_settings["embedding_candidates"]),
+        for retriever, count, weight in (
+            (
+                self.lexical,
+                self.retrieval_settings["lexical_candidates"],
+                self.retrieval_settings["lexical_weight"],
+            ),
+            (
+                self.embeddings,
+                self.retrieval_settings["embedding_candidates"],
+                self.retrieval_settings["embedding_weight"],
+            ),
         ):
+            if weight == 0:
+                continue
             for rank, hit in enumerate(retriever.search(question, count), start=1):
-                scores[hit.id] = scores.get(hit.id, 0.0) + 1 / (
+                scores[hit.id] = scores.get(hit.id, 0.0) + weight / (
                     self.retrieval_settings["rrf_k"] + rank
                 )
         ranked = sorted(
@@ -202,8 +245,23 @@ def load_retriever(
     source: Path | None = None,
     expected_model: str | None = None,
     hybrid_settings: dict | None = None,
+    reranker_settings: dict | None = None,
 ) -> PassageRetriever:
+    reranking = None
+    if reranker_settings:
+        from researchlens.reranking import LocalReranker, RerankedRetriever, reranker_metadata
+
+        settings = dict(reranker_settings)
+        candidates = settings.pop("candidates", 40)
+        diversity = settings.pop("diversity", 0.0)
+        if settings != reranker_metadata():
+            raise ValueError("Reranker model, revision or runtime settings are incompatible")
+        if not 1 <= candidates <= 100 or not math.isfinite(diversity) or not 0 <= diversity <= 1:
+            raise ValueError("Invalid reranking candidate count or diversity")
+        reranking = candidates, diversity
     if backend == "tfidf":
+        if reranker_settings:
+            raise ValueError("This reranking integration requires embeddings or hybrid retrieval")
         return TfidfRetriever.from_path(path, source=source)
     if backend in ("embeddings", "hybrid"):
         # Check configured model before loading weights; evaluation derives it from the artifact.
@@ -215,9 +273,18 @@ def load_retriever(
             except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
                 raise _rebuild_error("Embedding configuration/artifact mismatch", backend) from exc
         embeddings = EmbeddingRetriever.from_path(path, source=source)
-        return (
+        retriever = (
             HybridRetriever(embeddings, **(hybrid_settings or {}))
             if backend == "hybrid"
             else embeddings
         )
+        if reranker_settings:
+            candidates, diversity = reranking
+            retriever = RerankedRetriever(
+                retriever,
+                LocalReranker(),
+                candidates=candidates,
+                diversity=diversity,
+            )
+        return retriever
     raise ValueError("RETRIEVAL_BACKEND must be tfidf, embeddings or hybrid")

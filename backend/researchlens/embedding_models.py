@@ -247,3 +247,41 @@ class TorchEncoder:
             if batches
             else np.empty((0, self.encoding["dimensions"]), dtype=np.float32)
         )
+
+    def measure_documents(self, texts: list[str]) -> list[dict]:
+        from researchlens.encoding_diagnostics import measurement
+
+        if not self.tokenizer.is_fast:
+            raise ValueError("Encoding diagnostics require the pinned fast tokenizer's offsets")
+        rows = []
+        for text in texts:
+            original = self.tokenizer(text, truncation=False, padding=False)
+            retained = self.tokenizer(
+                text,
+                truncation=True,
+                max_length=self.encoding["max_tokens"],
+                padding=False,
+                return_offsets_mapping=True,
+                return_special_tokens_mask=True,
+            )
+            end = max(
+                (
+                    offset[1]
+                    for offset, special in zip(
+                        retained["offset_mapping"],
+                        retained["special_tokens_mask"],
+                        strict=True,
+                    )
+                    if not special
+                ),
+                default=0,
+            )
+            rows.append(
+                measurement(
+                    text,
+                    len(original["input_ids"]),
+                    len(retained["input_ids"]),
+                    end,
+                )
+            )
+        return rows
