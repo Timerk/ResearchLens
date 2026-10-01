@@ -25,6 +25,7 @@ def create_app(
                     active_settings.index_path,
                     source=active_settings.corpus_path,
                     expected_model=active_settings.embedding_model,
+                    **active_settings.retriever_options(),
                 )
             except ValueError as exc:
                 raise RuntimeError(str(exc)) from exc

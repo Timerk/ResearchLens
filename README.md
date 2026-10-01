@@ -77,6 +77,8 @@ first ingestion. Held-out questions are not executed. See [evaluation readiness]
 and the [historical preliminary comparison](docs/model-comparison.md).
 The [approved development results](docs/approved-model-comparison.md) report all nine
 configurations, complete evidence, paired regressions and CPU costs on the reviewed set.
+See [retrieval development experiments](docs/retrieval-improvements.md) for optional
+local reranking, weighted fusion, tokenizer measurements and offline context comparisons.
 
 ### Enable document-only OpenAI answers
 

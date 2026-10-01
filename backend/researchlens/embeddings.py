@@ -101,6 +101,35 @@ class LocalEncoder:
             batches.append(pooled.astype(np.float32))
         return np.concatenate(batches) if batches else np.empty((0, DIMENSIONS), dtype=np.float32)
 
+    def measure_documents(self, texts: list[str]) -> list[dict]:
+        from tokenizers import Tokenizer
+
+        from researchlens.encoding_diagnostics import measurement
+
+        # Clone rather than changing the tokenizer used by live searches.
+        full = Tokenizer.from_str(self.tokenizer.to_str())
+        full.no_truncation()
+        full.no_padding()
+        rows = []
+        for text in texts:
+            original = full.encode(text)
+            retained = self.tokenizer.encode(text)
+            end = max(
+                (
+                    offset[1]
+                    for offset, special, visible in zip(
+                        retained.offsets,
+                        retained.special_tokens_mask,
+                        retained.attention_mask,
+                        strict=True,
+                    )
+                    if visible and not special
+                ),
+                default=0,
+            )
+            rows.append(measurement(text, len(original.ids), sum(retained.attention_mask), end))
+        return rows
+
 
 def validate_vectors(vectors: object, count: int, dimensions: int = DIMENSIONS) -> np.ndarray:
     """Fail closed on malformed, non-finite, zero or non-unit passage/query vectors."""
