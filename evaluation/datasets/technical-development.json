@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "technical-development",
-  "version": "3-source-reviewed",
+  "version": "4-human-reviewed",
   "split": "development",
   "material": "real-corpus",
   "status": "draft",
@@ -32,7 +32,7 @@
       "publication_date": "2024-05-05"
     }
   ],
-  "notes": "Source-reviewed on 2026-10-01 by Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off), at the user's request. 50 accepted cases; rejected originals and all 100 case decisions are archived in evaluation/reviews/2026-10-01-pr8/. Original XML, all tables/formulas and all 38 publisher figures were inspected. Alternative/complementary prose support is included; omitted original evidence is documented separately. This is AI review, not human scientific sign-off. Development remains editable; substantial duplicate cases and one held-out target leak were removed. No model rankings or failure reports informed this review.",
+  "notes": "The project owner reviewed and approved these accepted questions on 2026-10-01 in the PR #8 thread. The preceding AI full-source review, all 100 original decisions and 14 rejected cases remain archived in evaluation/reviews/2026-10-01-pr8/. Human approval and the new file hashes are recorded in human-review.json. Question wording, expectations, references and dispositions are unchanged from the AI-reviewed accepted set. The owner's confirmation does not claim a new exhaustive scientific source audit or generated-answer review. Development remains editable.",
   "cases": [
     {
       "id": "tech-glass-exact",
@@ -71,7 +71,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -107,7 +107,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -171,7 +171,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -228,7 +228,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -260,7 +260,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -324,7 +324,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -454,7 +454,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -473,7 +473,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -533,7 +533,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -565,7 +565,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -597,7 +597,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -629,7 +629,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -670,7 +670,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -703,7 +703,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -751,7 +751,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -799,7 +799,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -831,7 +831,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -887,7 +887,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -935,7 +935,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -967,7 +967,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1007,7 +1007,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1039,7 +1039,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1071,7 +1071,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1127,7 +1127,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1167,7 +1167,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1199,7 +1199,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1247,7 +1247,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1279,7 +1279,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1351,7 +1351,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1391,7 +1391,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1435,7 +1435,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1479,7 +1479,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1523,7 +1523,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1567,7 +1567,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1611,7 +1611,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1655,7 +1655,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1715,7 +1715,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1775,7 +1775,7 @@
       ],
       "expected_abstention": false,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1794,7 +1794,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1813,7 +1813,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1832,7 +1832,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1851,7 +1851,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1870,7 +1870,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1889,7 +1889,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1929,7 +1929,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -1969,7 +1969,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -2001,7 +2001,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -2033,7 +2033,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -2092,7 +2092,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     },
     {
@@ -2124,7 +2124,7 @@
       ],
       "expected_abstention": true,
       "review_status": "approved",
-      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
       "review_date": "2026-10-01"
     }
   ]

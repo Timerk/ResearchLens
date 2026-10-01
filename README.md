@@ -176,9 +176,10 @@ until a concrete requirement justifies them.
    embedding comparisons, ranking/timing/memory diagnostics and human review. Model
    implementations belong in retrieval work. The [PR 8 source review](evaluation/reviews/2026-10-01-pr8/README.md)
    accepted 50 development and 36 held-out questions, rejected 14 overlapping or
-   unsuitable drafts, and froze held-out before model selection. Approval identifies
-   Codex as the AI reviewer; it is not human scientific sign-off. Human review,
-   answer-quality evaluation and a demonstration remain pending.
+   unsuitable drafts, and froze held-out before model selection. The owner approved
+   all 86 accepted questions on 2026-10-01. Human approval and the new freeze hashes
+   are recorded separately from the preserved AI source review. Answer-quality
+   evaluation and a demonstration remain pending.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 
@@ -214,8 +215,9 @@ retain their authors' copyright and CC BY 4.0 licenses; see
 
 The initial code, fixtures, tests, CI configuration and documentation were generated
 with AI assistance. The project owner provided the goals, constraints, technology
-preferences and API budget. Manual code review, technical-source review and evaluation
-judgments by the owner are still pending. Record subsequent contributions accurately;
+preferences and API budget. The owner reviewed and approved the 86 accepted technical
+evaluation questions on 2026-10-01 after the recorded AI source review. Evaluation
+of generated answers remains pending. Record subsequent contributions accurately;
 do not present generated code as independently authored work.
 
 See [the evaluation workflow](evaluation/README.md) for reproducible free runs,

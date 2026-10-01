@@ -1,10 +1,10 @@
 # Evaluation foundation
 
 This workflow compares retrieval implementations on fixed questions and passages.
-Four technical papers are available; technical questions received an explicitly
-identified AI source review on 2026-10-01. The three synthetic cases remain smoke
-tests. No human-reviewed retrieval
-benchmark or answer-quality results exist yet. Nearest neighbors and valid citation
+Four technical papers are available. The project owner approved the 86 accepted
+technical questions on 2026-10-01 after the recorded AI source review.
+The three synthetic cases remain smoke tests. Model quality and generated-answer
+quality have not been evaluated on this human-approved set. Nearest neighbors and valid citation
 IDs are not proof of support.
 
 ## Run free development diagnostics
@@ -42,13 +42,16 @@ missing references/claims and one-source comparisons fail validation.
 
 - `datasets/development.json`: three AI-authored, unreviewed synthetic smoke cases.
 - `datasets/technical-development.json`: 50 approved technical development cases,
-  version `3-source-reviewed`; the development dataset remains editable (`draft`).
-- `datasets/held-out.json`: 36 approved cases, version `2-source-reviewed-frozen`.
-  The accepted subset is `frozen`, with its exact file hash recorded in the review.
+  version `4-human-reviewed`; the development dataset remains editable (`draft`).
+- `datasets/held-out.json`: 36 approved cases, version `3-human-reviewed-frozen`.
+  The accepted subset is `frozen`, with its current file hash in `human-review.json`.
 - [PR 8 review](reviews/2026-10-01-pr8/README.md): all 100 input decisions, 14
   rejected originals, source conflicts, alternative evidence and full-source scope.
-  The reviewer is **Codex / GPT-6.1-Sol (AI)**, dated 2026-10-01. Case approval and
-  freezing were requested by the user; they do not constitute human sign-off.
+  The original reviewer is Codex / GPT-6.1-Sol, identified as AI, dated 2026-10-01.
+- [Human approval](reviews/2026-10-01-pr8/human-review.json): the project owner's
+  confirmation on 2026-10-01, all 86 accepted case IDs and new version/freeze hashes.
+  Case status remains `approved`; reviewer identity now identifies the human owner.
+  The earlier AI review and all 14 rejected originals remain unchanged.
 
 | Question type | Development | Held-out |
 | --- | ---: | ---: |
@@ -100,8 +103,8 @@ one does not certify complete factual support. Passage recall still measures the
 fraction of listed relevant passages retrieved, not the fraction of claims proved.
 Automated validation is not scientific review. New drafts use `unreviewed` with null
 reviewer/date; reviewed decisions require truthful identity/date. Only approved
-cases can be frozen. Human scientific sign-off remains separate from the recorded
-AI source review.
+cases can be frozen. Owner approval is separate from the earlier AI source review
+and does not claim a new exhaustive scientific source audit or generated-answer review.
 
 Keep development and held-out questions separate. Freeze held-out before model/settings
 selection; never tune on it. CLI overlap checks catch IDs/normalized identical questions,

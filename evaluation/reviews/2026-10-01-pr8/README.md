@@ -1,5 +1,12 @@
 # PR 8 question and expectation review
 
+The project owner approved the 86 accepted questions on 2026-10-01 in the PR 8
+thread. [human-review.json](human-review.json) records that confirmation, the
+human reviewer, the accepted case IDs and the new dataset versions/hashes.
+It links to the unchanged AI review and rejected-case archive. Questions and
+expectations did not change. The active held-out freeze is now the output hash
+in `human-review.json`. The following sections describe the earlier AI source review.
+
 Reviewed 2026-10-01 by **Codex / GPT-6.1-Sol, AI source reviewer** against
 PR [8](https://github.com/Timerk/ResearchLens/pull/8), input commit `7c096fc`.
 Approval is the named AI reviewer's decision, requested by the user. It is **not
@@ -17,7 +24,7 @@ replacement questions solely to restore counts.
 | [review.json](review.json) | Every decision, identity/date, support and absence notes, alternative/complementary passages, original-only evidence, source versions, figure URLs/checksums and exact input/output dataset hashes |
 | [rejected-cases.json](rejected-cases.json) | All 14 original rejected cases, marked rejected with identity/date and reasons; excluded from runnable datasets |
 | [technical development](../../datasets/technical-development.json) | 50 accepted cases with revised wording, expectations, relevance references and review provenance |
-| [held-out](../../datasets/held-out.json) | 36 accepted, approved, frozen cases; its exact SHA-256 is in review.json |
+| [held-out](../../datasets/held-out.json) | 36 accepted, human-approved, frozen cases; the current SHA-256 is in human-review.json |
 
 ## Material findings
 
@@ -101,7 +108,9 @@ partition and retain draft/frozen approval guards without executing held-out
 questions. Ruff lint, formatting and Git whitespace checks passed.
 These checks establish structure and provenance, not scientific truth.
 
-Use the recorded held-out output hash to identify this freeze. Changing questions,
+The hashes in `review.json` identify the earlier AI-reviewed versions; those records
+remain unchanged. Use `human-review.json` for the current human-approved freeze.
+Changing questions,
 expectations, references or dispositions requires a new version, source review and
 freeze before model/settings selection. If held-out failures influence tuning,
 retire this set and prepare fresh targets for subsequent quality claims.
