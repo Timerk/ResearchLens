@@ -34,6 +34,9 @@ test execution needs no API key, backend server or paid API call.
 | `npm run build` | Production build passed, within Angular budgets |
 | Existing backend checks, from repository root | `uv run pytest -q`: 33 passed; `uv run ruff check backend` and `uv run ruff format --check backend` passed |
 
+The [GitHub Actions push run](https://github.com/Timerk/ResearchLens/actions/runs/36869204683)
+also passed both jobs, including the frontend suite/build on Linux with Node 24.
+
 Local runs used Windows, Node 22.22.0 and Python 3.13.14. The initial dependency
 addition hit an npm 10 resolver error; using the repository-declared npm 11.17.0
 resolved it. A subsequent clean `npm ci` succeeded. Backend tests emit an existing
@@ -86,7 +89,7 @@ expanded answer. Those PNGs were opened and visually inspected locally; the
 existing palette/layout remains intact and the source metadata wraps at 320px.
 These are captured browser screenshots, not generated mockups or T3 snapshots.
 Two representative screenshots are retained here; all states are produced under
-`test-results/` and included in the CI artifact/HTML report. These are inspection
+`test-results/` and included in the CI artifact. These are inspection
 artifacts, not pixel-diff screenshot assertions.
 
 ![Desktop answer with expanded citation and reference](screenshots/desktop-answer.png)
