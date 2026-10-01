@@ -203,7 +203,9 @@ def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
         (manifest_path, {"schema_version": 1, "sources": records}),
         (directory / "documents.json", documents),
     ):
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        path.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
+        )
     notices = [
         "RESEARCHLENS TECHNICAL CORPUS — THIRD-PARTY ATTRIBUTIONS",
         "These articles retain their authors' copyright and CC BY 4.0 licensing.",
@@ -228,7 +230,9 @@ def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
                 ]
             )
         )
-    (directory / "NOTICE.txt").write_text("\n\n".join(notices) + "\n", encoding="utf-8")
+    (directory / "NOTICE.txt").write_text(
+        "\n\n".join(notices) + "\n", encoding="utf-8", newline="\n"
+    )
 
 
 if __name__ == "__main__":
