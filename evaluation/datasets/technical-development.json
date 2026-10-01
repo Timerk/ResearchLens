@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "id": "technical-development",
+  "version": "1-draft",
+  "split": "development",
+  "material": "real-corpus",
+  "status": "draft",
+  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "source_versions": [
+    {
+      "source_id": "pmc11510794",
+      "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "doi": "10.3390/s24206717",
+      "publication_date": "2024-10-18"
+    },
+    {
+      "source_id": "pmc11768589",
+      "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "doi": "10.3390/s25020527",
+      "publication_date": "2025-01-17"
+    },
+    {
+      "source_id": "pmc10934137",
+      "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "doi": "10.3390/s24051622",
+      "publication_date": "2024-03-01"
+    },
+    {
+      "source_id": "pmc11121878",
+      "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "doi": "10.3390/jimaging10050111",
+      "publication_date": "2024-05-05"
+    }
+  ],
+  "notes": "AI-authored development drafts for the four-paper corpus on main. Not human-reviewed and not a held-out benchmark. References pin the partial prose extraction and original XML checksums/locations. Figures, tables and formulae are omitted; full-source human review is pending. Paraphrase pairs intentionally share expectations for development diagnostics.",
+  "cases": [
+    {
+      "id": "tech-glass-exact",
+      "question": "Which forward and backward light sources are used in the aircraft glass canopy acquisition platform?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Forward lighting uses a ring light; backward lighting uses a planar light source."
+      ],
+      "required_qualifications": [
+        "Describe the acquisition platform in this paper, not all glass inspection systems."
+      ],
+      "forbidden_claims": [
+        "Unreported calibration settings or general claims of optimality."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-glass-paraphrase",
+      "question": "Why photograph the same transparent aircraft cover with light arriving from opposite sides? What information can each view lose?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Dual-Modal Illumination Structure",
+          "source_locator": "./body/sec[3]/sec[1]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "Bright-field forward lighting captures surface scratches but is susceptible to reflections and uneven lighting.",
+        "Backward lighting reveals depth information but can lose surface detail and boundary contours."
+      ],
+      "required_qualifications": [
+        "These are the authors' observations in their canopy inspection study."
+      ],
+      "forbidden_claims": [
+        "One view is sufficient for every defect.",
+        "Unreported numerical detection thresholds."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-painted-exact",
+      "question": "Which pre-trained CNNs were compared with a model trained from scratch for painted heating-device surface classification?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "The paper compares transfer learning of ResNet-50 and Inception V3 with a self-built network."
+      ],
+      "required_qualifications": [
+        "The task classifies OK/NOK painted heating-device surfaces."
+      ],
+      "forbidden_claims": [
+        "Claims that these classifiers were evaluated on the canopy dataset."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-painted-paraphrase",
+      "question": "For checking the paint on heaters, which existing image classifiers did the researchers adapt rather than design themselves?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "They adapted pre-trained ResNet-50 and Inception V3."
+      ],
+      "required_qualifications": [
+        "Keep the finding specific to this painted-surface classification study."
+      ],
+      "forbidden_claims": [
+        "Global claims that one network is always the most accurate."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-wafer-exact",
+      "question": "What changes to TDI stages and column fixed pattern noise improve particle-defect SNR in the non-patterned wafer study?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Increasing TDI stages and reducing column fixed pattern noise improved particle-defect signal-to-noise ratio without sacrificing detection efficiency in the reported experiments."
+      ],
+      "required_qualifications": [
+        "This is a reported experimental result, not a guarantee for arbitrary scanners."
+      ],
+      "forbidden_claims": [
+        "A numerical SNR gain not given in the cited passage."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-wafer-paraphrase",
+      "question": "How did the wafer-inspection researchers suppress background stripes from mismatched column readout circuits?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p15:w0",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "They reduce column fixed pattern noise by subtracting particle-free background images from particle images taken at different TDI stages."
+      ],
+      "required_qualifications": [
+        "Correlated dual sampling did not eliminate that noise completely."
+      ],
+      "forbidden_claims": [
+        "The subtraction eliminates all noise."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-autoencoder-exact",
+      "question": "What training examples are used in each stage of the two-stage autoencoder method, and how are stage-one weights used?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "Stage one uses only normal samples; stage two uses normal and artificially defective samples, initialized with stage-one weights."
+      ],
+      "required_qualifications": [
+        "Artificially defective examples are not a claim that stage one is trained on real defects."
+      ],
+      "forbidden_claims": [
+        "Stage one requires labeled real defects."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-autoencoder-paraphrase",
+      "question": "How does the reconstruction model first learn an undamaged surface and then learn to handle simulated damage?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "It first trains on normal samples, then reuses those learned weights to train with normal and artificially defective samples."
+      ],
+      "required_qualifications": [
+        "Describe the paper's two-stage strategy; do not generalize to every autoencoder."
+      ],
+      "forbidden_claims": [
+        "The study proves performance on every unseen material."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-fusion",
+      "question": "How do the canopy and painted heating-device studies differ in their illumination modalities and fusion levels?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p59:w0",
+          "paragraph": 59,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy inspection combines forward/backward lighting with RGB data-level fusion and an ADMF-Net feature-level method.",
+        "Painted heating-device inspection combines deflectometry/bright illumination with decision-level fusion."
+      ],
+      "required_qualifications": [
+        "These are different tasks and datasets; no common-benchmark superiority follows."
+      ],
+      "forbidden_claims": [
+        "Directly ranking the two approaches' accuracies across different datasets."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-learning",
+      "question": "Contrast the use of pre-trained classifiers in the painted-surface paper with the staged training examples in the autoencoder paper.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11768589",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "The painted-surface work adapts ResNet-50/Inception V3 for OK/NOK classification.",
+        "The autoencoder work first trains on normal examples, then normal/artificially defective examples using the first-stage weights."
+      ],
+      "required_qualifications": [
+        "Classification and reconstruction-based detection have different objectives and evaluations."
+      ],
+      "forbidden_claims": [
+        "The papers provide a head-to-head comparison of these methods on the same data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated",
+      "question": "Who composed the music for the opera The Magic Flute?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "This technical corpus is not evidence for an unrelated music-history answer."
+      ],
+      "forbidden_claims": [
+        "An answer supplied from general knowledge rather than these documents."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-shared-cpu-cost",
+      "question": "Which of the four methods has the lowest total CPU inference cost per detected defect when all four are tested on the identical glass-canopy benchmark?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "Draft missing-evidence case: a human must check all full sources for the requested common-benchmark CPU cost comparison; related abstracts cannot establish it."
+      ],
+      "forbidden_claims": [
+        "An invented cost ranking.",
+        "Converting unrelated timing or accuracy figures into a shared-benchmark result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    }
+  ]
+}

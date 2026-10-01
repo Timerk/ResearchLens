@@ -1,11 +1,37 @@
 {
   "schema_version": 1,
   "id": "real-corpus-held-out",
-  "version": "0-pending",
+  "version": "1-pending-review",
   "split": "held-out",
   "material": "real-corpus",
-  "status": "pending-real-corpus",
-  "corpus_sha256": null,
-  "notes": "Pending authorized real corpus and human source review. Target 20 questions: 8 factual, 8 cross-document comparisons, 4 plausible in-domain unanswerable requests. Do not populate from synthetic fixtures or use held-out questions for tuning.",
+  "status": "pending-human-review",
+  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "source_versions": [
+    {
+      "source_id": "pmc11510794",
+      "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "doi": "10.3390/s24206717",
+      "publication_date": "2024-10-18"
+    },
+    {
+      "source_id": "pmc11768589",
+      "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "doi": "10.3390/s25020527",
+      "publication_date": "2025-01-17"
+    },
+    {
+      "source_id": "pmc10934137",
+      "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "doi": "10.3390/s24051622",
+      "publication_date": "2024-03-01"
+    },
+    {
+      "source_id": "pmc11121878",
+      "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "doi": "10.3390/jimaging10050111",
+      "publication_date": "2024-05-05"
+    }
+  ],
+  "notes": "Four real papers are available. Independent creation, human review and freezing of held-out questions are pending; target approximately 20 (8 factual, 8 comparisons, 4 unanswerable) when sources permit. Never use held-out questions for model/settings selection.",
   "cases": []
 }

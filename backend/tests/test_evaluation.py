@@ -277,6 +277,8 @@ def test_cli_writes_offline_artifacts_and_refuses_overwrite(evaluation, tmp_path
         str(ROOT / "evaluation/datasets/held-out.json"),
         "--index",
         str(index),
+        "--source",
+        str(CORPUS),
         "--output",
         str(output),
     ]

@@ -1,11 +1,15 @@
-import json
 from pathlib import Path
+from typing import Protocol
 
-from pydantic import TypeAdapter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from researchlens.artifacts import load_artifact
 from researchlens.models import Passage, SearchHit
+
+
+class PassageRetriever(Protocol):
+    def search(self, question: str, limit: int = 4) -> list[SearchHit]: ...
 
 
 class Retriever:
@@ -21,11 +25,9 @@ class Retriever:
         self.matrix = self.vectorizer.fit_transform([passage.text for passage in passages])
 
     @classmethod
-    def from_path(cls, path: Path) -> "Retriever":
-        artifact = json.loads(path.read_text(encoding="utf-8"))
-        if artifact["schema_version"] != 1:
-            raise ValueError("Unsupported index schema; rebuild the index")
-        return cls(TypeAdapter(list[Passage]).validate_python(artifact["passages"]))
+    def from_path(cls, path: Path, *, source: Path | None = None) -> "Retriever":
+        _, passages = load_artifact(path, source=source)
+        return cls(passages)
 
     def search(self, question: str, limit: int = 4) -> list[SearchHit]:
         if limit < 1:
@@ -38,3 +40,12 @@ class Retriever:
             for index in ranked[:limit]
             if scores[index] > 0
         ]
+
+
+def load_retriever(backend: str, path: Path, *, source: Path | None = None) -> PassageRetriever:
+    """Factory contract shared with PR #9; implementations live in retrieval work."""
+    if backend == "tfidf":
+        return Retriever.from_path(path, source=source)
+    raise ValueError(
+        "Requested retrieval backend is not installed; integrate its retrieval adapter"
+    )
