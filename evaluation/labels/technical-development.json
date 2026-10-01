@@ -6,7 +6,7 @@
   "review_status": "unreviewed",
   "reviewer": null,
   "review_date": null,
-  "notes": "AI-authored draft evidence groups for the 36 answerable development cases only. The question review does not approve these new annotations. OR alternatives and AND combinations identify required factual parts and canonical-text character spans. Every required claim has at least one group; groups can split a composite claim. Alternatives are conservative and not exhaustive. Human support/alternative/span review is pending. Context-only references for all 14 negatives are excluded. Held-out questions and freeze are unchanged.",
+  "notes": "AI-authored development-only evidence groups revised after the 2026-10-01 AI evidence audit. Question approval does not approve these annotations. Each OR option supplies its group in explicit scope; AND spans supply complementary facts or necessary referents. Source-supported factual qualifications are required where labeled; generic answer-review guards and reasoned non-comparability remain outside passage coverage. Alternatives are conservative and not exhaustive. Human approval is pending. All 14 negatives remain unlabeled. Held-out questions, freeze, corpus and prior reviews are unchanged. See evidence-fixes.json and evidence-fixes.md for source checks and decisions on all 41 recommendations.",
   "cases": [
     {
       "case_id": "tech-glass-exact",
@@ -99,10 +99,10 @@
           "alternatives": [
             [
               {
-                "start": 326,
+                "start": 192,
                 "end": 405,
                 "passage_id": "pmc11510794:p22:w0",
-                "quote": "However, it tends to lose surface detail and some boundary contour information."
+                "quote": "Backward lighting effectively reveals the depth information of defects, aiding in the analysis of defect severity and classification. However, it tends to lose surface detail and some boundary contour information."
               }
             ]
           ]
@@ -148,6 +148,14 @@
                 "passage_id": "pmc11768589:p44:w0",
                 "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3."
               }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 71,
+                "passage_id": "pmc11768589:p5:w180",
+                "quote": "(2) TL of two pre-trained CNN architectures—ResNet-50 and Inception V3."
+              }
             ]
           ]
         },
@@ -179,6 +187,14 @@
                 "passage_id": "pmc11768589:p44:w0",
                 "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3."
               }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 104,
+                "passage_id": "pmc11768589:p25:w0",
+                "quote": "The first approach consisted in the construction and training of a new and lightweight CNN from scratch."
+              }
             ]
           ]
         }
@@ -209,6 +225,27 @@
               }
             ]
           ]
+        },
+        {
+          "id": "efficiency-scope",
+          "claim_index": 0,
+          "description": "Efficiency argument excludes transmission time and holds line frequency fixed",
+          "alternatives": [
+            [
+              {
+                "start": 82,
+                "end": 334,
+                "passage_id": "pmc10934137:p14:w180",
+                "quote": "Without considering the data transmission time, the imaging time is only related to line frequency. Therefore, the increase in the number of TDI stages does not affect the line frequency, thus improving the SNR without sacrificing detection efficiency."
+              },
+              {
+                "start": 0,
+                "end": 60,
+                "passage_id": "pmc10934137:p16:w0",
+                "quote": "In the experiment, the line frequency is fixed at 23,400 Hz,"
+              }
+            ]
+          ]
         }
       ]
     },
@@ -222,10 +259,10 @@
           "alternatives": [
             [
               {
-                "start": 215,
+                "start": 0,
                 "end": 299,
                 "passage_id": "pmc10934137:p15:w0",
-                "quote": "This CFPN is caused by a mismatch between the readout circuits of different columns."
+                "quote": "It should be noted that in Figure 9e, when the signal intensity of particles is weak at low TDI stages, the presence of stripe-like column fixed pattern noise (CFPN) in the background can impact particle detection. This CFPN is caused by a mismatch between the readout circuits of different columns."
               }
             ]
           ]
@@ -241,6 +278,21 @@
                 "end": 985,
                 "passage_id": "pmc10934137:p15:w0",
                 "quote": "The background images without particles are subtracted from the particle images taken at different TDI stages."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "cds-incomplete",
+          "claim_index": 0,
+          "description": "Correlated dual sampling does not completely eliminate CFPN",
+          "alternatives": [
+            [
+              {
+                "start": 300,
+                "end": 429,
+                "passage_id": "pmc10934137:p15:w0",
+                "quote": "Although the correlated dual sampling circuit structure is an effective method to eliminate CFPN, this elimination is incomplete."
               }
             ]
           ]
@@ -278,28 +330,58 @@
                 "passage_id": "pmc11121878:p44:w0",
                 "quote": "In the first stage, the model trains only on normal samples using the AW-SSIM loss function, effectively learning the background characteristics."
               }
+            ],
+            [
+              {
+                "start": 1008,
+                "end": 1151,
+                "passage_id": "pmc11121878:p1:w0",
+                "quote": "In the first stage, the model trains only on normal samples using AW-SSIM loss, allowing it to learn robust representations of normal features."
+              }
+            ],
+            [
+              {
+                "start": 59,
+                "end": 160,
+                "passage_id": "pmc11121878:p46:w0",
+                "quote": "The first stage of training is performed only on normal samples, utilizing the AW-SSIM loss function."
+              }
             ]
           ]
         },
         {
           "id": "part-2",
           "claim_index": 0,
-          "description": "Second stage uses artificial defects and clean references",
+          "description": "Stage two uses normal and artificially defective training samples",
           "alternatives": [
             [
               {
-                "start": 664,
-                "end": 824,
-                "passage_id": "pmc11121878:p17:w0",
-                "quote": "Here, images with artificially introduced defects ( [formula omitted] ) created by the ADGA are paired with their non-defect counterparts ( [formula omitted] )."
+                "start": 83,
+                "end": 282,
+                "passage_id": "pmc11121878:p8:w0",
+                "quote": "The first stage of training is exclusively conducted only on normal samples, and the second stage is training on normal and artificially defective samples using the model weight from the first stage."
               }
             ],
             [
               {
-                "start": 631,
-                "end": 807,
-                "passage_id": "pmc11121878:p44:w0",
-                "quote": "These learned weights are then transferred to the second stage, which utilizes artificially generated defects created by the ADGA and employs a combined LPIPS and AW-SSIM loss."
+                "start": 519,
+                "end": 674,
+                "passage_id": "pmc11121878:p46:w0",
+                "quote": "In the second stage of training, artificially defective samples and normal samples are used to train the model and enhance its ability to localize defects."
+              }
+            ],
+            [
+              {
+                "start": 1152,
+                "end": 1296,
+                "passage_id": "pmc11121878:p1:w0",
+                "quote": "In the second stage of training, the weights obtained from the first stage are used to train the model on both normal and artificially defective"
+              },
+              {
+                "start": 0,
+                "end": 17,
+                "passage_id": "pmc11121878:p1:w180",
+                "quote": "training samples."
               }
             ]
           ]
@@ -323,6 +405,14 @@
                 "end": 807,
                 "passage_id": "pmc11121878:p44:w0",
                 "quote": "These learned weights are then transferred to the second stage, which utilizes artificially generated defects created by the ADGA and employs a combined LPIPS and AW-SSIM loss."
+              }
+            ],
+            [
+              {
+                "start": 83,
+                "end": 282,
+                "passage_id": "pmc11121878:p8:w0",
+                "quote": "The first stage of training is exclusively conducted only on normal samples, and the second stage is training on normal and artificially defective samples using the model weight from the first stage."
               }
             ]
           ]
@@ -360,6 +450,22 @@
                 "passage_id": "pmc11510794:p59:w0",
                 "quote": "The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities."
               }
+            ],
+            [
+              {
+                "start": 420,
+                "end": 565,
+                "passage_id": "pmc11510794:p1:w0",
+                "quote": "To address this issue, we developed a dual-modal illumination system that integrates both forward and backward lighting to capture defect images."
+              }
+            ],
+            [
+              {
+                "start": 264,
+                "end": 427,
+                "passage_id": "pmc11510794:p57:w0",
+                "quote": "This system utilizes both forward lighting and backward lighting to capture defect images, facilitating a more comprehensive and accurate defect detection process."
+              }
             ]
           ]
         },
@@ -370,10 +476,10 @@
           "alternatives": [
             [
               {
-                "start": 254,
-                "end": 766,
+                "start": 630,
+                "end": 681,
                 "passage_id": "pmc11510794:p5:w0",
-                "quote": "By integrating the information from both types of images, more accurate defect detection is achieved.A curated dataset is presented, which, to the best of our knowledge, is the first benchmark in the field of defect detection for aircraft transparent materials.A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion."
+                "quote": "a data-level fusion method named RGB Channel Fusion"
               }
             ],
             [
@@ -406,6 +512,20 @@
                 "passage_id": "pmc11510794:p59:w0",
                 "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net)."
               }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 194,
+                "passage_id": "pmc11510794:p40:w0",
+                "quote": "To fully utilize the multimodal information obtained under different lighting conditions, this paper proposes an attention-based dual-branch modal fusion network (ADMF-Net) for defect detection."
+              },
+              {
+                "start": 515,
+                "end": 766,
+                "passage_id": "pmc11510794:p5:w0",
+                "quote": "A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion."
+              }
             ]
           ]
         },
@@ -437,6 +557,14 @@
                 "passage_id": "pmc11768589:p35:w0",
                 "quote": "The application of the two illumination modes—deflectometry-based structured illumination and bright field—was quite successful in the detection of all defects categories, despite their significantly different characteristics and sizes."
               }
+            ],
+            [
+              {
+                "start": 256,
+                "end": 520,
+                "passage_id": "pmc11768589:p44:w0",
+                "quote": "This system comprised deflectometry and bright light-based image acquisition for dataset generation, DL algorithms for defect detection and classification, surface’s information shipping to a MES server, and a final visual interface for defect information display."
+              }
             ]
           ]
         },
@@ -467,6 +595,22 @@
                 "end": 246,
                 "passage_id": "pmc11768589:p45:w0",
                 "quote": "The two illumination modes of the image acquisition module significantly widened the type of defects that could be identified with this system, while maintaining its computational complexity by performing multi-modal fusion at the decision level."
+              }
+            ],
+            [
+              {
+                "start": 1000,
+                "end": 1122,
+                "passage_id": "pmc11768589:p35:w0",
+                "quote": "However, unlike Guan et al. that employed a feature-level fusion, a decision-level fusion method was applied in this work."
+              }
+            ],
+            [
+              {
+                "start": 585,
+                "end": 1009,
+                "passage_id": "pmc11768589:p5:w0",
+                "quote": "Hence, in the present work, an automatic vision inspection system was proposed for the detection and classification of defects on the painted surfaces of heating devices, which included the following: (1) an image acquisition module for dataset generation employing two illumination strategies (bright field and deflectometry-based lighting), (2) DL models for defect detection and classification with decision-level fusion,"
               }
             ]
           ]
@@ -549,14 +693,14 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Forward/red and backward/green assignment",
+          "description": "Forward grayscale is red and backward grayscale is green",
           "alternatives": [
             [
               {
-                "start": 294,
+                "start": 168,
                 "end": 479,
                 "passage_id": "pmc11510794:p38:w0",
-                "quote": "These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images."
+                "quote": "In the RGB Channel Fusion method, the forward lighting image and the backward lighting image are each converted to grayscale. These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images."
               }
             ]
           ]
@@ -568,10 +712,10 @@
           "alternatives": [
             [
               {
-                "start": 294,
+                "start": 412,
                 "end": 479,
                 "passage_id": "pmc11510794:p38:w0",
-                "quote": "These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images."
+                "quote": "the blue channel is obtained by averaging the two grayscale images."
               }
             ]
           ]
@@ -608,6 +752,14 @@
                 "passage_id": "pmc11510794:p41:w0",
                 "quote": "Then, the P5 layers from both modalities are connected to a spatial pyramid pooling layer, FSPPF."
               }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 179,
+                "passage_id": "pmc11510794:p46:w0",
+                "quote": "The FSPPF module first concatenates the outputs of the P5 layers from the two feature extraction backbones, and then passes it into the SPPF (Spatial Pyramid Pooling-Fast) module."
+              }
             ]
           ]
         },
@@ -630,6 +782,27 @@
                 "end": 648,
                 "passage_id": "pmc11510794:p59:w0",
                 "quote": "Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "architecture-conflict",
+          "claim_index": 0,
+          "description": "Paragraph 46 conflicts with paragraph 41 on AMFF scales",
+          "alternatives": [
+            [
+              {
+                "start": 200,
+                "end": 353,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields."
+              },
+              {
+                "start": 277,
+                "end": 400,
+                "passage_id": "pmc11510794:p46:w0",
+                "quote": "The output of FSPPF, along with the outputs from the P3 and P5 layers’ AMFF modules, serves as the input to the neck layer."
               }
             ]
           ]
@@ -657,9 +830,15 @@
         {
           "id": "part-2",
           "claim_index": 0,
-          "description": "Zero phase",
+          "description": "Zero phase in both tested patterns",
           "alternatives": [
             [
+              {
+                "start": 270,
+                "end": 285,
+                "passage_id": "pmc11768589:p17:w0",
+                "quote": "θ to its phase."
+              },
               {
                 "start": 247,
                 "end": 287,
@@ -680,6 +859,12 @@
           "description": "Grayscale and adaptive binarization for illumination",
           "alternatives": [
             [
+              {
+                "start": 339,
+                "end": 568,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images."
+              },
               {
                 "start": 0,
                 "end": 201,
@@ -704,10 +889,10 @@
             ],
             [
               {
-                "start": 893,
+                "start": 718,
                 "end": 1150,
                 "passage_id": "pmc11768589:p29:w0",
-                "quote": "Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected."
+                "quote": "Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field. Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected."
               }
             ]
           ]
@@ -720,14 +905,14 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "ImageNet initialization",
+          "description": "ResNet-50 and Inception V3 were pretrained on ImageNet",
           "alternatives": [
             [
               {
-                "start": 113,
+                "start": 0,
                 "end": 246,
                 "passage_id": "pmc11768589:p26:w0",
-                "quote": "These networks have been trained on at least one million images from the ImageNet and have over 23 million trainable parameters [43]."
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3. These networks have been trained on at least one million images from the ImageNet and have over 23 million trainable parameters [43]."
               }
             ]
           ]
@@ -735,9 +920,15 @@
         {
           "id": "part-2",
           "claim_index": 0,
-          "description": "450-by-450 inputs",
+          "description": "The transferred classifier pair uses 450 by 450 inputs",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3."
+              },
               {
                 "start": 247,
                 "end": 313,
@@ -746,6 +937,12 @@
               }
             ],
             [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3."
+              },
               {
                 "start": 339,
                 "end": 568,
@@ -798,9 +995,15 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Addition instead of multiplication",
+          "description": "AW-SSIM adds sub-functions where standard SSIM multiplies",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 148,
+                "passage_id": "pmc11121878:p25:w0",
+                "quote": "The SSIM loss calculation uses multiplication between the three sub-functions to bring independence between these factors, as shown in Equation (6)."
+              },
               {
                 "start": 420,
                 "end": 618,
@@ -811,9 +1014,23 @@
             [
               {
                 "start": 0,
+                "end": 148,
+                "passage_id": "pmc11121878:p25:w0",
+                "quote": "The SSIM loss calculation uses multiplication between the three sub-functions to bring independence between these factors, as shown in Equation (6)."
+              },
+              {
+                "start": 0,
                 "end": 89,
                 "passage_id": "pmc11121878:p26:w0",
                 "quote": "For AW-SSIM, we apply addition between the three sub-functions, as shown in Equation (6)."
+              }
+            ],
+            [
+              {
+                "start": 723,
+                "end": 921,
+                "passage_id": "pmc11121878:p8:w0",
+                "quote": "Inspired by this, we propose an adaptive weighted structural similarity (AW-SSIM) loss by introducing addition instead of multiplication between the luminance, contrast, and structure sub-functions."
               }
             ]
           ]
@@ -821,14 +1038,29 @@
         {
           "id": "part-2",
           "claim_index": 0,
-          "description": "Component-specific weights",
+          "description": "A constant weight multiplies each named component",
           "alternatives": [
             [
               {
-                "start": 90,
+                "start": 0,
                 "end": 261,
                 "passage_id": "pmc11121878:p26:w0",
-                "quote": "In addition, we multiply each sub-function, luminance, contrast, and structure, by a constant [formula omitted] , [formula omitted] , and [formula omitted] , respectively."
+                "quote": "For AW-SSIM, we apply addition between the three sub-functions, as shown in Equation (6). In addition, we multiply each sub-function, luminance, contrast, and structure, by a constant [formula omitted] , [formula omitted] , and [formula omitted] , respectively."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "component-calculations",
+          "claim_index": 0,
+          "description": "Component calculations remain those of standard SSIM",
+          "alternatives": [
+            [
+              {
+                "start": 778,
+                "end": 892,
+                "passage_id": "pmc11121878:p26:w0",
+                "quote": "The calculations of the luminance, contrast, and structure values in AW-SSIM are the same as in the standard SSIM."
               }
             ]
           ]
@@ -892,7 +1124,7 @@
         {
           "id": "part-4",
           "claim_index": 0,
-          "description": "Gaussian-blurred edges",
+          "description": "Gaussian blur softens patch edges",
           "alternatives": [
             [
               {
@@ -903,9 +1135,9 @@
               },
               {
                 "start": 1065,
-                "end": 1126,
+                "end": 1115,
                 "passage_id": "pmc11121878:p18:w0",
-                "quote": "This blurring softens the transition at the edges, ensuring a"
+                "quote": "This blurring softens the transition at the edges,"
               }
             ]
           ]
@@ -988,7 +1220,7 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Manual adjustment and union contour",
+          "description": "Manual adjustment is necessary",
           "alternatives": [
             [
               {
@@ -1029,6 +1261,21 @@
               }
             ]
           ]
+        },
+        {
+          "id": "visibility-scope",
+          "claim_index": 0,
+          "description": "Some outlines are clear under only one lighting condition",
+          "alternatives": [
+            [
+              {
+                "start": 39,
+                "end": 130,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "This is because some defects are only clearly outlined under a specific lighting condition."
+              }
+            ]
+          ]
         }
       ]
     },
@@ -1042,10 +1289,10 @@
           "alternatives": [
             [
               {
-                "start": 0,
-                "end": 540,
+                "start": 173,
+                "end": 282,
                 "passage_id": "pmc11768589:p21:w0",
-                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations."
+                "quote": "(1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software;"
               }
             ]
           ]
@@ -1058,9 +1305,15 @@
             [
               {
                 "start": 0,
-                "end": 540,
+                "end": 172,
                 "passage_id": "pmc11768589:p21:w0",
-                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations."
+                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a):"
+              },
+              {
+                "start": 287,
+                "end": 376,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "(2) several data augmentation techniques were then performed on the extracted sub-images,"
               }
             ]
           ]
@@ -1105,6 +1358,14 @@
                 "passage_id": "pmc11768589:p1:w0",
                 "quote": "The inspection system consistently obtained fast and accurate surface classifications because it imposed OK classification on models trained with images from both illumination modes."
               }
+            ],
+            [
+              {
+                "start": 127,
+                "end": 261,
+                "passage_id": "pmc11768589:p48:w0",
+                "quote": "by imposing OK classification on models trained with images derived from both illumination modes: sinusoidal pattern and bright field."
+              }
             ]
           ]
         }
@@ -1142,6 +1403,27 @@
               }
             ]
           ]
+        },
+        {
+          "id": "containment-scope",
+          "claim_index": 0,
+          "description": "Environmental light was uncontrolled; containment was proposed for implementation",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 151,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Environmental lighting was not controlled, in this experimental setup, to better approximate the lighting conditions observed in an industrial setting."
+              },
+              {
+                "start": 770,
+                "end": 945,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Still, if containment is required for industrial implementation, tunnels such as those reported by Armesto et al., Molina et al., and Chang et al. could be considered [2,3,6]."
+              }
+            ]
+          ]
         }
       ]
     },
@@ -1151,7 +1433,7 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Oblique illumination and reflection on clean surface",
+          "description": "Wafer illumination is oblique",
           "alternatives": [
             [
               {
@@ -1201,14 +1483,22 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Charge follows and accumulates with motion",
+          "description": "Charge follows moving image and accumulates across stages",
           "alternatives": [
             [
               {
-                "start": 544,
+                "start": 357,
                 "end": 627,
                 "passage_id": "pmc10934137:p7:w0",
-                "quote": "Meanwhile, the charge at position i1 is transferred to position i2 and accumulated."
+                "quote": "At a certain moment, object position p1 is imaged at image position i1. When the object moves after ∆t time, position p1 moves to p2, and the corresponding image position i1 moves to i2. Meanwhile, the charge at position i1 is transferred to position i2 and accumulated."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 240,
+                "passage_id": "pmc10934137:p8:w0",
+                "quote": "In general, TDI image sensors consist of N TDI stages. As the object under test moves, the TDI image sensor sequentially captures light from the first stage to the Nth stage, and the charge accumulates from the first stage to the Nth stage."
               }
             ]
           ]
@@ -1253,6 +1543,27 @@
               }
             ]
           ]
+        },
+        {
+          "id": "residual-purpose",
+          "claim_index": 0,
+          "description": "Partial defect reconstruction reduces residual-based discrimination",
+          "alternatives": [
+            [
+              {
+                "start": 247,
+                "end": 354,
+                "passage_id": "pmc11121878:p6:w0",
+                "quote": "Using the residual (difference) between the input and the reconstructed image, we can localize the defects."
+              },
+              {
+                "start": 404,
+                "end": 600,
+                "passage_id": "pmc11121878:p6:w0",
+                "quote": "Partial defect reconstruction: Sometimes, the trained model might also reconstruct the defective region, thereby diminishing its ability to distinguish between defective and non-defective regions."
+              }
+            ]
+          ]
         }
       ]
     },
@@ -1262,9 +1573,15 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Narrow-noise versus wide-detail tradeoff",
+          "description": "Small Gaussian standard deviation amplifies noise; large standard deviation blurs details",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 136,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window."
+              },
               {
                 "start": 95,
                 "end": 189,
@@ -1277,14 +1594,34 @@
         {
           "id": "part-2",
           "claim_index": 0,
-          "description": "Gradual standard-deviation increase",
+          "description": "Increase Gaussian standard deviation by a small constant",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 136,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window."
+              },
               {
                 "start": 292,
                 "end": 427,
                 "passage_id": "pmc11121878:p31:w0",
                 "quote": "During training, it is gradually incremented by a small constant after processing every [formula omitted] patch of the training images."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 136,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window."
+              },
+              {
+                "start": 0,
+                "end": 374,
+                "passage_id": "pmc11121878:p32:w0",
+                "quote": "Here, [formula omitted] is the standard deviation after each epoch, which depends on the number of training samples and the sizes of the patches ( [formula omitted] ) in patch-based training. H and W are the height and width of the input image, respectively, and k is a small constant added to [formula omitted] after each patch of size [formula omitted] in the input image."
               }
             ]
           ]
@@ -1292,14 +1629,56 @@
         {
           "id": "part-3",
           "claim_index": 0,
-          "description": "Shuffle and reset each epoch",
+          "description": "Shuffle samples and reset Gaussian standard deviation each epoch",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 136,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window."
+              },
               {
                 "start": 428,
                 "end": 576,
                 "passage_id": "pmc11121878:p31:w0",
                 "quote": "Importantly, the training samples are shuffled after each epoch, and [formula omitted] is reset to its initial value before being incremented again."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "gaussian-spread",
+          "claim_index": 0,
+          "description": "Gaussian standard deviation changes weighting spread",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 440,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window. A smaller [formula omitted] creates a narrower window, concentrating weight near the center and reducing the influence of distant pixels, as shown in Figure 5. Conversely, a larger [formula omitted] results in a wider window, spreading weights more evenly and increasing the influence of distant pixels."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fixed-footprint",
+          "claim_index": 0,
+          "description": "The window footprint remains 11 by 11",
+          "alternatives": [
+            [
+              {
+                "start": 1035,
+                "end": 1080,
+                "passage_id": "pmc11121878:p29:w0",
+                "quote": "We used a window size of 11 × 11 in our work."
+              },
+              {
+                "start": 0,
+                "end": 136,
+                "passage_id": "pmc11121878:p30:w0",
+                "quote": "The standard deviation [formula omitted] of the Gaussian window determines how weights are assigned to pixels within the sliding window."
               }
             ]
           ]
@@ -1336,6 +1715,22 @@
                 "passage_id": "pmc11121878:p17:w0",
                 "quote": "The normal samples ( [formula omitted] ) are used as references to improve the reconstruction performance of the model by comparing a normal sample with the reconstructed image ( [formula omitted] ) from its artificially defective counterpart ( [formula omitted]"
               }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 238,
+                "passage_id": "pmc11121878:p36:w0",
+                "quote": "Here, [formula omitted] is the combined structural and perceptual loss, [formula omitted] is the original image without defects, and [formula omitted] is the reconstructed image from the artificially defective image ( [formula omitted] )."
+              }
+            ],
+            [
+              {
+                "start": 664,
+                "end": 1140,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "Here, images with artificially introduced defects ( [formula omitted] ) created by the ADGA are paired with their non-defect counterparts ( [formula omitted] ). During training, these pairs are fed into the model. The normal samples ( [formula omitted] ) are used as references to improve the reconstruction performance of the model by comparing a normal sample with the reconstructed image ( [formula omitted] ) from its artificially defective counterpart ( [formula omitted]"
+              }
             ]
           ]
         }
@@ -1355,6 +1750,22 @@
                 "end": 223,
                 "passage_id": "pmc11510794:p31:w0",
                 "quote": "Considering that many of the detected target objects are slender, that is, they have high aspect ratios, large image spans, and may be interlaced, we choose to use oriented bounding boxes (OBB) for annotation and detection."
+              }
+            ],
+            [
+              {
+                "start": 452,
+                "end": 604,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes."
+              }
+            ],
+            [
+              {
+                "start": 506,
+                "end": 648,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects."
               }
             ]
           ]
@@ -1587,9 +1998,15 @@
         {
           "id": "part-2",
           "claim_index": 1,
-          "description": "Heater 450-by-450 inputs",
+          "description": "The transferred classifier pair uses 450 by 450 inputs",
           "alternatives": [
             [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3."
+              },
               {
                 "start": 247,
                 "end": 313,
@@ -1599,13 +2016,11 @@
             ],
             [
               {
-                "start": 451,
-                "end": 524,
-                "passage_id": "pmc11768589:p25:w0",
-                "quote": "It should be noted that the CNNs’ default input image size was 450 × 450."
-              }
-            ],
-            [
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3."
+              },
               {
                 "start": 339,
                 "end": 568,
@@ -1623,7 +2038,7 @@
         {
           "id": "part-1",
           "claim_index": 0,
-          "description": "Canopy modality-specific feature extractors",
+          "description": "Canopy backbones extract modality features for fusion and detection",
           "alternatives": [
             [
               {
@@ -1631,14 +2046,26 @@
                 "end": 199,
                 "passage_id": "pmc11510794:p41:w0",
                 "quote": "In this network, we use two CSPDarknet-like feature extraction backbones, as proposed in YOLOv8, to extract multi-scale features from the forward lighting and backward lighting modalities separately."
+              },
+              {
+                "start": 200,
+                "end": 353,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields."
+              },
+              {
+                "start": 452,
+                "end": 604,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes."
               }
             ],
             [
               {
                 "start": 177,
-                "end": 321,
+                "end": 648,
                 "passage_id": "pmc11510794:p59:w0",
-                "quote": "The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities."
+                "quote": "The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities. Next, through the attention-based multi-modal feature fusion block (AMFF) and improved SPPF module, the network adaptively integrates the multi-scale features from the two modalities. Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects."
               }
             ]
           ]

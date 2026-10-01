@@ -4,6 +4,9 @@ evaluation/datasets/*.json text eol=lf
 
 evaluation/labels/*.json text eol=lf
 evaluation/reviews/**/*.json text eol=lf
+# Preserve the completed evidence audit exactly as supplied, including CRLF bytes.
+evaluation/reviews/2026-10-01-pr8/evidence-review.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+evaluation/reviews/2026-10-01-pr8/evidence-review.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
 # Preserve downloaded article bytes so manifest checksums survive checkout on every OS.
 data/technical/originals/*.xml -text
 data/technical/*.json text eol=lf

@@ -1,0 +1,597 @@
+{
+  "schema_version": 1,
+  "fix_date": "2026-10-01",
+  "author": "Codex / GPT-6.1-Sol, medium reasoning, AI implementer; not human approval",
+  "labels_review_status": "unreviewed",
+  "input_labels_sha256": "fc04f09f169c35d5d22173ef67246759ba9495a7a0e707635a0765391268a59e",
+  "output_labels_sha256": "f2fab94e1af336af0ee8e65ff7aadb1c0d7e129ba7a0117c34adc42fda4e4019",
+  "output_labels_canonical_sha256": "f7a6a40529d123b2456e079009a39b8113623f5dd4b46faed42dd3338c9ee594",
+  "review_files_sha256": {
+    "evidence-review.md": "17e6a7b6d13b390326137a17ea5246f3f8bcf3c877a7d21d96bf379001e3454d",
+    "evidence-review.json": "4c82d26fcbcbcd4babf55f0bd9a8e82baecbedb43ba3f4cff74de3a7d3da5889"
+  },
+  "pins": {
+    "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+    "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157"
+  },
+  "before": {
+    "cases": 36,
+    "groups": 83,
+    "alternatives": 111,
+    "span_occurrences": 114
+  },
+  "after": {
+    "cases": 36,
+    "groups": 92,
+    "alternatives": 140,
+    "span_occurrences": 165
+  },
+  "substantive_findings_addressed": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14"
+  ],
+  "recommendation_decisions": [
+    {
+      "proposal_number": 1,
+      "case_id": "tech-glass-paraphrase",
+      "group_id": "part-3",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 2,
+      "case_id": "tech-painted-exact",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": "Only the classifier-name clause is needed, not the subsequent promised benefits."
+    },
+    {
+      "proposal_number": 3,
+      "case_id": "tech-painted-exact",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 4,
+      "case_id": "tech-wafer-exact",
+      "group_id": "efficiency-scope",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 5,
+      "case_id": "tech-wafer-paraphrase",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 6,
+      "case_id": "tech-wafer-paraphrase",
+      "group_id": "cds-incomplete",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 7,
+      "case_id": "tech-autoencoder-exact",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": "Remove both old clean-pair/artificial-only alternatives for this reframed sample-type requirement; the abstract split requires both word windows."
+    },
+    {
+      "proposal_number": 8,
+      "case_id": "tech-autoencoder-exact",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 9,
+      "case_id": "tech-autoencoder-exact",
+      "group_id": "part-3",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 10,
+      "case_id": "tech-compare-fusion",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 11,
+      "case_id": "tech-compare-fusion",
+      "group_id": "part-3",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 12,
+      "case_id": "tech-compare-fusion",
+      "group_id": "part-4",
+      "decision": "partially applied",
+      "rationale": "Added explicit deflectometry/bright-light p44. Did not add p16 structured-light wording as a full deflectometry alternative."
+    },
+    {
+      "proposal_number": 13,
+      "case_id": "tech-compare-fusion",
+      "group_id": "part-5",
+      "decision": "applied with checked scope",
+      "rationale": "Expanded the p5 list fragment to identify the study, painted heaters and decision-level classification."
+    },
+    {
+      "proposal_number": 14,
+      "case_id": "tech-rgb-channel-assignment",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 15,
+      "case_id": "tech-rgb-channel-assignment",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 16,
+      "case_id": "tech-amff-layers",
+      "group_id": "architecture-conflict",
+      "decision": "applied with checked scope",
+      "rationale": "The original-only Figure 8 audit remains in the preserved review; no figure passage ID is created. p46 is not an alternative for the P3/P4 claim."
+    },
+    {
+      "proposal_number": 17,
+      "case_id": "tech-amff-layers",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 18,
+      "case_id": "tech-stripe-frequencies",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 19,
+      "case_id": "tech-adaptive-binarization",
+      "group_id": "part-1",
+      "decision": "adapted",
+      "rationale": "Explicit p29 structured-image processing plus p22 exact operations; p22 alone leaves its Afterwards referent unstated."
+    },
+    {
+      "proposal_number": 20,
+      "case_id": "tech-imagenet-initialization",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 21,
+      "case_id": "tech-imagenet-initialization",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": "Preserved p26 as explicit named-model/size evidence; repaired p29 with p26 identity. Removed p25 self-built-CNN option from the comparison."
+    },
+    {
+      "proposal_number": 22,
+      "case_id": "tech-compare-network-inputs",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": "Preserved p26 as explicit named-model/size evidence; repaired p29 with p26 identity. Removed p25 self-built-CNN option from the comparison."
+    },
+    {
+      "proposal_number": 23,
+      "case_id": "tech-aw-ssim-combination",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": "Preserved the old p25 comparison clause with explicit standard-SSIM context; repaired p26 and added p8."
+    },
+    {
+      "proposal_number": 24,
+      "case_id": "tech-aw-ssim-combination",
+      "group_id": "component-calculations",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 25,
+      "case_id": "tech-aw-ssim-combination",
+      "group_id": "part-2",
+      "decision": "background only; not scored",
+      "rationale": "p46/p27 explain weighting priorities, not constant weights. Existing p26 constant-weight evidence remains required; no redundant AND or insufficient OR added."
+    },
+    {
+      "proposal_number": 26,
+      "case_id": "tech-adga-shapes",
+      "group_id": "part-4",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 27,
+      "case_id": "tech-manual-outline-union",
+      "group_id": "visibility-scope",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 28,
+      "case_id": "tech-small-photo-supply",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": "Excluded optional augmentation hyperparameters from required spans."
+    },
+    {
+      "proposal_number": 29,
+      "case_id": "tech-small-photo-supply",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": "Excluded optional augmentation hyperparameters from required spans."
+    },
+    {
+      "proposal_number": 30,
+      "case_id": "tech-both-checks-clean",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 31,
+      "case_id": "tech-daylight-interference",
+      "group_id": "containment-scope",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 32,
+      "case_id": "tech-moving-signal-addition",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 33,
+      "case_id": "tech-too-many-shortcuts",
+      "group_id": "residual-purpose",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 34,
+      "case_id": "tech-changing-neighborhood",
+      "group_id": "gaussian-spread",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 35,
+      "case_id": "tech-changing-neighborhood",
+      "group_id": "fixed-footprint",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 36,
+      "case_id": "tech-changing-neighborhood",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": "Checked XML sigma versus fixed window/patch symbols. No numeric k inferred, and misleading different-window-sizes wording is excluded."
+    },
+    {
+      "proposal_number": 37,
+      "case_id": "tech-damaged-clean-pairs",
+      "group_id": "part-2",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 38,
+      "case_id": "tech-compare-localization-outputs",
+      "group_id": "part-1",
+      "decision": "applied with checked scope",
+      "rationale": ""
+    },
+    {
+      "proposal_number": 39,
+      "case_id": "tech-compare-localization-outputs",
+      "group_id": "part-2",
+      "decision": "not added as standalone alternative",
+      "rationale": "p6 describes a general residual method; p40 already establishes this implementation. Adding redundant p6 AND p40 would add no necessary fact, while p6 alone loses method scope."
+    },
+    {
+      "proposal_number": 40,
+      "case_id": "tech-compare-evaluation-metrics",
+      "group_id": "dataset-scope",
+      "decision": "optional background; not scored",
+      "rationale": "Different datasets are context for a reasoning limitation, not required metric-definition evidence. No positive span proves absence of a direct ranking. Keep answer-review guards separate."
+    },
+    {
+      "proposal_number": 41,
+      "case_id": "tech-compare-network-roles",
+      "group_id": "part-1",
+      "decision": "adapted",
+      "rationale": "Both original passage alternatives retained with feature/fusion/detection context. p41 uses three complementary spans instead of requiring optional FSPPF detail; p59 omits the RGB introduction."
+    }
+  ],
+  "case_changes": [
+    {
+      "case_id": "tech-glass-paraphrase",
+      "modified_groups": [
+        "part-3"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-painted-exact",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-wafer-exact",
+      "modified_groups": [],
+      "added_groups": [
+        "efficiency-scope"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": [
+        "cds-incomplete"
+      ]
+    },
+    {
+      "case_id": "tech-autoencoder-exact",
+      "modified_groups": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-compare-fusion",
+      "modified_groups": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "part-4",
+        "part-5"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-rgb-channel-assignment",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "modified_groups": [
+        "part-2"
+      ],
+      "added_groups": [
+        "architecture-conflict"
+      ]
+    },
+    {
+      "case_id": "tech-stripe-frequencies",
+      "modified_groups": [
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-adaptive-binarization",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-imagenet-initialization",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": [
+        "component-calculations"
+      ]
+    },
+    {
+      "case_id": "tech-adga-shapes",
+      "modified_groups": [
+        "part-4"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": [
+        "visibility-scope"
+      ]
+    },
+    {
+      "case_id": "tech-small-photo-supply",
+      "modified_groups": [
+        "part-1",
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-both-checks-clean",
+      "modified_groups": [
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "modified_groups": [],
+      "added_groups": [
+        "containment-scope"
+      ]
+    },
+    {
+      "case_id": "tech-bright-specks-dark-background",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-moving-signal-addition",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "modified_groups": [],
+      "added_groups": [
+        "residual-purpose"
+      ]
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "modified_groups": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ],
+      "added_groups": [
+        "gaussian-spread",
+        "fixed-footprint"
+      ]
+    },
+    {
+      "case_id": "tech-damaged-clean-pairs",
+      "modified_groups": [
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "modified_groups": [
+        "part-2"
+      ],
+      "added_groups": []
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "modified_groups": [
+        "part-1"
+      ],
+      "added_groups": []
+    }
+  ],
+  "new_requirement_types": [
+    {
+      "case_id": "tech-wafer-exact",
+      "group_id": "efficiency-scope",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "group_id": "cds-incomplete",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "group_id": "architecture-conflict",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "group_id": "component-calculations",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "group_id": "visibility-scope",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "group_id": "containment-scope",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "group_id": "residual-purpose",
+      "requirement_type": "source-supported factual qualification"
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "group_id": "gaussian-spread",
+      "requirement_type": "required parameter identity"
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "group_id": "fixed-footprint",
+      "requirement_type": "source-supported factual qualification"
+    }
+  ],
+  "original_only_checks": [
+    "All four original XML checksums match pinned manifest/attribution.",
+    "Autoencoder p29-p32 XML distinguishes sigma, fixed 11-by-11 window and PH/PW patch dimensions; k has no numeric value.",
+    "Canopy p41 versus p46 XML confirms conflicting AMFF scales. Figure 8 Chrome inspection is the preserved reviewer's audit, not a new visual inspection by this implementation."
+  ],
+  "unscored_answer_review_limits": [
+    "Generalization, missing numerical values, forbidden claims and non-comparability require answer review; passage retention cannot establish them.",
+    "No numeric sigma increment k is invented.",
+    "Optional metrics dataset scope is not added as a metric-definition requirement.",
+    "Weighting rationale alone does not establish constant weights."
+  ],
+  "execution_scope": "Only pinned source text and original XML used for relabeling; no retrieval results, held-out rankings, tuning, generation or paid calls.",
+  "remaining_step": "Genuine human review and approval of revised evidence groups before model/settings selection."
+}
