@@ -3,10 +3,10 @@
   "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
   "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
   "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
-  "review_status": "unreviewed",
-  "reviewer": null,
-  "review_date": null,
-  "notes": "AI-authored development-only evidence groups revised after the 2026-10-01 AI evidence audit. Question approval does not approve these annotations. Each OR option supplies its group in explicit scope; AND spans supply complementary facts or necessary referents. Source-supported factual qualifications are required where labeled; generic answer-review guards and reasoned non-comparability remain outside passage coverage. Alternatives are conservative and not exhaustive. Human approval is pending. All 14 negatives remain unlabeled. Held-out questions, freeze, corpus and prior reviews are unchanged. See evidence-fixes.json and evidence-fixes.md for source checks and decisions on all 41 recommendations.",
+  "review_status": "approved",
+  "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
+  "review_date": "2026-10-01",
+  "notes": "AI-authored development evidence groups revised after the recorded AI evidence audit and explicitly approved by the project owner in the PR #8 thread on 2026-10-01. This separate evidence approval covers the unchanged 36-case, 92-group, 140-alternative, 165-span revised set. Source checks and recommendation decisions remain in the preserved evidence-review and evidence-fixes records. OR alternatives and complementary AND combinations measure labeled passage retention, not generated-answer correctness or compliance with answer-review guards. Alternatives remain conservative and non-exhaustive. All 14 negatives remain unlabeled. Held-out questions, freeze, corpus and prior reviews are unchanged. Approval provenance and hashes are recorded in evaluation/reviews/2026-10-01-pr8/evidence-human-review.json.",
   "cases": [
     {
       "case_id": "tech-glass-exact",

@@ -529,7 +529,7 @@ def test_cli_cutoffs_and_paired_json_are_reproducible(sample, tmp_path, monkeypa
     assert not (tmp_path / "bad").exists()
 
 
-def test_development_labels_are_drafts_and_approved_dataset_hashes_are_unchanged(tmp_path):
+def test_development_labels_are_human_reviewed_and_dataset_hashes_are_unchanged(tmp_path):
     expected = {
         "technical-development.json": (
             "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2"
@@ -551,6 +551,7 @@ def test_development_labels_are_drafts_and_approved_dataset_hashes_are_unchanged
     approved = validate_labels(evidence, dataset, artifact, validate_passage_artifact(artifact))
     assert set(approved) == {c.id for c in dataset.cases if not c.expected_abstention}
     assert len(approved) == 36
-    assert evidence.review_status == "unreviewed"
-    assert evidence.reviewer is evidence.review_date is None
+    assert evidence.review_status == "approved"
+    assert evidence.reviewer == "Project owner (human reviewer; approval in PR #8 thread)"
+    assert evidence.review_date.isoformat() == "2026-10-01"
     assert sum(c.query_style == "missing-evidence" for c in dataset.cases) == 7

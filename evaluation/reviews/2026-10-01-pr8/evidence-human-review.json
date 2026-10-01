@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "review_status": "approved",
+  "reviewer_type": "human",
+  "reviewer": "Project owner (human reviewer; approval in PR #8 thread)",
+  "review_date": "2026-10-01",
+  "approval_source": "Explicit project-owner approval in the PR #8 conversation",
+  "approval_statement": "Okay reviewe is done these groups are fine like that",
+  "scope": "The revised development evidence groups only; no held-out evidence review, new scientific audit or generated-answer review is claimed.",
+  "previous_labels_sha256": "f2fab94e1af336af0ee8e65ff7aadb1c0d7e129ba7a0117c34adc42fda4e4019",
+  "approved_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "approved_labels_canonical_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+  "unchanged_evidence_content_sha256": "5056fe3e217a39865f8dc19d6cc5e019821291de6a468de18936c01cd5f675f5",
+  "previous_notes": "AI-authored development-only evidence groups revised after the 2026-10-01 AI evidence audit. Question approval does not approve these annotations. Each OR option supplies its group in explicit scope; AND spans supply complementary facts or necessary referents. Source-supported factual qualifications are required where labeled; generic answer-review guards and reasoned non-comparability remain outside passage coverage. Alternatives are conservative and not exhaustive. Human approval is pending. All 14 negatives remain unlabeled. Held-out questions, freeze, corpus and prior reviews are unchanged. See evidence-fixes.json and evidence-fixes.md for source checks and decisions on all 41 recommendations.",
+  "preserved_archive_sha256": {
+    "evidence-review.md": "17e6a7b6d13b390326137a17ea5246f3f8bcf3c877a7d21d96bf379001e3454d",
+    "evidence-review.json": "4c82d26fcbcbcd4babf55f0bd9a8e82baecbedb43ba3f4cff74de3a7d3da5889",
+    "evidence-fixes.md": "62d59e6d470bc2145b69088094b83a17135de5d3042a575688628f520907d71a",
+    "evidence-fixes.json": "c8a4efc33cdbea7f02982ca1f9d5f3a6d180e7075df27dd4d65a2d3342d385aa",
+    "review.json": "16dc61594f53339efc0fbb43fbac555964f04997010b3da46995c56ac5e996e9",
+    "rejected-cases.json": "e3c19ad5371202a9bf39a2d55dbf3079e15814a762cfc89a981d1f0d9d624203",
+    "human-review.json": "13c1c902b7d4ac3d01b68c039649d159321396f9f0d1a562335edcece8a5916e"
+  },
+  "unchanged_dataset_file_sha256": {
+    "technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
+  },
+  "pins": {
+    "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+    "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157"
+  },
+  "counts": {
+    "cases": 36,
+    "groups": 92,
+    "alternatives": 140,
+    "span_occurrences": 165
+  },
+  "approved_cases": [
+    {
+      "case_id": "tech-glass-exact",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-glass-paraphrase",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-painted-exact",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-exact",
+      "group_ids": [
+        "part-1",
+        "efficiency-scope"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "cds-incomplete"
+      ]
+    },
+    {
+      "case_id": "tech-autoencoder-exact",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-compare-fusion",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "part-4",
+        "part-5"
+      ]
+    },
+    {
+      "case_id": "tech-obb",
+      "group_ids": [
+        "part-1"
+      ]
+    },
+    {
+      "case_id": "tech-annotation-tools",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-rgb-channel-assignment",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "architecture-conflict"
+      ]
+    },
+    {
+      "case_id": "tech-stripe-frequencies",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-adaptive-binarization",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-imagenet-initialization",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-tdi-motion-sync",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "component-calculations"
+      ]
+    },
+    {
+      "case_id": "tech-adga-shapes",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "part-4"
+      ]
+    },
+    {
+      "case_id": "tech-stable-camera",
+      "group_ids": [
+        "part-1"
+      ]
+    },
+    {
+      "case_id": "tech-turn-and-flip-labels",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "visibility-scope"
+      ]
+    },
+    {
+      "case_id": "tech-small-photo-supply",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-both-checks-clean",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "containment-scope"
+      ]
+    },
+    {
+      "case_id": "tech-bright-specks-dark-background",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-moving-signal-addition",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "group_ids": [
+        "part-1",
+        "residual-purpose"
+      ]
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "gaussian-spread",
+        "fixed-footprint"
+      ]
+    },
+    {
+      "case_id": "tech-damaged-clean-pairs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-splits",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-computers",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-compare-data-expansion",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-evaluation-metrics",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-optical-cues",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    }
+  ],
+  "changes": "Review status, reviewer, review date and explanatory notes only. No group, description, alternative, claim index, quote, offset or pin changed."
+}
