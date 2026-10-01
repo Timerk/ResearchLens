@@ -178,11 +178,11 @@ def test_stale_corpus_and_references_rejected(evaluation, change):
         validate_artifact(dataset, artifact)
 
 
-def test_pending_held_out_and_split_overlap_rejected(evaluation):
+def test_draft_held_out_and_split_overlap_rejected(evaluation):
     development = evaluation[0]
     held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")
     validate_splits(development, held_out)
-    with pytest.raises(ValueError, match="pending"):
+    with pytest.raises(ValueError, match="frozen"):
         validate_artifact(held_out, evaluation[1])
     overlapping = held_out.model_copy(update={"cases": development.cases})
     with pytest.raises(ValueError, match="overlap"):

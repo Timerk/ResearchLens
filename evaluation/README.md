@@ -40,20 +40,46 @@ exposes JSON Schema. Unknown fields, inconsistent reviews, duplicate IDs/questio
 missing references/claims and one-source comparisons fail validation.
 
 - `datasets/development.json`: three AI-authored, unreviewed synthetic smoke cases.
-- `datasets/technical-development.json`: twelve AI-authored, unreviewed technical
-  drafts covering exact terminology, paraphrases, two cross-document comparisons, an
-  unrelated question and a plausible absent common-benchmark comparison. Paraphrase
-  pairs intentionally share expectations for development diagnostics.
-- `datasets/held-out.json`: empty, `pending-human-review`, pinned to the technical
-  corpus. It cannot run. Independently creating and human-reviewing roughly 20 questions
-  (8 factual, 8 comparisons, 4 unanswerable) remains pending when source material permits.
+- `datasets/technical-development.json`: 60 AI-authored technical drafts, version
+  `2-draft`, preserving the original twelve cases.
+- `datasets/held-out.json`: 40 AI-authored technical candidates, version `1-draft`.
+  It is `draft`, unreviewed and cannot run until human approval and freezing.
+
+| Question type | Development | Held-out |
+| --- | ---: | ---: |
+| Exact technical terminology | 15 | 10 |
+| Paraphrases with little word overlap | 15 | 10 |
+| Cross-document questions | 15 | 10 |
+| Unanswerable: unrelated or missing evidence | 15 | 10 |
+| **Total technical questions** | **60** | **40** |
+
+Unanswerable cases include 7 unrelated / 8 missing-evidence development questions
+and 5 unrelated / 5 missing-evidence held-out candidates. Paraphrases use everyday
+descriptions of technical mechanisms; some original pairs retain technical names.
+Cases cover optical cues, acquisition, labels, data preparation, network/loss roles,
+evaluation and limitations across the four papers. They are correlated: paraphrases
+and comparisons can reuse evidence within a split. More questions on four papers
+do not create 100 independent observations or broaden the corpus.
+
+Held-out question targets were reserved separately from development, but both sets
+use the same papers and related concepts. Human semantic-overlap and full-source
+review remain necessary before freezing. No retrieval or model selection has been
+run on these held-out candidates. Do not inspect their rankings while tuning.
 
 Each dataset records split/version/material/status, the source-file hash and original
 source checksums/DOIs/dates. Cases record expected source IDs, specific passage/paragraph
 and XML section/locator references, required claims/qualifications, forbidden claims,
 expected abstention and review provenance. Page numbers are null for XML/text sources;
 never invent PDF pages. References and original-source versions are checked against
-the index. The full original XML and attribution are preserved in `data/technical/`.
+the index. `validate_dataset_references(dataset, artifact)` provides a metadata-only
+authoring check for either split without running retrieval or certifying support.
+The execution guard in `validate_artifact` still requires held-out to be frozen and
+human approved. The full original XML and attribution are preserved in `data/technical/`.
+
+For missing-evidence questions, references identify nearby context to inspect; they
+are not positive relevance labels or proof that the requested information is absent.
+Unrelated cases have no expected sources. Review absence against the full papers,
+including omitted tables and figures, rather than relying on the prose extraction.
 
 The technical prose extraction omits figures, tables and formula details. A human must
 check the full sources, especially absence claims and alternative supporting passages,
