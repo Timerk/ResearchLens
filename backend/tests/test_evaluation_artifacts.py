@@ -1,6 +1,7 @@
 import hashlib
 import json
 import sys
+from collections import Counter
 from copy import deepcopy
 
 import numpy as np
@@ -16,6 +17,7 @@ from researchlens.evaluation import (
     run_evaluation,
     summarize,
     validate_artifact,
+    validate_dataset_references,
     validate_splits,
 )
 from researchlens.evaluation_schema import ExecutionConfig, RetrievalConfig
@@ -281,20 +283,48 @@ def test_technical_drafts_pin_originals_and_locations(tmp_path):
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")
     validate_splits(dataset, held_out)
-    assert len(dataset.source_versions) == 4
-    assert {c.query_style for c in dataset.cases} == {
-        "exact-terminology",
-        "paraphrase",
-        "cross-document",
-        "unrelated",
-        "missing-evidence",
-    }
-    assert all(c.review_status == "unreviewed" and c.reviewer is None for c in dataset.cases)
-    assert all(r.source_locator and r.source_section for c in dataset.cases for r in c.references)
+    for candidate, count in ((dataset, 15), (held_out, 10)):
+        assert candidate.status == "draft"
+        assert len(candidate.source_versions) == 4
+        assert len(candidate.cases) == count * 4
+        styles = Counter(
+            "unanswerable" if c.expected_abstention else c.query_style for c in candidate.cases
+        )
+        assert styles == dict.fromkeys(
+            ("exact-terminology", "paraphrase", "cross-document", "unanswerable"), count
+        )
+        assert {c.query_style for c in candidate.cases if c.expected_abstention} == {
+            "unrelated",
+            "missing-evidence",
+        }
+        assert all(
+            c.review_status == "unreviewed" and c.reviewer is None and c.review_date is None
+            for c in candidate.cases
+        )
+        assert all(c.required_qualifications and c.forbidden_claims for c in candidate.cases)
+        assert all(
+            r.source_locator and r.source_section and r.page is None
+            for c in candidate.cases
+            for r in c.references
+        )
+        # Metadata validation does not execute held-out questions or assess support.
+        validate_dataset_references(candidate, artifact)
     validate_artifact(dataset, artifact)
-    assert not held_out.cases
-    with pytest.raises(ValueError, match="pending"):
+    with pytest.raises(ValueError, match="frozen"):
         validate_artifact(held_out, artifact)
+
+    class NeverSearch:
+        def search(self, question, limit=4):
+            pytest.fail("Draft held-out questions must not be executed")
+
+    with pytest.raises(ValueError, match="frozen"):
+        run_evaluation(
+            held_out, artifact, NeverSearch(), RetrievalConfig(implementation="test", version="1")
+        )
+    stale = held_out.model_copy(deep=True)
+    stale.cases[0].references[0].source_locator = "./missing"
+    with pytest.raises(ValueError, match="source location is stale"):
+        validate_dataset_references(stale, artifact)
     changed = dataset.model_copy(deep=True)
     changed.source_versions[0].source_sha256 = "0" * 64
     with pytest.raises(ValueError, match="Original source version"):

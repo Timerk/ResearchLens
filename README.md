@@ -157,8 +157,10 @@ until a concrete requirement justifies them.
 3. Evaluation foundation: pinned synthetic smoke tests and unreviewed technical
    development drafts, schema-1/2 validation, selectable retrieval adapters, controlled
    embedding comparisons, ranking/timing/memory diagnostics and human review. Model
-   implementations belong in retrieval work; creation and human review of roughly 20 held-out
-   questions, answer-quality evaluation and a demonstration remain pending.
+   implementations belong in retrieval work. The technical drafts contain 60 development
+   and 40 held-out questions, balanced across terminology, paraphrases, comparisons and
+   unanswerable cases. Human full-source review, held-out freezing, answer-quality
+   evaluation and a demonstration remain pending.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 

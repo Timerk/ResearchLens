@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "technical-development",
-  "version": "1-draft",
+  "version": "2-draft",
   "split": "development",
   "material": "real-corpus",
   "status": "draft",
@@ -32,7 +32,7 @@
       "publication_date": "2024-05-05"
     }
   ],
-  "notes": "AI-authored development drafts for the four-paper corpus on main. Not human-reviewed and not a held-out benchmark. References pin the partial prose extraction and original XML checksums/locations. Figures, tables and formulae are omitted; full-source human review is pending. Paraphrase pairs intentionally share expectations for development diagnostics.",
+  "notes": "AI-authored, unreviewed development drafts: 15 exact terminology, 15 paraphrases, 15 cross-document and 15 unanswerable (7 unrelated, 8 missing-evidence). Original 12 cases retained. Some paraphrases and comparisons reuse development evidence and are correlated diagnostics, not independent samples. Pins partial prose extraction and original XML versions; figures, tables and mathematical markup are omitted. Full-source human review, absence verification and semantic overlap review are pending. Missing-evidence references are context, not proof of absence or positive relevance labels.",
   "cases": [
     {
       "id": "tech-glass-exact",
@@ -455,6 +455,1721 @@
       "forbidden_claims": [
         "An invented cost ranking.",
         "Converting unrelated timing or accuracy figures into a shared-benchmark result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-obb",
+      "question": "Why are oriented bounding boxes (OBB) selected for aircraft canopy defect annotation?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p31:w0",
+          "paragraph": 31,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "Targets can be slender, have high aspect ratios and large image spans, and be interlaced."
+      ],
+      "required_qualifications": [
+        "This is the stated motivation for this dataset's OBB annotations."
+      ],
+      "forbidden_claims": [
+        "OBB is guaranteed superior for all object detection tasks."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-annotation-tools",
+      "question": "What X-AnyLabeling version and Segment Anything variant are used for canopy pre-labeling, and how are OBBs derived?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p32:w0",
+          "paragraph": 32,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "X-AnyLabeling 2.3.5 uses Segment Anything ViT-Large to propose polygons; a script calculates each minimum enclosing rectangle."
+      ],
+      "required_qualifications": [
+        "These are preparatory labels, not a claim of fully automatic ground truth."
+      ],
+      "forbidden_claims": [
+        "Human annotation checks were unnecessary."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-rgb-channel-assignment",
+      "question": "How does RGB Channel Fusion assign forward and backward grayscale canopy images to red, green and blue?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "3. Methodology > 3.4. RGB Channel Fusion Method",
+          "source_locator": "./body/sec[3]/sec[4]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Forward grayscale is red, backward grayscale is green, and their average is blue."
+      ],
+      "required_qualifications": [
+        "Describe this data-level fusion construction."
+      ],
+      "forbidden_claims": [
+        "Blue uses subtraction in the reported primary method."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-amff-layers",
+      "question": "At which feature scales does ADMF-Net use AMFF and FSPPF, and what detection head follows?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p41:w0",
+          "paragraph": 41,
+          "page": null,
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "source_locator": "./body/sec[3]/sec[5]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "AMFF fuses P3 and P4; the two P5 outputs feed FSPPF; an OBB head predicts rotated boxes."
+      ],
+      "required_qualifications": [
+        "Use the architecture description in paragraph 41; do not infer tensor dimensions from omitted diagrams."
+      ],
+      "forbidden_claims": [
+        "Unreported feature-map dimensions or OBB angle conventions."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-stripe-frequencies",
+      "question": "Which sinusoidal frequencies, stripe counts and phase are tested for painted heating-device illumination?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p18:w0",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.2. Generation of the Sinusoidal Patterns",
+          "source_locator": "./body/sec[3]/sec[1]/sec[2]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "0.8 Hz generates 20 stripes and 1.6 Hz generates 40 stripes; phase is zero for both."
+      ],
+      "required_qualifications": [
+        "Retain the paper's reported units and tested settings."
+      ],
+      "forbidden_claims": [
+        "These are universal optimal frequencies for painted surfaces."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-adaptive-binarization",
+      "question": "What grayscale and adaptive-binarization preprocessing is applied to structured-illumination heater images, and is it applied to bright-field images?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "Structured images undergo RGB-to-grayscale conversion and adaptive binarization to reduce environmental-light effects; bright-field images are not processed this way."
+      ],
+      "required_qualifications": [
+        "Do not extrapolate a threshold or window size the passage does not give."
+      ],
+      "forbidden_claims": [
+        "Both illumination modes receive identical binarization."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-imagenet-initialization",
+      "question": "Which pretraining dataset and input image size are reported for the transferred ResNet-50 and Inception V3 classifiers?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
+          "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "They are pretrained on ImageNet; both use 450 by 450 input images in this study."
+      ],
+      "required_qualifications": [
+        "This describes classifier initialization and study inputs, not new training on the complete ImageNet dataset."
+      ],
+      "forbidden_claims": [
+        "The study collected a million new heater images."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-tdi-motion-sync",
+      "question": "How must TDI line frequency and charge-accumulation direction relate to wafer motion to avoid blur?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "3. Experimental Setup",
+          "source_locator": "./body/sec[3]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Line frequency must match wafer movement speed; charge accumulation is opposite the wafer's motion direction."
+      ],
+      "required_qualifications": [
+        "The equation is omitted from the extracted prose; do not invent its constants."
+      ],
+      "forbidden_claims": [
+        "Increasing line frequency alone guarantees sharp images at arbitrary speeds."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-cfpn-subtraction",
+      "question": "What causes column fixed pattern noise (CFPN), and how is it reduced in the TDI-DFSM experiments?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p15:w0",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "CFPN arises from mismatched column readout circuits; particle-free background images are subtracted from particle images."
+      ],
+      "required_qualifications": [
+        "This is background-noise reduction in the reported device, not elimination of all sensor noise."
+      ],
+      "forbidden_claims": [
+        "CFPN is caused by actual particle defects or is removed completely."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-aw-ssim-combination",
+      "question": "How does AW-SSIM combine the luminance, contrast and structure sub-functions differently from standard SSIM?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p25:w0",
+          "paragraph": 25,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[6]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "AW-SSIM uses addition instead of multiplication between sub-functions and assigns a constant weight to each component."
+      ],
+      "required_qualifications": [
+        "The component calculations remain the same as standard SSIM; equations are omitted in this extraction."
+      ],
+      "forbidden_claims": [
+        "New numerical weight values not supplied by the cited prose."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-adga-shapes",
+      "question": "How does ADGA choose and blend irregular defect patches into target images?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p18:w0",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Source appearance is selected for realistic defects; polygons use 3 to 7 vertices, are randomly resized and pasted, with Gaussian-blurred edges."
+      ],
+      "required_qualifications": [
+        "These are simulated defects for training, not collected real defective samples."
+      ],
+      "forbidden_claims": [
+        "All patches are unmodified rectangles from arbitrary sources."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-stable-camera",
+      "question": "When the transparent cover is photographed twice, what stops it from shifting relative to the lens?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p27:w0",
+          "paragraph": 27,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "A flexible arm holder keeps lens and sample positions fixed between lighting conditions."
+      ],
+      "required_qualifications": [
+        "This explains the fixture's role, not a measured registration-error bound."
+      ],
+      "forbidden_claims": [
+        "An unreported active stabilization or registration algorithm."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-turn-and-flip-labels",
+      "question": "How can the aircraft-cover training pictures be turned and reflected without drawing their defect outlines again?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[6]"
+        }
+      ],
+      "required_claims": [
+        "Rotate and mirror images and labels together; 90-degree rotations plus mirroring yield eightfold augmentation; out-of-frame labels require adjustment or deletion."
+      ],
+      "required_qualifications": [
+        "The eightfold example is specific to 90-degree rotations and mirrors."
+      ],
+      "forbidden_claims": [
+        "Every arbitrary rotation is lossless and leaves all boxes inside the image."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-manual-outline-union",
+      "question": "If damage has a different outline in the two pictures of the aircraft cover, how do the annotators reconcile the boundary?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p33:w0",
+          "paragraph": 33,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[5]"
+        }
+      ],
+      "required_claims": [
+        "Manual adjustment is needed; when contours differ, the union outer contour is selected, and annotation files are checked."
+      ],
+      "required_qualifications": [
+        "Some defects are clearer under only one illumination condition."
+      ],
+      "forbidden_claims": [
+        "The segmentation model's output is accepted without inspection."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-small-photo-supply",
+      "question": "How did the heater researchers enlarge a limited supply of surface photographs before fitting their classifiers?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p21:w0",
+          "paragraph": 21,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "They extract four 450 by 450 sub-images from each 808 by 608 image, then augment the crops to 500 images per defect category."
+      ],
+      "required_qualifications": [
+        "Augmented images are not 500 independent physical parts."
+      ],
+      "forbidden_claims": [
+        "The study inspected 500 independently acquired heaters per category."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-both-checks-clean",
+      "question": "Can a heater pass inspection after looking undamaged under the striped screen alone, and what happens next?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p30:w0",
+          "paragraph": 30,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "A structured-mode OK triggers bright-field assessment; a final OK requires OK outputs for both modes."
+      ],
+      "required_qualifications": [
+        "This is the reported decision rule, not a guarantee of zero missed defects."
+      ],
+      "forbidden_claims": [
+        "One successful illumination-mode check is enough to pass."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-daylight-interference",
+      "question": "Why could changing daylight hide a mark in the heater photographs, and how did the researchers make the mark easier to see?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Uncontrolled ambient illumination reduces contrast; preprocessing structured images produces higher-contrast defect regions."
+      ],
+      "required_qualifications": [
+        "Enclosing the setup is suggested for implementation, not part of the tested configuration."
+      ],
+      "forbidden_claims": [
+        "The experimental setup already had a light-isolating tunnel."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-bright-specks-dark-background",
+      "question": "Why do tiny flaws look bright against a dark wafer image when the beam arrives from the side?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p6:w0",
+          "paragraph": 6,
+          "page": null,
+          "source_section": "2. Methodology > 2.1. Dark-Field Scattering",
+          "source_locator": "./body/sec[2]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Oblique illumination produces reflected light on defect-free wafer areas; the system collects defect-scattered light, showing bright defects on a dark background."
+      ],
+      "required_qualifications": [
+        "This explains dark-field contrast, not a universal minimum defect size."
+      ],
+      "forbidden_claims": [
+        "The camera forms the image by collecting the direct reflected beam everywhere."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-moving-signal-addition",
+      "question": "How does following the same moving spot through repeated exposures help a dim wafer feature, and what ideal improvement is expected if the repeats multiply by m?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p7:w0",
+          "paragraph": 7,
+          "page": null,
+          "source_section": "2. Methodology > 2.2. Fundamental Aspects of TDI",
+          "source_locator": "./body/sec[2]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p8:w180",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "2. Methodology > 2.2. Fundamental Aspects of TDI",
+          "source_locator": "./body/sec[2]/sec[2]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Charge follows and accumulates as the image moves across sensor stages; ideally multiplying stages by m increases SNR by the square root of m."
+      ],
+      "required_qualifications": [
+        "The square-root relation is ideal, not a measured guarantee under every noise condition."
+      ],
+      "forbidden_claims": [
+        "SNR necessarily increases linearly with the number of stages."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-too-many-shortcuts",
+      "question": "Why did the image-repair network avoid shortcuts between every matching layer on its two sides?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "source_locator": "./body/sec[3]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Two strategically placed skip connections worked best in their experiments; connecting all layers partly reconstructed defects."
+      ],
+      "required_qualifications": [
+        "Reconstructing damage is undesirable for residual-based localization in this method."
+      ],
+      "forbidden_claims": [
+        "More skip connections always improve defect detection."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-changing-neighborhood",
+      "question": "How does the reconstruction study vary the neighborhood weighting during learning to balance speckle suppression with preserving small details?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p30:w0",
+          "paragraph": 30,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[11]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p31:w0",
+          "paragraph": 31,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[12]"
+        }
+      ],
+      "required_claims": [
+        "A narrow Gaussian can amplify noise and a wide one blur detail; standard deviation gradually increases, resets each epoch, and samples are shuffled."
+      ],
+      "required_qualifications": [
+        "No numeric increment is available in the extracted prose."
+      ],
+      "forbidden_claims": [
+        "One fixed neighborhood width is used throughout training."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-damaged-clean-pairs",
+      "question": "When teaching the repair model with made-up damage, which picture is used as the target for the repaired output?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p17:w0",
+          "paragraph": 17,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "source_locator": "./body/sec[3]/sec[1]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Artificially defective inputs are paired with their clean counterparts; reconstructed images are compared with the normal references."
+      ],
+      "required_qualifications": [
+        "The artificial defect is on the input, not the desired output."
+      ],
+      "forbidden_claims": [
+        "The model is trained to reproduce synthetic damage in its target."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-localization-outputs",
+      "question": "How do the canopy detector and the two-stage autoencoder represent where a defect is?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p31:w0",
+          "paragraph": 31,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p40:w0",
+          "paragraph": 40,
+          "page": null,
+          "source_section": "4. Experimentation > 4.1. Overall Performance Comparison",
+          "source_locator": "./body/sec[4]/sec[1]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Canopy defects use oriented bounding boxes.",
+        "The autoencoder localizes defects through the residual between input and reconstruction."
+      ],
+      "required_qualifications": [
+        "The outputs serve different inspection tasks.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "The autoencoder reports the same rotated-box labels as the canopy detector.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-training-splits",
+      "question": "Compare the reported training/test partition in the canopy dataset with the painted heater dataset.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p36:w0",
+          "paragraph": 36,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[8]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p23:w0",
+          "paragraph": 23,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[5]"
+        }
+      ],
+      "required_claims": [
+        "Canopy uses 1576/176 image pairs, described as 9:1.",
+        "Painted surfaces use 80% training and 20% testing."
+      ],
+      "required_qualifications": [
+        "Pairs and individual images are different counting units; neither passage establishes independence after augmentation.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "These percentages prove that both splits are leakage-free.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-training-computers",
+      "question": "What software frameworks and GPU/memory configurations are reported for canopy training and painted-surface training?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p48:w0",
+          "paragraph": 48,
+          "page": null,
+          "source_section": "4. Experiments > 4.2. Implementation Details",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy uses PyTorch 2.2.2 with CUDA 11.8, an RTX 4080 with 16GB VRAM and 48GB system memory.",
+        "Painted surfaces use Keras with TensorFlow, a GeForce 930MX and 8GB RAM."
+      ],
+      "required_qualifications": [
+        "Reported setups are not matched computational-cost experiments.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Either machine is demonstrated faster on the other study's task.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-labels-versus-simulation",
+      "question": "How are canopy defect boundaries checked, compared with how the autoencoder obtains artificial defects?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p33:w0",
+          "paragraph": 33,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[5]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p18:w0",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy annotations are manually adjusted and checked across illumination views.",
+        "The autoencoder pastes irregular, resized source patches with blurred edges to simulate damage."
+      ],
+      "required_qualifications": [
+        "Annotation correction and synthetic training-data generation are different operations.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Canopy labels were generated by ADGA.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-data-expansion",
+      "question": "Compare the canopy study's Mosaic-4 transformations with the painted heater study's crop-based data expansion.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p35:w0",
+          "paragraph": 35,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[7]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p21:w0",
+          "paragraph": 21,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "Canopy training uses Mosaic-4 image combinations, scaling/translation, contrast/exposure changes and noise.",
+        "Heater images yield four crops followed by rotations, shifts, zoom, shear and flips."
+      ],
+      "required_qualifications": [
+        "These procedures increase training variation, not independently acquired samples.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both papers used the identical augmentation pipeline.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-relative-motion",
+      "question": "Why does the canopy platform hold the sample fixed between views while the wafer platform synchronizes image acquisition with motion?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p27:w0",
+          "paragraph": 27,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "3. Experimental Setup",
+          "source_locator": "./body/sec[3]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Canopy acquisition needs a fixed lens/sample position across two lighting conditions.",
+        "Wafer TDI requires matching line frequency to movement and opposite charge-accumulation direction to prevent blur."
+      ],
+      "required_qualifications": [
+        "Do not infer a common motion-control specification.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Wafer TDI requires the sample to stay motionless during line scanning.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-evaluation-metrics",
+      "question": "Which metrics quantify canopy object-detection performance and autoencoder anomaly-detection performance, and can their numerical scores be ranked directly?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p47:w0",
+          "paragraph": 47,
+          "page": null,
+          "source_section": "4. Experiments > 4.1. Evaluation Metrics",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "4. Experimentation",
+          "source_locator": "./body/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Canopy reports mAP50 and mAP50-95 over IoU thresholds.",
+        "The autoencoder reports area under the ROC curve (AuROC); the task-specific metrics do not support a direct ranking."
+      ],
+      "required_qualifications": [
+        "The metrics measure different outputs and are evaluated on different datasets.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "98% mAP means the same error rate as 98% AuROC.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-noise-preprocessing",
+      "question": "Contrast background subtraction in the wafer study with adaptive binarization in the painted-surface study.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc10934137",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p15:w0",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "Wafer processing subtracts particle-free backgrounds to reduce CFPN.",
+        "Heater structured images are grayscaled and adaptively binarized to reduce environmental-light effects; bright-field images are excluded."
+      ],
+      "required_qualifications": [
+        "Different nuisance signals are addressed by different processing.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Adaptive binarization is the reported wafer CFPN removal method.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-optical-cues",
+      "question": "What optical cues reveal scratches/dents on painted heaters and particle defects on non-patterned wafers?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11768589",
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p35:w0",
+          "paragraph": 35,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[2]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p6:w0",
+          "paragraph": 6,
+          "page": null,
+          "source_section": "2. Methodology > 2.1. Dark-Field Scattering",
+          "source_locator": "./body/sec[2]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Heater structured illumination detects 3D marks through distortion of reflected patterns.",
+        "Wafer dark-field inspection collects defect-scattered light against a dark background."
+      ],
+      "required_qualifications": [
+        "The two studies do not establish identical material response or sensitivity.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "The wafer method depends on a reflected sinusoidal screen pattern.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-network-inputs",
+      "question": "Compare the patch size used for autoencoder training with the input image size of the transferred heater classifiers.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11121878",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p17:w0",
+          "paragraph": 17,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "source_locator": "./body/sec[3]/sec[1]/p[2]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
+          "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Autoencoder training divides images into 128 by 128 patches.",
+        "Transferred heater classifiers use 450 by 450 inputs."
+      ],
+      "required_qualifications": [
+        "Patch size is distinct from the size of the complete resized image.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both methods consume 128 by 128 whole images.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-network-roles",
+      "question": "How do the two backbones in ADMF-Net differ in purpose from the encoder and decoder in the autoencoder model?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p40:w0",
+          "paragraph": 40,
+          "page": null,
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "source_locator": "./body/sec[3]/sec[5]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p41:w0",
+          "paragraph": 41,
+          "page": null,
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "source_locator": "./body/sec[3]/sec[5]/p[2]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "source_locator": "./body/sec[3]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "ADMF-Net backbones separately extract features from the two lighting modalities for fusion and detection.",
+        "The autoencoder compresses an image and decodes it with transposed convolutions to reconstruct it."
+      ],
+      "required_qualifications": [
+        "Two branches in a detector are not the same as compression/reconstruction stages.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "The ADMF-Net backbones form an encoder-decoder reconstruction pair.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-image-degradation",
+      "question": "What degrades the canopy forward view, compared with the moving-target area-camera images in the wafer experiment?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Dual-Modal Illumination Structure",
+          "source_locator": "./body/sec[3]/sec[1]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p12:w0",
+          "paragraph": 12,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.2. Resolution Target Imaging",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy forward lighting is susceptible to reflections and uneven illumination.",
+        "A moving target causes severe motion blur for the area-array sensor in the wafer comparison."
+      ],
+      "required_qualifications": [
+        "These observations arise from different imaging experiments.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both observed problems are identified as column fixed pattern noise.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-compare-light-control",
+      "question": "Compare the explicitly specified canopy backlight with the environmental illumination conditions deliberately used in the heater experiment.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p28:w0",
+          "paragraph": 28,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[5]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy uses eight ring LEDs around the lens and switches the two sources alternately.",
+        "Heater environmental lighting is deliberately uncontrolled; processing counters contrast loss and containment is suggested."
+      ],
+      "required_qualifications": [
+        "Specified source settings do not prove the canopy study eliminated all ambient light.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both acquisition systems were demonstrated inside light-isolating tunnels.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-recipe",
+      "question": "What ingredients and cooking times are needed for a traditional spaghetti carbonara?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-inheritance-law",
+      "question": "How is an intestate estate divided under current German inheritance law?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-planet-moons",
+      "question": "How many confirmed moons does Jupiter have as of September 2026?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-exchange-rate",
+      "question": "What was the euro-to-yen closing exchange rate on 1 September 2026?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-database-isolation",
+      "question": "Which SQL transaction isolation level prevents phantom reads?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-unrelated-vaccination",
+      "question": "What is the recommended adult hepatitis B vaccination schedule?",
+      "category": "unanswerable",
+      "query_style": "unrelated",
+      "expected_source_ids": [],
+      "references": [],
+      "required_claims": [],
+      "required_qualifications": [
+        "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer."
+      ],
+      "forbidden_claims": [
+        "Answering from general knowledge or inventing a technical-source citation."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-canopy-service-life",
+      "question": "How many years of flight service remain for a canopy after its largest detected crack is repaired?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p30:w0",
+          "paragraph": 30,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p61:w0",
+          "paragraph": 61,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[5]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "Defect imaging and a detection method do not establish a structural-fatigue or remaining-life model.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-heater-energy",
+      "question": "How many joules per inspected heater does the complete camera, monitor and CNN system consume?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.1. Experimental Setup",
+          "source_locator": "./body/sec[3]/sec[1]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "Hardware descriptions are not measured end-to-end energy consumption.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-wafer-live-cells",
+      "question": "What sensitivity and specificity does the wafer TDI system achieve for malignant cells in live human blood?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p13:w0",
+          "paragraph": 13,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[1]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "A PSL-particle experiment on a wafer is not a biological diagnostic validation.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-autoencoder-ct",
+      "question": "What patient-level cancer detection accuracy does the two-stage autoencoder achieve on hospital CT scans?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "4. Experimentation",
+          "source_locator": "./body/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "MVTec surface-image evaluation does not supply patient-level CT results.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-factory-warranty",
+      "question": "Which of the four systems reduced warranty returns most in a randomized trial across the same factories?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p61:w0",
+          "paragraph": 61,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[5]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p43:w0",
+          "paragraph": 43,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.3. Performance of the Automatic Detection and Classification System",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p17:w0",
+          "paragraph": 17,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[5]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "4. Experimentation",
+          "source_locator": "./body/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "Separate inspection experiments do not supply a shared randomized factory-outcome trial.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-canopy-confidence-bounds",
+      "question": "What is the 95% bootstrap confidence interval across independent canopy collections for ADMF-Net's reported mAP50?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p52:w0",
+          "paragraph": 52,
+          "page": null,
+          "source_section": "4. Experiments > 4.3. Results and Discussion > 4.3.2. ADMF-Net Experiment",
+          "source_locator": "./body/sec[4]/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "A point metric from the canopy experiment is not a bootstrap interval across independent collections.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "unreviewed",
+      "reviewer": null,
+      "review_date": null
+    },
+    {
+      "id": "tech-missing-riscv-runtime",
+      "question": "Which model has the lowest measured latency on the same RISC-V CPU with 8-bit quantization and batch size one?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p48:w0",
+          "paragraph": 48,
+          "page": null,
+          "source_section": "4. Experiments > 4.2. Implementation Details",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "4. Experimentation",
+          "source_locator": "./body/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "These training descriptions do not provide that shared RISC-V quantized-runtime benchmark.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
       "review_status": "unreviewed",
