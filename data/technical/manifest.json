@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "pmc11510794",
+      "pmcid": "PMC11510794",
+      "title": "Dual-Modal Illumination System for Defect Detection of Aircraft Glass Canopies",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11510794/",
+      "download_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11510794/fullTextXML",
+      "original_file": "originals/PMC11510794.xml",
+      "license": "CC-BY-4.0",
+      "authors": [
+        "Zijian Li",
+        "Yong Yao",
+        "Runyuan Wen",
+        "Qiyang Liu"
+      ],
+      "publication_date": "2024-10-18",
+      "doi": "10.3390/s24206717",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "copyright": "© 2024 by the authors.",
+      "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. This is a partial text extraction; consult the original article for omitted material.",
+      "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "permission_evidence": "© 2024 by the authors.2024https://creativecommons.org/licenses/by/4.0/Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).",
+      "paragraph_count": 61,
+      "review_status": "not_human_reviewed",
+      "retrieved_at": "2026-10-01T09:49:14.550871+00:00"
+    },
+    {
+      "id": "pmc11768589",
+      "pmcid": "PMC11768589",
+      "title": "Improving Industrial Quality Control: A Transfer Learning Approach to Surface Defect Detection",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11768589/",
+      "download_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11768589/fullTextXML",
+      "original_file": "originals/PMC11768589.xml",
+      "license": "CC-BY-4.0",
+      "authors": [
+        "Ângela Semitela",
+        "Miguel Pereira",
+        "António Completo",
+        "Nuno Lau",
+        "José P Santos"
+      ],
+      "publication_date": "2025-01-17",
+      "doi": "10.3390/s25020527",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "copyright": "© 2025 by the authors.",
+      "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. This is a partial text extraction; consult the original article for omitted material.",
+      "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "permission_evidence": "© 2025 by the authors.Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).",
+      "paragraph_count": 50,
+      "review_status": "not_human_reviewed",
+      "retrieved_at": "2026-10-01T09:49:15.086841+00:00"
+    },
+    {
+      "id": "pmc10934137",
+      "pmcid": "PMC10934137",
+      "title": "Balancing the Efficiency and Sensitivity of Defect Inspection of Non-Patterned Wafers with TDI-Based Dark-Field Scattering Microscopy",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10934137/",
+      "download_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10934137/fullTextXML",
+      "original_file": "originals/PMC10934137.xml",
+      "license": "CC-BY-4.0",
+      "authors": [
+        "Fei Yu",
+        "Min Xu",
+        "Junhua Wang",
+        "Xiangchao Zhang",
+        "Xinlan Tang"
+      ],
+      "publication_date": "2024-03-01",
+      "doi": "10.3390/s24051622",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "copyright": "© 2024 by the authors.",
+      "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. This is a partial text extraction; consult the original article for omitted material.",
+      "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "permission_evidence": "© 2024 by the authors.2024https://creativecommons.org/licenses/by/4.0/Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).",
+      "paragraph_count": 18,
+      "review_status": "not_human_reviewed",
+      "retrieved_at": "2026-10-01T09:49:15.453579+00:00"
+    },
+    {
+      "id": "pmc11121878",
+      "pmcid": "PMC11121878",
+      "title": "Autoencoder-Based Unsupervised Surface Defect Detection Using Two-Stage Training",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11121878/",
+      "download_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11121878/fullTextXML",
+      "original_file": "originals/PMC11121878.xml",
+      "license": "CC-BY-4.0",
+      "authors": [
+        "Tesfaye Getachew Shiferaw",
+        "Li Yao"
+      ],
+      "publication_date": "2024-05-05",
+      "doi": "10.3390/jimaging10050111",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "copyright": "© 2024 by the authors.",
+      "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. This is a partial text extraction; consult the original article for omitted material.",
+      "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "permission_evidence": "© 2024 by the authors.2024https://creativecommons.org/licenses/by/4.0/Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).",
+      "paragraph_count": 47,
+      "review_status": "not_human_reviewed",
+      "retrieved_at": "2026-10-01T09:49:16.433498+00:00"
+    }
+  ]
+}
