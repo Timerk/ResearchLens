@@ -271,6 +271,8 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
     )
     assert failure["results"][0]["retrieved_passage_ids"]
     assert failure["results"][0]["error"]
+    assert failure["results"][0]["metrics_at_k"]["4"]["reciprocal_rank"] == 0
+    assert failure["results"][0]["metrics_at_k"]["4"]["source_recall"] == 0
     assert len(failure["results"][0]["retrieval_attempts"]) == 2
     assert "private credential" not in json.dumps(failure)
     assert summarize(failure)["errors"] == 1

@@ -1,0 +1,1679 @@
+{
+  "schema_version": 1,
+  "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+  "review_status": "unreviewed",
+  "reviewer": null,
+  "review_date": null,
+  "notes": "AI-authored draft evidence groups for the 36 answerable development cases only. The question review does not approve these new annotations. OR alternatives and AND combinations identify required factual parts and canonical-text character spans. Every required claim has at least one group; groups can split a composite claim. Alternatives are conservative and not exhaustive. Human support/alternative/span review is pending. Context-only references for all 14 negatives are excluded. Held-out questions and freeze are unchanged.",
+  "cases": [
+    {
+      "case_id": "tech-glass-exact",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Forward ring illumination",
+          "alternatives": [
+            [
+              {
+                "start": 226,
+                "end": 357,
+                "passage_id": "pmc11510794:p24:w0",
+                "quote": "For the implementation of forward lighting, we use a ring light source to achieve more uniform illumination and reduce reflections."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 92,
+                "passage_id": "pmc11510794:p28:w0",
+                "quote": "The forward lighting method uses 8 ring-shaped LED lights positioned around the camera lens."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Backward planar illumination",
+          "alternatives": [
+            [
+              {
+                "start": 358,
+                "end": 410,
+                "passage_id": "pmc11510794:p24:w0",
+                "quote": "For backward lighting, we use a planar light source."
+              }
+            ],
+            [
+              {
+                "start": 93,
+                "end": 223,
+                "passage_id": "pmc11510794:p28:w0",
+                "quote": "The backward lighting method uses a 30 cm × 42 cm backlight panel with a brightness of 500 nits and a color temperature of 6500 K."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-glass-paraphrase",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Scratch detail and reflection/uneven-light limitation",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 191,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "Through the analysis of these images collected, we found that bright field forward lighting easily captures surface scratch-type defects but is susceptible to reflections and uneven lighting."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Backward depth information",
+          "alternatives": [
+            [
+              {
+                "start": 192,
+                "end": 325,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "Backward lighting effectively reveals the depth information of defects, aiding in the analysis of defect severity and classification."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 1,
+          "description": "Backward surface/boundary-detail loss",
+          "alternatives": [
+            [
+              {
+                "start": 326,
+                "end": 405,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "However, it tends to lose surface detail and some boundary contour information."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-painted-exact",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Transferred classifier names",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 635,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "Three decision-making algorithms were tested for implementation: a new model built and trained from scratch and transfer learning of pre-trained networks (ResNet-50 and Inception V3)."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 171,
+                "passage_id": "pmc11768589:p15:w180",
+                "quote": "regard, in this work, a comparison will be performed between ResNet-50 and Inception V3 for defect detection and classification on the painted surfaces of heating devices."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3."
+              }
+            ],
+            [
+              {
+                "start": 521,
+                "end": 660,
+                "passage_id": "pmc11768589:p44:w0",
+                "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Scratch-built comparator",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 635,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "Three decision-making algorithms were tested for implementation: a new model built and trained from scratch and transfer learning of pre-trained networks (ResNet-50 and Inception V3)."
+              }
+            ],
+            [
+              {
+                "start": 172,
+                "end": 359,
+                "passage_id": "pmc11768589:p15:w180",
+                "quote": "Furthermore, an additional comparison will be performed of these pre-trained models with a CNN built and trained from scratch to demonstrate the potential of TL for defect classification."
+              }
+            ],
+            [
+              {
+                "start": 521,
+                "end": 660,
+                "passage_id": "pmc11768589:p44:w0",
+                "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-wafer-exact",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Stage and noise changes improve SNR without efficiency sacrifice",
+          "alternatives": [
+            [
+              {
+                "start": 600,
+                "end": 828,
+                "passage_id": "pmc10934137:p1:w0",
+                "quote": "Experiments illustrate that the increase in the number of TDI stages and reduction in the column fixed pattern noise effectively improve the signal-to-noise ratio of particle defects without sacrificing the detecting efficiency."
+              }
+            ],
+            [
+              {
+                "start": 318,
+                "end": 561,
+                "passage_id": "pmc10934137:p18:w0",
+                "quote": "In addition, by increasing the number of TDI stages and reducing the CFPN, the SNR of defect images was effectively improved without sacrificing detection efficiency, providing a reasonable balance between detection efficiency and sensitivity."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Readout mismatch causes CFPN",
+          "alternatives": [
+            [
+              {
+                "start": 215,
+                "end": 299,
+                "passage_id": "pmc10934137:p15:w0",
+                "quote": "This CFPN is caused by a mismatch between the readout circuits of different columns."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Subtract particle-free backgrounds",
+          "alternatives": [
+            [
+              {
+                "start": 875,
+                "end": 985,
+                "passage_id": "pmc10934137:p15:w0",
+                "quote": "The background images without particles are subtracted from the particle images taken at different TDI stages."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-autoencoder-exact",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Normal-only first stage",
+          "alternatives": [
+            [
+              {
+                "start": 83,
+                "end": 282,
+                "passage_id": "pmc11121878:p8:w0",
+                "quote": "The first stage of training is exclusively conducted only on normal samples, and the second stage is training on normal and artificially defective samples using the model weight from the first stage."
+              }
+            ],
+            [
+              {
+                "start": 41,
+                "end": 216,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "In the first stage, the training is performed only on non-defective training samples ( [formula omitted] ), focusing on learning the inherent characteristics of normal images."
+              }
+            ],
+            [
+              {
+                "start": 485,
+                "end": 630,
+                "passage_id": "pmc11121878:p44:w0",
+                "quote": "In the first stage, the model trains only on normal samples using the AW-SSIM loss function, effectively learning the background characteristics."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Second stage uses artificial defects and clean references",
+          "alternatives": [
+            [
+              {
+                "start": 664,
+                "end": 824,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "Here, images with artificially introduced defects ( [formula omitted] ) created by the ADGA are paired with their non-defect counterparts ( [formula omitted] )."
+              }
+            ],
+            [
+              {
+                "start": 631,
+                "end": 807,
+                "passage_id": "pmc11121878:p44:w0",
+                "quote": "These learned weights are then transferred to the second stage, which utilizes artificially generated defects created by the ADGA and employs a combined LPIPS and AW-SSIM loss."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Transfer first-stage weights",
+          "alternatives": [
+            [
+              {
+                "start": 534,
+                "end": 663,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "Using the weights learned from the first stage of training, the second stage focuses on equipping the model for defect detection."
+              }
+            ],
+            [
+              {
+                "start": 631,
+                "end": 807,
+                "passage_id": "pmc11121878:p44:w0",
+                "quote": "These learned weights are then transferred to the second stage, which utilizes artificially generated defects created by the ADGA and employs a combined LPIPS and AW-SSIM loss."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-fusion",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy forward/backward illumination",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 225,
+                "passage_id": "pmc11510794:p24:w0",
+                "quote": "Considering the practical feasibility in industrial inspection environments, we ultimately chose to use a dual-modal illumination structure, employing both forward lighting and backward lighting to capture and detect defects."
+              }
+            ],
+            [
+              {
+                "start": 131,
+                "end": 253,
+                "passage_id": "pmc11510794:p5:w0",
+                "quote": "For the same sampling point, the system sequentially uses forward lighting and backward lighting to capture defect images."
+              }
+            ],
+            [
+              {
+                "start": 177,
+                "end": 321,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Canopy data-level RGB fusion",
+          "alternatives": [
+            [
+              {
+                "start": 254,
+                "end": 766,
+                "passage_id": "pmc11510794:p5:w0",
+                "quote": "By integrating the information from both types of images, more accurate defect detection is achieved.A curated dataset is presented, which, to the best of our knowledge, is the first benchmark in the field of defect detection for aircraft transparent materials.A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 167,
+                "passage_id": "pmc11510794:p38:w0",
+                "quote": "To initially validate the effectiveness of fusion detection for this task, we first designed a data-level fusion method named RGB Channel Fusion, as shown in Figure 7."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 176,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net)."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Canopy feature-level ADMF-Net",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 176,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net)."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-4",
+          "claim_index": 1,
+          "description": "Heater deflectometry and bright-field modes",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 451,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "To automate the quality control of painted surfaces of heating devices, an automatic defect detection and classification system was developed by combining deflectometry and bright light-based illumination on the image acquisition, deep learning models for the classification of non-defective (OK) and defective (NOK) surfaces that fused dual-modal information at the decision level, and an online network for information dispatching and visualization."
+              }
+            ],
+            [
+              {
+                "start": 585,
+                "end": 1108,
+                "passage_id": "pmc11768589:p5:w0",
+                "quote": "Hence, in the present work, an automatic vision inspection system was proposed for the detection and classification of defects on the painted surfaces of heating devices, which included the following: (1) an image acquisition module for dataset generation employing two illumination strategies (bright field and deflectometry-based lighting), (2) DL models for defect detection and classification with decision-level fusion, (3) painted surface information dispatching to a designed server, and (4) image graphical display."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 236,
+                "passage_id": "pmc11768589:p35:w0",
+                "quote": "The application of the two illumination modes—deflectometry-based structured illumination and bright field—was quite successful in the detection of all defects categories, despite their significantly different characteristics and sizes."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-5",
+          "claim_index": 1,
+          "description": "Heater decision-level fusion",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 451,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "To automate the quality control of painted surfaces of heating devices, an automatic defect detection and classification system was developed by combining deflectometry and bright light-based illumination on the image acquisition, deep learning models for the classification of non-defective (OK) and defective (NOK) surfaces that fused dual-modal information at the decision level, and an online network for information dispatching and visualization."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 282,
+                "passage_id": "pmc11768589:p30:w0",
+                "quote": "It should be emphasized that this algorithm applied a decision-level fusion of the classification outputs, so for a painted surface to be classified as OK, its images should be submitted to CNNs trained with images of both illumination modes and obtain an OK classification on both."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 246,
+                "passage_id": "pmc11768589:p45:w0",
+                "quote": "The two illumination modes of the image acquisition module significantly widened the type of defects that could be identified with this system, while maintaining its computational complexity by performing multi-modal fusion at the decision level."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-obb",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Slender, spanning and interlaced target rationale",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 223,
+                "passage_id": "pmc11510794:p31:w0",
+                "quote": "Considering that many of the detected target objects are slender, that is, they have high aspect ratios, large image spans, and may be interlaced, we choose to use oriented bounding boxes (OBB) for annotation and detection."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-annotation-tools",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Annotation tool and version",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 149,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "We use X-AnyLabeling [27] (version 2.3.5) for data annotation, which allows the use of existing segmentation models to improve annotation efficiency."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "SAM model and preparatory polygons",
+          "alternatives": [
+            [
+              {
+                "start": 150,
+                "end": 287,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "We choose the Segment Anything (ViT-Large) model for pre-labeling, which provides preparatory polygon boundaries of the selected defects."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Minimum enclosing rectangles",
+          "alternatives": [
+            [
+              {
+                "start": 288,
+                "end": 425,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "Then, a script is written to calculate the minimum enclosing rectangle for each defect, resulting in a more precise rotated bounding box."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-rgb-channel-assignment",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Forward/red and backward/green assignment",
+          "alternatives": [
+            [
+              {
+                "start": 294,
+                "end": 479,
+                "passage_id": "pmc11510794:p38:w0",
+                "quote": "These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Blue averages the grayscale images",
+          "alternatives": [
+            [
+              {
+                "start": 294,
+                "end": 479,
+                "passage_id": "pmc11510794:p38:w0",
+                "quote": "These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "P3/P4 AMFF",
+          "alternatives": [
+            [
+              {
+                "start": 200,
+                "end": 353,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "P5 FSPPF",
+          "alternatives": [
+            [
+              {
+                "start": 354,
+                "end": 451,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Then, the P5 layers from both modalities are connected to a spatial pyramid pooling layer, FSPPF."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Rotated-box head",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 604,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes."
+              }
+            ],
+            [
+              {
+                "start": 506,
+                "end": 648,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-stripe-frequencies",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Frequency/stripe-count pairs",
+          "alternatives": [
+            [
+              {
+                "start": 115,
+                "end": 246,
+                "passage_id": "pmc11768589:p18:w0",
+                "quote": "Two frequencies were used to generate patterns with different numbers of stripes: 0.8 Hz for 20 stripes, and 1.6 Hz for 40 stripes."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Zero phase",
+          "alternatives": [
+            [
+              {
+                "start": 247,
+                "end": 287,
+                "passage_id": "pmc11768589:p18:w0",
+                "quote": "The θ was 0 for both frequencies tested."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-adaptive-binarization",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Grayscale and adaptive binarization for illumination",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 201,
+                "passage_id": "pmc11768589:p22:w0",
+                "quote": "Afterwards, the images were subjected to processing through the conversion RGB to grey scale and the application of adaptive binarization to reduce the effect of the environmental lighting (Figure 2b)."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Bright-field images excluded from processing",
+          "alternatives": [
+            [
+              {
+                "start": 202,
+                "end": 310,
+                "passage_id": "pmc11768589:p22:w0",
+                "quote": "It should be emphasized that images obtained via bright field illumination were not subjected to processing."
+              }
+            ],
+            [
+              {
+                "start": 893,
+                "end": 1150,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-imagenet-initialization",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "ImageNet initialization",
+          "alternatives": [
+            [
+              {
+                "start": 113,
+                "end": 246,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "These networks have been trained on at least one million images from the ImageNet and have over 23 million trainable parameters [43]."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "450-by-450 inputs",
+          "alternatives": [
+            [
+              {
+                "start": 247,
+                "end": 313,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The input image size of these pre-trained CNNs was also 450 × 450."
+              }
+            ],
+            [
+              {
+                "start": 339,
+                "end": 568,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-tdi-motion-sync",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Line frequency matches motion",
+          "alternatives": [
+            [
+              {
+                "start": 123,
+                "end": 396,
+                "passage_id": "pmc10934137:p10:w0",
+                "quote": "To ensure that the 2D image captured by the TDI image sensor is not blurry due to the rapid motion of the object, the line frequency needs to match the wafer movement speed, and the direction of charge accumulation needs to be opposite to the motion direction of the wafer."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Charge accumulation opposes motion",
+          "alternatives": [
+            [
+              {
+                "start": 123,
+                "end": 396,
+                "passage_id": "pmc10934137:p10:w0",
+                "quote": "To ensure that the 2D image captured by the TDI image sensor is not blurry due to the rapid motion of the object, the line frequency needs to match the wafer movement speed, and the direction of charge accumulation needs to be opposite to the motion direction of the wafer."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Addition instead of multiplication",
+          "alternatives": [
+            [
+              {
+                "start": 420,
+                "end": 618,
+                "passage_id": "pmc11121878:p25:w0",
+                "quote": "To compensate for the mean with the variance and co-variance values, we should remove the independence between the luminance and other sub-functions through using addition instead of multiplication."
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 89,
+                "passage_id": "pmc11121878:p26:w0",
+                "quote": "For AW-SSIM, we apply addition between the three sub-functions, as shown in Equation (6)."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Component-specific weights",
+          "alternatives": [
+            [
+              {
+                "start": 90,
+                "end": 261,
+                "passage_id": "pmc11121878:p26:w0",
+                "quote": "In addition, we multiply each sub-function, luminance, contrast, and structure, by a constant [formula omitted] , [formula omitted] , and [formula omitted] , respectively."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-adga-shapes",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Source appearance matches target",
+          "alternatives": [
+            [
+              {
+                "start": 575,
+                "end": 734,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "The source images ( [formula omitted] ) are carefully selected to represent realistic defects based on the background color and appearance of the target image."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Irregular 3-to-7-vertex polygons",
+          "alternatives": [
+            [
+              {
+                "start": 735,
+                "end": 878,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "We randomly cut a portion of the source image ( [formula omitted] ) by selecting vertices ranging from 3 to 7, resulting in an irregular shape."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Random resize and paste",
+          "alternatives": [
+            [
+              {
+                "start": 412,
+                "end": 574,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "Our approach involves cutting a portion from source images with varying shapes and sizes, and then pasting it randomly onto the target image as shown in Figure 2."
+              },
+              {
+                "start": 879,
+                "end": 939,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "Then, the section is resized to a randomly chosen dimension."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-4",
+          "claim_index": 0,
+          "description": "Gaussian-blurred edges",
+          "alternatives": [
+            [
+              {
+                "start": 940,
+                "end": 1064,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "To smoothly integrate this irregularly shaped portion into the target image ( [formula omitted] ), we apply a Gaussian blur."
+              },
+              {
+                "start": 1065,
+                "end": 1126,
+                "passage_id": "pmc11121878:p18:w0",
+                "quote": "This blurring softens the transition at the edges, ensuring a"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-stable-camera",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Holder fixes lens/sample positions",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 197,
+                "passage_id": "pmc11510794:p27:w0",
+                "quote": "Due to the necessity of maintaining a fixed position between the camera lens and the sample when capturing images under two lighting conditions, we used a flexible arm holder as the support device."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-turn-and-flip-labels",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Transform images and labels together",
+          "alternatives": [
+            [
+              {
+                "start": 281,
+                "end": 425,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "In this process, rotation and mirroring operations are simultaneously applied to the images and their labels to avoid redundant annotation work."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Eightfold rotation/mirror example",
+          "alternatives": [
+            [
+              {
+                "start": 517,
+                "end": 642,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "For example, using 90-degree rotations and mirroring operations, an 8× augmentation can be achieved without information loss."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Out-of-frame label correction/removal",
+          "alternatives": [
+            [
+              {
+                "start": 754,
+                "end": 951,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "Moreover, since the standard OBB format does not allow point coordinates to be located outside the image boundaries, labels that overflow during the rotation process need to be adjusted or deleted."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Manual adjustment and union contour",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 38,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "Manual adjustments are also necessary."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Union when contour boundaries differ",
+          "alternatives": [
+            [
+              {
+                "start": 341,
+                "end": 522,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "Additionally, there are also subtle differences in the contour boundaries of the defects under the two types of lighting, and in that case, the union outer contour will be selected."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Annotation file checks",
+          "alternatives": [
+            [
+              {
+                "start": 523,
+                "end": 605,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "We check each annotation file to ensure the accuracy and usability of the dataset."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-small-photo-supply",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Four crops and raw/crop dimensions",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 540,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Augment to 500 images per category",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 540,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-both-checks-clean",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Structured OK triggers bright-field check",
+          "alternatives": [
+            [
+              {
+                "start": 718,
+                "end": 892,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Final OK requires both modes",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 282,
+                "passage_id": "pmc11768589:p30:w0",
+                "quote": "It should be emphasized that this algorithm applied a decision-level fusion of the classification outputs, so for a painted surface to be classified as OK, its images should be submitted to CNNs trained with images of both illumination modes and obtain an OK classification on both."
+              }
+            ],
+            [
+              {
+                "start": 1047,
+                "end": 1229,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "The inspection system consistently obtained fast and accurate surface classifications because it imposed OK classification on models trained with images from both illumination modes."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Ambient illumination reduces contrast",
+          "alternatives": [
+            [
+              {
+                "start": 350,
+                "end": 529,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Indeed, as observed in Figure 6a, the low contrast observed in this image due to the interference of the environmental lighting hindered the immediate localization of the scratch."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Processing improves structured-image contrast",
+          "alternatives": [
+            [
+              {
+                "start": 530,
+                "end": 769,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Nevertheless, the processing algorithm applied counteracted this effect, by generating high-contrast areas in the images containing sinusoidal patterns that, ultimately, facilitated the visualization of the defects, as seen in Figure 6b,c."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-bright-specks-dark-background",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Oblique illumination and reflection on clean surface",
+          "alternatives": [
+            [
+              {
+                "start": 417,
+                "end": 478,
+                "passage_id": "pmc10934137:p6:w0",
+                "quote": "The wafer surface is illuminated obliquely by incident light."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Clean surface reflection",
+          "alternatives": [
+            [
+              {
+                "start": 479,
+                "end": 566,
+                "passage_id": "pmc10934137:p6:w0",
+                "quote": "Complete reflection of the light occurs when there are no defects on the wafer surface."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Defect scatter and dark background",
+          "alternatives": [
+            [
+              {
+                "start": 567,
+                "end": 715,
+                "passage_id": "pmc10934137:p6:w0",
+                "quote": "In the presence of defects, the microscopy system collects scattering light, resulting in an image of bright defects against a dark background [31]."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-moving-signal-addition",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Charge follows and accumulates with motion",
+          "alternatives": [
+            [
+              {
+                "start": 544,
+                "end": 627,
+                "passage_id": "pmc10934137:p7:w0",
+                "quote": "Meanwhile, the charge at position i1 is transferred to position i2 and accumulated."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Ideal square-root SNR scaling",
+          "alternatives": [
+            [
+              {
+                "start": 206,
+                "end": 305,
+                "passage_id": "pmc10934137:p8:w180",
+                "quote": "Ideally, increasing the number of TDI stages by a factor of m is expected to improve the SNR by √m."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Two strategic skips and all-layer defect reconstruction",
+          "alternatives": [
+            [
+              {
+                "start": 1124,
+                "end": 1274,
+                "passage_id": "pmc11121878:p16:w0",
+                "quote": "While experimenting with various skip-connection configurations, we found that utilizing two strategically placed connections yielded optimal results."
+              },
+              {
+                "start": 1275,
+                "end": 1366,
+                "passage_id": "pmc11121878:p16:w0",
+                "quote": "Notably, applying skip-connections to all layers resulted in partial defect reconstruction."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Narrow-noise versus wide-detail tradeoff",
+          "alternatives": [
+            [
+              {
+                "start": 95,
+                "end": 189,
+                "passage_id": "pmc11121878:p31:w0",
+                "quote": "A small [formula omitted] amplifies noise, while a large [formula omitted] blurs fine details."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Gradual standard-deviation increase",
+          "alternatives": [
+            [
+              {
+                "start": 292,
+                "end": 427,
+                "passage_id": "pmc11121878:p31:w0",
+                "quote": "During training, it is gradually incremented by a small constant after processing every [formula omitted] patch of the training images."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Shuffle and reset each epoch",
+          "alternatives": [
+            [
+              {
+                "start": 428,
+                "end": 576,
+                "passage_id": "pmc11121878:p31:w0",
+                "quote": "Importantly, the training samples are shuffled after each epoch, and [formula omitted] is reset to its initial value before being incremented again."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-damaged-clean-pairs",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Artificial defects paired with clean counterparts",
+          "alternatives": [
+            [
+              {
+                "start": 664,
+                "end": 824,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "Here, images with artificially introduced defects ( [formula omitted] ) created by the ADGA are paired with their non-defect counterparts ( [formula omitted] )."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Clean references for reconstruction",
+          "alternatives": [
+            [
+              {
+                "start": 878,
+                "end": 1140,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "The normal samples ( [formula omitted] ) are used as references to improve the reconstruction performance of the model by comparing a normal sample with the reconstructed image ( [formula omitted] ) from its artificially defective counterpart ( [formula omitted]"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy OBB representation",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 223,
+                "passage_id": "pmc11510794:p31:w0",
+                "quote": "Considering that many of the detected target objects are slender, that is, they have high aspect ratios, large image spans, and may be interlaced, we choose to use oriented bounding boxes (OBB) for annotation and detection."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Autoencoder residual localization",
+          "alternatives": [
+            [
+              {
+                "start": 494,
+                "end": 603,
+                "passage_id": "pmc11121878:p40:w0",
+                "quote": "By taking the residual between the input and the reconstructed image, we can localize the defects accurately."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-splits",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy split units/counts/ratio",
+          "alternatives": [
+            [
+              {
+                "start": 289,
+                "end": 419,
+                "passage_id": "pmc11510794:p36:w0",
+                "quote": "The dataset is divided into a training set with 1576 image pairs and a test set with 176 image pairs, following a 9:1 split ratio."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Heater 80/20 split",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 109,
+                "passage_id": "pmc11768589:p23:w0",
+                "quote": "From the total dataset generated, 80% of the images were used for training and the remaining 20% for testing."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-computers",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy PyTorch/CUDA versions",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 159,
+                "passage_id": "pmc11510794:p48:w0",
+                "quote": "The training environment for the experiments was configured with Python version 3.10.14 and PyTorch version 2.2.2, with CUDA version 11.8 for GPU acceleration."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Canopy RTX/memory setup",
+          "alternatives": [
+            [
+              {
+                "start": 236,
+                "end": 391,
+                "passage_id": "pmc11510794:p48:w0",
+                "quote": "The hardware setup included an AMD Ryzen™ 7 7800X3D CPU with 8 cores and 16 threads, 48GB of memory, and a NVIDIA® GeForce RTX™ 4080 GPU with 16GB of VRAM."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 1,
+          "description": "Heater framework and hardware",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 216,
+                "passage_id": "pmc11768589:p24:w0",
+                "quote": "All training and classification employed open sourced Keras framework with TensorFlow backend, implemented on a computer with an Intel®core i7 processor, a RAM memory of 8 GB, and a NVIDIA Geforce 930MX graphic card."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-data-expansion",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy Mosaic transformations",
+          "alternatives": [
+            [
+              {
+                "start": 78,
+                "end": 309,
+                "passage_id": "pmc11510794:p35:w0",
+                "quote": "Additionally, during the training process, we employed the Mosaic-4 data augmentation method, which includes random image combinations, random scaling and translation, contrast adjustments, exposure adjustments, and noise addition."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Heater crop/transformation pipeline",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 540,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-evaluation-metrics",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy mAP/IoU metric definitions",
+          "alternatives": [
+            [
+              {
+                "start": 669,
+                "end": 895,
+                "passage_id": "pmc11510794:p47:w0",
+                "quote": "In this study, we use both the conventional mAP50, which evaluates at an intersection over union (IoU) threshold of 0.5, and the stricter mAP50-95, which averages over multiple IoU thresholds from 0.5 to 0.95 in steps of 0.05."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Autoencoder AuROC",
+          "alternatives": [
+            [
+              {
+                "start": 408,
+                "end": 571,
+                "passage_id": "pmc11121878:p38:w0",
+                "quote": "To quantitatively assess the performances of various methods, we chose the area under the receiver operating characteristic curve (AuROC) as the evaluation metric."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-optical-cues",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Heater reflected-pattern distortion",
+          "alternatives": [
+            [
+              {
+                "start": 237,
+                "end": 526,
+                "passage_id": "pmc11768589:p35:w0",
+                "quote": "Indeed, the deflectometry-based illumination was appropriate for the detection of defects with three-dimensional features such as scratches and dents in specular surfaces such as those obtained after the painting process, due to the distortion of the reflected pattern (Figure 6b,c) [2,4]."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Wafer defect-scattered contrast",
+          "alternatives": [
+            [
+              {
+                "start": 567,
+                "end": 715,
+                "passage_id": "pmc10934137:p6:w0",
+                "quote": "In the presence of defects, the microscopy system collects scattering light, resulting in an image of bright defects against a dark background [31]."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Autoencoder 128-by-128 patches",
+          "alternatives": [
+            [
+              {
+                "start": 217,
+                "end": 333,
+                "passage_id": "pmc11121878:p17:w0",
+                "quote": "First, the input image is divided into 128 × 128 patches, and the latent representation is extracted by the encoder."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Heater 450-by-450 inputs",
+          "alternatives": [
+            [
+              {
+                "start": 247,
+                "end": 313,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The input image size of these pre-trained CNNs was also 450 × 450."
+              }
+            ],
+            [
+              {
+                "start": 451,
+                "end": 524,
+                "passage_id": "pmc11768589:p25:w0",
+                "quote": "It should be noted that the CNNs’ default input image size was 450 × 450."
+              }
+            ],
+            [
+              {
+                "start": 339,
+                "end": 568,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Canopy modality-specific feature extractors",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 199,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "In this network, we use two CSPDarknet-like feature extraction backbones, as proposed in YOLOv8, to extract multi-scale features from the forward lighting and backward lighting modalities separately."
+              }
+            ],
+            [
+              {
+                "start": 177,
+                "end": 321,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Autoencoder compresses input",
+          "alternatives": [
+            [
+              {
+                "start": 178,
+                "end": 385,
+                "passage_id": "pmc11121878:p16:w0",
+                "quote": "The encoder compresses the input image into a lower-dimensional representation using a series of convolutional layers, each employing a sequence of convolution, batch normalization, and activation functions."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "part-3",
+          "claim_index": 1,
+          "description": "Decoder reconstructs with transposed convolutions",
+          "alternatives": [
+            [
+              {
+                "start": 386,
+                "end": 590,
+                "passage_id": "pmc11121878:p16:w0",
+                "quote": "This compressed representation is then fed into the decoder, which utilizes transposed convolutional layers to progressively upsample the information and reconstruct the original image with high fidelity."
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
