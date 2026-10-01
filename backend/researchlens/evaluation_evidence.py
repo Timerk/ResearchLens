@@ -135,6 +135,35 @@ class EncodingDiagnostics(StrictModel):
     passages: list[EncodedPassage]
 
 
+def validate_pair_diagnostics(
+    rows: list[dict], passages: list[Passage], max_tokens: int
+) -> list[dict]:
+    """Pair token counts include the question; ranges refer to the canonical passage only."""
+    measurements = [EncodedPassage.model_validate(row) for row in rows]
+    by_id = {p.id: p for p in passages}
+    if len({p.passage_id for p in measurements}) != len(measurements):
+        raise ValueError("Duplicate reranker measurements")
+    for row in measurements:
+        passage = by_id.get(row.passage_id)
+        if (
+            passage is None
+            or row.text_sha256 != hashlib.sha256(passage.text.encode()).hexdigest()
+            or row.encoded_tokens > min(row.input_tokens, max_tokens)
+        ):
+            raise ValueError("Invalid reranker text or token counts")
+        previous = 0
+        for region in row.retained_ranges:
+            if region.start < previous or region.end > len(passage.text):
+                raise ValueError("Invalid reranker retained ranges")
+            previous = region.end
+        retained = sum(region.end - region.start for region in row.retained_ranges)
+        if row.truncated != (retained < len(passage.text)) or (
+            row.truncated and row.input_tokens == row.encoded_tokens
+        ):
+            raise ValueError("Invalid reranker truncation flag")
+    return [row.model_dump(mode="json") for row in measurements]
+
+
 def validate_encoding_diagnostics(
     diagnostics: EncodingDiagnostics, artifact: dict, passages: list[Passage]
 ) -> dict[str, EncodedPassage]:
