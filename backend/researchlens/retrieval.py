@@ -18,10 +18,16 @@ class PassageRetriever(Protocol):
 
 
 def _rebuild_error(reason: str, backend: str) -> ValueError:
-    extra = "--extra embeddings " if backend == "embeddings" else ""
+    dependencies = (
+        "Enable the selected model's dependencies first: uv sync --locked --extra embeddings "
+        "for MiniLM, or uv sync --locked --extra embedding-models for BGE/Qwen. "
+        if backend in ("embeddings", "hybrid")
+        else ""
+    )
     return ValueError(
-        f"{reason}. Rebuild with the configured RETRIEVAL_CORPUS and RETRIEVAL_INDEX: "
-        f"uv run {extra}--directory backend python -m researchlens.ingest "
+        f"{reason}. {dependencies}"
+        "Rebuild with the configured RETRIEVAL_CORPUS, RETRIEVAL_INDEX and EMBEDDING_MODEL: "
+        "uv run --no-sync --directory backend python -m researchlens.ingest "
         f"--retrieval {backend} (or supply --source and --destination for custom paths)."
     )
 
