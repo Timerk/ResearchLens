@@ -1,59 +1,59 @@
-# Frontend
+# ResearchLens frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+Angular 21.2 uses its built-in Vitest builder with jsdom for component tests.
+Three Playwright/Chromium smoke tests cover native keyboard/disclosure behavior,
+focus outlines, request recovery and narrow layouts that jsdom cannot verify.
 
-## Development server
+Use Node 24 with npm (the repository declares npm 11.17.0). From this directory:
 
-To start a local development server, run:
-
-```bash
-ng serve
+```sh
+rtk npm ci
+rtk npm run check
+rtk npm test
+rtk npm run build
+rtk npm run test:smoke:install
+rtk npm run test:smoke
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+RTK is a command wrapper. If it is unavailable, remove `rtk`. The production build
+is written to `dist/frontend`. `npm run check` checks smoke-test/fixture TypeScript
+and formatting of the changed UI and test files; Angular compilation checks the
+application and component-test TypeScript during build/test.
 
-## Code scaffolding
+`npm test` runs once and exits. Use `rtk npm run test:watch` during development.
+Component tests mock both `/api/health` and `/api/ask` using
+`HttpTestingController`. Smoke tests intercept both endpoints in the browser and
+start their own Angular dev server on port 4300. No backend, API keys or paid
+provider calls are required. Stop another server using port 4300 before running
+smoke tests. The first browser/dependency installation requires downloads.
+On Linux CI, `npx playwright install --with-deps chromium` also installs OS dependencies.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The HTML browser report is in `playwright-report/`; screenshots for desktop/mobile
+states and failure traces are in `test-results/`. Open the report with
+`rtk proxy npx playwright show-report`. CI runs checks, component tests, the production
+build and smoke tests, and retains browser artifacts for seven days.
 
-```bash
-ng generate component component-name
+For normal development with the local FastAPI backend on port 8000:
+
+```sh
+rtk npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Open <http://127.0.0.1:4200>. See the [repository README](../README.md) for backend setup.
 
-```bash
-ng generate --help
+For offline browser inspection of representative responses:
+
+```sh
+rtk npm run start:mock
 ```
 
-## Building
+Open <http://127.0.0.1:4300>. This command runs Angular and a separate mock HTTP
+server on port 4301. It never contacts FastAPI or an answer provider. The header
+starts in the mocked OpenAI mode; mocked responses can update it. Question text
+selects the response: `preview`, `no matches`, `insufficient`, or `error`;
+anything else returns a mocked answer. Include `slow` for an eight-second delay
+to inspect loading and duplicate prevention. Ctrl+C stops both servers.
+Fixture claims are labeled as mocks and must not be treated as scientific findings.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Read the [verification record](docs/verification.md) for coverage, captured screenshots,
+actual T3 browser interactions and the precise preview-host limitations.
