@@ -150,10 +150,14 @@ annotations, including review provenance, requires rerunning every comparison mo
 ## Alternatives and complete evidence
 
 [Development evidence labels](labels/README.md) cover all 36 answerable development
-cases with 83 factual groups. They pin the canonical dataset hash, corpus and shared
+cases with 92 factual groups after the recorded AI evidence-review fixes. They pin
+the canonical dataset hash, corpus and shared
 passage identity. The approved question files and held-out freeze remain unchanged.
 These AI-authored annotations are `unreviewed`; the human question approval does not
 approve new alternatives or offsets. Review them before using coverage to select settings.
+The original evidence audit remains unchanged; separate
+[fix records](reviews/2026-10-01-pr8/evidence-fixes.md) explain semantic/context
+corrections and distinguish factual qualifications from unscored answer-review guards.
 
 Each group identifies a required claim index and exact canonical-text character spans.
 An alternative is sufficient when all its spans are present. Any sufficient alternative
