@@ -1,8 +1,6 @@
-"""Build a deterministic passage artifact from UTF-8 JSON documents.
+"""Build a deterministic passage artifact from UTF-8 JSON documents."""
 
-This initial extractor accepts text only. PDF extraction and license-reviewed
-"""
-
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -13,6 +11,7 @@ from researchlens.models import Document, Passage
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / "data" / "sample_documents.json"
+TECHNICAL_CORPUS = ROOT / "data" / "technical" / "documents.json"
 INDEX = ROOT / "data" / "index.json"
 
 
@@ -24,6 +23,9 @@ def chunk_documents(documents: list[Document], max_words: int = 180) -> list[Pas
     passages: list[Passage] = []
     for document in documents:
         for paragraph, text in enumerate(document.text.split("\n\n"), start=1):
+            source = (
+                document.paragraph_sources[paragraph - 1] if document.paragraph_sources else None
+            )
             words = text.split()
             for offset in range(0, len(words), max_words):
                 passages.append(
@@ -36,6 +38,9 @@ def chunk_documents(documents: list[Document], max_words: int = 180) -> list[Pas
                         kind=document.kind,
                         paragraph=paragraph,
                         text=" ".join(words[offset : offset + max_words]),
+                        attribution=document.attribution,
+                        source_section=source.section if source else None,
+                        source_locator=source.locator if source else None,
                     )
                 )
     return passages
@@ -58,5 +63,8 @@ def build_index(source: Path = CORPUS, destination: Path = INDEX) -> None:
 
 
 if __name__ == "__main__":
-    build_index()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--corpus", choices=("technical", "sample"), default="technical")
+    args = parser.parse_args()
+    build_index(TECHNICAL_CORPUS if args.corpus == "technical" else CORPUS)
     print(f"Built {INDEX}")

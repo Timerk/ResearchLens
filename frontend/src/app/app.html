@@ -8,8 +8,9 @@
   <h1>Explore the evidence.<br><span>Inspect the source.</span></h1>
   <p class="intro">Search a small document collection and read the passages behind each result.</p>
   <aside class="notice">
-    <strong>Development corpus</strong>
-    These three documents are invented test fixtures, not technical evidence.
+    <strong>Inspect the evidence</strong>
+    Read each source and its experimental conditions before drawing conclusions.
+    Technical papers report their authors' findings; synthetic fixtures, when loaded, are labeled.
     Retrieval uses word matching and may miss differently phrased evidence.
     @if (mode() === 'openai') { Answers use only retrieved passages. OpenAI API charges apply. }
     @else if (mode() === 'local_preview') { Local preview displays passages without generating answers. }
@@ -59,7 +60,21 @@
             <summary>Inspect reference</summary>
             <dl>
               <dt>Passage ID</dt><dd>{{ passage.id }}</dd>
-              <dt>License</dt><dd>{{ passage.license }}</dd>
+              @if (passage.source_section) {
+                <dt>Section</dt><dd>{{ passage.source_section }}</dd>
+                <dt>Source XML location</dt><dd>{{ passage.source_locator }}</dd>
+              }
+              @if (passage.attribution; as attribution) {
+                <dt>Authors</dt><dd>{{ attribution.authors.join(', ') }}</dd>
+                <dt>Published</dt><dd>{{ attribution.publication_date }}</dd>
+                <dt>DOI</dt><dd>{{ attribution.doi }}</dd>
+                <dt>Copyright</dt><dd>{{ attribution.copyright }}</dd>
+                <dt>License</dt><dd><a [href]="attribution.license_url" target="_blank"
+                  rel="noopener noreferrer">{{ passage.license }}</a></dd>
+                <dt>Text preparation</dt><dd>{{ attribution.changes }}</dd>
+              } @else {
+                <dt>License</dt><dd>{{ passage.license }}</dd>
+              }
               <dt>Source</dt><dd>
                 @if (passage.source_url; as url) {
                   <a [href]="url" target="_blank" rel="noopener noreferrer">Original document ↗</a>

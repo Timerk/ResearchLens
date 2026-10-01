@@ -1,6 +1,21 @@
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+
+class Attribution(BaseModel):
+    authors: list[str]
+    publication_date: str
+    doi: str
+    license_url: str
+    copyright: str
+    changes: str
+    source_sha256: str
+
+
+class ParagraphSource(BaseModel):
+    section: str
+    locator: str
 
 
 class Document(BaseModel):
@@ -12,6 +27,14 @@ class Document(BaseModel):
     license: str
     kind: Literal["synthetic", "technical"]
     text: str = Field(min_length=1)
+    attribution: Attribution | None = None
+    paragraph_sources: list[ParagraphSource] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_provenance(self) -> "Document":
+        if self.paragraph_sources and len(self.paragraph_sources) != len(self.text.split("\n\n")):
+            raise ValueError("Each paragraph must have exactly one source location")
+        return self
 
 
 class Passage(BaseModel):
@@ -23,6 +46,9 @@ class Passage(BaseModel):
     kind: Literal["synthetic", "technical"]
     paragraph: int
     text: str
+    attribution: Attribution | None = None
+    source_section: str | None = None
+    source_locator: str | None = None
 
 
 class SearchHit(Passage):
