@@ -65,12 +65,16 @@ Run the existing evaluation pipeline across all four models and both retrieval m
 
 ```sh
 rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
-rtk proxy uv run --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --output ../evaluation/runs/cpu-comparison
+rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --evidence-labels ../evaluation/labels/technical-development.json --output ../evaluation/runs/cpu-comparison-k4
+rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --evidence-labels ../evaluation/labels/technical-development.json --limit 10 --cutoffs 1 4 10 --output ../evaluation/runs/cpu-comparison-ranking
 ```
 
-This downloads pinned weights locally and runs the unreviewed technical development
-questions without answer generation. CPU memory/latency and draft relevance measurements
-are diagnostics; human-reviewed comparisons remain pending. See [model comparisons](docs/model-comparison.md).
+This uses the 50 approved development questions and their separately approved evidence
+groups without answer generation. The first command measures actual k=4 retrieval;
+the second scores ranking prefixes at 1, 4 and 10. Each saves a paired per-question
+report against TF-IDF. Both use fresh processes and may download pinned weights on
+first ingestion. Held-out questions are not executed. See [evaluation readiness](docs/retrieval-readiness.md)
+and the [historical preliminary comparison](docs/model-comparison.md).
 
 ### Enable document-only OpenAI answers
 

@@ -138,8 +138,21 @@ once; each search encodes only the question. Evaluation derives settings from th
 independently of `.env`; app startup also verifies `EMBEDDING_MODEL`. `source` is optional
 for legacy callers; supply it for corpus validation. Citation identities remain unchanged.
 
+The new evaluator accepts an optional `get_encoding_diagnostics()` hook or
+`--encoding-diagnostics` sidecar for measured token counts and retained text ranges.
+These adapters do not yet publish that measurement. Encoder visibility and truncation
+rates therefore remain unknown, even though encoding settings are recorded. This
+does not block retrieval ranking or coverage scoring over full retrieved passages.
+Provider-context selection/truncation preview is measured separately without API calls.
+
 The existing evaluation CLI consumes full schema-2 artifacts directly. Hybrid defaults
 are recorded in `RetrievalConfig`; explicit `--retrieval-config` candidate counts/RRF k
 are passed to the actual adapter. Only RRF is implemented. Tune settings on reviewed
 development questions and freeze before held-out comparisons. See
 [CPU model comparison](model-comparison.md) for measured diagnostics and remaining limits.
+Use [current comparison commands](retrieval-readiness.md) to pass the approved evidence
+labels and ranking cutoffs. Changing labels or approval provenance requires fresh runs
+for every compared configuration. `--limit 4` measures application retrieval; use a
+separate `--limit 10 --cutoffs 1 4 10` run for ranking prefixes. The comparison helper
+records label identity/review status and saves `paired.json` against TF-IDF alongside
+the existing runner's `comparison.md`.
