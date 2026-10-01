@@ -7,8 +7,10 @@ import sys
 from pathlib import Path
 from time import perf_counter
 
+from researchlens.artifacts import canonical_hash
 from researchlens.embedding_models import MODELS
 from researchlens.evaluation import load_dataset, validate_splits
+from researchlens.evaluation_evidence import EvidenceLabels, dataset_digest
 from researchlens.ingest import ROOT, TECHNICAL_CORPUS
 
 
@@ -23,15 +25,28 @@ def compare(
     warmups: int = 1,
     limit: int = 4,
     stage_timeout: int = 3600,
+    evidence_labels: Path | None = None,
+    cutoffs: list[int] | None = None,
 ) -> dict:
     if not models or len(set(models)) != len(models) or any(name not in MODELS for name in models):
         raise ValueError("Select unique supported embedding model aliases")
-    if repeats < 1 or warmups < 0 or limit < 1 or stage_timeout < 1:
+    if not 1 <= repeats <= 100 or not 0 <= warmups <= 100 or limit < 1 or stage_timeout < 1:
         raise ValueError("Invalid comparison limits")
+    if cutoffs is not None and (
+        not cutoffs or any(type(k) is not int or not 1 <= k <= limit for k in cutoffs)
+    ):
+        raise ValueError("Ranking cutoffs must be positive and within the actual retrieval limit")
     development, other = load_dataset(dataset), load_dataset(other_split)
     if development.split != "development":
         raise ValueError("Model comparison/tuning must use development questions")
     validate_splits(development, other)
+    labels = (
+        EvidenceLabels.model_validate_json(evidence_labels.read_bytes())
+        if evidence_labels
+        else None
+    )
+    if labels and labels.dataset_sha256 != dataset_digest(development):
+        raise ValueError("Evidence labels do not match the selected development dataset")
     output.mkdir(parents=True, exist_ok=False)
     indexes = output / "indexes"
     indexes.mkdir()
@@ -45,6 +60,11 @@ def compare(
         "stages": [],
         "api_calls": 0,
         "generation": "none",
+        "cutoffs": sorted(set(cutoffs)) if cutoffs is not None else None,
+        "evidence_labels_sha256": canonical_hash(labels.model_dump(mode="json"))
+        if labels
+        else None,
+        "evidence_labels_review_status": labels.review_status if labels else None,
     }
 
     def save() -> None:
@@ -112,6 +132,10 @@ def compare(
                 "--ingestion-time-ms",
                 str(duration),
             ]
+            if evidence_labels is not None:
+                arguments += ["--evidence-labels", str(evidence_labels.resolve())]
+            if cutoffs is not None:
+                arguments += ["--cutoffs", *(str(k) for k in sorted(set(cutoffs)))]
             completed = execute(f"{alias}/{mode}", "researchlens.evaluation", arguments)
             if completed is not None:
                 successful.append(run_dir)
@@ -124,6 +148,8 @@ def compare(
                 *(str(path.resolve()) for path in successful),
                 "--output",
                 str((output / "comparison.md").resolve()),
+                "--paired-output",
+                str((output / "paired.json").resolve()),
             ],
         )
     return manifest
@@ -144,6 +170,8 @@ def main() -> None:
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--limit", type=int, default=4)
     parser.add_argument("--stage-timeout-seconds", type=int, default=3600)
+    parser.add_argument("--evidence-labels", type=Path, help="Pinned development evidence labels")
+    parser.add_argument("--cutoffs", type=int, nargs="+", help="Ranking prefixes, within --limit")
     args = parser.parse_args()
     try:
         manifest = compare(
@@ -156,6 +184,8 @@ def main() -> None:
             warmups=args.warmups,
             limit=args.limit,
             stage_timeout=args.stage_timeout_seconds,
+            evidence_labels=args.evidence_labels,
+            cutoffs=args.cutoffs,
         )
     except (OSError, ValueError):
         parser.exit(2, "Comparison failed: check input paths, splits and fresh output directory.\n")
