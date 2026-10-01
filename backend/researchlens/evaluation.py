@@ -69,6 +69,16 @@ def validate_artifact(dataset: Dataset, artifact: dict) -> list[Passage]:
         raise ValueError("No cases: question creation and human review are pending")
     if dataset.split == "held-out" and dataset.status != "frozen":
         raise ValueError("Held-out runs require a frozen, human-approved dataset")
+    return validate_dataset_references(dataset, artifact)
+
+
+def validate_dataset_references(dataset: Dataset, artifact: dict) -> list[Passage]:
+    """Check pinned sources/locations without executing retrieval or approving drafts.
+
+    This permits offline authoring checks for held-out candidates. Execution must
+    still go through validate_artifact, which enforces the held-out freeze guard.
+    Valid locations do not establish that the referenced text supports a claim.
+    """
     if dataset.corpus_sha256 != artifact.get("source_sha256"):
         raise ValueError("Dataset corpus hash differs from the passage artifact; review references")
     passages = validate_passage_artifact(artifact)
