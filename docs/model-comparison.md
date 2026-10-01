@@ -4,8 +4,8 @@ Historical preliminary comparison on the original 12 draft questions. The curren
 evaluation has 50 approved development questions and separately approved evidence
 groups with a new scoring contract. Do not compare these old scores with new runs.
 See [current integration and readiness checks](retrieval-readiness.md) for the updated
-commands and limitations. The four-model comparison below has not yet been rerun
-on the new questions and labels.
+commands and limitations. The [approved development comparison](approved-model-comparison.md)
+contains the new four-model results; the historical figures below are unchanged.
 
 Four pinned local embedding models and their TF-IDF hybrids completed the existing
 evaluation runner on the same technical passages and development questions. TF-IDF

@@ -83,7 +83,8 @@ and evidence visibility unknown rather than inventing them. Ranking and full-pas
 evidence coverage can run now; measured embedding-truncation analysis remains separate
 integration work. Provider-context visibility preview is available without paid calls.
 
-The full nine-configuration comparison has not yet been rerun with the approved
-questions/labels. The [old 12-question measurements](model-comparison.md) remain
-historical and cannot be compared with this scoring contract. Answer correctness,
+The [full approved development comparison](approved-model-comparison.md) now records
+all nine configurations, separate k=4/ranking runs and paired regressions. The
+[old 12-question measurements](model-comparison.md) remain historical and cannot be
+compared with this scoring contract. Answer correctness,
 citation support and abstention quality require a separate fixed-generation evaluation.
