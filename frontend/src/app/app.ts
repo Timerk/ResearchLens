@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 
-interface Passage {
+export interface Passage {
   id: string;
   document_id: string;
   title: string;
@@ -22,10 +22,11 @@ interface Passage {
     license_url: string;
     copyright: string;
     changes: string;
+    source_sha256: string;
   } | null;
 }
 
-interface Answer {
+export interface Answer {
   status: 'passages_found' | 'no_matches' | 'answered' | 'insufficient_evidence';
   mode: 'local_preview' | 'openai';
   message: string;
@@ -35,6 +36,7 @@ interface Answer {
   model: string | null;
   input_tokens: number | null;
   output_tokens: number | null;
+  estimated_api_cost_usd: number | null;
 }
 
 @Component({
@@ -49,7 +51,9 @@ export class App {
   protected readonly answer = signal<Answer | null>(null);
   protected readonly pending = signal(false);
   protected readonly error = signal('');
-  protected readonly mode = signal<'local_preview' | 'openai' | 'unknown'>('unknown');
+  protected readonly mode = signal<'local_preview' | 'openai' | 'connecting' | 'unknown'>(
+    'connecting',
+  );
 
   constructor() {
     this.http.get<{ mode: 'local_preview' | 'openai' }>('/api/health').subscribe({
@@ -60,7 +64,7 @@ export class App {
 
   protected heading(status: Answer['status']): string {
     return {
-      answered: 'Document-supported answer',
+      answered: 'Answer with source references',
       insufficient_evidence: 'Insufficient evidence',
       no_matches: 'No matching passages',
       passages_found: 'Retrieved passages',
@@ -71,8 +75,15 @@ export class App {
     return result.passages.filter((passage) => ids.includes(passage.id));
   }
 
+  protected questionError(): string {
+    const length = this.question.trim().length;
+    if (length < 3) return 'Enter at least 3 characters, excluding surrounding spaces.';
+    if (length > 2000) return 'Use no more than 2,000 characters.';
+    return '';
+  }
+
   protected async ask(): Promise<void> {
-    if (this.pending() || this.question.trim().length < 3) return;
+    if (this.pending() || this.questionError()) return;
     this.pending.set(true);
     this.error.set('');
     this.answer.set(null);

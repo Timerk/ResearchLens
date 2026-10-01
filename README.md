@@ -113,8 +113,22 @@ rtk proxy uv run ruff check backend
 rtk proxy uv run ruff format --check backend
 ```
 
-From `frontend`, run `rtk npm run build`. GitHub Actions runs these checks after
-the project is pushed. CI has not yet been run on GitHub.
+From `frontend`:
+
+```sh
+rtk npm ci
+rtk npm run check
+rtk npm test
+rtk npm run build
+rtk npm run test:smoke:install
+rtk npm run test:smoke
+```
+
+Frontend tests use mocked API responses and need no backend, API keys or paid calls.
+GitHub Actions runs the backend checks above, frontend checks, component tests,
+production build and Chromium smoke tests. See the [frontend instructions](frontend/README.md)
+for watch mode and offline UI inspection, and the [verification record](frontend/docs/verification.md)
+for actual browser coverage, screenshots and limitations.
 
 ## Architecture and boundaries
 
@@ -148,8 +162,10 @@ until a concrete requirement justifies them.
 ## Milestones
 
 1. Local preview and document-only OpenAI integration: implemented and checked with
-   automated tests and a small Luna/medium live smoke test. Browser verification
-   is pending because no browser connection was available in the development session.
+   automated tests and a small Luna/medium live smoke test. Frontend regression coverage
+   now includes mocked component tests and Chromium keyboard/mobile smoke tests.
+   T3 browser interaction was partially verified; screenshot capture and full visual
+   inspection in T3 were blocked by the preview host. See the verification record above.
 2. Baseline RAG: expand the four-paper starter set to 15–30 authorized documents; record source URL, author, date,
    license and permission evidence. Add PDF/text extraction with page references,
    and local embeddings. Evaluate the implemented LLM provider's citations and
