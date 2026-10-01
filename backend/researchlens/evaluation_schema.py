@@ -1,4 +1,4 @@
-"""Versioned evaluation contracts; draft expectations are not human judgments."""
+"""Versioned evaluation contracts; approval records the named reviewer's judgment."""
 
 from datetime import date
 from typing import Literal, Self
@@ -63,7 +63,7 @@ class Case(Question):
         if self.review_status != "unreviewed" and (
             not self.reviewer or not self.reviewer.strip() or not self.review_date
         ):
-            raise ValueError("Human review requires a reviewer and date")
+            raise ValueError("Case review requires a reviewer and date")
         if self.review_status == "unreviewed" and (self.reviewer or self.review_date):
             raise ValueError("Unreviewed drafts cannot claim a reviewer or review date")
         return self
@@ -96,7 +96,7 @@ class Dataset(StrictModel):
         elif not self.cases or not self.corpus_sha256:
             raise ValueError("Runnable datasets need cases and a pinned corpus hash")
         if self.status == "frozen" and any(c.review_status != "approved" for c in self.cases):
-            raise ValueError("Frozen datasets require human-approved cases")
+            raise ValueError("Frozen datasets require approved cases")
         if self.split == "held-out" and self.material != "real-corpus":
             raise ValueError("Synthetic examples belong in development only")
         if len({s.source_id for s in self.source_versions}) != len(self.source_versions):
