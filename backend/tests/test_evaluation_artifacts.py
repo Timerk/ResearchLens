@@ -287,8 +287,31 @@ def test_source_review_pins_originals_and_locations_without_running_held_out(tmp
     assert review["reviewer_kind"] == "ai" and review["human_sign_off"] is False
     assert not review["model_rankings_inspected"]
     assert not review["held_out_retrieval_executed"] and not review["settings_tuned"]
+    approval = json.loads(
+        (ROOT / "evaluation/reviews/2026-10-01-pr8/human-review.json").read_bytes()
+    )
+    assert approval["reviewer_kind"] == "human" and approval["human_sign_off"] is True
+    assert approval["decision"] == "approved" and approval["approval_statement"]
+    assert not approval["held_out_retrieval_executed_during_update"]
+    assert not approval["model_rankings_inspected_during_update"]
+    assert not approval["settings_tuned_during_update"]
+    assert (
+        approval["ai_source_review"]["sha256"]
+        == hashlib.sha256((ROOT / approval["ai_source_review"]["path"]).read_bytes()).hexdigest()
+    )
+    assert (
+        approval["rejected_archive_sha256"]
+        == hashlib.sha256(
+            (ROOT / "evaluation/reviews/2026-10-01-pr8/rejected-cases.json").read_bytes()
+        ).hexdigest()
+    )
     assert dataset.status == "draft" and held_out.status == "frozen"
-    for candidate, pin in zip((dataset, held_out), review["datasets"], strict=True):
+    for candidate, pin, previous in zip(
+        (dataset, held_out), approval["datasets"], review["datasets"], strict=True
+    ):
+        assert pin["reviewed_input_sha256"] == previous["output_sha256"]
+        assert candidate.version == pin["version"]
+        assert [c.id for c in candidate.cases] == pin["approved_case_ids"]
         assert len(candidate.source_versions) == 4
         assert len(candidate.cases) == pin["accepted_count"]
         assert hashlib.sha256((ROOT / pin["path"]).read_bytes()).hexdigest() == pin["output_sha256"]
@@ -302,8 +325,8 @@ def test_source_review_pins_originals_and_locations_without_running_held_out(tmp
         }
         assert all(
             c.review_status == "approved"
-            and c.reviewer == review["reviewer"]
-            and str(c.review_date) == review["review_date"]
+            and c.reviewer == approval["reviewer"]
+            and str(c.review_date) == approval["review_date"]
             for c in candidate.cases
         )
         assert all(c.required_qualifications and c.forbidden_claims for c in candidate.cases)
