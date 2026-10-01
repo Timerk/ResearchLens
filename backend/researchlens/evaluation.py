@@ -66,9 +66,9 @@ def validate_splits(development: Dataset, held_out: Dataset) -> None:
 
 def validate_artifact(dataset: Dataset, artifact: dict) -> list[Passage]:
     if not dataset.cases:
-        raise ValueError("No cases: question creation and human review are pending")
+        raise ValueError("No cases: question creation and source review are pending")
     if dataset.split == "held-out" and dataset.status != "frozen":
-        raise ValueError("Held-out runs require a frozen, human-approved dataset")
+        raise ValueError("Held-out runs require a frozen, approved dataset")
     return validate_dataset_references(dataset, artifact)
 
 

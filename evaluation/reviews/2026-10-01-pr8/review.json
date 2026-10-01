@@ -1,0 +1,2523 @@
+{
+  "schema_version": 1,
+  "pull_request": "https://github.com/Timerk/ResearchLens/pull/8",
+  "reviewed_commit": "7c096fc",
+  "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+  "reviewer_kind": "ai",
+  "review_date": "2026-10-01",
+  "human_sign_off": false,
+  "model_rankings_inspected": false,
+  "held_out_retrieval_executed": false,
+  "settings_tuned": false,
+  "datasets": [
+    {
+      "path": "evaluation/datasets/technical-development.json",
+      "reviewed_input_sha256": "27951b129b32ae6c1ee0839ac4fa830a9056c66d6505fd7f219d0cff18ed2b89",
+      "accepted_count": 50,
+      "output_sha256": "d05c8fc94dabfe912550a560b196335621603cd84c1389da9893328c32a90a62",
+      "status": "draft",
+      "categories": {
+        "exact-terminology": 14,
+        "paraphrase": 13,
+        "cross-document": 9,
+        "unanswerable": 14
+      }
+    },
+    {
+      "path": "evaluation/datasets/held-out.json",
+      "reviewed_input_sha256": "12cee347a77ce2233d9f6859fd630d226bd693db722cc6b8b927badefd9f9062",
+      "accepted_count": 36,
+      "output_sha256": "fee15bdb192e06391c708e7b641a471805a6753d8ca18168351a6b3b606875ee",
+      "status": "frozen",
+      "categories": {
+        "exact-terminology": 10,
+        "paraphrase": 9,
+        "cross-document": 7,
+        "unanswerable": 10
+      }
+    }
+  ],
+  "original_source_versions": [
+    {
+      "source_id": "pmc11510794",
+      "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "doi": "10.3390/s24206717",
+      "publication_date": "2024-10-18"
+    },
+    {
+      "source_id": "pmc11768589",
+      "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "doi": "10.3390/s25020527",
+      "publication_date": "2025-01-17"
+    },
+    {
+      "source_id": "pmc10934137",
+      "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "doi": "10.3390/s24051622",
+      "publication_date": "2024-03-01"
+    },
+    {
+      "source_id": "pmc11121878",
+      "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "doi": "10.3390/jimaging10050111",
+      "publication_date": "2024-05-05"
+    }
+  ],
+  "figure_sources": [
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f001",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g001.png",
+      "sha256": "1f71151f5d2d4bb02b88f5bd9032745978e7ada9dc2653dd362e00252b0b7e6c",
+      "size": [
+        2838,
+        1494
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f002",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g002.png",
+      "sha256": "43d125e7a2170f835c55c81ac423c81b50d7fd24093ff890f09f014a50bc75bd",
+      "size": [
+        2703,
+        973
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f003",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g003.png",
+      "sha256": "f54f716112ad8ece43fb0703e83fa5c292a83e64e572d759a749ee309c3e9c6c",
+      "size": [
+        2979,
+        1227
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f004",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g004.png",
+      "sha256": "247062919461739b956e12074b27b1b24c66cb5cdd463d605ccc84d869358071",
+      "size": [
+        2567,
+        1840
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f005",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g005.png",
+      "sha256": "4ca10535591a0c13ef29cdf968e2a21b36329f50aef8062be952212db13110ff",
+      "size": [
+        3084,
+        1319
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f006",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g006.png",
+      "sha256": "a501869ebfbac68ffa0a7013dc2b92af67ba154421bf55005f292737bf1b1a66",
+      "size": [
+        2111,
+        1700
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f007",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g007.png",
+      "sha256": "e667e5586d4537a429087e3ebd49c090602685f9a54f0daba9b19c13cb1feefe",
+      "size": [
+        3189,
+        2405
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f008",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g008.png",
+      "sha256": "51f5f97eba3d35debb223c6343b7fa5f0ad3e652e4cb61cc98eebab6d6f4ff13",
+      "size": [
+        3281,
+        1310
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f009",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g009.png",
+      "sha256": "efd87caef9f006bc37f9937b63c5148d02b0309892d225beaa820c97099b5167",
+      "size": [
+        3233,
+        876
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f010",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g010.png",
+      "sha256": "1214bf9da4853adee1f0db431cb7d452a9c39684e25c5ee5de9e5b6fd9db17d5",
+      "size": [
+        2260,
+        1818
+      ]
+    },
+    {
+      "source_id": "pmc10934137",
+      "figure_id": "sensors-24-01622-f011",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-01622/article_deploy/html/images/sensors-24-01622-g011.png",
+      "sha256": "f33fca650ff1730f7cd0660eeb39fb973b59a94fce09aba66d37ce91058c1e8a",
+      "size": [
+        3171,
+        1936
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f001",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g001.png",
+      "sha256": "c57feaa106e52e0a57b70cc632beaaf5ee14ae800526380c09879b78710f9f48",
+      "size": [
+        3277,
+        1891
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f002",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g002.png",
+      "sha256": "2254a7a4260c20e4bf64800027b5ff2c874dbd071304bbbd32785bb22e86a0e9",
+      "size": [
+        2877,
+        1852
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f003",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g003.png",
+      "sha256": "05eea72f00c4763b5760d656ca8ba25814e51f0ac1157b00926e2c204f08d85f",
+      "size": [
+        2592,
+        1657
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f004",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g004.png",
+      "sha256": "3b242315fe9117595f2a12879014c4ac9998df014c074934d5b8870d4a14fa1f",
+      "size": [
+        2954,
+        2117
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f005",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g005.png",
+      "sha256": "600076ac0446cf62cbf3e58c60d9b8b92a1a8102051f0983dc1fb4bacc5e04b9",
+      "size": [
+        3174,
+        1841
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f006",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g006.png",
+      "sha256": "1eedaebb720544d3ab4042605fc9fb71c5eb10d96cd4c4f31e644975283f5364",
+      "size": [
+        3280,
+        2073
+      ]
+    },
+    {
+      "source_id": "pmc11121878",
+      "figure_id": "jimaging-10-00111-f007",
+      "url": "https://pub.mdpi-res.com/jimaging/jimaging-10-00111/article_deploy/html/images/jimaging-10-00111-g007.png",
+      "sha256": "090d618dbe71fa3f52e9ea739fe4ea7827f46d766c68ec00233422a747c87217",
+      "size": [
+        3229,
+        1813
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f001",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g001.png",
+      "sha256": "11923c80384d296704ce932567a2747427d191267da33bc1c924fdd3dda7ba89",
+      "size": [
+        3142,
+        1356
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f002",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g002.png",
+      "sha256": "5e523241597aae968c8cd9b39502f8f641f0bd808c9007927dc41da4be272429",
+      "size": [
+        2582,
+        2066
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f003",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g003.png",
+      "sha256": "3e6f567e17eec2fa3ce3057677c85d09d9d57eb9a37ac6a0d974292af42f7032",
+      "size": [
+        2590,
+        1952
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f004",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g004.png",
+      "sha256": "cdc3748e7357e669b7bf68aef277c597e94f2dd2bd7c1e26c542b320eb62b1da",
+      "size": [
+        3234,
+        1227
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f005",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g005.png",
+      "sha256": "267f20226d2f8668b02c7898185a94cc61efff6aceb74159e90c3f3f4b09dfce",
+      "size": [
+        2590,
+        1946
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f006",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g006.png",
+      "sha256": "70e356e291b07ba3d775e0c3ac91e5bd9eb98c1221a9f1d67f85b546c9b283de",
+      "size": [
+        3150,
+        1512
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f007",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g007.png",
+      "sha256": "c3b56afe43a64befc2364682a7ecb6d82a5594460471df096d7f30d8ceb52e88",
+      "size": [
+        3161,
+        1758
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f008",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g008.png",
+      "sha256": "47ea12dcc35360107a69689df176fef95f2bf232f5375f1cf7bdb9251ca1c939",
+      "size": [
+        3181,
+        2373
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f009",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g009.png",
+      "sha256": "848262c4a43cdb8e800b4ac754340bccf52bc37ff5be422848f0a5b5d5aa6896",
+      "size": [
+        4229,
+        1951
+      ]
+    },
+    {
+      "source_id": "pmc11510794",
+      "figure_id": "sensors-24-06717-f010",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-24-06717/article_deploy/html/images/sensors-24-06717-g010.png",
+      "sha256": "8122cb85fce8df2d4ca02f241b5105898d9971b03eab14078a1bfe178ad5e25c",
+      "size": [
+        4114,
+        3631
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f001",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g001.png",
+      "sha256": "180da6201a53d1d59d922437b3d795863165e81f629b60af0faa000fb8108531",
+      "size": [
+        2848,
+        1804
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f002",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g002.png",
+      "sha256": "cca5e7bd20ae0fca77aced469c812952d51dfd4390a93cb70b5137ede9a5174c",
+      "size": [
+        1688,
+        2724
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f003",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g003.png",
+      "sha256": "03fd67c62fea6dadc5eab359b90df6f5591149d6684ab7fefb8cc4cb11fd5731",
+      "size": [
+        3151,
+        3690
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f004",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g004.png",
+      "sha256": "66a5c55ccd660dc4b554cb35fcb33b3ae0966700fa9b779fe1b095bf20cb3a63",
+      "size": [
+        2750,
+        3099
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f005",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g005.png",
+      "sha256": "c3a3e69e71e313b6e99878d5cc4b4a8cc66d507f27c02deb67c0d1361b88a643",
+      "size": [
+        3400,
+        1270
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f006",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g006.png",
+      "sha256": "759aaa3eba4bf4e18e65442b0359725fc192faa6b7ae5c344df24ba63415f129",
+      "size": [
+        3858,
+        1017
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f007",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g007.png",
+      "sha256": "8c139b8c625115a51399ab8189a3be90fea2f0211131376025c8d6e7d85fc516",
+      "size": [
+        3702,
+        2182
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f008",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g008.png",
+      "sha256": "03cb52f80b50722111f8e574a8703610890023974f1c7871e077d2f9efd91780",
+      "size": [
+        3317,
+        2542
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f009",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g009.png",
+      "sha256": "9093482796d93e3f34e9507207de0235feba9132aeebf6faf3c9c3760cfe122d",
+      "size": [
+        3372,
+        1328
+      ]
+    },
+    {
+      "source_id": "pmc11768589",
+      "figure_id": "sensors-25-00527-f010",
+      "url": "https://pub.mdpi-res.com/sensors/sensors-25-00527/article_deploy/html/images/sensors-25-00527-g010.png",
+      "sha256": "eb209867a4f345bff1212ca7f81abc58306b614a675c0db72f3156c77bf668fa",
+      "size": [
+        3334,
+        3295
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "tech-glass-exact",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which forward and backward light sources are used in the aircraft glass canopy acquisition platform?",
+      "notes": "Section 3.2 explicitly specifies ring/planar sources; p28 and Figure 4 identify their physical implementations. p25 supplies component-level support.",
+      "required_claims_checked": [
+        "Forward lighting uses a ring light; backward lighting uses a planar light source."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p24:w0",
+        "pmc11510794:p28:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p28:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-glass-paraphrase",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why photograph the same transparent aircraft cover with light arriving from opposite sides? What information can each view lose?",
+      "notes": "p22 supports both lighting-specific advantages and limitations; Figures 1/2 corroborate the optical arrangement and sample appearance. Do not equate visible depth information with a calibrated depth measurement.",
+      "required_claims_checked": [
+        "Bright-field forward lighting captures surface scratches but is susceptible to reflections and uneven lighting.",
+        "Backward lighting reveals depth information but can lose surface detail and boundary contours."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p22:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-painted-exact",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which pre-trained CNNs were compared with a model trained from scratch for painted heating-device surface classification?",
+      "notes": "Abstract, p5, p15, methodology p26 and conclusion p44 independently name the compared classifiers. p26 alone does not establish the scratch-built comparator.",
+      "required_claims_checked": [
+        "The paper compares transfer learning of ResNet-50 and Inception V3 with a self-built network."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p1:w0",
+        "pmc11768589:p5:w0",
+        "pmc11768589:p15:w180",
+        "pmc11768589:p26:w0",
+        "pmc11768589:p44:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p5:w0",
+        "pmc11768589:p15:w180",
+        "pmc11768589:p26:w0",
+        "pmc11768589:p44:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-painted-paraphrase",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Same classifier-name target as tech-painted-exact; wording adds no new required fact.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-wafer-exact",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What changes to TDI stages and column fixed pattern noise improve particle-defect SNR in the non-patterned wafer study?",
+      "notes": "Abstract, p14 and conclusion p18 support the reported SNR/efficiency result. p14's efficiency argument explicitly excludes data-transmission time; Figures 9-11 and Tables 3/4 quantify the stage/noise experiments.",
+      "required_claims_checked": [
+        "Increasing TDI stages and reducing column fixed pattern noise improved particle-defect signal-to-noise ratio without sacrificing detection efficiency in the reported experiments."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p1:w0",
+        "pmc10934137:p14:w0",
+        "pmc10934137:p14:w180",
+        "pmc10934137:p18:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc10934137:p14:w0",
+        "pmc10934137:p14:w180",
+        "pmc10934137:p18:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How did the wafer-inspection researchers suppress background stripes from mismatched column readout circuits?",
+      "notes": "p15 states readout mismatch, incomplete correlated dual sampling, and subtraction of particle-free backgrounds. Tables 3/4 and Figure 11 corroborate reduction, not complete noise elimination.",
+      "required_claims_checked": [
+        "The stripes are column fixed pattern noise caused by mismatched column readout circuits; particle-free background images are subtracted from particle images taken at different TDI stages."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p15:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-autoencoder-exact",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What training examples are used in each stage of the two-stage autoencoder method, and how are stage-one weights used?",
+      "notes": "Abstract, p8, p17, p44, p46 and Figure 1 consistently describe normal-only stage one, stage-one weights, and synthetic-defect/normal stage two. p17 specifies clean targets.",
+      "required_claims_checked": [
+        "Stage one uses only normal samples; stage two uses normal and artificially defective samples, initialized with stage-one weights."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p8:w0",
+        "pmc11121878:p1:w0",
+        "pmc11121878:p17:w0",
+        "pmc11121878:p44:w0",
+        "pmc11121878:p46:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p1:w0",
+        "pmc11121878:p17:w0",
+        "pmc11121878:p44:w0",
+        "pmc11121878:p46:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-autoencoder-paraphrase",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Same training-example and transferred-weight targets as tech-autoencoder-exact.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-fusion",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How do the canopy and painted heating-device studies differ in their illumination modalities and fusion levels?",
+      "notes": "Both papers are needed: canopy p5/p38/p40/p59 specify data/feature fusion; heater abstract/p5/p30/p35/p45 specify decision-level fusion. Generic fusion taxonomies alone are insufficient.",
+      "required_claims_checked": [
+        "Canopy inspection combines forward/backward lighting with RGB data-level fusion and an ADMF-Net feature-level method.",
+        "Painted heating-device inspection combines deflectometry/bright illumination with decision-level fusion."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p24:w0",
+        "pmc11510794:p59:w0",
+        "pmc11768589:p1:w0",
+        "pmc11510794:p5:w0",
+        "pmc11510794:p38:w0",
+        "pmc11510794:p40:w0",
+        "pmc11768589:p5:w0",
+        "pmc11768589:p16:w0",
+        "pmc11768589:p30:w0",
+        "pmc11768589:p44:w0",
+        "pmc11768589:p45:w0",
+        "pmc11768589:p35:w0",
+        "pmc11768589:p11:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p5:w0",
+        "pmc11510794:p38:w0",
+        "pmc11510794:p40:w0",
+        "pmc11768589:p5:w0",
+        "pmc11768589:p16:w0",
+        "pmc11768589:p30:w0",
+        "pmc11768589:p44:w0",
+        "pmc11768589:p45:w0",
+        "pmc11768589:p35:w0",
+        "pmc11768589:p11:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-learning",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Combines the complete answers to tech-painted-exact and tech-autoencoder-exact; no new comparison target.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Who composed the music for the opera The Magic Flute?",
+      "notes": "All four originals concern optical/surface inspection and contain no attribution of The Magic Flute. Abstention is corpus-bound, not a claim of unknowability.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-shared-cpu-cost",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which of the four methods has the lowest total CPU inference cost per detected defect when all four are tested on the identical glass-canopy benchmark?",
+      "notes": "Full methods/results, all tables and all 38 figures contain separate task evaluations, not an identical-canopy CPU cost-per-defect benchmark. Hardware descriptions and abstracts are context only.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-obb",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why are oriented bounding boxes (OBB) selected for aircraft canopy defect annotation?",
+      "notes": "p31 supplies the motivation (slender/interlaced targets); p59 and Figure 8 support rotated-box outputs but not the complete motivation on their own.",
+      "required_claims_checked": [
+        "Targets can be slender, have high aspect ratios and large image spans, and be interlaced."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p31:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-annotation-tools",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What X-AnyLabeling version and Segment Anything variant are used for canopy pre-labeling, and how are OBBs derived?",
+      "notes": "p32 explicitly gives X-AnyLabeling 2.3.5, ViT-Large, polygon proposals and minimum enclosing rectangles; p33 prevents treating proposed labels as unchecked ground truth.",
+      "required_claims_checked": [
+        "X-AnyLabeling 2.3.5 uses Segment Anything ViT-Large to propose polygons; a script calculates each minimum enclosing rectangle."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p32:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-rgb-channel-assignment",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How does RGB Channel Fusion assign forward and backward grayscale canopy images to red, green and blue?",
+      "notes": "p38 and Figure 7 specify forward/red, backward/green, mean/blue. p39 supports the averaging rationale only; the difference-channel ablation is a separate held-out target.",
+      "required_claims_checked": [
+        "Forward grayscale is red, backward grayscale is green, and their average is blue."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p38:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "At which feature scales does ADMF-Net use AMFF and FSPPF, and what detection head follows?",
+      "notes": "p41 and Figure 8 agree on P3/P4 AMFF, P5 FSPPF and rotated-box heads. p46 incorrectly says P3/P5 AMFF; qualify this internal inconsistency rather than silently treating p46 as an alternative.",
+      "required_claims_checked": [
+        "AMFF fuses P3 and P4; the two P5 outputs feed FSPPF; an OBB head predicts rotated boxes."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p41:w0",
+        "pmc11510794:p59:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p59:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "fig",
+          "sensors-24-06717-f008"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-stripe-frequencies",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which sinusoidal frequencies, stripe counts and phase are tested for painted heating-device illumination?",
+      "notes": "p18 explicitly labels the values 0.8/1.6 Hz, with 20/40 stripes and zero phase. Equation 1 describes a spatial pattern; retain the authors' reported units without inventing a temporal refresh rate or spatial calibration.",
+      "required_claims_checked": [
+        "0.8 Hz generates 20 stripes and 1.6 Hz generates 40 stripes; phase is zero for both."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p18:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-adaptive-binarization",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What grayscale and adaptive-binarization preprocessing is applied to structured-illumination heater images, and is it applied to bright-field images?",
+      "notes": "p22 states grayscale/adaptive binarization and excludes bright-field preprocessing. p29 and Figures 2/4 corroborate the two processing branches; p34 supports the contrast rationale.",
+      "required_claims_checked": [
+        "Structured images undergo RGB-to-grayscale conversion and adaptive binarization to reduce environmental-light effects; bright-field images are not processed this way."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p22:w0",
+        "pmc11768589:p29:w0",
+        "pmc11768589:p34:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p29:w0",
+        "pmc11768589:p34:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-imagenet-initialization",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which pretraining dataset and input image size are reported for the transferred ResNet-50 and Inception V3 classifiers?",
+      "notes": "p26 supports ImageNet pretraining and 450-by-450 study input size. Crop/automation passages alternatively establish input size, not ImageNet provenance.",
+      "required_claims_checked": [
+        "They are pretrained on ImageNet; both use 450 by 450 input images in this study."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p26:w0",
+        "pmc11768589:p21:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p21:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-tdi-motion-sync",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How must TDI line frequency and charge-accumulation direction relate to wafer motion to avoid blur?",
+      "notes": "p10 and Equation 4 require matching line frequency to speed; p7/Figure 4 show the opposite object/charge directions. No actual defect-free full-wafer timing follows.",
+      "required_claims_checked": [
+        "Line frequency must match wafer movement speed; charge accumulation is opposite the wafer's motion direction."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p10:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-cfpn-subtraction",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Same noise cause and subtraction procedure as the revised tech-wafer-paraphrase.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How does AW-SSIM combine the luminance, contrast and structure sub-functions differently from standard SSIM?",
+      "notes": "p25/p26 and Equations 6/7 show weighted addition versus a product with unchanged sub-function definitions. Figure 4 contains valid numerical component weights even though the extracted prose does not.",
+      "required_claims_checked": [
+        "AW-SSIM uses addition instead of multiplication between sub-functions and assigns a constant weight to each component."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p25:w0",
+        "pmc11121878:p26:w0",
+        "pmc11121878:p8:w0",
+        "pmc11121878:p8:w180"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p8:w0",
+        "pmc11121878:p8:w180"
+      ],
+      "original_evidence": [
+        [
+          "pmc11121878",
+          "disp-formula",
+          "FD7-jimaging-10-00111"
+        ],
+        [
+          "pmc11121878",
+          "fig",
+          "jimaging-10-00111-f004"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-adga-shapes",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How does ADGA choose and blend irregular defect patches into target images?",
+      "notes": "p18 (both windows), p19 and Figures 2/3 support selected appearance, 3-7 vertices, random resizing/pasting and blurred edges. The second word window is needed for the edge-blending explanation.",
+      "required_claims_checked": [
+        "Source appearance is selected for realistic defects; polygons use 3 to 7 vertices, are randomly resized and pasted, with Gaussian-blurred edges."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p18:w0",
+        "pmc11121878:p18:w180",
+        "pmc11121878:p19:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p18:w180",
+        "pmc11121878:p19:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-stable-camera",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "When the transparent cover is photographed twice, what stops it from shifting relative to the lens?",
+      "notes": "p27 explicitly ties the flexible arm to a fixed lens/sample relationship; Figures 3/4 corroborate the fixture without a quantitative registration bound.",
+      "required_claims_checked": [
+        "A flexible arm holder keeps lens and sample positions fixed between lighting conditions."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p27:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-turn-and-flip-labels",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How can the aircraft-cover training pictures be turned and reflected without drawing their defect outlines again?",
+      "notes": "Both windows of p34 are needed: transformations and eightfold example precede the overflow-label algorithm. Figure 8 is architecture, not augmentation evidence.",
+      "required_claims_checked": [
+        "Rotate and mirror images and labels together; 90-degree rotations plus mirroring yield eightfold augmentation; out-of-frame labels require adjustment or deletion."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p34:w0",
+        "pmc11510794:p34:w180"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p34:w180"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "If damage has a different outline in the two pictures of the aircraft cover, how do the annotators reconcile the boundary?",
+      "notes": "p33 states manual correction, union contour when views differ, and checking each annotation file; no automatic-label accuracy guarantee is reported.",
+      "required_claims_checked": [
+        "Manual adjustment is needed; when contours differ, the union outer contour is selected, and annotation files are checked."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p33:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-small-photo-supply",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How did the heater researchers enlarge a limited supply of surface photographs before fitting their classifiers?",
+      "notes": "p21 and Figure 2 establish four overlapping 450-by-450 crops and augmentation to 500 images/category; these are not independent parts.",
+      "required_claims_checked": [
+        "They extract four 450 by 450 sub-images from each 808 by 608 image, then augment the crops to 500 images per defect category."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p21:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-both-checks-clean",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Can a heater pass inspection after looking undamaged under the striped screen alone, and what happens next?",
+      "notes": "p29/p30 and Figure 4 specify the sequential decision rule. The abstract and p48 also support both-mode OK acceptance; p48 is not precise evidence for end-to-end timing.",
+      "required_claims_checked": [
+        "A structured-mode OK triggers bright-field assessment; a final OK requires OK outputs for both modes."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p29:w0",
+        "pmc11768589:p30:w0",
+        "pmc11768589:p1:w0",
+        "pmc11768589:p48:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p1:w0",
+        "pmc11768589:p48:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why could changing daylight hide a mark in the heater photographs, and how did the researchers make the mark easier to see?",
+      "notes": "p34/Figure 6 show ambient-light contrast problems and processing; p19 establishes varied daylight acquisition, p22 processing. Tunnel containment is suggested, not present in this experiment.",
+      "required_claims_checked": [
+        "Uncontrolled ambient illumination reduces contrast; preprocessing structured images produces higher-contrast defect regions."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p34:w0",
+        "pmc11768589:p22:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p22:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-bright-specks-dark-background",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why do tiny flaws look bright against a dark wafer image when the beam arrives from the side?",
+      "notes": "p6 and Figures 2/3 distinguish collected scattering from the excluded direct reflected beam. This physical explanation does not give a general size threshold.",
+      "required_claims_checked": [
+        "Oblique illumination produces reflected light on defect-free wafer areas; the system collects defect-scattered light, showing bright defects on a dark background."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p6:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-moving-signal-addition",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How does following the same moving spot through repeated exposures help a dim wafer feature, and what ideal improvement is expected if the repeats multiply by m?",
+      "notes": "p7/Figure 4 describe charge tracking; the tail window of p8 explicitly states ideal square-root-of-m SNR improvement. Treat it as the paper's ideal claim, not a measured scaling law or an inference from Equation 3 alone.",
+      "required_claims_checked": [
+        "Charge follows and accumulates as the image moves across sensor stages; ideally multiplying stages by m increases SNR by the square root of m."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p7:w0",
+        "pmc10934137:p8:w180",
+        "pmc10934137:p8:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc10934137:p8:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why did the image-repair network avoid shortcuts between every matching layer on its two sides?",
+      "notes": "p16 states two connections were best in the authors' tests and all-layer shortcuts partly reconstruct defects. Figure 1 is a schematic, not quantitative independent proof.",
+      "required_claims_checked": [
+        "Two strategically placed skip connections worked best in their experiments; connecting all layers partly reconstructed defects."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p16:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How does the reconstruction study vary the neighborhood weighting during learning to balance speckle suppression with preserving small details?",
+      "notes": "p30/p31, p32 and Figure 5 support changing sigma (spread), not changing the fixed 11-by-11 window dimensions. Samples shuffle and sigma resets per epoch. Numerical k is not supplied by Equation 9.",
+      "required_claims_checked": [
+        "A narrow Gaussian can amplify noise and a wide one blur detail; standard deviation gradually increases, resets each epoch, and samples are shuffled."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p30:w0",
+        "pmc11121878:p31:w0",
+        "pmc11121878:p1:w0",
+        "pmc11121878:p32:w0",
+        "pmc11121878:p42:w0",
+        "pmc11121878:p46:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p1:w0",
+        "pmc11121878:p32:w0",
+        "pmc11121878:p42:w0",
+        "pmc11121878:p46:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-damaged-clean-pairs",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "When teaching the repair model with made-up damage, which picture is used as the target for the repaired output?",
+      "notes": "p17 and p36/Equation 10 identify the clean target versus synthetic-damaged input; Figure 1 confirms the reconstruction direction.",
+      "required_claims_checked": [
+        "Artificially defective inputs are paired with their clean counterparts; reconstructed images are compared with the normal references."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p17:w0",
+        "pmc11121878:p36:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p36:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How do the canopy detector and the two-stage autoencoder represent where a defect is?",
+      "notes": "Canopy p31/p59/Figure 8 specify OBB outputs; autoencoder p6/p40/Figure 6 specify residual localization. Motivation for choosing OBB and representation of output are related but distinct targets.",
+      "required_claims_checked": [
+        "Canopy defects use oriented bounding boxes.",
+        "The autoencoder localizes defects through the residual between input and reconstruction."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p31:w0",
+        "pmc11121878:p40:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-training-splits",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Compare the reported training/test partition in the canopy dataset with the painted heater dataset.",
+      "notes": "Canopy p36 gives 1576/176 aligned pairs; heater p23 gives 80/20 percent images. Canopy Table 1 counts objects, not the split; augmentation precedes the split descriptions, so independence is not established.",
+      "required_claims_checked": [
+        "Canopy uses 1576/176 image pairs, described as 9:1.",
+        "Painted surfaces use 80% training and 20% testing."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p36:w0",
+        "pmc11768589:p23:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-training-computers",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What software frameworks and GPU/memory configurations are reported for canopy training and painted-surface training?",
+      "notes": "p48 and heater p24 give both training environments; differences are descriptive and provide no matched runtime ranking.",
+      "required_claims_checked": [
+        "Canopy uses PyTorch 2.2.2 with CUDA 11.8, an RTX 4080 with 16GB VRAM and 48GB system memory.",
+        "Painted surfaces use Keras with TensorFlow, a GeForce 930MX and 8GB RAM."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p48:w0",
+        "pmc11768589:p24:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-labels-versus-simulation",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Combines tech-manual-outline-union and tech-adga-shapes; duplicates their core claims.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-data-expansion",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Compare the canopy study's Mosaic-4 transformations with the painted heater study's crop-based data expansion.",
+      "notes": "Canopy p35 lists Mosaic-4 changes; heater p21/Figure 2 list rotations, shifts, zoom, shear and flips. Transform pipelines are new targets beyond the count-focused crop question; overlapping crop context is not an independent observation.",
+      "required_claims_checked": [
+        "Canopy training uses Mosaic-4 image combinations, scaling/translation, contrast/exposure changes and noise.",
+        "Heater images yield four crops followed by rotations, shifts, zoom, shear and flips."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p35:w0",
+        "pmc11768589:p21:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-relative-motion",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Combines tech-stable-camera and tech-tdi-motion-sync; duplicates their core claims.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-evaluation-metrics",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which metrics quantify canopy object-detection performance and autoencoder anomaly-detection performance, and can their numerical scores be ranked directly?",
+      "notes": "Canopy p47 defines IoU-dependent mAP; autoencoder p38 identifies AuROC. Both sources are necessary to identify the metrics; different task/metric scales prevent a performance ranking.",
+      "required_claims_checked": [
+        "Canopy reports mAP50 and mAP50-95 over IoU thresholds.",
+        "The autoencoder reports area under the ROC curve (AuROC); the task-specific metrics do not support a direct ranking."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p47:w0",
+        "pmc11121878:p38:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-noise-preprocessing",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Combines tech-wafer-paraphrase and tech-adaptive-binarization; duplicates their core claims.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-optical-cues",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What optical cues reveal scratches/dents on painted heaters and particle defects on non-patterned wafers?",
+      "notes": "Heater p35/Figure 6 relate 3D defects to reflected-pattern distortion; wafer p6/Figures 2/3 describe collected scattering. Wafer explanation reuses within-development context; reflected stripe deformation adds distinct two-document coverage.",
+      "required_claims_checked": [
+        "Heater structured illumination detects 3D marks through distortion of reflected patterns.",
+        "Wafer dark-field inspection collects defect-scattered light against a dark background."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p35:w0",
+        "pmc10934137:p6:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Compare the patch size used for autoencoder training with the input image size of the transferred heater classifiers.",
+      "notes": "Autoencoder p17 specifies 128-by-128 training patches; heater p26 (also p21/p25/p29) gives 450-by-450 input crops. The patch-size distinction is new; heater input dimensions reuse development background.",
+      "required_claims_checked": [
+        "Autoencoder training divides images into 128 by 128 patches.",
+        "Transferred heater classifiers use 450 by 450 inputs."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p17:w0",
+        "pmc11768589:p26:w0",
+        "pmc11768589:p21:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p21:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How do the two backbones in ADMF-Net differ in purpose from the encoder and decoder in the autoencoder model?",
+      "notes": "Canopy p40/p41/p59/Figure 8 support two modality feature extractors; autoencoder p16/Figure 1 support compression and transposed-convolution reconstruction. Role comparison is distinct from feature scales and skip-count tests.",
+      "required_claims_checked": [
+        "ADMF-Net backbones separately extract features from the two lighting modalities for fusion and detection.",
+        "The autoencoder compresses an image and decodes it with transposed convolutions to reconstruct it."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p40:w0",
+        "pmc11510794:p41:w0",
+        "pmc11121878:p16:w0",
+        "pmc11510794:p59:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p59:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-image-degradation",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Repeats tech-glass-paraphrase and exposes the moving-target blur answer reserved for hold-moving-chart-comparison.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-compare-light-control",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Question asks for specified canopy backlight properties while the expectation instead names forward ring LEDs and switching. Fixing it to ask panel properties would leak hold-panel-dimensions; the heater side repeats tech-daylight-interference. Reject rather than retain a mismatched, overlapping target.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-recipe",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What ingredients and cooking times are needed for a traditional spaghetti carbonara?",
+      "notes": "Full originals offer no carbonara recipe; surface textures and heating-device mentions do not provide culinary evidence.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-inheritance-law",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How is an intestate estate divided under current German inheritance law?",
+      "notes": "No original supplies German intestate-succession rules; document-only abstention is warranted.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-planet-moons",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How many confirmed moons does Jupiter have as of September 2026?",
+      "notes": "No original catalogues Jupiter's moons or September 2026 astronomical observations.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-exchange-rate",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What was the euro-to-yen closing exchange rate on 1 September 2026?",
+      "notes": "No original gives currency market observations for 1 September 2026.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-database-isolation",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which SQL transaction isolation level prevents phantom reads?",
+      "notes": "Heater MES/networking context contains no SQL isolation-level evidence.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-unrelated-vaccination",
+      "split": "development",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What is the recommended adult hepatitis B vaccination schedule?",
+      "notes": "No original gives hepatitis B vaccination recommendations; article consent/IRB boilerplate is not clinical evidence.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-canopy-service-life",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How many years of flight service remain for a canopy after its largest detected crack is repaired?",
+      "notes": "Full canopy original, Tables 1-5, Figures 1-10, formulas and data statement contain imaging/detection results, not repaired-canopy fatigue, repair efficacy or remaining-service-life measurements.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-heater-energy",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How many joules per inspected heater does the complete camera, monitor and CNN system consume?",
+      "notes": "Full heater methodology/results and Figures 1-10 give hardware/training/timing and MES messaging; no measured electrical energy or joules-per-heater accounting is given.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11768589"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-wafer-live-cells",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What sensitivity and specificity does the wafer TDI system achieve for malignant cells in live human blood?",
+      "notes": "Full wafer original, Tables 1-5 and Figures 1-11 test a USAF chart and PSL particles. Introductory fluorescence/biological references are other work, not this device's live-blood malignant-cell sensitivity/specificity study.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc10934137"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-autoencoder-ct",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What patient-level cancer detection accuracy does the two-stage autoencoder achieve on hospital CT scans?",
+      "notes": "Full autoencoder original, Tables 1/2 and Figures 1-7 evaluate six MVTec material categories. Related-work medical papers do not provide this method's patient-level CT cancer accuracy.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-factory-warranty",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which of the four systems reduced warranty returns most in a randomized trial across the same factories?",
+      "notes": "Across all full originals/tables/figures, no randomized common-factory study measures warranty returns. Separate industrial motivation/deployment proposals are insufficient.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-canopy-confidence-bounds",
+      "split": "development",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What is the 95% bootstrap confidence interval across independent canopy collections for ADMF-Net's reported mAP50?",
+      "notes": "Canopy Tables 3-5 and Figure 9 give point metrics/curves, not bootstrap intervals or resampling across independent canopy collections. No supplement is declared in the pinned XML.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "tech-missing-riscv-runtime",
+      "split": "development",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Another absent shared-hardware comparison, overlapping tech-missing-shared-cpu-cost; the RISC-V/quantization conditions are arbitrary rather than a paper-specific evidence gap.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-microscope-settings",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What focal length and approximate magnification are set on the digital microscope during canopy image acquisition?",
+      "notes": "p26 distinguishes operating 20 mm/~400x from the adjustable ranges; neither Figure 3 nor the maximum magnification changes those operating values.",
+      "required_claims_checked": [
+        "Acquisition uses a 20 mm focal length and approximately 400-fold magnification."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p26:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-panel-dimensions",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What are the canopy backlight panel dimensions, brightness and color temperature?",
+      "notes": "p28 gives 30 by 42 cm, 500 nits, 6500 K specifically for the backlight panel; Figure 4 shows the panel but provides no extra specimen illuminance.",
+      "required_claims_checked": [
+        "The panel is 30 by 42 cm, 500 nits and 6500 K."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p28:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-dataset-variants",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What do ag_dual_rect and ag_composite_obb designate in the canopy experiments?",
+      "notes": "p37 explicitly names rectangular-box and RGB-fused variants; p38/Figure 7 support the fusion construction. p54 identifies a different difference-channel variant and must not replace the primary variant definition.",
+      "required_claims_checked": [
+        "ag_dual_rect uses standard rectangular boxes; ag_composite_obb is the RGB Channel Fusion dataset."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p37:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-resnet-head",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How is the ResNet-50 final block fine-tuned for OK/NOK heater classification, and for how many epochs?",
+      "notes": "p27/Figure 3 specify 1024-neuron and 2-neuron softmax layers with 300 epochs. Figure 7 verifies the scratch experiment's 300-epoch axis; later defect experiments use different durations.",
+      "required_claims_checked": [
+        "A 1024-neuron fully connected layer precedes a 2-neuron softmax output; training uses 300 epochs."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p27:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-mes-status-codes",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which MES telegram codes represent OK/NOK and scratches, lack of paint and dents in the heater demonstration?",
+      "notes": "Both available windows of p31 and Figure 5 distinguish result 1/2 from defect codes 1/2/3. nioBits is 2 raised to the defect code; the figure's scratch example uses nioBits=2. The MES is a university simulation.",
+      "required_claims_checked": [
+        "Status 1 means OK and 2 means NOK; defect-category codes are 1 scratches, 2 lack of paint, 3 dents."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p31:w0",
+        "pmc11768589:p31:w180"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [
+        [
+          "pmc11768589",
+          "fig",
+          "sensors-25-00527-f005"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-tdi-sensor",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which TDI sensor model, across-track pixel count and along-track stage count are reported for TDI-DFSM?",
+      "notes": "p9 and Table 2 support GLT5009BSI, 9072 across-track pixels and 256 maximum stages; p8 provides stage terminology only. Table 2 enumerates available stage counts; p13 uses 32.",
+      "required_claims_checked": [
+        "Gpixel GLT5009BSI has 9072 across-track pixels and 256 along-track TDI stages."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p9:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [
+        [
+          "pmc10934137",
+          "table-wrap",
+          "sensors-24-01622-t002"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-psl-counting",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What PSL particle size and individual-particle counts are compared between TDI-DFSM and KEYENCE VHX-5000, and what is excluded?",
+      "notes": "p13/Figure 8 specify 0.5-micrometre PSL, 60 individual particles in each system, four excluded aggregation regions, 32 stages, 5 mm/s and 23,400 Hz. Keep the perfect count scoped to this comparison.",
+      "required_claims_checked": [
+        "The particles are 0.5 micrometre PSL; both systems count 60 individual particles, excluding four aggregation regions."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p13:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [
+        [
+          "pmc10934137",
+          "fig",
+          "sensors-24-01622-f008"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-ssim-window",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What Gaussian window size is used for SSIM in the autoencoder study, and how are pixels weighted within it?",
+      "notes": "p29/Equation 8 explicitly give 11 by 11 and center-heavy Gaussian weighting; p24 repeats size only in original math, p30 and Figure 5 corroborate weight spread. The fixed footprint differs from variable sigma.",
+      "required_claims_checked": [
+        "The window is 11 by 11; pixels nearer its centre have higher weights, decreasing toward the edges."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p29:w0",
+        "pmc11121878:p30:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p30:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-lpips-backbone",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which pretrained network supplies LPIPS features, and how are layerwise patch distances combined?",
+      "notes": "p34 states AlexNet and layerwise average distances; p10/p33 alternatively support deep-feature rather than raw-pixel comparison, not the AlexNet name on their own.",
+      "required_claims_checked": [
+        "LPIPS uses AlexNet features; it averages distances between the two patches' feature vectors across network layers."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p34:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-mvtec-counts",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How many MVTec AD training/test samples and which complete-image resolution are reported in the autoencoder experiments?",
+      "notes": "p38 reports six selected categories, 1660/714 samples, and resizing to 512 by 512 during training. These are not whole-MVTec counts or the 128-by-128 patch dimensions.",
+      "required_claims_checked": [
+        "For the six selected categories, there are 1660 training and 714 test samples; complete images are resized to 512 by 512 pixels during training."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p38:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-raw-photo-counts",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Before making extra copies for learning, how many photographs and distinct damaged locations did the aircraft-cover team collect?",
+      "notes": "p30 gives 438 raw photos of 219 defect points under two lights; p36/p58 give augmented totals and are context, not interchangeable raw-count evidence.",
+      "required_claims_checked": [
+        "They collected 438 raw images of 219 defect points under two lighting methods."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p30:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-paired-image-alignment",
+      "split": "held-out",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Substantial positional-consistency overlap with development tech-stable-camera. Original either/or wording also cues the expected answer. Reserve the raw counts and other distinct held-out targets instead.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-subtracted-channel",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What happened when the aircraft-cover team tried subtracting the two views for the extra colour plane instead of averaging them?",
+      "notes": "p54 supports a slight decrease. Original Tables 3/5 give .979/.691 for mean-channel versus .977/.684 for difference-channel mAP50/mAP50-95; optional exact declines are .2/.7 percentage points. Those numbers are absent from prose but are valid in the original.",
+      "required_claims_checked": [
+        "Using the difference image as the third channel caused a slight decrease in mAP."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p54:w0",
+        "pmc11510794:p50:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p50:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t003"
+        ],
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t005"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-turning-heater",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Was the heater turned automatically to show every side, and what hardware did the authors suggest for removing that manual step?",
+      "notes": "p19/p36 establish manual steering; p36 proposes a robotic arm. Figure 1 shows the tested arrangement without a robot.",
+      "required_claims_checked": [
+        "The device was steered manually; a robotic arm was proposed for a fully automatic process."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p36:w0",
+        "pmc11768589:p19:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p19:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-thinner-stripe-result",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Did making the projected bands narrower help the heater dent check, and what change did the test score show?",
+      "notes": "p38 and Figure 8 establish ResNet-50 dents, 20 versus 40 stripes, test accuracy 98 versus 100% and reduced loss. p47 alternatively states qualitative improvement; it does not supply the numerical endpoints.",
+      "required_claims_checked": [
+        "Thinner stripes improved the dent test accuracy from 98% to 100%, with reduced loss."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p38:w0",
+        "pmc11768589:p47:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11768589:p47:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc11768589",
+          "fig",
+          "sensors-25-00527-f008"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-classification-versus-cycle",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Does the heater study's under-one-second decision mean that a whole photograph-and-display cycle took under one second?",
+      "notes": "p41 specifies under-one-second classification after model input; p29 specifies acquisition/display every five seconds. A schedule interval is not measured end-to-end duration. Conclusion p48 broadly calls the entire sequence under one second without a timing breakdown; do not demand an unsupported definitive whole-cycle duration.",
+      "required_claims_checked": [
+        "Classification takes less than a second after images enter the model; acquisition and display occur at five-second intervals."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p41:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-moving-chart-comparison",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "When photographing the moving test chart for the same 11-millisecond exposure, which camera blurred and which followed the motion?",
+      "notes": "p12/Figure 7 give the USAF 1951 target comparison: TDI 128 stages at 11 ms versus Pike F-1600C at 11 ms with severe motion blur. Target speed is 2.5 mm/s and line frequency 11,700 Hz. Removed the development question that exposed this target.",
+      "required_claims_checked": [
+        "The area-array sensor produces severe motion blur; the TDI sensor has an advantage for the moving target at matched 11 ms exposure."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p12:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [
+        [
+          "pmc10934137",
+          "fig",
+          "sensors-24-01622-f007"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-production-scan-projection",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Was the three-minute scan of an eight-inch wafer already achieved, or is it a projected result from faster settings?",
+      "notes": "p16, Equation in p16 and Table 5 distinguish experimental 23,400 Hz/5 mm/s (calculated 1.12-hour scan) from potential 608 kHz/129 mm/s/three-minute production configuration with a high-power shorter-wavelength source. Whole-wafer three-minute prototype throughput was not demonstrated.",
+      "required_claims_checked": [
+        "The three-minute estimate is a potential production configuration at 608 kHz line frequency and 129 mm/s scan speed, with a higher-power shorter-wavelength source; the particle experiment uses 23,400 Hz and 5 mm/s."
+      ],
+      "supporting_passage_ids": [
+        "pmc10934137:p16:w0",
+        "pmc10934137:p13:w0",
+        "pmc10934137:p18:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc10934137:p13:w0",
+        "pmc10934137:p18:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc10934137",
+          "table-wrap",
+          "sensors-24-01622-t005"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-material-dependent-loss",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Why does the repair model emphasize weave layout for one material but brightness for tiles, nuts and tablets?",
+      "notes": "p28/Figure 4 explain structure for carpet and luminance for tile/hazelnut/pill; Figure 4 also provides numerical weights, which are valid optional source evidence. Category-specific experimental choices are not a universal rule.",
+      "required_claims_checked": [
+        "Carpet uses greater structure weight for weave detail; tile, hazelnut and pill use greater luminance weight for lighting changes."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p28:w0",
+        "pmc11121878:p27:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p27:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc11121878",
+          "fig",
+          "jimaging-10-00111-f004"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-two-loss-priorities",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "In the later learning phase, which error measure gets more emphasis, and why keep a second one concerned with what looks different?",
+      "notes": "p35, Equation 10 and Figure 7's caption place greater weight on AW-SSIM, with LPIPS adding deep perceptual comparison. p10/p33/p36 support complementary roles and the clean reconstruction target, not numeric coefficients.",
+      "required_claims_checked": [
+        "AW-SSIM has higher weight and measures local structure/pixel variation; LPIPS adds perceptual sensitivity to visible texture or shape abnormalities."
+      ],
+      "supporting_passage_ids": [
+        "pmc11121878:p35:w0",
+        "pmc11121878:p10:w0",
+        "pmc11121878:p33:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11121878:p10:w0",
+        "pmc11121878:p33:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-scratch-weakness",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which scratch-related limitations are reported for backward canopy illumination and the selected heater classifier?",
+      "notes": "Canopy p49 gives rounded 23%; Table 4 gives backward scratch AP50=.233 and AP50-95=.118. Heater p40 gives weakest scratch performance and proposed thinner stripes; p37/Figure 7 support selection/accuracy context. AP and classification accuracy cannot be ranked as one benchmark.",
+      "required_claims_checked": [
+        "Backward-only canopy scratch AP50 is reported as 23% in prose and 23.3% in Table 4, lowering overall mAP; either source-grounded precision is acceptable.",
+        "Heater scratches have the lowest accuracy and higher loss; improvement, including thinner stripes, is suggested."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p49:w0",
+        "pmc11768589:p40:w0",
+        "pmc11510794:p53:w0",
+        "pmc11768589:p37:w0",
+        "pmc11768589:p37:w180"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p53:w0",
+        "pmc11768589:p37:w0",
+        "pmc11768589:p37:w180"
+      ],
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t004"
+        ],
+        [
+          "pmc11768589",
+          "fig",
+          "sensors-25-00527-f007"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-ablation-results",
+      "split": "held-out",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Numeric expectations conflict with the original tables. Canopy Tables 3/5 give mAP50-95 0.669 versus 0.639 (3.0 percentage points), not the prose's 5.2%. Autoencoder Table 2 gives 86.7, 90.86, 95.60 and 98.89 for different loss/training configurations; 4.16 points is 90.86 minus 86.7, not an isolated AW-SSIM effect. Neither conflict should become an unqualified gold result.",
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t003"
+        ],
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t005"
+        ],
+        [
+          "pmc11121878",
+          "table-wrap",
+          "jimaging-10-00111-t002"
+        ]
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-size-evidence",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What size evidence is given for missing-paint spots in the heater paper and PSL test particles in the wafer paper?",
+      "notes": "Heater p35 describes missing-paint defects <0.5 mm; wafer p13/Figure 8 test 0.5 micrometre PSL. The units and type of evidence differ. Particle-size context repeats hold-psl-counting, but the unit/threshold interpretation and heater evidence are new; do not count them as independent observations.",
+      "required_claims_checked": [
+        "The heater paper discusses missing-paint defects smaller than 0.5 mm.",
+        "The wafer comparison uses 0.5 micrometre PSL particles, counting individual particles outside aggregation regions."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p35:w0",
+        "pmc10934137:p13:w0",
+        "pmc10934137:p10:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc10934137:p10:w0"
+      ],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-deployment-readiness",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What remains to be done for industrial implementation in the painted-heater and TDI wafer studies?",
+      "notes": "Heater p43 says improve image quality/quantity and industrial implementation remains future; wafer p17 proposes autofocus/calibration/feedback. These are proposals, not evidence of completed production deployment.",
+      "required_claims_checked": [
+        "Heater work needs more and better images and leaves paint-line implementation for the future.",
+        "The wafer device is experimental; autofocus, calibration and feedback are proposed to reduce intervention and improve stability."
+      ],
+      "supporting_passage_ids": [
+        "pmc11768589:p43:w0",
+        "pmc10934137:p17:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-defect-vocabularies",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which defect categories make up the canopy dataset and the painted-heater dataset?",
+      "notes": "Canopy p30/Figure 6 and heater p20/Figure 6 list distinct category sets. Raw counts and illumination cues do not imply identical category labels or morphology.",
+      "required_claims_checked": [
+        "Canopy categories are contusion, scratches, crack and spot.",
+        "Heater categories are scratches, dents and lack-of-paint spots."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p30:w0",
+        "pmc11768589:p20:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-pretrained-network-purpose",
+      "split": "held-out",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "AlexNet/LPIPS role duplicates hold-lpips-backbone; the heater classifier-role side also overlaps development classifier questions. The comparison provides little independent coverage.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-performance-caveats",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What prevents blanket superiority claims from the canopy fusion results and the autoencoder's category-level comparison?",
+      "notes": "Canopy p52 and Table 3 show mAP50 .979->.984, mAP50-95 .691->.669; autoencoder p39/Table 1 show first on wood/carpet/hazelnut/pill, second on tile/leather. This within-study comparison cannot rank the two methods against one another.",
+      "required_claims_checked": [
+        "ADMF-Net increases mAP50 from 97.9% to 98.4% but slightly decreases mAP50-95.",
+        "The autoencoder is best on wood, carpet, hazelnut and pill and second-best on tile and leather."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p52:w0",
+        "pmc11121878:p39:w0",
+        "pmc11510794:p50:w0",
+        "pmc11510794:p60:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [
+        "pmc11510794:p50:w0",
+        "pmc11510794:p60:w0"
+      ],
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t003"
+        ],
+        [
+          "pmc11121878",
+          "table-wrap",
+          "jimaging-10-00111-t001"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-optics-scale",
+      "split": "held-out",
+      "decision": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "notes": "Repeats every required operating-setting fact from hold-microscope-settings, adding heater geometry; broad 'working configuration' wording does not specify the expected resolution/distance/angle fields.",
+      "original_evidence": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-intensity-assumptions",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What rationale is given for grayscale conversion in canopy channel fusion, and what conditions are held fixed when wafer sensor linearity is measured?",
+      "notes": "Canopy p39 makes a task-specific grayscale information argument; wafer p11/Figure 6 fix illumination, frequency and gain for a sensor linearity test. Both specific statements are required; one does not validate the other.",
+      "required_claims_checked": [
+        "The canopy authors argue grayscale conversion hardly reduces information for their task.",
+        "The wafer DN-versus-stage test holds illumination, line frequency and gain constant."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p39:w0",
+        "pmc10934137:p11:w0"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-compare-task-specific-limits",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What cautions do the canopy attention experiments and wafer depth-of-field discussion give about making inspection systems more capable?",
+      "notes": "Canopy p56/Table 5 report worse outcomes for EMA/cross-attention configurations; the transformer run uses rectangular boxes, a confound. Wafer p17 discusses motion defocus and limited depth-of-field sensitivity for buried defects. More complexity is not universally worse, and attention was not tested as a cure for wafer defocus.",
+      "required_claims_checked": [
+        "More complex canopy attention mechanisms can have negative effects in the reported task.",
+        "Wafer motion causes defocus and sensitivity loss; limited depth of field may constrain buried texture or bulk defects."
+      ],
+      "supporting_passage_ids": [
+        "pmc11510794:p56:w0",
+        "pmc10934137:p17:w0",
+        "pmc10934137:p17:w180"
+      ],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [
+        [
+          "pmc11510794",
+          "table-wrap",
+          "sensors-24-06717-t005"
+        ]
+      ],
+      "absence_scope": [],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-unrelated-flight-route",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What is the shortest scheduled commercial flight route from Berlin to Tokyo next Monday?",
+      "notes": "No original contains commercial flight timetables/routes. Fixed the relative date so the frozen question's target does not drift.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-unrelated-botany",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What soil pH and watering schedule produce the highest yield of blueberry plants?",
+      "notes": "No original supplies blueberry soil pH, irrigation or yield experiments; wood/carpet material datasets are not horticultural evidence.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-unrelated-historical-treaty",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which states signed the Treaty of Westphalia in 1648?",
+      "notes": "No original identifies the Treaty of Westphalia's signatories.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-unrelated-music-theory",
+      "split": "held-out",
+      "decision": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How do you construct a diminished seventh chord in the key of C?",
+      "notes": "No original explains diminished seventh chord construction.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-unrelated-mortgage",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which bank currently offers the cheapest ten-year fixed-rate mortgage in Germany?",
+      "notes": "No original contains German mortgage offers. Fixed the date so the frozen question's target does not drift.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-missing-embedding-ranking",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which of MiniLM, BGE-M3 and Qwen3 embeddings retrieves these papers most accurately on the same reviewed question benchmark?",
+      "notes": "Full methods/results, all tables and figures across four originals compare surface-inspection systems, not MiniLM/BGE-M3/Qwen3 document retrieval on reviewed questions. No actual retrieval rankings or model failures were inspected in this review.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-missing-canopy-per-unit-euros",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What is the canopy inspection platform's audited manufacturing cost in euros per unit at a production volume of 10,000?",
+      "notes": "Full canopy original/Tables 1-5/Figures 1-10 give acquisition/training hardware, not audited euros-per-unit manufacturing accounts at 10,000 units. Component names are context only.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11510794"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-missing-heater-six-month-drift",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "How much does the heater classifier's accuracy fall after six months without recalibration on an operating paint line?",
+      "notes": "Full heater original/Figures 1-10 show short experimental classifier learning curves and a six-message MES demonstration, not six-month operating-line drift. p43 explicitly leaves line implementation to future work.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11768589"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-missing-wafer-damage-threshold",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "What experimentally certified maximum laser fluence leaves every wafer coating undamaged over one million repeated scans?",
+      "notes": "Full wafer original/Tables 1-5/Figures 1-11 discuss laser wavelength/power and qualitative damage avoidance; no repeated-coated-wafer laser-fluence damage-threshold measurement is reported. Replaced the original every-coating/million-scan guarantee trap with a concrete missing measurement.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc10934137"
+      ],
+      "overlap_checked": true
+    },
+    {
+      "case_id": "hold-missing-autoencoder-false-alarm-limit",
+      "split": "held-out",
+      "decision": "revised-and-approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01",
+      "original_question": "Which single operating threshold guarantees fewer than one false alarm per million images for all unseen materials?",
+      "notes": "Full autoencoder original/Tables 1/2/Figures 1-7 provide category AuROC and residual examples, not a deployed score threshold/false-positive rate on an independent unseen-material test. Replaced the original universal guarantee trap. The absence applies to the specified test, not to all threshold information in anomaly literature.",
+      "required_claims_checked": [],
+      "supporting_passage_ids": [],
+      "added_alternative_or_complementary_passage_ids": [],
+      "original_evidence": [],
+      "absence_scope": [
+        "pmc11121878"
+      ],
+      "overlap_checked": true
+    }
+  ]
+}

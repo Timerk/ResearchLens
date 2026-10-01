@@ -1,8 +1,9 @@
 # Evaluation foundation
 
 This workflow compares retrieval implementations on fixed questions and passages.
-Four technical papers are available; technical development questions are unreviewed
-drafts. The three synthetic cases remain smoke tests. No human-reviewed retrieval
+Four technical papers are available; technical questions received an explicitly
+identified AI source review on 2026-10-01. The three synthetic cases remain smoke
+tests. No human-reviewed retrieval
 benchmark or answer-quality results exist yet. Nearest neighbors and valid citation
 IDs are not proof of support.
 
@@ -33,38 +34,45 @@ which does not generate answers. Each new output directory receives `run.json`,
 when publishing results. Review licensed/private passage text before sharing it.
 Never save API credentials.
 
-## Datasets and human review
+## Datasets and source review
 
 `evaluation_schema.py` defines strict Pydantic contracts; `Dataset.model_json_schema()`
 exposes JSON Schema. Unknown fields, inconsistent reviews, duplicate IDs/questions,
 missing references/claims and one-source comparisons fail validation.
 
 - `datasets/development.json`: three AI-authored, unreviewed synthetic smoke cases.
-- `datasets/technical-development.json`: 60 AI-authored technical drafts, version
-  `2-draft`, preserving the original twelve cases.
-- `datasets/held-out.json`: 40 AI-authored technical candidates, version `1-draft`.
-  It is `draft`, unreviewed and cannot run until human approval and freezing.
+- `datasets/technical-development.json`: 50 approved technical development cases,
+  version `3-source-reviewed`; the development dataset remains editable (`draft`).
+- `datasets/held-out.json`: 36 approved cases, version `2-source-reviewed-frozen`.
+  The accepted subset is `frozen`, with its exact file hash recorded in the review.
+- [PR 8 review](reviews/2026-10-01-pr8/README.md): all 100 input decisions, 14
+  rejected originals, source conflicts, alternative evidence and full-source scope.
+  The reviewer is **Codex / GPT-6.1-Sol (AI)**, dated 2026-10-01. Case approval and
+  freezing were requested by the user; they do not constitute human sign-off.
 
 | Question type | Development | Held-out |
 | --- | ---: | ---: |
-| Exact technical terminology | 15 | 10 |
-| Paraphrases with little word overlap | 15 | 10 |
-| Cross-document questions | 15 | 10 |
-| Unanswerable: unrelated or missing evidence | 15 | 10 |
-| **Total technical questions** | **60** | **40** |
+| Exact technical terminology | 14 | 10 |
+| Paraphrases | 13 | 9 |
+| Cross-document questions | 9 | 7 |
+| Unanswerable: unrelated or missing evidence | 14 | 10 |
+| **Total technical questions** | **50** | **36** |
 
-Unanswerable cases include 7 unrelated / 8 missing-evidence development questions
-and 5 unrelated / 5 missing-evidence held-out candidates. Paraphrases use everyday
+Unanswerable cases include 7 unrelated / 7 missing-evidence development questions
+and 5 unrelated / 5 missing-evidence held-out cases. Paraphrases use everyday
 descriptions of technical mechanisms; some original pairs retain technical names.
 Cases cover optical cues, acquisition, labels, data preparation, network/loss roles,
 evaluation and limitations across the four papers. They are correlated: paraphrases
 and comparisons can reuse evidence within a split. More questions on four papers
-do not create 100 independent observations or broaden the corpus.
+do not create independent observations or broaden the corpus. Balance was not
+preserved by adding replacement drafts merely to restore the original counts.
 
-Held-out question targets were reserved separately from development, but both sets
-use the same papers and related concepts. Human semantic-overlap and full-source
-review remain necessary before freezing. No retrieval or model selection has been
-run on these held-out candidates. Do not inspect their rankings while tuning.
+The source review checked semantic overlap and removed a development comparison
+that exposed the held-out moving-chart blur target. Both sets still use the same
+papers and related concepts; remaining partial context reuse is documented in the
+review. All original tables, mathematical markup and 38 publisher figures were
+inspected. No held-out retrieval, rankings, failure reports, model selection or
+settings tuning informed this review. Do not inspect held-out rankings while tuning.
 
 Each dataset records split/version/material/status, the source-file hash and original
 source checksums/DOIs/dates. Cases record expected source IDs, specific passage/paragraph
@@ -74,22 +82,30 @@ never invent PDF pages. References and original-source versions are checked agai
 the index. `validate_dataset_references(dataset, artifact)` provides a metadata-only
 authoring check for either split without running retrieval or certifying support.
 The execution guard in `validate_artifact` still requires held-out to be frozen and
-human approved. The full original XML and attribution are preserved in `data/technical/`.
+every case to be approved. Approval records the named reviewer; the structural
+validator cannot establish that a reviewer is human or that evidence is factual.
+The full original XML and attribution are preserved in `data/technical/`.
 
 For missing-evidence questions, references identify nearby context to inspect; they
 are not positive relevance labels or proof that the requested information is absent.
 Unrelated cases have no expected sources. Review absence against the full papers,
 including omitted tables and figures, rather than relying on the prose extraction.
 
-The technical prose extraction omits figures, tables and formula details. A human must
-check the full sources, especially absence claims and alternative supporting passages,
-before approving a question. Automated validation is not human scientific review.
-All drafts have `review_status: unreviewed` with null reviewer/date. After actual human
-review, record identity/date and mark approved; only approved cases can be frozen.
+The technical prose extraction omits figures, tables and formula details. Source
+review must check the originals, absence claims and alternative supporting passages.
+Original-only evidence is recorded separately from retrieval references; do not
+invent passage IDs for unextracted tables or formulas. Alternative prose passages
+are relevance labels and may support only part of a multi-claim answer; retrieving
+one does not certify complete factual support. Passage recall still measures the
+fraction of listed relevant passages retrieved, not the fraction of claims proved.
+Automated validation is not scientific review. New drafts use `unreviewed` with null
+reviewer/date; reviewed decisions require truthful identity/date. Only approved
+cases can be frozen. Human scientific sign-off remains separate from the recorded
+AI source review.
 
 Keep development and held-out questions separate. Freeze held-out before model/settings
 selection; never tune on it. CLI overlap checks catch IDs/normalized identical questions,
-while semantic/paraphrase leakage requires human inspection. Log exposure, retire a set
+while semantic/paraphrase leakage requires source review. Log exposure, retire a set
 whose failures inform tuning, and use fresh questions for a subsequent quality claim.
 Synthetic tests and draft retrieval diagnostics do not establish model superiority.
 

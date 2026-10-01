@@ -276,29 +276,34 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
     assert summarize(failure)["errors"] == 1
 
 
-def test_technical_drafts_pin_originals_and_locations(tmp_path):
+def test_source_review_pins_originals_and_locations_without_running_held_out(tmp_path):
     path = tmp_path / "technical.json"
     build_index(TECHNICAL_CORPUS, path)
     artifact = json.loads(path.read_bytes())
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")
     validate_splits(dataset, held_out)
-    for candidate, count in ((dataset, 15), (held_out, 10)):
-        assert candidate.status == "draft"
+    review = json.loads((ROOT / "evaluation/reviews/2026-10-01-pr8/review.json").read_bytes())
+    assert review["reviewer_kind"] == "ai" and review["human_sign_off"] is False
+    assert not review["model_rankings_inspected"]
+    assert not review["held_out_retrieval_executed"] and not review["settings_tuned"]
+    assert dataset.status == "draft" and held_out.status == "frozen"
+    for candidate, pin in zip((dataset, held_out), review["datasets"], strict=True):
         assert len(candidate.source_versions) == 4
-        assert len(candidate.cases) == count * 4
+        assert len(candidate.cases) == pin["accepted_count"]
+        assert hashlib.sha256((ROOT / pin["path"]).read_bytes()).hexdigest() == pin["output_sha256"]
         styles = Counter(
             "unanswerable" if c.expected_abstention else c.query_style for c in candidate.cases
         )
-        assert styles == dict.fromkeys(
-            ("exact-terminology", "paraphrase", "cross-document", "unanswerable"), count
-        )
+        assert styles == pin["categories"]
         assert {c.query_style for c in candidate.cases if c.expected_abstention} == {
             "unrelated",
             "missing-evidence",
         }
         assert all(
-            c.review_status == "unreviewed" and c.reviewer is None and c.review_date is None
+            c.review_status == "approved"
+            and c.reviewer == review["reviewer"]
+            and str(c.review_date) == review["review_date"]
             for c in candidate.cases
         )
         assert all(c.required_qualifications and c.forbidden_claims for c in candidate.cases)
@@ -310,8 +315,10 @@ def test_technical_drafts_pin_originals_and_locations(tmp_path):
         # Metadata validation does not execute held-out questions or assess support.
         validate_dataset_references(candidate, artifact)
     validate_artifact(dataset, artifact)
+    validate_artifact(held_out, artifact)  # Metadata only; never calls a retriever.
+    draft = held_out.model_copy(update={"status": "draft"})
     with pytest.raises(ValueError, match="frozen"):
-        validate_artifact(held_out, artifact)
+        validate_artifact(draft, artifact)
 
     class NeverSearch:
         def search(self, question, limit=4):
@@ -319,7 +326,7 @@ def test_technical_drafts_pin_originals_and_locations(tmp_path):
 
     with pytest.raises(ValueError, match="frozen"):
         run_evaluation(
-            held_out, artifact, NeverSearch(), RetrievalConfig(implementation="test", version="1")
+            draft, artifact, NeverSearch(), RetrievalConfig(implementation="test", version="1")
         )
     stale = held_out.model_copy(deep=True)
     stale.cases[0].references[0].source_locator = "./missing"
@@ -329,6 +336,39 @@ def test_technical_drafts_pin_originals_and_locations(tmp_path):
     changed.source_versions[0].source_sha256 = "0" * 64
     with pytest.raises(ValueError, match="Original source version"):
         validate_artifact(changed, artifact)
+
+
+def test_question_review_covers_inputs_and_excludes_rejected_cases():
+    directory = ROOT / "evaluation/reviews/2026-10-01-pr8"
+    review = json.loads((directory / "review.json").read_bytes())
+    archive = json.loads((directory / "rejected-cases.json").read_bytes())
+    rows = {r["case_id"]: r for r in review["cases"]}
+    assert len(rows) == len(review["cases"]) == 100
+    accepted = {
+        c.id: c
+        for name in ("technical-development", "held-out")
+        for c in load_dataset(ROOT / f"evaluation/datasets/{name}.json").cases
+    }
+    rejected = {r["case"]["id"] for r in archive}
+    assert len(rejected) == len(archive) == 14
+    assert accepted.keys().isdisjoint(rejected)
+    assert accepted.keys() | rejected == rows.keys()
+    for cid, case in accepted.items():
+        row = rows[cid]
+        assert row["decision"] in {"approved", "revised-and-approved"}
+        assert row["required_claims_checked"] == case.required_claims
+        assert row["notes"] and row["overlap_checked"]
+        if case.expected_abstention:
+            assert row["absence_scope"] and not row["supporting_passage_ids"]
+        else:
+            assert set(row["supporting_passage_ids"]) == {r.passage_id for r in case.references}
+    for item in archive:
+        case = item["case"]
+        assert rows[case["id"]]["decision"] == case["review_status"] == "rejected"
+        assert item["reason"] and case["reviewer"] == review["reviewer"]
+        assert case["review_date"] == review["review_date"]
+    assert len(review["figure_sources"]) == 38
+    assert len({r["figure_id"] for r in review["figure_sources"]}) == 38
 
 
 def test_cli_delegates_schema_two_selection_to_retrieval_factory(inputs, tmp_path, monkeypatch):

@@ -171,13 +171,14 @@ until a concrete requirement justifies them.
    license and permission evidence. Add PDF/text extraction with page references,
    and local embeddings. Evaluate the implemented LLM provider's citations and
    insufficient-evidence behavior on the reviewed corpus.
-3. Evaluation foundation: pinned synthetic smoke tests and unreviewed technical
-   development drafts, schema-1/2 validation, selectable retrieval adapters, controlled
+3. Evaluation foundation: pinned synthetic smoke tests and source-reviewed technical
+   questions, schema-1/2 validation, selectable retrieval adapters, controlled
    embedding comparisons, ranking/timing/memory diagnostics and human review. Model
-   implementations belong in retrieval work. The technical drafts contain 60 development
-   and 40 held-out questions, balanced across terminology, paraphrases, comparisons and
-   unanswerable cases. Human full-source review, held-out freezing, answer-quality
-   evaluation and a demonstration remain pending.
+   implementations belong in retrieval work. The [PR 8 source review](evaluation/reviews/2026-10-01-pr8/README.md)
+   accepted 50 development and 36 held-out questions, rejected 14 overlapping or
+   unsuitable drafts, and froze held-out before model selection. Approval identifies
+   Codex as the AI reviewer; it is not human scientific sign-off. Human review,
+   answer-quality evaluation and a demonstration remain pending.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 

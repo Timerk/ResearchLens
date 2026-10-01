@@ -1,0 +1,630 @@
+[
+  {
+    "split": "development",
+    "reason": "Same classifier-name target as tech-painted-exact; wording adds no new required fact.",
+    "case": {
+      "id": "tech-painted-paraphrase",
+      "question": "For checking the paint on heaters, which existing image classifiers did the researchers adapt rather than design themselves?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "They adapted pre-trained ResNet-50 and Inception V3."
+      ],
+      "required_qualifications": [
+        "Keep the finding specific to this painted-surface classification study."
+      ],
+      "forbidden_claims": [
+        "Global claims that one network is always the most accurate."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Same training-example and transferred-weight targets as tech-autoencoder-exact.",
+    "case": {
+      "id": "tech-autoencoder-paraphrase",
+      "question": "How does the reconstruction model first learn an undamaged surface and then learn to handle simulated damage?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "It first trains on normal samples, then reuses those learned weights to train with normal and artificially defective samples."
+      ],
+      "required_qualifications": [
+        "Describe the paper's two-stage strategy; do not generalize to every autoencoder."
+      ],
+      "forbidden_claims": [
+        "The study proves performance on every unseen material."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Combines the complete answers to tech-painted-exact and tech-autoencoder-exact; no new comparison target.",
+    "case": {
+      "id": "tech-compare-learning",
+      "question": "Contrast the use of pre-trained classifiers in the painted-surface paper with the staged training examples in the autoencoder paper.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11768589",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        }
+      ],
+      "required_claims": [
+        "The painted-surface work adapts ResNet-50/Inception V3 for OK/NOK classification.",
+        "The autoencoder work first trains on normal examples, then normal/artificially defective examples using the first-stage weights."
+      ],
+      "required_qualifications": [
+        "Classification and reconstruction-based detection have different objectives and evaluations."
+      ],
+      "forbidden_claims": [
+        "The papers provide a head-to-head comparison of these methods on the same data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Same noise cause and subtraction procedure as the revised tech-wafer-paraphrase.",
+    "case": {
+      "id": "tech-cfpn-subtraction",
+      "question": "What causes column fixed pattern noise (CFPN), and how is it reduced in the TDI-DFSM experiments?",
+      "category": "factual",
+      "query_style": "exact-terminology",
+      "expected_source_ids": [
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p15:w0",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        }
+      ],
+      "required_claims": [
+        "CFPN arises from mismatched column readout circuits; particle-free background images are subtracted from particle images."
+      ],
+      "required_qualifications": [
+        "This is background-noise reduction in the reported device, not elimination of all sensor noise."
+      ],
+      "forbidden_claims": [
+        "CFPN is caused by actual particle defects or is removed completely."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Combines tech-manual-outline-union and tech-adga-shapes; duplicates their core claims.",
+    "case": {
+      "id": "tech-compare-labels-versus-simulation",
+      "question": "How are canopy defect boundaries checked, compared with how the autoencoder obtains artificial defects?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p33:w0",
+          "paragraph": 33,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[5]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p18:w0",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy annotations are manually adjusted and checked across illumination views.",
+        "The autoencoder pastes irregular, resized source patches with blurred edges to simulate damage."
+      ],
+      "required_qualifications": [
+        "Annotation correction and synthetic training-data generation are different operations.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Canopy labels were generated by ADGA.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Combines tech-stable-camera and tech-tdi-motion-sync; duplicates their core claims.",
+    "case": {
+      "id": "tech-compare-relative-motion",
+      "question": "Why does the canopy platform hold the sample fixed between views while the wafer platform synchronizes image acquisition with motion?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p27:w0",
+          "paragraph": 27,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "3. Experimental Setup",
+          "source_locator": "./body/sec[3]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Canopy acquisition needs a fixed lens/sample position across two lighting conditions.",
+        "Wafer TDI requires matching line frequency to movement and opposite charge-accumulation direction to prevent blur."
+      ],
+      "required_qualifications": [
+        "Do not infer a common motion-control specification.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Wafer TDI requires the sample to stay motionless during line scanning.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Combines tech-wafer-paraphrase and tech-adaptive-binarization; duplicates their core claims.",
+    "case": {
+      "id": "tech-compare-noise-preprocessing",
+      "question": "Contrast background subtraction in the wafer study with adaptive binarization in the painted-surface study.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc10934137",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p15:w0",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+        }
+      ],
+      "required_claims": [
+        "Wafer processing subtracts particle-free backgrounds to reduce CFPN.",
+        "Heater structured images are grayscaled and adaptively binarized to reduce environmental-light effects; bright-field images are excluded."
+      ],
+      "required_qualifications": [
+        "Different nuisance signals are addressed by different processing.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Adaptive binarization is the reported wafer CFPN removal method.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Repeats tech-glass-paraphrase and exposes the moving-target blur answer reserved for hold-moving-chart-comparison.",
+    "case": {
+      "id": "tech-compare-image-degradation",
+      "question": "What degrades the canopy forward view, compared with the moving-target area-camera images in the wafer experiment?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc10934137"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Dual-Modal Illumination Structure",
+          "source_locator": "./body/sec[3]/sec[1]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p12:w0",
+          "paragraph": 12,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.2. Resolution Target Imaging",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy forward lighting is susceptible to reflections and uneven illumination.",
+        "A moving target causes severe motion blur for the area-array sensor in the wafer comparison."
+      ],
+      "required_qualifications": [
+        "These observations arise from different imaging experiments.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both observed problems are identified as column fixed pattern noise.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Question asks for specified canopy backlight properties while the expectation instead names forward ring LEDs and switching. Fixing it to ask panel properties would leak hold-panel-dimensions; the heater side repeats tech-daylight-interference. Reject rather than retain a mismatched, overlapping target.",
+    "case": {
+      "id": "tech-compare-light-control",
+      "question": "Compare the explicitly specified canopy backlight with the environmental illumination conditions deliberately used in the heater experiment.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p28:w0",
+          "paragraph": 28,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[5]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy uses eight ring LEDs around the lens and switches the two sources alternately.",
+        "Heater environmental lighting is deliberately uncontrolled; processing counters contrast loss and containment is suggested."
+      ],
+      "required_qualifications": [
+        "Specified source settings do not prove the canopy study eliminated all ambient light.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both acquisition systems were demonstrated inside light-isolating tunnels.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "development",
+    "reason": "Another absent shared-hardware comparison, overlapping tech-missing-shared-cpu-cost; the RISC-V/quantization conditions are arbitrary rather than a paper-specific evidence gap.",
+    "case": {
+      "id": "tech-missing-riscv-runtime",
+      "question": "Which model has the lowest measured latency on the same RISC-V CPU with 8-bit quantization and batch size one?",
+      "category": "unanswerable",
+      "query_style": "missing-evidence",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p48:w0",
+          "paragraph": 48,
+          "page": null,
+          "source_section": "4. Experiments > 4.2. Implementation Details",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p24:w0",
+          "paragraph": 24,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "4. Experimentation",
+          "source_locator": "./body/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [],
+      "required_qualifications": [
+        "These training descriptions do not provide that shared RISC-V quantized-runtime benchmark.",
+        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+      ],
+      "forbidden_claims": [
+        "Inventing the requested result or supplying it from external knowledge.",
+        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
+      ],
+      "expected_abstention": true,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "held-out",
+    "reason": "Substantial positional-consistency overlap with development tech-stable-camera. Original either/or wording also cues the expected answer. Reserve the raw counts and other distinct held-out targets instead.",
+    "case": {
+      "id": "hold-paired-image-alignment",
+      "question": "Do the two pictures attached to one aircraft-cover flaw show the same position, or are they unrelated snapshots?",
+      "category": "factual",
+      "query_style": "paraphrase",
+      "expected_source_ids": [
+        "pmc11510794"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p36:w0",
+          "paragraph": 36,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[8]"
+        }
+      ],
+      "required_claims": [
+        "Each defect point has forward- and backward-lighting images that are strictly spatially aligned."
+      ],
+      "required_qualifications": [
+        "This is the authors' dataset description, without a quantified alignment error."
+      ],
+      "forbidden_claims": [
+        "A numerical registration accuracy or unrelated randomly paired views."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "held-out",
+    "reason": "Numeric expectations conflict with the original tables. Canopy Tables 3/5 give mAP50-95 0.669 versus 0.639 (3.0 percentage points), not the prose's 5.2%. Autoencoder Table 2 gives 86.7, 90.86, 95.60 and 98.89 for different loss/training configurations; 4.16 points is 90.86 minus 86.7, not an isolated AW-SSIM effect. Neither conflict should become an unqualified gold result.",
+    "case": {
+      "id": "hold-compare-ablation-results",
+      "question": "What changes in reported metrics follow removing canopy attention versus replacing standard SSIM with AW-SSIM in the autoencoder ablation?",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p55:w0",
+          "paragraph": 55,
+          "page": null,
+          "source_section": "4. Experiments > 4.3. Results and Discussion > 4.3.4. Comparative Analysis of Results",
+          "source_locator": "./body/sec[4]/sec[3]/sec[4]/p[2]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p42:w0",
+          "paragraph": 42,
+          "page": null,
+          "source_section": "4. Experimentation > 4.2. Ablation Study > 4.2.1. The Influence of AW-SSIM",
+          "source_locator": "./body/sec[4]/sec[2]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Removing canopy attention leaves mAP50 relatively stable but lowers mAP50-95 by a reported 5.2%.",
+        "The autoencoder reports a 4.16% AUROC improvement with AW-SSIM."
+      ],
+      "required_qualifications": [
+        "Preserve the authors' percentage wording; do not infer relative versus percentage-point differences without full-table review.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "One ablation gain is numerically comparable to the other across metrics.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "held-out",
+    "reason": "AlexNet/LPIPS role duplicates hold-lpips-backbone; the heater classifier-role side also overlaps development classifier questions. The comparison provides little independent coverage.",
+    "case": {
+      "id": "hold-compare-pretrained-network-purpose",
+      "question": "Contrast Inception V3's output role in heater inspection with AlexNet's role in the autoencoder's perceptual loss.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11768589",
+        "pmc11121878"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p28:w0",
+          "paragraph": 28,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
+          "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[3]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "3. Methodology > 3.4. Combined AW-SSIM and LPIPS Loss for Stage Two of Training",
+          "source_locator": "./body/sec[3]/sec[4]/p[2]"
+        }
+      ],
+      "required_claims": [
+        "Inception V3 is fine-tuned with a two-neuron softmax for OK/NOK heater classification.",
+        "AlexNet supplies deep features to compare patches in LPIPS loss."
+      ],
+      "required_qualifications": [
+        "A loss feature extractor is not the downstream OK/NOK classifier.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "AlexNet is the heater classifier or Inception V3 supplies this paper's LPIPS features.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  },
+  {
+    "split": "held-out",
+    "reason": "Repeats every required operating-setting fact from hold-microscope-settings, adding heater geometry; broad 'working configuration' wording does not specify the expected resolution/distance/angle fields.",
+    "case": {
+      "id": "hold-compare-optics-scale",
+      "question": "Compare the acquisition optics and working configuration of the canopy microscope with the heater camera setup.",
+      "category": "comparison",
+      "query_style": "cross-document",
+      "expected_source_ids": [
+        "pmc11510794",
+        "pmc11768589"
+      ],
+      "references": [
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.1. Experimental Setup",
+          "source_locator": "./body/sec[3]/sec[1]/sec[1]/p[1]"
+        }
+      ],
+      "required_claims": [
+        "Canopy acquisition sets a digital microscope to 20 mm focal length and about 400-fold magnification.",
+        "Heater acquisition uses a 6 mm camera lens, 808 by 608 images, a 20–30 cm distance and a 30-degree angle from the surface normal."
+      ],
+      "required_qualifications": [
+        "Lens focal length is not working distance; omitted canopy resolution must not be invented.",
+        "Different tasks and datasets; this is not a common-benchmark performance ranking."
+      ],
+      "forbidden_claims": [
+        "Both setups operate at 400-fold magnification or the heater working distance is 6 mm.",
+        "Claiming a head-to-head evaluation on identical data."
+      ],
+      "expected_abstention": false,
+      "review_status": "rejected",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
+    }
+  }
+]
