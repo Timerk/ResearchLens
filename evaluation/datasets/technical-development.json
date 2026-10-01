@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "technical-development",
-  "version": "2-draft",
+  "version": "3-source-reviewed",
   "split": "development",
   "material": "real-corpus",
   "status": "draft",
@@ -32,7 +32,7 @@
       "publication_date": "2024-05-05"
     }
   ],
-  "notes": "AI-authored, unreviewed development drafts: 15 exact terminology, 15 paraphrases, 15 cross-document and 15 unanswerable (7 unrelated, 8 missing-evidence). Original 12 cases retained. Some paraphrases and comparisons reuse development evidence and are correlated diagnostics, not independent samples. Pins partial prose extraction and original XML versions; figures, tables and mathematical markup are omitted. Full-source human review, absence verification and semantic overlap review are pending. Missing-evidence references are context, not proof of absence or positive relevance labels.",
+  "notes": "Source-reviewed on 2026-10-01 by Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off), at the user's request. 50 accepted cases; rejected originals and all 100 case decisions are archived in evaluation/reviews/2026-10-01-pr8/. Original XML, all tables/formulas and all 38 publisher figures were inspected. Alternative/complementary prose support is included; omitted original evidence is documented separately. This is AI review, not human scientific sign-off. Development remains editable; substantial duplicate cases and one held-out target leak were removed. No model rankings or failure reports informed this review.",
   "cases": [
     {
       "id": "tech-glass-exact",
@@ -50,6 +50,14 @@
           "page": null,
           "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
           "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p28:w0",
+          "paragraph": 28,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[5]"
         }
       ],
       "required_claims": [
@@ -62,13 +70,13 @@
         "Unreported calibration settings or general claims of optimality."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-glass-paraphrase",
-      "question": "Why photograph the same transparent aircraft cover with light arriving from opposite sides? What information can each view lose?",
+      "question": "In the aircraft glass canopy study, why take pictures of the same transparent cover with light arriving from opposite sides, and what information can each view miss?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -89,16 +97,18 @@
         "Backward lighting reveals depth information but can lose surface detail and boundary contours."
       ],
       "required_qualifications": [
-        "These are the authors' observations in their canopy inspection study."
+        "These are the authors' observations in their canopy inspection study.",
+        "Visible depth information is not a calibrated numerical measurement of defect depth.",
+        "Visible depth information is not a calibrated numerical measurement of defect depth."
       ],
       "forbidden_claims": [
         "One view is sufficient for every defect.",
         "Unreported numerical detection thresholds."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-painted-exact",
@@ -116,6 +126,38 @@
           "page": null,
           "source_section": "Abstract",
           "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p5:w0",
+          "paragraph": 5,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p15:w180",
+          "paragraph": 15,
+          "page": null,
+          "source_section": "2. Related Work > 2.2. Transfer Learning for Feature Extraction and Decision-Making",
+          "source_locator": "./body/sec[2]/sec[2]/p[4]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
+          "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p44:w0",
+          "paragraph": 44,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[1]"
         }
       ],
       "required_claims": [
@@ -128,41 +170,9 @@
         "Claims that these classifiers were evaluated on the canopy dataset."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-painted-paraphrase",
-      "question": "For checking the paint on heaters, which existing image classifiers did the researchers adapt rather than design themselves?",
-      "category": "factual",
-      "query_style": "paraphrase",
-      "expected_source_ids": [
-        "pmc11768589"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11768589",
-          "passage_id": "pmc11768589:p1:w0",
-          "paragraph": 1,
-          "page": null,
-          "source_section": "Abstract",
-          "source_locator": "./front/article-meta/abstract[1]/p[1]"
-        }
-      ],
-      "required_claims": [
-        "They adapted pre-trained ResNet-50 and Inception V3."
-      ],
-      "required_qualifications": [
-        "Keep the finding specific to this painted-surface classification study."
-      ],
-      "forbidden_claims": [
-        "Global claims that one network is always the most accurate."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-wafer-exact",
@@ -180,25 +190,50 @@
           "page": null,
           "source_section": "Abstract",
           "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p14:w0",
+          "paragraph": 14,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p14:w180",
+          "paragraph": 14,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p18:w0",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[1]"
         }
       ],
       "required_claims": [
         "Increasing TDI stages and reducing column fixed pattern noise improved particle-defect signal-to-noise ratio without sacrificing detection efficiency in the reported experiments."
       ],
       "required_qualifications": [
-        "This is a reported experimental result, not a guarantee for arbitrary scanners."
+        "This is a reported experimental result, not a guarantee for arbitrary scanners.",
+        "The efficiency argument holds line frequency fixed and excludes data-transmission time; it is not a measured end-to-end throughput guarantee."
       ],
       "forbidden_claims": [
         "A numerical SNR gain not given in the cited passage."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-wafer-paraphrase",
-      "question": "How did the wafer-inspection researchers suppress background stripes from mismatched column readout circuits?",
+      "question": "In the wafer study, what caused the background stripes in the particle images, and how did the researchers reduce them?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -215,7 +250,7 @@
         }
       ],
       "required_claims": [
-        "They reduce column fixed pattern noise by subtracting particle-free background images from particle images taken at different TDI stages."
+        "The stripes are column fixed pattern noise caused by mismatched column readout circuits; particle-free background images are subtracted from particle images taken at different TDI stages."
       ],
       "required_qualifications": [
         "Correlated dual sampling did not eliminate that noise completely."
@@ -224,9 +259,9 @@
         "The subtraction eliminates all noise."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-autoencoder-exact",
@@ -244,6 +279,38 @@
           "page": null,
           "source_section": "1. Introduction",
           "source_locator": "./body/sec[1]/p[7]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p17:w0",
+          "paragraph": 17,
+          "page": null,
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "source_locator": "./body/sec[3]/sec[1]/p[2]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p44:w0",
+          "paragraph": 44,
+          "page": null,
+          "source_section": "4. Experimentation > 4.2. Ablation Study > 4.2.3. Influence of Two-Stage Training",
+          "source_locator": "./body/sec[4]/sec[2]/sec[3]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p46:w0",
+          "paragraph": 46,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[2]"
         }
       ],
       "required_claims": [
@@ -256,41 +323,9 @@
         "Stage one requires labeled real defects."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-autoencoder-paraphrase",
-      "question": "How does the reconstruction model first learn an undamaged surface and then learn to handle simulated damage?",
-      "category": "factual",
-      "query_style": "paraphrase",
-      "expected_source_ids": [
-        "pmc11121878"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11121878",
-          "passage_id": "pmc11121878:p8:w0",
-          "paragraph": 8,
-          "page": null,
-          "source_section": "1. Introduction",
-          "source_locator": "./body/sec[1]/p[7]"
-        }
-      ],
-      "required_claims": [
-        "It first trains on normal samples, then reuses those learned weights to train with normal and artificially defective samples."
-      ],
-      "required_qualifications": [
-        "Describe the paper's two-stage strategy; do not generalize to every autoencoder."
-      ],
-      "forbidden_claims": [
-        "The study proves performance on every unseen material."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-fusion",
@@ -325,6 +360,86 @@
           "page": null,
           "source_section": "Abstract",
           "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p5:w0",
+          "paragraph": 5,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[4]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p38:w0",
+          "paragraph": 38,
+          "page": null,
+          "source_section": "3. Methodology > 3.4. RGB Channel Fusion Method",
+          "source_locator": "./body/sec[3]/sec[4]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p40:w0",
+          "paragraph": 40,
+          "page": null,
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "source_locator": "./body/sec[3]/sec[5]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p5:w0",
+          "paragraph": 5,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.1. Experimental Setup",
+          "source_locator": "./body/sec[3]/sec[1]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p30:w0",
+          "paragraph": 30,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p44:w0",
+          "paragraph": 44,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p45:w0",
+          "paragraph": 45,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/list[1]/list-item[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p35:w0",
+          "paragraph": 35,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[2]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p11:w0",
+          "paragraph": 11,
+          "page": null,
+          "source_section": "2. Related Work > 2.1. Illumination Strategies for the Image Acquisition Module",
+          "source_locator": "./body/sec[2]/sec[1]/p[5]"
         }
       ],
       "required_claims": [
@@ -338,51 +453,9 @@
         "Directly ranking the two approaches' accuracies across different datasets."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-learning",
-      "question": "Contrast the use of pre-trained classifiers in the painted-surface paper with the staged training examples in the autoencoder paper.",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc11768589",
-        "pmc11121878"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11768589",
-          "passage_id": "pmc11768589:p1:w0",
-          "paragraph": 1,
-          "page": null,
-          "source_section": "Abstract",
-          "source_locator": "./front/article-meta/abstract[1]/p[1]"
-        },
-        {
-          "source_id": "pmc11121878",
-          "passage_id": "pmc11121878:p8:w0",
-          "paragraph": 8,
-          "page": null,
-          "source_section": "1. Introduction",
-          "source_locator": "./body/sec[1]/p[7]"
-        }
-      ],
-      "required_claims": [
-        "The painted-surface work adapts ResNet-50/Inception V3 for OK/NOK classification.",
-        "The autoencoder work first trains on normal examples, then normal/artificially defective examples using the first-stage weights."
-      ],
-      "required_qualifications": [
-        "Classification and reconstruction-based detection have different objectives and evaluations."
-      ],
-      "forbidden_claims": [
-        "The papers provide a head-to-head comparison of these methods on the same data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated",
@@ -399,9 +472,9 @@
         "An answer supplied from general knowledge rather than these documents."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-shared-cpu-cost",
@@ -450,16 +523,18 @@
       ],
       "required_claims": [],
       "required_qualifications": [
-        "Draft missing-evidence case: a human must check all full sources for the requested common-benchmark CPU cost comparison; related abstracts cannot establish it."
+        "No full original reports the requested identical-canopy-benchmark CPU cost-per-defect comparison; separate training hardware and task metrics cannot establish such a ranking.",
+        "No full original reports the requested identical-canopy-benchmark CPU cost-per-defect comparison; separate training hardware and task metrics cannot establish such a ranking.",
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "An invented cost ranking.",
         "Converting unrelated timing or accuracy figures into a shared-benchmark result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-obb",
@@ -489,9 +564,9 @@
         "OBB is guaranteed superior for all object detection tasks."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-annotation-tools",
@@ -521,9 +596,9 @@
         "Human annotation checks were unnecessary."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-rgb-channel-assignment",
@@ -553,13 +628,13 @@
         "Blue uses subtraction in the reported primary method."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-amff-layers",
-      "question": "At which feature scales does ADMF-Net use AMFF and FSPPF, and what detection head follows?",
+      "question": "According to paragraph 41 and Figure 8 of the canopy paper, at which feature scales does ADMF-Net use AMFF and FSPPF, and what detection head follows?",
       "category": "factual",
       "query_style": "exact-terminology",
       "expected_source_ids": [
@@ -573,21 +648,30 @@
           "page": null,
           "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
           "source_locator": "./body/sec[3]/sec[5]/p[2]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p59:w0",
+          "paragraph": 59,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[3]"
         }
       ],
       "required_claims": [
         "AMFF fuses P3 and P4; the two P5 outputs feed FSPPF; an OBB head predicts rotated boxes."
       ],
       "required_qualifications": [
-        "Use the architecture description in paragraph 41; do not infer tensor dimensions from omitted diagrams."
+        "Paragraph 41 and Figure 8 agree on P3/P4 AMFF and P5 FSPPF; paragraph 46 inconsistently says P3/P5 AMFF. Acknowledge this inconsistency rather than treating the alternative prose as unambiguously wrong."
       ],
       "forbidden_claims": [
-        "Unreported feature-map dimensions or OBB angle conventions."
+        "Unreported feature-map dimensions or OBB angle conventions.",
+        "Claiming the paper's architecture descriptions are internally consistent."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-stripe-frequencies",
@@ -611,15 +695,16 @@
         "0.8 Hz generates 20 stripes and 1.6 Hz generates 40 stripes; phase is zero for both."
       ],
       "required_qualifications": [
-        "Retain the paper's reported units and tested settings."
+        "Retain the paper's reported units and tested settings.",
+        "Hz is the paper's reported label for generated spatial patterns; do not infer a temporal monitor-refresh frequency or convert to cycles/mm without calibration."
       ],
       "forbidden_claims": [
         "These are universal optimal frequencies for painted surfaces."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-adaptive-binarization",
@@ -637,6 +722,22 @@
           "page": null,
           "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
           "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p34:w0",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
         }
       ],
       "required_claims": [
@@ -649,9 +750,9 @@
         "Both illumination modes receive identical binarization."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-imagenet-initialization",
@@ -669,6 +770,22 @@
           "page": null,
           "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
           "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p21:w0",
+          "paragraph": 21,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]"
         }
       ],
       "required_claims": [
@@ -681,9 +798,9 @@
         "The study collected a million new heater images."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-tdi-motion-sync",
@@ -713,41 +830,9 @@
         "Increasing line frequency alone guarantees sharp images at arbitrary speeds."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-cfpn-subtraction",
-      "question": "What causes column fixed pattern noise (CFPN), and how is it reduced in the TDI-DFSM experiments?",
-      "category": "factual",
-      "query_style": "exact-terminology",
-      "expected_source_ids": [
-        "pmc10934137"
-      ],
-      "references": [
-        {
-          "source_id": "pmc10934137",
-          "passage_id": "pmc10934137:p15:w0",
-          "paragraph": 15,
-          "page": null,
-          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
-          "source_locator": "./body/sec[4]/sec[3]/p[3]"
-        }
-      ],
-      "required_claims": [
-        "CFPN arises from mismatched column readout circuits; particle-free background images are subtracted from particle images."
-      ],
-      "required_qualifications": [
-        "This is background-noise reduction in the reported device, not elimination of all sensor noise."
-      ],
-      "forbidden_claims": [
-        "CFPN is caused by actual particle defects or is removed completely."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-aw-ssim-combination",
@@ -773,6 +858,22 @@
           "page": null,
           "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
           "source_locator": "./body/sec[3]/sec[3]/p[7]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p8:w180",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[7]"
         }
       ],
       "required_claims": [
@@ -782,12 +883,12 @@
         "The component calculations remain the same as standard SSIM; equations are omitted in this extraction."
       ],
       "forbidden_claims": [
-        "New numerical weight values not supplied by the cited prose."
+        "Invented component weights that appear nowhere in the original; the numerical category-specific weights in Figure 4 are valid optional details."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-adga-shapes",
@@ -805,6 +906,22 @@
           "page": null,
           "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
           "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p18:w180",
+          "paragraph": 18,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p19:w0",
+          "paragraph": 19,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
+          "source_locator": "./body/sec[3]/sec[2]/p[2]"
         }
       ],
       "required_claims": [
@@ -817,9 +934,9 @@
         "All patches are unmodified rectangles from arbitrary sources."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-stable-camera",
@@ -849,9 +966,9 @@
         "An unreported active stabilization or registration algorithm."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-turn-and-flip-labels",
@@ -869,6 +986,14 @@
           "page": null,
           "source_section": "3. Methodology > 3.3. Dataset Construction",
           "source_locator": "./body/sec[3]/sec[3]/p[6]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p34:w180",
+          "paragraph": 34,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "source_locator": "./body/sec[3]/sec[3]/p[6]"
         }
       ],
       "required_claims": [
@@ -881,9 +1006,9 @@
         "Every arbitrary rotation is lossless and leaves all boxes inside the image."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-manual-outline-union",
@@ -913,9 +1038,9 @@
         "The segmentation model's output is accepted without inspection."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-small-photo-supply",
@@ -945,9 +1070,9 @@
         "The study inspected 500 independently acquired heaters per category."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-both-checks-clean",
@@ -973,6 +1098,22 @@
           "page": null,
           "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
           "source_locator": "./body/sec[3]/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p48:w0",
+          "paragraph": 48,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/list[1]/list-item[4]/p[1]"
         }
       ],
       "required_claims": [
@@ -985,9 +1126,9 @@
         "One successful illumination-mode check is enough to pass."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-daylight-interference",
@@ -1005,6 +1146,14 @@
           "page": null,
           "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
           "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p22:w0",
+          "paragraph": 22,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
         }
       ],
       "required_claims": [
@@ -1017,9 +1166,9 @@
         "The experimental setup already had a light-isolating tunnel."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-bright-specks-dark-background",
@@ -1049,13 +1198,13 @@
         "The camera forms the image by collecting the direct reflected beam everywhere."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-moving-signal-addition",
-      "question": "How does following the same moving spot through repeated exposures help a dim wafer feature, and what ideal improvement is expected if the repeats multiply by m?",
+      "question": "In the wafer study, how does following a moving spot across more sensor rows help a dim feature, and what ideal signal-to-noise improvement is expected when the number of rows is multiplied by m?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -1077,6 +1226,14 @@
           "page": null,
           "source_section": "2. Methodology > 2.2. Fundamental Aspects of TDI",
           "source_locator": "./body/sec[2]/sec[2]/p[2]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p8:w0",
+          "paragraph": 8,
+          "page": null,
+          "source_section": "2. Methodology > 2.2. Fundamental Aspects of TDI",
+          "source_locator": "./body/sec[2]/sec[2]/p[2]"
         }
       ],
       "required_claims": [
@@ -1089,13 +1246,13 @@
         "SNR necessarily increases linearly with the number of stages."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-too-many-shortcuts",
-      "question": "Why did the image-repair network avoid shortcuts between every matching layer on its two sides?",
+      "question": "In the two-stage surface-reconstruction study, why did the network avoid shortcuts between every matching layer of its encoder and decoder?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -1121,13 +1278,13 @@
         "More skip connections always improve defect detection."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-changing-neighborhood",
-      "question": "How does the reconstruction study vary the neighborhood weighting during learning to balance speckle suppression with preserving small details?",
+      "question": "In the two-stage surface-reconstruction study, how did the researchers change which nearby pixels influence learning to balance noise suppression and preservation of small details?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -1149,25 +1306,57 @@
           "page": null,
           "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
           "source_locator": "./body/sec[3]/sec[3]/p[12]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p32:w0",
+          "paragraph": 32,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[13]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p42:w0",
+          "paragraph": 42,
+          "page": null,
+          "source_section": "4. Experimentation > 4.2. Ablation Study > 4.2.1. The Influence of AW-SSIM",
+          "source_locator": "./body/sec[4]/sec[2]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p46:w0",
+          "paragraph": 46,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[2]"
         }
       ],
       "required_claims": [
         "A narrow Gaussian can amplify noise and a wide one blur detail; standard deviation gradually increases, resets each epoch, and samples are shuffled."
       ],
       "required_qualifications": [
-        "No numeric increment is available in the extracted prose."
+        "The Gaussian standard deviation changes while the 11-by-11 window dimensions remain fixed; the original gives the symbolic increment k but no numeric value."
       ],
       "forbidden_claims": [
         "One fixed neighborhood width is used throughout training."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-damaged-clean-pairs",
-      "question": "When teaching the repair model with made-up damage, which picture is used as the target for the repaired output?",
+      "question": "In the two-stage surface-reconstruction study, when the input has made-up damage, which picture is used as the target for the repaired output?",
       "category": "factual",
       "query_style": "paraphrase",
       "expected_source_ids": [
@@ -1181,6 +1370,14 @@
           "page": null,
           "source_section": "3. Methodology > 3.1. Overall Network Architecture",
           "source_locator": "./body/sec[3]/sec[1]/p[2]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p36:w0",
+          "paragraph": 36,
+          "page": null,
+          "source_section": "3. Methodology > 3.4. Combined AW-SSIM and LPIPS Loss for Stage Two of Training",
+          "source_locator": "./body/sec[3]/sec[4]/p[4]"
         }
       ],
       "required_claims": [
@@ -1193,9 +1390,9 @@
         "The model is trained to reproduce synthetic damage in its target."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-localization-outputs",
@@ -1237,9 +1434,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-training-splits",
@@ -1281,9 +1478,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-training-computers",
@@ -1325,53 +1522,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-labels-versus-simulation",
-      "question": "How are canopy defect boundaries checked, compared with how the autoencoder obtains artificial defects?",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc11510794",
-        "pmc11121878"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11510794",
-          "passage_id": "pmc11510794:p33:w0",
-          "paragraph": 33,
-          "page": null,
-          "source_section": "3. Methodology > 3.3. Dataset Construction",
-          "source_locator": "./body/sec[3]/sec[3]/p[5]"
-        },
-        {
-          "source_id": "pmc11121878",
-          "passage_id": "pmc11121878:p18:w0",
-          "paragraph": 18,
-          "page": null,
-          "source_section": "3. Methodology > 3.2. Artificial Defect Generation Algorithm (ADGA)",
-          "source_locator": "./body/sec[3]/sec[2]/p[1]"
-        }
-      ],
-      "required_claims": [
-        "Canopy annotations are manually adjusted and checked across illumination views.",
-        "The autoencoder pastes irregular, resized source patches with blurred edges to simulate damage."
-      ],
-      "required_qualifications": [
-        "Annotation correction and synthetic training-data generation are different operations.",
-        "Different tasks and datasets; this is not a common-benchmark performance ranking."
-      ],
-      "forbidden_claims": [
-        "Canopy labels were generated by ADGA.",
-        "Claiming a head-to-head evaluation on identical data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-data-expansion",
@@ -1413,53 +1566,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-relative-motion",
-      "question": "Why does the canopy platform hold the sample fixed between views while the wafer platform synchronizes image acquisition with motion?",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc11510794",
-        "pmc10934137"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11510794",
-          "passage_id": "pmc11510794:p27:w0",
-          "paragraph": 27,
-          "page": null,
-          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
-          "source_locator": "./body/sec[3]/sec[2]/p[4]"
-        },
-        {
-          "source_id": "pmc10934137",
-          "passage_id": "pmc10934137:p10:w0",
-          "paragraph": 10,
-          "page": null,
-          "source_section": "3. Experimental Setup",
-          "source_locator": "./body/sec[3]/p[2]"
-        }
-      ],
-      "required_claims": [
-        "Canopy acquisition needs a fixed lens/sample position across two lighting conditions.",
-        "Wafer TDI requires matching line frequency to movement and opposite charge-accumulation direction to prevent blur."
-      ],
-      "required_qualifications": [
-        "Do not infer a common motion-control specification.",
-        "Different tasks and datasets; this is not a common-benchmark performance ranking."
-      ],
-      "forbidden_claims": [
-        "Wafer TDI requires the sample to stay motionless during line scanning.",
-        "Claiming a head-to-head evaluation on identical data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-evaluation-metrics",
@@ -1501,53 +1610,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-noise-preprocessing",
-      "question": "Contrast background subtraction in the wafer study with adaptive binarization in the painted-surface study.",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc10934137",
-        "pmc11768589"
-      ],
-      "references": [
-        {
-          "source_id": "pmc10934137",
-          "passage_id": "pmc10934137:p15:w0",
-          "paragraph": 15,
-          "page": null,
-          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
-          "source_locator": "./body/sec[4]/sec[3]/p[3]"
-        },
-        {
-          "source_id": "pmc11768589",
-          "passage_id": "pmc11768589:p22:w0",
-          "paragraph": 22,
-          "page": null,
-          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
-          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
-        }
-      ],
-      "required_claims": [
-        "Wafer processing subtracts particle-free backgrounds to reduce CFPN.",
-        "Heater structured images are grayscaled and adaptively binarized to reduce environmental-light effects; bright-field images are excluded."
-      ],
-      "required_qualifications": [
-        "Different nuisance signals are addressed by different processing.",
-        "Different tasks and datasets; this is not a common-benchmark performance ranking."
-      ],
-      "forbidden_claims": [
-        "Adaptive binarization is the reported wafer CFPN removal method.",
-        "Claiming a head-to-head evaluation on identical data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-optical-cues",
@@ -1589,9 +1654,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-network-inputs",
@@ -1618,6 +1683,22 @@
           "page": null,
           "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
           "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p21:w0",
+          "paragraph": 21,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+        },
+        {
+          "source_id": "pmc11768589",
+          "passage_id": "pmc11768589:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]"
         }
       ],
       "required_claims": [
@@ -1633,9 +1714,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-compare-network-roles",
@@ -1670,6 +1751,14 @@
           "page": null,
           "source_section": "3. Methodology > 3.1. Overall Network Architecture",
           "source_locator": "./body/sec[3]/sec[1]/p[1]"
+        },
+        {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p59:w0",
+          "paragraph": 59,
+          "page": null,
+          "source_section": "5. Conclusions",
+          "source_locator": "./body/sec[5]/p[3]"
         }
       ],
       "required_claims": [
@@ -1685,97 +1774,9 @@
         "Claiming a head-to-head evaluation on identical data."
       ],
       "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-image-degradation",
-      "question": "What degrades the canopy forward view, compared with the moving-target area-camera images in the wafer experiment?",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc11510794",
-        "pmc10934137"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11510794",
-          "passage_id": "pmc11510794:p22:w0",
-          "paragraph": 22,
-          "page": null,
-          "source_section": "3. Methodology > 3.1. Dual-Modal Illumination Structure",
-          "source_locator": "./body/sec[3]/sec[1]/p[4]"
-        },
-        {
-          "source_id": "pmc10934137",
-          "passage_id": "pmc10934137:p12:w0",
-          "paragraph": 12,
-          "page": null,
-          "source_section": "4. Experimental Results and Discussions > 4.2. Resolution Target Imaging",
-          "source_locator": "./body/sec[4]/sec[2]/p[1]"
-        }
-      ],
-      "required_claims": [
-        "Canopy forward lighting is susceptible to reflections and uneven illumination.",
-        "A moving target causes severe motion blur for the area-array sensor in the wafer comparison."
-      ],
-      "required_qualifications": [
-        "These observations arise from different imaging experiments.",
-        "Different tasks and datasets; this is not a common-benchmark performance ranking."
-      ],
-      "forbidden_claims": [
-        "Both observed problems are identified as column fixed pattern noise.",
-        "Claiming a head-to-head evaluation on identical data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-compare-light-control",
-      "question": "Compare the explicitly specified canopy backlight with the environmental illumination conditions deliberately used in the heater experiment.",
-      "category": "comparison",
-      "query_style": "cross-document",
-      "expected_source_ids": [
-        "pmc11510794",
-        "pmc11768589"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11510794",
-          "passage_id": "pmc11510794:p28:w0",
-          "paragraph": 28,
-          "page": null,
-          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
-          "source_locator": "./body/sec[3]/sec[2]/p[5]"
-        },
-        {
-          "source_id": "pmc11768589",
-          "passage_id": "pmc11768589:p34:w0",
-          "paragraph": 34,
-          "page": null,
-          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
-          "source_locator": "./body/sec[4]/sec[1]/p[1]"
-        }
-      ],
-      "required_claims": [
-        "Canopy uses eight ring LEDs around the lens and switches the two sources alternately.",
-        "Heater environmental lighting is deliberately uncontrolled; processing counters contrast loss and containment is suggested."
-      ],
-      "required_qualifications": [
-        "Specified source settings do not prove the canopy study eliminated all ambient light.",
-        "Different tasks and datasets; this is not a common-benchmark performance ranking."
-      ],
-      "forbidden_claims": [
-        "Both acquisition systems were demonstrated inside light-isolating tunnels.",
-        "Claiming a head-to-head evaluation on identical data."
-      ],
-      "expected_abstention": false,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-recipe",
@@ -1792,9 +1793,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-inheritance-law",
@@ -1811,9 +1812,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-planet-moons",
@@ -1830,9 +1831,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-exchange-rate",
@@ -1849,9 +1850,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-database-isolation",
@@ -1868,9 +1869,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-unrelated-vaccination",
@@ -1887,9 +1888,9 @@
         "Answering from general knowledge or inventing a technical-source citation."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-canopy-service-life",
@@ -1920,16 +1921,16 @@
       "required_claims": [],
       "required_qualifications": [
         "Defect imaging and a detection method do not establish a structural-fatigue or remaining-life model.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-heater-energy",
@@ -1960,16 +1961,16 @@
       "required_claims": [],
       "required_qualifications": [
         "Hardware descriptions are not measured end-to-end energy consumption.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-wafer-live-cells",
@@ -1992,16 +1993,16 @@
       "required_claims": [],
       "required_qualifications": [
         "A PSL-particle experiment on a wafer is not a biological diagnostic validation.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-autoencoder-ct",
@@ -2024,16 +2025,16 @@
       "required_claims": [],
       "required_qualifications": [
         "MVTec surface-image evaluation does not supply patient-level CT results.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-factory-warranty",
@@ -2083,16 +2084,16 @@
       "required_claims": [],
       "required_qualifications": [
         "Separate inspection experiments do not supply a shared randomized factory-outcome trial.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     },
     {
       "id": "tech-missing-canopy-confidence-bounds",
@@ -2115,66 +2116,16 @@
       "required_claims": [],
       "required_qualifications": [
         "A point metric from the canopy experiment is not a bootstrap interval across independent collections.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
+        "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result."
       ],
       "forbidden_claims": [
         "Inventing the requested result or supplying it from external knowledge.",
         "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
       ],
       "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
-    },
-    {
-      "id": "tech-missing-riscv-runtime",
-      "question": "Which model has the lowest measured latency on the same RISC-V CPU with 8-bit quantization and batch size one?",
-      "category": "unanswerable",
-      "query_style": "missing-evidence",
-      "expected_source_ids": [
-        "pmc11510794",
-        "pmc11768589",
-        "pmc11121878"
-      ],
-      "references": [
-        {
-          "source_id": "pmc11510794",
-          "passage_id": "pmc11510794:p48:w0",
-          "paragraph": 48,
-          "page": null,
-          "source_section": "4. Experiments > 4.2. Implementation Details",
-          "source_locator": "./body/sec[4]/sec[2]/p[1]"
-        },
-        {
-          "source_id": "pmc11768589",
-          "passage_id": "pmc11768589:p24:w0",
-          "paragraph": 24,
-          "page": null,
-          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
-          "source_locator": "./body/sec[3]/sec[2]/p[1]"
-        },
-        {
-          "source_id": "pmc11121878",
-          "passage_id": "pmc11121878:p38:w0",
-          "paragraph": 38,
-          "page": null,
-          "source_section": "4. Experimentation",
-          "source_locator": "./body/sec[4]/p[2]"
-        }
-      ],
-      "required_claims": [],
-      "required_qualifications": [
-        "These training descriptions do not provide that shared RISC-V quantized-runtime benchmark.",
-        "Draft absence expectation: human review of all full sources is pending. References provide nearby context, not proof of absence or positive supporting passages."
-      ],
-      "forbidden_claims": [
-        "Inventing the requested result or supplying it from external knowledge.",
-        "Treating a nearby passage or an omitted table/formula as evidence for the requested result."
-      ],
-      "expected_abstention": true,
-      "review_status": "unreviewed",
-      "reviewer": null,
-      "review_date": null
+      "review_status": "approved",
+      "reviewer": "Codex / GPT-6.1-Sol (AI source reviewer; not human sign-off)",
+      "review_date": "2026-10-01"
     }
   ]
 }
