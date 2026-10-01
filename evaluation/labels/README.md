@@ -1,23 +1,26 @@
 # Development evidence labels
 
-`technical-development.json` contains 92 draft evidence groups for the 36 answerable
+`technical-development.json` contains 92 approved evidence groups for the 36 answerable
 development questions. Both approved datasets and their review records are unchanged.
-The labels are AI-authored and unreviewed. They are not included in the project owner's
-prior question approval. No held-out evidence labels, retrieval results or rankings
-were used to create them.
+The project owner explicitly approved the revised groups in the PR #8 thread on
+2026-10-01. This separate evidence approval is recorded in
+[evidence-human-review.json](../reviews/2026-10-01-pr8/evidence-human-review.json), with
+the previous/current label hashes and unchanged evidence-content hash. No group,
+description, alternative, quote, offset or pin changed during approval. No held-out
+evidence labels, retrieval results or rankings were used to create them.
 
 The [AI evidence audit](../reviews/2026-10-01-pr8/evidence-review.md) reviewed the
 original 83 groups and identified semantic/context fixes. The
 [fix record](../reviews/2026-10-01-pr8/evidence-fixes.md) records the source checks,
 changes and decisions on all 41 recommendations. The revised labels contain 140
 alternatives and 165 exact span occurrences. Both audit files remain unchanged.
-These corrections do not constitute human approval.
+The AI corrections and the subsequent human approval have separate provenance.
 
-The draft uses exact sentences or sentence fragments from the pinned extracted
+The labels use exact sentences or sentence fragments from the pinned extracted
 passages. Alternatives are conservative and incomplete. Some facts need complementary
 spans, including spans within the same passage. A complete match certifies only that
-these labeled text spans survived retrieval/context budgets. Human review must still
-check factual sufficiency, qualifications, full sources and acceptable alternatives.
+these labeled text spans survived retrieval/context budgets. Generated answers still
+need separate correctness, qualification, citation-support and abstention review.
 
 ## Evidence format and review
 
@@ -70,9 +73,10 @@ When reviewing:
   as a claim-support score.
 - Preserve all negative cases as unscored. Their context references are not support.
 
-Set this file to `approved` with truthful reviewer/date only after that review. Its
-hash changes, so rerun all compared development modes. Do not relabel held-out cases
-after inspecting model failures. Do not alter the existing human approval archive.
+Future evidence revisions need a new review with truthful reviewer/date. Changing
+content or approval provenance changes the hash, so rerun all compared development
+modes. Do not relabel held-out cases after inspecting model failures. Preserve both
+the question approval and this separate evidence approval archive.
 
 ## Encoder measurement format
 
