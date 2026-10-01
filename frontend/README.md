@@ -56,4 +56,4 @@ to inspect loading and duplicate prevention. Ctrl+C stops both servers.
 Fixture claims are labeled as mocks and must not be treated as scientific findings.
 
 Read the [verification record](docs/verification.md) for coverage, captured screenshots,
-actual T3 browser interactions and the precise preview-host limitations.
+actual Chrome/T3 browser interactions and the precise browser-tooling limitations.

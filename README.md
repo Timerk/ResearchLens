@@ -164,8 +164,9 @@ until a concrete requirement justifies them.
 1. Local preview and document-only OpenAI integration: implemented and checked with
    automated tests and a small Luna/medium live smoke test. Frontend regression coverage
    now includes mocked component tests and Chromium keyboard/mobile smoke tests.
-   T3 browser interaction was partially verified; screenshot capture and full visual
-   inspection in T3 were blocked by the preview host. See the verification record above.
+   Normal Chrome verification covered keyboard focus, response states and 320px/390px
+   layouts with viewport screenshots. Earlier T3 preview capture was blocked by its
+   host; that limitation and the Chrome follow-up are recorded above.
 2. Baseline RAG: expand the four-paper starter set to 15–30 authorized documents; record source URL, author, date,
    license and permission evidence. Add PDF/text extraction with page references,
    and local embeddings. Evaluate the implemented LLM provider's citations and

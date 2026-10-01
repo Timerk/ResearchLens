@@ -81,6 +81,56 @@ environment `41b52f2c-0c97-49a0-bba1-d74c7cd8c208`, with an instruction not to r
 T3 mobile result inspection and T3 screenshot capture therefore remain incomplete.
 The focus-ring and mobile-result evidence above comes from Chromium smoke tests.
 
+## Normal Chrome follow-up inspection
+
+At the user's request, the installed Chrome browser was connected through its
+browser extension and used against the same offline mock server on port 4300.
+This was an actual normal Chrome session, separate from both T3's preview and
+the headless Chromium smoke suite. No backend or provider calls were made.
+
+Keyboard navigation showed visible 2px green focus outlines on the brand,
+question, submit button, citation summary, reference summary, license link and
+source link. Enter submitted the question; the button retained focus during the
+eight-second mocked request and after completion. The read-only question,
+`aria-disabled` submit control, busy result region and concise loading/completion
+status text were confirmed. Repeated Enter/Space while pending did not restart
+the visible workflow; exact duplicate-request counts are asserted by the existing
+automated smoke test. Enter/Space expanded the citation/reference disclosures.
+Source/license destinations and new-tab/security attributes were confirmed.
+
+Chrome interactions also checked local preview, no matches, insufficient evidence,
+the API timeout alert and a successful retry that cleared the alert. Screenshots
+were visually inspected for the answer, loading, error, validation, preview,
+no-matches and expanded reference layouts. The accessible question name,
+description, validation state, result status and alert were inspected in the DOM;
+screen-reader speech was not tested. No warning/error entries were reported by
+the tab's captured console log during the checks.
+
+At a 320×740 viewport, whitespace-aware validation disabled submission, the
+answer/citation text wrapped, and expanded metadata stacked without horizontal
+overflow (305px content width after the vertical scrollbar). At 390×844, preview
+and no-matches states also fit without horizontal overflow (375px content width).
+The temporary viewport override was reset afterward. No additional frontend
+defects were found; this follow-up changes documentation and evidence only.
+
+Chrome viewport screenshots succeeded. Full-page captures timed out on
+`Page.captureScreenshot`, and synthesized scrolling timed out on
+`Input.synthesizeScrollGesture`. Regular control interaction and locator scrolling
+still allowed viewport inspection/capture. The earlier automated full-page PNGs
+are retained alongside these Chrome viewport JPEGs.
+
+![Normal Chrome desktop answer](screenshots/chrome-desktop-answer.jpg)
+
+![Normal Chrome 320px answer](screenshots/chrome-mobile-answer.jpg)
+
+Additional Chrome evidence: [loading](screenshots/chrome-desktop-loading.jpg),
+[API error](screenshots/chrome-desktop-error.jpg),
+[desktop no matches](screenshots/chrome-desktop-no-matches.jpg),
+[320px validation](screenshots/chrome-mobile-validation.jpg),
+[320px expanded reference](screenshots/chrome-mobile-reference.jpg),
+[390px preview](screenshots/chrome-mobile-preview.jpg), and
+[390px no matches](screenshots/chrome-mobile-no-matches.jpg).
+
 ## Captured visual evidence
 
 Playwright captured desktop initial, loading, expanded answer, API error and
@@ -107,5 +157,6 @@ artifacts, not pixel-diff screenshot assertions.
   screen-reader announcements, or a full accessibility conformance audit.
 - External source pages were not opened; tests check the link destinations and
   new-tab/security attributes without introducing external network dependencies.
-- Full T3 screenshots, rendered focus visibility and mobile result inspection need
-  a connected, visible preview host. Automated checks do not replace those checks.
+- T3-specific screenshot capture remains blocked by its preview host. The equivalent
+  rendered focus and mobile result checks were completed in normal Chrome above;
+  Chrome's full-page capture and synthesized-scroll tooling limits are recorded there.
