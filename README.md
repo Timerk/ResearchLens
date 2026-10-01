@@ -6,8 +6,8 @@ with inspectable citations and explicit insufficient-evidence responses.
 
 Angular and FastAPI run end to end with four **CC BY 4.0 technical papers** by default.
 The original three synthetic documents remain available as a separate regression corpus.
-Retrieval offers TF-IDF word matching (the default baseline) and optional local CPU
-embeddings. Local mode shows retrieved passages; OpenAI mode generates document-only
+Retrieval offers TF-IDF word matching (the default baseline), local CPU embeddings and
+hybrid rank fusion. Local mode shows retrieved passages; OpenAI mode generates document-only
 answers with validated passage references. Do not treat the fixtures as technical findings
 or valid citation IDs as proof that a claim is supported. The technical corpus has not yet
 received human scientific review.
@@ -51,11 +51,26 @@ rtk proxy uv run --extra embeddings --directory backend uvicorn researchlens.api
 
 The first ingestion downloads the pinned Apache-2.0 English `all-MiniLM-L6-v2` model
 (about 91 MB); encoding runs locally on CPU. Startup uses only cached model files.
-No embedding API, key, PyTorch installation or vector database is required.
+MiniLM needs no embedding API, key, PyTorch installation or vector database.
 Set `RETRIEVAL_BACKEND=tfidf` to select the baseline again; it can use the same artifact.
 Keep `ANSWER_PROVIDER=local` for a free passage preview in either retrieval mode.
 See [embedding setup and integration](docs/embeddings.md) for model conventions,
 custom corpus paths, stale-index recovery and the evaluation runner interface.
+
+The CPU model catalog also supports `bge-m3`, `qwen3-0.6b` and `qwen3-4b` using the
+optional `embedding-models` extra. Set `EMBEDDING_MODEL` to the matching alias and
+`RETRIEVAL_BACKEND=hybrid` to fuse TF-IDF and embedding ranks. Each model needs its own
+ingested artifact; startup rejects mismatched models or encoding/runtime settings.
+Run the existing evaluation pipeline across all four models and both retrieval modes:
+
+```sh
+rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
+rtk proxy uv run --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --output ../evaluation/runs/cpu-comparison
+```
+
+This downloads pinned weights locally and runs the unreviewed technical development
+questions without answer generation. CPU memory/latency and draft relevance measurements
+are diagnostics; human-reviewed comparisons remain pending. See [model comparisons](docs/model-comparison.md).
 
 ### Enable document-only OpenAI answers
 
@@ -120,8 +135,9 @@ Changing extraction or source content can change passage IDs; rebuild the index 
 evaluation references after such changes. Raw XML files are marked binary for Git line-ending
 purposes so checksums remain valid across Windows and Linux checkouts.
 
-To run the old fixture examples instead, rebuild with `--corpus sample` and restart the
-backend. The two corpora are not mixed. `CORPUS` and the Python `build_index()` default remain
+To run the old fixture examples instead, rebuild with `--corpus sample`, set
+`RETRIEVAL_CORPUS=data/sample_documents.json` and restart the backend. The two corpora
+are not mixed. `CORPUS` and the Python `build_index()` default remain
 the sample corpus for compatibility with existing tests; the ingestion CLI defaults to
 technical. Questions such as `Does dust cause false positives?` retain their original test
 meaning only against the fixture corpus. Rebuild and restart after switching corpora.
@@ -153,6 +169,7 @@ GitHub Actions runs the backend checks above, frontend checks, component tests,
 production build and Chromium smoke tests. See the [frontend instructions](frontend/README.md)
 for watch mode and offline UI inspection, and the [verification record](frontend/docs/verification.md)
 for actual browser coverage, screenshots and limitations.
+Model downloads and real-model benchmarks are manual; CI uses offline retrieval tests.
 
 ## Architecture and boundaries
 

@@ -1,131 +1,145 @@
-# Local embedding retrieval
+# Local embeddings and hybrid retrieval
 
-TF-IDF remains the default and an explicitly selectable baseline. `RETRIEVAL_BACKEND`
-accepts `tfidf` or `embeddings`, independently of `ANSWER_PROVIDER`. No paid embedding
-service or automatic fallback is used. Restart the backend after configuration changes.
+`RETRIEVAL_BACKEND=tfidf|embeddings|hybrid` selects retrieval independently of answer
+generation. TF-IDF remains the default; `Retriever` is its compatibility alias. All
+encoders run locally on CPU. Startup is cache-only; no vector database or embedding API
+is used. Restart after changing configuration, corpus or artifacts.
 
-## Model and encoding contract
+## Pinned model catalog
 
-- Model: [`sentence-transformers/all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/tree/1110a243fdf4706b3f48f1d95db1a4f5529b4d41).
-- Pinned revision: `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. Code never resolves `main`.
-- License: Apache-2.0; language: English, per the
-  [pinned model card](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/blob/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md).
-  Multilingual retrieval is not supported or evaluated by this integration.
-- Small six-layer MiniLM encoder, 384-dimensional vectors. We use the repository's
-  float32 `onnx/model.onnx` and `tokenizer.json`, not a quantized variant. ONNX Runtime's
-  `CPUExecutionProvider` uses two intra-operation threads; batches contain at most 32 texts.
-  This avoids the PyTorch dependency and runs on Windows x64/Python 3.13.
-- Queries and documents use the **same encoding**: raw text, no instruction or prefix,
-  the model's uncased WordPiece tokenizer, attention-mask mean pooling (including
-  non-padding special tokens), then L2 normalization. Documents encode only `Passage.text`,
-  without titles, IDs or source metadata. Similarity is the dot product of unit vectors.
-- Both inputs truncate on the right to 256 tokens including special tokens, following
-  the model's [sentence configuration](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/blob/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/sentence_bert_config.json).
-  The existing paragraph/180-word chunks and IDs are unchanged. **180 words can exceed
-  256 WordPieces**, particularly with technical terms; such a passage's vector represents
-  only its prefix. The stored and returned text remains complete. Long questions can also
-  be truncated for retrieval; the HTTP 2,000-character question limit is unchanged.
-  Token-aware rechunking would change citation boundaries and needs separate evaluation.
+| Alias | Upstream model | Pinned revision | License / languages | Dimensions / runtime |
+| --- | --- | --- | --- | --- |
+| `minilm` | [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/tree/1110a243fdf4706b3f48f1d95db1a4f5529b4d41) | `1110a243fdf4706b3f48f1d95db1a4f5529b4d41` | Apache-2.0 / English | 384 / ONNX Runtime |
+| `bge-m3` | [BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3/tree/5617a9f61b028005a4858fdac845db406aefb181) | `5617a9f61b028005a4858fdac845db406aefb181` | MIT / multilingual, 100+ languages | 1024 / Torch + Transformers |
+| `qwen3-0.6b` | [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/tree/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3) | `97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3` | Apache-2.0 / 100+ languages | 1024 / Torch + Transformers |
+| `qwen3-4b` | [Qwen3-Embedding-4B](https://huggingface.co/Qwen/Qwen3-Embedding-4B/tree/5cf2132abc99cad020ac570b19d031efec650f2b) | `5cf2132abc99cad020ac570b19d031efec650f2b` | Apache-2.0 / 100+ languages | 2560 / Torch + Transformers |
+
+Licenses/language coverage are upstream claims, not corpus quality measurements. Model
+files are allowlisted at these revisions; no `main` resolution or repository Python code
+is used (`trust_remote_code=False`). BGE uses dense output only, without sparse/ColBERT heads.
 
 ## Install, ingest and start
 
-From the repository root (Windows can replace `uv` with `py -m uv`):
+MiniLM requires the smaller extra; BGE/Qwen require `embedding-models`, whose uv source
+selects CPU PyTorch wheels. Keep the extras on subsequent `uv run`/`uv sync` commands.
 
 ```sh
-rtk proxy uv sync --locked --extra embeddings --python 3.13
-rtk proxy uv run --extra embeddings --directory backend python -m researchlens.ingest --retrieval embeddings
-rtk proxy uv run --extra embeddings --directory backend uvicorn researchlens.api:app --host 127.0.0.1 --port 8000
+rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
+rtk proxy uv run --extra embedding-models --directory backend python -m researchlens.ingest --corpus technical --retrieval embeddings --embedding-model bge-m3
 ```
 
-Before starting, set these in `.env` without changing an existing API key:
+Configure `.env` without changing an existing API key:
 
 ```dotenv
 ANSWER_PROVIDER=local
-RETRIEVAL_BACKEND=embeddings
+RETRIEVAL_BACKEND=hybrid
+EMBEDDING_MODEL=bge-m3
 RETRIEVAL_INDEX=data/index.json
-RETRIEVAL_CORPUS=data/sample_documents.json
+RETRIEVAL_CORPUS=data/technical/documents.json
 ```
 
-The first ingestion needs network access to Hugging Face and its download hosts for
-roughly 91 MB of model/tokenizer files, in addition to the Python dependencies. Files
-are cached through `huggingface_hub` (normally under `~/.cache/huggingface/hub`;
-`HF_HOME`/`HF_HUB_CACHE` can relocate them). Downloads are unauthenticated, require no
-Hugging Face token, and do not upload passages or questions. No model files are committed.
-Windows without symlink privileges may report a harmless cache warning and use extra
-disk space; administrator privileges are not required. Python dependencies are locked
-in `uv.lock`; retain `--extra embeddings` on `uv run`/`uv sync` to keep them installed.
+```sh
+rtk proxy uv run --extra embedding-models --directory backend uvicorn researchlens.api:app --host 127.0.0.1 --port 8000
+```
 
-Ingestion reads only retrieval configuration and does not instantiate an answer provider.
-Startup uses `local_files_only=True`: a missing cache fails with an ingestion command,
-never a hidden network download. For offline deployment, ingest once while online and
-carry the pinned cache files, corpus and index to the target machine. A running server
-keeps its snapshot until restarted; it does not watch files or reload per request.
+Use `--extra embeddings`/`--embedding-model minilm` for MiniLM alone. CLI and application
+defaults select the technical corpus. For fixtures, use `--corpus sample` and set the app's
+`RETRIEVAL_CORPUS=data/sample_documents.json`. `CORPUS` and Python `build_index()` defaults
+remain sample-compatible. TF-IDF uses any valid passage artifact without optional packages.
+Ingestion reads retrieval configuration without constructing an answer provider.
 
-Run ingestion without `--retrieval` to use `RETRIEVAL_BACKEND`. Explicit CLI flags override
-retrieval settings. Environment paths are resolved relative to the repository root;
-CLI `--source` and `--destination` paths are relative to the command's working directory
-(`backend` when using `--directory backend`). For custom corpora, configure both
-`RETRIEVAL_CORPUS` and `RETRIEVAL_INDEX` or provide absolute CLI paths. Keep generated
-custom artifacts out of Git; only `data/index.json` is ignored by default.
+Explicit ingestion flags override configuration: `--retrieval`, `--embedding-model`,
+`--source`, `--destination`; `--corpus` selects a bundled source. Environment paths are
+repository-relative. CLI paths are relative to the launch directory (`backend` with
+`--directory backend`); use absolute paths for integrations.
 
-`RETRIEVAL_BACKEND=tfidf` selects lexical retrieval without optional dependencies or model
-downloads. A schema-2 embedding artifact also works for TF-IDF. A TF-IDF-only artifact
-must be rebuilt before selecting embeddings. Existing schema-1 artifacts remain readable
-by TF-IDF when their source hash and passages match the configured corpus.
+The first ingestion downloads roughly 91 MB (MiniLM), 2.3 GB (BGE-M3), 1.2 GB (Qwen0.6B)
+or 8 GB (Qwen4B), plus Python packages. BGE's pinned weights are `pytorch_model.bin`;
+Qwen uses safetensors. Inference precision does not reduce download size. Downloads are
+unauthenticated (`token=False`), never upload text and use the Hugging Face cache
+(`HF_HOME`/`HF_HUB_CACHE` can relocate it). Windows without symlink privileges can use
+extra disk space; administrator privileges are not needed. Startup uses only cached
+files (`local_files_only=True`) and fails explicitly when files/dependencies are missing.
+For offline deployment, carry the pinned cache, corpus, index and dependencies. Running
+servers retain their loaded snapshot until restarted.
 
-## Artifact validation and lifecycle
+## Encoding contract
 
-Ingestion writes one JSON artifact atomically, after all vectors have been computed.
-It contains schema version 2, SHA-256 of raw corpus bytes, chunking method/max words,
-unchanged complete passage metadata, and (in embedding mode) encoding/model/revision
-metadata, ordered passage IDs, vectors and a SHA-256 of little-endian float32 vector bytes.
-This single file avoids partially updated vector/metadata pairs. JSON is deliberate for
-this tiny corpus; vectors are loaded into one float32 matrix in memory, with exact search.
+Documents encode `Passage.text` alone. IDs/titles/attribution are not prepended. Chunking
+stays paragraph/180-word windows, with complete original text and all metadata preserved.
+Stored vectors are normalized float32 arrays; exact cosine search is a dot product.
 
-Startup verifies the corpus hash, chunking contract and reconstructed passage records.
-Embedding startup also checks the exact encoding contract, row identities/order, count,
-384-dimensional finite unit vectors and vector checksum before loading the model.
-Checksums detect accidental corruption; they are not signatures for untrusted artifacts.
-Changed source bytes (even whitespace), changed model/encoding, unsupported schemas,
-missing vectors or corrupt records fail with an actionable rebuild error. Re-run ingestion
-with the same configured corpus/index and desired backend, then restart. Do not hand-edit
-metadata to bypass the checks. Model/encoding changes require rebuilding all vectors.
+| Model | Query/document conventions | Pooling | Default token cap / batch / intra-op threads | Precision |
+| --- | --- | --- | --- | --- |
+| MiniLM | Raw text, no prefixes | Attention-masked mean, including non-padding special tokens | 256 / 32 / 2 | float32 |
+| BGE-M3 | Raw text, no instructions | First/CLS token, normalized | 512 / 1 / 8 | bfloat16 |
+| Qwen3, both sizes | Fixed query instruction; raw documents | Last non-padding token, normalized | 512 / 1 / 8 | bfloat16 |
 
-## Integration interface for the evaluation thread
+Qwen's fixed query prefix is:
+
+```text
+Instruct: Given a research question, retrieve relevant passages that answer the question
+Query: <question>
+```
+
+Tokenization pads/truncates on the right; Qwen uses the attention mask to exclude padding.
+Decoder KV caching is disabled. All runtimes use one inter-operation thread. Ingestion
+accepts `--max-tokens`, `--batch-size`, `--threads` and Torch `--precision float32|bfloat16`;
+startup reuses saved settings. MiniLM stays float32. CPU bfloat16 speed depends on CPU
+features and is measured separately. There is no quantization or GPU allocation.
+
+Upstream limits are 256 for MiniLM, 8192 for BGE-M3 and 32768 for the Qwen adapters. The
+smaller Torch default bounds CPU work while preserving existing passage boundaries.
+**180 words can exceed a token cap**, especially with technical notation; such vectors
+represent only the prefix. Stored/returned passage text remains complete. Instructions
+also count toward Qwen's query cap; the HTTP 2000-character limit remains unchanged.
+Token-aware rechunking is a separate experiment because it changes citation boundaries.
+
+## Artifacts and compatibility
+
+Ingestion atomically publishes one schema-2 JSON with raw-corpus SHA-256, chunking, full
+passages, model/revision and encoding/runtime settings, ordered passage IDs, vectors and
+their little-endian float32 checksum. JSON on disk and a matrix in memory suffice here.
+Generated comparison indexes live in ignored `evaluation/runs/`; keep other custom indexes
+out of Git. No weights or credentials are committed.
+
+Retrieval and evaluation share `artifacts.load_artifact`. It validates vector dimensions,
+finite/nonzero values, normalization, checksum and row identity. With `source=...`, it
+checks corpus bytes and reconstructed text/attribution/section/XML metadata. The retriever
+additionally checks the allowlisted revision, exact encoding and installed runtime before
+loading weights; the application explicitly supplies its configured source/model.
+Unsupported/stale/corrupt artifacts fail with rebuild instructions. Re-ingest using the
+matching corpus/model/settings, then restart; do not relabel metadata to bypass checks.
+Checksums detect corruption, not malicious tampering. Schema 1 stays usable by TF-IDF.
+Old incomplete embedding contracts and changed recorded runtime versions require rebuilding.
+
+## Hybrid and runner integration
+
+Hybrid combines up to 20 positive-score lexical candidates and 20 dense neighbors with
+reciprocal rank fusion: sum `1 / (60 + rank)`, using one-based ranks. It deduplicates by
+stable passage ID; exact ties use artifact order. Raw similarity scores are not added.
+The final limit defaults to four. There is no threshold, reranker, learned weighting or
+diversity heuristic. Unrelated questions can still have dense/hybrid neighbors and reach
+the paid answer provider. Scores never prove answerability; existing prompt/context
+limits and provider abstention remain intact. Local preview does not judge support.
 
 ```python
 from pathlib import Path
-from researchlens.retrieval import PassageRetriever, load_retriever
+from researchlens.retrieval import load_retriever
 
-retriever: PassageRetriever = load_retriever(
-    "embeddings",  # or "tfidf"; use the same embedding artifact for both
-    Path("data/index.json"),
-    source=Path("data/sample_documents.json"),
+retriever = load_retriever(
+    "hybrid", Path("data/index.json"), source=Path("data/technical/documents.json")
 )
 hits = retriever.search(question, limit=4)
 ```
 
-Run from the repository root with `backend` on `PYTHONPATH`, or import from a runner
-already configured that way. Explicit `source` is required for a custom corpus; the
-default is the bundled corpus. Each retriever instance loads once and reuses its index;
-each embedding search encodes only the question. `SearchHit` fields and citation identities
-are unchanged. `Retriever(passages)` and `Retriever.from_path(path, source=...)` remain
-aliases for the lexical baseline, preserving existing `Retriever.search(question, limit)`
-callers. Do not use the alias when intending to select embeddings.
+Run with `backend` on `PYTHONPATH` or inside that directory. Model/index loading happens
+once; each search encodes only the question. Evaluation derives settings from the artifact
+independently of `.env`; app startup also verifies `EMBEDDING_MODEL`. `source` is optional
+for legacy callers; supply it for corpus validation. Citation identities remain unchanged.
 
-Both implementations rank descending; exact score ties use artifact order. `limit` defaults
-to four, must be positive and is capped by corpus size. Blank questions return no hits.
-TF-IDF returns only positive word-overlap scores. Embeddings return up to `limit` neighbors
-even for zero or negative cosine scores. Scores across modes are not calibrated or directly
-comparable. There is **no relevance threshold**, reranking or document-diversity heuristic.
-Any subsequent tuning must use reviewed development questions, never held-out questions.
-
-The HTTP answer schema, generation prompt/settings, four-passage/3,000-character per
-passage/16,000 serialized-character context limits, and provider abstention checks are
-unchanged. The local preview does not generate answers or judge support. With embeddings,
-an unrelated query can still reach the OpenAI provider and incur cost; nearest neighbors
-alone never establish evidence sufficiency. Actual abstention quality is pending evaluation.
-
-Record artifact hash, corpus hash, chunking/encoding metadata, backend, `limit` and any
-future threshold alongside results. No evaluation datasets or competing runner are added
-here. See [implementation measurements and pending comparisons](retrieval-checks.md).
+The existing evaluation CLI consumes full schema-2 artifacts directly. Hybrid defaults
+are recorded in `RetrievalConfig`; explicit `--retrieval-config` candidate counts/RRF k
+are passed to the actual adapter. Only RRF is implemented. Tune settings on reviewed
+development questions and freeze before held-out comparisons. See
+[CPU model comparison](model-comparison.md) for measured diagnostics and remaining limits.

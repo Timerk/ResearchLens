@@ -1,5 +1,10 @@
 # Retrieval implementation checks — 2026-09-28
 
+Historical MiniLM/synthetic diagnostics. The evaluation integration below has since
+been replaced by direct schema-2 loading and multi-model CPU comparisons; see
+[current model comparison](model-comparison.md). The temporary passage view is no
+longer needed, and the old encoding metadata requires rebuilding before current startup.
+
 These are AI-authored synthetic development diagnostics on three test documents, not
 research-quality evaluation or evidence that embeddings improve answer quality. No
 retrieval setting or threshold was tuned on these results. No held-out questions were
