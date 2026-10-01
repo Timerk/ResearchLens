@@ -14,7 +14,13 @@ from time import perf_counter
 from typing import Protocol
 from uuid import uuid4
 
-from researchlens.answers import INSTRUCTIONS, AnswerProvider, LocalPreview, OpenAIProvider
+from researchlens.answers import (
+    INSTRUCTIONS,
+    AnswerProvider,
+    LocalPreview,
+    OpenAIProvider,
+    prepare_answer_context,
+)
 from researchlens.artifacts import (
     EncodingMetadata,
     canonical_hash,
@@ -22,7 +28,23 @@ from researchlens.artifacts import (
     passage_identity,
     validate_passage_artifact,
 )
+from researchlens.evaluation_evidence import (
+    EncodingDiagnostics,
+    EvidenceLabels,
+    TextRange,
+    coverage_loss,
+    evidence_coverage,
+    ranking_metrics,
+    validate_encoding_diagnostics,
+    validate_labels,
+)
 from researchlens.evaluation_memory import process_peak_rss_bytes
+from researchlens.evaluation_metrics import (
+    comparison_details,
+    cutoff_summary,
+    paired_changes,
+    percentile_nearest_rank,
+)
 from researchlens.evaluation_schema import (
     CaseReview,
     ClaimReview,
@@ -217,6 +239,10 @@ def code_state() -> dict:
                         "evaluation_schema.py",
                         "artifacts.py",
                         "evaluation_memory.py",
+                        "evaluation_evidence.py",
+                        "evaluation_metrics.py",
+                        "answers.py",
+                        "models.py",
                     )
                 }
             ),
@@ -236,6 +262,9 @@ def run_evaluation(
     estimated_run_cost_usd: float | None = None,
     pricing_date: str | None = None,
     execution: ExecutionConfig | None = None,
+    evidence_labels: EvidenceLabels | None = None,
+    encoding_diagnostics: EncodingDiagnostics | None = None,
+    cutoffs: list[int] | None = None,
 ) -> dict:
     """Injected implementations own their resources; never serialize clients/settings.
 
@@ -244,6 +273,28 @@ def run_evaluation(
     """
     passages = validate_artifact(dataset, artifact)
     retrieval = validate_retrieval_config(retrieval, artifact)
+    cutoffs = (
+        cutoffs
+        if cutoffs is not None
+        else [k for k in (1, 4, 10, retrieval.limit) if k <= retrieval.limit]
+    )
+    if not cutoffs or any(type(k) is not int or k < 1 or k > retrieval.limit for k in cutoffs):
+        raise ValueError("Cutoffs must be positive integers within the actual retrieval limit")
+    cutoffs = sorted(set(cutoffs))
+    labels = (
+        validate_labels(evidence_labels, dataset, artifact, passages) if evidence_labels else {}
+    )
+    if encoding_diagnostics is None and retrieval.backend in ("embeddings", "hybrid"):
+        diagnostics_hook = getattr(retriever, "get_encoding_diagnostics", None)
+        if callable(diagnostics_hook):
+            supplied_diagnostics = diagnostics_hook()
+            if supplied_diagnostics is not None:
+                encoding_diagnostics = EncodingDiagnostics.model_validate(supplied_diagnostics)
+    encoded_passages = (
+        validate_encoding_diagnostics(encoding_diagnostics, artifact, passages)
+        if encoding_diagnostics
+        else {}
+    )
     execution = execution or ExecutionConfig()
     memory_before = process_peak_rss_bytes() if execution.measure_memory else None
     generation = generation or GenerationConfig()
@@ -292,15 +343,24 @@ def run_evaluation(
             "output_tokens": 0 if generation.provider != "openai" else None,
             "estimated_api_cost_usd": 0 if generation.provider != "openai" else None,
             "error": None,
+            "metrics_at_k": {},
+            "embedding_coverage_at_k": {},
+            "embedding_truncation_loss_at_k": {},
+            "answer_context_preview": None,
+            "answer_context_coverage": None,
+            "answer_context_selection_loss": None,
+            "answer_context_truncation_loss": None,
+            "encoder_truncated_passage_ids": [],
+            "encoder_unmeasured_passage_ids": [],
         }
         stage = "retrieval"
+        hits = None
         try:
             if execution.warmups:
                 warmup_started = perf_counter()
                 for _ in range(execution.warmups):
                     retriever.search(case.question, limit=retrieval.limit)
                 row["warmup_latency_ms"] = round((perf_counter() - warmup_started) * 1000, 3)
-            hits = None
             for _ in range(execution.repeats):
                 query_started = perf_counter()
                 attempt = {"latency_ms": None, "retrieved_passage_ids": [], "error": None}
@@ -338,23 +398,12 @@ def run_evaluation(
             row["retrieved_passages"] = [p.model_dump() for p in hits]
             # Related references for unanswerable cases are context, not answer evidence.
             if not case.expected_abstention:
-                expected = set(case.expected_source_ids)
-                found = {p.document_id for p in hits}
-                expected_passages = {r.passage_id for r in case.references}
-                row["source_recall_at_k"] = len(expected & found) / len(expected)
-                row["passage_recall_at_k"] = len(expected_passages & {p.id for p in hits}) / len(
-                    expected_passages
-                )
-                row["all_expected_sources_retrieved"] = expected <= found
-                row["first_relevant_passage_rank"] = next(
-                    (rank for rank, p in enumerate(hits, start=1) if p.id in expected_passages),
-                    None,
-                )
-                row["reciprocal_rank_at_k"] = (
-                    1 / row["first_relevant_passage_rank"]
-                    if row["first_relevant_passage_rank"]
-                    else 0.0
-                )
+                metrics = ranking_metrics(case, hits, labels.get(case.id))
+                row["source_recall_at_k"] = metrics["source_recall"]
+                row["passage_recall_at_k"] = metrics["passage_recall"]
+                row["all_expected_sources_retrieved"] = metrics["all_sources"]
+                row["first_relevant_passage_rank"] = metrics["first_relevant_rank"]
+                row["reciprocal_rank_at_k"] = metrics["reciprocal_rank"]
             if provider is not None:
                 stage = "generation"
                 answer_started = perf_counter()
@@ -368,6 +417,57 @@ def run_evaluation(
         except Exception:
             # Exception messages/tracebacks can contain authorization headers or request bodies.
             row["error"] = {"stage": stage, "code": f"{stage}_failed"}
+        # Failed retrievals score zero even if an earlier timing repeat preserved hits.
+        scored_hits = [] if row["error"] and row["error"]["stage"] == "retrieval" else hits or []
+        entry = labels.get(case.id)
+        for k in cutoffs:
+            prefix = scored_hits[:k]
+            row["metrics_at_k"][str(k)] = ranking_metrics(case, prefix, entry)
+            if retrieval.backend in ("embeddings", "hybrid") and not case.expected_abstention:
+                visibility = {
+                    p.id: encoded_passages[p.id].retained_ranges
+                    if p.id in encoded_passages
+                    else None
+                    for p in prefix
+                }
+                row["embedding_coverage_at_k"][str(k)] = evidence_coverage(entry, visibility)
+                row["embedding_truncation_loss_at_k"][str(k)] = coverage_loss(
+                    row["metrics_at_k"][str(k)], row["embedding_coverage_at_k"][str(k)]
+                )
+        if hits is not None:
+            budget = (
+                {
+                    "max_passages": provider.MAX_PASSAGES,
+                    "max_passage_chars": provider.MAX_PASSAGE_CHARS,
+                    "max_context_chars": provider.MAX_CONTEXT_CHARS,
+                }
+                if isinstance(provider, OpenAIProvider)
+                else {}
+            )
+            prepared = prepare_answer_context(hits, **budget)
+            row["answer_context_preview"] = prepared.diagnostics.model_dump()
+            row["answer_context_coverage"] = evidence_coverage(
+                entry,
+                {
+                    pid: [TextRange(start=0, end=length)]
+                    for pid, length in prepared.diagnostics.visible_chars.items()
+                    if length
+                },
+            )
+            full_context = ranking_metrics(case, prepared.supplied, entry)
+            row["answer_context_selection_loss"] = coverage_loss(
+                ranking_metrics(case, hits, entry), full_context
+            )
+            row["answer_context_truncation_loss"] = coverage_loss(
+                full_context, row["answer_context_coverage"]
+            )
+            row["encoder_truncated_passage_ids"] = [
+                p.id for p in hits if p.id in encoded_passages and encoded_passages[p.id].truncated
+            ]
+            if retrieval.backend in ("embeddings", "hybrid"):
+                row["encoder_unmeasured_passage_ids"] = [
+                    p.id for p in hits if p.id not in encoded_passages
+                ]
         row["latency_ms"] = round((perf_counter() - started) * 1000, 3)
         row["process_peak_rss_bytes"] = (
             process_peak_rss_bytes() if execution.measure_memory else None
@@ -375,6 +475,29 @@ def run_evaluation(
         rows.append(row)
     return {
         "schema_version": 2,
+        "evaluation_contract": {
+            "metrics_version": 2,
+            "primary_k": 4,
+            "evidence_labels_sha256": canonical_hash(evidence_labels.model_dump(mode="json"))
+            if evidence_labels
+            else None,
+            "percentile_method": "nearest-rank",
+        },
+        "cutoffs": cutoffs,
+        "evidence_labels": evidence_labels.model_dump(mode="json") if evidence_labels else None,
+        "encoding_diagnostics": encoding_diagnostics.model_dump(mode="json")
+        if encoding_diagnostics
+        else None,
+        "encoding_measurement_summary": {
+            "measured_passages": len(encoded_passages),
+            "unmeasured_passages": len(passages) - len(encoded_passages),
+            "truncated_passages": sum(p.truncated for p in encoded_passages.values()),
+            "truncation_rate_measured": sum(p.truncated for p in encoded_passages.values())
+            / len(encoded_passages)
+            if encoded_passages
+            else None,
+            "applicable": retrieval.backend in ("embeddings", "hybrid"),
+        },
         "run_id": str(uuid4()),
         "created_at": datetime.now(UTC).isoformat(),
         "code": code_state(),
@@ -474,6 +597,7 @@ def summarize(run: dict, review: Review | None = None) -> dict:
         for r in rows
         if (r["answer"] or {}).get("status") in ("answered", "insufficient_evidence")
     ]
+    primary = cutoff_summary(run, 4) if run.get("evaluation_contract") else {}
     return {
         "cases": len(rows),
         "errors": sum(r["error"] is not None for r in rows),
@@ -544,7 +668,44 @@ def summarize(run: dict, review: Review | None = None) -> dict:
             a["error"] is not None for r in rows for a in r.get("retrieval_attempts", [])
         ),
         "query_median_ms": median(query_samples) if query_samples else None,
+        "query_p95_ms": percentile_nearest_rank(query_samples, 0.95),
         "query_max_ms": max(query_samples) if query_samples else None,
+        "primary_k4_mrr": primary.get("mrr"),
+        "primary_k4_group_coverage": primary.get("mean_group_coverage"),
+        "primary_k4_complete_evidence_rate": primary.get("complete_evidence_rate"),
+        "evidence_labels_review_status": (run.get("evidence_labels") or {}).get("review_status"),
+        "encoder_measured_passages": (run.get("encoding_measurement_summary") or {}).get(
+            "measured_passages"
+        ),
+        "encoder_unmeasured_passages": (run.get("encoding_measurement_summary") or {}).get(
+            "unmeasured_passages"
+        ),
+        "encoder_truncation_rate_measured": (run.get("encoding_measurement_summary") or {}).get(
+            "truncation_rate_measured"
+        ),
+        "encoder_k4_evidence_loss_cases": sum(
+            bool(r.get("embedding_truncation_loss_at_k", {}).get("4", {}).get("lost_group_ids"))
+            for r in rows
+        ),
+        "encoder_k4_evidence_unknown_cases": sum(
+            bool(r.get("embedding_truncation_loss_at_k", {}).get("4", {}).get("unknown_group_ids"))
+            for r in rows
+        ),
+        "context_selection_evidence_loss_cases": sum(
+            bool((r.get("answer_context_selection_loss") or {}).get("lost_group_ids")) for r in rows
+        ),
+        "context_truncation_evidence_loss_cases": sum(
+            bool((r.get("answer_context_truncation_loss") or {}).get("lost_group_ids"))
+            for r in rows
+        ),
+        "context_preview_truncated_passages": sum(
+            len((r.get("answer_context_preview") or {}).get("truncated_passage_ids", []))
+            for r in rows
+        ),
+        "context_preview_omitted_passages": sum(
+            len((r.get("answer_context_preview") or {}).get("omitted_passage_ids", []))
+            for r in rows
+        ),
         "unstable_ranking_cases": sum(
             r.get("ranking_stable_across_repeats") is False for r in rows
         ),
@@ -577,6 +738,7 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
                     r["corpus"]["source_sha256"],
                     canonical_hash(r["corpus"]["chunking"]),
                     r["corpus"][identity_field],
+                    canonical_hash(r.get("evaluation_contract")),
                 )
                 for r in runs
             }
@@ -584,7 +746,8 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
         != 1
     ):
         raise ValueError(
-            "Compare only the same dataset, corpus, chunking and passage/source metadata"
+            "Compare only the same dataset, corpus, chunking, passage/source metadata "
+            "and evidence/scoring contract"
         )
     summaries = [summarize(r, review) for r, review in zip(runs, reviews, strict=True)]
     lines = [
@@ -596,7 +759,8 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
         "The recall mean uses scored retrievals; inspect errors and recall_scored alongside it. "
         "Comparison coverage includes failed retrievals in its denominator. "
         "No-match and preview statuses are not generated abstentions.",
-        "MRR uses expected passage IDs, with misses/retrieval errors zero "
+        "MRR uses labeled evidence passage IDs when provided, otherwise expected passage IDs, "
+        "with misses/retrieval errors zero "
         "over all answerable cases. "
         "Unanswerable cases receive no relevance score; nearest neighbors do not prove support.",
         "Query timings exclude setup/warmups; setup is recorded separately. Peak RSS is a "
@@ -611,6 +775,17 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
     ]
     for key in summaries[0]:
         lines.append("| " + key + " | " + " | ".join(str(s[key]) for s in summaries) + " |")
+    lines.extend(comparison_details(runs))
+    lines.extend(
+        [
+            "",
+            "Evidence coverage follows the supplied labels, including OR alternatives and AND "
+            "combinations. Unreviewed labels produce development diagnostics. Full source presence "
+            "and one relevant passage do not establish complete support. Encoder visibility is "
+            "unknown without measured character ranges. Application context preview is offline. "
+            "Actual OpenAI answers record the supplied context. Neither is answer correctness.",
+        ]
+    )
     for run in runs:
         lines.extend(
             [
@@ -623,6 +798,8 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
                         "retrieval": run["retrieval"],
                         "generation": run["generation"],
                         "execution": run.get("execution"),
+                        "evaluation_contract": run.get("evaluation_contract"),
+                        "encoding_measurement_summary": run.get("encoding_measurement_summary"),
                         "embedding_artifact_sha256": run["corpus"].get("embedding_artifact_sha256"),
                         "unknown_embedding_runtime_settings": [
                             field
@@ -650,10 +827,15 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
     for run, review in zip(runs, reviews, strict=True):
         for row in run["results"]:
             status = (row["answer"] or {}).get("status", "retrieval-only")
+            primary = (row.get("metrics_at_k", {}).get("4") or {}).get("complete_evidence")
             lines.append(
                 f"- {run['run_id']} / {row['case_id']}: recall={row['source_recall_at_k']}, "
                 f"first relevant rank={row.get('first_relevant_passage_rank')}, "
                 f"status={status}, error={row['error']}"
+                f", k4 complete={primary}, "
+                f"encoder lost/unknown={row.get('embedding_truncation_loss_at_k', {}).get('4')}, "
+                f"context selection loss={row.get('answer_context_selection_loss')}, "
+                f"context truncation loss={row.get('answer_context_truncation_loss')}"
             )
         if review:
             for case in review.cases:
@@ -682,6 +864,13 @@ def main() -> None:
     )
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--limit", type=int)
+    run.add_argument("--cutoffs", type=int, nargs="+", help="Ranking prefixes; use 1 4 10")
+    run.add_argument(
+        "--evidence-labels", type=Path, help="Pinned alternative/complete-evidence labels"
+    )
+    run.add_argument(
+        "--encoding-diagnostics", type=Path, help="Measured encoder token/range sidecar"
+    )
     run.add_argument("--repeats", type=int, default=1)
     run.add_argument("--warmups", type=int, default=0)
     run.add_argument("--measure-memory", action="store_true")
@@ -696,6 +885,9 @@ def main() -> None:
     report = commands.add_parser("report")
     report.add_argument("runs", type=Path, nargs="+")
     report.add_argument("--output", type=Path, required=True)
+    report.add_argument(
+        "--paired-output", type=Path, help="Optional machine-readable paired changes"
+    )
     args = parser.parse_args()
     try:
         if args.command == "run":
@@ -722,6 +914,13 @@ def main() -> None:
                 retrieval = RetrievalConfig.model_validate(
                     {**retrieval.model_dump(), "limit": args.limit}
                 )
+            elif args.cutoffs:
+                retrieval = RetrievalConfig.model_validate(
+                    {
+                        **retrieval.model_dump(),
+                        "limit": max(retrieval.limit, max(args.cutoffs)),
+                    }
+                )
             execution = ExecutionConfig(
                 repeats=args.repeats,
                 warmups=args.warmups,
@@ -738,6 +937,17 @@ def main() -> None:
                 provider=provider,
                 generation=GenerationConfig(provider="local-preview" if provider else "none"),
                 execution=execution,
+                cutoffs=args.cutoffs,
+                evidence_labels=EvidenceLabels.model_validate_json(
+                    args.evidence_labels.read_bytes()
+                )
+                if args.evidence_labels
+                else None,
+                encoding_diagnostics=EncodingDiagnostics.model_validate_json(
+                    args.encoding_diagnostics.read_bytes()
+                )
+                if args.encoding_diagnostics
+                else None,
             )
             args.output.mkdir(parents=True, exist_ok=False)
             (args.output / "run.json").write_bytes(encoded(result))
@@ -758,8 +968,30 @@ def main() -> None:
                 else None
                 for path in args.runs
             ]
+            if args.output.exists() or (
+                args.paired_output
+                and (
+                    args.paired_output.exists()
+                    or args.paired_output.resolve() == args.output.resolve()
+                )
+            ):
+                raise ValueError("Report output already exists")
+            body = comparison_report(runs, reviews)
+            paired = [
+                {
+                    "baseline_run_id": runs[0]["run_id"],
+                    "candidate_run_id": candidate["run_id"],
+                    "changes": {str(k): paired_changes(runs[0], candidate, k) for k in (1, 4, 10)},
+                }
+                for candidate in runs[1:]
+            ]
             with args.output.open("x", encoding="utf-8") as output:
-                output.write(comparison_report(runs, reviews))
+                output.write(body)
+            if args.paired_output:
+                with args.paired_output.open("xb") as output:
+                    output.write(
+                        encoded({"schema_version": 1, "primary_k": 4, "comparisons": paired})
+                    )
     except (ValueError, OSError, KeyError):
         # Avoid dumping user-controlled values, paths or provider credentials.
         parser.exit(2, "Evaluation failed: check dataset, artifact, split and output contracts.\n")
