@@ -1,196 +1,204 @@
-# Evaluation procedure
+# Evaluation foundation
 
-No technical evaluation results exist yet. The three synthetic documents and backend
-tests are development material, not a held-out evaluation set. Passing tests do
-not demonstrate RAG answer quality.
+This workflow compares retrieval implementations on fixed questions and passages.
+Four technical papers are available; technical development questions are unreviewed
+drafts. The three synthetic cases remain smoke tests. No human-reviewed retrieval
+benchmark or answer-quality results exist yet. Nearest neighbors and valid citation
+IDs are not proof of support.
 
-## Reproduce the free development evaluation
+## Run free development diagnostics
 
-From the repository root (Python 3.13 and the committed `uv.lock`):
+From the repository root (Python 3.13 and committed `uv.lock`):
 
 ```sh
 rtk proxy uv sync --locked --python 3.13
-rtk proxy uv run --directory backend python -m researchlens.ingest
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/development.json --other-split ../evaluation/datasets/held-out.json --output ../evaluation/runs/retrieval-k4
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/development.json --other-split ../evaluation/datasets/held-out.json --limit 1 --output ../evaluation/runs/retrieval-k1
-rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/retrieval-k4 ../evaluation/runs/retrieval-k1 --output ../evaluation/runs/comparison.md
+rtk proxy uv run --directory backend python -m researchlens.ingest --corpus technical
+rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k4
+rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --limit 1 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k1
+rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-k1 --output ../evaluation/runs/technical-comparison.md
 ```
 
+To run the original smoke tests, ingest `--corpus sample`, select
+`--dataset ../evaluation/datasets/development.json`, and pass
+`--source ../data/sample_documents.json`. The runner's source default matches the
+technical ingestion CLI default. Do not mix the sample questions with a technical index.
 On Windows, `py -m uv` can replace `uv`. Without RTK, omit `rtk proxy`.
-Use a fresh output directory/name for every run/report: existing artifacts are never
-overwritten. `evaluation/runs/` is ignored by Git. Archive explicitly selected,
-reviewed artifacts when publishing results. Do not commit credentials.
 
-The default CLI path constructs only the local TF-IDF retriever and makes **zero API
-calls**, regardless of `.env` or `ANSWER_PROVIDER`. `--mode local-preview` additionally
-records the app's preview response. This is not generated-answer evaluation.
-CLI output consists of `run.json`, a blank `review.json`, and `report.md`.
-Repeat the `report` command after human review to include judgments. Compare runs
-only with identical dataset and passage-artifact hashes; configuration differences
-are recorded. Timing and run IDs vary, while pinned inputs and retrieval results are
-reproducible. Git attributes enforce LF corpus bytes across Windows/Linux; rebuild
-an older index after normalizing an existing checkout with `git add --renormalize`
-only if you intend to stage those files. A fresh checkout already applies the rule.
+Evaluation is manual. CI tests the tooling; it does not run a quality benchmark or
+publish evaluation artifacts. The default CLI makes zero paid API calls regardless
+of `.env` or `ANSWER_PROVIDER`. `--mode local-preview` also records the app's preview,
+which does not generate answers. Each new output directory receives `run.json`,
+`review.json` and `report.md`. Existing outputs are never overwritten.
+`evaluation/runs/` is ignored by Git; archive deliberately selected, reviewed artifacts
+when publishing results. Review licensed/private passage text before sharing it.
+Never save API credentials.
 
-## Dataset contract and current status
+## Datasets and human review
 
-`backend/researchlens/evaluation_schema.py` defines strict, versioned Pydantic contracts
-(`Dataset.model_json_schema()` exposes the JSON Schema). Unknown fields and inconsistent
-reviews, duplicate IDs/questions, missing evidence, and one-source comparisons fail validation.
+`evaluation_schema.py` defines strict Pydantic contracts; `Dataset.model_json_schema()`
+exposes JSON Schema. Unknown fields, inconsistent reviews, duplicate IDs/questions,
+missing references/claims and one-source comparisons fail validation.
 
-- `datasets/development.json`: three AI-authored, **unreviewed synthetic** examples
-  covering factual, cross-document and missing-evidence questions. All reviewer/date
-  fields are null. These may be used for implementation and tuning.
-- `datasets/held-out.json`: deliberately empty, `pending-real-corpus`. It cannot run.
-  No curated real documents are available in this checkout. Creating roughly 20
-  real-corpus questions (8 factual, 8 comparison, 4 unanswerable) is **pending**.
-  Do not pad the held-out set with synthetic questions or invent publications.
+- `datasets/development.json`: three AI-authored, unreviewed synthetic smoke cases.
+- `datasets/technical-development.json`: twelve AI-authored, unreviewed technical
+  drafts covering exact terminology, paraphrases, two cross-document comparisons, an
+  unrelated question and a plausible absent common-benchmark comparison. Paraphrase
+  pairs intentionally share expectations for development diagnostics.
+- `datasets/held-out.json`: empty, `pending-human-review`, pinned to the technical
+  corpus. It cannot run. Independently creating and human-reviewing roughly 20 questions
+  (8 factual, 8 comparisons, 4 unanswerable) remains pending when source material permits.
 
-Each dataset records its split, version, material, status and raw source-file SHA-256.
-Each case records category, expected source IDs, passage/paragraph/page references,
-required claims, required qualifications, forbidden unsupported claims, expected
-abstention, reviewer, date and review status. Text fixtures have no pages: use null,
-never an invented page number. Passage/source/paragraph consistency is checked against
-the pinned index; future PDF page references must be checked against full sources by
-humans because today's passage API does not expose page numbers. For unanswerable
-cases, references identify related context or explicitly missing measurements, not
-positive answer evidence. They do not receive a recall score.
+Each dataset records split/version/material/status, the source-file hash and original
+source checksums/DOIs/dates. Cases record expected source IDs, specific passage/paragraph
+and XML section/locator references, required claims/qualifications, forbidden claims,
+expected abstention and review provenance. Page numbers are null for XML/text sources;
+never invent PDF pages. References and original-source versions are checked against
+the index. The full original XML and attribution are preserved in `data/technical/`.
 
-After real-corpus curation, draft questions as `unreviewed`, have a human check every
-expectation against the **full sources**, fill identity/date, then mark `approved`.
-Pin the corpus hash and freeze the reviewed held-out dataset (`status: frozen`).
-Rejected questions must be corrected and reviewed again before freezing. Human review
-cannot be inferred from schema validation. The CLI checks IDs and normalized questions
-against the other split; semantic/paraphrase leakage still requires human inspection.
-Never tune on held-out questions. Freeze before tuning, log access/exposure, and retire
-an exposed held-out set if its failures inform changes; use a new version and fresh
-questions for subsequent quality claims.
+The technical prose extraction omits figures, tables and formula details. A human must
+check the full sources, especially absence claims and alternative supporting passages,
+before approving a question. Automated validation is not human scientific review.
+All drafts have `review_status: unreviewed` with null reviewer/date. After actual human
+review, record identity/date and mark approved; only approved cases can be frozen.
 
-## Retrieval and generation integration
+Keep development and held-out questions separate. Freeze held-out before model/settings
+selection; never tune on it. CLI overlap checks catch IDs/normalized identical questions,
+while semantic/paraphrase leakage requires human inspection. Log exposure, retire a set
+whose failures inform tuning, and use fresh questions for a subsequent quality claim.
+Synthetic tests and draft retrieval diagnostics do not establish model superiority.
 
-The app's retrieval API is unchanged. Embedding work can plug into:
+## Shared artifacts and controlled comparisons
+
+`artifacts.load_artifact(path, source=...)` is shared with retrieval loading and accepts
+schema-1 passages and schema-2 artifacts. Schema 2 can contain PR #9's
+`embeddings.encoding`, `passage_ids`, `vectors` and `vectors_sha256`. A schema-2
+passage-only artifact is valid for lexical retrieval. The validator checks:
+
+- Corpus hash, unique passage IDs and chunking; when source is supplied, re-chunked
+  passages must match text and all attribution/source locations.
+- Embedding row order, dimensions, finite/nonzero values, L2 norms when declared and
+  the little-endian float32 checksum. Encoding metadata uses an explicit allowlist.
+
+The actual embedding adapter also verifies that its query encoder matches the saved
+model, pinned revision and encoding. Evaluation never loads weights, computes document
+vectors or substitutes a temporary schema-1 view.
+
+Run schema 2 stores a shared passage fingerprint of the corpus hash, chunking and ordered
+full normalized passage records: IDs, text, title, URL, license, kind, paragraph,
+attribution and XML locations. Comparisons require matching dataset, corpus, chunking
+and shared passage identity. Model vectors/encoding may differ and receive separate
+full embedding-artifact and encoding hashes. Changing any shared input blocks a
+controlled comparison. Old run schema 1 retains its strict full-artifact check;
+regenerate legacy runs before mixing with new ones.
+
+## Retrieval adapter and model configuration
+
+The injected Python interface remains:
 
 ```python
 class Search(Protocol):
     def search(self, question: str, limit: int = 4) -> list[SearchHit]: ...
 
 run_evaluation(dataset, artifact, retriever, retrieval_config,
-               provider=None, generation=None)
+               execution=ExecutionConfig(repeats=5, warmups=1, measure_memory=True))
 ```
 
-Build/load the index outside the timed loop, then inject the implementation. Return
-ranked, unique `SearchHit` objects from the exact pinned passage artifact, at most
-`limit`; scores can be implementation-specific. Do not rewrite passage IDs or text.
-Record implementation/version, k, model/revision, embedding artifact hash,
-normalization and score threshold using `RetrievalConfig`; extend the strict schema
-with explicit fields for other ranking options rather than dumping a client or env.
-Local embeddings can therefore be evaluated without modifying the CLI or app API by
-calling this Python entry point from an integration script. No embedding implementation
-is included here. Call `validate_splits` before custom runs, as the CLI does.
+Return ranked, unique SearchHits from the exact pinned artifact, at most `limit`.
+Scores are implementation-specific and must be finite. Build/load outside the query
+loop, pass setup times explicitly, and call `validate_splits` before custom runs.
+Injected adapters own their lifecycle and are trusted executable code.
 
-An optional `AnswerProvider.answer(question, passages) -> Answer` records generated
-sections/citation IDs, answer status, supplied passage references and token metadata.
-Use `GenerationConfig(provider="mock")` for fake providers; mock usage is simulated,
-with zero API cost. A custom adapter is trusted executable code: it must truthfully
-declare its configuration and avoid remote requests in offline mode. The runner cannot
-prove arbitrary Python adapters are offline. Providers own their lifecycle and closing.
+CLI `--retriever tfidf|embeddings|hybrid` delegates to
+`retrieval.load_retriever(backend, path, source=...)`. This branch provides the lexical
+factory adapter; PR #9 owns embedding implementation/selection with that same interface.
+Unavailable adapters fail explicitly rather than silently using TF-IDF. No second
+encoder, hybrid algorithm or multi-model orchestration is implemented here. MiniLM,
+BGE-M3, Qwen3-Embedding-0.6B and Qwen3-Embedding-4B are planned retrieval comparisons,
+not measured model results in this PR.
 
-There is intentionally **no paid CLI mode**. The Python runner accepts the existing
-`OpenAIProvider` only with declared `gpt-6-luna`, medium reasoning, output limit matching
-the provider (currently 2,000 tokens), zero client retries, and the SHA-256 of
-`answers.INSTRUCTIONS`. It rejects unreviewed questions and requires a positive dated
-`estimated_run_cost_usd` and `pricing_date` before invoking that provider. It never
-loads keys or constructs a live client on its own. Construct and close a live provider
-only in a deliberately authorized integration script; never serialize `Settings`.
-The existing provider bounds context to four passages, each truncated to 3,000
-characters, within a 16,000-character serialized context cap. Its returned references
-retain full text; review the truncation boundary when assessing support available to
-the model. Retrieval k can exceed four, so retrieved and model-supplied IDs can differ.
+After the retrieval adapter and a separate schema-2 technical index are available:
 
-Before any live test, obtain current input/output rates and estimate
-`(input_tokens * input_rate + max_output_tokens * output_rate) / 1_000_000`, summed
-over requests with a conservative input allowance for instructions, question, context
-and structured-output schema. Record rates, date, assumptions and budget alongside the
-run. Estimates are not a hard spend cap. Prefer mocks and retrieval-only runs; do not
-run broad paid evaluations on draft questions. No paid calls were used for this tooling.
+```sh
+rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --source ../data/technical/documents.json --index ../data/minilm-index.json --retriever embeddings --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-minilm
+rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-minilm --output ../evaluation/runs/model-comparison.md
+```
 
-## Artifacts and human review
+Strict `RetrievalConfig` records implementation/version/k, model/pinned revision,
+runtime/version/backend, device, precision/quantization, dimensions, weights/tokenizer,
+pooling, normalization, query/document instructions, maximum tokens, truncation, batch
+size, CPU intra/inter-op thread settings and text representation. Hybrid settings include both candidate counts and
+RRF k or weighted-score fusion settings. Named fields are allowlisted; never serialize
+a client, credentials or whole environment/settings object.
 
-Run artifacts snapshot the dataset/expectations, source and passage-artifact hashes,
-chunking configuration, Git commit/dirty flag, evaluation code hash, Python/package
-versions and lockfile hash, retrieval/model configuration, timestamp and run ID.
-Per case they save ranked passage IDs/text/scores, answer sections and citations,
-retrieval/generation/total latency, token usage, cost and errors. Outputs are intended
-for local use; review licensed/private source text before sharing an artifact. Never
-report a dirty-worktree run as a reproducible published baseline without archiving the
-corresponding code. Index load/build time is excluded; the first request can be cold.
+PR #9's encoding fields populate the evaluation configuration. Runtime/device/precision,
+quantization/truncation/batch size missing from its metadata remain null (unknown), never
+guessed from a model name. Ask the adapter to publish truthful metadata or supply a
+complete `--retrieval-config path.json` with selected backend and actual implementation
+class. Declared encoding fields must match the artifact; `--limit` can override k.
+Evaluation cannot verify arbitrary adapter settings from a label. Verify actual setup
+before publishing a reproducible baseline. Versions of installed relevant libraries,
+OS/architecture, lockfile, Git commit/dirty flag and evaluation code hash are recorded.
 
-Errors stay in the result set, including retrieval successes followed by generation
-failures. Only stable stage/error codes are saved: exception strings may contain
-credentials or provider request data. On provider errors, usage/cost remains **unknown**,
-including invalid completed answers whose usage the current provider cannot return.
-No-call retrieval and previews cost zero. Known sums and unknown counts are separate;
-do not interpret known sums as final billing totals. Per-request paid estimates may
-remain null because the provider does not hardcode billing rates.
+## Ranking, timing and memory
 
-`review.json` is bound to the run ID and full canonical run hash. Reviewers inspect the
-run's question, expectations, retrieved context and each answer section against full
-sources, then record:
+Source/passage recall and full cross-document source coverage are retained. The first
+relevant passage rank and reciprocal rank use expected passage IDs, so rank three
+contributes 1/3 rather than 1. MRR at k includes all answerable cases with misses/retrieval errors
+as zero. Source/passage recall also have failure-inclusive summaries alongside scored
+counts. Unanswerable/unrelated cases have no relevance score. Incomplete draft relevance
+judgments may underestimate recall/MRR; review acceptable evidence before model selection.
 
-- Per section: correctness (`correct/incorrect/unclear`), citation support
-  (`supported/unsupported/unclear`) and concrete evidence notes. Check every material
-  claim within the section, including scope and qualifications; split notes by claim.
-- Per answer: correctness (`correct/partial/incorrect/unclear/not-applicable`), overall
-  citation support, whether required claims/qualifications are met, forbidden claims,
-  and full/partial/no abstention (or `not-applicable` for retrieval/preview/errors).
-- Reviewer, date and `status: complete` only after all judgments are filled. A blank
-  template is pending, never a completed human review. Use notes for source/page
-  evidence, missing claims, contradictions and error diagnosis.
+Index read, validation and factory/model construction are recorded separately as
+`index_load_time_ms`. Ingestion happens outside evaluation: supply an externally
+measured `--ingestion-time-ms` or ExecutionConfig duration; omission means unknown.
+Warmups are separate from timed query attempts. Repeats call local retrieval only;
+answer generation is called at most once per case. Each timed attempt records latency,
+IDs and errors; changed rankings are flagged. Failure stops remaining repeats without
+retry and remains in the result set. Reports show sample counts, median/max query
+latency, whole-case duration and setup costs. Use identical timing protocols in comparisons.
 
-**Valid citation IDs alone do not establish factual support.** Retrieval-only runs
-have no correctness, citation-support or generated-abstention scores. No-match is a
-retrieval outcome, not proof that the corpus cannot answer. Automatic status counts
-are explicitly separate from human judgments; partial answers require manual review.
-Reports show recall denominators/errors, comparison coverage, abstention counts,
-review completion, latency and known/unknown usage. Do not rank model quality from
-unreviewed examples or claim statistical certainty from a small held-out set.
+`--measure-memory` records native process lifetime peak RSS (Windows peak working set;
+Unix `ru_maxrss`). This includes native allocations, but is a coarse high-water mark
+rather than isolated per-model/per-query memory. Unavailable measurements are null.
+Use a fresh process per model and distinguish cache-only/cold model load from warmed
+queries. CPU speed and RAM feasibility for the 4B model require measurement in retrieval
+work. API cost is zero for local runs; CPU time and RAM still matter.
 
-After the authorized corpus is fixed, draft 20 questions: eight factual, eight
-cross-document comparisons and four unanswerable questions. The owner must manually
-review each question against full source documents, confirm supporting passages and
-record review status before any reported evaluation. Unanswerable questions should
-include plausible in-domain requests whose missing facts cannot be established merely
-by retrieving related text.
+## Optional generated-answer review
 
-Each case should record `id`, `question`, `category`, `expected_source_ids`, specific
-page/passage references, required claims, forbidden unsupported claims, expected
-abstention behavior, reviewer and review date. Suggestions should be assessed separately
-from documented findings. Preserve source versions and the corpus hash.
+An optional `AnswerProvider.answer(question, passages) -> Answer` records answer
+sections/citations, status, supplied references, latency, usage and errors. Mocks have
+zero API cost. Retrieval-only runs cannot establish correctness or abstention quality.
+No-match is a retrieval outcome, not proof that the corpus lacks an answer.
 
-Keep tuning questions in a separate development file. Freeze the held-out questions
-before model/prompt tuning. If failures motivate tuning, disclose that exposure and
-use new held-out questions for a fresh comparison.
+`review.json` is bound to the run ID and canonical run hash. Generated answers start
+pending; retrieval/preview/error entries are explicitly not-applicable. Human reviewers
+inspect every material claim against full sources and record per-section correctness
+(correct/incorrect/unclear), citation support (supported/unsupported/unclear), evidence
+notes, overall correctness/support, required claims and qualifications, forbidden claims,
+and full/partial/no abstention. Complete reviews require identity/date and all judgments.
+Valid citation IDs never automatically earn factual-support scores. Reports separate
+automatic statuses from human judgments and expose review completion and errors.
 
-## Run and assess
+There is no paid CLI mode. Injecting the existing OpenAIProvider requires reviewed
+cases, gpt-6-luna/medium, the matching bounded output limit (currently 2,000), zero
+client retries, the prompt hash and a positive dated cost estimate before any call.
+The provider supplies at most four 3,000-character passages within 16,000 serialized
+context characters; returned references retain full originals. Review truncation when
+assessing evidence available to the model. Retrieval k may exceed model context size.
 
-1. Record the commit, corpus hash, chunking parameters, embedding model/revision,
-   retrieval settings, provider/model, prompt version and run time.
-2. Save retrieved passage IDs, answer text, citations, wall-clock latency, input/output
-   tokens, provider errors and estimated cost per request. Never save API credentials.
-3. Compute source recall at k as retrieved expected sources divided by expected sources
-   for answerable questions. Report cross-document coverage separately. Do not assign
-   recall to questions with no expected sources.
-4. Manually mark each material claim correct/incorrect/unclear, and cited support
-   supported/unsupported/unclear. Valid citation IDs alone cannot establish support.
-5. Report abstention on unanswerable cases and false abstention on answerable cases,
-   with counts and concrete failures. Distinguish partial answers from full abstention.
-6. Report per-request latency, median and maximum, noting cold starts and sample size.
-   Record provider failures as failures rather than dropping them. Price estimates must
-   include the pricing date and distinguish unknown usage from zero usage.
+Before a deliberately authorized live pilot, obtain current rates and conservatively
+estimate `(input_tokens * input_rate + max_output_tokens * output_rate) / 1_000_000`
+over all planned requests, including prompt/context/schema overhead. Record assumptions,
+date and budget. Estimates are not spend caps or billing totals. Prefer mocks/local
+retrieval; no paid generation is needed for embedding comparisons.
 
-Use a small pilot on development questions to estimate cost before the held-out run.
-Reserve $1 for the first evaluation, within the available $10 total credit. Do not
-claim statistical certainty or model superiority from 20 examples.
+Errors retain stable stage/code fields instead of exception strings that may expose
+credentials. Failed paid requests can leave usage/cost unknown, including invalid
+answers whose usage the current provider cannot return. Known sums and unknown counts
+stay separate; no-call requests cost zero. Do not claim statistical certainty from a
+small dataset. Dirty-worktree results require archived corresponding code before being
+published as a reproducible baseline.
 
 ## Initial implementation verification, 2026-09-25
 
