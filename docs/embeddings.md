@@ -118,8 +118,10 @@ Old incomplete embedding contracts and changed recorded runtime versions require
 Hybrid combines up to 20 positive-score lexical candidates and 20 dense neighbors with
 reciprocal rank fusion: sum `1 / (60 + rank)`, using one-based ranks. It deduplicates by
 stable passage ID; exact ties use artifact order. Raw similarity scores are not added.
-The final limit defaults to four. There is no threshold, reranker, learned weighting or
-diversity heuristic. Unrelated questions can still have dense/hybrid neighbors and reach
+The final limit defaults to four. Optional static weights, a pinned local cross-encoder
+and redundancy selection are documented in [retrieval experiments](retrieval-improvements.md).
+They are disabled by default; no relevance threshold or learned weighting is implemented.
+Unrelated questions can still have dense/hybrid neighbors and reach
 the paid answer provider. Scores never prove answerability; existing prompt/context
 limits and provider abstention remain intact. Local preview does not judge support.
 
@@ -134,20 +136,25 @@ hits = retriever.search(question, limit=4)
 ```
 
 Run with `backend` on `PYTHONPATH` or inside that directory. Model/index loading happens
-once; each search encodes only the question. Evaluation derives settings from the artifact
+once; dense search encodes only the question. Optional reranking encodes question/passage
+pairs for its fixed candidate pool. Evaluation derives settings from the artifact
 independently of `.env`; app startup also verifies `EMBEDDING_MODEL`. `source` is optional
 for legacy callers; supply it for corpus validation. Citation identities remain unchanged.
 
 The new evaluator accepts an optional `get_encoding_diagnostics()` hook or
 `--encoding-diagnostics` sidecar for measured token counts and retained text ranges.
-These adapters do not yet publish that measurement. Encoder visibility and truncation
-rates therefore remain unknown, even though encoding settings are recorded. This
-does not block retrieval ranking or coverage scoring over full retrieved passages.
+Embedding adapters now publish this hook using the actual loaded tokenizers, including
+special-token counts and retained canonical-text character ranges. Hybrid and reranked
+adapters delegate the same cached measurements. Artifact/encoding/text hashes bind the
+measurements to the saved vectors. Full-passage scoring and encoder visibility remain
+separate measures; a correctly retrieved passage can contain evidence beyond its encoded prefix.
 Provider-context selection/truncation preview is measured separately without API calls.
 
 The existing evaluation CLI consumes full schema-2 artifacts directly. Hybrid defaults
 are recorded in `RetrievalConfig`; explicit `--retrieval-config` candidate counts/RRF k
-are passed to the actual adapter. Only RRF is implemented. Tune settings on reviewed
+and static weights are passed to the actual adapter. A nested allowlisted reranker
+configuration records its pin, runtime, candidate pool and optional diversity penalty.
+Only RRF is implemented for fusion. Tune settings on reviewed
 development questions and freeze before held-out comparisons. See
 [CPU model comparison](model-comparison.md) for measured diagnostics and remaining limits.
 Use [current comparison commands](retrieval-readiness.md) to pass the approved evidence

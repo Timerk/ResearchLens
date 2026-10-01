@@ -77,11 +77,12 @@ held-out questions. Record any configuration tuning and preserve original report
 
 ## Remaining limitations
 
-Actual tokenizer-based passage visibility measurements are not implemented in the
-embedding adapters. The new runner marks encoder token counts, truncation frequency
-and evidence visibility unknown rather than inventing them. Ranking and full-passage
-evidence coverage can run now; measured embedding-truncation analysis remains separate
-integration work. Provider-context visibility preview is available without paid calls.
+The [retrieval development experiments](retrieval-improvements.md) now implement
+actual tokenizer-based passage visibility for every embedding adapter, plus optional
+weighted fusion and local reranking. The historical readiness runs above predate those
+measurements and correctly retain unknown visibility. New runs measure token counts,
+retained character ranges and truncation against artifact hashes. Provider-context
+visibility preview is available without paid calls; larger context budgets are offline experiments.
 
 The [full approved development comparison](approved-model-comparison.md) now records
 all nine configurations, separate k=4/ranking runs and paired regressions. The

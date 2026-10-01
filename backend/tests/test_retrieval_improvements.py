@@ -178,6 +178,26 @@ def test_diagnostics_bind_exact_artifact_and_are_cached(tmp_path, monkeypatch):
         )
 
 
+def test_configured_model_validation_reads_index_and_loads_encoder_once(tmp_path, monkeypatch):
+    import researchlens.retrieval as retrieval
+
+    encoder = Mock()
+    encoder.encoding = encoding_metadata()
+    matrix = np.zeros((6, 384), dtype=np.float32)
+    matrix[:, 0] = 1
+    encoder.encode.return_value = matrix
+    monkeypatch.setattr("researchlens.embedding_models.create_encoder", lambda *a, **k: encoder)
+    path = tmp_path / "index.json"
+    build_index(CORPUS, path, retrieval="embeddings")
+    loader = Mock(wraps=retrieval._load_artifact)
+    factory = Mock(return_value=encoder)
+    monkeypatch.setattr(retrieval, "_load_artifact", loader)
+    monkeypatch.setattr(retrieval, "create_encoder", factory)
+    load_retriever("embeddings", path, source=CORPUS, expected_model="minilm")
+    loader.assert_called_once_with(path, CORPUS)
+    factory.assert_called_once()
+
+
 def test_reranker_measurements_reject_stale_text_and_out_of_bounds_ranges():
     hits = sample_hits()
     row = {"passage_id": hits[0].id, **measurement(hits[0].text, 7, 7, len(hits[0].text))}

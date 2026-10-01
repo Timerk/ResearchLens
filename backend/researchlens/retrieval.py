@@ -95,7 +95,13 @@ class EmbeddingRetriever:
         self._artifact = None
 
     @classmethod
-    def from_path(cls, path: Path, *, source: Path | None = None) -> "EmbeddingRetriever":
+    def from_path(
+        cls,
+        path: Path,
+        *,
+        source: Path | None = None,
+        expected_model: str | None = None,
+    ) -> "EmbeddingRetriever":
         try:
             artifact, passages = _load_artifact(path, source)
             if artifact["schema_version"] != 2:
@@ -103,6 +109,8 @@ class EmbeddingRetriever:
             saved = artifact["embeddings"]
             encoding = saved["encoding"]
             model = model_for_encoding(encoding)
+            if expected_model is not None and model != expected_model:
+                raise ValueError("Configured embedding model differs from saved vectors")
             if saved["passage_ids"] != [passage.id for passage in passages]:
                 raise ValueError("Embedding rows do not match passage identities")
             vectors = validate_vectors(saved["vectors"], len(passages), encoding["dimensions"])
@@ -113,7 +121,10 @@ class EmbeddingRetriever:
                 raise ValueError("Embedding vector checksum mismatch")
         except (OSError, ValueError, KeyError, TypeError, AttributeError, OverflowError) as exc:
             raise _rebuild_error(
-                "Missing, stale or incompatible embedding artifact", "embeddings"
+                "Embedding configuration/artifact mismatch"
+                if expected_model is not None
+                else "Missing, stale or incompatible embedding artifact",
+                "embeddings",
             ) from exc
         # Startup is cache-only. Only explicit ingestion can download model files.
         encoder = create_encoder(
@@ -264,15 +275,10 @@ def load_retriever(
             raise ValueError("This reranking integration requires embeddings or hybrid retrieval")
         return TfidfRetriever.from_path(path, source=source)
     if backend in ("embeddings", "hybrid"):
-        # Check configured model before loading weights; evaluation derives it from the artifact.
-        if expected_model is not None:
-            try:
-                artifact, _ = _load_artifact(path, source)
-                if model_for_encoding(artifact["embeddings"]["encoding"]) != expected_model:
-                    raise ValueError("Configured embedding model differs from saved vectors")
-            except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
-                raise _rebuild_error("Embedding configuration/artifact mismatch", backend) from exc
-        embeddings = EmbeddingRetriever.from_path(path, source=source)
+        # Validate the configured model against the same artifact used to construct the index.
+        embeddings = EmbeddingRetriever.from_path(
+            path, source=source, expected_model=expected_model
+        )
         retriever = (
             HybridRetriever(embeddings, **(hybrid_settings or {}))
             if backend == "hybrid"
