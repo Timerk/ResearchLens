@@ -24,13 +24,23 @@ ENCODING = {
 
 
 class Encoder(Protocol):
+    encoding: dict
+
     def encode(self, texts: list[str]) -> np.ndarray: ...
 
 
 class LocalEncoder:
     """Reuse one tokenizer and ONNX session; queries and passages use identical encoding."""
 
-    def __init__(self, *, download: bool = False) -> None:
+    def __init__(
+        self,
+        *,
+        download: bool = False,
+        max_tokens: int = 256,
+        batch_size: int = 32,
+        threads: int = 2,
+    ) -> None:
+        self.batch_size = batch_size
         try:
             import onnxruntime as ort
             from huggingface_hub import hf_hub_download
@@ -53,10 +63,11 @@ class LocalEncoder:
                 for key in ("weights", "tokenizer")
             }
             self.tokenizer = Tokenizer.from_file(paths["tokenizer"])
-            self.tokenizer.enable_truncation(max_length=ENCODING["max_tokens"])
+            self.tokenizer.enable_truncation(max_length=max_tokens)
             self.tokenizer.enable_padding(pad_id=0, pad_token="[PAD]")
             options = ort.SessionOptions()
-            options.intra_op_num_threads = 2
+            options.intra_op_num_threads = threads
+            options.inter_op_num_threads = 1
             self.session = ort.InferenceSession(
                 paths["weights"], sess_options=options, providers=["CPUExecutionProvider"]
             )
@@ -71,8 +82,8 @@ class LocalEncoder:
 
     def encode(self, texts: list[str]) -> np.ndarray:
         batches = []
-        for start in range(0, len(texts), 32):
-            encoded = self.tokenizer.encode_batch(texts[start : start + 32])
+        for start in range(0, len(texts), self.batch_size):
+            encoded = self.tokenizer.encode_batch(texts[start : start + self.batch_size])
             inputs = {
                 "input_ids": np.asarray([item.ids for item in encoded], dtype=np.int64),
                 "attention_mask": np.asarray(
@@ -91,14 +102,14 @@ class LocalEncoder:
         return np.concatenate(batches) if batches else np.empty((0, DIMENSIONS), dtype=np.float32)
 
 
-def validate_vectors(vectors: object, count: int) -> np.ndarray:
+def validate_vectors(vectors: object, count: int, dimensions: int = DIMENSIONS) -> np.ndarray:
     """Fail closed on malformed, non-finite, zero or non-unit passage/query vectors."""
     try:
         matrix = np.asarray(vectors, dtype=np.float32)
     except (ValueError, TypeError, OverflowError):
         raise ValueError("Embedding vectors must be a rectangular numeric matrix") from None
     if (
-        matrix.shape != (count, DIMENSIONS)
+        matrix.shape != (count, dimensions)
         or not np.isfinite(matrix).all()
         or not np.allclose(np.linalg.norm(matrix, axis=1), 1.0, atol=1e-4)
     ):

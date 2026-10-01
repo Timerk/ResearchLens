@@ -56,7 +56,7 @@ from researchlens.evaluation_schema import (
 )
 from researchlens.ingest import ROOT, TECHNICAL_CORPUS
 from researchlens.models import Passage, SearchHit
-from researchlens.retrieval import load_retriever
+from researchlens.retrieval import HYBRID_DEFAULTS, load_retriever
 
 
 class Search(Protocol):
@@ -190,6 +190,8 @@ def validate_retrieval_config(config: RetrievalConfig, artifact: dict) -> Retrie
 
 def default_retrieval_config(backend: str, artifact: dict, implementation: str) -> RetrievalConfig:
     settings = encoding_settings(artifact) if backend != "tfidf" else {}
+    if backend == "hybrid":
+        settings.update(HYBRID_DEFAULTS)
     return RetrievalConfig(
         implementation=implementation,
         version="tfidf-word-unigram-bigram-english-stopwords-v1"
@@ -211,6 +213,8 @@ def installed_versions() -> dict:
         "tokenizers",
         "huggingface-hub",
         "torch",
+        "transformers",
+        "safetensors",
         "sentence-transformers",
     ):
         try:
@@ -900,12 +904,25 @@ def main() -> None:
             load_started = perf_counter()
             artifact, _ = load_artifact(args.index, source=args.source)
             validate_artifact(dataset, artifact)
-            retriever = load_retriever(args.retriever, args.index, source=args.source)
+            declared = (
+                RetrievalConfig.model_validate_json(args.retrieval_config.read_bytes())
+                if args.retrieval_config
+                else None
+            )
+            hybrid = (
+                {key: getattr(declared, key) for key in HYBRID_DEFAULTS}
+                if declared is not None and args.retriever == "hybrid"
+                else None
+            )
+            factory_options = {"hybrid_settings": hybrid} if hybrid is not None else {}
+            retriever = load_retriever(
+                args.retriever, args.index, source=args.source, **factory_options
+            )
             load_time = (perf_counter() - load_started) * 1000
             implementation = f"{type(retriever).__module__}.{type(retriever).__qualname__}"
             retrieval = (
-                RetrievalConfig.model_validate_json(args.retrieval_config.read_bytes())
-                if args.retrieval_config
+                declared
+                if declared is not None
                 else default_retrieval_config(args.retriever, artifact, implementation)
             )
             if retrieval.backend != args.retriever or retrieval.implementation != implementation:

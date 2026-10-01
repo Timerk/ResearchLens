@@ -57,9 +57,14 @@ def build_index(
     destination: Path = INDEX,
     *,
     retrieval: str = "tfidf",
+    embedding_model: str = "minilm",
+    max_tokens: int | None = None,
+    batch_size: int | None = None,
+    threads: int | None = None,
+    precision: str | None = None,
 ) -> None:
-    if retrieval not in ("tfidf", "embeddings"):
-        raise ValueError("retrieval must be tfidf or embeddings")
+    if retrieval not in ("tfidf", "embeddings", "hybrid"):
+        raise ValueError("retrieval must be tfidf, embeddings or hybrid")
     raw = source.read_bytes()
     documents = TypeAdapter(list[Document]).validate_json(raw)
     passages = chunk_documents(documents)
@@ -71,15 +76,25 @@ def build_index(
         "chunking": CHUNKING,
         "passages": [passage.model_dump() for passage in passages],
     }
-    if retrieval == "embeddings":
-        from researchlens.embeddings import ENCODING, LocalEncoder, validate_vectors
+    if retrieval in ("embeddings", "hybrid"):
+        from researchlens.embedding_models import create_encoder
+        from researchlens.embeddings import validate_vectors
 
+        encoder = create_encoder(
+            embedding_model,
+            download=True,
+            max_tokens=max_tokens,
+            batch_size=batch_size,
+            threads=threads,
+            precision=precision,
+        )
         vectors = validate_vectors(
-            LocalEncoder(download=True).encode([passage.text for passage in passages]),
+            encoder.encode([passage.text for passage in passages]),
             len(passages),
+            encoder.encoding["dimensions"],
         )
         artifact["embeddings"] = {
-            "encoding": ENCODING,
+            "encoding": encoder.encoding,
             "passage_ids": [passage.id for passage in passages],
             "vectors": vectors.tolist(),
             "vectors_sha256": hashlib.sha256(vectors.astype("<f4").tobytes()).hexdigest(),
@@ -106,13 +121,27 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus", choices=("technical", "sample"))
     parser.add_argument(
-        "--retrieval", choices=("tfidf", "embeddings"), default=defaults["retrieval"]
+        "--retrieval", choices=("tfidf", "embeddings", "hybrid"), default=defaults["retrieval"]
     )
+    parser.add_argument("--embedding-model", default=defaults["embedding_model"])
+    parser.add_argument("--max-tokens", type=int)
+    parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--threads", type=int)
+    parser.add_argument("--precision", choices=("float32", "bfloat16"))
     parser.add_argument("--source", type=Path, default=defaults["corpus_path"])
     parser.add_argument("--destination", type=Path, default=defaults["index_path"])
     args = parser.parse_args()
     source = (
-        TECHNICAL_CORPUS if args.corpus == "technical" else CORPUS
-    ) if args.corpus else args.source
-    build_index(source, args.destination, retrieval=args.retrieval)
+        (TECHNICAL_CORPUS if args.corpus == "technical" else CORPUS) if args.corpus else args.source
+    )
+    build_index(
+        source,
+        args.destination,
+        retrieval=args.retrieval,
+        embedding_model=args.embedding_model,
+        max_tokens=args.max_tokens,
+        batch_size=args.batch_size,
+        threads=args.threads,
+        precision=args.precision,
+    )
     print(f"Built {args.destination} ({args.retrieval})")
