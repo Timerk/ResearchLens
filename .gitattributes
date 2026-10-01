@@ -1,3 +1,7 @@
 # Corpus hashes must be identical on Windows and Linux.
 data/*.json text eol=lf
 evaluation/datasets/*.json text eol=lf
+# Preserve downloaded article bytes so manifest checksums survive checkout on every OS.
+data/technical/originals/*.xml -text
+data/technical/*.json text eol=lf
+data/technical/NOTICE.txt text eol=lf

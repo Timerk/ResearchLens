@@ -4,11 +4,13 @@ An independent portfolio project for exploring a curated technical document coll
 The application answers research questions from retrieved document passages,
 with inspectable citations and explicit insufficient-evidence responses.
 
-Angular and FastAPI run end to end with three **synthetic test documents**.
+Angular and FastAPI run end to end with four **CC BY 4.0 technical papers** by default.
+The original three synthetic documents remain available as a separate regression corpus.
 Retrieval uses TF-IDF word matching. Local mode shows matching passages; OpenAI mode
 generates document-only answers with validated passage references. Semantic embeddings
-are not implemented. Do not treat the fixtures as technical findings or valid citation
-IDs as proof that a claim is supported.
+are not implemented on this branch. Do not treat the fixtures as technical findings or
+valid citation IDs as proof that a claim is supported. The technical corpus has not yet
+received human scientific review.
 
 ## Run locally
 
@@ -65,10 +67,43 @@ the app does not silently fall back to preview mode. Response metadata includes
 model, latency and token usage; `estimated_api_cost_usd` is `null` for paid requests
 because billing rates are not hardcoded, and zero when no API call was made.
 
-Try `Does dust cause false positives?` and inspect the first reference. Then try
-`Who composed Beethoven symphonies?` for the no-match state.
-In OpenAI mode, try `What is the minimum detectable defect size in micrometers for
-bright-field imaging?` for an insufficient-evidence response.
+Try `Why combine forward and backward lighting for aircraft glass canopy inspection?`
+or `What training data are used in each stage of the autoencoder method?` and inspect
+the source references. Results include author, date, license, section and original XML
+location. XML citations use section/paragraph locations, not invented PDF page numbers.
+
+### Technical corpus and attribution
+
+The four papers cover dual-modal glass inspection, transfer learning on painted surfaces,
+TDI dark-field wafer inspection, and two-stage autoencoder training. Their original XML,
+checksums, publication metadata, permission evidence and extraction notes are in
+[`data/technical/manifest.json`](data/technical/manifest.json). Preserve
+[`data/technical/NOTICE.txt`](data/technical/NOTICE.txt) when redistributing this corpus.
+The texts are licensed CC BY 4.0 by their authors; no external image datasets are included.
+
+Normal startup uses the checked-in extracted text and requires no download. Reproduce
+the extraction offline (verifies original checksums), or explicitly refresh source files:
+
+```sh
+rtk proxy uv run --directory backend python -m researchlens.corpus
+# Optional network refresh; review the resulting content/license/checksum changes:
+rtk proxy uv run --directory backend python -m researchlens.corpus --download
+rtk proxy uv run --directory backend python -m researchlens.ingest --corpus technical
+```
+
+Extraction includes abstract and body prose, preserves section paths and XML paragraph
+locations, and normalizes whitespace. Figures, captions, tables, references and back matter
+are excluded; mathematical markup is replaced with `[formula omitted]`. This is a partial
+extraction. Consult the originals for omitted evidence, equations and numerical tables.
+Changing extraction or source content can change passage IDs; rebuild the index and review
+evaluation references after such changes. Raw XML files are marked binary for Git line-ending
+purposes so checksums remain valid across Windows and Linux checkouts.
+
+To run the old fixture examples instead, rebuild with `--corpus sample` and restart the
+backend. The two corpora are not mixed. `CORPUS` and the Python `build_index()` default remain
+the sample corpus for compatibility with existing tests; the ingestion CLI defaults to
+technical. Questions such as `Does dust cause false positives?` retain their original test
+meaning only against the fixture corpus. Rebuild and restart after switching corpora.
 
 ## Verify
 
@@ -101,7 +136,8 @@ Angular → POST /api/ask → TF-IDF retrieval → answer provider → passage r
 - Angular displays plain text and expandable reference metadata. Its development
   proxy sends `/api` to FastAPI. There is no separate CORS configuration.
 
-The saved artifact stores normalized text, paragraph numbers, and word offsets.
+The saved artifact stores normalized text, paragraph numbers, word offsets, attribution
+and technical-source section/XML locations.
 Its IDs are stable for unchanged input, not across arbitrary source revisions.
 There is no PDF extractor or production deployment configuration yet.
 
@@ -114,7 +150,7 @@ until a concrete requirement justifies them.
 1. Local preview and document-only OpenAI integration: implemented and checked with
    automated tests and a small Luna/medium live smoke test. Browser verification
    is pending because no browser connection was available in the development session.
-2. Baseline RAG: curate 15–30 authorized documents; record source URL, author, date,
+2. Baseline RAG: expand the four-paper starter set to 15–30 authorized documents; record source URL, author, date,
    license and permission evidence. Add PDF/text extraction with page references,
    and local embeddings. Evaluate the implemented LLM provider's citations and
    insufficient-evidence behavior on the reviewed corpus.
@@ -139,7 +175,7 @@ Recheck rates before the paid baseline. The provider follows the official
 
 ## Learning checkpoint
 
-Read `Retriever.search` and the chunking test. In the running app, compare
+Read `Retriever.search` and the chunking test. With `--corpus sample`, compare
 `Does dust cause false positives?` with `Can contamination trigger erroneous alarms?`.
 Explain why lexical matching can behave differently for equivalent questions.
 Then explain why a passage matching `illumination` cannot establish a numerical

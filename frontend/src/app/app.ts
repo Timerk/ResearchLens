@@ -13,6 +13,16 @@ interface Passage {
   paragraph: number;
   text: string;
   score: number;
+  source_section: string | null;
+  source_locator: string | null;
+  attribution: {
+    authors: string[];
+    publication_date: string;
+    doi: string;
+    license_url: string;
+    copyright: string;
+    changes: string;
+  } | null;
 }
 
 interface Answer {
