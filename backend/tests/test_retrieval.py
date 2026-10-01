@@ -11,6 +11,7 @@ from fastapi.testclient import TestClient
 from researchlens.answers import INSTRUCTIONS, OpenAIProvider
 from researchlens.api import create_app
 from researchlens.config import ROOT, Settings, retrieval_environment
+from researchlens.embedding_models import encoding_metadata
 from researchlens.embeddings import DIMENSIONS, ENCODING, LocalEncoder
 from researchlens.ingest import CORPUS, build_index
 from researchlens.models import GeneratedAnswer
@@ -28,8 +29,9 @@ def encoder(monkeypatch):
     instance = Mock()
     instance.encode.side_effect = lambda texts: unit_vectors(len(texts))
     factory = Mock(return_value=instance)
-    monkeypatch.setattr("researchlens.embeddings.LocalEncoder", factory)
-    monkeypatch.setattr("researchlens.retrieval.LocalEncoder", factory)
+    instance.encoding = encoding_metadata()
+    monkeypatch.setattr("researchlens.embedding_models.create_encoder", factory)
+    monkeypatch.setattr("researchlens.retrieval.create_encoder", factory)
     return factory, instance
 
 
@@ -48,8 +50,8 @@ def test_ingestion_encodes_once_and_preserves_metadata(embedding_index, encoder,
     assert artifact["passages"] == baseline["passages"]
     assert artifact["chunking"] == baseline["chunking"]
     assert artifact["source_sha256"] == hashlib.sha256(CORPUS.read_bytes()).hexdigest()
-    assert artifact["embeddings"]["encoding"] == ENCODING
-    encoder[0].assert_called_once_with(download=True)
+    assert artifact["embeddings"]["encoding"] == encoder[1].encoding
+    assert encoder[0].call_args.kwargs["download"] is True
     encoder[1].encode.assert_called_once_with([p["text"] for p in artifact["passages"]])
 
 
@@ -72,7 +74,7 @@ def test_compatible_baseline_and_embedding_search(embedding_index, encoder):
             retriever.search("query", 0)
     # One encoder per ingestion/startup, never per search; no document re-encoding at startup.
     assert encoder[0].call_count == 2
-    assert encoder[0].call_args.kwargs == {}
+    assert not encoder[0].call_args.kwargs.get("download", False)
     assert [call.args[0] for call in encoder[1].encode.call_args_list[1:]] == [
         ["A query"],
         ["Another query"],
@@ -92,7 +94,7 @@ def test_cosine_ranking_does_not_claim_answerability(embedding_index, encoder):
 
 @pytest.mark.parametrize("backend", ["tfidf", "embeddings"])
 def test_api_loads_once_and_keeps_limits(embedding_index, encoder, backend):
-    settings = Settings(retrieval=backend, index_path=embedding_index)
+    settings = Settings(retrieval=backend, index_path=embedding_index, corpus_path=CORPUS)
     with TestClient(create_app(settings=settings)) as client:
         for _ in range(2):
             response = client.post(
@@ -199,7 +201,7 @@ def test_rejects_invalid_artifact_before_loading_model(embedding_index, encoder,
         saved = None
     embedding_index.write_text(json.dumps(saved))
     with pytest.raises(ValueError, match="Rebuild.*researchlens.ingest.*--retrieval embeddings"):
-        EmbeddingRetriever.from_path(embedding_index)
+        EmbeddingRetriever.from_path(embedding_index, source=CORPUS)
     assert encoder[0].call_count == 1
 
 
@@ -251,6 +253,7 @@ def test_retrieval_configuration(tmp_path, monkeypatch):
 
 def test_encoder_masked_pooling_and_identical_plain_text_encoding():
     encoder = LocalEncoder.__new__(LocalEncoder)
+    encoder.batch_size = 32
     encoder.tokenizer = Mock()
     encoder.tokenizer.encode_batch.return_value = [
         SimpleNamespace(ids=[101, 102, 0], attention_mask=[1, 1, 0], type_ids=[0, 0, 0])

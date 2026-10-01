@@ -22,6 +22,7 @@ def retrieval_environment(path: Path = ENV_FILE) -> dict:
 
     return {
         "retrieval": (values.get("RETRIEVAL_BACKEND") or "tfidf").strip(),
+        "embedding_model": (values.get("EMBEDDING_MODEL") or "minilm").strip(),
         "index_path": configured_path("RETRIEVAL_INDEX", "data/index.json"),
         "corpus_path": configured_path("RETRIEVAL_CORPUS", "data/technical/documents.json"),
     }
@@ -32,13 +33,16 @@ class Settings:
     provider: Literal["local", "openai"] = "local"
     api_key: str = field(default="", repr=False)
     model: str = "gpt-6-luna"
-    retrieval: Literal["tfidf", "embeddings"] = "tfidf"
+    retrieval: Literal["tfidf", "embeddings", "hybrid"] = "tfidf"
+    embedding_model: str = "minilm"
     index_path: Path = ROOT / "data" / "index.json"
     corpus_path: Path = ROOT / "data" / "technical" / "documents.json"
 
     def __post_init__(self) -> None:
-        if self.retrieval not in ("tfidf", "embeddings"):
-            raise ValueError("RETRIEVAL_BACKEND must be tfidf or embeddings")
+        if self.retrieval not in ("tfidf", "embeddings", "hybrid"):
+            raise ValueError("RETRIEVAL_BACKEND must be tfidf, embeddings or hybrid")
+        if self.embedding_model not in ("minilm", "bge-m3", "qwen3-0.6b", "qwen3-4b"):
+            raise ValueError("EMBEDDING_MODEL must be minilm, bge-m3, qwen3-0.6b or qwen3-4b")
         if self.provider not in ("local", "openai"):
             raise ValueError("ANSWER_PROVIDER must be local or openai")
         if self.provider == "openai" and (not self.api_key.strip() or not self.model.strip()):
