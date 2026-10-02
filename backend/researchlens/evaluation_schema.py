@@ -143,8 +143,8 @@ class VulkanRerankerConfig(RerankerConfig):
     context_tokens: int = Field(ge=1)
     batch_tokens: int = Field(ge=1)
     gpu_layers: int = Field(ge=1)
-    prompt_cache_ram_mib: Literal[0] = 0
-    server_private_limit_bytes: int = Field(default=6 * 1024**3, ge=1)
+    prompt_cache_ram_mib: Literal[0]
+    server_private_limit_bytes: int = Field(ge=1)
     prompt_template_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
 
 
