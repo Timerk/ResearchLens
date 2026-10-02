@@ -187,17 +187,20 @@
       },
       {
         "name": "bge-m3-qwen-rerank40",
-        "status": "interrupted-at-user-request"
+        "status": "completed",
+        "resumed_output": "vulkan-rerankers-resume-2026-10-02"
       }
     ],
     "api_calls": 0,
     "selection_rule": "Complete evidence@4, cohort regressions, then latency; development only",
     "held_out_retrieval": false,
-    "status": "paused-at-user-request-before-machine-shutdown",
-    "remaining": [
-      "bge-m3-qwen-rerank40",
-      "CPU float32 reference ranking checks",
-      "final selection and report"
+    "status": "completed-after-user-authorized-resume",
+    "remaining": [],
+    "interrupted_attempts": [
+      {
+        "name": "bge-m3-qwen-rerank40",
+        "status": "interrupted-at-user-request"
+      }
     ]
   },
   "runs": {
@@ -26049,6 +26052,2995 @@
         "peak_rss_bytes": 2164899840,
         "peak_private_bytes": 3864698880
       }
+    },
+    "bge-m3-qwen-rerank40": {
+      "run_sha256": "2cbbb15046fce37433717c286a323b8959ea50578ab40ddc9616f0db7e5de1c6",
+      "code": {
+        "commit": "d40c6a88aa1ad00e5d62d92565e546173286c122",
+        "dirty": true,
+        "evaluation_code_sha256": "af2d0a10056b4a4fd0e27d8bc76669055f3ea82a23ab4fbe209b4e2fff1c2d3f"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.reranking.RerankedRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": {
+          "model": "Qwen/Qwen3-Reranker-0.6B",
+          "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "runtime": "llama.cpp",
+          "runtime_version": "b11327",
+          "device": "Vulkan0",
+          "precision": "float16",
+          "quantization": "none",
+          "weights": "qwen-f16.gguf",
+          "tokenizer": "pinned-Hugging-Face-tokenizer",
+          "max_tokens": 511,
+          "truncation": "reject-overflow",
+          "batch_size": 4,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1,
+          "pair_order": "question-passage",
+          "score": "yes-no-softmax",
+          "candidates": 40,
+          "diversity": 0.0,
+          "weights_sha256": "42b24043fc2315f1244bd01607a4f60a2c23ccc7fc6b019babd580122b941344",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "device_name": "AMD Radeon RX 6800",
+          "context_tokens": 2048,
+          "batch_tokens": 2048,
+          "gpu_layers": 99,
+          "prompt_cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "prompt_template_sha256": "530d14b8bd99d766dfcb63b6f55032c0207b9f1ee457ec40d4009f55e83c8620"
+        }
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "recall_scored": 36,
+        "mean_source_recall_at_k": 0.9583333333333334,
+        "answerable_cases": 36,
+        "mean_source_recall_with_failures": 0.9583333333333334,
+        "mean_passage_recall_with_failures": 0.7062321937321937,
+        "mrr_at_k_with_failures": 0.7337962962962963,
+        "comparison_full_coverage": 6,
+        "comparison_cases": 9,
+        "comparison_mean_source_recall_at_k": 0.8333333333333334,
+        "generated_answers": 0,
+        "generated_unanswerable_cases": 0,
+        "generated_answerable_cases": 0,
+        "automatic_abstentions_unanswerable": 0,
+        "automatic_full_abstentions": 0,
+        "automatic_false_abstentions": 0,
+        "no_match_cases": 0,
+        "human_reviews_complete": 0,
+        "human_correct": 0,
+        "human_supported": 0,
+        "human_full_abstention_unanswerable": 0,
+        "human_false_abstention": 0,
+        "median_latency_ms": 11513.777,
+        "max_latency_ms": 12795.08,
+        "query_timing_samples": 150,
+        "query_failed_attempts": 0,
+        "query_median_ms": 2872.861,
+        "query_p95_ms": 3149.248,
+        "query_max_ms": 3203.294,
+        "primary_k4_mrr": 0.7337962962962963,
+        "primary_k4_group_coverage": 0.7842592592592593,
+        "primary_k4_complete_evidence_rate": 0.6388888888888888,
+        "evidence_labels_review_status": "approved",
+        "encoder_measured_passages": 204,
+        "encoder_unmeasured_passages": 0,
+        "encoder_truncation_rate_measured": 0.0,
+        "encoder_k4_evidence_loss_cases": 0,
+        "encoder_k4_evidence_unknown_cases": 0,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "context_preview_truncated_passages": 0,
+        "context_preview_omitted_passages": 0,
+        "unstable_ranking_cases": 0,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 25544.064999999988,
+        "process_peak_rss_bytes": 4209147904,
+        "input_tokens_known": 0,
+        "output_tokens_known": 0,
+        "unknown_usage_cases": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "complete_count": 23,
+      "cohorts": {
+        "exact-terminology": {
+          "cases": 14,
+          "complete": 12
+        },
+        "paraphrase": {
+          "cases": 13,
+          "complete": 8
+        },
+        "cross-document": {
+          "cases": 9,
+          "complete": 3
+        }
+      },
+      "gains_vs_qwen_dense": [
+        "tech-amff-layers"
+      ],
+      "losses_vs_qwen_dense": [
+        "tech-compare-data-expansion",
+        "tech-compare-optical-cues"
+      ],
+      "runtime_buffer_report": {
+        "model": 1136.48,
+        "KV": 224.0,
+        "compute": 1290.96,
+        "reported_gpu_buffers_mib": 2651.44
+      },
+      "pair_measurements": 2000,
+      "max_pair_tokens": 382,
+      "truncated_pairs": 0,
+      "cases": [
+        {
+          "case_id": "tech-glass-exact",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11510794:p28:w0",
+            "pmc11510794:p24:w0",
+            "pmc11510794:p57:w0",
+            "pmc11510794:p20:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-glass-paraphrase",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11510794:p57:w0",
+            "pmc11510794:p58:w0",
+            "pmc11510794:p36:w0",
+            "pmc11510794:p30:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-painted-exact",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11768589:p15:w180",
+            "pmc11768589:p44:w0",
+            "pmc11768589:p5:w180",
+            "pmc11768589:p1:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.2,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.6,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-wafer-exact",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc10934137:p14:w0",
+            "pmc10934137:p15:w180",
+            "pmc10934137:p8:w180",
+            "pmc10934137:p18:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.25,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "efficiency-scope",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 4,
+              "reciprocal_rank": 0.25,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "efficiency-scope",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-wafer-paraphrase",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc10934137:p15:w0",
+            "pmc11768589:p22:w0",
+            "pmc10934137:p14:w0",
+            "pmc11768589:p18:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "cds-incomplete",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "cds-incomplete",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-autoencoder-exact",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11121878:p8:w0",
+            "pmc11121878:p17:w0",
+            "pmc11121878:p46:w0",
+            "pmc11121878:p44:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.2,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.6,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-fusion",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11768589:p45:w0",
+            "pmc11768589:p5:w0",
+            "pmc11768589:p35:w0",
+            "pmc11768589:p1:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.07692307692307693,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-4",
+                  "claim_index": 1,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-5",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.2,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 0.5,
+              "passage_recall": 0.3076923076923077,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-4",
+                  "claim_index": 1,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-5",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.4,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11768589:p2:w0",
+            "pmc11121878:p18:w180",
+            "pmc11121878:p19:w0",
+            "pmc11768589:p17:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-shared-cpu-cost",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11510794:p36:w0",
+            "pmc11510794:p30:w0",
+            "pmc11510794:p58:w0",
+            "pmc11510794:p4:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-obb",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11510794:p31:w0",
+            "pmc11510794:p58:w0",
+            "pmc11510794:p36:w0",
+            "pmc11510794:p34:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-annotation-tools",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11510794:p32:w0",
+            "pmc11510794:p31:w0",
+            "pmc11510794:p58:w0",
+            "pmc11510794:p36:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-rgb-channel-assignment",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11510794:p38:w0",
+            "pmc11510794:p39:w0",
+            "pmc11510794:p54:w0",
+            "pmc11510794:p5:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-amff-layers",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11510794:p40:w0",
+            "pmc11510794:p59:w0",
+            "pmc11510794:p41:w0",
+            "pmc11510794:p46:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "architecture-conflict",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "architecture-conflict",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-stripe-frequencies",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11768589:p18:w0",
+            "pmc11768589:p17:w0",
+            "pmc11768589:p47:w0",
+            "pmc11768589:p1:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-adaptive-binarization",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11768589:p22:w0",
+            "pmc11768589:p19:w0",
+            "pmc11768589:p35:w0",
+            "pmc11510794:p38:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-imagenet-initialization",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11768589:p26:w0",
+            "pmc11768589:p5:w180",
+            "pmc11768589:p15:w0",
+            "pmc11768589:p37:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-tdi-motion-sync",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc10934137:p10:w0",
+            "pmc10934137:p7:w0",
+            "pmc10934137:p12:w0",
+            "pmc10934137:p16:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-aw-ssim-combination",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11121878:p26:w0",
+            "pmc11121878:p27:w0",
+            "pmc11121878:p8:w0",
+            "pmc11121878:p42:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.25,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "component-calculations",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.6666666666666666,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "component-calculations",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-adga-shapes",
+          "query_style": "exact-terminology",
+          "passage_ids": [
+            "pmc11121878:p19:w0",
+            "pmc11121878:p9:w0",
+            "pmc11121878:p18:w0",
+            "pmc11121878:p10:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-4",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.6666666666666666,
+              "first_relevant_rank": 3,
+              "reciprocal_rank": 0.3333333333333333,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-4",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-stable-camera",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11510794:p27:w0",
+            "pmc11510794:p57:w0",
+            "pmc11768589:p19:w0",
+            "pmc10934137:p12:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-turn-and-flip-labels",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11510794:p34:w0",
+            "pmc11510794:p36:w0",
+            "pmc11510794:p30:w0",
+            "pmc11510794:p58:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-manual-outline-union",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11510794:p33:w0",
+            "pmc11510794:p34:w0",
+            "pmc11510794:p32:w0",
+            "pmc11510794:p30:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "visibility-scope",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "visibility-scope",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-small-photo-supply",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11768589:p19:w0",
+            "pmc11768589:p1:w0",
+            "pmc11768589:p21:w0",
+            "pmc11768589:p36:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 3,
+              "reciprocal_rank": 0.3333333333333333,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-both-checks-clean",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11768589:p5:w0",
+            "pmc11768589:p33:w0",
+            "pmc11768589:p44:w0",
+            "pmc11768589:p1:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.25,
+              "first_relevant_rank": 4,
+              "reciprocal_rank": 0.25,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-daylight-interference",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11768589:p19:w0",
+            "pmc11768589:p34:w0",
+            "pmc11768589:p44:w0",
+            "pmc11768589:p36:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "containment-scope",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "containment-scope",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-bright-specks-dark-background",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc10934137:p6:w0",
+            "pmc11768589:p7:w0",
+            "pmc10934137:p9:w0",
+            "pmc10934137:p3:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-moving-signal-addition",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc10934137:p8:w180",
+            "pmc10934137:p3:w180",
+            "pmc10934137:p5:w0",
+            "pmc10934137:p15:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.3333333333333333,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-too-many-shortcuts",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11121878:p16:w0",
+            "pmc11510794:p12:w0",
+            "pmc11121878:p17:w0",
+            "pmc11121878:p44:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "residual-purpose",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "residual-purpose",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-changing-neighborhood",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11121878:p46:w0",
+            "pmc11121878:p1:w0",
+            "pmc11121878:p31:w0",
+            "pmc11121878:p10:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.16666666666666666,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "gaussian-spread",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "fixed-footprint",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 3,
+              "reciprocal_rank": 0.3333333333333333,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "gaussian-spread",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "fixed-footprint",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-damaged-clean-pairs",
+          "query_style": "paraphrase",
+          "passage_ids": [
+            "pmc11121878:p19:w0",
+            "pmc11121878:p40:w0",
+            "pmc11121878:p17:w0",
+            "pmc11121878:p36:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 1.0,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 3,
+              "reciprocal_rank": 0.3333333333333333,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-localization-outputs",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11510794:p57:w0",
+            "pmc11510794:p61:w0",
+            "pmc11510794:p58:w0",
+            "pmc11121878:p40:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 4,
+              "reciprocal_rank": 0.25,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-training-splits",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11510794:p36:w0",
+            "pmc11768589:p23:w0",
+            "pmc11768589:p15:w180",
+            "pmc11768589:p44:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-training-computers",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11768589:p24:w0",
+            "pmc11510794:p48:w0",
+            "pmc11768589:p5:w180",
+            "pmc11768589:p15:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.3333333333333333,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 1,
+              "reciprocal_rank": 1.0,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-data-expansion",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11768589:p15:w180",
+            "pmc11510794:p35:w0",
+            "pmc11768589:p44:w0",
+            "pmc11768589:p33:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-evaluation-metrics",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11121878:p39:w0",
+            "pmc11121878:p38:w0",
+            "pmc11510794:p47:w0",
+            "pmc11121878:p5:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 1.0,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 1.0,
+              "complete_evidence": true
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-optical-cues",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11768589:p20:w0",
+            "pmc11768589:p35:w0",
+            "pmc11510794:p33:w0",
+            "pmc11768589:p33:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 0.5,
+              "passage_recall": 0.5,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-network-inputs",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11121878:p32:w0",
+            "pmc11768589:p15:w180",
+            "pmc11768589:p26:w0",
+            "pmc11768589:p44:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.0,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 1.0,
+              "passage_recall": 0.25,
+              "first_relevant_rank": 3,
+              "reciprocal_rank": 0.3333333333333333,
+              "all_sources": true,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": true
+                }
+              ],
+              "group_coverage": 0.5,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-compare-network-roles",
+          "query_style": "cross-document",
+          "passage_ids": [
+            "pmc11510794:p40:w0",
+            "pmc11510794:p59:w0",
+            "pmc11510794:p60:w0",
+            "pmc11510794:p41:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": 0.5,
+              "passage_recall": 0.25,
+              "first_relevant_rank": null,
+              "reciprocal_rank": 0.0,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.0,
+              "complete_evidence": false
+            },
+            "4": {
+              "source_recall": 0.5,
+              "passage_recall": 0.75,
+              "first_relevant_rank": 2,
+              "reciprocal_rank": 0.5,
+              "all_sources": false,
+              "groups": [
+                {
+                  "group_id": "part-1",
+                  "claim_index": 0,
+                  "covered": true
+                },
+                {
+                  "group_id": "part-2",
+                  "claim_index": 1,
+                  "covered": false
+                },
+                {
+                  "group_id": "part-3",
+                  "claim_index": 1,
+                  "covered": false
+                }
+              ],
+              "group_coverage": 0.3333333333333333,
+              "complete_evidence": false
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-recipe",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11121878:p18:w180",
+            "pmc11510794:p7:w0",
+            "pmc11121878:p23:w0",
+            "pmc11768589:p18:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-inheritance-law",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11121878:p36:w0",
+            "pmc11768589:p5:w180",
+            "pmc11768589:p35:w180",
+            "pmc11510794:p15:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-planet-moons",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11510794:p58:w0",
+            "pmc11121878:p8:w180",
+            "pmc11768589:p39:w0",
+            "pmc11768589:p24:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-exchange-rate",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11768589:p2:w0",
+            "pmc11768589:p24:w0",
+            "pmc11121878:p23:w0",
+            "pmc11121878:p8:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-database-isolation",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11121878:p8:w180",
+            "pmc11510794:p17:w0",
+            "pmc11768589:p2:w0",
+            "pmc11510794:p55:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-unrelated-vaccination",
+          "query_style": "unrelated",
+          "passage_ids": [
+            "pmc11121878:p18:w180",
+            "pmc11768589:p5:w180",
+            "pmc11768589:p18:w0",
+            "pmc11121878:p8:w180"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-canopy-service-life",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11510794:p58:w0",
+            "pmc11510794:p30:w0",
+            "pmc11510794:p61:w0",
+            "pmc11510794:p29:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-heater-energy",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11768589:p36:w0",
+            "pmc11768589:p44:w0",
+            "pmc11768589:p19:w0",
+            "pmc11768589:p5:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-wafer-live-cells",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc10934137:p18:w0",
+            "pmc10934137:p9:w0",
+            "pmc10934137:p5:w0",
+            "pmc10934137:p10:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-autoencoder-ct",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11121878:p1:w180",
+            "pmc11121878:p8:w0",
+            "pmc11121878:p44:w0",
+            "pmc11121878:p17:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-factory-warranty",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11768589:p37:w180",
+            "pmc11768589:p40:w0",
+            "pmc11510794:p55:w0",
+            "pmc11768589:p39:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        },
+        {
+          "case_id": "tech-missing-canopy-confidence-bounds",
+          "query_style": "missing-evidence",
+          "passage_ids": [
+            "pmc11510794:p55:w0",
+            "pmc11510794:p47:w0",
+            "pmc11510794:p40:w0",
+            "pmc11510794:p52:w0"
+          ],
+          "metrics_at_k": {
+            "1": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            },
+            "4": {
+              "source_recall": null,
+              "passage_recall": null,
+              "first_relevant_rank": null,
+              "reciprocal_rank": null,
+              "all_sources": null,
+              "groups": [],
+              "group_coverage": null,
+              "complete_evidence": null
+            }
+          },
+          "error": null,
+          "ranking_stable": true
+        }
+      ],
+      "server_memory": {
+        "scope": "owned llama-server Windows counters; excludes Python and VRAM",
+        "sampling": "startup and before/after each HTTP request; native high-water counters",
+        "sample_count": 401,
+        "loaded": {
+          "rss_bytes": 1341607936,
+          "private_bytes": 3004239872,
+          "peak_rss_bytes": 1341607936,
+          "peak_private_bytes": 3004248064
+        },
+        "final": {
+          "rss_bytes": 2177478656,
+          "private_bytes": 3877871616,
+          "peak_rss_bytes": 2177478656,
+          "peak_private_bytes": 3877879808
+        },
+        "peak_rss_bytes": 2177478656,
+        "peak_private_bytes": 3877879808
+      }
     }
+  },
+  "reference_check": {
+    "artifact": "vulkan-reference-results.json",
+    "reproduction": "vulkan-reference-check.py",
+    "selection": "First development case in each query-style cohort, independent of scores",
+    "candidate_pairs_per_model": 100,
+    "bge_order_matches": 5,
+    "qwen_order_matches": 4,
+    "bge_set_matches": 5,
+    "qwen_set_matches": 5,
+    "limitations": "Five cases per model; GPU score deltas measured on returned top four only; no complete equivalence claim"
+  },
+  "selection": {
+    "scope": "evaluation-only RX 6800 Vulkan candidate; application and prior CPU selection unchanged",
+    "split": "development",
+    "frozen_before_held_out_retrieval": true,
+    "configuration": "bge-m3-bge-rerank20",
+    "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+    "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+    "run_sha256": "01cb9d0cbc0b99458aa5b57d36e97cbcc5f310426297de6888397581e8d02305",
+    "retrieval": {
+      "implementation": "researchlens.reranking.RerankedRetriever",
+      "version": "encoding-v2",
+      "limit": 4,
+      "backend": "embeddings",
+      "model": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+      "normalization": "l2",
+      "score_threshold": null,
+      "runtime": "torch+transformers",
+      "runtime_version": "2.14.1+cpu",
+      "runtime_backend": "pytorch-cpu",
+      "device": "cpu",
+      "precision": "bfloat16",
+      "quantization": "none",
+      "dimensions": 1024,
+      "weights": "pytorch_model.bin",
+      "tokenizer": "tokenizer.json",
+      "pooling": "cls",
+      "query_instruction": "",
+      "document_instruction": "",
+      "max_tokens": 512,
+      "truncation": "right",
+      "batch_size": 1,
+      "intra_op_threads": 8,
+      "inter_op_threads": 1,
+      "text_representation": "passage-text-only",
+      "encoding_version": 2,
+      "lexical_candidates": null,
+      "embedding_candidates": null,
+      "fusion_method": null,
+      "rrf_k": null,
+      "lexical_weight": null,
+      "embedding_weight": null,
+      "reranker": {
+        "model": "BAAI/bge-reranker-v2-m3",
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "runtime": "llama.cpp",
+        "runtime_version": "b11327",
+        "device": "Vulkan0",
+        "precision": "float16",
+        "quantization": "none",
+        "weights": "bge-f16.gguf",
+        "tokenizer": "pinned-Hugging-Face-tokenizer",
+        "max_tokens": 511,
+        "truncation": "reject-overflow",
+        "batch_size": 4,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "pair_order": "question-passage",
+        "score": "raw-relevance-logit",
+        "candidates": 20,
+        "diversity": 0.0,
+        "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+        "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+        "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+        "device_name": "AMD Radeon RX 6800",
+        "context_tokens": 2048,
+        "batch_tokens": 2048,
+        "gpu_layers": 99,
+        "prompt_cache_ram_mib": 0,
+        "server_private_limit_bytes": 6442450944,
+        "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+      }
+    },
+    "selection_rule": "Complete evidence@4, cohort regressions, then latency; development only",
+    "rationale": "Highest complete evidence@4 (26/36); no cohort total below Qwen3-4B dense; 481 ms median; observed question regressions retained",
+    "gains_vs_qwen_dense": [
+      "tech-amff-layers",
+      "tech-compare-network-inputs",
+      "tech-compare-network-roles"
+    ],
+    "losses_vs_qwen_dense": [
+      "tech-stripe-frequencies"
+    ],
+    "relevance_threshold": null,
+    "held_out_retrieval": false,
+    "answer_generation": false,
+    "limitations": [
+      "72.2% is below the provisional 80% completeness goal",
+      "small four-document development corpus; no generalization or statistical superiority claim",
+      "runtime/precision/backend equivalence checked only on the recorded sample",
+      "provider integration, generated-answer correctness and abstention remain untested"
+    ]
   }
 }
