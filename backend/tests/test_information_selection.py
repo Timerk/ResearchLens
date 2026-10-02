@@ -3,7 +3,18 @@
 import numpy as np
 import pytest
 from researchlens.information_selection import select_indices
-from researchlens.local_needs import validate_needs
+from researchlens.local_needs import question_schema, validate_needs
+
+
+def test_decoding_schema_contains_only_exact_question_phrases():
+    question = "Which forward and backward light sources are used in the microscope?"
+    schema = question_schema(question)
+    fields = schema["properties"]["needs"]["items"]["properties"]
+    assert "microscope" in fields["subject"]["enum"]
+    assert "forward and backward light sources" in fields["aspect"]["enum"]
+    assert "forward light sources" not in fields["aspect"]["enum"]
+    assert all(value in question for value in fields["aspect"]["enum"])
+    assert question_schema(question) == schema
 
 
 def test_needs_use_exact_question_phrases_and_deduplicate():

@@ -129,6 +129,7 @@ def measure(args):
                     row["needs_output"] = needs.last_record
                 except (ValueError, httpx.HTTPError, KeyError, TypeError):
                     row["error"] = "invalid_or_failed_local_decomposition"
+                    row["needs_output"] = needs.last_record
                 row["decomposition_ms"] = 1000 * (perf_counter() - started)
                 rules = [f.query for f in decomposer.split(case.question)[1:]]
                 row["rule_queries"] = rules
