@@ -101,13 +101,18 @@ def single(args):
         )
         if entry["reranker"]:
             (output / "server-memory.json").write_text(
-                json.dumps({
-                    "scope": "owned llama-server Windows counters; excludes Python and VRAM",
-                    "sampling": (
-                        "startup and before/after each HTTP request; native high-water counters"
-                    ),
-                    "samples": reranker.memory_samples,
-                }, indent=2) + "\n", encoding="utf-8",
+                json.dumps(
+                    {
+                        "scope": "owned llama-server Windows counters; excludes Python and VRAM",
+                        "sampling": (
+                            "startup and before/after each HTTP request; native high-water counters"
+                        ),
+                        "samples": reranker.memory_samples,
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
             )
         (output / "run.json").write_bytes(encoded(result))
         (output / "review.json").write_bytes(
