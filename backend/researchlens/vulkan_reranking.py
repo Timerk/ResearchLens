@@ -4,6 +4,7 @@ import hashlib
 import json
 import socket
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -30,6 +31,40 @@ QWEN_TEMPLATE = (
     PREFIX + f"<Instruct>: {INSTRUCTION}\n<Query>: {{query}}\n<Document>: {{document}}" + SUFFIX
 )
 BGE_TEMPLATE = "<s>{query}</s></s>{document}</s>"
+SERVER_PRIVATE_LIMIT_BYTES = 6 * 1024**3
+
+
+def server_memory(process) -> dict[str, int]:
+    """Native Windows counters for the owned server, separate from Python and VRAM."""
+    if sys.platform != "win32":
+        raise ValueError("Vulkan memory monitoring requires the verified Windows runtime")
+    import ctypes
+    from ctypes import wintypes
+
+    class Counters(ctypes.Structure):
+        _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD)] + [
+            (name, ctypes.c_size_t)
+            for name in (
+                "PeakWorkingSetSize", "WorkingSetSize", "QuotaPeakPagedPoolUsage",
+                "QuotaPagedPoolUsage", "QuotaPeakNonPagedPoolUsage", "QuotaNonPagedPoolUsage",
+                "PagefileUsage", "PeakPagefileUsage", "PrivateUsage",
+            )
+        ]
+
+    psapi = ctypes.WinDLL("psapi", use_last_error=True)
+    psapi.GetProcessMemoryInfo.argtypes = [
+        wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD,
+    ]
+    counters = Counters()
+    counters.cb = ctypes.sizeof(counters)
+    if not psapi.GetProcessMemoryInfo(int(process._handle), ctypes.byref(counters), counters.cb):
+        raise ValueError("Cannot measure local server memory; stop and inspect the process")
+    return {
+        "rss_bytes": counters.WorkingSetSize,
+        "private_bytes": counters.PrivateUsage,
+        "peak_rss_bytes": counters.PeakWorkingSetSize,
+        "peak_private_bytes": counters.PeakPagefileUsage,
+    }
 
 
 def file_sha256(path: Path) -> str:
@@ -79,6 +114,8 @@ def metadata(root: Path, alias: str, *, device: str = "Vulkan0") -> dict:
         context_tokens=2048,
         batch_tokens=2048,
         gpu_layers=99,
+        prompt_cache_ram_mib=0,
+        server_private_limit_bytes=SERVER_PRIVATE_LIMIT_BYTES,
         prompt_template_sha256=hashlib.sha256(
             (BGE_TEMPLATE if alias == "bge" else QWEN_TEMPLATE).encode()
         ).hexdigest(),
@@ -122,6 +159,7 @@ class VulkanReranker:
         self.last_diagnostics = []
         self._last_key = None
         self._last_tokens = []
+        self.memory_samples = []
         from transformers import AutoTokenizer
 
         models = json.loads((root / "models.json").read_text(encoding="utf-8"))
@@ -174,6 +212,8 @@ class VulkanReranker:
             "4",
             "--no-warmup",
             "--no-webui",
+            "--cache-ram",
+            "0",
         ]
         try:
             self.process = subprocess.Popen(
@@ -201,6 +241,7 @@ class VulkanReranker:
                 or f"offloaded {layers} layers to GPU" not in log
             ):
                 raise ValueError("Expected RX 6800 layer offload was not confirmed in startup log")
+            self.check_memory()
             return self
         except BaseException:
             self.close()
@@ -221,6 +262,16 @@ class VulkanReranker:
 
     def __exit__(self, *_):
         self.close()
+
+    def check_memory(self):
+        sample = server_memory(self.process)
+        self.memory_samples.append(sample)
+        if sample["peak_private_bytes"] > SERVER_PRIVATE_LIMIT_BYTES:
+            self.close()
+            raise ValueError(
+                "Vulkan server exceeded its 6 GiB private-memory budget and was stopped; "
+                "verify --cache-ram 0 and inspect the local log before rerunning"
+            )
 
     def pair_tokens(self, question: str, text: str) -> list[int]:
         if any(marker in question or marker in text for marker in ("{query}", "{document}")):
@@ -256,6 +307,7 @@ class VulkanReranker:
                 for hit, count in zip(passages, counts, strict=True)
             ]
         try:
+            self.check_memory()
             response = self.client.post(
                 "/rerank",
                 json={
@@ -265,6 +317,7 @@ class VulkanReranker:
                 },
             )
             response.raise_for_status()
+            self.check_memory()
             return restore_scores(response.json(), len(passages), sum(self._last_tokens))
         except (httpx.HTTPError, json.JSONDecodeError):
             raise ValueError(
