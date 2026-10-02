@@ -4,6 +4,11 @@ Research date: 2026-10-02. Scope: inference and repeated retrieval evaluations o
 
 The RX 6800 has practical GPU inference routes for these models. The most useful candidates are ONNX Runtime DirectML for the existing encoder models, and llama.cpp Vulkan for Qwen3 embeddings and the stronger rerankers. AMD's current official ROCm Radeon support matrices do not list this card. That excludes a supported ROCm installation, not all GPU inference.
 
+Follow-up: the pinned Vulkan reranker study has now completed RX 6800 offload checks,
+all ten development configurations and a CPU reference sample. See
+[the completed report](vulkan-reranking.md). The route assessments below retain the
+initial investigation's state; the report records subsequent measurements and limits.
+
 ## Local environment
 
 The investigating parent agent observed an RX 6800 and an integrated AMD GPU, driver `32.0.21045.5002`, Python 3.13.14, and ONNX Runtime 1.30.0 with only Azure and CPU execution providers. The repository requires Python >=3.13 and Torch >=2.7, uses Transformers 5, and pins the CPU Torch package. These are local observations rather than statements from vendor documentation. GPU use therefore needs an explicit backend and adapter selection; the current CPU installation does not become GPU-enabled automatically.

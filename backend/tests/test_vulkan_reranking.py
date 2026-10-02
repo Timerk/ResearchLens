@@ -60,6 +60,30 @@ def test_pair_format_and_reserved_placeholders():
     scorer.tokenizer.assert_called_once_with("question", "passage", truncation=False)
 
 
+def test_vulkan_provenance_requires_explicit_cache_and_memory_budget():
+    settings = {
+        **reranker_metadata(),
+        "candidates": 20,
+        "diversity": 0.0,
+        "runtime": "llama.cpp",
+        "device": "Vulkan0",
+        "precision": "float16",
+        "truncation": "reject-overflow",
+        "weights_sha256": "a" * 64,
+        "runtime_binary_sha256": "b" * 64,
+        "runtime_commit": "c" * 40,
+        "device_name": "AMD Radeon RX 6800",
+        "context_tokens": 2048,
+        "batch_tokens": 2048,
+        "gpu_layers": 99,
+        "prompt_template_sha256": "d" * 64,
+    }
+    with pytest.raises(ValueError):
+        VulkanRerankerConfig.model_validate(settings)
+    settings.update(prompt_cache_ram_mib=0, server_private_limit_bytes=6 * 1024**3)
+    assert VulkanRerankerConfig.model_validate(settings).prompt_cache_ram_mib == 0
+
+
 def scorer_stub():
     scorer = object.__new__(VulkanReranker)
     scorer.client = Mock()
