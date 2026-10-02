@@ -60,12 +60,16 @@ def test_pair_format_and_reserved_placeholders():
     scorer.tokenizer.assert_called_once_with("question", "passage", truncation=False)
 
 
-def test_vulkan_provenance_requires_explicit_cache_and_memory_budget():
+def test_vulkan_provenance_requires_explicit_cache_and_memory_budget(monkeypatch):
+    import researchlens.reranking as cpu_module
+
+    monkeypatch.setattr(cpu_module, "package_version", lambda _: None)
     settings = {
         **reranker_metadata(),
         "candidates": 20,
         "diversity": 0.0,
         "runtime": "llama.cpp",
+        "runtime_version": "b11327",
         "device": "Vulkan0",
         "precision": "float16",
         "truncation": "reject-overflow",
