@@ -83,3 +83,20 @@ The local probe establishes faster warm inference for the two tested MiniLM inpu
 15. [BAAI BGE-M3 official model card](https://huggingface.co/BAAI/bge-m3).
 16. [Qwen Qwen3-Reranker-0.6B official model card and scoring example](https://huggingface.co/Qwen/Qwen3-Reranker-0.6B).
 17. [BAAI BGE-reranker-v2-m3 official model card](https://huggingface.co/BAAI/bge-reranker-v2-m3).
+
+## Follow-up: reranker host-memory growth
+
+Investigated on 2026-10-02 against the locally tested llama.cpp b11327, commit `552f18f912a32ea86edf82e2b76431cb7131538d`, using Qwen3-Reranker-0.6B F16 on the RX 6800. Final local measurements and operating instructions belong in [the Vulkan reranking report](vulkan-reranking.md).
+
+Repeated identical requests reached a memory plateau, while requests with changing queries increased host memory. Upstream [issue #26293](https://github.com/ggml-org/llama.cpp/issues/26293) reports the same pattern for this reranker and identifies an idle-slot RAM prompt cache that accepts reranking state but cannot restore it for reranking. A separately reported [Vulkan memory issue #28008](https://github.com/ggml-org/llama.cpp/issues/28008) also resolved by disabling that cache. These reports identify a server-cache explanation independent of GPU driver or shader compilation.
+
+The tested source confirms the mechanism:
+
+- [common/common.h:630](https://github.com/ggml-org/llama.cpp/blob/552f18f912a32ea86edf82e2b76431cb7131538d/common/common.h#L630) enables idle-slot caching by default; [line 634](https://github.com/ggml-org/llama.cpp/blob/552f18f912a32ea86edf82e2b76431cb7131538d/common/common.h#L634) sets the default RAM cache to 8192 MiB.
+- [server-context.cpp:2436](https://github.com/ggml-org/llama.cpp/blob/552f18f912a32ea86edf82e2b76431cb7131538d/tools/server/server-context.cpp#L2436) saves idle slots without a task-type guard.
+- [server-context.cpp:1639](https://github.com/ggml-org/llama.cpp/blob/552f18f912a32ea86edf82e2b76431cb7131538d/tools/server/server-context.cpp#L1639) restricts the cache-restoration path to completion tasks.
+- [server-context.cpp:1420](https://github.com/ggml-org/llama.cpp/blob/552f18f912a32ea86edf82e2b76431cb7131538d/tools/server/server-context.cpp#L1420) automatically disables idle-slot caching when `--cache-ram 0` is specified.
+
+The targeted 12-request probe finished. The default-cache comparison ended around 7.83 GiB private memory, with 3.93 GiB growth after the first two requests. With `--cache-ram 0`, the fixed adapter ended at 3.60 GiB private memory and 2.01 GiB working set, with about 0.24 GiB growth after the first two requests and a plateau after the fifth. This supports the source diagnosis. It does not prove an unbounded leak: the default prompt cache has an 8 GiB budget, and other allocations contribute to total process memory. No driver-cache defect was established.
+
+Use `--cache-ram 0` for the reranker experiment and inspect the full-grid memory and score checks before judging longer-run stability. Upstream [PR #26893](https://github.com/ggml-org/llama.cpp/pull/26893) proposes excluding non-completion tasks from idle-slot caching; it was open and unmerged when checked. There is no need to change the driver or select an older build to test this targeted mitigation.

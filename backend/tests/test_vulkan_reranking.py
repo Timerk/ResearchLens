@@ -69,6 +69,7 @@ def scorer_stub():
     scorer._last_key = None
     scorer._last_tokens = []
     scorer.pair_tokens = Mock(return_value=[1, 2])
+    scorer.check_memory = Mock()
     return scorer
 
 
@@ -108,3 +109,48 @@ def test_fixed_development_plan_has_controls_and_both_candidate_pools():
             for e in entries
             if e["model"] == model and e["reranker"]
         } == {(r, n) for r in ("bge", "qwen") for n in (20, 40)}
+
+
+def test_managed_server_disables_write_only_prompt_cache_and_closes(monkeypatch, tmp_path):
+    import researchlens.vulkan_reranking as module
+
+    scorer = object.__new__(VulkanReranker)
+    scorer.root = tmp_path
+    scorer.metadata = {"weights": "qwen-f16.gguf"}
+    scorer.alias = "qwen"
+    scorer.log_path = tmp_path / "server.log"
+    scorer.client = scorer.process = scorer.log = None
+    scorer.memory_samples = []
+    client = Mock()
+    client.get.return_value.status_code = 200
+    process = Mock()
+    process.poll.return_value = None
+    popen = Mock(return_value=process)
+    monkeypatch.setattr(module.httpx, "Client", Mock(return_value=client))
+    monkeypatch.setattr(module.subprocess, "Popen", popen)
+    monkeypatch.setattr(module, "server_memory", lambda _: {"peak_private_bytes": 1})
+    monkeypatch.setattr(type(tmp_path), "read_text", lambda *_args, **_kwargs:
+                        "using device Vulkan0 (AMD Radeon RX 6800) offloaded 29/29 layers to GPU")
+    with scorer:
+        arguments = popen.call_args.args[0]
+        assert "--cache-ram" in arguments
+        assert arguments[arguments.index("--cache-ram") + 1] == "0"
+    client.close.assert_called_once()
+    process.terminate.assert_called_once()
+    process.wait.assert_called_once()
+
+
+def test_memory_guard_stops_owned_server_before_more_requests(monkeypatch):
+    import researchlens.vulkan_reranking as module
+
+    scorer = scorer_stub()
+    del scorer.check_memory
+    scorer.memory_samples = []
+    scorer.close = Mock()
+    monkeypatch.setattr(module, "server_memory", lambda _: {
+        "peak_private_bytes": module.SERVER_PRIVATE_LIMIT_BYTES + 1,
+    })
+    with pytest.raises(ValueError, match="6 GiB"):
+        scorer.score("question", [SimpleNamespace(id="one", text="passage")])
+    scorer.close.assert_called_once()
+    scorer.client.post.assert_not_called()
