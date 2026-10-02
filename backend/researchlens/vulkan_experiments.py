@@ -124,14 +124,15 @@ def single(args):
             raise ValueError("Run contains case errors; inspect run.json")
 
 
-def compare(args):
+def compare(args, entries=None, module="researchlens.vulkan_experiments", provenance=None):
+    entries = plan() if entries is None else entries
     dataset, labels, artifacts = inputs(args)
     runtime = {alias: metadata(args.runtime, alias) for alias in ("bge", "qwen")}
     execution = ExecutionConfig(repeats=args.repeats, warmups=1, measure_memory=True)
     args.output.mkdir(parents=True, exist_ok=False)
     manifest = {
-        "plan": plan(),
-        "plan_sha256": canonical_hash(plan()),
+        "plan": entries,
+        "plan_sha256": canonical_hash(entries),
         "dataset_sha256": canonical_hash(dataset.model_dump(mode="json")),
         "evidence_labels_sha256": canonical_hash(labels.model_dump(mode="json")),
         "artifact_hashes": {k: canonical_hash(v) for k, v in artifacts.items()},
@@ -143,6 +144,7 @@ def compare(args):
         "api_calls": 0,
         "selection_rule": "Complete evidence@4, cohort regressions, then latency; development only",
         "held_out_retrieval": False,
+        "experiment_provenance": provenance,
     }
 
     def save():
@@ -151,7 +153,7 @@ def compare(args):
         )
 
     save()  # Immutable settings and inputs are recorded before any question executes.
-    for entry in plan():
+    for entry in entries:
         print(f"Starting {entry['name']}", flush=True)
         started = perf_counter()
         with (args.output / f"{entry['name']}-process.log").open("w", encoding="utf-8") as log:
@@ -160,7 +162,7 @@ def compare(args):
                     [
                         sys.executable,
                         "-m",
-                        "researchlens.vulkan_experiments",
+                        module,
                         "--single",
                         entry["name"],
                         "--runtime",
@@ -212,7 +214,7 @@ def compare(args):
             ],
             check=True,
         )
-    if len(successful) != len(plan()):
+    if len(successful) != len(entries):
         raise ValueError("Some predefined configurations failed; no automatic retries")
 
 
