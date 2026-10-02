@@ -33,7 +33,7 @@ From the repository root with the existing CPU embedding extras installed:
 rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
 rtk proxy uv pip install --python .venv/Scripts/python.exe --target .venv/vulkan/convert-deps sentencepiece==0.2.1
 rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.vulkan_prepare --runtime ../.venv/vulkan
-rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.vulkan_experiments --runtime ../.venv/vulkan --indexes ../evaluation/runs/approved-models-2026-10-01-k4/indexes --output ../evaluation/runs/vulkan-rerankers-2026-10-02
+rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.vulkan_experiments --runtime ../.venv/vulkan --indexes ../evaluation/runs/approved-models-2026-10-01-k4/indexes --output ../evaluation/runs/vulkan-rerankers-cache-off-2026-10-02
 ```
 
 Preparation explicitly downloads public assets at pinned revisions. Startup/scoring
@@ -55,6 +55,25 @@ instead of silently clipping evidence. Measured pair-token totals must match the
 reported evaluated tokens. Each run records executable/weight hashes, revision, scoring
 and prompt conventions. GPU layer offload does not imply every tensor or operation is
 on GPU; token embeddings can remain CPU-mapped.
+
+The adapter explicitly disables the idle prompt cache with `--cache-ram 0`. In this
+runtime the default 8 GiB host cache stores reranking state but restores state only
+for completion tasks. Distinct requests therefore fill a cache that reranking cannot
+use. See [the source diagnosis](amd-gpu-research.md#follow-up-reranker-host-memory-growth).
+Native Windows server counters are sampled at startup and before/after each request;
+`server-memory.json` records working set, private memory and their native high-water
+counters separately from Python and VRAM. A 6 GiB server private-memory high-water
+limit stops the owned server with an actionable error. It is a per-server check,
+not a total-system or continuous memory guarantee.
+
+A 12-request reproduction using the first approved development cases and the saved
+20 Qwen3-4B candidates reproduced the RAM increase. After two requests, the default
+cache grew by 3.93 GiB and ended at about 7.83 GiB private memory. With the fixed
+adapter, private memory stayed between 3.36 and 3.60 GiB after the first request,
+ending at 3.60 GiB; working set ended at 2.01 GiB. This check ran the actual adapter
+without injected flags. The full comparison repeats changing questions and records
+memory for every GPU configuration. Earlier interrupted timings are excluded because
+system RAM reached 96%.
 
 ## Development protocol
 
