@@ -92,7 +92,54 @@ is part of setup, excluded from timed searches. The runner's process peak RSS co
 the Python process, not the separate server or total VRAM. Runtime GPU buffer sizes
 must be reported separately and must not be called measured peak VRAM.
 
-Results are pending. Three synthetic relevance pairs passed both Vulkan adapters and
+The full comparison is paused; see the checkpoint below. Three synthetic relevance pairs passed both Vulkan adapters and
 kept the Transformers float32 ordering. Maximum score differences were 0.099643 raw
 BGE logits and 0.00001520 Qwen softmax values. These establish a smoke check, not corpus
 quality or full numerical/ranking equivalence.
+
+
+## Saved checkpoint, 2026-10-02
+
+Stopped at the owner's request before machine shutdown. Nine of ten configurations
+completed all 50 approved development cases without errors. The final BGE-M3/Qwen
+40-candidate run was interrupted; its partial logs are retained but not scored.
+Selected metrics, input/runtime hashes, cohorts, case gains/losses, token diagnostics
+and separate server-memory summaries are saved in [vulkan-reranking-results.json](vulkan-reranking-results.json).
+Full runs remain locally in the ignored `evaluation/runs/vulkan-rerankers-cache-off-2026-10-02/`.
+
+| CPU embedding model | Retrieval | Complete evidence / 36 | Median query time |
+| --- | --- | ---: | ---: |
+| Qwen3-4B | Dense | 24 | 218 ms |
+| BGE-M3 | Dense | 22 | 26 ms |
+| Qwen3-4B | BGE reranker, 20 candidates | 25 | 626 ms |
+| Qwen3-4B | BGE reranker, 40 candidates | 25 | 1,024 ms |
+| Qwen3-4B | Qwen reranker, 20 candidates | 25 | 1,580 ms |
+| Qwen3-4B | Qwen reranker, 40 candidates | 23 | 2,915 ms |
+| BGE-M3 | BGE reranker, 20 candidates | 26 | 481 ms |
+| BGE-M3 | BGE reranker, 40 candidates | 25 | 939 ms |
+| BGE-M3 | Qwen reranker, 20 candidates | 23 | 1,452 ms |
+
+These are actual four-passage searches, with one warmup and three timed repeats per
+question. The best completed setting reaches 72.2% completeness, below the provisional
+80% goal. Its cohort counts are 11/14 terminology, 8/13 paraphrase and 7/9 cross-document,
+versus Qwen3-4B dense's 11/14, 8/13 and 5/9. Question-level regressions remain in the JSON;
+equal cohort totals do not mean identical successful questions. Selection is provisional
+until the remaining configuration and CPU reference checks finish. Production defaults
+and the prior CPU selection remain unchanged. No OpenAI calls or held-out searches occurred.
+
+The cache-off reruns reproduced all 50 rankings and metrics in each of the five
+previously completed configurations. Longer cache-off runs also kept server memory
+bounded; the JSON records actual native peaks separately from reported GPU buffers.
+No measured peak VRAM or controlled CPU-versus-GPU speedup is claimed.
+
+To resume, preserve the completed directories and use a fresh parent output directory
+for the interrupted configuration:
+
+```powershell
+rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.vulkan_experiments --single bge-m3-qwen-rerank40 --runtime ../.venv/vulkan --indexes ../evaluation/runs/approved-models-2026-10-01-k4/indexes --output ../evaluation/runs/vulkan-rerankers-resume-2026-10-02
+```
+
+Then run the separate CPU float32 reference ranking checks, assemble the final paired
+report with the existing runner, and freeze any selected development configuration
+before held-out retrieval. Do not overwrite the saved nine runs or count the interrupted
+run as completed. The optional Vulkan adapter remains evaluation-only.

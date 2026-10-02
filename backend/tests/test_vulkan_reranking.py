@@ -129,8 +129,13 @@ def test_managed_server_disables_write_only_prompt_cache_and_closes(monkeypatch,
     monkeypatch.setattr(module.httpx, "Client", Mock(return_value=client))
     monkeypatch.setattr(module.subprocess, "Popen", popen)
     monkeypatch.setattr(module, "server_memory", lambda _: {"peak_private_bytes": 1})
-    monkeypatch.setattr(type(tmp_path), "read_text", lambda *_args, **_kwargs:
-                        "using device Vulkan0 (AMD Radeon RX 6800) offloaded 29/29 layers to GPU")
+    monkeypatch.setattr(
+        type(tmp_path),
+        "read_text",
+        lambda *_args, **_kwargs: (
+            "using device Vulkan0 (AMD Radeon RX 6800) offloaded 29/29 layers to GPU"
+        ),
+    )
     with scorer:
         arguments = popen.call_args.args[0]
         assert "--cache-ram" in arguments
@@ -147,9 +152,13 @@ def test_memory_guard_stops_owned_server_before_more_requests(monkeypatch):
     del scorer.check_memory
     scorer.memory_samples = []
     scorer.close = Mock()
-    monkeypatch.setattr(module, "server_memory", lambda _: {
-        "peak_private_bytes": module.SERVER_PRIVATE_LIMIT_BYTES + 1,
-    })
+    monkeypatch.setattr(
+        module,
+        "server_memory",
+        lambda _: {
+            "peak_private_bytes": module.SERVER_PRIVATE_LIMIT_BYTES + 1,
+        },
+    )
     with pytest.raises(ValueError, match="6 GiB"):
         scorer.score("question", [SimpleNamespace(id="one", text="passage")])
     scorer.close.assert_called_once()
