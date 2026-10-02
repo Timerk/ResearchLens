@@ -81,6 +81,9 @@ See [retrieval development experiments](docs/retrieval-improvements.md) for opti
 local reranking, weighted fusion, tokenizer measurements and offline context comparisons.
 Optional RX 6800 Vulkan reranker experiments are documented in
 [Vulkan reranker tests](docs/vulkan-reranking.md).
+The [complementary selection experiment](docs/complementary-selection.md) tests
+question splitting and title/section reranking. Its five variants regress against
+the existing controls, so the previous selection and application defaults remain.
 
 ### Enable document-only OpenAI answers
 
