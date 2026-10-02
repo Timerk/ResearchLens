@@ -45,15 +45,23 @@ def server_memory(process) -> dict[str, int]:
         _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD)] + [
             (name, ctypes.c_size_t)
             for name in (
-                "PeakWorkingSetSize", "WorkingSetSize", "QuotaPeakPagedPoolUsage",
-                "QuotaPagedPoolUsage", "QuotaPeakNonPagedPoolUsage", "QuotaNonPagedPoolUsage",
-                "PagefileUsage", "PeakPagefileUsage", "PrivateUsage",
+                "PeakWorkingSetSize",
+                "WorkingSetSize",
+                "QuotaPeakPagedPoolUsage",
+                "QuotaPagedPoolUsage",
+                "QuotaPeakNonPagedPoolUsage",
+                "QuotaNonPagedPoolUsage",
+                "PagefileUsage",
+                "PeakPagefileUsage",
+                "PrivateUsage",
             )
         ]
 
     psapi = ctypes.WinDLL("psapi", use_last_error=True)
     psapi.GetProcessMemoryInfo.argtypes = [
-        wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD,
+        wintypes.HANDLE,
+        ctypes.POINTER(Counters),
+        wintypes.DWORD,
     ]
     counters = Counters()
     counters.cb = ctypes.sizeof(counters)
