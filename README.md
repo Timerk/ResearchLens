@@ -84,6 +84,10 @@ Optional RX 6800 Vulkan reranker experiments are documented in
 The [complementary selection experiment](docs/complementary-selection.md) tests
 question splitting and title/section reranking. Its five variants regress against
 the existing controls, so the previous selection and application defaults remain.
+The [fixed-pool information-needs study](docs/information-needs-experiments.md)
+also tests a local question model and separately rebuilt title/section/neighbor
+vectors. Its best new selector ties ordinary reranking at 25/36 complete cases;
+the existing BGE reranker selection at 26/36 remains unchanged.
 
 ### Enable document-only OpenAI answers
 
