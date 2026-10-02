@@ -170,6 +170,21 @@ class PassageSelectionConfig(StrictModel):
         return self
 
 
+class InformationSelectionConfig(StrictModel):
+    version: Literal["fixed-information-needs-v1"]
+    policy: Literal[
+        "dense-order",
+        "whole-rerank",
+        "rules-max",
+        "needs-max",
+        "needs-saturation",
+        "needs-round-robin",
+    ]
+    input_bundle_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    candidate_count: Literal[40]
+    timing_scope: Literal["replay-selection-only"]
+
+
 class RetrievalConfig(StrictModel):
     implementation: str
     version: str
@@ -208,6 +223,7 @@ class RetrievalConfig(StrictModel):
     embedding_weight: float | None = Field(default=None, ge=0, le=1)
     reranker: RerankerConfig | VulkanRerankerConfig | None = None
     passage_selection: PassageSelectionConfig | None = None
+    information_selection: InformationSelectionConfig | None = None
 
     @model_validator(mode="after")
     def hybrid_settings(self) -> Self:

@@ -204,6 +204,8 @@ def default_retrieval_config(
         settings["reranker"] = adapter.reranking_settings
     if adapter is not None and hasattr(adapter, "selection_settings"):
         settings["passage_selection"] = adapter.selection_settings
+    if adapter is not None and hasattr(adapter, "information_settings"):
+        settings["information_selection"] = adapter.information_settings
     return RetrievalConfig(
         implementation=implementation,
         version="tfidf-word-unigram-bigram-english-stopwords-v1"
