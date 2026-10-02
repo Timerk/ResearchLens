@@ -1,8 +1,10 @@
 """Evaluation-only local question decomposition, grounded in copied question phrases."""
 
 import argparse
+import copy
 import hashlib
 import json
+import re
 import socket
 import subprocess
 import time
@@ -50,6 +52,22 @@ SCHEMA = {
     },
     "required": ["needs"],
 }
+
+
+def question_schema(question):
+    """Constrain decoding to contiguous question phrases, before model inference."""
+    words = list(re.finditer(r"\S+", question))
+    phrases = {question}
+    for start in range(len(words)):
+        for end in range(start, min(start + 12, len(words))):
+            phrase = question[words[start].start() : words[end].end()].strip(" ,.?;:\"'")
+            if phrase:
+                phrases.add(phrase)
+    schema = copy.deepcopy(SCHEMA)
+    fields = schema["properties"]["needs"]["items"]["properties"]
+    fields["subject"]["enum"] = ["", *sorted(phrases)]
+    fields["aspect"]["enum"] = sorted(phrases)
+    return schema
 
 
 def validate_needs(question, response):
@@ -126,7 +144,7 @@ class LocalNeeds:
             ).hexdigest(),
             "cache_ram_mib": 0,
             "server_private_limit_bytes": 6 * 1024**3,
-            "grounding": "exact-contiguous-question-phrases-v1",
+            "grounding": "schema-question-phrases-v2-max12words-or-fullquestion",
             "retries": 0,
         }
 
@@ -214,6 +232,8 @@ class LocalNeeds:
         if not 1 <= len(question) <= 2000:
             raise ValueError("Question must fit the existing 2000-character budget")
         self.check_memory()
+        self.last_record = None
+        schema = question_schema(question)
         response = self.client.post(
             "/v1/chat/completions",
             json={
@@ -227,7 +247,7 @@ class LocalNeeds:
                 "cache_prompt": False,
                 "response_format": {
                     "type": "json_schema",
-                    "json_schema": {"name": "information_needs", "strict": True, "schema": SCHEMA},
+                    "json_schema": {"name": "information_needs", "strict": True, "schema": schema},
                 },
             },
         )
@@ -235,11 +255,19 @@ class LocalNeeds:
         data = response.json()
         self.check_memory()
         choice = data["choices"][0]
+        self.last_record = {
+            "content": choice["message"]["content"],
+            "usage": data.get("usage"),
+            "finish_reason": choice["finish_reason"],
+            "question_schema_sha256": hashlib.sha256(
+                json.dumps(schema, sort_keys=True).encode()
+            ).hexdigest(),
+        }
         if choice["finish_reason"] != "stop":
             raise ValueError("Local information-needs output was incomplete")
         raw = json.loads(choice["message"]["content"])
         queries = validate_needs(question, raw)
-        self.last_record = {"raw": raw, "queries": queries, "usage": data.get("usage")}
+        self.last_record.update(raw=raw, queries=queries)
         return queries
 
     def close(self):
