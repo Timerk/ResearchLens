@@ -148,6 +148,28 @@ class VulkanRerankerConfig(RerankerConfig):
     prompt_template_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
 
 
+class PassageSelectionConfig(StrictModel):
+    """Allowlisted provenance for evaluation-only question/metadata selection."""
+
+    version: Literal["facets-v1"]
+    decompose: bool
+    complementary: bool
+    candidates: int = Field(ge=1, le=100)
+    per_query: int = Field(ge=1, le=100)
+    max_queries: Literal[3]
+    reranking_representation: Literal["passage-text-only", "title-section-text-v1"]
+    original_weight: Literal[0.5]
+    rank_constant: Literal[10]
+    document_profile: Literal["title-first-passage-v1"]
+    profile_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+    @model_validator(mode="after")
+    def budgets(self) -> Self:
+        if self.per_query > self.candidates:
+            raise ValueError("Original query candidates must fit the total pool")
+        return self
+
+
 class RetrievalConfig(StrictModel):
     implementation: str
     version: str
@@ -185,6 +207,7 @@ class RetrievalConfig(StrictModel):
     lexical_weight: float | None = Field(default=None, ge=0, le=1)
     embedding_weight: float | None = Field(default=None, ge=0, le=1)
     reranker: RerankerConfig | VulkanRerankerConfig | None = None
+    passage_selection: PassageSelectionConfig | None = None
 
     @model_validator(mode="after")
     def hybrid_settings(self) -> Self:
