@@ -1,0 +1,309 @@
+{
+  "audit_date": "2026-10-05",
+  "base_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+  "reviewer": "Codex / GPT-6-Astra, AI-assisted audit, no independent human sign-off",
+  "method": "Development questions and primary-source audit; prior review entries filtered to development; held-out JSON never parsed by this script.",
+  "boundary_incident": "An earlier schema probe called list() on rejected-cases.json, which is a list rather than a mapping, and emitted rejected held-out draft records. It was stopped. The frozen held-out dataset was not opened or queried. No rejected draft was used to propose changes. This exposure means the overall session must not be described as having zero held-out-related text exposure.",
+  "case_count": 50,
+  "answerable_count": 36,
+  "negative_count": 14,
+  "query_styles": {
+    "exact-terminology": 14,
+    "paraphrase": 13,
+    "cross-document": 9,
+    "unrelated": 7,
+    "missing-evidence": 7
+  },
+  "positive_source_incidence": {
+    "pmc11510794": 16,
+    "pmc11768589": 13,
+    "pmc10934137": 6,
+    "pmc11121878": 10
+  },
+  "positive_pairs": 630,
+  "positive_pairs_sharing_approved_passages": 28,
+  "passage_overlap_interpretation": "Shared accepted passages indicate dependence, not identical factual targets. This is a within-development calculation, not a split-leakage audit.",
+  "overlapping_case_pairs": [
+    {
+      "case_ids": [
+        "tech-glass-exact",
+        "tech-compare-fusion"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p24:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-painted-exact",
+        "tech-compare-fusion"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p1:w0",
+        "pmc11768589:p44:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-painted-exact",
+        "tech-imagenet-initialization"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p26:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-painted-exact",
+        "tech-both-checks-clean"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p1:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-painted-exact",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p26:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-autoencoder-exact",
+        "tech-aw-ssim-combination"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11121878:p8:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-autoencoder-exact",
+        "tech-damaged-clean-pairs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11121878:p17:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-autoencoder-exact",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11121878:p17:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-rgb-channel-assignment"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p38:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-amff-layers"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p59:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-both-checks-clean"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p1:w0",
+        "pmc11768589:p30:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-compare-localization-outputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p59:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-compare-optical-cues"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p35:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-fusion",
+        "tech-compare-network-roles"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p59:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-obb",
+        "tech-compare-localization-outputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p31:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-amff-layers",
+        "tech-compare-localization-outputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p41:w0",
+        "pmc11510794:p59:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-amff-layers",
+        "tech-compare-network-roles"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p41:w0",
+        "pmc11510794:p59:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-adaptive-binarization",
+        "tech-imagenet-initialization"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-adaptive-binarization",
+        "tech-both-checks-clean"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-adaptive-binarization",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-imagenet-initialization",
+        "tech-both-checks-clean"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-imagenet-initialization",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p26:w0",
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-small-photo-supply",
+        "tech-compare-data-expansion"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p21:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-both-checks-clean",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11768589:p29:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-bright-specks-dark-background",
+        "tech-compare-optical-cues"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc10934137:p6:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-too-many-shortcuts",
+        "tech-compare-network-roles"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11121878:p16:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-damaged-clean-pairs",
+        "tech-compare-network-inputs"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11121878:p17:w0"
+      ]
+    },
+    {
+      "case_ids": [
+        "tech-compare-localization-outputs",
+        "tech-compare-network-roles"
+      ],
+      "shared_approved_passage_ids": [
+        "pmc11510794:p41:w0",
+        "pmc11510794:p59:w0"
+      ]
+    }
+  ],
+  "protected_file_sha256": {
+    "data/technical/NOTICE.txt": "1b0764a5f0c3acf744cfa2fe040d46d342028c434e2ad1880fd2548085dddbce",
+    "data/technical/documents.json": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "data/technical/manifest.json": "508bb5c5f00982c4f80a341cc2b49db6728c62575366067b60579875696e4376",
+    "data/technical/originals/PMC10934137.xml": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+    "data/technical/originals/PMC11121878.xml": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+    "data/technical/originals/PMC11510794.xml": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+    "data/technical/originals/PMC11768589.xml": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+    "evaluation/datasets/development.json": "85677ebecd332e8132c7ff152ac45db6bde8d210dca061c4156353dce168e82c",
+    "evaluation/datasets/held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572",
+    "evaluation/datasets/technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "evaluation/labels/README.md": "08ac7c04b1ea19aa0d15b16966df0a110f30e160180206d6b8cca010d5f14a81",
+    "evaluation/labels/technical-development.json": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+    "evaluation/reviews/2026-10-01-pr8/README.md": "afd1f404a501b730a717b08b735b95bd2a4cf703d59e5a064f403cda2efee356",
+    "evaluation/reviews/2026-10-01-pr8/evidence-fixes.json": "c8a4efc33cdbea7f02982ca1f9d5f3a6d180e7075df27dd4d65a2d3342d385aa",
+    "evaluation/reviews/2026-10-01-pr8/evidence-fixes.md": "62d59e6d470bc2145b69088094b83a17135de5d3042a575688628f520907d71a",
+    "evaluation/reviews/2026-10-01-pr8/evidence-human-review.json": "ac6f8fa358e94e8eae7ca6b22d5c4d7393ebab0ee9e91a8a998d6af0f18995ae",
+    "evaluation/reviews/2026-10-01-pr8/evidence-review.json": "4c82d26fcbcbcd4babf55f0bd9a8e82baecbedb43ba3f4cff74de3a7d3da5889",
+    "evaluation/reviews/2026-10-01-pr8/evidence-review.md": "17e6a7b6d13b390326137a17ea5246f3f8bcf3c877a7d21d96bf379001e3454d",
+    "evaluation/reviews/2026-10-01-pr8/human-review.json": "13c1c902b7d4ac3d01b68c039649d159321396f9f0d1a562335edcece8a5916e",
+    "evaluation/reviews/2026-10-01-pr8/rejected-cases.json": "e3c19ad5371202a9bf39a2d55dbf3079e15814a762cfc89a981d1f0d9d624203",
+    "evaluation/reviews/2026-10-01-pr8/review.json": "16dc61594f53339efc0fbb43fbac555964f04997010b3da46995c56ac5e996e9"
+  }
+}

@@ -1,0 +1,1691 @@
+{
+  "review_date": "2026-10-05",
+  "review_status": "unreviewed-proposals",
+  "reviewer": "Codex / GPT-6-Astra, AI-assisted",
+  "method": "Visible requested facts identified before classifying expectations; no cached retrieval outcomes viewed for these judgments.",
+  "cases": [
+    {
+      "case_id": "tech-compare-fusion",
+      "question": "How do the canopy and painted heating-device studies differ in their illumination modalities and fusion levels?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Identify both illumination modes in each paper.",
+        "Distinguish canopy RGB data fusion and ADMF-Net feature fusion from heater decision fusion."
+      ],
+      "evidence_judgment": "All 5 groups and all current alternatives support their facts in context. Group part-3 unnecessarily pairs canopy p40 with p5: p5 itself names the expanded model and says feature-level fusion. Add the p5 span alone. This does not permit a generic fusion taxonomy as model-specific evidence.",
+      "proposed_correction": "Add pmc11510794:p5:w0 [515,766) alone for part-3; retain existing alternatives and all five facts.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p5:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[1]/p[4]",
+          "source_section": "1. Introduction",
+          "quote": "Our contributions can be summarized as follows:An automated prototype system with a dual-modal illumination structure is proposed. For the same sampling point, the system sequentially uses forward lighting and backward lighting to capture defect images. By integrating the information from both types of images, more accurate defect detection is achieved.A curated dataset is presented, which, to the best of our knowledge, is the first benchmark in the field of defect detection for aircraft transparent materials.A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion. Both methods achieved excellent results on our dataset.",
+          "start": 0,
+          "end": 822
+        },
+        {
+          "passage_id": "pmc11510794:p59:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[5]/p[3]",
+          "source_section": "5. Conclusions",
+          "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net). The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities. Next, through the attention-based multi-modal feature fusion block (AMFF) and improved SPPF module, the network adaptively integrates the multi-scale features from the two modalities. Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects.",
+          "start": 0,
+          "end": 648
+        },
+        {
+          "passage_id": "pmc11768589:p1:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]",
+          "source_section": "Abstract",
+          "quote": "To automate the quality control of painted surfaces of heating devices, an automatic defect detection and classification system was developed by combining deflectometry and bright light-based illumination on the image acquisition, deep learning models for the classification of non-defective (OK) and defective (NOK) surfaces that fused dual-modal information at the decision level, and an online network for information dispatching and visualization. Three decision-making algorithms were tested for implementation: a new model built and trained from scratch and transfer learning of pre-trained networks (ResNet-50 and Inception V3). The results revealed that the two illumination modes employed widened the type of defects that could be identified with this system, while maintaining its lower computational complexity by performing multi-modal fusion at the decision level. Furthermore, the pre-trained networks achieved higher accuracies on defect classification compared to the self-built network, with ResNet-50 displaying higher accuracy. The inspection system consistently obtained fast and accurate surface classifications because it imposed OK classification on models trained with images from both illumination modes. The obtained surface information was then successfully sent to a server to be forwarded to",
+          "start": 0,
+          "end": 1320
+        },
+        {
+          "passage_id": "pmc11768589:p30:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[3]/p[2]",
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "quote": "It should be emphasized that this algorithm applied a decision-level fusion of the classification outputs, so for a painted surface to be classified as OK, its images should be submitted to CNNs trained with images of both illumination modes and obtain an OK classification on both. A confidence interval of 90% was required for the acceptance of a defect classification, given the overlap between the four subimages extracted from the original image.",
+          "start": 0,
+          "end": 451
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy inspection combines forward/backward lighting with RGB data-level fusion and an ADMF-Net feature-level method.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Painted heating-device inspection combines deflectometry/bright illumination with decision-level fusion.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "These are different tasks and datasets; no common-benchmark superiority follows.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A claim of comparative superiority would need matched tasks/data; a descriptive fusion comparison need not volunteer a performance disclaimer."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Directly ranking the two approaches' accuracies across different datasets.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy forward/backward illumination",
+          "alternatives_checked": 5,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Canopy data-level RGB fusion",
+          "alternatives_checked": 3,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-3",
+          "description": "Canopy feature-level ADMF-Net",
+          "alternatives_checked": 2,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-4",
+          "description": "Heater deflectometry and bright-field modes",
+          "alternatives_checked": 4,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-5",
+          "description": "Heater decision-level fusion",
+          "alternatives_checked": 5,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-unrelated",
+      "question": "Who composed the music for the opera The Magic Flute?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "Who composed the music for the opera The Magic Flute?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "This technical corpus is not evidence for an unrelated music-history answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "An answer supplied from general knowledge rather than these documents.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-shared-cpu-cost",
+      "question": "Which of the four methods has the lowest total CPU inference cost per detected defect when all four are tested on the identical glass-canopy benchmark?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "A matched four-method CPU cost-per-defect ranking on the same canopy data."
+      ],
+      "evidence_judgment": "The four source methods/results describe different materials, tasks and hardware. Hardware specifications and runtime fragments cannot supply the absent common experiment.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p48:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]",
+          "source_section": "4. Experiments > 4.2. Implementation Details",
+          "quote": "The training environment for the experiments was configured with Python version 3.10.14 and PyTorch version 2.2.2, with CUDA version 11.8 for GPU acceleration. The Ultralytics version 8.2.2 was employed to support model implementation. The hardware setup included an AMD Ryzen™ 7 7800X3D CPU with 8 cores and 16 threads, 48GB of memory, and a NVIDIA® GeForce RTX™ 4080 GPU with 16GB of VRAM. During the training phase, we adopted the hyperparameter settings shown in Table 2.",
+          "start": 0,
+          "end": 475
+        },
+        {
+          "passage_id": "pmc11768589:p24:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "quote": "All training and classification employed open sourced Keras framework with TensorFlow backend, implemented on a computer with an Intel®core i7 processor, a RAM memory of 8 GB, and a NVIDIA Geforce 930MX graphic card.",
+          "start": 0,
+          "end": 216
+        },
+        {
+          "passage_id": "pmc10934137:p17:w0",
+          "source_id": "pmc10934137",
+          "source_locator": "./body/sec[4]/sec[3]/p[5]",
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "quote": "It should be noted that the system is an experimental verification device, and it can be further enhanced for practical applications. The uniformity of the illumination light and the intensity of the scattering light can be increased by setting up ring light sources. The combination of a circular scanning strategy and multiple dark-field scattering acquisition channels offers the possibility of improving detection efficiency. However, the different line frequencies of the TDI image sensor need to be adjusted to accommodate linear velocity changes at different radii, thereby eliminating image blur. The TDI-DFSM can integrate an autofocus mechanism, an auto-calibration procedure, and a feedback mechanism, thus reducing manual intervention and improving system stability. Therefore, the relationship between defocus distance and signal intensity needs to be established. In addition, the TDI image sensor can capture multiple images via a single scan, improving data throughput and defect detectability. Polarization modulation and ellipsometry techniques can provide more information and are expected to improve detection sensitivity. In microscopy systems, the depth of field is limited, and wafer movement during inspection inevitably leads to defocusing issues. However,",
+          "start": 0,
+          "end": 1281
+        },
+        {
+          "passage_id": "pmc11121878:p38:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/p[2]",
+          "source_section": "4. Experimentation",
+          "quote": "For our experiments, we used diverse anomaly detection samples sourced from the MVTec AD dataset [47], including leather, carpet, hazelnut, pill, wood, and tile textures. In total, 1660 and 714 samples were used for training and testing, respectively. All images were resized to 512 × 512 pixels during training. Training was performed using an Adam optimizer trained for a total of 25 epochs in two stages. To quantitatively assess the performances of various methods, we chose the area under the receiver operating characteristic curve (AuROC) as the evaluation metric. This metric is insensitive to threshold variations and provides a more accurate evaluation of the models’ inspection capabilities.",
+          "start": 0,
+          "end": 702
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "No full original reports the requested identical-canopy-benchmark CPU cost-per-defect comparison; separate training hardware and task metrics cannot establish such a ranking.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "No full original reports the requested identical-canopy-benchmark CPU cost-per-defect comparison; separate training hardware and task metrics cannot establish such a ranking.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 2,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "An invented cost ranking.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Converting unrelated timing or accuracy figures into a shared-benchmark result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "question": "How do the canopy detector and the two-stage autoencoder represent where a defect is?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Name the canopy detector's geometric output.",
+        "Explain the autoencoder's spatial defect representation."
+      ],
+      "evidence_judgment": "All 2 groups and 4 alternatives are supported. Canopy p31 explicitly says annotation AND detection, while p41/p59 explicitly name rotated-box prediction. Autoencoder p40 explicitly ties residual localization to this method. Its p6 gives a general methodological statement; p6 alone remains unresolved as model-specific evidence and is not added. A p6+p40 alternative would consume unnecessary passages because p40 already suffices.",
+      "proposed_correction": "No scoring change. Keep p6 as supplementary conceptual context, pending attribution review.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p31:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[3]/p[3]",
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "quote": "Considering that many of the detected target objects are slender, that is, they have high aspect ratios, large image spans, and may be interlaced, we choose to use oriented bounding boxes (OBB) for annotation and detection.",
+          "start": 0,
+          "end": 223
+        },
+        {
+          "passage_id": "pmc11510794:p41:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[5]/p[2]",
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "quote": "In this network, we use two CSPDarknet-like feature extraction backbones, as proposed in YOLOv8, to extract multi-scale features from the forward lighting and backward lighting modalities separately. Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields. Then, the P5 layers from both modalities are connected to a spatial pyramid pooling layer, FSPPF. Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes.",
+          "start": 0,
+          "end": 604
+        },
+        {
+          "passage_id": "pmc11510794:p59:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[5]/p[3]",
+          "source_section": "5. Conclusions",
+          "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net). The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities. Next, through the attention-based multi-modal feature fusion block (AMFF) and improved SPPF module, the network adaptively integrates the multi-scale features from the two modalities. Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects.",
+          "start": 0,
+          "end": 648
+        },
+        {
+          "passage_id": "pmc11121878:p40:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/sec[1]/p[2]",
+          "source_section": "4. Experimentation > 4.1. Overall Performance Comparison",
+          "quote": "Figure 6 presents the inspection results of our proposed method on six different samples. We tested the proposed method on different samples with different kinds of defects like color stains, holes, contamination, etc. By employing a two-stage training process, using AW-SSIM as a loss function, utilizing the ADGA, and combining structural and perceptual losses, the model achieves a clear reconstruction of the normal background. The trained model is unable to reconstruct defective regions. By taking the residual between the input and the reconstructed image, we can localize the defects accurately.",
+          "start": 0,
+          "end": 603
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy defects use oriented bounding boxes.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "The autoencoder localizes defects through the residual between input and reconstruction.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The outputs serve different inspection tasks.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Keep detection boxes distinct from reconstruction residuals."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "Matched-benchmark performance is only relevant if an answer adds a ranking."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "The autoencoder reports the same rotated-box labels as the canopy detector.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy OBB representation",
+          "alternatives_checked": 3,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Autoencoder residual localization",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-splits",
+      "question": "Compare the reported training/test partition in the canopy dataset with the painted heater dataset.",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Report each training/test split with the correct units and attribution."
+      ],
+      "evidence_judgment": "Both groups each have a sufficient single-passage alternative. Canopy p36 reports 1576/176 pairs and describes this approximately as 9:1. Heater p23 reports 80/20 images. Neither the split prose nor canopy Table 1, which counts defect objects, proves sample independence. Exact counts plus ratio are a reasonable reference-answer choice, not a new reason to require other passages.",
+      "proposed_correction": "Keep evidence. Split the compound first qualification into a mandatory unit distinction and a conditional independence guard in a future answer rubric.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p36:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[3]/p[8]",
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "quote": "The final dataset of aircraft glass canopy defects, named ag_dual_obb, includes four types of defects, totaling 1752 defect points and 4784 defect objects. Each defect point includes two images: a forward lighting image and a backward lighting image, which are strictly spatially aligned. The dataset is divided into a training set with 1576 image pairs and a test set with 176 image pairs, following a 9:1 split ratio. See Table 1.",
+          "start": 0,
+          "end": 432
+        },
+        {
+          "passage_id": "pmc11768589:p23:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[5]",
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "quote": "From the total dataset generated, 80% of the images were used for training and the remaining 20% for testing. It should be emphasized that models were trained using images acquired with both illumination modes.",
+          "start": 0,
+          "end": 210
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy uses 1576/176 image pairs, described as 9:1.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Painted surfaces use 80% training and 20% testing.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Pairs and individual images are different counting units; neither passage establishes independence after augmentation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Pairs versus images are necessary units. The additional statement about post-augmentation independence is conditional on a leakage or independence claim."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "The question does not request a performance ranking."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "These percentages prove that both splits are leakage-free.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy split units/counts/ratio",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Heater 80/20 split",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-computers",
+      "question": "What software frameworks and GPU/memory configurations are reported for canopy training and painted-surface training?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Report software frameworks, GPU identities, GPU memory where reported, and system RAM for each study."
+      ],
+      "evidence_judgment": "All 3 groups are supported by two passages. Canopy p48 separates 16GB VRAM from 48GB system memory and states PyTorch/CUDA versions. Heater p24 states Keras/TensorFlow, 930MX and 8GB RAM. Requiring another hardware or timing passage is unnecessary. Versions are a reasonable interpretation of reported framework configurations.",
+      "proposed_correction": "Keep evidence; make benchmarking disclaimers conditional in an answer rubric.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p48:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[4]/sec[2]/p[1]",
+          "source_section": "4. Experiments > 4.2. Implementation Details",
+          "quote": "The training environment for the experiments was configured with Python version 3.10.14 and PyTorch version 2.2.2, with CUDA version 11.8 for GPU acceleration. The Ultralytics version 8.2.2 was employed to support model implementation. The hardware setup included an AMD Ryzen™ 7 7800X3D CPU with 8 cores and 16 threads, 48GB of memory, and a NVIDIA® GeForce RTX™ 4080 GPU with 16GB of VRAM. During the training phase, we adopted the hyperparameter settings shown in Table 2.",
+          "start": 0,
+          "end": 475
+        },
+        {
+          "passage_id": "pmc11768589:p24:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "quote": "All training and classification employed open sourced Keras framework with TensorFlow backend, implemented on a computer with an Intel®core i7 processor, a RAM memory of 8 GB, and a NVIDIA Geforce 930MX graphic card.",
+          "start": 0,
+          "end": 216
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy uses PyTorch 2.2.2 with CUDA 11.8, an RTX 4080 with 16GB VRAM and 48GB system memory.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Painted surfaces use Keras with TensorFlow, a GeForce 930MX and 8GB RAM.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Reported setups are not matched computational-cost experiments.",
+          "classification": "Conditional on an additional claim",
+          "notes": "Hardware descriptions need a matched-cost caveat only when drawing a speed/cost inference."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "No ranking is requested."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Either machine is demonstrated faster on the other study's task.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy PyTorch/CUDA versions",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Canopy RTX/memory setup",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-3",
+          "description": "Heater framework and hardware",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-data-expansion",
+      "question": "Compare the canopy study's Mosaic-4 transformations with the painted heater study's crop-based data expansion.",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Describe the Mosaic-4 transformations and the heater crop/augmentation sequence."
+      ],
+      "evidence_judgment": "The 2 groups are sufficient and each points to the exact pipeline. Canopy p35 lists combinations, scale/translation, contrast/exposure and noise. Heater p21 lists four crops, rotation, shifts, zoom, shear and flips. The latter's detailed numeric augmentation settings are optional for this question; its current expected claim does not demand them. The composite group makes partial coverage coarse but does not inflate passage demand.",
+      "proposed_correction": "No scoring change. Do not import optional transformation parameter values into mandatory answer requirements.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p35:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[3]/p[7]",
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "quote": "By following these steps, we ensure that the labels are correctly normalized. Additionally, during the training process, we employed the Mosaic-4 data augmentation method, which includes random image combinations, random scaling and translation, contrast adjustments, exposure adjustments, and noise addition.",
+          "start": 0,
+          "end": 309
+        },
+        {
+          "passage_id": "pmc11768589:p21:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]",
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.3. Dataset Generation",
+          "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a): (1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software; and (2) several data augmentation techniques were then performed on the extracted sub-images, including a random 5-degree rotation, height and width shift-range of 1.5, zoom-range of 0.7, shear-range of 0.2, and horizontal and vertical flip transformations. Besides increasing the size of the dataset, these data augmentations also prevented data overfitting and improved the overall performance of the CNNs [10].",
+          "start": 0,
+          "end": 696
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy training uses Mosaic-4 image combinations, scaling/translation, contrast/exposure changes and noise.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Heater images yield four crops followed by rotations, shifts, zoom, shear and flips.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "These procedures increase training variation, not independently acquired samples.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Describe transformations as augmentation, not new acquisitions. A separate sentence about independence is optional when the answer already makes that distinction."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "No matched performance ranking is requested."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Both papers used the identical augmentation pipeline.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy Mosaic transformations",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Heater crop/transformation pipeline",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-evaluation-metrics",
+      "question": "Which metrics quantify canopy object-detection performance and autoencoder anomaly-detection performance, and can their numerical scores be ranked directly?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Identify canopy detection and autoencoder anomaly metrics.",
+        "Answer whether their reported values support a direct ranking."
+      ],
+      "evidence_judgment": "Both groups are correctly supported: canopy p47 defines mAP50 and mAP50-95/IoU; autoencoder p38 identifies AuROC and its MVTec setting. The no-direct-ranking conclusion is an inference from the metric/task distinction, not a verbatim statement in either source. Complete evidence checks the ingredients, not whether an answer draws that inference. No extra disclaimer passage should be required.",
+      "proposed_correction": "Keep groups and mandatory non-comparability requirement. Deduplicate the answer qualification without changing retrieval scoring.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p47:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]",
+          "source_section": "4. Experiments > 4.1. Evaluation Metrics",
+          "quote": "We evaluate the model’s detection performance using the mean average precision (mAP). Precision is the ratio of true positives (TP) to the sum of true positives and false positives (FP), indicating the accuracy of positive predictions. Recall is the ratio of true positives to the sum of true positives and false negatives (FN), reflecting how well the model detects all relevant instances. Average precision (AP) measures the area under the precision-recall curve, denoted as [formula omitted] , which describes the relationship between precision and recall as the confidence threshold changes. The final mAP is obtained by averaging the AP values across all classes. In this study, we use both the conventional mAP50, which evaluates at an intersection over union (IoU) threshold of 0.5, and the stricter mAP50-95, which averages over multiple IoU thresholds from 0.5 to 0.95 in steps of 0.05. [formula omitted]",
+          "start": 0,
+          "end": 913
+        },
+        {
+          "passage_id": "pmc11121878:p38:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/p[2]",
+          "source_section": "4. Experimentation",
+          "quote": "For our experiments, we used diverse anomaly detection samples sourced from the MVTec AD dataset [47], including leather, carpet, hazelnut, pill, wood, and tile textures. In total, 1660 and 714 samples were used for training and testing, respectively. All images were resized to 512 × 512 pixels during training. Training was performed using an Adam optimizer trained for a total of 25 epochs in two stages. To quantitatively assess the performances of various methods, we chose the area under the receiver operating characteristic curve (AuROC) as the evaluation metric. This metric is insensitive to threshold variations and provides a more accurate evaluation of the models’ inspection capabilities.",
+          "start": 0,
+          "end": 702
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Canopy reports mAP50 and mAP50-95 over IoU thresholds.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "The autoencoder reports area under the ROC curve (AuROC); the task-specific metrics do not support a direct ranking.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The metrics measure different outputs and are evaluated on different datasets.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Different metric definitions and tasks explain why numeric ranking is invalid."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Explicitly requested",
+          "notes": "Unlike the other comparison questions, this one explicitly asks about ranking. The second qualification largely duplicates the first."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "98% mAP means the same error rate as 98% AuROC.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy mAP/IoU metric definitions",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Autoencoder AuROC",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-optical-cues",
+      "question": "What optical cues reveal scratches/dents on painted heaters and particle defects on non-patterned wafers?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Explain how reflected stripes reveal heater scratches/dents and scattered light reveals wafer particles."
+      ],
+      "evidence_judgment": "Both single-passage groups are factually sufficient. Heater p35 names 3D scratches/dents and reflected-pattern distortion; wafer p6 names defect-scattered light on a dark background. Generic references to illumination are not sufficient alternatives. No unsupported interchangeability of sensitivity is licensed.",
+      "proposed_correction": "Keep evidence and reject unsupported sensitivity claims; classify unprompted disclaimers as conditional in the answer rubric.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11768589:p35:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[4]/sec[1]/p[2]",
+          "source_section": "4. Results and Discussion > 4.1. Dataset Acquisition and Generation",
+          "quote": "The application of the two illumination modes—deflectometry-based structured illumination and bright field—was quite successful in the detection of all defects categories, despite their significantly different characteristics and sizes. Indeed, the deflectometry-based illumination was appropriate for the detection of defects with three-dimensional features such as scratches and dents in specular surfaces such as those obtained after the painting process, due to the distortion of the reflected pattern (Figure 6b,c) [2,4]. Conversely, defects derived from the lack of paint, which were much smaller (<0.5 mm), generate different superficial textures that were more easily detected using bright field (Figure 6d). In fact, using deflectometry-based illumination in this instance could trigger incorrect classifications, on the cases that the spots without paint appear in the black stripes of the sinusoidal patterns [18]. A similar multi-modal concept was previously reported by Guan et al. [7]. However, unlike Guan et al. that employed a feature-level fusion, a decision-level fusion method was applied in this work. This method not only preserved all the features extracted from the images retrieved using each illumination mode, but also significantly reduced the",
+          "start": 0,
+          "end": 1271
+        },
+        {
+          "passage_id": "pmc10934137:p6:w0",
+          "source_id": "pmc10934137",
+          "source_locator": "./body/sec[2]/sec[1]/p[1]",
+          "source_section": "2. Methodology > 2.1. Dark-Field Scattering",
+          "quote": "Dark-field scattering has emerged as a powerful microscopy technique for detecting and characterizing microscopic particles, structures, and defects. Unlike bright-field microscopy, which illuminates the sample under test with direct light resulting in a bright background, dark-field microscopy employs oblique illumination [30]. Figure 2 illustrates the principle of dark-field and bright-field scattering imaging. The wafer surface is illuminated obliquely by incident light. Complete reflection of the light occurs when there are no defects on the wafer surface. In the presence of defects, the microscopy system collects scattering light, resulting in an image of bright defects against a dark background [31]. This imaging technique can improve the visualization and characterization of small, low-contrast defects that may be difficult to discern using bright-field microscopy [32]. Figure 3 shows the comparison of particles on the non-patterned wafer under bright-field and dark-field conditions via KEYENCE VHX-5000 (Keyence Corporation, Osaka, Japan). Particle scattering on wafer surfaces is complex and its rigorous solution is difficult to obtain. However, it can be expressed qualitatively as [33] [formula omitted] where [formula omitted] represents the particle scattering light intensity, [formula",
+          "start": 0,
+          "end": 1315
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Heater structured illumination detects 3D marks through distortion of reflected patterns.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Wafer dark-field inspection collects defect-scattered light against a dark background.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The two studies do not establish identical material response or sensitivity.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A common material response/sensitivity claim would need additional support; merely describing distinct cues does not require this sentence."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "No performance ranking is requested."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "The wafer method depends on a reflected sinusoidal screen pattern.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Heater reflected-pattern distortion",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Wafer defect-scattered contrast",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "question": "Compare the patch size used for autoencoder training with the input image size of the transferred heater classifiers.",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Report the autoencoder training patch dimensions and the transferred heater classifiers' input dimensions."
+      ],
+      "evidence_judgment": "Both groups are supported. Autoencoder p17 states 128 by 128 patches. Heater p26 identifies both transferred CNNs and 450 by 450 inputs in one canonical passage. The p26+p29 joint alternative is redundant but harmless because p26 alone is an accepted complete alternative. Heater p25 describes the scratch-built network; p21/p29 crop sizes alone do not independently identify the transferred pair. Do not loosen those model-scope restrictions.",
+      "proposed_correction": "No scoring change. Retain the approved contextual antecedent in p26.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11121878:p17:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[3]/sec[1]/p[2]",
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "quote": "The training is performed in two stages. In the first stage, the training is performed only on non-defective training samples ( [formula omitted] ), focusing on learning the inherent characteristics of normal images. First, the input image is divided into 128 × 128 patches, and the latent representation is extracted by the encoder. Then, the latent features are fed into the decoder to obtain the reconstructed image ( [formula omitted] ). This stage lays the foundation for the model to understand what constitutes a normal image. Using the weights learned from the first stage of training, the second stage focuses on equipping the model for defect detection. Here, images with artificially introduced defects ( [formula omitted] ) created by the ADGA are paired with their non-defect counterparts ( [formula omitted] ). During training, these pairs are fed into the model. The normal samples ( [formula omitted] ) are used as references to improve the reconstruction performance of the model by comparing a normal sample with the reconstructed image ( [formula omitted] ) from its artificially defective counterpart ( [formula omitted]",
+          "start": 0,
+          "end": 1140
+        },
+        {
+          "passage_id": "pmc11768589:p26:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks > 3.2.2. Approach 2: Pre-Trained CNNs",
+          "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3. These networks have been trained on at least one million images from the ImageNet and have over 23 million trainable parameters [43]. The input image size of these pre-trained CNNs was also 450 × 450.",
+          "start": 0,
+          "end": 313
+        },
+        {
+          "passage_id": "pmc11768589:p29:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "quote": "A Python-based algorithm was designed to automatize the entire defect detection and classification system, from the image acquisition to the predicted decision of the developed CNNs. The detailed flowchart is shown in Figure 4. Image acquisition and display were performed automatically in 5 s intervals employing both illumination modes. Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images. The detection module generated an output of OK or NOK surfaces, and the classification module identified the defect categories (scratches or dents). Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field. Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected.",
+          "start": 0,
+          "end": 1150
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "Autoencoder training divides images into 128 by 128 patches.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "Transferred heater classifiers use 450 by 450 inputs.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Patch size is distinct from the size of the complete resized image.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "128 by 128 patches must not be described as the full 512 by 512 resized source image."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "No ranking is requested."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Both methods consume 128 by 128 whole images.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Autoencoder 128-by-128 patches",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "The transferred classifier pair uses 450 by 450 inputs",
+          "alternatives_checked": 2,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "question": "How do the two backbones in ADMF-Net differ in purpose from the encoder and decoder in the autoencoder model?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Answerable from indexed passages",
+      "requested_facts": [
+        "Contrast the two modality-specific feature extractors and downstream fusion/detection with the encoder's compression and decoder's reconstruction."
+      ],
+      "evidence_judgment": "All 3 groups and 4 alternatives are supported. Three spans in the p41 alternative occupy one passage, not three slots. p59 also supplies the whole canopy role. Autoencoder p16 supplies compression and transposed-convolution reconstruction. The particular convolution mechanism is useful optional implementation detail for a purpose question; it occupies the same passage as the requested role, so removing it would not repair a passage-selection failure. No relaxation is proposed.",
+      "proposed_correction": "Keep retrieval groups. Mark 'transposed convolutions' optional in a future answer rubric while preserving compression/reconstruction as required.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p41:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[5]/p[2]",
+          "source_section": "3. Methodology > 3.5. Attention-Based Dual-Branch Modal Fusion Network (ADMF-Net)",
+          "quote": "In this network, we use two CSPDarknet-like feature extraction backbones, as proposed in YOLOv8, to extract multi-scale features from the forward lighting and backward lighting modalities separately. Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields. Then, the P5 layers from both modalities are connected to a spatial pyramid pooling layer, FSPPF. Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes.",
+          "start": 0,
+          "end": 604
+        },
+        {
+          "passage_id": "pmc11510794:p59:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[5]/p[3]",
+          "source_section": "5. Conclusions",
+          "quote": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net). The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities. Next, through the attention-based multi-modal feature fusion block (AMFF) and improved SPPF module, the network adaptively integrates the multi-scale features from the two modalities. Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects.",
+          "start": 0,
+          "end": 648
+        },
+        {
+          "passage_id": "pmc11121878:p16:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[3]/sec[1]/p[1]",
+          "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+          "quote": "The overall architecture of the proposed method is shown in Figure 1. It relies on three key components: the encoder, decoder, and artificial defect generation algorithm (ADGA). The encoder compresses the input image into a lower-dimensional representation using a series of convolutional layers, each employing a sequence of convolution, batch normalization, and activation functions. This compressed representation is then fed into the decoder, which utilizes transposed convolutional layers to progressively upsample the information and reconstruct the original image with high fidelity. Similar to the encoder, each transposed convolutional layer employs a sequence of transposed convolution, batch normalization, and activation functions. The ADGA algorithm create images with artificial defects of various shapes and sizes for the second stage of training. Our model incorporates skip-connections to significantly enhance the performance of the autoencoder. These skip-connections facilitate better information flow between the encoder and decoder, preserving critical fine-grained details in the reconstructed image. While experimenting with various skip-connection configurations, we found that utilizing two strategically placed connections yielded optimal results. Notably, applying skip-connections to all layers resulted in partial defect reconstruction.",
+          "start": 0,
+          "end": 1366
+        }
+      ],
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "text": "ADMF-Net backbones separately extract features from the two lighting modalities for fusion and detection.",
+          "classification": "Explicitly requested",
+          "notes": "Supported by the cited passages; preserve scientific scope."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "text": "The autoencoder compresses an image and decodes it with transposed convolutions to reconstruct it.",
+          "classification": "Explicitly requested",
+          "notes": "The transposed-convolution subclause is optional background."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Two branches in a detector are not the same as compression/reconstruction stages.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "The role distinction is the requested comparison."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "Different tasks and datasets; this is not a common-benchmark performance ranking.",
+          "classification": "Conditional on an additional claim",
+          "notes": "No performance ranking is requested."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "The ADMF-Net backbones form an encoder-decoder reconstruction pair.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Claiming a head-to-head evaluation on identical data.",
+          "classification": "Conditional on an additional claim",
+          "notes": "A prohibition on making this inaccurate assertion, not a mandatory disclaimer sentence or extra retrieval group."
+        }
+      ],
+      "groups_reviewed": [
+        {
+          "group_id": "part-1",
+          "description": "Canopy backbones extract modality features for fusion and detection",
+          "alternatives_checked": 2,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-2",
+          "description": "Autoencoder compresses input",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        },
+        {
+          "group_id": "part-3",
+          "description": "Decoder reconstructs with transposed convolutions",
+          "alternatives_checked": 1,
+          "judgment": "All existing alternatives supported; see case note for omitted alternatives and joint requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "tech-unrelated-recipe",
+      "question": "What ingredients and cooking times are needed for a traditional spaghetti carbonara?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "What ingredients and cooking times are needed for a traditional spaghetti carbonara?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-unrelated-inheritance-law",
+      "question": "How is an intestate estate divided under current German inheritance law?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "How is an intestate estate divided under current German inheritance law?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-unrelated-planet-moons",
+      "question": "How many confirmed moons does Jupiter have as of September 2026?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "How many confirmed moons does Jupiter have as of September 2026?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-unrelated-exchange-rate",
+      "question": "What was the euro-to-yen closing exchange rate on 1 September 2026?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "What was the euro-to-yen closing exchange rate on 1 September 2026?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-unrelated-database-isolation",
+      "question": "Which SQL transaction isolation level prevents phantom reads?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "Which SQL transaction isolation level prevents phantom reads?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-unrelated-vaccination",
+      "question": "What is the recommended adult hepatitis B vaccination schedule?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "What is the recommended adult hepatitis B vaccination schedule?"
+      ],
+      "evidence_judgment": "The pinned papers study optical surface inspection, detection networks and reconstruction. Their methods/results, tables and captions do not answer this unrelated question. External general knowledge is outside the document-only contract.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [],
+      "negative_kind": "unrelated",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "The four surface-inspection papers do not support this unrelated question; abstain from a document-only answer.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Answering from general knowledge or inventing a technical-source citation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-canopy-service-life",
+      "question": "How many years of flight service remain for a canopy after its largest detected crack is repaired?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "Remaining flight years after a crack repair."
+      ],
+      "evidence_judgment": "Canopy p30 describes defects and p61 limitations; the paper evaluates imaging/detection, not structural fatigue, repair validation or remaining-service-life prediction. Tables 1-5 contain counts, settings and detection metrics.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p30:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[3]/sec[3]/p[2]",
+          "source_section": "3. Methodology > 3.3. Dataset Construction",
+          "quote": "Based on the real aircraft glass canopies samples, we collected a total of 438 raw images, covering 219 defect points using two different lighting methods. Through image analysis and relevant experience, we categorized the collected defects into four types: contusion, scratches, crack, and spot. These categories essentially cover all possible defect types that may appear on the aircraft glass canopy. Typical images are shown in Figure 6.",
+          "start": 0,
+          "end": 441
+        },
+        {
+          "passage_id": "pmc11510794:p61:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[5]/p[5]",
+          "source_section": "5. Conclusions",
+          "quote": "Our research effectively addresses the issue of defect detection in aircraft glass canopies. Moreover, it provides a new methodological support for defect detection in other transparent materials. Exploring specific multi-modal detection networks remains a worthwhile issue.",
+          "start": 0,
+          "end": 274
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Defect imaging and a detection method do not establish a structural-fatigue or remaining-life model.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-heater-energy",
+      "question": "How many joules per inspected heater does the complete camera, monitor and CNN system consume?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "End-to-end camera, display and CNN electrical energy per inspected heater."
+      ],
+      "evidence_judgment": "Heater p16/p24 describe hardware and p29 a 5-second acquisition cycle. No measured watts, duty-cycle accounting or joules-per-heater result is given. A timing interval alone cannot establish energy.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11768589:p16:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[1]/sec[1]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.1. Image Acquisition and Processing > 3.1.1. Experimental Setup",
+          "quote": "The experimental setup employed for image acquisition is depicted in Figure 1a and illustrated in Figure 1b. The liquid crystal display (LCD) monitor (21’’) provided two illumination modes: (1) structured illumination, by projecting a sinusoidal pattern; and (2) bright field illumination, by projecting a white screen. The camera then captured the imagens using both illumination modes in an alternate manner. The employed camera (BFLY-PGE-05S2C-CS, Point Grey Research Inc., Richmond, Canada), shown in Figure 1c, had a C-mount Fujinon lens with a fixed focal length of 6 mm for 1/2” sensors, that allowed for the capture of images with a resolution of 808 × 608. Image acquisition was powered via POE (Power over Ethernet) and performed using SpinView (Spinnaker SDK v. 1.27.0. 48). The selected configuration maintained the camera aligned with the LCD monitor at a distance between 20 (minimum) and 30 (maximum) centimeters from the painted surface, and at a 30° angle from the normal of the surface, resulting in a clearer projection with a more uniform lighting throughout the surface.",
+          "start": 0,
+          "end": 1091
+        },
+        {
+          "passage_id": "pmc11768589:p24:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[2]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.2. Feature Extraction and Classification Using Convolutional Neural Networks",
+          "quote": "All training and classification employed open sourced Keras framework with TensorFlow backend, implemented on a computer with an Intel®core i7 processor, a RAM memory of 8 GB, and a NVIDIA Geforce 930MX graphic card.",
+          "start": 0,
+          "end": 216
+        },
+        {
+          "passage_id": "pmc11768589:p29:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[3]/sec[3]/p[1]",
+          "source_section": "3. Proposed Methodology > 3.3. Automation of the Defect Detection Process",
+          "quote": "A Python-based algorithm was designed to automatize the entire defect detection and classification system, from the image acquisition to the predicted decision of the developed CNNs. The detailed flowchart is shown in Figure 4. Image acquisition and display were performed automatically in 5 s intervals employing both illumination modes. Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images. The detection module generated an output of OK or NOK surfaces, and the classification module identified the defect categories (scratches or dents). Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field. Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected.",
+          "start": 0,
+          "end": 1150
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Hardware descriptions are not measured end-to-end energy consumption.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11768589"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-wafer-live-cells",
+      "question": "What sensitivity and specificity does the wafer TDI system achieve for malignant cells in live human blood?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "Clinical sensitivity and specificity for malignant cells in live human blood."
+      ],
+      "evidence_judgment": "Wafer p13 tests sprayed 0.5 micrometre PSL particle surrogates on polished wafers; p17 calls the setup experimental. Introductory references to biological imaging are other work. No relevant patient/cell validation is reported.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc10934137:p13:w0",
+          "source_id": "pmc10934137",
+          "source_locator": "./body/sec[4]/sec[3]/p[1]",
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "quote": "To inspect defects on the non-patterned wafer, 0.5 μm polystyrene latex (PSL) is employed to mimic particle defects. These PSLs are diluted and sprayed onto the polished non-patterned wafer. Due to the self-aggregation phenomenon of PSLs, the captured images show multiple microspheres gathering in a limited area, as shown in Figure 8a. The horizontal motion speed of the wafer is 5 mm/s to test the defect detection capability at higher speed, the line frequency of the TDI image sensor is set to 23,400 Hz, and the TDI stage is set to 32. To determine the detection capability of the TDI-DFSM, the comparison results with KEYENCE VHX-5000 are shown in Figure 8b. Excluding considerations for the four aggregation regions and focusing on the count of individual PSL particles, both systems record counts of 60. This demonstrates that the TDI-DFSM has a 100% detection capability for 0.5 μm spherical particles, with no false detections or missed detections.",
+          "start": 0,
+          "end": 959
+        },
+        {
+          "passage_id": "pmc10934137:p17:w0",
+          "source_id": "pmc10934137",
+          "source_locator": "./body/sec[4]/sec[3]/p[5]",
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "quote": "It should be noted that the system is an experimental verification device, and it can be further enhanced for practical applications. The uniformity of the illumination light and the intensity of the scattering light can be increased by setting up ring light sources. The combination of a circular scanning strategy and multiple dark-field scattering acquisition channels offers the possibility of improving detection efficiency. However, the different line frequencies of the TDI image sensor need to be adjusted to accommodate linear velocity changes at different radii, thereby eliminating image blur. The TDI-DFSM can integrate an autofocus mechanism, an auto-calibration procedure, and a feedback mechanism, thus reducing manual intervention and improving system stability. Therefore, the relationship between defocus distance and signal intensity needs to be established. In addition, the TDI image sensor can capture multiple images via a single scan, improving data throughput and defect detectability. Polarization modulation and ellipsometry techniques can provide more information and are expected to improve detection sensitivity. In microscopy systems, the depth of field is limited, and wafer movement during inspection inevitably leads to defocusing issues. However,",
+          "start": 0,
+          "end": 1281
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "A PSL-particle experiment on a wafer is not a biological diagnostic validation.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc10934137"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-autoencoder-ct",
+      "question": "What patient-level cancer detection accuracy does the two-stage autoencoder achieve on hospital CT scans?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "Patient-level CT cancer detection accuracy for the proposed model."
+      ],
+      "evidence_judgment": "Autoencoder p38 uses MVTec leather, carpet, hazelnut, pill, wood and tile, with AuROC; p39 compares anomaly methods. Related medical work cannot be reassigned to this model or converted into patient accuracy.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11121878:p38:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/p[2]",
+          "source_section": "4. Experimentation",
+          "quote": "For our experiments, we used diverse anomaly detection samples sourced from the MVTec AD dataset [47], including leather, carpet, hazelnut, pill, wood, and tile textures. In total, 1660 and 714 samples were used for training and testing, respectively. All images were resized to 512 × 512 pixels during training. Training was performed using an Adam optimizer trained for a total of 25 epochs in two stages. To quantitatively assess the performances of various methods, we chose the area under the receiver operating characteristic curve (AuROC) as the evaluation metric. This metric is insensitive to threshold variations and provides a more accurate evaluation of the models’ inspection capabilities.",
+          "start": 0,
+          "end": 702
+        },
+        {
+          "passage_id": "pmc11121878:p39:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]",
+          "source_section": "4. Experimentation > 4.1. Overall Performance Comparison",
+          "quote": "To validate the effectiveness of our proposed method, we compared its defect detection performance against those of several prominent anomaly and defect detection methods, including AE-SSIM [24], AnoGAN [23], f-AnoGAN [35], MS-FCAE [40], MemAE [42], TrustMAE [43], VAE [49], ACDN [50], AFEAN [29], and CMA-AE [31]. Table 1 summarizes the quantitative analysis results. Our method achieved a superior performance across various sample types, including wood, carpet, hazelnut, and pill. Additionally, it obtained the second-best results on the tile and leather samples.",
+          "start": 0,
+          "end": 567
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "MVTec surface-image evaluation does not supply patient-level CT results.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-factory-warranty",
+      "question": "Which of the four systems reduced warranty returns most in a randomized trial across the same factories?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "A common-factory randomized comparison of warranty returns across all four systems."
+      ],
+      "evidence_judgment": "Separate defect-detection experiments and industrial motivations do not report a randomized warranty-outcome trial. No source offers the common study design or outcome denominators.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p61:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[5]/p[5]",
+          "source_section": "5. Conclusions",
+          "quote": "Our research effectively addresses the issue of defect detection in aircraft glass canopies. Moreover, it provides a new methodological support for defect detection in other transparent materials. Exploring specific multi-modal detection networks remains a worthwhile issue.",
+          "start": 0,
+          "end": 274
+        },
+        {
+          "passage_id": "pmc11768589:p43:w0",
+          "source_id": "pmc11768589",
+          "source_locator": "./body/sec[4]/sec[3]/p[3]",
+          "source_section": "4. Results and Discussion > 4.3. Performance of the Automatic Detection and Classification System",
+          "quote": "All in all, the obtained results demonstrated the robustness and quickness of the developed inspection systems, from the image acquisition to the visualization through GUI, demonstrating its potential for implementation for industrial quality control of the painted surfaces. Despite all this, optimization of certain aspects of this system is still required to further improve its robustness. Concerning the dataset, it needs to be improved in terms of quality, with more captured images of defective and non-defective surfaces to accommodate each defect’s features’ real variations, and in terms of size, given that 500 images is still a small dataset for these models. Additionally, implementation of this system in an industrial painting line will be considered in the future.",
+          "start": 0,
+          "end": 780
+        },
+        {
+          "passage_id": "pmc10934137:p17:w0",
+          "source_id": "pmc10934137",
+          "source_locator": "./body/sec[4]/sec[3]/p[5]",
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "quote": "It should be noted that the system is an experimental verification device, and it can be further enhanced for practical applications. The uniformity of the illumination light and the intensity of the scattering light can be increased by setting up ring light sources. The combination of a circular scanning strategy and multiple dark-field scattering acquisition channels offers the possibility of improving detection efficiency. However, the different line frequencies of the TDI image sensor need to be adjusted to accommodate linear velocity changes at different radii, thereby eliminating image blur. The TDI-DFSM can integrate an autofocus mechanism, an auto-calibration procedure, and a feedback mechanism, thus reducing manual intervention and improving system stability. Therefore, the relationship between defocus distance and signal intensity needs to be established. In addition, the TDI image sensor can capture multiple images via a single scan, improving data throughput and defect detectability. Polarization modulation and ellipsometry techniques can provide more information and are expected to improve detection sensitivity. In microscopy systems, the depth of field is limited, and wafer movement during inspection inevitably leads to defocusing issues. However,",
+          "start": 0,
+          "end": 1281
+        },
+        {
+          "passage_id": "pmc11121878:p38:w0",
+          "source_id": "pmc11121878",
+          "source_locator": "./body/sec[4]/p[2]",
+          "source_section": "4. Experimentation",
+          "quote": "For our experiments, we used diverse anomaly detection samples sourced from the MVTec AD dataset [47], including leather, carpet, hazelnut, pill, wood, and tile textures. In total, 1660 and 714 samples were used for training and testing, respectively. All images were resized to 512 × 512 pixels during training. Training was performed using an Adam optimizer trained for a total of 25 epochs in two stages. To quantitatively assess the performances of various methods, we chose the area under the receiver operating characteristic curve (AuROC) as the evaluation metric. This metric is insensitive to threshold variations and provides a more accurate evaluation of the models’ inspection capabilities.",
+          "start": 0,
+          "end": 702
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "Separate inspection experiments do not supply a shared randomized factory-outcome trial.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794",
+        "pmc11768589",
+        "pmc10934137",
+        "pmc11121878"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    },
+    {
+      "case_id": "tech-missing-canopy-confidence-bounds",
+      "question": "What is the 95% bootstrap confidence interval across independent canopy collections for ADMF-Net's reported mAP50?",
+      "reviewer_type": "AI-assisted",
+      "independent_human_review": false,
+      "answerability": "Unsupported by the source",
+      "requested_facts": [
+        "A 95% bootstrap interval across independently collected canopy datasets."
+      ],
+      "evidence_judgment": "Canopy p52/Table 4 and related tables report point metrics. mAP50-95 denotes IoU thresholds, not a 95% confidence interval. No independent-collection bootstrap method or interval is reported; the heater's separate 90% acceptance wording does not answer this question.",
+      "proposed_correction": "Keep negative and abstain from the requested result. Do not assign a positive evidence-completeness score.",
+      "source_evidence": [
+        {
+          "passage_id": "pmc11510794:p47:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]",
+          "source_section": "4. Experiments > 4.1. Evaluation Metrics",
+          "quote": "We evaluate the model’s detection performance using the mean average precision (mAP). Precision is the ratio of true positives (TP) to the sum of true positives and false positives (FP), indicating the accuracy of positive predictions. Recall is the ratio of true positives to the sum of true positives and false negatives (FN), reflecting how well the model detects all relevant instances. Average precision (AP) measures the area under the precision-recall curve, denoted as [formula omitted] , which describes the relationship between precision and recall as the confidence threshold changes. The final mAP is obtained by averaging the AP values across all classes. In this study, we use both the conventional mAP50, which evaluates at an intersection over union (IoU) threshold of 0.5, and the stricter mAP50-95, which averages over multiple IoU thresholds from 0.5 to 0.95 in steps of 0.05. [formula omitted]",
+          "start": 0,
+          "end": 913
+        },
+        {
+          "passage_id": "pmc11510794:p52:w0",
+          "source_id": "pmc11510794",
+          "source_locator": "./body/sec[4]/sec[3]/sec[2]/p[1]",
+          "source_section": "4. Experiments > 4.3. Results and Discussion > 4.3.2. ADMF-Net Experiment",
+          "quote": "Our fusion model achieved excellent results on the ag_dual_obb dataset. The detection rates for the contusion, crack, and spot categories all exceeded 99%. The detection rate for scratches was 95.4%, which is consistent with the results of the RGB Channel Fusion method. Overall, compared to the RGB Channel Fusion method, the total mAP50 improved from 97.9% to 98.4%. As shown in Figure 9, our fusion model demonstrated a better precision-confidence curve and precision-recall curve, although there was a slight decrease in mAP50-95.",
+          "start": 0,
+          "end": 534
+        }
+      ],
+      "negative_kind": "missing-evidence",
+      "labels": "No positive evidence groups, correctly excluded from completeness denominator.",
+      "requirements": [
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "text": "A point metric from the canopy experiment is not a bootstrap interval across independent collections.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "text": "The requested result is absent from the reviewed full original(s), including tables, formulas and figures. Listed passage references are contextual anchors, not positive evidence or proof of absence; abstain from the requested unsupported result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Document-only abstention is necessary; this explanatory wording is not mandatory. The archival full-figure absence claim is inherited from the prior AI review, not a new visual inspection."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "text": "Inventing the requested result or supplying it from external knowledge.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "text": "Treating a nearby passage or an omitted table/formula as evidence for the requested result.",
+          "classification": "Necessary to make the requested answer accurate",
+          "notes": "Do not invent evidence or answer this document-only request from external knowledge."
+        }
+      ],
+      "absence_scope": [
+        "pmc11510794"
+      ],
+      "absence_limit": "Rechecked pinned XML prose, tables, formula text and captions with source-specific review. External figure raster pixels were not re-inspected. Prior development-only AI review records a broader original-figure check. No new independent human or exhaustive visual certification."
+    }
+  ]
+}

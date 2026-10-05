@@ -1,0 +1,98 @@
+{
+  "source_base_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+  "scope": "Byte-identical copies of audit and research notes; no model assets, environment files or raw runs",
+  "files": {
+    "docs/retrieval-evaluation-audit-2026-10-05.md": {
+      "sha256": "efe84558e394c97426db0f2248c9c36ef7af30480e5db0ec5c4dc2dea7faaf73",
+      "bytes": 22654
+    },
+    "docs/evaluation-audit-2026-10-05/assemble-proposals.py": {
+      "sha256": "b6396a4f6fb9479d35951565d79c9696bd4c9f5a1512b244082d061680819d82",
+      "bytes": 6983
+    },
+    "docs/evaluation-audit-2026-10-05/canopy-heater.json": {
+      "sha256": "a3daed828d8ad34a3015e14a50e9f18abf56212d9b06d7438719d54e84fcbcc3",
+      "bytes": 109865
+    },
+    "docs/evaluation-audit-2026-10-05/canopy-heater.md": {
+      "sha256": "bdc587b93360906ddcd7f892f9493dcd6cd51109225d9a0f1f8d9970da2650e3",
+      "bytes": 33344
+    },
+    "docs/evaluation-audit-2026-10-05/comparisons-negatives.json": {
+      "sha256": "32178276a3c611c63ce1b70c7981e5c7770ee6c40d3db1b84e6b9b32a38f199a",
+      "bytes": 119384
+    },
+    "docs/evaluation-audit-2026-10-05/comparisons-negatives.md": {
+      "sha256": "a0270eff500281495367b3afb5230101843ae9d66751325ae2d63f15e0f9f9fc",
+      "bytes": 46186
+    },
+    "docs/evaluation-audit-2026-10-05/input-audit.json": {
+      "sha256": "b216cd69098ec3a7ea2c76bcdaff10012bd639223e22f8247b9a70cdcc33a459",
+      "bytes": 9329
+    },
+    "docs/evaluation-audit-2026-10-05/inspect-inputs.py": {
+      "sha256": "eb6641680a88d94b1009f5e7d4a5b8b14eeadc5fe00378c0a2160707263f36df",
+      "bytes": 4378
+    },
+    "docs/evaluation-audit-2026-10-05/post-replay-adjudication.md": {
+      "sha256": "3ce43f12608a2232d9f5ec9b59860aad8fef63a04c742bb2c9f5ff013f67b7a4",
+      "bytes": 5224
+    },
+    "docs/evaluation-audit-2026-10-05/proposed-revisions.json": {
+      "sha256": "436ec27f2fff344f40440e492931f0042536946a2d313be8c3e32830de74a38b",
+      "bytes": 14952
+    },
+    "docs/evaluation-audit-2026-10-05/replay-results.json": {
+      "sha256": "2a7cd65c5f4770efd72550dc0a34e6ba66249129042b585e001dd2e708b1ce2a",
+      "bytes": 3847030
+    },
+    "docs/evaluation-audit-2026-10-05/replay.py": {
+      "sha256": "e8d0603d496217b9947a8ce6af4ae57c8aac2b16007f6cc4ffa91b4276549a0f",
+      "bytes": 22308
+    },
+    "docs/evaluation-audit-2026-10-05/scoring.md": {
+      "sha256": "2319ef46b8d6e2f294c7560e7f663125f8869b468d358bf9f608a2a598d0596b",
+      "bytes": 15600
+    },
+    "docs/evaluation-audit-2026-10-05/shortcut-sensitivity.json": {
+      "sha256": "019d1755f6665a17ace8f762c9d1816e7ff8d5bd15e7a153fcf45d60ed5bd95e",
+      "bytes": 9146
+    },
+    "docs/evaluation-audit-2026-10-05/shortcut-sensitivity.py": {
+      "sha256": "113949303410dbeda8173482b26f2e3f46e1a38f90ecaf857786dcfe905e1c36",
+      "bytes": 6585
+    },
+    "docs/evaluation-audit-2026-10-05/verification.json": {
+      "sha256": "d1079289b0df35295ee8cea26836e98226182e57e4a314ed28084bd85f5f3d17",
+      "bytes": 3300
+    },
+    "docs/evaluation-audit-2026-10-05/verify-audit.py": {
+      "sha256": "c1c667593b02288d0565e1aba97a435663efcca52018df060eb27ca90d7569cf",
+      "bytes": 3926
+    },
+    "docs/evaluation-audit-2026-10-05/wafer-autoencoder.json": {
+      "sha256": "6b765b960354be30d421863cfc87ca034b883a315a0cbc859e3ce27c8c8e5068",
+      "bytes": 103126
+    },
+    "docs/evaluation-audit-2026-10-05/wafer-autoencoder.md": {
+      "sha256": "c208128ea6f474167f41a11eec724691c0f2887e1dc006bc0fea73fd2091c204",
+      "bytes": 31488
+    },
+    "docs/model-retrieval-research-2026-10-02.md": {
+      "sha256": "b3dc9f8e18ed65768f8dadf9af67d2ab4ec6eced0cfe30e47b618cb3387fb1fa",
+      "bytes": 12930
+    },
+    "docs/rag-methods-research-2026-10-02.md": {
+      "sha256": "52d68e582dced90222aae79d4e66cf2cce0a0dfb6b91c2db6c8e3a85ca3d6141",
+      "bytes": 16319
+    },
+    "docs/rag-performance-investigation-2026-10-02.md": {
+      "sha256": "e2f1d301cee042f5c8504d782d94083889741819015c3dae7d64d72767223524",
+      "bytes": 22164
+    },
+    "docs/retrieval-evaluation-audit-2026-10-02.md": {
+      "sha256": "93ed37758384c21f1bfbb31ca8b98cba2ea17aee6ae007a5ef845f44bce9804f",
+      "bytes": 11682
+    }
+  }
+}

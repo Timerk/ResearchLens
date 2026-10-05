@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "status": "AI-assisted, post-outcome exploratory, owner-unresolved",
+  "not_an_approved_correction_or_retrieval_quality_result": true,
+  "order_disclosure": "The main first-pass semantic audit treated the residual-purpose qualification as necessary. After replay exposed the remaining failure, follow-up AI adjudication considered whether the narrower empirical explanation already answers the visible why question. This judgment was made after observing retrieval outcomes.",
+  "protected_main_snapshot_hashes": {
+    "proposed-revisions.json": "436ec27f2fff344f40440e492931f0042536946a2d313be8c3e32830de74a38b",
+    "replay-results.json": "2a7cd65c5f4770efd72550dc0a34e6ba66249129042b585e001dd2e708b1ce2a"
+  },
+  "cached_archive": "docs/vulkan-reranking-results.json",
+  "cached_archive_sha256": "c5873f646a7b664e32c247c419dc7e997cf6c87af20912706dba71ec09895f76",
+  "case_id": "tech-too-many-shortcuts",
+  "visible_question": "In the two-stage surface-reconstruction study, why did the network avoid shortcuts between every matching layer of its encoder and decoder?",
+  "proposed_change": {
+    "id": "post-replay-shortcut-narrow-empirical-answer",
+    "case_id": "tech-too-many-shortcuts",
+    "group_id": "residual-purpose",
+    "action": "remove_group",
+    "category": "exploratory-question-scope",
+    "status": "owner-unresolved",
+    "rubric_dependency": "The explicit residual-discrimination qualification would be conditional on an answer adding that mechanism. P16 does not support the unchanged residual-purpose claim. Owner adjudication must decide whether a narrow empirical answer suffices."
+  },
+  "source": {
+    "passage_id": "pmc11121878:p16:w0",
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11121878/",
+    "source_locator": "./body/sec[3]/sec[1]/p[1]",
+    "source_section": "3. Methodology > 3.1. Overall Network Architecture",
+    "exact_canonical_quotes": [
+      {
+        "start": 1124,
+        "end": 1274,
+        "passage_id": "pmc11121878:p16:w0",
+        "quote": "While experimenting with various skip-connection configurations, we found that utilizing two strategically placed connections yielded optimal results."
+      },
+      {
+        "start": 1275,
+        "end": 1366,
+        "passage_id": "pmc11121878:p16:w0",
+        "quote": "Notably, applying skip-connections to all layers resulted in partial defect reconstruction."
+      }
+    ]
+  },
+  "acceptable_narrow_answer_if_owner_adopts_scope": "The authors found that two strategically placed skip connections worked best in their experiments; connecting every layer partly reconstructed the defects.",
+  "claim_not_established_by_p16_or_p16_plus_p17": "Partial defect reconstruction reduces residual-based discrimination.",
+  "scenarios": {
+    "approved-original": {
+      "summary": {
+        "answerable_cases": 36,
+        "available": true,
+        "mrr": 0.8333333333333334,
+        "source_recall": 0.9861111111111112,
+        "passage_recall": 0.7165954415954415,
+        "evidence_labeled_cases": 36,
+        "mean_group_coverage": 0.8027777777777777,
+        "complete_evidence_cases": 26,
+        "complete_evidence_rate": 0.7222222222222222,
+        "any_evidence_hit_cases": 33,
+        "any_evidence_hit_rate": 0.9166666666666666,
+        "negative_cases_unscored": 14
+      },
+      "remaining_incomplete": [
+        "tech-glass-paraphrase",
+        "tech-wafer-exact",
+        "tech-compare-fusion",
+        "tech-stripe-frequencies",
+        "tech-adaptive-binarization",
+        "tech-both-checks-clean",
+        "tech-moving-signal-addition",
+        "tech-too-many-shortcuts",
+        "tech-changing-neighborhood",
+        "tech-compare-localization-outputs"
+      ],
+      "shortcut_case": {
+        "case_id": "tech-too-many-shortcuts",
+        "retrieved_passage_ids": [
+          "pmc11121878:p16:w0",
+          "pmc11121878:p17:w0",
+          "pmc11768589:p4:w180",
+          "pmc11768589:p15:w0"
+        ],
+        "error": null,
+        "metrics_at_k": {
+          "4": {
+            "source_recall": 1.0,
+            "passage_recall": 1.0,
+            "first_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "all_sources": true,
+            "groups": [
+              {
+                "group_id": "part-1",
+                "claim_index": 0,
+                "covered": true
+              },
+              {
+                "group_id": "residual-purpose",
+                "claim_index": 0,
+                "covered": false
+              }
+            ],
+            "group_coverage": 0.5,
+            "complete_evidence": false
+          }
+        },
+        "context_complete_evidence": false,
+        "context_truncation_loses_evidence": false
+      }
+    },
+    "main-13-change-snapshot": {
+      "summary": {
+        "answerable_cases": 36,
+        "available": true,
+        "mrr": 0.8333333333333334,
+        "source_recall": 0.9861111111111112,
+        "passage_recall": 0.7165954415954415,
+        "evidence_labeled_cases": 36,
+        "mean_group_coverage": 0.8305555555555555,
+        "complete_evidence_cases": 28,
+        "complete_evidence_rate": 0.7777777777777778,
+        "any_evidence_hit_cases": 33,
+        "any_evidence_hit_rate": 0.9166666666666666,
+        "negative_cases_unscored": 14
+      },
+      "remaining_incomplete": [
+        "tech-glass-paraphrase",
+        "tech-compare-fusion",
+        "tech-stripe-frequencies",
+        "tech-both-checks-clean",
+        "tech-moving-signal-addition",
+        "tech-too-many-shortcuts",
+        "tech-changing-neighborhood",
+        "tech-compare-localization-outputs"
+      ],
+      "shortcut_case": {
+        "case_id": "tech-too-many-shortcuts",
+        "retrieved_passage_ids": [
+          "pmc11121878:p16:w0",
+          "pmc11121878:p17:w0",
+          "pmc11768589:p4:w180",
+          "pmc11768589:p15:w0"
+        ],
+        "error": null,
+        "metrics_at_k": {
+          "4": {
+            "source_recall": 1.0,
+            "passage_recall": 1.0,
+            "first_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "all_sources": true,
+            "groups": [
+              {
+                "group_id": "part-1",
+                "claim_index": 0,
+                "covered": true
+              },
+              {
+                "group_id": "residual-purpose",
+                "claim_index": 0,
+                "covered": false
+              }
+            ],
+            "group_coverage": 0.5,
+            "complete_evidence": false
+          }
+        },
+        "context_complete_evidence": false,
+        "context_truncation_loses_evidence": false
+      }
+    },
+    "post-replay-exploratory-shortcut-scope": {
+      "summary": {
+        "answerable_cases": 36,
+        "available": true,
+        "mrr": 0.8333333333333334,
+        "source_recall": 0.9861111111111112,
+        "passage_recall": 0.7165954415954415,
+        "evidence_labeled_cases": 36,
+        "mean_group_coverage": 0.8444444444444444,
+        "complete_evidence_cases": 29,
+        "complete_evidence_rate": 0.8055555555555556,
+        "any_evidence_hit_cases": 33,
+        "any_evidence_hit_rate": 0.9166666666666666,
+        "negative_cases_unscored": 14
+      },
+      "remaining_incomplete": [
+        "tech-glass-paraphrase",
+        "tech-compare-fusion",
+        "tech-stripe-frequencies",
+        "tech-both-checks-clean",
+        "tech-moving-signal-addition",
+        "tech-changing-neighborhood",
+        "tech-compare-localization-outputs"
+      ],
+      "shortcut_case": {
+        "case_id": "tech-too-many-shortcuts",
+        "retrieved_passage_ids": [
+          "pmc11121878:p16:w0",
+          "pmc11121878:p17:w0",
+          "pmc11768589:p4:w180",
+          "pmc11768589:p15:w0"
+        ],
+        "error": null,
+        "metrics_at_k": {
+          "4": {
+            "source_recall": 1.0,
+            "passage_recall": 1.0,
+            "first_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "all_sources": true,
+            "groups": [
+              {
+                "group_id": "part-1",
+                "claim_index": 0,
+                "covered": true
+              }
+            ],
+            "group_coverage": 1.0,
+            "complete_evidence": true
+          }
+        },
+        "context_complete_evidence": true,
+        "context_truncation_loses_evidence": false
+      }
+    }
+  },
+  "changed_cases_from_main": [
+    "tech-too-many-shortcuts"
+  ],
+  "bge20_oracle_complete_counts": {
+    "original": 31,
+    "main": 31,
+    "exploratory": 32
+  },
+  "qwen40_oracle_complete_counts": {
+    "original": 34,
+    "main": 34,
+    "exploratory": 34
+  },
+  "recommendation": "Owner should adjudicate required causal depth from the visible question before adopting any score change. Keep the approved 26/36 and main unreviewed 28/36 snapshot; do not claim that this sensitivity meets the original 29/36 target."
+}

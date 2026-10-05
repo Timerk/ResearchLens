@@ -11,3 +11,15 @@ evaluation/reviews/2026-10-01-pr8/evidence-fixes.md text eol=lf
 data/technical/originals/*.xml -text
 data/technical/*.json text eol=lf
 data/technical/NOTICE.txt text eol=lf
+# Handoff audit/research archives bind exact bytes, including source line endings.
+docs/evaluation-audit-2026-10-05/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/retrieval-evaluation-audit-2026-10-05.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/model-retrieval-research-2026-10-02.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/rag-methods-research-2026-10-02.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/rag-performance-investigation-2026-10-02.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/retrieval-evaluation-audit-2026-10-02.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/continuation-2026-10-05.md text eol=lf
+docs/continuation-artifacts-2026-10-05.json text eol=lf
+# These existing README files were hashed as CRLF by the source audit.
+evaluation/labels/README.md text eol=crlf
+evaluation/reviews/2026-10-01-pr8/README.md text eol=crlf

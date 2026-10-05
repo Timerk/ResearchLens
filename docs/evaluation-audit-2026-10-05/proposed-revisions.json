@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "review_status": "unreviewed",
+  "proposed_contract": "question-aligned-evidence-audit-draft-2026-10-05",
+  "reviewer_kind": "AI-assisted; no independent human approval",
+  "scope": "Development-only counterfactual scoring of the identical cached rankings. Neither a new retrieval run nor answer accuracy.",
+  "historical_contract": "The original approved 92-group evidence package and original reference-passage recall remain unchanged and are reported separately.",
+  "adoption_requirements": [
+    "Owner reviews semantic corrections without choosing them for their score effects.",
+    "Scope removals require matching versioned required-claim/qualification changes; do not merely delete an evidence group while retaining an unconditional answer claim.",
+    "Retain efficiency qualifications whenever an answer claims efficiency, the architecture conflict whenever it generalizes beyond p41's account, and the proposed-versus-tested enclosure distinction whenever an enclosure is discussed.",
+    "Keep necessary scientific scope and explicitly requested facts. Do not convert optional context into permission to make an inaccurate additional claim.",
+    "Save a separately versioned development dataset/label bundle with new hashes and approval; preserve all historical runs. Replay every cached comparison with existing scoring, keeping the original reference recall denominator.",
+    "Generated-answer and abstention quality still require a separate review. No deployment or 80% generalization claim follows from this counterfactual audit."
+  ],
+  "answer_rubric_changes": [
+    {
+      "case_id": "tech-wafer-exact",
+      "change": "Make required_claims[0]'s efficiency assertion optional. If made, require fixed line frequency and excluded transmission time. Core SNR changes stay mandatory."
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "change": "Scope the answer to the explicitly named p41/Figure8 account; retain p46 conflict as supplemental or mandatory on broader architecture assertions. Alternatively rewrite the question to explicitly request reconciliation and retain the original package."
+    },
+    {
+      "case_id": "tech-turn-and-flip-labels",
+      "change": "Move the 90-degree/eightfold example to optional detail; if used, preserve its conditions. Keep joint image/label transforms and overflow handling."
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "change": "Keep manual adjustment and union contour mandatory. Treat annotation-file checking and one-view visibility explanation as supplementary."
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "change": "Rubric-only proposal, excluded from executable replay changes. Keep uncontrolled ambient light, contrast loss and processing improvement in the requested answer. Make a proposed tunnel conditional on introducing containment. Before adoption, retain p34:w0 [0,151) in a narrowed core group, rather than deleting the mixed group wholesale. All facts remain in the same mandatory passage, so this cannot change full-passage completeness."
+    },
+    {
+      "case_id": "tech-glass-paraphrase",
+      "change": "Remove the duplicated qualification text in a future version; no evidence-group or score change."
+    },
+    {
+      "case_id": "comparison cases",
+      "change": "Do not require unsolicited common-benchmark disclaimers for descriptive comparisons. Retain the no-direct-ranking explanation for tech-compare-evaluation-metrics because that question explicitly asks it. Preserve units, patch-versus-full-image distinctions and prohibitions on unsupported claims."
+    }
+  ],
+  "source_audit_sha256": {
+    "canopy-heater.json": "a3daed828d8ad34a3015e14a50e9f18abf56212d9b06d7438719d54e84fcbcc3",
+    "wafer-autoencoder.json": "6b765b960354be30d421863cfc87ca034b883a315a0cbc859e3ce27c8c8e5068",
+    "comparisons-negatives.json": "32178276a3c611c63ce1b70c7981e5c7770ee6c40d3db1b84e6b9b32a38f199a"
+  },
+  "changes": [
+    {
+      "id": "tech-painted-exact:part-2:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-painted-exact",
+      "group_id": "part-2",
+      "action": "add_alternative",
+      "rationale": "This is the study's own comparison, not a related-work claim; the next canonical window is already accepted for the model names.",
+      "judgment_kind": "confirmed_omitted_alternative",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p5:w0",
+          "start": 1109,
+          "end": 1261,
+          "quote": "Regarding the feature extraction and decision-making performed by the DL models, two approaches were compared: (1) a CNN built and trained from scratch;"
+        }
+      ],
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-painted-exact:part-1:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-painted-exact",
+      "group_id": "part-1",
+      "action": "add_alternative",
+      "rationale": "The paper's own results explicitly identify both fine-tuned pretrained models. The numerical accuracies are not required by this question.",
+      "judgment_kind": "confirmed_omitted_alternative",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p37:w180",
+          "start": 24,
+          "end": 203,
+          "quote": "Indeed, the fine-tuning of pre-trained CNNs considerably improved the outputs, with ResNet-50 and Inception V3 reaching around 95% and 90% of accuracy, respectively (Figure 7b,c)."
+        }
+      ],
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-amff-layers:architecture-conflict:move_group_to_conditional",
+      "category": "question-scope",
+      "case_id": "tech-amff-layers",
+      "group_id": "architecture-conflict",
+      "action": "remove_group",
+      "rationale": "Retain the contradiction as an answer-review guard and optional evidence. Require it if an answer generalizes beyond the named account, or rewrite the question to ask about the conflict before keeping it mandatory. Preserve the historical approved-package score.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "decision_kind": "question-scope",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-adaptive-binarization:part-1:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-adaptive-binarization",
+      "group_id": "part-1",
+      "action": "add_alternative",
+      "rationale": "Use the complete paragraph including its explicit bright-field exclusion, not only the first sentence. An owner may still prefer a literal named-mode link; report that stricter interpretation separately rather than treating this correction as already approved.",
+      "judgment_kind": "contextual_sufficiency_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p22:w0",
+          "start": 0,
+          "end": 310,
+          "quote": "Afterwards, the images were subjected to processing through the conversion RGB to grey scale and the application of adaptive binarization to reduce the effect of the environmental lighting (Figure 2b). It should be emphasized that images obtained via bright field illumination were not subjected to processing."
+        }
+      ],
+      "decision_kind": "contextual-alternative",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-turn-and-flip-labels:part-2:move_group_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-turn-and-flip-labels",
+      "group_id": "part-2",
+      "action": "remove_group",
+      "rationale": "The visible how-question does not ask the augmentation factor. Preserve overflow safeguards; expected complete-evidence passage requirement is unchanged because all facts are in p34:w0.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "decision_kind": "question-scope",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-manual-outline-union:part-3:move_groups_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-manual-outline-union",
+      "group_id": "part-3",
+      "action": "remove_group",
+      "rationale": "Keep union and manual adjustment mandatory. Both optional facts live in the same necessary passage, so the whole-passage completeness result should not change.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "decision_kind": "question-scope",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tech-manual-outline-union:visibility-scope:move_groups_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-manual-outline-union",
+      "group_id": "visibility-scope",
+      "action": "remove_group",
+      "rationale": "Keep union and manual adjustment mandatory. Both optional facts live in the same necessary passage, so the whole-passage completeness result should not change.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "decision_kind": "question-scope",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "wafer-question-scope",
+      "category": "question-scope",
+      "case_id": "tech-wafer-exact",
+      "group_id": "efficiency-scope",
+      "action": "remove_group",
+      "confidence": "high",
+      "rationale": "The visible question requests changes that improve SNR. Efficiency is an extra claim introduced by the required answer. In a separately approved question-scoped contract, make the no-efficiency-sacrifice clause and its transmission/fixed-frequency qualification conditional on making that extra claim. Preserve both in the original package metric.",
+      "dependency": "Also split required_claims[0] into requested SNR changes and conditional efficiency. Removing only the group while continuing to require unqualified efficiency would be unsound.",
+      "decision_kind": "question-scope",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "wafer-efficiency-self-contained",
+      "category": "alternatives",
+      "case_id": "tech-wafer-exact",
+      "group_id": "efficiency-scope",
+      "action": "add_alternative",
+      "confidence": "high",
+      "spans": [
+        {
+          "passage_id": "pmc10934137:p14:w180",
+          "start": 82,
+          "end": 334,
+          "quote": "Without considering the data transmission time, the imaging time is only related to line frequency. Therefore, the increase in the number of TDI stages does not affect the line frequency, thus improving the SNR without sacrificing detection efficiency."
+        }
+      ],
+      "rationale": "This passage states both excluded transmission time and unchanged line frequency as stages increase. The requirement does not request the numerical 23,400 Hz setting, so p16 is corroboration rather than a necessary second passage.",
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "autoencoder-abstract-weight-transfer",
+      "category": "alternatives",
+      "case_id": "tech-autoencoder-exact",
+      "group_id": "part-3",
+      "action": "add_alternative",
+      "confidence": "high",
+      "spans": [
+        {
+          "passage_id": "pmc11121878:p1:w0",
+          "start": 1152,
+          "end": 1254,
+          "quote": "In the second stage of training, the weights obtained from the first stage are used to train the model"
+        }
+      ],
+      "rationale": "The complete weight-transfer clause is present before the 180-word boundary. It does not need the next passage to establish where the weights came from or their use in stage two. Keep the two-passage stage-two sample alternative unchanged.",
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "tdi-opposite-motion-example",
+      "category": "alternatives",
+      "case_id": "tech-tdi-motion-sync",
+      "group_id": "part-2",
+      "action": "add_alternative",
+      "confidence": "high",
+      "spans": [
+        {
+          "passage_id": "pmc10934137:p7:w0",
+          "start": 246,
+          "end": 356,
+          "quote": "In Figure 4a, the object moves to the left and the integral direction of the TDI image sensor is to the right."
+        }
+      ],
+      "rationale": "The paper directly describes opposite object and integration directions. This alternative supports direction only; matching line frequency remains required by part-1.",
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "shortcut-residual-purpose",
+      "category": "alternatives",
+      "case_id": "tech-too-many-shortcuts",
+      "group_id": "residual-purpose",
+      "action": "add_alternative",
+      "confidence": "high",
+      "spans": [
+        {
+          "passage_id": "pmc11121878:p7:w0",
+          "start": 0,
+          "end": 154,
+          "quote": "Therefore, achieving a clear and informative residual image requires a high-quality normal background reconstruction and non-reconstruction of the defect."
+        }
+      ],
+      "rationale": "This is the causal requirement for a useful residual, not a generic mention of autoencoders. Retained part-1 still requires p16 to establish that all-layer skip connections reconstruct defects in this architecture. Jointly p16 and p7 establish the same reason as p16 and the approved generic-method p6 explanation.",
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "fusion-expanded-model-name",
+      "category": "alternatives",
+      "case_id": "tech-compare-fusion",
+      "group_id": "part-3",
+      "action": "add_alternative",
+      "spans": [
+        {
+          "start": 515,
+          "end": 766,
+          "passage_id": "pmc11510794:p5:w0",
+          "quote": "A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion."
+        }
+      ],
+      "confidence": "high",
+      "rationale": "The paper's own contributions explicitly state an attention-based dual-branch modal fusion network using feature-level fusion. This identifies ADMF-Net by its expanded name. The p40 model-name passage is redundant, not a necessary complementary fact. Both the primary comparison audit and another AI source reviewer agreed before examining outcomes.",
+      "decision_kind": "strict-alternatives",
+      "review_status": "unreviewed"
+    }
+  ]
+}

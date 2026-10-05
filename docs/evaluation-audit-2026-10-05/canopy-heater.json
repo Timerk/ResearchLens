@@ -1,0 +1,2229 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "status": "proposals_only_not_approved",
+  "reviewer_kind": "AI-assisted source audit, not independent human review",
+  "outcome_blinding": "No cached retrieval scores or rankings were read before these semantic judgments were written.",
+  "scope": "16 development positives from the canopy and heater papers. No held-out questions or retrieval were inspected by this reviewer.",
+  "verification": {
+    "canonical_passage_count": 204,
+    "approved_span_occurrences_verified": 60,
+    "method": "Existing ingest.chunk_documents with its default 180-word windows; exact spans checked against canonical text and reviewed paragraphs checked against pinned original XML. No scoring implementation introduced.",
+    "source_checks": [
+      {
+        "source_id": "pmc11510794",
+        "xml_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+        "paragraphs_verified": [
+          22,
+          24,
+          27,
+          28,
+          31,
+          32,
+          33,
+          34,
+          38,
+          41,
+          46,
+          59
+        ]
+      },
+      {
+        "source_id": "pmc11768589",
+        "xml_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+        "paragraphs_verified": [
+          1,
+          5,
+          15,
+          17,
+          18,
+          21,
+          22,
+          25,
+          26,
+          29,
+          30,
+          34,
+          37,
+          44,
+          48
+        ]
+      }
+    ],
+    "figure_limitation": "Original XML captions and references were read, not image pixels. Figure 8 is an external graphic; new visual agreement is not claimed."
+  },
+  "cases": [
+    {
+      "id": "tech-glass-exact",
+      "requested_facts": [
+        "Identify the forward light source and the backward light source in the named platform."
+      ],
+      "minimum_answer": "Forward lighting uses a ring light, and backward lighting uses a planar backlight.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Both directions and source types are directly requested.",
+          "component": null,
+          "approved_text": "Forward lighting uses a ring light; backward lighting uses a planar light source."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Attribute the answer to this platform. The visible question already supplies that scope; no separate disclaimer is needed.",
+          "component": null,
+          "approved_text": "Describe the acquisition platform in this paper, not all glass inspection systems."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Calibration values or universal optimality would be new, unsupported claims.",
+          "component": null,
+          "approved_text": "Unreported calibration settings or general claims of optimality."
+        }
+      ],
+      "group_judgment": "Both alternatives for each group are sufficient. Paragraph 28's backlight panel is the concrete planar source; paragraph 25 lists hardware but does not map lights to directions, so is topical rather than a sufficient replacement.",
+      "sources": [
+        "pmc11510794:p24:w0",
+        "pmc11510794:p28:w0"
+      ],
+      "question": "Which forward and backward light sources are used in the aircraft glass canopy acquisition platform?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Forward ring illumination",
+          "alternatives": [
+            [
+              {
+                "start": 226,
+                "end": 357,
+                "passage_id": "pmc11510794:p24:w0",
+                "quote": "For the implementation of forward lighting, we use a ring light source to achieve more uniform illumination and reduce reflections.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[2]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 92,
+                "passage_id": "pmc11510794:p28:w0",
+                "quote": "The forward lighting method uses 8 ring-shaped LED lights positioned around the camera lens.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[2]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Backward planar illumination",
+          "alternatives": [
+            [
+              {
+                "start": 358,
+                "end": 410,
+                "passage_id": "pmc11510794:p24:w0",
+                "quote": "For backward lighting, we use a planar light source.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[2]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 93,
+                "end": 223,
+                "passage_id": "pmc11510794:p28:w0",
+                "quote": "The backward lighting method uses a 30 cm × 42 cm backlight panel with a brightness of 500 nits and a color temperature of 6500 K.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[2]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-glass-paraphrase",
+      "requested_facts": [
+        "Explain the complementary purpose of opposite illumination directions.",
+        "State what each view reveals and what it can miss."
+      ],
+      "minimum_answer": "Forward bright-field lighting shows surface scratches but suffers reflections and uneven illumination; backward lighting shows depth-related information but can lose surface details and boundary contours.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The forward view's benefit and limitation answer the question.",
+          "component": null,
+          "approved_text": "Bright-field forward lighting captures surface scratches but is susceptible to reflections and uneven lighting."
+        },
+        {
+          "field": "required_claims",
+          "index": 1,
+          "classification": "explicitly_requested",
+          "explanation": "The backward view's benefit and limitation answer the question.",
+          "component": null,
+          "approved_text": "Backward lighting reveals depth information but can lose surface detail and boundary contours."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Report these as observations from the named study.",
+          "component": null,
+          "approved_text": "These are the authors' observations in their canopy inspection study."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A depth-calibration disclaimer is needed if an answer implies quantitative depth measurement. Plainly attributed qualitative depth information does not require a separate numerical disclaimer.",
+          "component": null,
+          "approved_text": "Visible depth information is not a calibrated numerical measurement of defect depth."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 2,
+          "classification": "unsupported_or_mismatched",
+          "explanation": "Exact duplicate of qualification 1. Remove the duplicate without changing the scientific constraint.",
+          "component": null,
+          "approved_text": "Visible depth information is not a calibrated numerical measurement of defect depth."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Universal sufficiency of one view contradicts the requested complementary explanation.",
+          "component": null,
+          "approved_text": "One view is sufficient for every defect."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Numerical thresholds would be an added claim.",
+          "component": null,
+          "approved_text": "Unreported numerical detection thresholds."
+        }
+      ],
+      "group_judgment": "Paragraph 22 directly supports all three groups. The third span correctly includes the backward-lighting antecedent. Abstract paragraph 1 supports the general value of dual lighting but not each specific limitation; paragraph 33's scratches/spots examples cannot replace the required depth/boundary account.",
+      "sources": [
+        "pmc11510794:p22:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "confirmed_annotation_defect",
+          "operation": "remove_duplicate_qualification",
+          "field": "required_qualifications",
+          "index": 2,
+          "reason": "Exact duplicated guard, not an extra fact. No evidence-group change and no retrieval-score effect."
+        }
+      ],
+      "question": "In the aircraft glass canopy study, why take pictures of the same transparent cover with light arriving from opposite sides, and what information can each view miss?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Scratch detail and reflection/uneven-light limitation",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 191,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "Through the analysis of these images collected, we found that bright field forward lighting easily captures surface scratch-type defects but is susceptible to reflections and uneven lighting.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[1]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 1,
+          "description": "Backward depth information",
+          "alternatives": [
+            [
+              {
+                "start": 192,
+                "end": 325,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "Backward lighting effectively reveals the depth information of defects, aiding in the analysis of defect severity and classification.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[1]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-3",
+          "claim_index": 1,
+          "description": "Backward surface/boundary-detail loss",
+          "alternatives": [
+            [
+              {
+                "start": 192,
+                "end": 405,
+                "passage_id": "pmc11510794:p22:w0",
+                "quote": "Backward lighting effectively reveals the depth information of defects, aiding in the analysis of defect severity and classification. However, it tends to lose surface detail and some boundary contour information.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[1]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-painted-exact",
+      "requested_facts": [
+        "Name the pretrained CNNs compared against the scratch-built model for painted heater classification."
+      ],
+      "minimum_answer": "The study compares transferred ResNet-50 and Inception V3 against a self-built CNN trained from scratch.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Model names and the comparison are requested.",
+          "component": null,
+          "approved_text": "The paper compares transfer learning of ResNet-50 and Inception V3 with a self-built network."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Keep the painted heating-device scope supplied by the question.",
+          "component": "painted heating-device surfaces",
+          "approved_text": "The task classifies OK/NOK painted heating-device surfaces."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "Spelling out the OK/NOK labels is useful background but unnecessary to identify the model pair.",
+          "component": "OK/NOK classification",
+          "approved_text": "The task classifies OK/NOK painted heating-device surfaces."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Attributing these classifiers to the canopy dataset would misidentify the source.",
+          "component": null,
+          "approved_text": "Claims that these classifiers were evaluated on the canopy dataset."
+        }
+      ],
+      "group_judgment": "All existing alternatives support their own subfact. Paragraph 26 names the models without the comparator; paragraph 25 identifies the comparator without naming both models. Keeping separate groups is defensible. Missing factual alternatives exist in paragraph 5's first window and paragraph 37's second window. Related-work paragraph 14 lists other studies and is not a substitute.",
+      "sources": [
+        "pmc11768589:p1:w0",
+        "pmc11768589:p15:w180",
+        "pmc11768589:p26:w0",
+        "pmc11768589:p44:w0",
+        "pmc11768589:p5:w0",
+        "pmc11768589:p37:w180"
+      ],
+      "proposals": [
+        {
+          "kind": "confirmed_omitted_alternative",
+          "operation": "add_alternative",
+          "group_id": "part-2",
+          "spans": [
+            {
+              "passage_id": "pmc11768589:p5:w0",
+              "start": 1109,
+              "end": 1261,
+              "quote": "Regarding the feature extraction and decision-making performed by the DL models, two approaches were compared: (1) a CNN built and trained from scratch;",
+              "source_id": "pmc11768589",
+              "source_locator": "./body/sec[1]/p[3]"
+            }
+          ],
+          "reason": "This is the study's own comparison, not a related-work claim; the next canonical window is already accepted for the model names."
+        },
+        {
+          "kind": "confirmed_omitted_alternative",
+          "operation": "add_alternative",
+          "group_id": "part-1",
+          "spans": [
+            {
+              "passage_id": "pmc11768589:p37:w180",
+              "start": 24,
+              "end": 203,
+              "quote": "Indeed, the fine-tuning of pre-trained CNNs considerably improved the outputs, with ResNet-50 and Inception V3 reaching around 95% and 90% of accuracy, respectively (Figure 7b,c).",
+              "source_id": "pmc11768589",
+              "source_locator": "./body/sec[4]/sec[2]/p[1]"
+            }
+          ],
+          "reason": "The paper's own results explicitly identify both fine-tuned pretrained models. The numerical accuracies are not required by this question."
+        }
+      ],
+      "question": "Which pre-trained CNNs were compared with a model trained from scratch for painted heating-device surface classification?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Transferred classifier names",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 635,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "Three decision-making algorithms were tested for implementation: a new model built and trained from scratch and transfer learning of pre-trained networks (ResNet-50 and Inception V3).",
+                "source_id": "pmc11768589",
+                "source_locator": "./front/article-meta/abstract[1]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 171,
+                "passage_id": "pmc11768589:p15:w180",
+                "quote": "regard, in this work, a comparison will be performed between ResNet-50 and Inception V3 for defect detection and classification on the painted surfaces of heating devices.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[2]/sec[2]/p[4]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 521,
+                "end": 660,
+                "passage_id": "pmc11768589:p44:w0",
+                "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[5]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 71,
+                "passage_id": "pmc11768589:p5:w180",
+                "quote": "(2) TL of two pre-trained CNN architectures—ResNet-50 and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[1]/p[3]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 5
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Scratch-built comparator",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 635,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "Three decision-making algorithms were tested for implementation: a new model built and trained from scratch and transfer learning of pre-trained networks (ResNet-50 and Inception V3).",
+                "source_id": "pmc11768589",
+                "source_locator": "./front/article-meta/abstract[1]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 172,
+                "end": 359,
+                "passage_id": "pmc11768589:p15:w180",
+                "quote": "Furthermore, an additional comparison will be performed of these pre-trained models with a CNN built and trained from scratch to demonstrate the potential of TL for defect classification.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[2]/sec[2]/p[4]"
+              }
+            ],
+            [
+              {
+                "start": 521,
+                "end": 660,
+                "passage_id": "pmc11768589:p44:w0",
+                "quote": "Three CNNs were tested: a lightweight CNN built and trained from scratch, and two fine-tuned pre-trained CNNs, ResNet-50, and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[5]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 104,
+                "passage_id": "pmc11768589:p25:w0",
+                "quote": "The first approach consisted in the construction and training of a new and lightweight CNN from scratch.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[1]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-obb",
+      "requested_facts": [
+        "Explain the dataset-specific reason to use oriented bounding boxes."
+      ],
+      "minimum_answer": "Many defects are slender, span much of an image and can interlace, which motivates oriented boxes.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The target geometry is the stated rationale.",
+          "component": null,
+          "approved_text": "Targets can be slender, have high aspect ratios and large image spans, and be interlaced."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "The motivation applies to this dataset, which is already named in the question.",
+          "component": null,
+          "approved_text": "This is the stated motivation for this dataset's OBB annotations."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A universal OBB-superiority claim would go beyond the question and evidence.",
+          "component": null,
+          "approved_text": "OBB is guaranteed superior for all object detection tasks."
+        }
+      ],
+      "group_judgment": "Paragraph 31 gives the full rationale in one sentence. The later OBB-head passages establish rotated predictions but do not explain the annotation choice.",
+      "sources": [
+        "pmc11510794:p31:w0"
+      ],
+      "question": "Why are oriented bounding boxes (OBB) selected for aircraft canopy defect annotation?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Slender, spanning and interlaced target rationale",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 223,
+                "passage_id": "pmc11510794:p31:w0",
+                "quote": "Considering that many of the detected target objects are slender, that is, they have high aspect ratios, large image spans, and may be interlaced, we choose to use oriented bounding boxes (OBB) for annotation and detection.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[3]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-annotation-tools",
+      "requested_facts": [
+        "Give the X-AnyLabeling version, the Segment Anything variant and how pre-labeling polygons become OBBs."
+      ],
+      "minimum_answer": "X-AnyLabeling 2.3.5 uses Segment Anything ViT-Large for preparatory polygons; a script calculates each minimum enclosing rectangle.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "All three named details are requested.",
+          "component": null,
+          "approved_text": "X-AnyLabeling 2.3.5 uses Segment Anything ViT-Large to propose polygons; a script calculates each minimum enclosing rectangle."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "The question already calls this pre-labeling. Describe preparatory labels accurately without requiring a second passage about human checks.",
+          "component": null,
+          "approved_text": "These are preparatory labels, not a claim of fully automatic ground truth."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Human checks being unnecessary would be a new claim contradicted by paragraph 33.",
+          "component": null,
+          "approved_text": "Human annotation checks were unnecessary."
+        }
+      ],
+      "group_judgment": "All three exact spans in paragraph 32 are sufficient and stay within one passage. Paragraph 33's manual review is useful extra context, not a missing required alternative for the named software or rectangle procedure.",
+      "sources": [
+        "pmc11510794:p32:w0"
+      ],
+      "question": "What X-AnyLabeling version and Segment Anything variant are used for canopy pre-labeling, and how are OBBs derived?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Annotation tool and version",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 149,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "We use X-AnyLabeling [27] (version 2.3.5) for data annotation, which allows the use of existing segmentation models to improve annotation efficiency.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "SAM model and preparatory polygons",
+          "alternatives": [
+            [
+              {
+                "start": 150,
+                "end": 287,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "We choose the Segment Anything (ViT-Large) model for pre-labeling, which provides preparatory polygon boundaries of the selected defects.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Minimum enclosing rectangles",
+          "alternatives": [
+            [
+              {
+                "start": 288,
+                "end": 425,
+                "passage_id": "pmc11510794:p32:w0",
+                "quote": "Then, a script is written to calculate the minimum enclosing rectangle for each defect, resulting in a more precise rotated bounding box.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-rgb-channel-assignment",
+      "requested_facts": [
+        "Map the forward image, backward image and their combination onto RGB channels."
+      ],
+      "minimum_answer": "Forward grayscale goes to red, backward grayscale to green, and their average to blue.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The three channel assignments are exactly requested.",
+          "component": null,
+          "approved_text": "Forward grayscale is red, backward grayscale is green, and their average is blue."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "Calling the construction data-level fusion is correct background; the mapping already answers the question.",
+          "component": null,
+          "approved_text": "Describe this data-level fusion construction."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Subtraction would be incorrect for the reported primary method. Table 5's differential-image ablation is a separate variant.",
+          "component": null,
+          "approved_text": "Blue uses subtraction in the reported primary method."
+        }
+      ],
+      "group_judgment": "Paragraph 38 supports both groups. Group part-1 includes the blue rule as context and overlaps part-2, but it imposes no extra passage. Paragraph 39 motivates averaging without stating both red/green assignments, so it is not a full substitute. Original Table 5 confirms the differential third-channel variant must not overwrite the primary method.",
+      "sources": [
+        "pmc11510794:p38:w0"
+      ],
+      "question": "How does RGB Channel Fusion assign forward and backward grayscale canopy images to red, green and blue?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Forward grayscale is red and backward grayscale is green",
+          "alternatives": [
+            [
+              {
+                "start": 168,
+                "end": 479,
+                "passage_id": "pmc11510794:p38:w0",
+                "quote": "In the RGB Channel Fusion method, the forward lighting image and the backward lighting image are each converted to grayscale. These grayscale images are then assigned to the red channel and green channel of the fused image, respectively, while the blue channel is obtained by averaging the two grayscale images.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[4]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Blue averages the grayscale images",
+          "alternatives": [
+            [
+              {
+                "start": 412,
+                "end": 479,
+                "passage_id": "pmc11510794:p38:w0",
+                "quote": "the blue channel is obtained by averaging the two grayscale images.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[4]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-amff-layers",
+      "requested_facts": [
+        "Report the AMFF scales, the FSPPF scales and detection head according to the explicitly named paragraph 41 and Figure 8 account."
+      ],
+      "minimum_answer": "Paragraph 41 reports AMFF at P3/P4, both P5 outputs feeding FSPPF, and an OBB detection head for rotated boxes.",
+      "answerability_note": "The requested paragraph-41 account is answerable from the index. The paper is internally contradictory because paragraph 46 says P3/P5 AMFF. The current audit verified both XML prose locations. Figure 8's caption and graphic reference are present in the original XML, but the graphic is not bundled and was not visually rechecked; its claimed agreement rests on the earlier review, not new visual verification.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The scoped feature scales and head are directly requested.",
+          "component": null,
+          "approved_text": "AMFF fuses P3 and P4; the two P5 outputs feed FSPPF; an OBB head predicts rotated boxes."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "The paragraph-46 conflict is mandatory if an answer claims a single unambiguous architecture across the paper. It is optional supplementary context when the answer explicitly reports the paragraph-41 account requested. Figure agreement must not be claimed as newly verified by this audit.",
+          "component": null,
+          "approved_text": "Paragraph 41 and Figure 8 agree on P3/P4 AMFF and P5 FSPPF; paragraph 46 inconsistently says P3/P5 AMFF. Acknowledge this inconsistency rather than treating the alternative prose as unambiguously wrong."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Feature dimensions and angle conventions would be extra unsupported detail.",
+          "component": null,
+          "approved_text": "Unreported feature-map dimensions or OBB angle conventions."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 1,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Do not affirm internal consistency. Omitting an unrequested conflict note is not itself a claim of consistency.",
+          "component": null,
+          "approved_text": "Claiming the paper's architecture descriptions are internally consistent."
+        }
+      ],
+      "group_judgment": "All existing spans accurately quote the source. The architecture-conflict joint alternative genuinely proves a contradiction and therefore correctly needs both paragraphs. Making that extra fact mandatory for this visibly scoped question is the mismatch. Paragraph 46 remains a legitimate alternative for P5 FSPPF alone, despite its separate AMFF error; paragraph 59 supports the OBB head alone.",
+      "sources": [
+        "pmc11510794:p41:w0",
+        "pmc11510794:p46:w0",
+        "pmc11510794:p59:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "question_contract_revision_for_owner_review",
+          "operation": "move_group_to_conditional",
+          "group_id": "architecture-conflict",
+          "reason": "Retain the contradiction as an answer-review guard and optional evidence. Require it if an answer generalizes beyond the named account, or rewrite the question to ask about the conflict before keeping it mandatory. Preserve the historical approved-package score.",
+          "spans": [
+            {
+              "passage_id": "pmc11510794:p41:w0",
+              "start": 200,
+              "end": 353,
+              "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields.",
+              "source_id": "pmc11510794",
+              "source_locator": "./body/sec[3]/sec[5]/p[2]"
+            },
+            {
+              "passage_id": "pmc11510794:p46:w0",
+              "start": 277,
+              "end": 400,
+              "quote": "The output of FSPPF, along with the outputs from the P3 and P5 layers’ AMFF modules, serves as the input to the neck layer.",
+              "source_id": "pmc11510794",
+              "source_locator": "./body/sec[3]/sec[5]/p[7]"
+            }
+          ]
+        }
+      ],
+      "question": "According to paragraph 41 and Figure 8 of the canopy paper, at which feature scales does ADMF-Net use AMFF and FSPPF, and what detection head follows?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": true,
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "P3/P4 AMFF",
+          "alternatives": [
+            [
+              {
+                "start": 200,
+                "end": 353,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[2]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "P5 FSPPF",
+          "alternatives": [
+            [
+              {
+                "start": 354,
+                "end": 451,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Then, the P5 layers from both modalities are connected to a spatial pyramid pooling layer, FSPPF.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[2]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 179,
+                "passage_id": "pmc11510794:p46:w0",
+                "quote": "The FSPPF module first concatenates the outputs of the P5 layers from the two feature extraction backbones, and then passes it into the SPPF (Spatial Pyramid Pooling-Fast) module.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[7]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Rotated-box head",
+          "alternatives": [
+            [
+              {
+                "start": 452,
+                "end": 604,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Finally, the three scales of features are fed into the detection layers, using an OBB detection head to predict the defects with rotated bounding boxes.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[2]"
+              }
+            ],
+            [
+              {
+                "start": 506,
+                "end": 648,
+                "passage_id": "pmc11510794:p59:w0",
+                "quote": "Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[5]/p[3]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        },
+        {
+          "id": "architecture-conflict",
+          "claim_index": 0,
+          "description": "Paragraph 46 conflicts with paragraph 41 on AMFF scales",
+          "alternatives": [
+            [
+              {
+                "start": 200,
+                "end": 353,
+                "passage_id": "pmc11510794:p41:w0",
+                "quote": "Next, two AMFF modules are inserted between the two backbones, applied to the P3 and P4 layers, to obtain fused features with different receptive fields.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[2]"
+              },
+              {
+                "start": 277,
+                "end": 400,
+                "passage_id": "pmc11510794:p46:w0",
+                "quote": "The output of FSPPF, along with the outputs from the P3 and P5 layers’ AMFF modules, serves as the input to the neck layer.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[5]/p[7]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-stripe-frequencies",
+      "requested_facts": [
+        "Give both tested sinusoidal frequencies, their corresponding stripe counts and the phase."
+      ],
+      "minimum_answer": "The paper reports 0.8 Hz for 20 stripes, 1.6 Hz for 40 stripes, and zero phase for both.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Every numerical value is directly requested.",
+          "component": null,
+          "approved_text": "0.8 Hz generates 20 stripes and 1.6 Hz generates 40 stripes; phase is zero for both."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Keep the source's units and distinguish tested settings from universal optimum.",
+          "component": null,
+          "approved_text": "Retain the paper's reported units and tested settings."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Attribution matters because Hz is the paper's label for generated spatial patterns.",
+          "component": "reported label",
+          "approved_text": "Hz is the paper's reported label for generated spatial patterns; do not infer a temporal monitor-refresh frequency or convert to cycles/mm without calibration."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 1,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A monitor-refresh or cycles/mm interpretation would be an added claim requiring unavailable calibration.",
+          "component": "temporal or spatial conversion warning",
+          "approved_text": "Hz is the paper's reported label for generated spatial patterns; do not infer a temporal monitor-refresh frequency or convert to cycles/mm without calibration."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Optimality for all painted surfaces would be a new claim.",
+          "component": null,
+          "approved_text": "These are universal optimal frequencies for painted surfaces."
+        }
+      ],
+      "group_judgment": "Paragraph 18 supplies both pairs and theta=0. Paragraph 17 explicitly identifies theta as phase, so their joint requirement is defensible for strict factual grounding. Paragraph 18 mentions phase in its opening sentence and an ordinary reader can infer the symbol, but deleting the definition is an unresolved sufficiency choice, not a confirmed correction. Do not count the two-passage requirement as a defect merely because theta is familiar.",
+      "sources": [
+        "pmc11768589:p17:w0",
+        "pmc11768589:p18:w0"
+      ],
+      "unresolved": [
+        "Whether paragraph 18 alone is an acceptable zero-phase alternative depends on the agreed allowance for local symbol inference. Retain the existing joint support pending review."
+      ],
+      "question": "Which sinusoidal frequencies, stripe counts and phase are tested for painted heating-device illumination?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Frequency/stripe-count pairs",
+          "alternatives": [
+            [
+              {
+                "start": 115,
+                "end": 246,
+                "passage_id": "pmc11768589:p18:w0",
+                "quote": "Two frequencies were used to generate patterns with different numbers of stripes: 0.8 Hz for 20 stripes, and 1.6 Hz for 40 stripes.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[2]/p[2]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Zero phase in both tested patterns",
+          "alternatives": [
+            [
+              {
+                "start": 270,
+                "end": 285,
+                "passage_id": "pmc11768589:p17:w0",
+                "quote": "θ to its phase.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[2]/p[1]"
+              },
+              {
+                "start": 247,
+                "end": 287,
+                "passage_id": "pmc11768589:p18:w0",
+                "quote": "The θ was 0 for both frequencies tested.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[2]/p[2]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-adaptive-binarization",
+      "requested_facts": [
+        "Describe grayscale conversion and adaptive binarization for structured illumination, including whether bright-field images receive it."
+      ],
+      "minimum_answer": "The structured-image pipeline converts RGB to grayscale and applies adaptive binarization to reduce environmental-light effects. The paper explicitly excludes bright-field images from this processing.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Both transformations and the bright-field exception are requested; the purpose explains the processing.",
+          "component": null,
+          "approved_text": "Structured images undergo RGB-to-grayscale conversion and adaptive binarization to reduce environmental-light effects; bright-field images are not processed this way."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Threshold or window size would be an additional implementation claim.",
+          "component": null,
+          "approved_text": "Do not extrapolate a threshold or window size the passage does not give."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Applying the same processing to both modes contradicts the explicit exception.",
+          "component": null,
+          "approved_text": "Both illumination modes receive identical binarization."
+        }
+      ],
+      "group_judgment": "The current p29+p22 joint alternative is sufficient. Paragraph 29 names structured illumination but does not name grayscale or adaptive binarization. Paragraph 22 names both transformations and explicitly excludes bright-field in the same passage, which supports the visible two-mode question without requiring another passage to restate structured-mode identity. A p22-only alternative is a justified candidate under ordinary contextual reading, with its anaphoric opening disclosed. It is not an exact source contradiction in the existing labels.",
+      "sources": [
+        "pmc11768589:p22:w0",
+        "pmc11768589:p29:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "contextual_sufficiency_revision_for_owner_review",
+          "operation": "add_alternative",
+          "group_id": "part-1",
+          "confidence": "medium-high",
+          "spans": [
+            {
+              "passage_id": "pmc11768589:p22:w0",
+              "start": 0,
+              "end": 310,
+              "quote": "Afterwards, the images were subjected to processing through the conversion RGB to grey scale and the application of adaptive binarization to reduce the effect of the environmental lighting (Figure 2b). It should be emphasized that images obtained via bright field illumination were not subjected to processing.",
+              "source_id": "pmc11768589",
+              "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+            }
+          ],
+          "reason": "Use the complete paragraph including its explicit bright-field exclusion, not only the first sentence. An owner may still prefer a literal named-mode link; report that stricter interpretation separately rather than treating this correction as already approved."
+        }
+      ],
+      "unresolved": [
+        "Paragraph 22 begins 'Afterwards, the images'. The proposed alternative permits resolving its scope using the same paragraph's bright-field exclusion and the visible question's two named modes."
+      ],
+      "question": "What grayscale and adaptive-binarization preprocessing is applied to structured-illumination heater images, and is it applied to bright-field images?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Grayscale and adaptive binarization for illumination",
+          "alternatives": [
+            [
+              {
+                "start": 339,
+                "end": 568,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[3]/p[1]"
+              },
+              {
+                "start": 0,
+                "end": 201,
+                "passage_id": "pmc11768589:p22:w0",
+                "quote": "Afterwards, the images were subjected to processing through the conversion RGB to grey scale and the application of adaptive binarization to reduce the effect of the environmental lighting (Figure 2b).",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Bright-field images excluded from processing",
+          "alternatives": [
+            [
+              {
+                "start": 202,
+                "end": 310,
+                "passage_id": "pmc11768589:p22:w0",
+                "quote": "It should be emphasized that images obtained via bright field illumination were not subjected to processing.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[4]"
+              }
+            ],
+            [
+              {
+                "start": 718,
+                "end": 1150,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field. Since no processing was necessary for these images, images proceeded immediately from 450 × 450 extraction to the CNNs trained with dataset obtained with bright field illumination, in order to assess whether defects derived from lack of paint were detected.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[3]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-imagenet-initialization",
+      "requested_facts": [
+        "Identify the pretraining dataset and study input size for both transferred classifiers."
+      ],
+      "minimum_answer": "Both ResNet-50 and Inception V3 were pretrained on ImageNet and use 450 by 450 inputs in this study.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The dataset and study dimensions are requested.",
+          "component": null,
+          "approved_text": "They are pretrained on ImageNet; both use 450 by 450 input images in this study."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Distinguish prior pretraining from the study's fine-tuning.",
+          "component": null,
+          "approved_text": "This describes classifier initialization and study inputs, not new training on the complete ImageNet dataset."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A million new heater photographs would be an added false claim.",
+          "component": null,
+          "approved_text": "The study collected a million new heater images."
+        }
+      ],
+      "group_judgment": "Paragraph 26 alone directly supports all facts. Its two-span input-size alternative keeps the antecedent for 'these pre-trained CNNs' within the same passage. The p26+p29 alternative is redundant at whole-passage scoring because p26 already states the dimensions, but it does not make extra retrieval mandatory. Paragraph 25's 450 dimensions refer to the scratch-built CNN and cannot alone establish the transferred pair's inputs.",
+      "sources": [
+        "pmc11768589:p26:w0"
+      ],
+      "question": "Which pretraining dataset and input image size are reported for the transferred ResNet-50 and Inception V3 classifiers?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "ResNet-50 and Inception V3 were pretrained on ImageNet",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 246,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3. These networks have been trained on at least one million images from the ImageNet and have over 23 million trainable parameters [43].",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "The transferred classifier pair uses 450 by 450 inputs",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+              },
+              {
+                "start": 247,
+                "end": 313,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The input image size of these pre-trained CNNs was also 450 × 450.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 0,
+                "end": 112,
+                "passage_id": "pmc11768589:p26:w0",
+                "quote": "The second approach entailed the TL and fine-tunning of two common pre-trained CNNs: ResNet-50 and Inception V3.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[2]/sec[2]/p[1]"
+              },
+              {
+                "start": 339,
+                "end": 568,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Smaller images with 450 × 450 pixels size were extracted from the images obtained with deflectometry-based structured illumination, and then processed to be input to the CNNs trained with the dataset of pattern-containing images.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[3]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-stable-camera",
+      "requested_facts": [
+        "Identify what physically preserves the camera/sample geometry between captures."
+      ],
+      "minimum_answer": "A flexible arm holder keeps the lens and sample in a fixed relative position.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The support device and its role answer the question.",
+          "component": null,
+          "approved_text": "A flexible arm holder keeps lens and sample positions fixed between lighting conditions."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A measured registration-error guarantee would be an additional claim.",
+          "component": null,
+          "approved_text": "This explains the fixture's role, not a measured registration-error bound."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "An active stabilization algorithm would be an added unsupported mechanism.",
+          "component": null,
+          "approved_text": "An unreported active stabilization or registration algorithm."
+        }
+      ],
+      "group_judgment": "Paragraph 27 explicitly gives the holder's purpose. Paragraph 25 merely inventories the holder and does not state why it prevents shifting; no omitted sufficient alternative was found.",
+      "sources": [
+        "pmc11510794:p27:w0"
+      ],
+      "question": "When the transparent cover is photographed twice, what stops it from shifting relative to the lens?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Holder fixes lens/sample positions",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 197,
+                "passage_id": "pmc11510794:p27:w0",
+                "quote": "Due to the necessity of maintaining a fixed position between the camera lens and the sample when capturing images under two lighting conditions, we used a flexible arm holder as the support device.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[2]/p[4]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-turn-and-flip-labels",
+      "requested_facts": [
+        "Explain how image rotations and reflections preserve usable defect annotations without redrawing."
+      ],
+      "minimum_answer": "Apply each rotation and mirror transformation to the image and its labels together, correcting or deleting labels that move outside the image.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Simultaneous image/label transformations answer how redrawing is avoided.",
+          "component": "rotate and mirror together",
+          "approved_text": "Rotate and mirror images and labels together; 90-degree rotations plus mirroring yield eightfold augmentation; out-of-frame labels require adjustment or deletion."
+        },
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "The eightfold count is an illustrative example, not required to explain transformed labels.",
+          "component": "90-degree eightfold example",
+          "approved_text": "Rotate and mirror images and labels together; 90-degree rotations plus mirroring yield eightfold augmentation; out-of-frame labels require adjustment or deletion."
+        },
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "For the question's unrestricted turning operation, labels that leave the frame need correction or removal.",
+          "component": "out-of-frame labels",
+          "approved_text": "Rotate and mirror images and labels together; 90-degree rotations plus mirroring yield eightfold augmentation; out-of-frame labels require adjustment or deletion."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Specify 90-degree rotations and mirroring if adding the eightfold example.",
+          "component": null,
+          "approved_text": "The eightfold example is specific to 90-degree rotations and mirrors."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Do not imply arbitrary rotations preserve all content and boxes.",
+          "component": null,
+          "approved_text": "Every arbitrary rotation is lossless and leaves all boxes inside the image."
+        }
+      ],
+      "group_judgment": "All existing groups are accurately supported by paragraph 34's first window. The eightfold group is optional detail but imposes no separate passage. The numerical example is not grounds to accept paragraph 34's second window alone, which lacks the core image/label transformation instruction.",
+      "sources": [
+        "pmc11510794:p34:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "question_contract_revision_for_owner_review",
+          "operation": "move_group_to_optional",
+          "group_id": "part-2",
+          "reason": "The visible how-question does not ask the augmentation factor. Preserve overflow safeguards; expected complete-evidence passage requirement is unchanged because all facts are in p34:w0."
+        }
+      ],
+      "question": "How can the aircraft-cover training pictures be turned and reflected without drawing their defect outlines again?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Transform images and labels together",
+          "alternatives": [
+            [
+              {
+                "start": 281,
+                "end": 425,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "In this process, rotation and mirroring operations are simultaneously applied to the images and their labels to avoid redundant annotation work.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[6]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Eightfold rotation/mirror example",
+          "alternatives": [
+            [
+              {
+                "start": 517,
+                "end": 642,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "For example, using 90-degree rotations and mirroring operations, an 8× augmentation can be achieved without information loss.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[6]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Out-of-frame label correction/removal",
+          "alternatives": [
+            [
+              {
+                "start": 754,
+                "end": 951,
+                "passage_id": "pmc11510794:p34:w0",
+                "quote": "Moreover, since the standard OBB format does not allow point coordinates to be located outside the image boundaries, labels that overflow during the rotation process need to be adjusted or deleted.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[6]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-manual-outline-union",
+      "requested_facts": [
+        "Explain how annotators reconcile a defect's differing outlines across two illumination views."
+      ],
+      "minimum_answer": "They manually adjust the boundaries and select the union outer contour when the views differ.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Manual reconciliation and the union rule directly answer the boundary question.",
+          "component": "manual adjustment and union outer contour",
+          "approved_text": "Manual adjustment is needed; when contours differ, the union outer contour is selected, and annotation files are checked."
+        },
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "Checking every annotation file is related quality control, not necessary to identify how the boundary is reconciled.",
+          "component": "annotation files checked",
+          "approved_text": "Manual adjustment is needed; when contours differ, the union outer contour is selected, and annotation files are checked."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "Visibility under one illumination explains why manual work is useful but is supplementary to the explicitly stated differing-outline condition.",
+          "component": null,
+          "approved_text": "Some defects are clearer under only one illumination condition."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Accepting model output without review would contradict the manual reconciliation.",
+          "component": null,
+          "approved_text": "The segmentation model's output is accepted without inspection."
+        }
+      ],
+      "group_judgment": "Paragraph 33 supports all groups and supplies their local context. The visibility qualification and annotation-file checks add requested-answer scope but do not consume extra passage slots. Paragraph 32's automated rectangle generation does not establish the union boundary.",
+      "sources": [
+        "pmc11510794:p33:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "question_contract_revision_for_owner_review",
+          "operation": "move_groups_to_optional",
+          "group_ids": [
+            "part-3",
+            "visibility-scope"
+          ],
+          "reason": "Keep union and manual adjustment mandatory. Both optional facts live in the same necessary passage, so the whole-passage completeness result should not change."
+        }
+      ],
+      "question": "If damage has a different outline in the two pictures of the aircraft cover, how do the annotators reconcile the boundary?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Manual adjustment is necessary",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 38,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "Manual adjustments are also necessary.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Union when contour boundaries differ",
+          "alternatives": [
+            [
+              {
+                "start": 341,
+                "end": 522,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "Additionally, there are also subtle differences in the contour boundaries of the defects under the two types of lighting, and in that case, the union outer contour will be selected.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-3",
+          "claim_index": 0,
+          "description": "Annotation file checks",
+          "alternatives": [
+            [
+              {
+                "start": 523,
+                "end": 605,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "We check each annotation file to ensure the accuracy and usability of the dataset.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "visibility-scope",
+          "claim_index": 0,
+          "description": "Some outlines are clear under only one lighting condition",
+          "alternatives": [
+            [
+              {
+                "start": 39,
+                "end": 130,
+                "passage_id": "pmc11510794:p33:w0",
+                "quote": "This is because some defects are only clearly outlined under a specific lighting condition.",
+                "source_id": "pmc11510794",
+                "source_locator": "./body/sec[3]/sec[3]/p[5]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-small-photo-supply",
+      "requested_facts": [
+        "Explain how the heater study expanded a limited photo dataset before classifier training."
+      ],
+      "minimum_answer": "They extracted four 450 by 450 crops from each 808 by 608 image, then augmented the crops to 500 images per defect category.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "Cropping followed by augmentation is the requested enlargement method.",
+          "component": "crop then augment",
+          "approved_text": "They extract four 450 by 450 sub-images from each 808 by 608 image, then augment the crops to 500 images per defect category."
+        },
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "optional_background",
+          "explanation": "Exact raw/crop dimensions and the 500-image target are useful concrete study details but the how-question does not explicitly demand every number.",
+          "component": "numerical recipe details",
+          "approved_text": "They extract four 450 by 450 sub-images from each 808 by 608 image, then augment the crops to 500 images per defect category."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "Clarify derived versus independent samples if stating the 500 count or interpreting sample independence.",
+          "component": null,
+          "approved_text": "Augmented images are not 500 independent physical parts."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Do not reinterpret augmentation as acquisition of 500 independent heaters.",
+          "component": null,
+          "approved_text": "The study inspected 500 independently acquired heaters per category."
+        }
+      ],
+      "group_judgment": "Paragraph 21 directly supports both stages and all numbers. The two spans for augmentation stay in one passage and connect the 500-image goal with the augmentation operation. Its omitted rotation/flip examples could improve an answer but do not justify adding a new mandatory detail list. Keeping current factual groups is a reasonable specific-answer design choice; scope should be explicit in any answer rubric.",
+      "sources": [
+        "pmc11768589:p21:w0"
+      ],
+      "unresolved": [
+        "The desired granularity of a how-question is a rubric choice. The current numerical recipe is correct and costs no extra passage; no score-changing simplification is proposed."
+      ],
+      "question": "How did the heater researchers enlarge a limited supply of surface photographs before fitting their classifiers?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Four crops and raw/crop dimensions",
+          "alternatives": [
+            [
+              {
+                "start": 173,
+                "end": 282,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "(1) four sub-images with 450 × 450 were extracted from the original 808 × 608 images using the GIMP software;",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Augment to 500 images per category",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 172,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "Given the low availability of painted samples (with and without defects), two strategies were employed to augment the dataset to 500 images per defect category (Figure 2a):",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+              },
+              {
+                "start": 287,
+                "end": 376,
+                "passage_id": "pmc11768589:p21:w0",
+                "quote": "(2) several data augmentation techniques were then performed on the extracted sub-images,",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[1]/sec[3]/p[3]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-both-checks-clean",
+      "requested_facts": [
+        "Decide whether a structured-only clean result is enough and describe the next test and final pass rule."
+      ],
+      "minimum_answer": "No. An OK under the sinusoidal pattern triggers a bright-field check, and both modes must return OK for a final pass.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The sequence and two-mode final acceptance rule answer both parts.",
+          "component": null,
+          "approved_text": "A structured-mode OK triggers bright-field assessment; a final OK requires OK outputs for both modes."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "A zero-miss guarantee would be an extra claim. Calling this the reported decision rule is sufficient.",
+          "component": null,
+          "approved_text": "This is the reported decision rule, not a guarantee of zero missed defects."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "A one-mode pass contradicts the requested decision rule.",
+          "component": null,
+          "approved_text": "One successful illumination-mode check is enough to pass."
+        }
+      ],
+      "group_judgment": "Paragraph 29 proves sequence; paragraphs 30, 1 and 48 each explicitly state the two-mode OK requirement. The final-rule alternatives do not establish sequence, so a second passage for that fact is warranted. Paragraph 29 strongly implies the final rule but does not explicitly state the final classification; retaining the second group is defensible and avoids substituting topical overlap for complete decision logic.",
+      "sources": [
+        "pmc11768589:p29:w0",
+        "pmc11768589:p30:w0",
+        "pmc11768589:p1:w0",
+        "pmc11768589:p48:w0"
+      ],
+      "question": "Can a heater pass inspection after looking undamaged under the striped screen alone, and what happens next?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "proposals": [],
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Structured OK triggers bright-field check",
+          "alternatives": [
+            [
+              {
+                "start": 718,
+                "end": 892,
+                "passage_id": "pmc11768589:p29:w0",
+                "quote": "Once a surface was deemed OK using images with the sinusoidal pattern, a new algorithm cycle was performed employing images of the same surface illuminated with bright field.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[3]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Final OK requires both modes",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 282,
+                "passage_id": "pmc11768589:p30:w0",
+                "quote": "It should be emphasized that this algorithm applied a decision-level fusion of the classification outputs, so for a painted surface to be classified as OK, its images should be submitted to CNNs trained with images of both illumination modes and obtain an OK classification on both.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[3]/sec[3]/p[2]"
+              }
+            ],
+            [
+              {
+                "start": 1047,
+                "end": 1229,
+                "passage_id": "pmc11768589:p1:w0",
+                "quote": "The inspection system consistently obtained fast and accurate surface classifications because it imposed OK classification on models trained with images from both illumination modes.",
+                "source_id": "pmc11768589",
+                "source_locator": "./front/article-meta/abstract[1]/p[1]"
+              }
+            ],
+            [
+              {
+                "start": 127,
+                "end": 261,
+                "passage_id": "pmc11768589:p48:w0",
+                "quote": "by imposing OK classification on models trained with images derived from both illumination modes: sinusoidal pattern and bright field.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[5]/list[1]/list-item[4]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech-daylight-interference",
+      "requested_facts": [
+        "Explain the contrast problem from daylight changes and the tested way to make defects easier to see."
+      ],
+      "minimum_answer": "Uncontrolled ambient light reduces contrast and can hide a scratch. Processing the sinusoidal-pattern images produces high-contrast defect regions.",
+      "requirements": [
+        {
+          "field": "required_claims",
+          "index": 0,
+          "classification": "explicitly_requested",
+          "explanation": "The contrast mechanism and processing mitigation directly answer the question.",
+          "component": null,
+          "approved_text": "Uncontrolled ambient illumination reduces contrast; preprocessing structured images produces higher-contrast defect regions."
+        },
+        {
+          "field": "required_qualifications",
+          "index": 0,
+          "classification": "conditional_on_additional_claim",
+          "explanation": "The proposed-tunnel distinction matters only if an answer introduces containment. It need not discuss an enclosure at all to answer the visible question.",
+          "component": null,
+          "approved_text": "Enclosing the setup is suggested for implementation, not part of the tested configuration."
+        },
+        {
+          "field": "forbidden_claims",
+          "index": 0,
+          "classification": "necessary_for_accuracy",
+          "explanation": "Calling a tunnel the tested fix would be inaccurate.",
+          "component": null,
+          "approved_text": "The experimental setup already had a light-isolating tunnel."
+        }
+      ],
+      "group_judgment": "Paragraph 34 proves all approved groups. The containment-scope group partly contains necessary experimental context, uncontrolled light, but also forces the optional tunnel proposal. Separate those subfacts in a revised rubric. No extra passage is caused because all quoted text is already in the core support passage.",
+      "sources": [
+        "pmc11768589:p34:w0"
+      ],
+      "proposals": [
+        {
+          "kind": "question_contract_revision_for_owner_review",
+          "operation": "separate_conditional_qualification",
+          "group_id": "containment-scope",
+          "reason": "Keep uncontrolled ambient illumination in the requested explanation; make proposed containment conditional on discussing an enclosure. Passage-level completeness should stay unchanged."
+        }
+      ],
+      "question": "Why could changing daylight hide a mark in the heater photographs, and how did the researchers make the mark easier to see?",
+      "answerability": "answerable_from_indexed_passages",
+      "paper_internal_contradiction": false,
+      "answerability_note": "The requested facts have sufficient prose support in the indexed passages. No omitted table, figure or equation is required to report them.",
+      "reviewer_kind": "AI-assisted semantic audit; not independent human review",
+      "confidence": "high",
+      "unresolved": [],
+      "approved_groups": [
+        {
+          "id": "part-1",
+          "claim_index": 0,
+          "description": "Ambient illumination reduces contrast",
+          "alternatives": [
+            [
+              {
+                "start": 350,
+                "end": 529,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Indeed, as observed in Figure 6a, the low contrast observed in this image due to the interference of the environmental lighting hindered the immediate localization of the scratch.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[4]/sec[1]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "part-2",
+          "claim_index": 0,
+          "description": "Processing improves structured-image contrast",
+          "alternatives": [
+            [
+              {
+                "start": 530,
+                "end": 769,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Nevertheless, the processing algorithm applied counteracted this effect, by generating high-contrast areas in the images containing sinusoidal patterns that, ultimately, facilitated the visualization of the defects, as seen in Figure 6b,c.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[4]/sec[1]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        },
+        {
+          "id": "containment-scope",
+          "claim_index": 0,
+          "description": "Environmental light was uncontrolled; containment was proposed for implementation",
+          "alternatives": [
+            [
+              {
+                "start": 0,
+                "end": 151,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Environmental lighting was not controlled, in this experimental setup, to better approximate the lighting conditions observed in an industrial setting.",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[4]/sec[1]/p[1]"
+              },
+              {
+                "start": 770,
+                "end": 945,
+                "passage_id": "pmc11768589:p34:w0",
+                "quote": "Still, if containment is required for industrial implementation, tunnels such as those reported by Armesto et al., Molina et al., and Chang et al. could be considered [2,3,6].",
+                "source_id": "pmc11768589",
+                "source_locator": "./body/sec[4]/sec[1]/p[1]"
+              }
+            ]
+          ],
+          "audit": {
+            "exact_spans_valid": true,
+            "source_identity_valid": true,
+            "alternative_sufficiency": "Each listed alternative supports its stated group in source context; see case-specific scope/joint-support judgment.",
+            "alternatives_checked": 1
+          }
+        }
+      ]
+    }
+  ],
+  "replay_proposals": [
+    {
+      "id": "tech-painted-exact:part-2:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-painted-exact",
+      "group_id": "part-2",
+      "action": "add_alternative",
+      "rationale": "This is the study's own comparison, not a related-work claim; the next canonical window is already accepted for the model names.",
+      "judgment_kind": "confirmed_omitted_alternative",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p5:w0",
+          "start": 1109,
+          "end": 1261,
+          "quote": "Regarding the feature extraction and decision-making performed by the DL models, two approaches were compared: (1) a CNN built and trained from scratch;"
+        }
+      ]
+    },
+    {
+      "id": "tech-painted-exact:part-1:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-painted-exact",
+      "group_id": "part-1",
+      "action": "add_alternative",
+      "rationale": "The paper's own results explicitly identify both fine-tuned pretrained models. The numerical accuracies are not required by this question.",
+      "judgment_kind": "confirmed_omitted_alternative",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p37:w180",
+          "start": 24,
+          "end": 203,
+          "quote": "Indeed, the fine-tuning of pre-trained CNNs considerably improved the outputs, with ResNet-50 and Inception V3 reaching around 95% and 90% of accuracy, respectively (Figure 7b,c)."
+        }
+      ]
+    },
+    {
+      "id": "tech-amff-layers:architecture-conflict:move_group_to_conditional",
+      "category": "question-scope",
+      "case_id": "tech-amff-layers",
+      "group_id": "architecture-conflict",
+      "action": "remove_group",
+      "rationale": "Retain the contradiction as an answer-review guard and optional evidence. Require it if an answer generalizes beyond the named account, or rewrite the question to ask about the conflict before keeping it mandatory. Preserve the historical approved-package score.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved"
+    },
+    {
+      "id": "tech-adaptive-binarization:part-1:add_alternative",
+      "category": "alternatives",
+      "case_id": "tech-adaptive-binarization",
+      "group_id": "part-1",
+      "action": "add_alternative",
+      "rationale": "Use the complete paragraph including its explicit bright-field exclusion, not only the first sentence. An owner may still prefer a literal named-mode link; report that stricter interpretation separately rather than treating this correction as already approved.",
+      "judgment_kind": "contextual_sufficiency_revision_for_owner_review",
+      "status": "proposed_not_approved",
+      "spans": [
+        {
+          "passage_id": "pmc11768589:p22:w0",
+          "start": 0,
+          "end": 310,
+          "quote": "Afterwards, the images were subjected to processing through the conversion RGB to grey scale and the application of adaptive binarization to reduce the effect of the environmental lighting (Figure 2b). It should be emphasized that images obtained via bright field illumination were not subjected to processing."
+        }
+      ]
+    },
+    {
+      "id": "tech-turn-and-flip-labels:part-2:move_group_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-turn-and-flip-labels",
+      "group_id": "part-2",
+      "action": "remove_group",
+      "rationale": "The visible how-question does not ask the augmentation factor. Preserve overflow safeguards; expected complete-evidence passage requirement is unchanged because all facts are in p34:w0.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved"
+    },
+    {
+      "id": "tech-manual-outline-union:part-3:move_groups_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-manual-outline-union",
+      "group_id": "part-3",
+      "action": "remove_group",
+      "rationale": "Keep union and manual adjustment mandatory. Both optional facts live in the same necessary passage, so the whole-passage completeness result should not change.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved"
+    },
+    {
+      "id": "tech-manual-outline-union:visibility-scope:move_groups_to_optional",
+      "category": "question-scope",
+      "case_id": "tech-manual-outline-union",
+      "group_id": "visibility-scope",
+      "action": "remove_group",
+      "rationale": "Keep union and manual adjustment mandatory. Both optional facts live in the same necessary passage, so the whole-passage completeness result should not change.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved"
+    },
+    {
+      "id": "tech-daylight-interference:containment-scope:separate_conditional_qualification",
+      "category": "question-scope",
+      "case_id": "tech-daylight-interference",
+      "group_id": "containment-scope",
+      "action": "remove_group",
+      "rationale": "Keep uncontrolled ambient illumination in the requested explanation; make proposed containment conditional on discussing an enclosure. Passage-level completeness should stay unchanged.",
+      "judgment_kind": "question_contract_revision_for_owner_review",
+      "status": "proposed_not_approved"
+    }
+  ],
+  "prior_review_check": {
+    "files": [
+      "evaluation/reviews/2026-10-01-pr8/review.json",
+      "evaluation/reviews/2026-10-01-pr8/evidence-review.json",
+      "evaluation/reviews/2026-10-01-pr8/evidence-fixes.json"
+    ],
+    "selection": "Only records matching these 16 development IDs were output or reviewed. No rejected-case archive was read.",
+    "timing": "Reviewed after the first written semantic judgments; no model results inspected.",
+    "findings": "The old AMFF question was broad, then explicitly scoped to paragraph 41/Figure 8; later evidence fixes nevertheless added architecture-conflict as mandatory. The old adaptive-binarization evidence audit accepted bright-field exclusion as potential complementary context, but the applied fix chose p29. Neither prior review establishes that the selected context policy is the only legitimate one."
+  }
+}
