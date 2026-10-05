@@ -88,6 +88,11 @@ The [fixed-pool information-needs study](docs/information-needs-experiments.md)
 also tests a local question model and separately rebuilt title/section/neighbor
 vectors. Its best new selector ties ordinary reranking at 25/36 complete cases;
 the existing BGE reranker selection at 26/36 remains unchanged.
+The [constrained selection diagnostics](docs/selection-diagnostics.md) confirm
+four-passage ceilings of 31/36 for BGE20 and 34/36 for Qwen40. Exact relevance
+selection and approved-description reranking do not improve the winner. A local
+quoted-support repair pilot fixes two targeted failures, but exposes verifier
+errors and substantial latency; it remains a diagnostic rather than a new default.
 
 ### Enable document-only OpenAI answers
 
