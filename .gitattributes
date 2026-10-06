@@ -2,3 +2,6 @@
 data/technical/originals/*.xml -text
 data/technical/*.json text eol=lf
 data/technical/NOTICE.txt text eol=lf
+
+# Match Prettier's LF output on Windows and Linux; keep binary assets untouched.
+frontend/** text=auto eol=lf
