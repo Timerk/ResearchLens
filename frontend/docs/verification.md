@@ -160,3 +160,33 @@ artifacts, not pixel-diff screenshot assertions.
 - T3-specific screenshot capture remains blocked by its preview host. The equivalent
   rendered focus and mobile result checks were completed in normal Chrome above;
   Chrome's full-page capture and synthesized-scroll tooling limits are recorded there.
+
+## Post-cleanup verification — 2026-10-06
+
+After updating Angular to 21.2.25, adding MIT licensing and enforcing frontend LF
+line endings, a clean install with Node 24.21.0 and npm 11.17.0 passed the formatting
+and TypeScript check, 21 component tests, the production build and all three
+Chromium smoke tests. Python 3.13.16 passed all 33 backend tests and both Ruff checks.
+The frontend lockfile audit reported zero known vulnerabilities.
+
+The updated app was also run and visually inspected in normal Chrome. FastAPI
+served the technical corpus in local preview mode through Angular's development
+proxy. A real canopy-lighting question returned four passages; expanded references
+displayed section/XML locations, authors, publication date, copyright, license and
+source links. A nonsense query displayed the no-match state, and a one-character
+question displayed validation feedback with submission disabled. Keyboard
+submission worked. The real-backend session had no browser console errors.
+
+Desktop and 390px/320px mobile layouts were inspected, including expanded source
+metadata. Neither mobile width had horizontal overflow. The offline mock server
+was used separately to inspect generated-answer sections, expandable citations,
+eight-second loading feedback, a 504 error alert, successful keyboard retry and
+insufficient-evidence feedback. These mock responses are presentation fixtures;
+this check made no paid OpenAI requests and does not establish answer quality.
+
+Representative screenshots from this check:
+
+- [Desktop reference from the real local backend](screenshots/chrome-post-cleanup-desktop-reference.jpg).
+- [390px generated-answer layout using mock responses](screenshots/chrome-post-cleanup-mobile-answer.jpg).
+
+The temporary viewport override was reset and the verification servers were stopped.

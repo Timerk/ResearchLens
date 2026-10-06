@@ -197,6 +197,13 @@ Then explain why a passage matching `illumination` cannot establish a numerical
 defect-size limit. These are two different problems: retrieval recall and evidence
 sufficiency. We will use both observations when adding embeddings and generation.
 
+## License
+
+The application code and project documentation are licensed under the
+[MIT License](LICENSE). The bundled technical papers and their extracted text
+retain their authors' copyright and CC BY 4.0 licenses; see
+[the corpus notices](data/technical/NOTICE.txt) for attribution and extraction changes.
+
 ## Development disclosure
 
 The initial code, fixtures, tests, CI configuration and documentation were generated
