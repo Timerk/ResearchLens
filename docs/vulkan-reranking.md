@@ -126,8 +126,9 @@ encoding and GPU reranking, with actual output limit four. They exclude loading.
 
 Selected metrics, hashes, cohorts, question regressions and memory summaries are in
 [vulkan-reranking-results.json](vulkan-reranking-results.json). The existing runner's
-paired diagnostics for the selected candidate against both dense controls are archived
-in [vulkan-reranking-paired.json](vulkan-reranking-paired.json). Full generated runs,
+paired outcome summaries for the selected candidate against both dense controls are
+in [vulkan-reranking-paired.json](vulkan-reranking-paired.json). Full case-level
+diagnostics are linked by each archive's `archive_provenance`. Full generated runs,
 logs and weights remain ignored. Historical draft-question scores are not comparable
 to this approved-evidence study.
 
@@ -184,7 +185,7 @@ Reference records are in [vulkan-reference-results.json](vulkan-reference-result
 To reproduce from the repository root after the GPU grid, run:
 
 ```powershell
-rtk proxy .venv/Scripts/python.exe docs/vulkan-reference-check.py
+uv run --extra embedding-models python evaluation/scripts/vulkan-reference-check.py --output evaluation/runs/vulkan-reference-new.json
 ```
 
 The reference uses cached original pinned models, float32, SDPA, eight CPU threads,

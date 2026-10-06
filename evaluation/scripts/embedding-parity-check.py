@@ -1,7 +1,8 @@
 """Small cached Qwen4B parity check against documented left-padding reference pooling.
 
 No model download, held-out questions, GPU server or paid API. From repo root:
-rtk proxy .venv/Scripts/python.exe docs/embedding-parity-check.py --output <new-json-path>
+uv run --extra embedding-models python evaluation/scripts/embedding-parity-check.py
+    --output <new-json-path>
 """
 
 import argparse
@@ -13,9 +14,9 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, "backend")
-from researchlens.artifacts import canonical_hash
-from researchlens.embedding_models import TorchEncoder
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "backend"))
+from researchlens.artifacts import canonical_hash  # noqa: E402
+from researchlens.embedding_models import TorchEncoder  # noqa: E402
 
 
 def main(output):

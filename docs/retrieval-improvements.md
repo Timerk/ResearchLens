@@ -162,8 +162,9 @@ ranking results. The final backend suite passes 193 tests; lint and formatting p
 Full generated runs remain ignored under `evaluation/runs/retrieval-improvements-2026-10-02/`
 and `evaluation/runs/retrieval-improvements-confirmation-2026-10-02/`.
 [Selected result excerpts](retrieval-improvement-results.json) archive code/runtime,
-artifact/run hashes, all settings, cutoff/cohort/context summaries, per-question
-failure classifications and paired changes. They contain no model weights, vectors,
+artifact/run hashes, all settings, cutoff/cohort/context summaries, aggregate
+failure classifications and paired outcome summaries. Full per-case records are
+linked in the JSON archive's `archive_provenance`. They contain no model weights, vectors,
 duplicate dataset text or credentials. The existing runner supplies every relevance
 score and paired comparison.
 

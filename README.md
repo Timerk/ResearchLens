@@ -57,42 +57,16 @@ Keep `ANSWER_PROVIDER=local` for a free passage preview in either retrieval mode
 See [embedding setup and integration](docs/embeddings.md) for model conventions,
 custom corpus paths, stale-index recovery and the evaluation runner interface.
 
-The CPU model catalog also supports `bge-m3`, `qwen3-0.6b` and `qwen3-4b` using the
-optional `embedding-models` extra. Set `EMBEDDING_MODEL` to the matching alias and
-`RETRIEVAL_BACKEND=hybrid` to fuse TF-IDF and embedding ranks. Each model needs its own
-ingested artifact; startup rejects mismatched models or encoding/runtime settings.
-Run the existing evaluation pipeline across all four models and both retrieval modes:
+The optional `embedding-models` extra also supports `bge-m3`, `qwen3-0.6b` and
+`qwen3-4b` on CPU. Set `EMBEDDING_MODEL` to the alias used at ingestion;
+`RETRIEVAL_BACKEND=hybrid` combines lexical and embedding ranks. Optional local
+reranking and fusion settings are covered in [embedding setup](docs/embeddings.md).
 
-```sh
-rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
-rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --evidence-labels ../evaluation/labels/technical-development.json --output ../evaluation/runs/cpu-comparison-k4
-rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.compare_retrieval --evidence-labels ../evaluation/labels/technical-development.json --limit 10 --cutoffs 1 4 10 --output ../evaluation/runs/cpu-comparison-ranking
-```
-
-This uses the 50 approved development questions and their separately approved evidence
-groups without answer generation. The first command measures actual k=4 retrieval;
-the second scores ranking prefixes at 1, 4 and 10. Each saves a paired per-question
-report against TF-IDF. Both use fresh processes and may download pinned weights on
-first ingestion. Held-out questions are not executed. See [evaluation readiness](docs/retrieval-readiness.md)
-and the [historical preliminary comparison](docs/model-comparison.md).
-The [approved development results](docs/approved-model-comparison.md) report all nine
-configurations, complete evidence, paired regressions and CPU costs on the reviewed set.
-See [retrieval development experiments](docs/retrieval-improvements.md) for optional
-local reranking, weighted fusion, tokenizer measurements and offline context comparisons.
-Optional RX 6800 Vulkan reranker experiments are documented in
-[Vulkan reranker tests](docs/vulkan-reranking.md).
-The [complementary selection experiment](docs/complementary-selection.md) tests
-question splitting and title/section reranking. Its five variants regress against
-the existing controls, so the previous selection and application defaults remain.
-The [fixed-pool information-needs study](docs/information-needs-experiments.md)
-also tests a local question model and separately rebuilt title/section/neighbor
-vectors. Its best new selector ties ordinary reranking at 25/36 complete cases;
-the existing BGE reranker selection at 26/36 remains unchanged.
-The [constrained selection diagnostics](docs/selection-diagnostics.md) confirm
-four-passage ceilings of 31/36 for BGE20 and 34/36 for Qwen40. Exact relevance
-selection and approved-description reranking do not improve the winner. A local
-quoted-support repair pilot fixes two targeted failures, but exposes verifier
-errors and substantial latency; it remains a diagnostic rather than a new default.
+For controlled development comparisons, use the [evaluation workflow](evaluation/README.md)
+and [comparison commands](docs/retrieval-readiness.md). The
+[research index](docs/retrieval-research.md) links the approved results, GPU experiments
+and remaining limitations. The full quality targets and held-out evaluation remain
+unfinished; optimization can continue in a later PR.
 
 ### Enable document-only OpenAI answers
 

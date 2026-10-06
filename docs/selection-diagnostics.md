@@ -53,8 +53,10 @@ The five BGE20 selection failures and their complete witnesses are:
 | Adaptive-binarization scope | `pmc11768589:p22:w0`, `p29:w0` |
 
 IDs abbreviated after the first entry in a cell belong to that same document.
-Full IDs, all pool memberships, witnesses, cohort labels and question-level
-selections are in [the archived results](selection-diagnostics-results.json).
+Aggregate ceilings and experiment summaries are in
+[the archived results](selection-diagnostics-results.json). Full IDs, pool memberships,
+witnesses and question-level selections remain in the original archive linked by
+`archive_provenance`.
 Annotations are conservative and non-exhaustive. These ceilings concern approved
 support, not every possible semantically sufficient passage combination.
 
@@ -220,8 +222,8 @@ rtk proxy ../.venv/Scripts/python.exe -m researchlens.repair_experiments --diagn
 From the repository root:
 
 ```sh
-rtk proxy .venv/Scripts/python.exe docs/embedding-parity-check.py --output evaluation/runs/embedding-parity-new.json
-rtk proxy .venv/Scripts/python.exe docs/selection-diagnostics-results.py --output docs/selection-diagnostics-results-new.json
+rtk proxy .venv/Scripts/python.exe evaluation/scripts/embedding-parity-check.py --output evaluation/runs/embedding-parity-new.json
+rtk proxy .venv/Scripts/python.exe evaluation/scripts/selection-diagnostics-results.py --output evaluation/runs/selection-diagnostics-results-new.json
 ```
 
 `selection_diagnostics` validates approved development inputs, artifact hashes,

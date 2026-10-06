@@ -654,5 +654,13 @@
         "cpu_reranking_ms_single_sample": 8848.099599999841
       }
     ]
+  },
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "b1ae82d2fce39ba043e749eb65c2c16abe1d0270571f04d2ed61819df63002c0",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/vulkan-reference-results.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/vulkan-reference-results.json"
   }
 }

@@ -6,7 +6,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "backend"))
 from researchlens.evaluation import summarize  # noqa: E402
 
 
@@ -132,7 +132,9 @@ def main():
                 for kind in ("needs", "reranker")
             }
         archive["studies"].append(study)
-    args.output.write_text(json.dumps(archive, indent=2) + "\n", encoding="utf-8")
+    with args.output.open("x", encoding="utf-8") as stream:
+        json.dump(archive, stream, indent=2, allow_nan=False)
+        stream.write("\n")
     print(f"Archived {len(archive['studies'])} studies")
 
 

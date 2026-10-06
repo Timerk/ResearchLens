@@ -53,7 +53,7 @@ the prepared Vulkan runtime:
 
 ```sh
 rtk proxy uv run --locked --extra embeddings --extra embedding-models --directory backend python -m researchlens.selection_experiments --runtime ../.venv/vulkan --indexes ../evaluation/runs/approved-models-2026-10-01-k4/indexes --output ../evaluation/runs/selection-improvements-new
-rtk proxy uv run python docs/selection-results.py evaluation/runs/selection-improvements-new docs/complementary-selection-results.json
+rtk proxy uv run python evaluation/scripts/selection-results.py evaluation/runs/selection-improvements-new evaluation/runs/complementary-selection-results.json
 ```
 
 Each configuration runs in a fresh child process with one warmup and three timed
@@ -182,7 +182,8 @@ also require renewed evidence mapping and review.
 
 [Archived metrics and selection diagnostics](complementary-selection-results.json)
 include the fixed plan, runtime/input/source hashes, actual candidate counts,
-per-question outcomes, query routes, cohorts and memory summaries. Full generated
+cohorts, paired outcomes and memory summaries. Full per-question outcomes and query
+routes are linked in the JSON archive's `archive_provenance`. Full generated
 run files remain ignored under `evaluation/runs/selection-improvements-2026-10-02`.
 This small, correlated four-paper development study does not establish general
 quality. Retrieval evidence does not establish generated-answer correctness,

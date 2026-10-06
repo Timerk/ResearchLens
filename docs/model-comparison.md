@@ -38,8 +38,9 @@ rtk proxy uv run --locked --extra embeddings --extra embedding-models --director
 ```
 
 [Archived result excerpts](model-comparison-results.json) contain run IDs, file hashes,
-corpus/artifact identity, runtime and retrieval settings, runner summaries, and each
-case's retrieved IDs, ranks and recalls. Full local outputs and vectors stay ignored;
+corpus/artifact identity, runtime and retrieval settings, and runner summaries.
+Each case's retrieved IDs, ranks and recalls remain in the full archive linked by
+`archive_provenance`. Full local outputs and vectors stay ignored;
 model weights stay in the Hugging Face cache. Dataset files were not edited.
 
 The cached runs used implementation commit
