@@ -8,6 +8,17 @@ the tooling. They do not establish model superiority or generated-answer quality
 Nearest neighbors and valid citation IDs are not proof of support. The new development
 evidence-group annotations received separate project-owner approval on 2026-10-01.
 
+## Workflow
+
+1. Ingest the unchanged corpus into a local passage artifact.
+2. Run the approved development questions with their approved evidence labels.
+3. Compare reports under the same corpus, label, cutoff and runtime contract.
+4. Freeze the selected settings before running the frozen held-out split.
+
+Keep generated indexes, run files and inference measurements in ignored
+`evaluation/runs/`. The checked-in datasets, labels and approval records are the
+evaluation inputs; do not replace them with experiment outputs.
+
 ## Run free development diagnostics
 
 From the repository root (Python 3.13 and committed `uv.lock`):
@@ -24,7 +35,8 @@ To run the original smoke tests, ingest `--corpus sample`, select
 `--dataset ../evaluation/datasets/development.json`, and pass
 `--source ../data/sample_documents.json`. The runner's source default matches the
 technical ingestion CLI default. Do not mix the sample questions with a technical index.
-On Windows, `py -m uv` can replace `uv`. Without RTK, omit `rtk proxy`.
+On Windows, `py -m uv` can replace `uv`. RTK is optional: the commands below
+and above work with the `rtk proxy` prefix omitted.
 
 Evaluation is manual. CI tests the tooling; it does not run a quality benchmark or
 publish evaluation artifacts. The default CLI makes zero paid API calls regardless

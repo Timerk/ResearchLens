@@ -1,7 +1,6 @@
 # Corpus hashes must be identical on Windows and Linux.
 data/*.json text eol=lf
 evaluation/datasets/*.json text eol=lf
-
 evaluation/labels/*.json text eol=lf
 evaluation/reviews/**/*.json text eol=lf
 # Preserve the completed evidence audit exactly as supplied, including CRLF bytes.
