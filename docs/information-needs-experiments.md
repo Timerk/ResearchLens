@@ -235,11 +235,12 @@ failures, neighbor document boundaries, visibility offset mapping and stale inpu
 Synthetic tests establish functionality, not scientific quality.
 
 [Compact archived results](information-needs-results.json) contain plans, pins,
-source/input hashes, staged score matrices, model outputs, per-question outcomes,
-candidate IDs, cohorts, token summaries and memory counters. Recreate the archive:
+source/input hashes, aggregate outcomes, cohorts, token summaries and memory counters.
+Full score matrices, model outputs and per-question records are linked in the JSON
+archive's `archive_provenance`. Recreate a full local archive:
 
 ```sh
-rtk proxy uv run python docs/information-needs-results.py --studies evaluation/runs/information-needs-2026-10-02 evaluation/runs/information-needs-schema-v2-2026-10-02 evaluation/runs/enriched-representations-2026-10-02 --output docs/information-needs-results.json
+rtk proxy uv run python evaluation/scripts/information-needs-results.py --studies evaluation/runs/information-needs-2026-10-02 evaluation/runs/information-needs-schema-v2-2026-10-02 evaluation/runs/enriched-representations-2026-10-02 --output evaluation/runs/information-needs-results.json
 ```
 
 Full runs, measured visibility sidecars, vectors, GGUF weights and server logs stay

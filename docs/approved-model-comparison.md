@@ -50,7 +50,8 @@ The first contains five ingested artifacts, nine existing-runner reports and its
 stage manifest. Both contain `comparison.md` and TF-IDF-baseline `paired.json`.
 [Selected result excerpts](approved-model-comparison-results.json) archive run IDs,
 file/artifact/code hashes, settings, cutoff/cohort summaries and hybrid-versus-dense
-paired changes. All scoring comes from the existing evaluation modules.
+paired outcome summaries. Full case-level records are linked in each JSON archive's
+`archive_provenance`. All scoring comes from the existing evaluation modules.
 
 All 18 runs completed with zero errors and stable rankings across repeats. For every
 configuration and all 50 questions, actual limit-4 passage IDs and metrics exactly
