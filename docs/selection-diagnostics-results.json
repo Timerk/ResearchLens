@@ -1,0 +1,540 @@
+{
+  "archive_schema": 1,
+  "input_sha256": {
+    "oracles": "23f42662e273d1540630434e8fe8c95f2c4a58b4b743894cfd036509a3e88212",
+    "reviewed_scoring": "20ba353bdd52d0c6bc8b836dd756c69f9500e7568aa3c68787294ff280851e60",
+    "embedding_parity": "eb26c50348132f52f70cad38452d7b6e6cb94b6facd2f470b203e5b7e997896b",
+    "initial_repair": "c962fd654f11dc1f1c1f4327f5d64e9991f592ef26a7c3ec705de074f1472b3a",
+    "corrected_repair": "c4bd579bb62033a639754cd8f2b2292ef3e7474d4a8bf3a41ebc3b4be173390b"
+  },
+  "oracles": {
+    "manifest": {
+      "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+      "labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "input_sha256": {
+        "evaluation\\runs\\information-needs-schema-v2-2026-10-02\\measurements.json": "60d06d4e25f4e7dd571e85ca56b775ad7c8bdc6e2577da9afca231a5f5c76a3e",
+        "evaluation\\runs\\retrieval-improvements-2026-10-02\\qwen3-4b-dense\\run.json": "009ffcbcf78365c9040f94144106b4f0c22b2ba0ca15d6a116950dc121380d7d",
+        "evaluation\\runs\\vulkan-rerankers-cache-off-2026-10-02\\bge-m3-bge-rerank20\\run.json": "fbbad57af4f19faaace6f40e17a5d744c9f056ec036a9bfcb9357c31fae8a0a1",
+        "evaluation\\runs\\vulkan-rerankers-cache-off-2026-10-02\\bge-m3-bge-rerank40\\run.json": "de07ffd8032a0216c3c51ea58cece53ec757635f010cc015c5475f381eba4129"
+      },
+      "source_sha256": "2c4aaaf26257e8b9cd6f9b0bb2c46d81eef94b2d339638c916f8441ec27b5b2b",
+      "slot_budget": 4,
+      "plan": [
+        "pool-oracles-bge20-qwen40-union-matched-bge40-qwen40",
+        "generated-needs-greedy-vs-exact-identical-utility",
+        "approved-group-label-utilities-greedy-vs-exact",
+        "joint-support-oracle",
+        "reference-recall-ceilings"
+      ],
+      "label_assisted": true,
+      "held_out_searches": false,
+      "api_calls": 0
+    },
+    "cases_archived_count": 36,
+    "summary": {
+      "answerable_cases": 36,
+      "oracles": {
+        "bge20": {
+          "complete": 31,
+          "misses": [
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": 26
+        },
+        "qwen40": {
+          "complete": 34,
+          "misses": [
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge40": {
+          "complete": 33,
+          "misses": [
+            "tech-moving-signal-addition",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge20-qwen40-union": {
+          "complete": 34,
+          "misses": [
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge20-qwen20-union": {
+          "complete": 33,
+          "misses": [
+            "tech-both-checks-clean",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        }
+      },
+      "selections": {
+        "qwen40-whole-rerank": {
+          "complete": 25,
+          "wins_vs_incumbent": [],
+          "regressions_vs_incumbent": [
+            "tech-compare-training-computers"
+          ]
+        },
+        "generated-greedy": {
+          "complete": 25,
+          "wins_vs_incumbent": [],
+          "regressions_vs_incumbent": [
+            "tech-compare-training-computers"
+          ]
+        },
+        "generated-exact": {
+          "complete": 25,
+          "wins_vs_incumbent": [
+            "tech-stripe-frequencies"
+          ],
+          "regressions_vs_incumbent": [
+            "tech-amff-layers",
+            "tech-compare-network-inputs"
+          ]
+        },
+        "reviewed-support-greedy": {
+          "complete": 31,
+          "wins_vs_incumbent": [
+            "tech-glass-paraphrase",
+            "tech-compare-fusion",
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts"
+          ],
+          "regressions_vs_incumbent": []
+        },
+        "reviewed-support-exact-max": {
+          "complete": 31,
+          "wins_vs_incumbent": [
+            "tech-glass-paraphrase",
+            "tech-compare-fusion",
+            "tech-stripe-frequencies",
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts"
+          ],
+          "regressions_vs_incumbent": [
+            "tech-amff-layers"
+          ]
+        }
+      },
+      "reference_recall_ceiling_corpus": 0.9603988603988604
+    }
+  },
+  "reviewed_scoring": {
+    "manifest": {
+      "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+      "labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "diagnostics_sha256": "23f42662e273d1540630434e8fe8c95f2c4a58b4b743894cfd036509a3e88212",
+      "qwen_run_sha256": "009ffcbcf78365c9040f94144106b4f0c22b2ba0ca15d6a116950dc121380d7d",
+      "source_sha256": "efc5509b0084b2f0b8408f942f8049fe73fdbf772d29ca87ec40c24fa22dd321",
+      "plan": [
+        "approved-descriptions-greedy",
+        "approved-descriptions-exact"
+      ],
+      "query_convention": "original question + Evidence requirement: approved description",
+      "label_assisted": true,
+      "held_out_searches": false,
+      "api_calls": 0,
+      "timing_scope": "single staged requirement scoring; excludes encoding and selection",
+      "reranker": {
+        "model": "BAAI/bge-reranker-v2-m3",
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "runtime": "llama.cpp",
+        "runtime_version": "b11327",
+        "device": "Vulkan0",
+        "precision": "float16",
+        "quantization": "none",
+        "weights": "bge-f16.gguf",
+        "tokenizer": "pinned-Hugging-Face-tokenizer",
+        "max_tokens": 511,
+        "truncation": "reject-overflow",
+        "batch_size": 4,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "pair_order": "question-passage",
+        "score": "raw-relevance-logit",
+        "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+        "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+        "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+        "device_name": "AMD Radeon RX 6800",
+        "context_tokens": 2048,
+        "batch_tokens": 2048,
+        "gpu_layers": 99,
+        "prompt_cache_ram_mib": 0,
+        "server_private_limit_bytes": 6442450944,
+        "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+      }
+    },
+    "cases_archived_count": 36,
+    "summary": {
+      "answerable_cases": 36,
+      "oracles": {
+        "bge20": {
+          "complete": 31,
+          "misses": [
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": 26
+        },
+        "qwen40": {
+          "complete": 34,
+          "misses": [
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge40": {
+          "complete": 33,
+          "misses": [
+            "tech-moving-signal-addition",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge20-qwen40-union": {
+          "complete": 34,
+          "misses": [
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        },
+        "bge20-qwen20-union": {
+          "complete": 33,
+          "misses": [
+            "tech-both-checks-clean",
+            "tech-changing-neighborhood",
+            "tech-compare-localization-outputs"
+          ],
+          "actual_complete": null
+        }
+      },
+      "selections": {
+        "approved-descriptions-greedy": {
+          "complete": 25,
+          "wins_vs_incumbent": [],
+          "regressions_vs_incumbent": [
+            "tech-compare-training-computers"
+          ]
+        },
+        "approved-descriptions-exact": {
+          "complete": 26,
+          "wins_vs_incumbent": [
+            "tech-stripe-frequencies"
+          ],
+          "regressions_vs_incumbent": [
+            "tech-amff-layers"
+          ]
+        }
+      },
+      "reference_recall_ceiling_corpus": 0.9603988603988604
+    },
+    "native_memory_summary": {
+      "peak_private_bytes": 2388852736,
+      "scope": "owned local server; excludes Python and VRAM"
+    },
+    "pair_summary": {
+      "requirements": 92,
+      "pairs": 3680,
+      "max_input_tokens": 383,
+      "truncated": 0
+    }
+  },
+  "embedding_parity": {
+    "model": {
+      "model": "Qwen/Qwen3-Embedding-4B",
+      "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+      "dimensions": 2560,
+      "max_tokens": 512,
+      "pooling": "last-nonpadding-token",
+      "normalization": "l2",
+      "query_prefix": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+      "document_prefix": "",
+      "text": "passage-text-only",
+      "encoding_version": 2,
+      "weights": "model.safetensors.index.json",
+      "tokenizer": "tokenizer.json",
+      "runtime": "torch+transformers",
+      "runtime_version": "2.14.1+cpu",
+      "backend": "pytorch-cpu",
+      "device": "cpu",
+      "precision": "bfloat16",
+      "quantization": "none",
+      "truncation": "right",
+      "batch_size": 1,
+      "intra_op_threads": 8,
+      "inter_op_threads": 1
+    },
+    "dataset_sha256": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+    "source_sha256": "40b0ac8418b2b50cfe000b892dfefbd7719d13abfe8fd0495f1cd49583f3ed18",
+    "case_selection": "first answerable development question per query-style cohort",
+    "case_ids": [
+      "tech-glass-exact",
+      "tech-glass-paraphrase",
+      "tech-compare-fusion"
+    ],
+    "passage_ids": [
+      "pmc11510794:p24:w0",
+      "pmc11510794:p22:w0",
+      "pmc11510794:p59:w0"
+    ],
+    "reference": "documented Qwen left-padding, final-token pooling, L2 normalization",
+    "instruction": "same task-specific research-question instruction in both paths",
+    "same_loaded_model": true,
+    "ours_batch_size": 1,
+    "reference_batch_size": 6,
+    "cosines_ours_vs_reference": [
+      0.999800443649292,
+      0.9998579025268555,
+      0.9998353719711304,
+      0.9998621940612793,
+      0.9998727440834045,
+      1.0000005960464478
+    ],
+    "cosines_reencoded_documents_vs_saved": [
+      1.0000003851954906,
+      1.000000432951335,
+      1.0000005602250348
+    ],
+    "our_document_rankings": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        2,
+        0,
+        1
+      ]
+    ],
+    "reference_document_rankings": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        2,
+        0,
+        1
+      ]
+    ],
+    "rankings_identical": true,
+    "held_out_searches": false,
+    "api_calls": 0,
+    "limitation": "small same-precision sample, not general equivalence or quality evaluation"
+  },
+  "initial_repair": {
+    "manifest": {
+      "plan": "one repair within BGE20, generated needs, exact predicted support selection",
+      "pilot_rule": "all recoverable failures + first success per cohort + first two negatives",
+      "case_ids": [
+        "tech-glass-exact",
+        "tech-glass-paraphrase",
+        "tech-wafer-exact",
+        "tech-wafer-paraphrase",
+        "tech-compare-fusion",
+        "tech-unrelated",
+        "tech-missing-shared-cpu-cost",
+        "tech-stripe-frequencies",
+        "tech-adaptive-binarization",
+        "tech-compare-training-splits"
+      ],
+      "selection_uses_labels": false,
+      "pilot_sampling_uses_development_labels": true,
+      "requirements": "unchanged copied question phrases from prior local needs run",
+      "prompt_sha256": "d017d99b428ff82551b0f193d70371c7e16548cd5c283a16ed81731d5a5a2a42",
+      "source_sha256": {
+        "repair_experiments.py": "1f0a888638253085f2277f094a29ce5722ad83aaaea06790bb5c181c4a8ba221",
+        "support_assessment.py": "e045cf5a54fc9249783f9dfefd34163f62e4374a1169664888ddbc247aa5bef4"
+      },
+      "input_sha256": {
+        "evaluation\\runs\\vulkan-rerankers-cache-off-2026-10-02\\bge-m3-bge-rerank20\\run.json": "fbbad57af4f19faaace6f40e17a5d744c9f056ec036a9bfcb9357c31fae8a0a1",
+        "evaluation\\runs\\selection-diagnostics-2026-10-05\\oracles.json": "23f42662e273d1540630434e8fe8c95f2c4a58b4b743894cfd036509a3e88212",
+        "evaluation\\runs\\information-needs-schema-v2-2026-10-02\\measurements.json": "60d06d4e25f4e7dd571e85ca56b775ad7c8bdc6e2577da9afca231a5f5c76a3e"
+      },
+      "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+      "labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "api_calls": 0,
+      "held_out_searches": false,
+      "max_output_tokens": 768,
+      "retries": 0,
+      "output_limit": 4,
+      "secondary_objective": "retain incumbent passages, then dense pool order",
+      "timing_scope": "single support/verification/selection stages, excludes retrieval",
+      "model": {
+        "model": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+        "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+        "weights": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        "weights_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+        "license": "Apache-2.0",
+        "runtime": "b11327",
+        "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+        "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+        "device": "Vulkan0",
+        "quantization": "Q4_K_M",
+        "context_tokens": 4096,
+        "max_output_tokens": 384,
+        "temperature": 0,
+        "seed": 42,
+        "prompt_sha256": "20c3b7330e659d7f9c4759c355cd0370cd1f9d8b9d7dfb33f3db60b1dda9d36f",
+        "schema_sha256": "92e448b35d6b30773b61805dd790e18031c5e4506e0ee9e0fdaf8cf521709e1f",
+        "cache_ram_mib": 0,
+        "server_private_limit_bytes": 6442450944,
+        "grounding": "schema-question-phrases-v2-max12words-or-fullquestion",
+        "retries": 0
+      }
+    },
+    "cases_archived_count": 10,
+    "summary": {
+      "cases": 10,
+      "errors": [
+        "tech-glass-paraphrase",
+        "tech-wafer-exact",
+        "tech-wafer-paraphrase",
+        "tech-compare-fusion",
+        "tech-unrelated",
+        "tech-missing-shared-cpu-cost",
+        "tech-stripe-frequencies",
+        "tech-adaptive-binarization",
+        "tech-compare-training-splits"
+      ],
+      "wins": [],
+      "regressions": [],
+      "false_complete": []
+    },
+    "native_memory_summary": {
+      "peak_private_bytes": 3681005568,
+      "scope": "owned local server; excludes Python and VRAM"
+    },
+    "measurement_summary": {
+      "requests": 30,
+      "staged_ms_median": 2991.6228999995838,
+      "scope": "single staged requests, excludes baseline retrieval; not throughput"
+    }
+  },
+  "corrected_repair": {
+    "manifest": {
+      "plan": "one repair within BGE20, generated needs, exact predicted support selection",
+      "pilot_rule": "recoverable failures, first success per cohort, first two negatives",
+      "case_ids": [
+        "tech-glass-exact",
+        "tech-glass-paraphrase",
+        "tech-wafer-exact",
+        "tech-wafer-paraphrase",
+        "tech-compare-fusion",
+        "tech-unrelated",
+        "tech-missing-shared-cpu-cost",
+        "tech-stripe-frequencies",
+        "tech-adaptive-binarization",
+        "tech-compare-training-splits"
+      ],
+      "selection_uses_labels": false,
+      "pilot_sampling_uses_development_labels": true,
+      "requirements": "unchanged copied question phrases from prior local needs run",
+      "prompt_sha256": "51fbe63dc8b4c0516b3ab5e091d41f029f474f1f7ac6f6389fb78edcdc077ba8",
+      "source_sha256": {
+        "repair_experiments.py": "2ef3f0b0a1a95677c2a26aa215d0690ccab3c407ccff1cad1968b86019eefd27",
+        "support_assessment.py": "31d7d9473d69e7eb677e731967383d0539fb77cb66163766ddfdac679b183e1e"
+      },
+      "input_sha256": {
+        "evaluation\\runs\\vulkan-rerankers-cache-off-2026-10-02\\bge-m3-bge-rerank20\\run.json": "fbbad57af4f19faaace6f40e17a5d744c9f056ec036a9bfcb9357c31fae8a0a1",
+        "evaluation\\runs\\selection-diagnostics-2026-10-05\\oracles.json": "23f42662e273d1540630434e8fe8c95f2c4a58b4b743894cfd036509a3e88212",
+        "evaluation\\runs\\information-needs-schema-v2-2026-10-02\\measurements.json": "60d06d4e25f4e7dd571e85ca56b775ad7c8bdc6e2577da9afca231a5f5c76a3e"
+      },
+      "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+      "labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "api_calls": 0,
+      "held_out_searches": false,
+      "max_output_tokens": 768,
+      "retries": 0,
+      "output_limit": 4,
+      "secondary_objective": "retain incumbent passages, then dense pool order",
+      "timing_scope": "single support/verification/selection stages, excludes retrieval",
+      "model": {
+        "model": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+        "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+        "weights": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        "weights_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+        "license": "Apache-2.0",
+        "runtime": "b11327",
+        "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+        "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+        "device": "Vulkan0",
+        "quantization": "Q4_K_M",
+        "context_tokens": 4096,
+        "max_output_tokens": 384,
+        "temperature": 0,
+        "seed": 42,
+        "prompt_sha256": "20c3b7330e659d7f9c4759c355cd0370cd1f9d8b9d7dfb33f3db60b1dda9d36f",
+        "schema_sha256": "92e448b35d6b30773b61805dd790e18031c5e4506e0ee9e0fdaf8cf521709e1f",
+        "cache_ram_mib": 0,
+        "server_private_limit_bytes": 6442450944,
+        "grounding": "schema-question-phrases-v2-max12words-or-fullquestion",
+        "retries": 0
+      }
+    },
+    "cases_archived_count": 10,
+    "summary": {
+      "cases": 10,
+      "errors": [],
+      "wins": [
+        "tech-stripe-frequencies",
+        "tech-adaptive-binarization"
+      ],
+      "regressions": [],
+      "false_complete": [
+        "tech-wafer-exact"
+      ]
+    },
+    "native_memory_summary": {
+      "peak_private_bytes": 3712446464,
+      "scope": "owned local server; excludes Python and VRAM"
+    },
+    "measurement_summary": {
+      "requests": 157,
+      "staged_ms_median": 30005.547400000978,
+      "scope": "single staged requests, excludes baseline retrieval; not throughput"
+    }
+  },
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "219ca1992dfc7351e82ac30dfabe80a26085fd1e4616ce306db349ae4b6df83c",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/selection-diagnostics-results.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/selection-diagnostics-results.json"
+  }
+}

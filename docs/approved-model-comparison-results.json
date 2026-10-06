@@ -1,0 +1,4063 @@
+{
+  "schema_version": 1,
+  "description": "Selected existing evaluation-runner results on approved development questions. No held-out evaluation, generation or tuning.",
+  "implementation_commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+  "runtime": {
+    "python": "3.13.14",
+    "system": "Windows",
+    "machine": "AMD64",
+    "lockfile_sha256": "e43b5a2ae58dff470dcb833bfd6db86235b912fa460b28ea612932081a35f6dc",
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.9.1",
+      "pydantic": "2.13.5",
+      "openai": "2.54.0",
+      "onnxruntime": "1.30.0",
+      "tokenizers": "0.23.2",
+      "huggingface-hub": "1.33.0",
+      "torch": "2.14.1+cpu",
+      "transformers": "5.18.0",
+      "safetensors": "0.8.0",
+      "sentence-transformers": null
+    }
+  },
+  "dataset": {
+    "id": "technical-development",
+    "version": "4-human-reviewed",
+    "split": "development",
+    "material": "real-corpus",
+    "status": "draft"
+  },
+  "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+  "evaluation_contract": {
+    "metrics_version": 2,
+    "primary_k": 4,
+    "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+    "percentile_method": "nearest-rank"
+  },
+  "hardware": {
+    "cpu": "AMD Ryzen 7 9800X3D, 8 cores / 16 threads",
+    "ram_gib": 32,
+    "gpu": "RX 6800, unused"
+  },
+  "generation": {
+    "provider": "none",
+    "model": null,
+    "reasoning_effort": null,
+    "max_output_tokens": null,
+    "max_retries": 0,
+    "prompt_sha256": null
+  },
+  "api_calls": 0,
+  "manifests": {
+    "k4": {
+      "schema_version": 1,
+      "models": [
+        "minilm",
+        "bge-m3",
+        "qwen3-0.6b",
+        "qwen3-4b"
+      ],
+      "repeats": 5,
+      "warmups": 1,
+      "limit": 4,
+      "stage_timeout_seconds": 3600,
+      "stages": [
+        {
+          "label": "tfidf/ingestion",
+          "status": "completed",
+          "duration_ms": 166.194
+        },
+        {
+          "label": "tfidf/tfidf",
+          "status": "completed",
+          "duration_ms": 1920.392
+        },
+        {
+          "label": "minilm/ingestion",
+          "status": "completed",
+          "duration_ms": 3617.514
+        },
+        {
+          "label": "minilm/embeddings",
+          "status": "completed",
+          "duration_ms": 2620.276
+        },
+        {
+          "label": "minilm/hybrid",
+          "status": "completed",
+          "duration_ms": 2817.709
+        },
+        {
+          "label": "bge-m3/ingestion",
+          "status": "completed",
+          "duration_ms": 38504.111
+        },
+        {
+          "label": "bge-m3/embeddings",
+          "status": "completed",
+          "duration_ms": 16850.856
+        },
+        {
+          "label": "bge-m3/hybrid",
+          "status": "completed",
+          "duration_ms": 17084.745
+        },
+        {
+          "label": "qwen3-0.6b/ingestion",
+          "status": "completed",
+          "duration_ms": 26835.324
+        },
+        {
+          "label": "qwen3-0.6b/embeddings",
+          "status": "completed",
+          "duration_ms": 21135.634
+        },
+        {
+          "label": "qwen3-0.6b/hybrid",
+          "status": "completed",
+          "duration_ms": 21440.628
+        },
+        {
+          "label": "qwen3-4b/ingestion",
+          "status": "completed",
+          "duration_ms": 122570.914
+        },
+        {
+          "label": "qwen3-4b/embeddings",
+          "status": "completed",
+          "duration_ms": 85169.269
+        },
+        {
+          "label": "qwen3-4b/hybrid",
+          "status": "completed",
+          "duration_ms": 80410.453
+        },
+        {
+          "label": "comparison/report",
+          "status": "completed",
+          "duration_ms": 2761.021
+        }
+      ],
+      "api_calls": 0,
+      "generation": "none",
+      "cutoffs": null,
+      "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "evidence_labels_review_status": "approved"
+    },
+    "ranking": {
+      "schema_version": 1,
+      "reuse_indexes_from": "evaluation/runs/approved-models-2026-10-01-k4",
+      "limit": 10,
+      "cutoffs": [
+        1,
+        4,
+        10
+      ],
+      "repeats": 5,
+      "warmups": 1,
+      "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+      "api_calls": 0,
+      "generation": "none",
+      "stages": [
+        {
+          "label": "tfidf/tfidf",
+          "status": "completed",
+          "duration_ms": 1882.787
+        },
+        {
+          "label": "minilm/embeddings",
+          "status": "completed",
+          "duration_ms": 2936.452
+        },
+        {
+          "label": "minilm/hybrid",
+          "status": "completed",
+          "duration_ms": 2774.057
+        },
+        {
+          "label": "bge-m3/embeddings",
+          "status": "completed",
+          "duration_ms": 23262.623
+        },
+        {
+          "label": "bge-m3/hybrid",
+          "status": "completed",
+          "duration_ms": 16247.159
+        },
+        {
+          "label": "qwen3-0.6b/embeddings",
+          "status": "completed",
+          "duration_ms": 22271.454
+        },
+        {
+          "label": "qwen3-0.6b/hybrid",
+          "status": "completed",
+          "duration_ms": 21268.446
+        },
+        {
+          "label": "qwen3-4b/embeddings",
+          "status": "completed",
+          "duration_ms": 79195.198
+        },
+        {
+          "label": "qwen3-4b/hybrid",
+          "status": "completed",
+          "duration_ms": 80704.662
+        },
+        {
+          "label": "comparison/report",
+          "status": "completed",
+          "duration_ms": 2758.671
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "protocol": "k4",
+      "name": "tfidf-tfidf",
+      "raw_run_file_sha256": "4fb09d3be8ab6b2dbaac7dde689659cee55282d8d3eb97f8de5151bf7028a0f4",
+      "run_id": "bd634500-1de1-4b3a-92cf-5fda4a329b1e",
+      "created_at": "2026-10-01T17:03:25.286418+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": null,
+        "encoding_sha256": null,
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.TfidfRetriever",
+        "version": "tfidf-word-unigram-bigram-english-stopwords-v1",
+        "limit": 4,
+        "backend": "tfidf",
+        "model": null,
+        "revision": null,
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "normalization": null,
+        "score_threshold": null,
+        "runtime": null,
+        "runtime_version": null,
+        "runtime_backend": null,
+        "device": null,
+        "precision": null,
+        "quantization": null,
+        "dimensions": null,
+        "weights": null,
+        "tokenizer": null,
+        "pooling": null,
+        "query_instruction": null,
+        "document_instruction": null,
+        "max_tokens": null,
+        "truncation": null,
+        "batch_size": null,
+        "intra_op_threads": null,
+        "inter_op_threads": null,
+        "text_representation": null,
+        "encoding_version": null,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 166.194,
+        "index_load_time_ms": 75.45789999858243
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 156524544,
+        "peak_rss_bytes": 157569024
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 0.454,
+        "query_p95_ms": 0.594,
+        "query_max_ms": 0.777,
+        "index_load_time_ms": 75.45789999858243,
+        "process_peak_rss_bytes": 157569024,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4444444444444444,
+          "source_recall": 0.7916666666666666,
+          "passage_recall": 0.3087962962962963,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3333333333333333,
+          "complete_evidence_cases": 7,
+          "complete_evidence_rate": 0.19444444444444445
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5578703703703703,
+          "source_recall": 0.9861111111111112,
+          "passage_recall": 0.47638888888888886,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.5518518518518518,
+          "complete_evidence_cases": 15,
+          "complete_evidence_rate": 0.4166666666666667
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.4444444444444444,
+            "source_recall": 0.9444444444444444,
+            "passage_recall": 0.2777777777777778,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.35185185185185186,
+            "complete_evidence_cases": 1,
+            "complete_evidence_rate": 0.1111111111111111
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8214285714285714,
+            "source_recall": 1.0,
+            "passage_recall": 0.719047619047619,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8571428571428571,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.35256410256410253,
+            "source_recall": 1.0,
+            "passage_recall": 0.35256410256410253,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.36153846153846153,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.23076923076923078
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 6
+        }
+      },
+      "context_complete_evidence_cases": 15,
+      "at_least_one_evidence_at_k4_cases": 25,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "minilm-embeddings",
+      "raw_run_file_sha256": "6c6b5f24c847d4cfaab2cea5803c85070653e1f791dba9e4c6b1f3247ce6526e",
+      "run_id": "b78dd412-4e86-474a-9002-8d191a2b128d",
+      "created_at": "2026-10-01T17:03:31.452516+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 3617.514,
+        "index_load_time_ms": 391.84279999972205
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 331579392,
+        "peak_rss_bytes": 331579392
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 1.4655,
+        "query_p95_ms": 2.097,
+        "query_max_ms": 2.465,
+        "index_load_time_ms": 391.84279999972205,
+        "process_peak_rss_bytes": 331579392,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.875,
+          "passage_recall": 0.26944444444444443,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3263888888888889,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5439814814814814,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.5012108262108262,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6175925925925926,
+          "complete_evidence_cases": 17,
+          "complete_evidence_rate": 0.4722222222222222
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.462962962962963,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.3696581196581197,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.45185185185185184,
+            "complete_evidence_cases": 2,
+            "complete_evidence_rate": 0.2222222222222222
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7738095238095238,
+            "source_recall": 1.0,
+            "passage_recall": 0.6702380952380952,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.869047619047619,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.35256410256410253,
+            "source_recall": 1.0,
+            "passage_recall": 0.41025641025641024,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 17,
+      "at_least_one_evidence_at_k4_cases": 27,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "minilm-hybrid",
+      "raw_run_file_sha256": "1da4d56ba35c929b2fa90e4db3ffcedf7f8888807b21274f7a4923ede5ff1c33",
+      "run_id": "3ecd4dc4-3e94-4127-a9f9-887f25cb9d29",
+      "created_at": "2026-10-01T17:03:34.271114+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 3617.514,
+        "index_load_time_ms": 274.8670000000857
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 331128832,
+        "peak_rss_bytes": 331128832
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 2.4795,
+        "query_p95_ms": 3.393,
+        "query_max_ms": 5.43,
+        "index_load_time_ms": 274.8670000000857,
+        "process_peak_rss_bytes": 331128832,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5277777777777778,
+          "source_recall": 0.875,
+          "passage_recall": 0.33888888888888885,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3958333333333333,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6527777777777778,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.575,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.662037037037037,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.5555555555555556,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.5,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5740740740740741,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.3333333333333333
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8571428571428571,
+            "source_recall": 1.0,
+            "passage_recall": 0.7345238095238095,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.869047619047619,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.5,
+            "source_recall": 1.0,
+            "passage_recall": 0.4551282051282052,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 30,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "bge-m3-embeddings",
+      "raw_run_file_sha256": "e6932c10b92ba56d4fdc391e3dd795c1c25cc566e96677d3e4d297be81eef66d",
+      "run_id": "c228739c-9ed6-4a0f-a786-9e9373d2759a",
+      "created_at": "2026-10-01T17:04:28.936784+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 38504.111,
+        "index_load_time_ms": 5846.708099998068
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4188258304,
+        "peak_rss_bytes": 4188258304
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 26.5895,
+        "query_p95_ms": 33.699,
+        "query_max_ms": 65.295,
+        "index_load_time_ms": 5846.708099998068,
+        "process_peak_rss_bytes": 4188258304,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.8194444444444444,
+          "passage_recall": 0.24704415954415954,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3537037037037037,
+          "complete_evidence_cases": 10,
+          "complete_evidence_rate": 0.2777777777777778
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5925925925925926,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.6139957264957264,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7078703703703704,
+          "complete_evidence_cases": 22,
+          "complete_evidence_rate": 0.6111111111111112
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.5740740740740741,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.6004273504273505,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.6370370370370371,
+            "complete_evidence_cases": 4,
+            "complete_evidence_rate": 0.4444444444444444
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7678571428571429,
+            "source_recall": 1.0,
+            "passage_recall": 0.6452380952380953,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8035714285714286,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.4166666666666667,
+            "source_recall": 1.0,
+            "passage_recall": 0.5897435897435898,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.6538461538461539,
+            "complete_evidence_cases": 8,
+            "complete_evidence_rate": 0.6153846153846154
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 22,
+      "at_least_one_evidence_at_k4_cases": 30,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "bge-m3-hybrid",
+      "raw_run_file_sha256": "4342ae009c697d8a8d2d86d4eb34a7eed7fb1bc9cd51b2b027ac926a05c34e26",
+      "run_id": "3f9348c9-ab7e-4985-9116-a2bd491a9813",
+      "created_at": "2026-10-01T17:04:46.100101+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 38504.111,
+        "index_load_time_ms": 5843.309100000624
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4188827648,
+        "peak_rss_bytes": 4188827648
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 27.939500000000002,
+        "query_p95_ms": 34.137,
+        "query_max_ms": 54.466,
+        "index_load_time_ms": 5843.309100000624,
+        "process_peak_rss_bytes": 4188827648,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5,
+          "source_recall": 0.8472222222222222,
+          "passage_recall": 0.31556267806267807,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3814814814814815,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6319444444444444,
+          "source_recall": 0.9861111111111112,
+          "passage_recall": 0.5826923076923076,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6777777777777777,
+          "complete_evidence_cases": 21,
+          "complete_evidence_rate": 0.5833333333333334
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6666666666666666,
+            "source_recall": 0.9444444444444444,
+            "passage_recall": 0.5363247863247863,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.6555555555555556,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.5555555555555556
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8035714285714286,
+            "source_recall": 1.0,
+            "passage_recall": 0.7488095238095237,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8928571428571429,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.4230769230769231,
+            "source_recall": 1.0,
+            "passage_recall": 0.4358974358974359,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 21,
+      "at_least_one_evidence_at_k4_cases": 28,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "qwen3-0.6b-embeddings",
+      "raw_run_file_sha256": "8cd07a2d9971e67a0ae1a5cb5e315f877b106ae5813055ae6294c7361912cde2",
+      "run_id": "03e2441e-d8a9-45ae-bf9a-618160d0944d",
+      "created_at": "2026-10-01T17:05:34.225736+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 26835.324,
+        "index_load_time_ms": 4790.662999999768
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1740128256,
+        "peak_rss_bytes": 1816932352
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 45.695,
+        "query_p95_ms": 57.873,
+        "query_max_ms": 168.474,
+        "index_load_time_ms": 4790.662999999768,
+        "process_peak_rss_bytes": 1816932352,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.875,
+          "passage_recall": 0.29027777777777775,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3402777777777778,
+          "complete_evidence_cases": 8,
+          "complete_evidence_rate": 0.2222222222222222
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5416666666666666,
+          "source_recall": 0.9583333333333334,
+          "passage_recall": 0.5354700854700855,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6129629629629629,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.462962962962963,
+            "source_recall": 0.8333333333333334,
+            "passage_recall": 0.39743589743589747,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.45185185185185184,
+            "complete_evidence_cases": 2,
+            "complete_evidence_rate": 0.2222222222222222
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7261904761904762,
+            "source_recall": 1.0,
+            "passage_recall": 0.6571428571428571,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.7857142857142857,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.39743589743589747,
+            "source_recall": 1.0,
+            "passage_recall": 0.5,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5384615384615384,
+            "complete_evidence_cases": 6,
+            "complete_evidence_rate": 0.46153846153846156
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 26,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "qwen3-0.6b-hybrid",
+      "raw_run_file_sha256": "ac7d83b5210d493a4266925284905836bc4683ca04905dc14f11d624e2666c8e",
+      "run_id": "8927cd25-7b85-4296-8453-67bdde190305",
+      "created_at": "2026-10-01T17:05:55.659619+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 26835.324,
+        "index_load_time_ms": 4502.405600000202
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1741713408,
+        "peak_rss_bytes": 1818304512
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 47.7625,
+        "query_p95_ms": 55.917,
+        "query_max_ms": 171.259,
+        "index_load_time_ms": 4502.405600000202,
+        "process_peak_rss_bytes": 1818304512,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5277777777777778,
+          "source_recall": 0.875,
+          "passage_recall": 0.32962962962962966,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3819444444444444,
+          "complete_evidence_cases": 7,
+          "complete_evidence_rate": 0.19444444444444445
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6296296296296297,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.5456552706552706,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6222222222222222,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6481481481481481,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.45299145299145294,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5444444444444445,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.3333333333333333
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8214285714285714,
+            "source_recall": 1.0,
+            "passage_recall": 0.713095238095238,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8214285714285714,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.41025641025641024,
+            "source_recall": 1.0,
+            "passage_recall": 0.42948717948717946,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 27,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "qwen3-4b-embeddings",
+      "raw_run_file_sha256": "6978fa1766420ebd605c6d94b916c48d9cbbd857cfc65ae23f9bb6e5dc0d9300",
+      "run_id": "1161c79c-8ec0-4489-84f0-cdcd59c74257",
+      "created_at": "2026-10-01T17:09:22.866298+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 122570.914,
+        "index_load_time_ms": 14839.924300002167
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8701726720,
+        "peak_rss_bytes": 8715554816
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 217.4335,
+        "query_p95_ms": 248.407,
+        "query_max_ms": 387.333,
+        "index_load_time_ms": 14839.924300002167,
+        "process_peak_rss_bytes": 8715554816,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6111111111111112,
+          "source_recall": 0.875,
+          "passage_recall": 0.3951923076923077,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.48935185185185187,
+          "complete_evidence_cases": 13,
+          "complete_evidence_rate": 0.3611111111111111
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.7152777777777778,
+          "source_recall": 0.9583333333333334,
+          "passage_recall": 0.6925213675213675,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7828703703703703,
+          "complete_evidence_cases": 24,
+          "complete_evidence_rate": 0.6666666666666666
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6574074074074074,
+            "source_recall": 0.8333333333333334,
+            "passage_recall": 0.7478632478632479,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.7703703703703704,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.5555555555555556
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.875,
+            "source_recall": 1.0,
+            "passage_recall": 0.7523809523809524,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.9107142857142857,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.5833333333333333,
+            "source_recall": 1.0,
+            "passage_recall": 0.5897435897435898,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.6538461538461539,
+            "complete_evidence_cases": 8,
+            "complete_evidence_rate": 0.6153846153846154
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 24,
+      "at_least_one_evidence_at_k4_cases": 32,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "k4",
+      "name": "qwen3-4b-hybrid",
+      "raw_run_file_sha256": "5e3766b4db92add69f9bdcec8980c94d627eafa0a8752b641db9846d42edcfaa",
+      "run_id": "7575e128-f782-4e34-88c7-2049cb6a6cc5",
+      "created_at": "2026-10-01T17:10:43.343546+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": 122570.914,
+        "index_load_time_ms": 11764.77000000159
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8656146432,
+        "peak_rss_bytes": 8716582912
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 215.344,
+        "query_p95_ms": 249.646,
+        "query_max_ms": 273.719,
+        "index_load_time_ms": 11764.77000000159,
+        "process_peak_rss_bytes": 8716582912,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 0,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5833333333333334,
+          "source_recall": 0.875,
+          "passage_recall": 0.36741452991452994,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.4277777777777778,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6782407407407408,
+          "source_recall": 1.0,
+          "passage_recall": 0.589636752136752,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6870370370370371,
+          "complete_evidence_cases": 21,
+          "complete_evidence_rate": 0.5833333333333334
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6203703703703703,
+            "source_recall": 1.0,
+            "passage_recall": 0.5363247863247863,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5814814814814815,
+            "complete_evidence_cases": 4,
+            "complete_evidence_rate": 0.4444444444444444
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8928571428571429,
+            "source_recall": 1.0,
+            "passage_recall": 0.7488095238095237,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.9285714285714286,
+            "complete_evidence_cases": 12,
+            "complete_evidence_rate": 0.8571428571428571
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.48717948717948717,
+            "source_recall": 1.0,
+            "passage_recall": 0.4551282051282052,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 21,
+      "at_least_one_evidence_at_k4_cases": 29,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "tfidf-tfidf",
+      "raw_run_file_sha256": "b89bf9b41aeead6cfcc5349be8a78a5cc3c5edd449366e4208f6ea774aa51843",
+      "run_id": "b4ea36a3-5752-48bf-ae02-097f06e73f2b",
+      "created_at": "2026-10-01T17:11:20.259497+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": null,
+        "encoding_sha256": null,
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.TfidfRetriever",
+        "version": "tfidf-word-unigram-bigram-english-stopwords-v1",
+        "limit": 10,
+        "backend": "tfidf",
+        "model": null,
+        "revision": null,
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "normalization": null,
+        "score_threshold": null,
+        "runtime": null,
+        "runtime_version": null,
+        "runtime_backend": null,
+        "device": null,
+        "precision": null,
+        "quantization": null,
+        "dimensions": null,
+        "weights": null,
+        "tokenizer": null,
+        "pooling": null,
+        "query_instruction": null,
+        "document_instruction": null,
+        "max_tokens": null,
+        "truncation": null,
+        "batch_size": null,
+        "intra_op_threads": null,
+        "inter_op_threads": null,
+        "text_representation": null,
+        "encoding_version": null,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 27.99530000265804
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 155779072,
+        "peak_rss_bytes": 157159424
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 0.476,
+        "query_p95_ms": 0.509,
+        "query_max_ms": 0.685,
+        "index_load_time_ms": 27.99530000265804,
+        "process_peak_rss_bytes": 157159424,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 12,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4444444444444444,
+          "source_recall": 0.7916666666666666,
+          "passage_recall": 0.3087962962962963,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3333333333333333,
+          "complete_evidence_cases": 7,
+          "complete_evidence_rate": 0.19444444444444445
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5578703703703703,
+          "source_recall": 0.9861111111111112,
+          "passage_recall": 0.47638888888888886,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.5518518518518518,
+          "complete_evidence_cases": 15,
+          "complete_evidence_rate": 0.4166666666666667
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.583179012345679,
+          "source_recall": 1.0,
+          "passage_recall": 0.6987179487179487,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7861111111111111,
+          "complete_evidence_cases": 26,
+          "complete_evidence_rate": 0.7222222222222222
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.4444444444444444,
+            "source_recall": 0.9444444444444444,
+            "passage_recall": 0.2777777777777778,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.35185185185185186,
+            "complete_evidence_cases": 1,
+            "complete_evidence_rate": 0.1111111111111111
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8214285714285714,
+            "source_recall": 1.0,
+            "passage_recall": 0.719047619047619,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8571428571428571,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.35256410256410253,
+            "source_recall": 1.0,
+            "passage_recall": 0.35256410256410253,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.36153846153846153,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.23076923076923078
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 6
+        }
+      },
+      "context_complete_evidence_cases": 15,
+      "at_least_one_evidence_at_k4_cases": 25,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "minilm-embeddings",
+      "raw_run_file_sha256": "93920f33a68dbf8d005759739857b92687967ae5fb9509f3d1bcfc884aeceea1",
+      "run_id": "79dd258f-87ec-48f9-98b1-f22526473cb0",
+      "created_at": "2026-10-01T17:11:23.126847+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "embeddings",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 646.0131999992882
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 331059200,
+        "peak_rss_bytes": 331059200
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 1.5139999999999998,
+        "query_p95_ms": 2.223,
+        "query_max_ms": 2.507,
+        "index_load_time_ms": 646.0131999992882,
+        "process_peak_rss_bytes": 331059200,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 8,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.875,
+          "passage_recall": 0.26944444444444443,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3263888888888889,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5439814814814814,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.5012108262108262,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6175925925925926,
+          "complete_evidence_cases": 17,
+          "complete_evidence_rate": 0.4722222222222222
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5618827160493827,
+          "source_recall": 1.0,
+          "passage_recall": 0.6980769230769232,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7657407407407407,
+          "complete_evidence_cases": 24,
+          "complete_evidence_rate": 0.6666666666666666
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.462962962962963,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.3696581196581197,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.45185185185185184,
+            "complete_evidence_cases": 2,
+            "complete_evidence_rate": 0.2222222222222222
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7738095238095238,
+            "source_recall": 1.0,
+            "passage_recall": 0.6702380952380952,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.869047619047619,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.35256410256410253,
+            "source_recall": 1.0,
+            "passage_recall": 0.41025641025641024,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 17,
+      "at_least_one_evidence_at_k4_cases": 27,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "minilm-hybrid",
+      "raw_run_file_sha256": "0fde602c73ba3e5940ab3b8081a72878162bba6467bca1028ba0aa677279e0b7",
+      "run_id": "a16f8105-fb39-44f6-9a6e-fa6d11d23070",
+      "created_at": "2026-10-01T17:11:25.896935+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "hybrid",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 268.75379999910365
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 331345920,
+        "peak_rss_bytes": 331345920
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 2.3705,
+        "query_p95_ms": 2.966,
+        "query_max_ms": 3.337,
+        "index_load_time_ms": 268.75379999910365,
+        "process_peak_rss_bytes": 331345920,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 8,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5277777777777778,
+          "source_recall": 0.875,
+          "passage_recall": 0.33888888888888885,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3958333333333333,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6527777777777778,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.575,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.662037037037037,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.662962962962963,
+          "source_recall": 1.0,
+          "passage_recall": 0.7101139601139601,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7749999999999999,
+          "complete_evidence_cases": 25,
+          "complete_evidence_rate": 0.6944444444444444
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.5555555555555556,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.5,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5740740740740741,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.3333333333333333
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8571428571428571,
+            "source_recall": 1.0,
+            "passage_recall": 0.7345238095238095,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.869047619047619,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.5,
+            "source_recall": 1.0,
+            "passage_recall": 0.4551282051282052,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 30,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "bge-m3-embeddings",
+      "raw_run_file_sha256": "fcfb9fa0d3c85f137668c6bcda75865fddc9465117ff01c360dad559e90184e3",
+      "run_id": "43908e06-b750-4679-be0e-16029cc347c0",
+      "created_at": "2026-10-01T17:11:48.518781+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 13653.300199999649
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4188463104,
+        "peak_rss_bytes": 4188463104
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 23.5835,
+        "query_p95_ms": 26.984,
+        "query_max_ms": 31.097,
+        "index_load_time_ms": 13653.300199999649,
+        "process_peak_rss_bytes": 4188463104,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 9,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.8194444444444444,
+          "passage_recall": 0.24704415954415954,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3537037037037037,
+          "complete_evidence_cases": 10,
+          "complete_evidence_rate": 0.2777777777777778
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5925925925925926,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.6139957264957264,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7078703703703704,
+          "complete_evidence_cases": 22,
+          "complete_evidence_rate": 0.6111111111111112
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.609292328042328,
+          "source_recall": 1.0,
+          "passage_recall": 0.7752136752136752,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.8444444444444444,
+          "complete_evidence_cases": 27,
+          "complete_evidence_rate": 0.75
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.5740740740740741,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.6004273504273505,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.6370370370370371,
+            "complete_evidence_cases": 4,
+            "complete_evidence_rate": 0.4444444444444444
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7678571428571429,
+            "source_recall": 1.0,
+            "passage_recall": 0.6452380952380953,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8035714285714286,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.4166666666666667,
+            "source_recall": 1.0,
+            "passage_recall": 0.5897435897435898,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.6538461538461539,
+            "complete_evidence_cases": 8,
+            "complete_evidence_rate": 0.6153846153846154
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 22,
+      "at_least_one_evidence_at_k4_cases": 30,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "bge-m3-hybrid",
+      "raw_run_file_sha256": "4e6b3f84576741600609b9715f259d1391085a39956467c75ea4db608690b735",
+      "run_id": "e45853ad-8094-4908-9e41-c13f5d4b21a3",
+      "created_at": "2026-10-01T17:12:04.806584+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "hybrid",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 5485.023299999739
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4188073984,
+        "peak_rss_bytes": 4188073984
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 27.073,
+        "query_p95_ms": 31.655,
+        "query_max_ms": 42.102,
+        "index_load_time_ms": 5485.023299999739,
+        "process_peak_rss_bytes": 4188073984,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 8,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5,
+          "source_recall": 0.8472222222222222,
+          "passage_recall": 0.31556267806267807,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3814814814814815,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6319444444444444,
+          "source_recall": 0.9861111111111112,
+          "passage_recall": 0.5826923076923076,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6777777777777777,
+          "complete_evidence_cases": 21,
+          "complete_evidence_rate": 0.5833333333333334
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6513888888888889,
+          "source_recall": 1.0,
+          "passage_recall": 0.7654914529914529,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.8333333333333334,
+          "complete_evidence_cases": 28,
+          "complete_evidence_rate": 0.7777777777777778
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6666666666666666,
+            "source_recall": 0.9444444444444444,
+            "passage_recall": 0.5363247863247863,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.6555555555555556,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.5555555555555556
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8035714285714286,
+            "source_recall": 1.0,
+            "passage_recall": 0.7488095238095237,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8928571428571429,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.4230769230769231,
+            "source_recall": 1.0,
+            "passage_recall": 0.4358974358974359,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 21,
+      "at_least_one_evidence_at_k4_cases": 28,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "qwen3-0.6b-embeddings",
+      "raw_run_file_sha256": "84fe58365d3de6b7226d8c8c19c7a63829f413718fdace7718938cd664bddab0",
+      "run_id": "3bc22a6f-b0d9-40bf-a0c7-ba2bc20abfa1",
+      "created_at": "2026-10-01T17:12:27.016977+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 5493.117300000449
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1739104256,
+        "peak_rss_bytes": 1816834048
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 46.5685,
+        "query_p95_ms": 54.885,
+        "query_max_ms": 187.139,
+        "index_load_time_ms": 5493.117300000449,
+        "process_peak_rss_bytes": 1816834048,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 7,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.4166666666666667,
+          "source_recall": 0.875,
+          "passage_recall": 0.29027777777777775,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3402777777777778,
+          "complete_evidence_cases": 8,
+          "complete_evidence_rate": 0.2222222222222222
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5416666666666666,
+          "source_recall": 0.9583333333333334,
+          "passage_recall": 0.5354700854700855,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6129629629629629,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5630401234567901,
+          "source_recall": 0.9861111111111112,
+          "passage_recall": 0.6662393162393162,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7472222222222222,
+          "complete_evidence_cases": 23,
+          "complete_evidence_rate": 0.6388888888888888
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.462962962962963,
+            "source_recall": 0.8333333333333334,
+            "passage_recall": 0.39743589743589747,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.45185185185185184,
+            "complete_evidence_cases": 2,
+            "complete_evidence_rate": 0.2222222222222222
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.7261904761904762,
+            "source_recall": 1.0,
+            "passage_recall": 0.6571428571428571,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.7857142857142857,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.39743589743589747,
+            "source_recall": 1.0,
+            "passage_recall": 0.5,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5384615384615384,
+            "complete_evidence_cases": 6,
+            "complete_evidence_rate": 0.46153846153846156
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 26,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "qwen3-0.6b-hybrid",
+      "raw_run_file_sha256": "a03ba9824a3bbe3485fa0e50cc3f08b887ea353de3ccd87032393932c89f6efd",
+      "run_id": "778d3638-33f8-48ca-86b6-5b054ef9e708",
+      "created_at": "2026-10-01T17:12:48.436357+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 4419.666199999483
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1739464704,
+        "peak_rss_bytes": 1816252416
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 47.236999999999995,
+        "query_p95_ms": 56.235,
+        "query_max_ms": 145.55,
+        "index_load_time_ms": 4419.666199999483,
+        "process_peak_rss_bytes": 1816252416,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 10,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5277777777777778,
+          "source_recall": 0.875,
+          "passage_recall": 0.32962962962962966,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.3819444444444444,
+          "complete_evidence_cases": 7,
+          "complete_evidence_rate": 0.19444444444444445
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6296296296296297,
+          "source_recall": 0.9722222222222222,
+          "passage_recall": 0.5456552706552706,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6222222222222222,
+          "complete_evidence_cases": 18,
+          "complete_evidence_rate": 0.5
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6510361552028219,
+          "source_recall": 1.0,
+          "passage_recall": 0.7298433048433048,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.8166666666666667,
+          "complete_evidence_cases": 27,
+          "complete_evidence_rate": 0.75
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6481481481481481,
+            "source_recall": 0.8888888888888888,
+            "passage_recall": 0.45299145299145294,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5444444444444445,
+            "complete_evidence_cases": 3,
+            "complete_evidence_rate": 0.3333333333333333
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8214285714285714,
+            "source_recall": 1.0,
+            "passage_recall": 0.713095238095238,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.8214285714285714,
+            "complete_evidence_cases": 10,
+            "complete_evidence_rate": 0.7142857142857143
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.41025641025641024,
+            "source_recall": 1.0,
+            "passage_recall": 0.42948717948717946,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.46153846153846156,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 18,
+      "at_least_one_evidence_at_k4_cases": 27,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "qwen3-4b-embeddings",
+      "raw_run_file_sha256": "8314f5e209920f238759726b4a3476b8f21f713e8a1a8e89b802940be2249879",
+      "run_id": "4ca07f0a-7f46-497e-91a8-cf3429513ba8",
+      "created_at": "2026-10-01T17:14:07.155840+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 12473.91609999977
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8702480384,
+        "peak_rss_bytes": 8715407360
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 209.5685,
+        "query_p95_ms": 246.294,
+        "query_max_ms": 345.162,
+        "index_load_time_ms": 12473.91609999977,
+        "process_peak_rss_bytes": 8715407360,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 5,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6111111111111112,
+          "source_recall": 0.875,
+          "passage_recall": 0.3951923076923077,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.48935185185185187,
+          "complete_evidence_cases": 13,
+          "complete_evidence_rate": 0.3611111111111111
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.7152777777777778,
+          "source_recall": 0.9583333333333334,
+          "passage_recall": 0.6925213675213675,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.7828703703703703,
+          "complete_evidence_cases": 24,
+          "complete_evidence_rate": 0.6666666666666666
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.722718253968254,
+          "source_recall": 1.0,
+          "passage_recall": 0.7889245014245014,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.8509259259259259,
+          "complete_evidence_cases": 27,
+          "complete_evidence_rate": 0.75
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6574074074074074,
+            "source_recall": 0.8333333333333334,
+            "passage_recall": 0.7478632478632479,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.7703703703703704,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.5555555555555556
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.875,
+            "source_recall": 1.0,
+            "passage_recall": 0.7523809523809524,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.9107142857142857,
+            "complete_evidence_cases": 11,
+            "complete_evidence_rate": 0.7857142857142857
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.5833333333333333,
+            "source_recall": 1.0,
+            "passage_recall": 0.5897435897435898,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.6538461538461539,
+            "complete_evidence_cases": 8,
+            "complete_evidence_rate": 0.6153846153846154
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 24,
+      "at_least_one_evidence_at_k4_cases": 32,
+      "context_truncation_loss_cases": []
+    },
+    {
+      "protocol": "ranking",
+      "name": "qwen3-4b-hybrid",
+      "raw_run_file_sha256": "564e0de11bb712a70599621447324141e964811501838e7e1b9e4009898ade06",
+      "run_id": "a5dfea52-bd08-4cf8-80a3-361606bd4fbc",
+      "created_at": "2026-10-01T17:15:27.932227+00:00",
+      "code": {
+        "commit": "31d1e380dacc4b65b1974128f3ef2a09fb86db6d",
+        "dirty": true,
+        "evaluation_code_sha256": "183533993e6d5821435e0f02bf336fd8c71c702ba9b027b4f6fcc88703bc2152"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 10,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 10395.211800001562
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8708308992,
+        "peak_rss_bytes": 8716320768
+      },
+      "summary": {
+        "cases": 50,
+        "errors": 0,
+        "query_timing_samples": 250,
+        "query_failed_attempts": 0,
+        "query_median_ms": 219.55450000000002,
+        "query_p95_ms": 251.384,
+        "query_max_ms": 284.103,
+        "index_load_time_ms": 10395.211800001562,
+        "process_peak_rss_bytes": 8716320768,
+        "unstable_ranking_cases": 0,
+        "encoder_measured_passages": 0,
+        "encoder_unmeasured_passages": 204,
+        "encoder_truncation_rate_measured": null,
+        "context_selection_evidence_loss_cases": 9,
+        "context_truncation_evidence_loss_cases": 0,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "cutoffs": {
+        "1": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.5833333333333334,
+          "source_recall": 0.875,
+          "passage_recall": 0.36741452991452994,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.4277777777777778,
+          "complete_evidence_cases": 9,
+          "complete_evidence_rate": 0.25
+        },
+        "4": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6782407407407408,
+          "source_recall": 1.0,
+          "passage_recall": 0.589636752136752,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.6870370370370371,
+          "complete_evidence_cases": 21,
+          "complete_evidence_rate": 0.5833333333333334
+        },
+        "10": {
+          "answerable_cases": 36,
+          "available": true,
+          "mrr": 0.6933972663139331,
+          "source_recall": 1.0,
+          "passage_recall": 0.7792022792022792,
+          "evidence_labeled_cases": 36,
+          "mean_group_coverage": 0.8611111111111112,
+          "complete_evidence_cases": 29,
+          "complete_evidence_rate": 0.8055555555555556
+        }
+      },
+      "cohorts": {
+        "cross-document": {
+          "cases": 9,
+          "cutoff4": {
+            "answerable_cases": 9,
+            "available": true,
+            "mrr": 0.6203703703703703,
+            "source_recall": 1.0,
+            "passage_recall": 0.5363247863247863,
+            "evidence_labeled_cases": 9,
+            "mean_group_coverage": 0.5814814814814815,
+            "complete_evidence_cases": 4,
+            "complete_evidence_rate": 0.4444444444444444
+          },
+          "returned_neighbors": 9
+        },
+        "exact-terminology": {
+          "cases": 14,
+          "cutoff4": {
+            "answerable_cases": 14,
+            "available": true,
+            "mrr": 0.8928571428571429,
+            "source_recall": 1.0,
+            "passage_recall": 0.7488095238095237,
+            "evidence_labeled_cases": 14,
+            "mean_group_coverage": 0.9285714285714286,
+            "complete_evidence_cases": 12,
+            "complete_evidence_rate": 0.8571428571428571
+          },
+          "returned_neighbors": 14
+        },
+        "missing-evidence": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        },
+        "paraphrase": {
+          "cases": 13,
+          "cutoff4": {
+            "answerable_cases": 13,
+            "available": true,
+            "mrr": 0.48717948717948717,
+            "source_recall": 1.0,
+            "passage_recall": 0.4551282051282052,
+            "evidence_labeled_cases": 13,
+            "mean_group_coverage": 0.5,
+            "complete_evidence_cases": 5,
+            "complete_evidence_rate": 0.38461538461538464
+          },
+          "returned_neighbors": 13
+        },
+        "unrelated": {
+          "cases": 7,
+          "cutoff4": {
+            "answerable_cases": 0,
+            "available": true,
+            "mrr": null,
+            "source_recall": null,
+            "passage_recall": null,
+            "evidence_labeled_cases": 0,
+            "mean_group_coverage": null,
+            "complete_evidence_cases": 0,
+            "complete_evidence_rate": null
+          },
+          "returned_neighbors": 7
+        }
+      },
+      "context_complete_evidence_cases": 21,
+      "at_least_one_evidence_at_k4_cases": 29,
+      "context_truncation_loss_cases": []
+    }
+  ],
+  "hybrid_vs_dense_k4": {
+    "minilm": {
+      "outcomes": {
+        "unchanged": 20,
+        "improved": 13,
+        "worsened": 3,
+        "not-scored": 14
+      },
+      "cases_summary": {
+        "case_count": 50,
+        "outcomes": {
+          "improved": 13,
+          "not-scored": 14,
+          "unchanged": 20,
+          "worsened": 3
+        },
+        "changed_case_ids": {
+          "improved": [
+            "tech-wafer-exact",
+            "tech-stripe-frequencies",
+            "tech-adga-shapes",
+            "tech-stable-camera",
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts",
+            "tech-changing-neighborhood",
+            "tech-damaged-clean-pairs",
+            "tech-compare-data-expansion",
+            "tech-compare-optical-cues",
+            "tech-compare-network-inputs",
+            "tech-compare-network-roles"
+          ],
+          "worsened": [
+            "tech-compare-fusion",
+            "tech-turn-and-flip-labels",
+            "tech-compare-evaluation-metrics"
+          ]
+        },
+        "complete_gains": [
+          "tech-stable-camera",
+          "tech-compare-data-expansion"
+        ],
+        "complete_losses": [
+          "tech-turn-and-flip-labels"
+        ]
+      }
+    },
+    "bge-m3": {
+      "outcomes": {
+        "unchanged": 17,
+        "improved": 11,
+        "worsened": 7,
+        "not-scored": 14,
+        "mixed": 1
+      },
+      "cases_summary": {
+        "case_count": 50,
+        "outcomes": {
+          "improved": 11,
+          "mixed": 1,
+          "not-scored": 14,
+          "unchanged": 17,
+          "worsened": 7
+        },
+        "changed_case_ids": {
+          "improved": [
+            "tech-wafer-exact",
+            "tech-wafer-paraphrase",
+            "tech-amff-layers",
+            "tech-stripe-frequencies",
+            "tech-adga-shapes",
+            "tech-stable-camera",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts",
+            "tech-compare-training-splits",
+            "tech-compare-network-inputs",
+            "tech-compare-network-roles"
+          ],
+          "mixed": [
+            "tech-compare-optical-cues"
+          ],
+          "worsened": [
+            "tech-autoencoder-exact",
+            "tech-compare-fusion",
+            "tech-turn-and-flip-labels",
+            "tech-manual-outline-union",
+            "tech-small-photo-supply",
+            "tech-daylight-interference",
+            "tech-compare-evaluation-metrics"
+          ]
+        },
+        "complete_gains": [
+          "tech-amff-layers",
+          "tech-compare-training-splits",
+          "tech-compare-network-roles"
+        ],
+        "complete_losses": [
+          "tech-turn-and-flip-labels",
+          "tech-manual-outline-union",
+          "tech-small-photo-supply",
+          "tech-compare-optical-cues"
+        ]
+      }
+    },
+    "qwen3-0.6b": {
+      "outcomes": {
+        "unchanged": 19,
+        "improved": 11,
+        "worsened": 6,
+        "not-scored": 14
+      },
+      "cases_summary": {
+        "case_count": 50,
+        "outcomes": {
+          "improved": 11,
+          "not-scored": 14,
+          "unchanged": 19,
+          "worsened": 6
+        },
+        "changed_case_ids": {
+          "improved": [
+            "tech-wafer-exact",
+            "tech-obb",
+            "tech-adga-shapes",
+            "tech-both-checks-clean",
+            "tech-too-many-shortcuts",
+            "tech-damaged-clean-pairs",
+            "tech-compare-localization-outputs",
+            "tech-compare-data-expansion",
+            "tech-compare-optical-cues",
+            "tech-compare-network-inputs",
+            "tech-compare-network-roles"
+          ],
+          "worsened": [
+            "tech-compare-fusion",
+            "tech-stripe-frequencies",
+            "tech-stable-camera",
+            "tech-turn-and-flip-labels",
+            "tech-manual-outline-union",
+            "tech-compare-evaluation-metrics"
+          ]
+        },
+        "complete_gains": [
+          "tech-adga-shapes",
+          "tech-damaged-clean-pairs",
+          "tech-compare-network-roles"
+        ],
+        "complete_losses": [
+          "tech-stripe-frequencies",
+          "tech-turn-and-flip-labels",
+          "tech-manual-outline-union"
+        ]
+      }
+    },
+    "qwen3-4b": {
+      "outcomes": {
+        "worsened": 8,
+        "unchanged": 17,
+        "improved": 9,
+        "not-scored": 14,
+        "mixed": 2
+      },
+      "cases_summary": {
+        "case_count": 50,
+        "outcomes": {
+          "improved": 9,
+          "mixed": 2,
+          "not-scored": 14,
+          "unchanged": 17,
+          "worsened": 8
+        },
+        "changed_case_ids": {
+          "improved": [
+            "tech-wafer-exact",
+            "tech-obb",
+            "tech-adga-shapes",
+            "tech-both-checks-clean",
+            "tech-moving-signal-addition",
+            "tech-too-many-shortcuts",
+            "tech-compare-data-expansion",
+            "tech-compare-network-inputs",
+            "tech-compare-network-roles"
+          ],
+          "mixed": [
+            "tech-amff-layers",
+            "tech-compare-localization-outputs"
+          ],
+          "worsened": [
+            "tech-glass-exact",
+            "tech-compare-fusion",
+            "tech-turn-and-flip-labels",
+            "tech-manual-outline-union",
+            "tech-small-photo-supply",
+            "tech-daylight-interference",
+            "tech-damaged-clean-pairs",
+            "tech-compare-evaluation-metrics"
+          ]
+        },
+        "complete_gains": [
+          "tech-amff-layers"
+        ],
+        "complete_losses": [
+          "tech-turn-and-flip-labels",
+          "tech-manual-outline-union",
+          "tech-small-photo-supply",
+          "tech-compare-evaluation-metrics"
+        ]
+      }
+    }
+  },
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "f5372ff2d48ffaa22cfed9a9c61a3997c9abbcff543d0e166437f65a9c05d5ee",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/approved-model-comparison-results.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/approved-model-comparison-results.json"
+  }
+}

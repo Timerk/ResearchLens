@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "primary_k": 4,
+  "run_ids": {
+    "qwen3-4b-dense": "a1b28488-4d72-4538-8bca-db0b16c3bfc9",
+    "bge-m3-dense": "564544fc-86a4-4e8e-afcf-3b76f90b301e",
+    "bge-m3-bge-rerank20": "0b103b41-75b9-45ed-9cd3-ca949757ae54"
+  },
+  "comparisons": [
+    {
+      "baseline_run_id": "a1b28488-4d72-4538-8bca-db0b16c3bfc9",
+      "candidate_run_id": "0b103b41-75b9-45ed-9cd3-ca949757ae54",
+      "changes": {
+        "1_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "improved": 13,
+            "not-scored": 14,
+            "unchanged": 19,
+            "worsened": 4
+          },
+          "changed_case_ids": {
+            "improved": [
+              "tech-wafer-exact",
+              "tech-autoencoder-exact",
+              "tech-compare-fusion",
+              "tech-obb",
+              "tech-adga-shapes",
+              "tech-manual-outline-union",
+              "tech-moving-signal-addition",
+              "tech-too-many-shortcuts",
+              "tech-compare-training-computers",
+              "tech-compare-data-expansion",
+              "tech-compare-evaluation-metrics",
+              "tech-compare-network-inputs",
+              "tech-compare-network-roles"
+            ],
+            "worsened": [
+              "tech-glass-exact",
+              "tech-amff-layers",
+              "tech-small-photo-supply",
+              "tech-compare-training-splits"
+            ]
+          },
+          "complete_gains": [
+            "tech-autoencoder-exact",
+            "tech-obb",
+            "tech-adga-shapes",
+            "tech-manual-outline-union"
+          ],
+          "complete_losses": [
+            "tech-glass-exact",
+            "tech-small-photo-supply"
+          ]
+        },
+        "4_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "improved": 11,
+            "mixed": 2,
+            "not-scored": 14,
+            "unchanged": 18,
+            "worsened": 5
+          },
+          "changed_case_ids": {
+            "improved": [
+              "tech-wafer-exact",
+              "tech-obb",
+              "tech-adga-shapes",
+              "tech-manual-outline-union",
+              "tech-moving-signal-addition",
+              "tech-too-many-shortcuts",
+              "tech-changing-neighborhood",
+              "tech-compare-data-expansion",
+              "tech-compare-evaluation-metrics",
+              "tech-compare-network-inputs",
+              "tech-compare-network-roles"
+            ],
+            "mixed": [
+              "tech-amff-layers",
+              "tech-compare-localization-outputs"
+            ],
+            "worsened": [
+              "tech-glass-exact",
+              "tech-compare-fusion",
+              "tech-stripe-frequencies",
+              "tech-small-photo-supply",
+              "tech-compare-training-splits"
+            ]
+          },
+          "complete_gains": [
+            "tech-amff-layers",
+            "tech-compare-network-inputs",
+            "tech-compare-network-roles"
+          ],
+          "complete_losses": [
+            "tech-stripe-frequencies"
+          ]
+        },
+        "10_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "unavailable": 50
+          },
+          "changed_case_ids": {},
+          "complete_gains": [],
+          "complete_losses": []
+        }
+      }
+    },
+    {
+      "baseline_run_id": "564544fc-86a4-4e8e-afcf-3b76f90b301e",
+      "candidate_run_id": "0b103b41-75b9-45ed-9cd3-ca949757ae54",
+      "changes": {
+        "1_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "improved": 13,
+            "not-scored": 14,
+            "unchanged": 23
+          },
+          "changed_case_ids": {
+            "improved": [
+              "tech-wafer-exact",
+              "tech-wafer-paraphrase",
+              "tech-stripe-frequencies",
+              "tech-adga-shapes",
+              "tech-stable-camera",
+              "tech-manual-outline-union",
+              "tech-moving-signal-addition",
+              "tech-too-many-shortcuts",
+              "tech-damaged-clean-pairs",
+              "tech-compare-evaluation-metrics",
+              "tech-compare-optical-cues",
+              "tech-compare-network-inputs",
+              "tech-compare-network-roles"
+            ]
+          },
+          "complete_gains": [
+            "tech-wafer-paraphrase",
+            "tech-adga-shapes",
+            "tech-stable-camera",
+            "tech-manual-outline-union",
+            "tech-damaged-clean-pairs"
+          ],
+          "complete_losses": []
+        },
+        "4_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "improved": 16,
+            "not-scored": 14,
+            "unchanged": 19,
+            "worsened": 1
+          },
+          "changed_case_ids": {
+            "improved": [
+              "tech-wafer-exact",
+              "tech-wafer-paraphrase",
+              "tech-amff-layers",
+              "tech-stripe-frequencies",
+              "tech-adga-shapes",
+              "tech-stable-camera",
+              "tech-manual-outline-union",
+              "tech-moving-signal-addition",
+              "tech-too-many-shortcuts",
+              "tech-changing-neighborhood",
+              "tech-damaged-clean-pairs",
+              "tech-compare-training-splits",
+              "tech-compare-evaluation-metrics",
+              "tech-compare-optical-cues",
+              "tech-compare-network-inputs",
+              "tech-compare-network-roles"
+            ],
+            "worsened": [
+              "tech-compare-fusion"
+            ]
+          },
+          "complete_gains": [
+            "tech-amff-layers",
+            "tech-compare-training-splits",
+            "tech-compare-evaluation-metrics",
+            "tech-compare-network-roles"
+          ],
+          "complete_losses": []
+        },
+        "10_summary": {
+          "case_count": 50,
+          "outcomes": {
+            "unavailable": 50
+          },
+          "changed_case_ids": {},
+          "complete_gains": [],
+          "complete_losses": []
+        }
+      }
+    }
+  ],
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "87986822efb6537bdd615a1820c9bae6fe47b8694f2211f19c25feb50a737d9a",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/vulkan-reranking-paired.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/vulkan-reranking-paired.json"
+  }
+}

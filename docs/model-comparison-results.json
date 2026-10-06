@@ -1,0 +1,1380 @@
+{
+  "schema_version": 1,
+  "description": "Selected existing-runner diagnostics, not reviewed quality evidence. Full runs and indexes remain in ignored local output directories.",
+  "hardware": {
+    "cpu": "AMD Ryzen 7 9800X3D (8 cores / 16 threads)",
+    "ram_gib": 32,
+    "gpu": "AMD Radeon RX 6800 (16 GiB VRAM), unused"
+  },
+  "dataset": {
+    "id": "technical-development",
+    "version": "1-draft",
+    "split": "development",
+    "material": "real-corpus",
+    "status": "draft"
+  },
+  "initial_output_directory": "evaluation/runs/cpu-models-2026-10-01",
+  "final_output_directory": "evaluation/runs/cpu-models-final-2026-10-01",
+  "initial_ingestion_includes_setup_and_downloads": true,
+  "initial_ingestion_stages": [
+    {
+      "label": "tfidf/ingestion",
+      "status": "completed",
+      "duration_ms": 148.812
+    },
+    {
+      "label": "minilm/ingestion",
+      "status": "completed",
+      "duration_ms": 4810.348
+    },
+    {
+      "label": "bge-m3/ingestion",
+      "status": "completed",
+      "duration_ms": 90083.241
+    },
+    {
+      "label": "qwen3-0.6b/ingestion",
+      "status": "completed",
+      "duration_ms": 68314.837
+    },
+    {
+      "label": "qwen3-4b/ingestion",
+      "status": "completed",
+      "duration_ms": 331835.405
+    }
+  ],
+  "api_calls": 0,
+  "runs": [
+    {
+      "name": "tfidf-tfidf",
+      "raw_run_file_sha256": "593bc3df43adf79673a39b8270d6f984ebbd631380865910f5ee1d5b0543ebec",
+      "run_id": "0aca59c3-6a32-4cc5-9c71-c7c8eede4439",
+      "created_at": "2026-10-01T11:17:55.351019+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": null,
+        "encoding_sha256": null,
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.TfidfRetriever",
+        "version": "tfidf-word-unigram-bigram-english-stopwords-v1",
+        "limit": 4,
+        "backend": "tfidf",
+        "model": null,
+        "revision": null,
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "normalization": null,
+        "score_threshold": null,
+        "runtime": null,
+        "runtime_version": null,
+        "runtime_backend": null,
+        "device": null,
+        "precision": null,
+        "quantization": null,
+        "dimensions": null,
+        "weights": null,
+        "tokenizer": null,
+        "pooling": null,
+        "query_instruction": null,
+        "document_instruction": null,
+        "max_tokens": null,
+        "truncation": null,
+        "batch_size": null,
+        "intra_op_threads": null,
+        "inter_op_threads": null,
+        "text_representation": null,
+        "encoding_version": null,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 27.737899999920046
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 154796032,
+        "peak_rss_bytes": 155422720
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 1.0,
+        "mean_passage_recall_with_failures": 0.3,
+        "mrr_at_k_with_failures": 0.15833333333333333,
+        "comparison_full_coverage": 2,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 0.4575,
+        "query_max_ms": 0.528,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 27.737899999920046,
+        "process_peak_rss_bytes": 155422720,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.3125
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.08333333333333333
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.0
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "minilm-embeddings",
+      "raw_run_file_sha256": "18237b60f6cc47d6931200823ca39de3c680637acad7f70ba4eefc15d229c21d",
+      "run_id": "2726e489-86d3-45b3-b56b-6c0795183ac7",
+      "created_at": "2026-10-01T11:17:57.859790+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 594.390199999907
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 330776576,
+        "peak_rss_bytes": 330776576
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 0.95,
+        "mean_passage_recall_with_failures": 0.3,
+        "mrr_at_k_with_failures": 0.08333333333333333,
+        "comparison_full_coverage": 1,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 1.748,
+        "query_max_ms": 3.433,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 594.390199999907,
+        "process_peak_rss_bytes": 330776576,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.0625
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.14583333333333331
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 0.75,
+          "mrr_at_k": 0.0
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "minilm-hybrid",
+      "raw_run_file_sha256": "0d61a3519c0c6eb66650921ad54af24be2e0e4f9add70768c8bc909a2e6ba426",
+      "run_id": "6c243d5c-6c4a-4278-b305-463642a43021",
+      "created_at": "2026-10-01T11:18:00.234992+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "encoding_sha256": "48b8a6a48d44ed8888a4e73849713d77540c36787ffb4577345b02a7eb9aee20",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "artifact_sha256": "c1945a77ffe7af5ce34f38a1c4de539000584eb3589dd61b73f9a529ee7a87af",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "onnxruntime",
+        "runtime_version": "1.30.0",
+        "runtime_backend": "CPUExecutionProvider",
+        "device": "cpu",
+        "precision": "float32",
+        "quantization": "none",
+        "dimensions": 384,
+        "weights": "onnx/model.onnx",
+        "tokenizer": "tokenizer.json",
+        "pooling": "attention-masked-mean",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 256,
+        "truncation": "right",
+        "batch_size": 32,
+        "intra_op_threads": 2,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 287.0593999996345
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 330563584,
+        "peak_rss_bytes": 330563584
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 0.9,
+        "mean_passage_recall_with_failures": 0.35,
+        "mrr_at_k_with_failures": 0.2833333333333333,
+        "comparison_full_coverage": 0,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 2.6174999999999997,
+        "query_max_ms": 3.489,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 287.0593999996345,
+        "process_peak_rss_bytes": 330563584,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.20833333333333331
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.25
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 0.5,
+          "mrr_at_k": 0.5
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "bge-m3-embeddings",
+      "raw_run_file_sha256": "dfb58f8cd6e0446e2c1d1ef20e33d5dd53191691ff0fa0a94b9302f74e515e54",
+      "run_id": "69961a8c-9f0c-4a62-b6af-7acfc6d90781",
+      "created_at": "2026-10-01T11:18:16.603788+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 12631.743100000676
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4187918336,
+        "peak_rss_bytes": 4187918336
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 1.0,
+        "mean_passage_recall_with_failures": 0.35,
+        "mrr_at_k_with_failures": 0.4,
+        "comparison_full_coverage": 2,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 24.3585,
+        "query_max_ms": 26.877,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 12631.743100000676,
+        "process_peak_rss_bytes": 4187918336,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.25
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.5
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.5
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "bge-m3-hybrid",
+      "raw_run_file_sha256": "95785e15f69911c9ab6b9795822806f180c87adbb29a096221bf5b63d16067e1",
+      "run_id": "3ecaa3d2-32cb-490b-ae05-0af2b4d3e650",
+      "created_at": "2026-10-01T11:18:26.323894+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 5320.129199999428
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 4187639808,
+        "peak_rss_bytes": 4187639808
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 0.95,
+        "mean_passage_recall_with_failures": 0.55,
+        "mrr_at_k_with_failures": 0.25833333333333336,
+        "comparison_full_coverage": 1,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 22.7575,
+        "query_max_ms": 29.746,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 5320.129199999428,
+        "process_peak_rss_bytes": 4187639808,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.2708333333333333
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.25
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 0.75,
+          "mrr_at_k": 0.25
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "qwen3-0.6b-embeddings",
+      "raw_run_file_sha256": "67ab04f2896ae7e75fabbdeb0e8db6e17ffa0abe6ab6a7598212c6e86084fa77",
+      "run_id": "7996755d-21e2-48e9-8417-b9743edb169d",
+      "created_at": "2026-10-01T11:18:37.303902+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 5371.95470000006
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1737142272,
+        "peak_rss_bytes": 1773150208
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 0.95,
+        "mean_passage_recall_with_failures": 0.5,
+        "mrr_at_k_with_failures": 0.23333333333333334,
+        "comparison_full_coverage": 1,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 42.8885,
+        "query_max_ms": 51.709,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 5371.95470000006,
+        "process_peak_rss_bytes": 1773150208,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.2708333333333333
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.3125
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 0.75,
+          "mrr_at_k": 0.0
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "qwen3-0.6b-hybrid",
+      "raw_run_file_sha256": "380c26f16552c134af7d9e21db9faa1624a5a4297dee6614d6c268a582022277",
+      "run_id": "de6ad4c9-ea3c-48e3-83a4-cf9a0a84da07",
+      "created_at": "2026-10-01T11:18:47.181741+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "encoding_sha256": "63a6bc8273e7ee12484f51f6b44359222c41cae1657695779aab43a33876c3f0",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "artifact_sha256": "a332d0e58f32bd606c82451d09748f9ec2ae24bf6585f30316f42d905c7a99a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "model.safetensors",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 4327.362600000015
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 1738510336,
+        "peak_rss_bytes": 1774039040
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 0.95,
+        "mean_passage_recall_with_failures": 0.5,
+        "mrr_at_k_with_failures": 0.29166666666666663,
+        "comparison_full_coverage": 1,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 43.575500000000005,
+        "query_max_ms": 59.422,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 4327.362600000015,
+        "process_peak_rss_bytes": 1774039040,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.41666666666666663
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.3125
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 0.75,
+          "mrr_at_k": 0.0
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "qwen3-4b-embeddings",
+      "raw_run_file_sha256": "3a524fd63ad915c2871cbf6be670268ba033898c7d046d3b86247e016c30f533",
+      "run_id": "daa91355-3862-413e-b443-271a872dc622",
+      "created_at": "2026-10-01T11:19:15.265901+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 10997.985699999845
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8721907712,
+        "peak_rss_bytes": 8721907712
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 1.0,
+        "mean_passage_recall_with_failures": 0.65,
+        "mrr_at_k_with_failures": 0.4166666666666667,
+        "comparison_full_coverage": 2,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 201.42450000000002,
+        "query_max_ms": 244.622,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 10997.985699999845,
+        "process_peak_rss_bytes": 8721907712,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.3333333333333333
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.4583333333333333
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.5
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    },
+    {
+      "name": "qwen3-4b-hybrid",
+      "raw_run_file_sha256": "2518078ef43fbd47a9c3f5e0d0ee025570fe714176ed4d395b2a713a10f7d5ba",
+      "run_id": "b7180a3c-e932-417d-b09a-3d9684f31fbf",
+      "created_at": "2026-10-01T11:19:39.963181+00:00",
+      "code": {
+        "commit": "19b416f6aaf13885cec36d67cf12e9054c91adf7",
+        "dirty": true,
+        "evaluation_code_sha256": "af7ab55b5980ec5566e5e1d7d99d9e596cb1f208655cad5e253cc6b66d6eea4a"
+      },
+      "runtime": {
+        "python": "3.13.14",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "417c7e831b89b9e55adb9ee5a9160d70032c948db2f614fada1eb7990aece278",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null
+        }
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.retrieval.HybridRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "hybrid",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": 20,
+        "embedding_candidates": 20,
+        "fusion_method": "rrf",
+        "rrf_k": 60,
+        "lexical_weight": null,
+        "embedding_weight": null
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      },
+      "execution": {
+        "repeats": 5,
+        "warmups": 1,
+        "measure_memory": true,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 6871.851299999435
+      },
+      "memory": {
+        "method": "process-lifetime-high-water-rss",
+        "before_queries_peak_rss_bytes": 8673226752,
+        "peak_rss_bytes": 8673226752
+      },
+      "dataset_sha256": "77b5060e0c74639357beb534c596cef530fd9cfda134243abde560fca978c56a",
+      "metrics": {
+        "cases": 12,
+        "errors": 0,
+        "recall_scored": 10,
+        "mean_source_recall_at_k": 1.0,
+        "mean_passage_recall_with_failures": 0.5,
+        "mrr_at_k_with_failures": 0.4333333333333333,
+        "comparison_full_coverage": 2,
+        "comparison_cases": 2,
+        "query_timing_samples": 60,
+        "query_failed_attempts": 0,
+        "query_median_ms": 202.951,
+        "query_max_ms": 251.353,
+        "unstable_ranking_cases": 0,
+        "index_load_time_ms": 6871.851299999435,
+        "process_peak_rss_bytes": 8673226752,
+        "generated_answers": 0,
+        "estimated_cost_usd_known": 0,
+        "unknown_cost_cases": 0
+      },
+      "by_query_style": {
+        "exact-terminology": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.3333333333333333
+        },
+        "paraphrase": {
+          "cases": 4,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.5
+        },
+        "cross-document": {
+          "cases": 2,
+          "mean_source_recall_at_k": 1.0,
+          "mrr_at_k": 0.5
+        },
+        "unrelated": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        },
+        "missing-evidence": {
+          "cases": 1,
+          "mean_source_recall_at_k": null,
+          "mrr_at_k": null
+        }
+      },
+      "cases_archived_count": 12
+    }
+  ],
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "cf2fe51c342ef759b13d1a70194d3925ea2993f52acbb17a7dcf9698c29d5c7b",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/model-comparison-results.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/model-comparison-results.json"
+  }
+}

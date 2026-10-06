@@ -1,0 +1,1923 @@
+{
+  "studies": [
+    {
+      "directory": "information-needs-2026-10-02",
+      "manifest": {
+        "plan": [
+          "dense-order",
+          "whole-rerank",
+          "rules-max",
+          "needs-max",
+          "needs-saturation",
+          "needs-round-robin"
+        ],
+        "source_hashes": {
+          "information_experiments.py": "1b45bdeeaf7272721fa9e1f80576c14d0ed031bb78c37f85ff9a6780900a98c1",
+          "information_selection.py": "bab7089ead121714ae24c245d5175e9eb9c205df7bb03998914b5b17a66a0d9c",
+          "local_needs.py": "e86e9d12b9979e80698e2a9e82864864ffefffd3811606c62e4021d571691cc1",
+          "evaluation.py": "cedb7a826430458a81b2cc4a262f965e1cbe514807cd99a86d3de19b2f20353b",
+          "evaluation_schema.py": "c2959b42e790ad6934454807275bee9829ea4e31d7244842771a6ab98a557f4b",
+          "vulkan_reranking.py": "1061be3fafdc26b162bd4785054083f1b27bad790a3e01f9062bb1ba469af013",
+          "representation_experiments.py": "45803562553902ca803f13ada9eaa28099906a17d944833a808bfe625e0b4156"
+        },
+        "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+        "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "fixed_pool_run_sha256": "009ffcbcf78365c9040f94144106b4f0c22b2ba0ca15d6a116950dc121380d7d",
+        "needs_model": {
+          "model": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+          "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+          "weights": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+          "weights_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+          "license": "Apache-2.0",
+          "runtime": "b11327",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "device": "Vulkan0",
+          "quantization": "Q4_K_M",
+          "context_tokens": 4096,
+          "max_output_tokens": 384,
+          "temperature": 0,
+          "seed": 42,
+          "prompt_sha256": "20c3b7330e659d7f9c4759c355cd0370cd1f9d8b9d7dfb33f3db60b1dda9d36f",
+          "schema_sha256": "92e448b35d6b30773b61805dd790e18031c5e4506e0ee9e0fdaf8cf521709e1f",
+          "cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "grounding": "exact-contiguous-question-phrases-v1",
+          "retries": 0
+        },
+        "reranker": {
+          "model": "BAAI/bge-reranker-v2-m3",
+          "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+          "runtime": "llama.cpp",
+          "runtime_version": "b11327",
+          "device": "Vulkan0",
+          "precision": "float16",
+          "quantization": "none",
+          "weights": "bge-f16.gguf",
+          "tokenizer": "pinned-Hugging-Face-tokenizer",
+          "max_tokens": 511,
+          "truncation": "reject-overflow",
+          "batch_size": 4,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1,
+          "pair_order": "question-passage",
+          "score": "raw-relevance-logit",
+          "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "device_name": "AMD Radeon RX 6800",
+          "context_tokens": 2048,
+          "batch_tokens": 2048,
+          "gpu_layers": 99,
+          "prompt_cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+        },
+        "rules_profile_sha256": "a6da157d1b59e51f640735ab46c98c752659ef5e0a3501a033883a0b1c6d2ef2",
+        "selection": {
+          "max_rank_original_weight": 0.5,
+          "rank_constant": 10,
+          "saturation_original_weight": 0.25,
+          "cosine_penalty": 0.1
+        },
+        "candidate_count": 40,
+        "output_limit": 4,
+        "held_out_searches": false,
+        "api_calls": 0,
+        "timing_scope": "staged inference plus replay-selection-only",
+        "representation_plan": [
+          "passage-text-only",
+          "title-section-text-v1",
+          "title-section-current-neighbors60-v1"
+        ]
+      },
+      "configurations": [
+        {
+          "name": "dense-order",
+          "run_sha256": "13778dd620daa433b8d2056d01ee5583117a152f29023c0224e289b8175b1037",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": null,
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "dense-order",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.141,
+            "query_p95_ms": 0.18,
+            "query_max_ms": 0.248,
+            "primary_k4_mrr": 0.7152777777777778,
+            "primary_k4_group_coverage": 0.7828703703703703,
+            "primary_k4_complete_evidence_rate": 0.6666666666666666,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 24,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 5,
+              "both_sources": 6
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-max",
+          "run_sha256": "415a6c2eada75260eba03acb67eb90f9f96515dd7cab062438665b2d25c33500",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-max",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 78,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.1985,
+            "query_p95_ms": 0.224,
+            "query_max_ms": 0.249,
+            "primary_k4_mrr": 0.4074074074074074,
+            "primary_k4_group_coverage": 0.4305555555555556,
+            "primary_k4_complete_evidence_rate": 0.3888888888888889,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 14,
+          "error_count_all_50": 24,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 1,
+              "both_sources": 2
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 6,
+              "both_sources": 7
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 7,
+              "both_sources": 11
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-round-robin",
+          "run_sha256": "1a82b8c7c94a57d55e5ad8ab5dc4b3eab7d1243db10fc2657aeb97811a025d99",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-round-robin",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 78,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.1855,
+            "query_p95_ms": 0.203,
+            "query_max_ms": 0.247,
+            "primary_k4_mrr": 0.3657407407407407,
+            "primary_k4_group_coverage": 0.3796296296296296,
+            "primary_k4_complete_evidence_rate": 0.3055555555555556,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 11,
+          "error_count_all_50": 24,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 0,
+              "both_sources": 2
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 5,
+              "both_sources": 7
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 6,
+              "both_sources": 11
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-saturation",
+          "run_sha256": "325fe907e8e63f16f3f29c628453d22c358ab7266a836b37e78cc8e1196d01d8",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-saturation",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 78,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.211,
+            "query_p95_ms": 0.232,
+            "query_max_ms": 0.324,
+            "primary_k4_mrr": 0.3611111111111111,
+            "primary_k4_group_coverage": 0.3101851851851852,
+            "primary_k4_complete_evidence_rate": 0.25,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 9,
+          "error_count_all_50": 24,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 1,
+              "both_sources": 2
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 5,
+              "both_sources": 7
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 3,
+              "both_sources": 11
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "rules-max",
+          "run_sha256": "49d1b882ea35d865074fecf91b36b2a4595399e1f71a0f5c851ed33373a2f5cb",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "rules-max",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.182,
+            "query_p95_ms": 0.202,
+            "query_max_ms": 0.231,
+            "primary_k4_mrr": 0.7569444444444444,
+            "primary_k4_group_coverage": 0.7935185185185185,
+            "primary_k4_complete_evidence_rate": 0.6944444444444444,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 25,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 8
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "whole-rerank",
+          "run_sha256": "c384bcc85521fb2156da1c6ba3d9ae3197826fce445b4b6e81c98a792071f402",
+          "code": {
+            "commit": "e9958797e5b3c26fc356dc44f15c6637ccad6782",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "whole-rerank",
+              "input_bundle_sha256": "255936253c65a76335188cfa13e410253729eb78db5dea75f275f1b28f83779d",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.144,
+            "query_p95_ms": 0.159,
+            "query_max_ms": 0.229,
+            "primary_k4_mrr": 0.8333333333333334,
+            "primary_k4_group_coverage": 0.7935185185185185,
+            "primary_k4_complete_evidence_rate": 0.6944444444444444,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 25,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 8
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        }
+      ],
+      "measurement_bundle_sha256": "692a82d942a5b921ae16d6a2c27103616c8583883b7f4b5173297ff405b5851f",
+      "measurements_archived_count": 50,
+      "pair_visibility": {
+        "measured_pairs": 5320,
+        "max_input_tokens": 413,
+        "truncated_pairs": 0
+      },
+      "server_memory": {
+        "needs": {
+          "samples": 101,
+          "peak_private_bytes": 3508387840,
+          "peak_rss_bytes": 2679255040
+        },
+        "reranker": {
+          "samples": 267,
+          "peak_private_bytes": 2467213312,
+          "peak_rss_bytes": 2338570240
+        }
+      }
+    },
+    {
+      "directory": "information-needs-schema-v2-2026-10-02",
+      "manifest": {
+        "plan": [
+          "dense-order",
+          "whole-rerank",
+          "rules-max",
+          "needs-max",
+          "needs-saturation",
+          "needs-round-robin"
+        ],
+        "source_hashes": {
+          "information_experiments.py": "4dfa44bd9b782e7526a5f33e8a60c7f5e5953b2671a5e66e4acc8e8ce84a1125",
+          "information_selection.py": "bab7089ead121714ae24c245d5175e9eb9c205df7bb03998914b5b17a66a0d9c",
+          "local_needs.py": "5698eeb74bb05eb56a81718ee330dc197746b0dd20d5ed02bffccab8df37e9b2",
+          "evaluation.py": "cedb7a826430458a81b2cc4a262f965e1cbe514807cd99a86d3de19b2f20353b",
+          "evaluation_schema.py": "c2959b42e790ad6934454807275bee9829ea4e31d7244842771a6ab98a557f4b",
+          "vulkan_reranking.py": "1061be3fafdc26b162bd4785054083f1b27bad790a3e01f9062bb1ba469af013",
+          "representation_experiments.py": "45803562553902ca803f13ada9eaa28099906a17d944833a808bfe625e0b4156"
+        },
+        "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+        "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "fixed_pool_run_sha256": "009ffcbcf78365c9040f94144106b4f0c22b2ba0ca15d6a116950dc121380d7d",
+        "needs_model": {
+          "model": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+          "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+          "weights": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+          "weights_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+          "license": "Apache-2.0",
+          "runtime": "b11327",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "device": "Vulkan0",
+          "quantization": "Q4_K_M",
+          "context_tokens": 4096,
+          "max_output_tokens": 384,
+          "temperature": 0,
+          "seed": 42,
+          "prompt_sha256": "20c3b7330e659d7f9c4759c355cd0370cd1f9d8b9d7dfb33f3db60b1dda9d36f",
+          "schema_sha256": "92e448b35d6b30773b61805dd790e18031c5e4506e0ee9e0fdaf8cf521709e1f",
+          "cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "grounding": "schema-question-phrases-v2-max12words-or-fullquestion",
+          "retries": 0
+        },
+        "reranker": {
+          "model": "BAAI/bge-reranker-v2-m3",
+          "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+          "runtime": "llama.cpp",
+          "runtime_version": "b11327",
+          "device": "Vulkan0",
+          "precision": "float16",
+          "quantization": "none",
+          "weights": "bge-f16.gguf",
+          "tokenizer": "pinned-Hugging-Face-tokenizer",
+          "max_tokens": 511,
+          "truncation": "reject-overflow",
+          "batch_size": 4,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1,
+          "pair_order": "question-passage",
+          "score": "raw-relevance-logit",
+          "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "device_name": "AMD Radeon RX 6800",
+          "context_tokens": 2048,
+          "batch_tokens": 2048,
+          "gpu_layers": 99,
+          "prompt_cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+        },
+        "rules_profile_sha256": "a6da157d1b59e51f640735ab46c98c752659ef5e0a3501a033883a0b1c6d2ef2",
+        "selection": {
+          "max_rank_original_weight": 0.5,
+          "rank_constant": 10,
+          "saturation_original_weight": 0.25,
+          "cosine_penalty": 0.1
+        },
+        "candidate_count": 40,
+        "output_limit": 4,
+        "held_out_searches": false,
+        "api_calls": 0,
+        "timing_scope": "staged inference plus replay-selection-only",
+        "representation_plan": [
+          "passage-text-only",
+          "title-section-text-v1",
+          "title-section-current-neighbors60-v1"
+        ]
+      },
+      "configurations": [
+        {
+          "name": "dense-order",
+          "run_sha256": "574e89e8b85c416e53381191e79569f5109e63ff47a8f6bb8b02e54b72525e38",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": null,
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "dense-order",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.141,
+            "query_p95_ms": 0.208,
+            "query_max_ms": 0.226,
+            "primary_k4_mrr": 0.7152777777777778,
+            "primary_k4_group_coverage": 0.7828703703703703,
+            "primary_k4_complete_evidence_rate": 0.6666666666666666,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 24,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 5,
+              "both_sources": 6
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-max",
+          "run_sha256": "a3fb70d28348a01eeda8b4fa43cea094883f35ab1f449e2baf0f559d5e05faa6",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-max",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.198,
+            "query_p95_ms": 0.229,
+            "query_max_ms": 0.267,
+            "primary_k4_mrr": 0.7800925925925926,
+            "primary_k4_group_coverage": 0.8129629629629629,
+            "primary_k4_complete_evidence_rate": 0.6944444444444444,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 25,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 9
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-round-robin",
+          "run_sha256": "9c493059eaa445129df35750f78576f714da9535f836b19145d7e00310a6956a",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-round-robin",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.187,
+            "query_p95_ms": 0.204,
+            "query_max_ms": 0.229,
+            "primary_k4_mrr": 0.6157407407407408,
+            "primary_k4_group_coverage": 0.7203703703703703,
+            "primary_k4_complete_evidence_rate": 0.5833333333333334,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 21,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 4,
+              "both_sources": 8
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 10,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 7,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "needs-saturation",
+          "run_sha256": "efd00d6f0c5e01dac9b15cd58c841724f89d0ac962607ff120d0cd1920e8f6bb",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "needs-saturation",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.214,
+            "query_p95_ms": 0.234,
+            "query_max_ms": 0.267,
+            "primary_k4_mrr": 0.7361111111111112,
+            "primary_k4_group_coverage": 0.6856481481481481,
+            "primary_k4_complete_evidence_rate": 0.5277777777777778,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 19,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 9
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 9,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 4,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "rules-max",
+          "run_sha256": "d2e16660cce4e7ffd9b8b397e3d01e659b4214c73a9e3cf59a54e035de3bdb47",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "rules-max",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.182,
+            "query_p95_ms": 0.201,
+            "query_max_ms": 0.203,
+            "primary_k4_mrr": 0.7569444444444444,
+            "primary_k4_group_coverage": 0.7935185185185185,
+            "primary_k4_complete_evidence_rate": 0.6944444444444444,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 25,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 8
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        },
+        {
+          "name": "whole-rerank",
+          "run_sha256": "fb31049e25f789feef3780625e508d9031b77e35bfe96cf81674721b4d8c0aaa",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.information_selection.FixedPoolSelector",
+            "version": "encoding-v2",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "passage-text-only",
+            "encoding_version": 2,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": {
+              "model": "BAAI/bge-reranker-v2-m3",
+              "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+              "runtime": "llama.cpp",
+              "runtime_version": "b11327",
+              "device": "Vulkan0",
+              "precision": "float16",
+              "quantization": "none",
+              "weights": "bge-f16.gguf",
+              "tokenizer": "pinned-Hugging-Face-tokenizer",
+              "max_tokens": 511,
+              "truncation": "reject-overflow",
+              "batch_size": 4,
+              "intra_op_threads": 8,
+              "inter_op_threads": 1,
+              "pair_order": "question-passage",
+              "score": "raw-relevance-logit",
+              "candidates": 40,
+              "diversity": 0.0,
+              "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+              "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+              "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+              "device_name": "AMD Radeon RX 6800",
+              "context_tokens": 2048,
+              "batch_tokens": 2048,
+              "gpu_layers": 99,
+              "prompt_cache_ram_mib": 0,
+              "server_private_limit_bytes": 6442450944,
+              "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+            },
+            "passage_selection": null,
+            "information_selection": {
+              "version": "fixed-information-needs-v1",
+              "policy": "whole-rerank",
+              "input_bundle_sha256": "a43100140ec4429f36fe43a86c3fd52e3899627024b91a22b7985960ae6531b7",
+              "candidate_count": 40,
+              "timing_scope": "replay-selection-only"
+            }
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 0.144,
+            "query_p95_ms": 0.148,
+            "query_max_ms": 0.168,
+            "primary_k4_mrr": 0.8333333333333334,
+            "primary_k4_group_coverage": 0.7935185185185185,
+            "primary_k4_complete_evidence_rate": 0.6944444444444444,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": null
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 25,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 6,
+              "both_sources": 8
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 8,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          }
+        }
+      ],
+      "measurement_bundle_sha256": "60d06d4e25f4e7dd571e85ca56b775ad7c8bdc6e2577da9afca231a5f5c76a3e",
+      "measurements_archived_count": 50,
+      "pair_visibility": {
+        "measured_pairs": 7680,
+        "max_input_tokens": 413,
+        "truncated_pairs": 0
+      },
+      "server_memory": {
+        "needs": {
+          "samples": 101,
+          "peak_private_bytes": 3513573376,
+          "peak_rss_bytes": 2685571072
+        },
+        "reranker": {
+          "samples": 385,
+          "peak_private_bytes": 2466910208,
+          "peak_rss_bytes": 2338516992
+        }
+      }
+    },
+    {
+      "directory": "enriched-representations-2026-10-02",
+      "manifest": {
+        "plan": [
+          "title-section-text-v1",
+          "title-section-current-neighbors60-v1"
+        ],
+        "model": {
+          "model": "Qwen/Qwen3-Embedding-4B",
+          "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+          "dimensions": 2560,
+          "max_tokens": 512,
+          "pooling": "last-nonpadding-token",
+          "normalization": "l2",
+          "query_prefix": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+          "document_prefix": "",
+          "text": "passage-text-only",
+          "encoding_version": 2,
+          "weights": "model.safetensors.index.json",
+          "tokenizer": "tokenizer.json",
+          "runtime": "torch+transformers",
+          "runtime_version": "2.14.1+cpu",
+          "backend": "pytorch-cpu",
+          "device": "cpu",
+          "precision": "bfloat16",
+          "quantization": "none",
+          "truncation": "right",
+          "batch_size": 1,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1
+        },
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+        "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+        "source_sha256": "45803562553902ca803f13ada9eaa28099906a17d944833a808bfe625e0b4156",
+        "api_calls": 0,
+        "held_out_searches": false,
+        "canonical_chunk_changes": false,
+        "limit": 4,
+        "candidate_cutoffs": [
+          20,
+          40
+        ],
+        "repeats": 3,
+        "warmups": 1
+      },
+      "configurations": [
+        {
+          "name": "title-section-current-neighbors60-v1",
+          "run_sha256": "6fdbbf6929cf68dc0c416d4ba3a3b012559efe4de7405c1a0b7b02d7e2715c5c",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.representation_experiments.RepresentedRetriever",
+            "version": "encoding-v3",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "65ebc7cce251018aad0448b585d9a86cb503db7691ec2b0efa8d52aa75567259",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "title-section-current-neighbors60-v1",
+            "encoding_version": 3,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": null,
+            "passage_selection": null,
+            "information_selection": null
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 176.3245,
+            "query_p95_ms": 229.669,
+            "query_max_ms": 245.149,
+            "primary_k4_mrr": 0.7314814814814814,
+            "primary_k4_group_coverage": 0.7462962962962963,
+            "primary_k4_complete_evidence_rate": 0.6111111111111112,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": 9638252544
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 22,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 2,
+              "both_sources": 3
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 9,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          },
+          "candidate_metrics_archived_count": 50,
+          "actual_input_measurements": {
+            "max_tokens": 493,
+            "truncated_inputs": 0,
+            "passages": 204
+          }
+        },
+        {
+          "name": "title-section-text-v1",
+          "run_sha256": "95ebb225f4d7a2d76a3754a5f7d3b04fbec137c50de5f2d2ef729b4c38bf61d7",
+          "code": {
+            "commit": "aed7f3e84d3eb129487d658aec292431440b579e",
+            "dirty": true,
+            "evaluation_code_sha256": "f268aa9f78d86751b03c3949135d0e0157309986997130ea489e7529460c34c5"
+          },
+          "retrieval": {
+            "implementation": "researchlens.representation_experiments.RepresentedRetriever",
+            "version": "encoding-v3",
+            "limit": 4,
+            "backend": "embeddings",
+            "model": "Qwen/Qwen3-Embedding-4B",
+            "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+            "artifact_sha256": "a2742e2b485672ebce881648eb0ccf54c1f1ca253807690ca5cbead8dc50d2f2",
+            "normalization": "l2",
+            "score_threshold": null,
+            "runtime": "torch+transformers",
+            "runtime_version": "2.14.1+cpu",
+            "runtime_backend": "pytorch-cpu",
+            "device": "cpu",
+            "precision": "bfloat16",
+            "quantization": "none",
+            "dimensions": 2560,
+            "weights": "model.safetensors.index.json",
+            "tokenizer": "tokenizer.json",
+            "pooling": "last-nonpadding-token",
+            "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+            "document_instruction": "",
+            "max_tokens": 512,
+            "truncation": "right",
+            "batch_size": 1,
+            "intra_op_threads": 8,
+            "inter_op_threads": 1,
+            "text_representation": "title-section-text-v1",
+            "encoding_version": 3,
+            "lexical_candidates": null,
+            "embedding_candidates": null,
+            "fusion_method": null,
+            "rrf_k": null,
+            "lexical_weight": null,
+            "embedding_weight": null,
+            "reranker": null,
+            "passage_selection": null,
+            "information_selection": null
+          },
+          "summary": {
+            "query_timing_samples": 150,
+            "query_failed_attempts": 0,
+            "query_median_ms": 184.757,
+            "query_p95_ms": 245.896,
+            "query_max_ms": 362.286,
+            "primary_k4_mrr": 0.712962962962963,
+            "primary_k4_group_coverage": 0.7472222222222222,
+            "primary_k4_complete_evidence_rate": 0.6111111111111112,
+            "unstable_ranking_cases": 0,
+            "process_peak_rss_bytes": 9253027840
+          },
+          "cases_archived_count": 50,
+          "complete_count_all_36": 22,
+          "error_count_all_50": 0,
+          "cohorts": {
+            "cross-document": {
+              "cases": 9,
+              "complete": 2,
+              "both_sources": 2
+            },
+            "exact-terminology": {
+              "cases": 14,
+              "complete": 11,
+              "both_sources": 14
+            },
+            "missing-evidence": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            },
+            "paraphrase": {
+              "cases": 13,
+              "complete": 9,
+              "both_sources": 13
+            },
+            "unrelated": {
+              "cases": 7,
+              "complete": 0,
+              "both_sources": 0
+            }
+          },
+          "candidate_metrics_archived_count": 50,
+          "actual_input_measurements": {
+            "max_tokens": 325,
+            "truncated_inputs": 0,
+            "passages": 204
+          }
+        }
+      ]
+    }
+  ],
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "f42d22b2cca1de4ab78ab56ab4c143d5a1a6e1d42f4ac016e4a6a5d726178656",
+    "scope": "Summary only; per-case scoring and inference records are in the full archive.",
+    "source_commit": "0542fb8aa1ac87b96d0e6b91320a48e2f4328889",
+    "source_path": "docs/information-needs-results.json",
+    "full_archive_url": "https://github.com/Timerk/ResearchLens/blob/0542fb8aa1ac87b96d0e6b91320a48e2f4328889/docs/information-needs-results.json"
+  }
+}

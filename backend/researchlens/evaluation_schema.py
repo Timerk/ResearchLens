@@ -106,6 +106,85 @@ class Dataset(StrictModel):
         return self
 
 
+class RerankerConfig(StrictModel):
+    model: str
+    revision: str
+    runtime: str
+    runtime_version: str | None
+    device: Literal["cpu"]
+    precision: Literal["float32"]
+    quantization: Literal["none"]
+    weights: str
+    tokenizer: str
+    max_tokens: int = Field(ge=1)
+    truncation: Literal["longest-first"]
+    batch_size: int = Field(ge=1)
+    intra_op_threads: int = Field(ge=1)
+    inter_op_threads: int = Field(ge=1)
+    pair_order: Literal["question-passage"]
+    score: Literal["raw-relevance-logit"]
+    candidates: int = Field(default=40, ge=1, le=100)
+    diversity: float = Field(default=0.0, ge=0, le=1, allow_inf_nan=False)
+
+
+class VulkanRerankerConfig(RerankerConfig):
+    """Evaluation-only local runtime provenance; separate from the CPU adapter contract."""
+
+    runtime: Literal["llama.cpp"]
+    runtime_version: str
+    device: Literal["Vulkan0"]
+    precision: Literal["float16"]
+    truncation: Literal["reject-overflow"]
+    score: Literal["raw-relevance-logit", "yes-no-softmax"]
+    weights_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    runtime_binary_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    runtime_commit: str = Field(pattern=r"^[a-f0-9]{40}$")
+    device_name: Literal["AMD Radeon RX 6800"]
+    context_tokens: int = Field(ge=1)
+    batch_tokens: int = Field(ge=1)
+    gpu_layers: int = Field(ge=1)
+    prompt_cache_ram_mib: Literal[0]
+    server_private_limit_bytes: int = Field(ge=1)
+    prompt_template_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class PassageSelectionConfig(StrictModel):
+    """Allowlisted provenance for evaluation-only question/metadata selection."""
+
+    version: Literal["facets-v1"]
+    decompose: bool
+    complementary: bool
+    candidates: int = Field(ge=1, le=100)
+    per_query: int = Field(ge=1, le=100)
+    max_queries: Literal[3]
+    reranking_representation: Literal["passage-text-only", "title-section-text-v1"]
+    original_weight: Literal[0.5]
+    rank_constant: Literal[10]
+    document_profile: Literal["title-first-passage-v1"]
+    profile_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+    @model_validator(mode="after")
+    def budgets(self) -> Self:
+        if self.per_query > self.candidates:
+            raise ValueError("Original query candidates must fit the total pool")
+        return self
+
+
+class InformationSelectionConfig(StrictModel):
+    version: Literal["fixed-information-needs-v1"]
+    policy: Literal[
+        "dense-order",
+        "whole-rerank",
+        "rules-max",
+        "needs-max",
+        "needs-saturation",
+        "needs-round-robin",
+    ]
+    input_bundle_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    candidate_count: Literal[40]
+    timing_scope: Literal["replay-selection-only"]
+
+
 class RetrievalConfig(StrictModel):
     implementation: str
     version: str
@@ -142,9 +221,16 @@ class RetrievalConfig(StrictModel):
     rrf_k: int | None = Field(default=None, ge=1)
     lexical_weight: float | None = Field(default=None, ge=0, le=1)
     embedding_weight: float | None = Field(default=None, ge=0, le=1)
+    reranker: RerankerConfig | VulkanRerankerConfig | None = None
+    passage_selection: PassageSelectionConfig | None = None
+    information_selection: InformationSelectionConfig | None = None
 
     @model_validator(mode="after")
     def hybrid_settings(self) -> Self:
+        if self.reranker and (
+            self.backend not in ("embeddings", "hybrid") or self.limit > self.reranker.candidates
+        ):
+            raise ValueError("Reranking requires embedding retrieval and enough candidates for k")
         if self.backend == "hybrid" and (
             self.lexical_candidates is None
             or self.embedding_candidates is None

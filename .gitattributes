@@ -2,6 +2,7 @@
 data/*.json text eol=lf
 evaluation/datasets/*.json text eol=lf
 evaluation/labels/*.json text eol=lf
+docs/*results.json text eol=lf
 evaluation/reviews/**/*.json text eol=lf
 # Preserve the completed evidence audit exactly as supplied, including CRLF bytes.
 evaluation/reviews/2026-10-01-pr8/evidence-review.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
