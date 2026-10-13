@@ -326,6 +326,22 @@ supplied/omitted/truncated IDs and visible character counts in `context_diagnost
 Retrieval-only previews are potential provider input, not generated answers. Other
 providers may use different context policies and must report their own actual context.
 
+The four-passage policy remains the default. Optional `--context-budgets 4 8000
+12000 16000` profiles the provider serialization at four passages and three character
+budgets. Larger-budget profiles require `--limit 40` or higher, including at least
+40 reranking candidates when reranking is enabled. Each profile scores visible
+evidence spans with all approved groups and a diagnostic asked-only view that
+includes group IDs starting with `part-`. Labels are unchanged. Reports include
+cohort counts, exact binomial 95% intervals and paired exact McNemar tests with
+discordant counts. Differences of 1-3 complete questions out of 36 are not
+significant at 5% under that paired test.
+
+Input-token estimates use offline `o200k_base` on the exact question/passages JSON
+and instructions. They exclude Responses framing, output schema and internal
+tokens, and are separate from actual usage. Install the dev dependencies for this
+measurement. See [the serialized context study](../docs/context-budget.md) for
+results, selection and the unmeasured answer-quality limits.
+
 Before hybrid settings selection, predefine a small development-only configuration
 set with candidate counts and fusion settings using the approved evidence labels. Run each
 through the retrieval factory in a fresh process with the same labels and protocol.
