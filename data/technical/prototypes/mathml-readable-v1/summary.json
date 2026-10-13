@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "artifact_version": "mathml-readable-v1",
+  "prototype_script_sha256": "c32d1290bb229f932a790c9955de8826332ca3f287994ac182370e96dc8ed4c9",
+  "status": "proposal_only_owner_approval_required",
+  "canonical_documents_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "approved_development_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "scope": "development labels only; no retrieval or answer-quality evaluation",
+  "chunking": {
+    "method": "paragraph-word-windows",
+    "max_words": 180
+  },
+  "sources": [
+    {
+      "document_id": "pmc11510794",
+      "original_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "mathml_elements_in_original": 21,
+      "paragraphs_changed": 5,
+      "rendered_formulas": 20
+    },
+    {
+      "document_id": "pmc11768589",
+      "original_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "mathml_elements_in_original": 0,
+      "paragraphs_changed": 0
+    },
+    {
+      "document_id": "pmc10934137",
+      "original_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "mathml_elements_in_original": 22,
+      "paragraphs_changed": 7,
+      "rendered_formulas": 22
+    },
+    {
+      "document_id": "pmc11121878",
+      "original_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "mathml_elements_in_original": 95,
+      "paragraphs_changed": 22,
+      "rendered_formulas": 80,
+      "unsupported_formulas": 4,
+      "remaining_placeholders": 4
+    }
+  ],
+  "label_remapping_estimate": {
+    "total_span_occurrences": 165,
+    "same_id_and_offsets": 132,
+    "quote_preserved_remap": 12,
+    "quote_changed_or_split": 21,
+    "affected_spans": [
+      {
+        "case_id": "tech-wafer-exact",
+        "group_id": "efficiency-scope",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc10934137:p14:w180",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc10934137:p14:w180",
+            "start": 284
+          }
+        ]
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-1",
+        "alternative_index": 1,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-1",
+        "alternative_index": 3,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p1:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p1:w0",
+            "start": 992
+          }
+        ]
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-2",
+        "alternative_index": 1,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p46:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p46:w0",
+            "start": 503
+          }
+        ]
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-2",
+        "alternative_index": 2,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p1:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p1:w0",
+            "start": 1136
+          }
+        ]
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-2",
+        "alternative_index": 2,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p1:w180",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-autoencoder-exact",
+        "group_id": "part-3",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p17:w0",
+            "start": 526
+          }
+        ]
+      },
+      {
+        "case_id": "tech-aw-ssim-combination",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p26:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-aw-ssim-combination",
+        "group_id": "component-calculations",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p26:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p26:w0",
+            "start": 730
+          }
+        ]
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-3",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p18:w0",
+            "start": 402
+          }
+        ]
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-3",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p18:w0",
+            "start": 849
+          }
+        ]
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-4",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-adga-shapes",
+        "group_id": "part-4",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p18:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p18:w0",
+            "start": 1025
+          }
+        ]
+      },
+      {
+        "case_id": "tech-moving-signal-addition",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc10934137:p8:w180",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc10934137:p8:w180",
+            "start": 335
+          }
+        ]
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p31:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p31:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-2",
+        "alternative_index": 1,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-2",
+        "alternative_index": 1,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p32:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-3",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "part-3",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p31:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "gaussian-spread",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "fixed-footprint",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p29:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-changing-neighborhood",
+        "group_id": "fixed-footprint",
+        "alternative_index": 0,
+        "span_index": 1,
+        "old_passage_id": "pmc11121878:p30:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-damaged-clean-pairs",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-damaged-clean-pairs",
+        "group_id": "part-2",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-damaged-clean-pairs",
+        "group_id": "part-2",
+        "alternative_index": 1,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p36:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-damaged-clean-pairs",
+        "group_id": "part-2",
+        "alternative_index": 2,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_changed_or_split",
+        "candidate_locations": []
+      },
+      {
+        "case_id": "tech-compare-evaluation-metrics",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11510794:p47:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11510794:p47:w0",
+            "start": 659
+          }
+        ]
+      },
+      {
+        "case_id": "tech-compare-network-inputs",
+        "group_id": "part-1",
+        "alternative_index": 0,
+        "span_index": 0,
+        "old_passage_id": "pmc11121878:p17:w0",
+        "status": "quote_preserved_remap",
+        "candidate_locations": [
+          {
+            "passage_id": "pmc11121878:p17:w0",
+            "start": 209
+          }
+        ]
+      }
+    ]
+  },
+  "prototype_documents_sha256": "a76f1ee2f32be7f778a5f79814a18e66f05d0fccd4c39022e785e8a6ecc58c7b"
+}
