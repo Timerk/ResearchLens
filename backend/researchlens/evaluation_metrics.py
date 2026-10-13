@@ -3,6 +3,43 @@
 import math
 from collections import Counter
 
+from scipy.stats import beta
+
+
+def binomial_ci(successes: int, total: int) -> list[float] | None:
+    """Two-sided 95% Clopper-Pearson interval, including boundary cases."""
+    if not 0 <= successes <= total:
+        raise ValueError("Invalid binomial counts")
+    if not total:
+        return None
+    return [
+        float(beta.ppf(0.025, successes, total - successes + 1)) if successes else 0.0,
+        float(beta.ppf(0.975, successes + 1, total - successes)) if successes < total else 1.0,
+    ]
+
+
+def exact_mcnemar(before: dict[str, bool | None], after: dict[str, bool | None]) -> dict:
+    """Two-sided exact binomial test on paired complete-evidence discordances."""
+    if before.keys() != after.keys():
+        raise ValueError("McNemar requires identical case IDs")
+    paired = [
+        (before[c], after[c]) for c in before if before[c] is not None and after[c] is not None
+    ]
+    gains = sum(a is False and b is True for a, b in paired)
+    losses = sum(a is True and b is False for a, b in paired)
+    n = gains + losses
+    p = min(1.0, 2 * sum(math.comb(n, i) for i in range(min(gains, losses) + 1)) / 2**n)
+    return {
+        "paired_cases": len(paired),
+        "excluded_unscored_cases": len(before) - len(paired),
+        "gains": gains,
+        "losses": losses,
+        "both_complete": sum(a is True and b is True for a, b in paired),
+        "neither_complete": sum(a is False and b is False for a, b in paired),
+        "p_two_sided": p,
+        "method": "exact-mcnemar-two-sided-binomial",
+    }
+
 
 def percentile_nearest_rank(samples: list[float], fraction: float) -> float | None:
     if not samples:
@@ -32,6 +69,9 @@ def cutoff_summary(run: dict, k: int) -> dict:
         / len(labeled)
         if labeled
         else None,
+        "complete_evidence_ci95": binomial_ci(
+            sum(m["complete_evidence"] is True for m in labeled), len(labeled)
+        ),
     }
 
 
@@ -100,8 +140,8 @@ def comparison_details(runs: list[dict]) -> list[str]:
         "Missing cutoffs remain unavailable.",
         "",
         "| Run | k | MRR | Source recall | Passage recall | Labeled cases | "
-        "Group coverage | Complete evidence |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        "Group coverage | Complete evidence | 95% binomial CI |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for run in runs:
         for k in (1, 4, 10):
@@ -118,6 +158,7 @@ def comparison_details(runs: list[dict]) -> list[str]:
                     "evidence_labeled_cases",
                     "mean_group_coverage",
                     "complete_evidence_rate",
+                    "complete_evidence_ci95",
                 )
             ]
             lines.append(f"| {run['run_id']} | {k} | " + " | ".join(map(str, values)) + " |")
@@ -133,10 +174,21 @@ def comparison_details(runs: list[dict]) -> list[str]:
         )
         for k in (1, 4, 10):
             changes = paired_changes(runs[0], candidate, k)
+            paired = exact_mcnemar(
+                {
+                    c["case_id"]: (c["baseline_metrics"] or {}).get("complete_evidence")
+                    for c in changes
+                },
+                {
+                    c["case_id"]: (c["candidate_metrics"] or {}).get("complete_evidence")
+                    for c in changes
+                },
+            )
             lines.extend(
                 [
                     "",
                     f"k={k} outcomes: {dict(Counter(c['outcome'] for c in changes))}",
+                    f"Exact McNemar complete evidence: {paired}",
                     "",
                     "| Case | Outcome | Group coverage delta | Reciprocal rank delta | "
                     "Source recall delta | Errors |",

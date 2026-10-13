@@ -56,22 +56,30 @@ def prepare_answer_context(
     max_passages: int = 4,
     max_passage_chars: int = 3000,
     max_context_chars: int = 16000,
+    mode: str = "passages",
 ) -> PreparedContext:
     """Use the actual provider's context budget, without an API call."""
     if min(max_passages, max_passage_chars, max_context_chars) < 1:
         raise ValueError("Context budgets must be positive")
+    if mode not in ("passages", "characters"):
+        raise ValueError("Context mode must be passages or characters")
     items, supplied = [], []
-    for passage in passages[:max_passages]:
+    candidates = passages[:max_passages] if mode == "passages" else passages
+    for passage in candidates:
         item = {"id": passage.id, "kind": passage.kind, "text": passage.text[:max_passage_chars]}
         if len(json.dumps([*items, item], ensure_ascii=True)) <= max_context_chars:
             items.append(item)
             supplied.append(passage)
+        elif mode == "characters":
+            # Preserve a ranked prefix. Do not skip a high-ranked item for smaller later ones.
+            break
     ids = {p.id for p in supplied}
     return PreparedContext(
         items,
         supplied,
         AnswerContext(
-            max_passages=max_passages,
+            mode=mode,
+            max_passages=max_passages if mode == "passages" else None,
             max_passage_chars=max_passage_chars,
             max_context_chars=max_context_chars,
             serialized_chars=len(json.dumps(items, ensure_ascii=True)),
@@ -81,6 +89,11 @@ def prepare_answer_context(
             visible_chars={item["id"]: len(item["text"]) for item in items},
         ),
     )
+
+
+def serialize_answer_input(question: str, items: list[dict]) -> str:
+    """The exact question/context JSON sent to Responses, shared with offline measurement."""
+    return json.dumps({"question": question, "passages": items})
 
 
 class LocalPreview:
@@ -110,6 +123,8 @@ class OpenAIProvider:
 
     def __init__(self, settings: Settings, client: OpenAI | None = None):
         self.model = settings.model
+        self.context_mode = settings.answer_context_mode
+        self.MAX_CONTEXT_CHARS = settings.answer_context_chars
         self.client = (
             client
             if client is not None
@@ -143,6 +158,7 @@ class OpenAIProvider:
             max_passages=self.MAX_PASSAGES,
             max_passage_chars=self.MAX_PASSAGE_CHARS,
             max_context_chars=self.MAX_CONTEXT_CHARS,
+            mode=self.context_mode,
         )
         context, supplied = prepared.items, prepared.supplied
         if not supplied:
@@ -154,7 +170,7 @@ class OpenAIProvider:
                 model=self.model,
                 reasoning={"effort": "medium"},
                 instructions=INSTRUCTIONS,
-                input=json.dumps({"question": question, "passages": context}),
+                input=serialize_answer_input(question, context),
                 text_format=GeneratedAnswer,
                 max_output_tokens=self.MAX_OUTPUT_TOKENS,
                 store=False,

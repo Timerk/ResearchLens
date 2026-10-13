@@ -44,8 +44,23 @@ class Settings:
     hybrid_lexical_weight: float = 1.0
     hybrid_embedding_weight: float = 1.0
     hybrid_candidates: int = 20
+    answer_context_mode: Literal["passages", "characters"] = "passages"
+    answer_context_chars: int = 16000
+    answer_context_candidates: int = 40
 
     def __post_init__(self) -> None:
+        if self.answer_context_mode not in ("passages", "characters") or not (
+            2 <= self.answer_context_chars <= 16000 and 40 <= self.answer_context_candidates <= 100
+        ):
+            raise ValueError(
+                "Answer context needs passages/characters, 2..16000 chars and 40..100 candidates"
+            )
+        if (
+            self.answer_context_mode == "characters"
+            and self.reranker != "none"
+            and self.reranking_candidates < self.answer_context_candidates
+        ):
+            raise ValueError("Character context needs enough reranking candidates")
         if self.retrieval not in ("tfidf", "embeddings", "hybrid"):
             raise ValueError("RETRIEVAL_BACKEND must be tfidf, embeddings or hybrid")
         if self.embedding_model not in ("minilm", "bge-m3", "qwen3-0.6b", "qwen3-4b"):
@@ -107,6 +122,9 @@ class Settings:
                 "hybrid_lexical_weight": float(values.get("HYBRID_LEXICAL_WEIGHT") or "1"),
                 "hybrid_embedding_weight": float(values.get("HYBRID_EMBEDDING_WEIGHT") or "1"),
                 "hybrid_candidates": int(values.get("HYBRID_CANDIDATES") or "20"),
+                "answer_context_mode": (values.get("ANSWER_CONTEXT_MODE") or "passages").strip(),
+                "answer_context_chars": int(values.get("ANSWER_CONTEXT_CHARS") or "16000"),
+                "answer_context_candidates": int(values.get("ANSWER_CONTEXT_CANDIDATES") or "40"),
             }
         except ValueError:
             raise ValueError("Invalid numeric retrieval settings; check .env.example") from None
