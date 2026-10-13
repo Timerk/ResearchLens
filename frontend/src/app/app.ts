@@ -75,6 +75,10 @@ export class App {
     return result.passages.filter((passage) => ids.includes(passage.id));
   }
 
+  protected citationNumber(result: Answer, id: string): number {
+    return result.passages.findIndex((passage) => passage.id === id) + 1;
+  }
+
   protected questionError(): string {
     const length = this.question.trim().length;
     if (length < 3) return 'Enter at least 3 characters, excluding surrounding spaces.';
