@@ -65,8 +65,10 @@ reranking and fusion settings are covered in [embedding setup](docs/embeddings.m
 For controlled development comparisons, use the [evaluation workflow](evaluation/README.md)
 and [comparison commands](docs/retrieval-readiness.md). The
 [research index](docs/retrieval-research.md) links the approved results, GPU experiments
-and remaining limitations. The full quality targets and held-out evaluation remain
-unfinished; optimization can continue in a later PR.
+and remaining limitations. Qwen3-4B dense meets the development retrieval targets
+when the answer context is budgeted by characters (`ANSWER_CONTEXT_MODE=characters`,
+`ANSWER_CONTEXT_CHARS=12000`, `ANSWER_CONTEXT_CANDIDATES=40`). The default stays at
+four passages. Held-out evaluation and answer quality remain unfinished.
 
 ### Enable document-only OpenAI answers
 

@@ -12,6 +12,7 @@ models and existing development runs, as documented in the linked studies.
 | `embedding-parity-check.py` | Compare cached Qwen embeddings with reference pooling. |
 | `vulkan-reference-check.py` | Compare cached CPU reranker rankings with saved Vulkan results. |
 | `compact_results.py` | Reduce a full research archive to a summary for Git. |
+| `context-budget-results.py` | Verify context-run provenance, archive per-question token estimates and record the development-selected budget. |
 
 Use fresh output paths under `evaluation/runs/` for full records. The archive
 extractors preserve existing output files. The parity checks run local inference;

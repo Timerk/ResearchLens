@@ -30,6 +30,11 @@ def create_app(
             except ValueError as exc:
                 raise RuntimeError(str(exc)) from exc
         app.state.mode = "openai" if active_settings.provider == "openai" else "local_preview"
+        app.state.retrieval_limit = (
+            active_settings.answer_context_candidates
+            if active_settings.answer_context_mode == "characters"
+            else 4
+        )
         app.state.provider = (
             provider
             if provider is not None
@@ -57,7 +62,7 @@ def create_app(
         active_retriever: PassageRetriever | None = app.state.retriever
         if active_retriever is None:
             raise HTTPException(status_code=503, detail="Document index is unavailable")
-        passages = active_retriever.search(request.question)
+        passages = active_retriever.search(request.question, limit=app.state.retrieval_limit)
         try:
             answer = app.state.provider.answer(request.question, passages)
         except ProviderError as exc:

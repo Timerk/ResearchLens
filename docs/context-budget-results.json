@@ -1,0 +1,5637 @@
+{
+  "schema_version": 1,
+  "manifest": {
+    "schema_version": 1,
+    "plan": {
+      "configurations": [
+        "tfidf",
+        "qwen3-4b-dense",
+        "bge-m3-dense",
+        "bge-m3-bge-rerank20",
+        "bge-m3-bge-rerank40"
+      ],
+      "context_budgets": [
+        4,
+        8000,
+        12000,
+        16000
+      ],
+      "rerank20_budgets": [
+        4
+      ],
+      "larger_reranking_budgets_candidates": 40,
+      "selection_rule": "smallest serialized budget reaching 29/36 all-group complete evidence; report all configurations",
+      "per_passage_chars": 3000,
+      "scoring_views": {
+        "all_groups": "approved labels unchanged",
+        "asked_groups": "only group IDs starting part-"
+      }
+    },
+    "plan_sha256": "78e49a0170d948d7751996966db10a3b1235c3b386ac775c9adf37a9a848e99f",
+    "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+    "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+    "input_archives": {
+      "tfidf": {
+        "path": "C:\\Users\\timbe\\.t3\\worktrees\\ResearchLens\\t3code-ae70ece2\\evaluation\\runs\\retrieval-improvements-2026-10-02\\tfidf\\run.json",
+        "sha256": "85476f060fd5bc6500659d909f31ac46f7ac69f9a8ae894b86b02a38b2eb93df",
+        "run_id": "1d455931-b079-437b-8abe-d3f94bc4cf38"
+      },
+      "qwen3-4b-dense": {
+        "path": "C:\\Users\\timbe\\.t3\\worktrees\\ResearchLens\\t3code-ae70ece2\\evaluation\\runs\\retrieval-improvements-2026-10-02\\qwen3-4b-dense\\run.json",
+        "sha256": "009ffcbcf78365c9040f94144106b4f0c22b2ba0ca15d6a116950dc121380d7d",
+        "run_id": "92e418b7-6a39-40d6-a5de-aeda0571f4de"
+      },
+      "bge-m3-dense": {
+        "path": "C:\\Users\\timbe\\.t3\\worktrees\\ResearchLens\\t3code-ae70ece2\\evaluation\\runs\\retrieval-improvements-2026-10-02\\bge-m3-dense\\run.json",
+        "sha256": "d993279d18cea1a97ac8c029409dd3bb01cd5534e2323645c73d1762268230d3",
+        "run_id": "68afa349-4ec5-45b3-ae01-deb728202876"
+      },
+      "bge-m3-bge-rerank20": {
+        "path": "C:\\Users\\timbe\\.t3\\worktrees\\ResearchLens\\t3code-ae70ece2\\evaluation\\runs\\vulkan-rerankers-cache-off-2026-10-02\\bge-m3-bge-rerank20\\run.json",
+        "sha256": "fbbad57af4f19faaace6f40e17a5d744c9f056ec036a9bfcb9357c31fae8a0a1",
+        "run_id": "0b103b41-75b9-45ed-9cd3-ca949757ae54"
+      },
+      "bge-m3-bge-rerank40": {
+        "path": "C:\\Users\\timbe\\.t3\\worktrees\\ResearchLens\\t3code-b1cf6fbb\\evaluation\\runs\\context-budget-2026-10-13\\bge-m3-bge-rerank40\\run.json",
+        "sha256": "550164b4c51def7303835e826da11b497a6fd97bc6cb71fd3a66ba69db3094cc",
+        "run_id": "c17caf32-6723-4642-b6c2-175a0dc0718d"
+      }
+    },
+    "code": {
+      "commit": "8b8690925618d843657851ea1f60ad94b8de1180",
+      "dirty": true,
+      "evaluation_code_sha256": "4c6bb38351504aca6107df8e6ef32f5952709c9e9d7013f2130e6909594c8831"
+    },
+    "source_sha256": {
+      "answers.py": "691b1b9ebda56b102df5b14f514515d6e218d9097092c53fc5b6f3eb82fb51ca",
+      "context_evaluation.py": "2eb1c2c8fc3f8761c03b4a5ae2ef53654663962781de4249f2e9a37adc309858",
+      "context_experiments.py": "8341e1c6135798f6634ca92a12ef2318fa653e6d876fc16046ab17332b508fcc",
+      "evaluation.py": "15976c0720e912153d4387abe0813a76f3c874cae3ed572bc798a6c1aafd3a06",
+      "evaluation_evidence.py": "3cf06389f1cd835a45763c42508a3d07f861c187b72db28f551d13e3ab826b49",
+      "evaluation_metrics.py": "3b56f51d857ea6c0fab22b37590d5cbf8b2bc9ef73dc228253c8189e60e60707"
+    },
+    "api_calls": 0,
+    "held_out_searches": false,
+    "generation": "none",
+    "timing_scope": "archive replay and context preparation; not retrieval/model latency"
+  },
+  "runs": {
+    "tfidf": {
+      "archive_provenance": {
+        "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\tfidf\\run.json",
+        "sha256": "624b6ef114d107f2e117bf9e09e425e7c427a8da10216e9fad23bd3f3da5fa23",
+        "run_id": "5a891cd8-4555-4217-8180-81fa664e1425"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": null,
+        "encoding_sha256": null,
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.context_experiments.ArchivedRetriever",
+        "version": "tfidf-word-unigram-bigram-english-stopwords-v1",
+        "limit": 40,
+        "backend": "tfidf",
+        "model": null,
+        "revision": null,
+        "artifact_sha256": "6c0f4490fefea572e31c29f7317343cb4df539032050669e8eef4ed788d07f4b",
+        "normalization": null,
+        "score_threshold": null,
+        "runtime": null,
+        "runtime_version": null,
+        "runtime_backend": null,
+        "device": null,
+        "precision": null,
+        "quantization": null,
+        "dimensions": null,
+        "weights": null,
+        "tokenizer": null,
+        "pooling": null,
+        "query_instruction": null,
+        "document_instruction": null,
+        "max_tokens": null,
+        "truncation": null,
+        "batch_size": null,
+        "intra_op_threads": null,
+        "inter_op_threads": null,
+        "text_representation": null,
+        "encoding_version": null,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null,
+        "passage_selection": null,
+        "information_selection": null
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "59652f998f6848e44d1355d0277f220dc0728fc93169bf933f29a50ecb865903",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": null,
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "summaries": {
+        "4": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 15,
+            "complete_evidence_rate": 0.4166666666666667,
+            "complete_evidence_ci95": [
+              0.2551410483264677,
+              0.5924347591082235
+            ],
+            "mean_group_coverage": 0.5518518518518518,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 1,
+                "complete_evidence_rate": 0.1111111111111111,
+                "complete_evidence_ci95": [
+                  0.0028091367465992146,
+                  0.48249651491733697
+                ],
+                "mean_group_coverage": 0.35185185185185186
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.8571428571428571
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 3,
+                "complete_evidence_rate": 0.23076923076923078,
+                "complete_evidence_ci95": [
+                  0.05038107349115153,
+                  0.5381315392340409
+                ],
+                "mean_group_coverage": 0.36153846153846153
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 825.7222222222222,
+              "median": 811.0,
+              "min": 560,
+              "max": 1154,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3009.3888888888887
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 17,
+            "complete_evidence_rate": 0.4722222222222222,
+            "complete_evidence_ci95": [
+              0.3040505887162663,
+              0.64513620146269
+            ],
+            "mean_group_coverage": 0.5740740740740741,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 1,
+                "complete_evidence_rate": 0.1111111111111111,
+                "complete_evidence_ci95": [
+                  0.0028091367465992146,
+                  0.48249651491733697
+                ],
+                "mean_group_coverage": 0.35185185185185186
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.8928571428571429
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 4,
+                "complete_evidence_rate": 0.3076923076923077,
+                "complete_evidence_ci95": [
+                  0.0909203945720966,
+                  0.6142616617507044
+                ],
+                "mean_group_coverage": 0.38461538461538464
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 825.7222222222222,
+              "median": 811.0,
+              "min": 560,
+              "max": 1154,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3009.3888888888887
+          }
+        },
+        "8000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 25,
+            "complete_evidence_rate": 0.6944444444444444,
+            "complete_evidence_ci95": [
+              0.5189293699999202,
+              0.8365260153715064
+            ],
+            "mean_group_coverage": 0.7722222222222223,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.7222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.46153846153846156,
+                "complete_evidence_ci95": [
+                  0.19223244180128798,
+                  0.7486545177296964
+                ],
+                "mean_group_coverage": 0.6
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1748.5833333333333,
+              "median": 1766.0,
+              "min": 1080,
+              "max": 1997,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 10.027777777777779,
+            "mean_serialized_chars": 7513.944444444444
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 28,
+            "complete_evidence_rate": 0.7777777777777778,
+            "complete_evidence_ci95": [
+              0.6084823508426185,
+              0.8988494696550873
+            ],
+            "mean_group_coverage": 0.8055555555555556,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.7222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6538461538461539
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1748.5833333333333,
+              "median": 1766.0,
+              "min": 1080,
+              "max": 1997,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 10.027777777777779,
+            "mean_serialized_chars": 7513.944444444444
+          }
+        },
+        "12000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 26,
+            "complete_evidence_rate": 0.7222222222222222,
+            "complete_evidence_ci95": [
+              0.548138854932161,
+              0.857997552736598
+            ],
+            "mean_group_coverage": 0.7861111111111111,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.7777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.46153846153846156,
+                "complete_evidence_ci95": [
+                  0.19223244180128798,
+                  0.7486545177296964
+                ],
+                "mean_group_coverage": 0.6
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2535.222222222222,
+              "median": 2578.0,
+              "min": 1080,
+              "max": 2754,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.694444444444445,
+            "mean_serialized_chars": 11338.111111111111
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8194444444444444,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.7777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6538461538461539
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2535.222222222222,
+              "median": 2578.0,
+              "min": 1080,
+              "max": 2754,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.694444444444445,
+            "mean_serialized_chars": 11338.111111111111
+          }
+        },
+        "16000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 26,
+            "complete_evidence_rate": 0.7222222222222222,
+            "complete_evidence_ci95": [
+              0.548138854932161,
+              0.857997552736598
+            ],
+            "mean_group_coverage": 0.8,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8333333333333334
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.46153846153846156,
+                "complete_evidence_ci95": [
+                  0.19223244180128798,
+                  0.7486545177296964
+                ],
+                "mean_group_coverage": 0.6
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3302.6666666666665,
+              "median": 3350.5,
+              "min": 1080,
+              "max": 3670,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 19.416666666666668,
+            "mean_serialized_chars": 15130.027777777777
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8333333333333334,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8333333333333334
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6538461538461539
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3302.6666666666665,
+              "median": 3350.5,
+              "min": 1080,
+              "max": 3670,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 19.416666666666668,
+            "mean_serialized_chars": 15130.027777777777
+          }
+        }
+      },
+      "cases_archived_count": 50,
+      "per_question_input_tokens_estimate": {
+        "tech-glass-exact": {
+          "4": 579,
+          "8000": 1789,
+          "12000": 2659,
+          "16000": 3320
+        },
+        "tech-glass-paraphrase": {
+          "4": 742,
+          "8000": 1788,
+          "12000": 2558,
+          "16000": 3221
+        },
+        "tech-painted-exact": {
+          "4": 786,
+          "8000": 1604,
+          "12000": 2505,
+          "16000": 3321
+        },
+        "tech-wafer-exact": {
+          "4": 963,
+          "8000": 1643,
+          "12000": 2545,
+          "16000": 3359
+        },
+        "tech-wafer-paraphrase": {
+          "4": 976,
+          "8000": 1841,
+          "12000": 2671,
+          "16000": 3295
+        },
+        "tech-autoencoder-exact": {
+          "4": 1012,
+          "8000": 1734,
+          "12000": 2598,
+          "16000": 3220
+        },
+        "tech-compare-fusion": {
+          "4": 560,
+          "8000": 1817,
+          "12000": 2380,
+          "16000": 3258
+        },
+        "tech-unrelated": {
+          "4": 188,
+          "8000": 188,
+          "12000": 188,
+          "16000": 188
+        },
+        "tech-missing-shared-cpu-cost": {
+          "4": 621,
+          "8000": 1810,
+          "12000": 2566,
+          "16000": 3455
+        },
+        "tech-obb": {
+          "4": 615,
+          "8000": 1789,
+          "12000": 2609,
+          "16000": 3398
+        },
+        "tech-annotation-tools": {
+          "4": 610,
+          "8000": 1795,
+          "12000": 2581,
+          "16000": 3568
+        },
+        "tech-rgb-channel-assignment": {
+          "4": 712,
+          "8000": 1901,
+          "12000": 2640,
+          "16000": 3436
+        },
+        "tech-amff-layers": {
+          "4": 747,
+          "8000": 1823,
+          "12000": 2655,
+          "16000": 3366
+        },
+        "tech-stripe-frequencies": {
+          "4": 591,
+          "8000": 1801,
+          "12000": 2527,
+          "16000": 3538
+        },
+        "tech-adaptive-binarization": {
+          "4": 975,
+          "8000": 1657,
+          "12000": 2529,
+          "16000": 3357
+        },
+        "tech-imagenet-initialization": {
+          "4": 690,
+          "8000": 1658,
+          "12000": 2613,
+          "16000": 3612
+        },
+        "tech-tdi-motion-sync": {
+          "4": 1014,
+          "8000": 1997,
+          "12000": 2662,
+          "16000": 3670
+        },
+        "tech-aw-ssim-combination": {
+          "4": 1070,
+          "8000": 1729,
+          "12000": 2485,
+          "16000": 3368
+        },
+        "tech-adga-shapes": {
+          "4": 644,
+          "8000": 1944,
+          "12000": 2754,
+          "16000": 3520
+        },
+        "tech-stable-camera": {
+          "4": 934,
+          "8000": 1762,
+          "12000": 2538,
+          "16000": 3267
+        },
+        "tech-turn-and-flip-labels": {
+          "4": 569,
+          "8000": 1855,
+          "12000": 2665,
+          "16000": 3224
+        },
+        "tech-manual-outline-union": {
+          "4": 578,
+          "8000": 1729,
+          "12000": 2577,
+          "16000": 3344
+        },
+        "tech-small-photo-supply": {
+          "4": 765,
+          "8000": 1608,
+          "12000": 2645,
+          "16000": 3307
+        },
+        "tech-both-checks-clean": {
+          "4": 957,
+          "8000": 1730,
+          "12000": 2577,
+          "16000": 3251
+        },
+        "tech-daylight-interference": {
+          "4": 836,
+          "8000": 1080,
+          "12000": 1080,
+          "16000": 1080
+        },
+        "tech-bright-specks-dark-background": {
+          "4": 1132,
+          "8000": 1721,
+          "12000": 2566,
+          "16000": 3161
+        },
+        "tech-moving-signal-addition": {
+          "4": 756,
+          "8000": 1770,
+          "12000": 2480,
+          "16000": 3385
+        },
+        "tech-too-many-shortcuts": {
+          "4": 1154,
+          "8000": 1752,
+          "12000": 2429,
+          "16000": 3391
+        },
+        "tech-changing-neighborhood": {
+          "4": 1020,
+          "8000": 1762,
+          "12000": 2472,
+          "16000": 3291
+        },
+        "tech-damaged-clean-pairs": {
+          "4": 1109,
+          "8000": 1787,
+          "12000": 2573,
+          "16000": 3359
+        },
+        "tech-compare-localization-outputs": {
+          "4": 1042,
+          "8000": 1658,
+          "12000": 2589,
+          "16000": 3331
+        },
+        "tech-compare-training-splits": {
+          "4": 737,
+          "8000": 1843,
+          "12000": 2592,
+          "16000": 3407
+        },
+        "tech-compare-training-computers": {
+          "4": 668,
+          "8000": 1791,
+          "12000": 2640,
+          "16000": 3475
+        },
+        "tech-compare-data-expansion": {
+          "4": 644,
+          "8000": 1791,
+          "12000": 2594,
+          "16000": 3490
+        },
+        "tech-compare-evaluation-metrics": {
+          "4": 946,
+          "8000": 1757,
+          "12000": 2565,
+          "16000": 3333
+        },
+        "tech-compare-optical-cues": {
+          "4": 917,
+          "8000": 1605,
+          "12000": 2549,
+          "16000": 3266
+        },
+        "tech-compare-network-inputs": {
+          "4": 837,
+          "8000": 1905,
+          "12000": 2579,
+          "16000": 3334
+        },
+        "tech-compare-network-roles": {
+          "4": 839,
+          "8000": 1733,
+          "12000": 2587,
+          "16000": 3373
+        },
+        "tech-unrelated-recipe": {
+          "4": 556,
+          "8000": 1556,
+          "12000": 2307,
+          "16000": 2307
+        },
+        "tech-unrelated-inheritance-law": {
+          "4": 947,
+          "8000": 1197,
+          "12000": 1197,
+          "16000": 1197
+        },
+        "tech-unrelated-planet-moons": {
+          "4": 761,
+          "8000": 1462,
+          "12000": 1462,
+          "16000": 1462
+        },
+        "tech-unrelated-exchange-rate": {
+          "4": 1036,
+          "8000": 1036,
+          "12000": 1036,
+          "16000": 1036
+        },
+        "tech-unrelated-database-isolation": {
+          "4": 480,
+          "8000": 1701,
+          "12000": 2454,
+          "16000": 3255
+        },
+        "tech-unrelated-vaccination": {
+          "4": 445,
+          "8000": 445,
+          "12000": 445,
+          "16000": 445
+        },
+        "tech-missing-canopy-service-life": {
+          "4": 543,
+          "8000": 1824,
+          "12000": 2376,
+          "16000": 2376
+        },
+        "tech-missing-heater-energy": {
+          "4": 816,
+          "8000": 1788,
+          "12000": 2713,
+          "16000": 3467
+        },
+        "tech-missing-wafer-live-cells": {
+          "4": 747,
+          "8000": 1683,
+          "12000": 2532,
+          "16000": 3430
+        },
+        "tech-missing-autoencoder-ct": {
+          "4": 863,
+          "8000": 1633,
+          "12000": 2435,
+          "16000": 3261
+        },
+        "tech-missing-factory-warranty": {
+          "4": 711,
+          "8000": 1691,
+          "12000": 2539,
+          "16000": 3274
+        },
+        "tech-missing-canopy-confidence-bounds": {
+          "4": 644,
+          "8000": 1860,
+          "12000": 2725,
+          "16000": 3398
+        }
+      }
+    },
+    "qwen3-4b-dense": {
+      "archive_provenance": {
+        "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\qwen3-4b-dense\\run.json",
+        "sha256": "915bc143992017d0b899f9bba6196d655f16c39961276578d594d03a1c698734",
+        "run_id": "b62e581c-6eae-43cc-b5c9-bdbd303ae7e6"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.context_experiments.ArchivedRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null,
+        "passage_selection": null,
+        "information_selection": null
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "59652f998f6848e44d1355d0277f220dc0728fc93169bf933f29a50ecb865903",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": null,
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "summaries": {
+        "4": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 24,
+            "complete_evidence_rate": 0.6666666666666666,
+            "complete_evidence_ci95": [
+              0.49029745334810876,
+              0.8144381901740788
+            ],
+            "mean_group_coverage": 0.7828703703703703,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 5,
+                "complete_evidence_rate": 0.5555555555555556,
+                "complete_evidence_ci95": [
+                  0.21200850677886798,
+                  0.8630043377348335
+                ],
+                "mean_group_coverage": 0.7703703703703704
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.9107142857142857
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6538461538461539
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 878.6944444444445,
+              "median": 839.5,
+              "min": 549,
+              "max": 1216,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3246.8055555555557
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 27,
+            "complete_evidence_rate": 0.75,
+            "complete_evidence_ci95": [
+              0.577970415421856,
+              0.8787967058761648
+            ],
+            "mean_group_coverage": 0.8175925925925925,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 5,
+                "complete_evidence_rate": 0.5555555555555556,
+                "complete_evidence_ci95": [
+                  0.21200850677886798,
+                  0.8630043377348335
+                ],
+                "mean_group_coverage": 0.7703703703703704
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.6923076923076923
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 878.6944444444445,
+              "median": 839.5,
+              "min": 549,
+              "max": 1216,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3246.8055555555557
+          }
+        },
+        "8000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 26,
+            "complete_evidence_rate": 0.7222222222222222,
+            "complete_evidence_ci95": [
+              0.548138854932161,
+              0.857997552736598
+            ],
+            "mean_group_coverage": 0.837037037037037,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 5,
+                "complete_evidence_rate": 0.5555555555555556,
+                "complete_evidence_ci95": [
+                  0.21200850677886798,
+                  0.8630043377348335
+                ],
+                "mean_group_coverage": 0.7925925925925926
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.9285714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7692307692307693
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1751.2777777777778,
+              "median": 1747.0,
+              "min": 1533,
+              "max": 1957,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 9.833333333333334,
+            "mean_serialized_chars": 7503.388888888889
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 28,
+            "complete_evidence_rate": 0.7777777777777778,
+            "complete_evidence_ci95": [
+              0.6084823508426185,
+              0.8988494696550873
+            ],
+            "mean_group_coverage": 0.8648148148148148,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 5,
+                "complete_evidence_rate": 0.5555555555555556,
+                "complete_evidence_ci95": [
+                  0.21200850677886798,
+                  0.8630043377348335
+                ],
+                "mean_group_coverage": 0.7925925925925926
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1751.2777777777778,
+              "median": 1747.0,
+              "min": 1533,
+              "max": 1957,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 9.833333333333334,
+            "mean_serialized_chars": 7503.388888888889
+          }
+        },
+        "12000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 30,
+            "complete_evidence_rate": 0.8333333333333334,
+            "complete_evidence_ci95": [
+              0.671884067957082,
+              0.9362798663916143
+            ],
+            "mean_group_coverage": 0.8981481481481481,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.8148148148148148
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.8461538461538461,
+                "complete_evidence_ci95": [
+                  0.5455289443234422,
+                  0.9807933280174715
+                ],
+                "mean_group_coverage": 0.8846153846153846
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2571.8055555555557,
+              "median": 2587.5,
+              "min": 2391,
+              "max": 2822,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.88888888888889,
+            "mean_serialized_chars": 11471.944444444445
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 31,
+            "complete_evidence_rate": 0.8611111111111112,
+            "complete_evidence_ci95": [
+              0.7050250518893684,
+              0.9533223393969097
+            ],
+            "mean_group_coverage": 0.9120370370370371,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.8148148148148148
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.8461538461538461,
+                "complete_evidence_ci95": [
+                  0.5455289443234422,
+                  0.9807933280174715
+                ],
+                "mean_group_coverage": 0.8846153846153846
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2571.8055555555557,
+              "median": 2587.5,
+              "min": 2391,
+              "max": 2822,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.88888888888889,
+            "mean_serialized_chars": 11471.944444444445
+          }
+        },
+        "16000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 33,
+            "complete_evidence_rate": 0.9166666666666666,
+            "complete_evidence_ci95": [
+              0.7753102394430269,
+              0.9824735040760654
+            ],
+            "mean_group_coverage": 0.9444444444444444,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.9230769230769231,
+                "complete_evidence_ci95": [
+                  0.6397025647321225,
+                  0.9980543715026533
+                ],
+                "mean_group_coverage": 0.9230769230769231
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3413.9444444444443,
+              "median": 3422.5,
+              "min": 3154,
+              "max": 3680,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 20.36111111111111,
+            "mean_serialized_chars": 15549.277777777777
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 34,
+            "complete_evidence_rate": 0.9444444444444444,
+            "complete_evidence_ci95": [
+              0.813363293542446,
+              0.9931996993459772
+            ],
+            "mean_group_coverage": 0.9583333333333334,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.9230769230769231,
+                "complete_evidence_ci95": [
+                  0.6397025647321225,
+                  0.9980543715026533
+                ],
+                "mean_group_coverage": 0.9230769230769231
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3413.9444444444443,
+              "median": 3422.5,
+              "min": 3154,
+              "max": 3680,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 20.36111111111111,
+            "mean_serialized_chars": 15549.277777777777
+          }
+        }
+      },
+      "cases_archived_count": 50,
+      "per_question_input_tokens_estimate": {
+        "tech-glass-exact": {
+          "4": 568,
+          "8000": 1920,
+          "12000": 2772,
+          "16000": 3484
+        },
+        "tech-glass-paraphrase": {
+          "4": 582,
+          "8000": 1712,
+          "12000": 2701,
+          "16000": 3485
+        },
+        "tech-painted-exact": {
+          "4": 787,
+          "8000": 1750,
+          "12000": 2396,
+          "16000": 3290
+        },
+        "tech-wafer-exact": {
+          "4": 1119,
+          "8000": 1660,
+          "12000": 2615,
+          "16000": 3490
+        },
+        "tech-wafer-paraphrase": {
+          "4": 1216,
+          "8000": 1787,
+          "12000": 2525,
+          "16000": 3334
+        },
+        "tech-autoencoder-exact": {
+          "4": 1150,
+          "8000": 1616,
+          "12000": 2391,
+          "16000": 3341
+        },
+        "tech-compare-fusion": {
+          "4": 840,
+          "8000": 1788,
+          "12000": 2497,
+          "16000": 3376
+        },
+        "tech-unrelated": {
+          "4": 571,
+          "8000": 1932,
+          "12000": 2935,
+          "16000": 3801
+        },
+        "tech-missing-shared-cpu-cost": {
+          "4": 774,
+          "8000": 1817,
+          "12000": 2500,
+          "16000": 3331
+        },
+        "tech-obb": {
+          "4": 722,
+          "8000": 1772,
+          "12000": 2581,
+          "16000": 3360
+        },
+        "tech-annotation-tools": {
+          "4": 600,
+          "8000": 1877,
+          "12000": 2677,
+          "16000": 3680
+        },
+        "tech-rgb-channel-assignment": {
+          "4": 626,
+          "8000": 1727,
+          "12000": 2457,
+          "16000": 3424
+        },
+        "tech-amff-layers": {
+          "4": 748,
+          "8000": 1751,
+          "12000": 2691,
+          "16000": 3590
+        },
+        "tech-stripe-frequencies": {
+          "4": 703,
+          "8000": 1848,
+          "12000": 2594,
+          "16000": 3467
+        },
+        "tech-adaptive-binarization": {
+          "4": 819,
+          "8000": 1702,
+          "12000": 2612,
+          "16000": 3207
+        },
+        "tech-imagenet-initialization": {
+          "4": 690,
+          "8000": 1675,
+          "12000": 2638,
+          "16000": 3624
+        },
+        "tech-tdi-motion-sync": {
+          "4": 1187,
+          "8000": 1706,
+          "12000": 2636,
+          "16000": 3526
+        },
+        "tech-aw-ssim-combination": {
+          "4": 1060,
+          "8000": 1738,
+          "12000": 2503,
+          "16000": 3334
+        },
+        "tech-adga-shapes": {
+          "4": 850,
+          "8000": 1771,
+          "12000": 2399,
+          "16000": 3248
+        },
+        "tech-stable-camera": {
+          "4": 951,
+          "8000": 1957,
+          "12000": 2822,
+          "16000": 3662
+        },
+        "tech-turn-and-flip-labels": {
+          "4": 855,
+          "8000": 1753,
+          "12000": 2702,
+          "16000": 3321
+        },
+        "tech-manual-outline-union": {
+          "4": 812,
+          "8000": 1931,
+          "12000": 2666,
+          "16000": 3458
+        },
+        "tech-small-photo-supply": {
+          "4": 834,
+          "8000": 1593,
+          "12000": 2511,
+          "16000": 3419
+        },
+        "tech-both-checks-clean": {
+          "4": 839,
+          "8000": 1713,
+          "12000": 2641,
+          "16000": 3439
+        },
+        "tech-daylight-interference": {
+          "4": 731,
+          "8000": 1743,
+          "12000": 2469,
+          "16000": 3537
+        },
+        "tech-bright-specks-dark-background": {
+          "4": 1068,
+          "8000": 1738,
+          "12000": 2504,
+          "16000": 3442
+        },
+        "tech-moving-signal-addition": {
+          "4": 1140,
+          "8000": 1804,
+          "12000": 2676,
+          "16000": 3530
+        },
+        "tech-too-many-shortcuts": {
+          "4": 1113,
+          "8000": 1621,
+          "12000": 2395,
+          "16000": 3154
+        },
+        "tech-changing-neighborhood": {
+          "4": 1163,
+          "8000": 1688,
+          "12000": 2525,
+          "16000": 3317
+        },
+        "tech-damaged-clean-pairs": {
+          "4": 1041,
+          "8000": 1737,
+          "12000": 2419,
+          "16000": 3277
+        },
+        "tech-compare-localization-outputs": {
+          "4": 1054,
+          "8000": 1832,
+          "12000": 2425,
+          "16000": 3184
+        },
+        "tech-compare-training-splits": {
+          "4": 549,
+          "8000": 1744,
+          "12000": 2550,
+          "16000": 3459
+        },
+        "tech-compare-training-computers": {
+          "4": 773,
+          "8000": 1806,
+          "12000": 2662,
+          "16000": 3601
+        },
+        "tech-compare-data-expansion": {
+          "4": 659,
+          "8000": 1773,
+          "12000": 2614,
+          "16000": 3332
+        },
+        "tech-compare-evaluation-metrics": {
+          "4": 981,
+          "8000": 1690,
+          "12000": 2719,
+          "16000": 3423
+        },
+        "tech-compare-optical-cues": {
+          "4": 1103,
+          "8000": 1533,
+          "12000": 2526,
+          "16000": 3300
+        },
+        "tech-compare-network-inputs": {
+          "4": 964,
+          "8000": 1817,
+          "12000": 2637,
+          "16000": 3365
+        },
+        "tech-compare-network-roles": {
+          "4": 736,
+          "8000": 1773,
+          "12000": 2437,
+          "16000": 3422
+        },
+        "tech-unrelated-recipe": {
+          "4": 884,
+          "8000": 2033,
+          "12000": 2907,
+          "16000": 3695
+        },
+        "tech-unrelated-inheritance-law": {
+          "4": 856,
+          "8000": 1903,
+          "12000": 2643,
+          "16000": 3325
+        },
+        "tech-unrelated-planet-moons": {
+          "4": 725,
+          "8000": 2009,
+          "12000": 2905,
+          "16000": 3733
+        },
+        "tech-unrelated-exchange-rate": {
+          "4": 693,
+          "8000": 2003,
+          "12000": 2878,
+          "16000": 3558
+        },
+        "tech-unrelated-database-isolation": {
+          "4": 799,
+          "8000": 1618,
+          "12000": 2715,
+          "16000": 3347
+        },
+        "tech-unrelated-vaccination": {
+          "4": 733,
+          "8000": 2070,
+          "12000": 2809,
+          "16000": 3643
+        },
+        "tech-missing-canopy-service-life": {
+          "4": 621,
+          "8000": 1842,
+          "12000": 2597,
+          "16000": 3462
+        },
+        "tech-missing-heater-energy": {
+          "4": 1028,
+          "8000": 1511,
+          "12000": 2619,
+          "16000": 3486
+        },
+        "tech-missing-wafer-live-cells": {
+          "4": 1112,
+          "8000": 1722,
+          "12000": 2566,
+          "16000": 3503
+        },
+        "tech-missing-autoencoder-ct": {
+          "4": 1169,
+          "8000": 1635,
+          "12000": 2492,
+          "16000": 3386
+        },
+        "tech-missing-factory-warranty": {
+          "4": 740,
+          "8000": 1768,
+          "12000": 2429,
+          "16000": 3379
+        },
+        "tech-missing-canopy-confidence-bounds": {
+          "4": 760,
+          "8000": 1909,
+          "12000": 2729,
+          "16000": 3439
+        }
+      }
+    },
+    "bge-m3-dense": {
+      "archive_provenance": {
+        "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\bge-m3-dense\\run.json",
+        "sha256": "8e2b1c2384694ad63810e8903bc8a950e5a0bd1ecffa69bb89a05d07ad6a92be",
+        "run_id": "02a97974-5049-410d-9ef3-81ccaefab929"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.context_experiments.ArchivedRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null,
+        "passage_selection": null,
+        "information_selection": null
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "59652f998f6848e44d1355d0277f220dc0728fc93169bf933f29a50ecb865903",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": null,
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "summaries": {
+        "4": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 22,
+            "complete_evidence_rate": 0.6111111111111112,
+            "complete_evidence_ci95": [
+              0.43463804744842544,
+              0.7685755983378573
+            ],
+            "mean_group_coverage": 0.7078703703703704,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 4,
+                "complete_evidence_rate": 0.4444444444444444,
+                "complete_evidence_ci95": [
+                  0.1369956622651665,
+                  0.787991493221132
+                ],
+                "mean_group_coverage": 0.6370370370370371
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7142857142857143,
+                "complete_evidence_ci95": [
+                  0.4189647428163391,
+                  0.9161106816928725
+                ],
+                "mean_group_coverage": 0.8035714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6538461538461539
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 883.4166666666666,
+              "median": 867.0,
+              "min": 626,
+              "max": 1206,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3372.8611111111113
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 24,
+            "complete_evidence_rate": 0.6666666666666666,
+            "complete_evidence_ci95": [
+              0.49029745334810876,
+              0.8144381901740788
+            ],
+            "mean_group_coverage": 0.7287037037037037,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 4,
+                "complete_evidence_rate": 0.4444444444444444,
+                "complete_evidence_ci95": [
+                  0.1369956622651665,
+                  0.787991493221132
+                ],
+                "mean_group_coverage": 0.6370370370370371
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.8214285714285714
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.6923076923076923
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 883.4166666666666,
+              "median": 867.0,
+              "min": 626,
+              "max": 1206,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3372.8611111111113
+          }
+        },
+        "8000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 27,
+            "complete_evidence_rate": 0.75,
+            "complete_evidence_ci95": [
+              0.577970415421856,
+              0.8787967058761648
+            ],
+            "mean_group_coverage": 0.8444444444444444,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.8928571428571429
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7692307692307693
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1698.1666666666667,
+              "median": 1687.5,
+              "min": 1518,
+              "max": 1887,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 9.222222222222221,
+            "mean_serialized_chars": 7406.916666666667
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8722222222222222,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.9285714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1698.1666666666667,
+              "median": 1687.5,
+              "min": 1518,
+              "max": 1887,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 9.222222222222221,
+            "mean_serialized_chars": 7406.916666666667
+          }
+        },
+        "12000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8722222222222222,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7692307692307693
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2531.4166666666665,
+              "median": 2538.0,
+              "min": 2268,
+              "max": 2759,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.083333333333334,
+            "mean_serialized_chars": 11486.111111111111
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 30,
+            "complete_evidence_rate": 0.8333333333333334,
+            "complete_evidence_ci95": [
+              0.671884067957082,
+              0.9362798663916143
+            ],
+            "mean_group_coverage": 0.8861111111111111,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8777777777777778
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2531.4166666666665,
+              "median": 2538.0,
+              "min": 2268,
+              "max": 2759,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 14.083333333333334,
+            "mean_serialized_chars": 11486.111111111111
+          }
+        },
+        "16000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 30,
+            "complete_evidence_rate": 0.8333333333333334,
+            "complete_evidence_ci95": [
+              0.671884067957082,
+              0.9362798663916143
+            ],
+            "mean_group_coverage": 0.9027777777777778,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3346.8888888888887,
+              "median": 3356.5,
+              "min": 3102,
+              "max": 3499,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 18.583333333333332,
+            "mean_serialized_chars": 15477.361111111111
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 31,
+            "complete_evidence_rate": 0.8611111111111112,
+            "complete_evidence_ci95": [
+              0.7050250518893684,
+              0.9533223393969097
+            ],
+            "mean_group_coverage": 0.9166666666666666,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8461538461538461
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3346.8888888888887,
+              "median": 3356.5,
+              "min": 3102,
+              "max": 3499,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 18.583333333333332,
+            "mean_serialized_chars": 15477.361111111111
+          }
+        }
+      },
+      "cases_archived_count": 50,
+      "per_question_input_tokens_estimate": {
+        "tech-glass-exact": {
+          "4": 694,
+          "8000": 1780,
+          "12000": 2759,
+          "16000": 3491
+        },
+        "tech-glass-paraphrase": {
+          "4": 746,
+          "8000": 1596,
+          "12000": 2626,
+          "16000": 3467
+        },
+        "tech-painted-exact": {
+          "4": 952,
+          "8000": 1518,
+          "12000": 2268,
+          "16000": 3192
+        },
+        "tech-wafer-exact": {
+          "4": 751,
+          "8000": 1668,
+          "12000": 2555,
+          "16000": 3327
+        },
+        "tech-wafer-paraphrase": {
+          "4": 1122,
+          "8000": 1591,
+          "12000": 2554,
+          "16000": 3476
+        },
+        "tech-autoencoder-exact": {
+          "4": 1049,
+          "8000": 1616,
+          "12000": 2467,
+          "16000": 3150
+        },
+        "tech-compare-fusion": {
+          "4": 920,
+          "8000": 1626,
+          "12000": 2459,
+          "16000": 3249
+        },
+        "tech-unrelated": {
+          "4": 599,
+          "8000": 1633,
+          "12000": 2686,
+          "16000": 3547
+        },
+        "tech-missing-shared-cpu-cost": {
+          "4": 1013,
+          "8000": 1792,
+          "12000": 2521,
+          "16000": 3370
+        },
+        "tech-obb": {
+          "4": 722,
+          "8000": 1763,
+          "12000": 2532,
+          "16000": 3383
+        },
+        "tech-annotation-tools": {
+          "4": 626,
+          "8000": 1858,
+          "12000": 2581,
+          "16000": 3341
+        },
+        "tech-rgb-channel-assignment": {
+          "4": 627,
+          "8000": 1834,
+          "12000": 2612,
+          "16000": 3312
+        },
+        "tech-amff-layers": {
+          "4": 748,
+          "8000": 1866,
+          "12000": 2524,
+          "16000": 3372
+        },
+        "tech-stripe-frequencies": {
+          "4": 791,
+          "8000": 1694,
+          "12000": 2593,
+          "16000": 3498
+        },
+        "tech-adaptive-binarization": {
+          "4": 821,
+          "8000": 1729,
+          "12000": 2434,
+          "16000": 3224
+        },
+        "tech-imagenet-initialization": {
+          "4": 690,
+          "8000": 1756,
+          "12000": 2744,
+          "16000": 3479
+        },
+        "tech-tdi-motion-sync": {
+          "4": 1081,
+          "8000": 1679,
+          "12000": 2713,
+          "16000": 3441
+        },
+        "tech-aw-ssim-combination": {
+          "4": 1047,
+          "8000": 1694,
+          "12000": 2431,
+          "16000": 3261
+        },
+        "tech-adga-shapes": {
+          "4": 1010,
+          "8000": 1712,
+          "12000": 2327,
+          "16000": 3320
+        },
+        "tech-stable-camera": {
+          "4": 857,
+          "8000": 1821,
+          "12000": 2678,
+          "16000": 3404
+        },
+        "tech-turn-and-flip-labels": {
+          "4": 1074,
+          "8000": 1688,
+          "12000": 2564,
+          "16000": 3275
+        },
+        "tech-manual-outline-union": {
+          "4": 806,
+          "8000": 1879,
+          "12000": 2579,
+          "16000": 3378
+        },
+        "tech-small-photo-supply": {
+          "4": 929,
+          "8000": 1668,
+          "12000": 2534,
+          "16000": 3244
+        },
+        "tech-both-checks-clean": {
+          "4": 887,
+          "8000": 1694,
+          "12000": 2294,
+          "16000": 3209
+        },
+        "tech-daylight-interference": {
+          "4": 877,
+          "8000": 1743,
+          "12000": 2527,
+          "16000": 3433
+        },
+        "tech-bright-specks-dark-background": {
+          "4": 895,
+          "8000": 1595,
+          "12000": 2542,
+          "16000": 3386
+        },
+        "tech-moving-signal-addition": {
+          "4": 1022,
+          "8000": 1620,
+          "12000": 2517,
+          "16000": 3426
+        },
+        "tech-too-many-shortcuts": {
+          "4": 1206,
+          "8000": 1670,
+          "12000": 2461,
+          "16000": 3320
+        },
+        "tech-changing-neighborhood": {
+          "4": 1054,
+          "8000": 1608,
+          "12000": 2353,
+          "16000": 3102
+        },
+        "tech-damaged-clean-pairs": {
+          "4": 1096,
+          "8000": 1756,
+          "12000": 2490,
+          "16000": 3324
+        },
+        "tech-compare-localization-outputs": {
+          "4": 752,
+          "8000": 1571,
+          "12000": 2511,
+          "16000": 3310
+        },
+        "tech-compare-training-splits": {
+          "4": 753,
+          "8000": 1687,
+          "12000": 2607,
+          "16000": 3392
+        },
+        "tech-compare-training-computers": {
+          "4": 835,
+          "8000": 1627,
+          "12000": 2668,
+          "16000": 3424
+        },
+        "tech-compare-data-expansion": {
+          "4": 829,
+          "8000": 1840,
+          "12000": 2694,
+          "16000": 3443
+        },
+        "tech-compare-evaluation-metrics": {
+          "4": 775,
+          "8000": 1887,
+          "12000": 2646,
+          "16000": 3499
+        },
+        "tech-compare-optical-cues": {
+          "4": 1126,
+          "8000": 1587,
+          "12000": 2318,
+          "16000": 3258
+        },
+        "tech-compare-network-inputs": {
+          "4": 897,
+          "8000": 1601,
+          "12000": 2609,
+          "16000": 3260
+        },
+        "tech-compare-network-roles": {
+          "4": 736,
+          "8000": 1612,
+          "12000": 2360,
+          "16000": 3418
+        },
+        "tech-unrelated-recipe": {
+          "4": 820,
+          "8000": 1864,
+          "12000": 2673,
+          "16000": 3451
+        },
+        "tech-unrelated-inheritance-law": {
+          "4": 747,
+          "8000": 1828,
+          "12000": 2554,
+          "16000": 3393
+        },
+        "tech-unrelated-planet-moons": {
+          "4": 597,
+          "8000": 1835,
+          "12000": 2527,
+          "16000": 3401
+        },
+        "tech-unrelated-exchange-rate": {
+          "4": 637,
+          "8000": 1902,
+          "12000": 2690,
+          "16000": 3618
+        },
+        "tech-unrelated-database-isolation": {
+          "4": 794,
+          "8000": 1757,
+          "12000": 2529,
+          "16000": 3316
+        },
+        "tech-unrelated-vaccination": {
+          "4": 823,
+          "8000": 1934,
+          "12000": 2759,
+          "16000": 3709
+        },
+        "tech-missing-canopy-service-life": {
+          "4": 674,
+          "8000": 1774,
+          "12000": 2576,
+          "16000": 3532
+        },
+        "tech-missing-heater-energy": {
+          "4": 854,
+          "8000": 1691,
+          "12000": 2612,
+          "16000": 3705
+        },
+        "tech-missing-wafer-live-cells": {
+          "4": 1096,
+          "8000": 1648,
+          "12000": 2505,
+          "16000": 3476
+        },
+        "tech-missing-autoencoder-ct": {
+          "4": 986,
+          "8000": 1788,
+          "12000": 2472,
+          "16000": 3332
+        },
+        "tech-missing-factory-warranty": {
+          "4": 905,
+          "8000": 1679,
+          "12000": 2658,
+          "16000": 3457
+        },
+        "tech-missing-canopy-confidence-bounds": {
+          "4": 880,
+          "8000": 1872,
+          "12000": 2743,
+          "16000": 3729
+        }
+      }
+    },
+    "bge-m3-bge-rerank20": {
+      "archive_provenance": {
+        "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\bge-m3-bge-rerank20\\run.json",
+        "sha256": "d33a5f6bcfa84c07f42fdb5d839fe2485a29ab58f48e39455558e624c519127d",
+        "run_id": "8c30308c-f54b-4be0-9b31-d9bd43ad5420"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.context_experiments.ArchivedRetriever",
+        "version": "encoding-v2",
+        "limit": 4,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": {
+          "model": "BAAI/bge-reranker-v2-m3",
+          "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+          "runtime": "llama.cpp",
+          "runtime_version": "b11327",
+          "device": "Vulkan0",
+          "precision": "float16",
+          "quantization": "none",
+          "weights": "bge-f16.gguf",
+          "tokenizer": "pinned-Hugging-Face-tokenizer",
+          "max_tokens": 511,
+          "truncation": "reject-overflow",
+          "batch_size": 4,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1,
+          "pair_order": "question-passage",
+          "score": "raw-relevance-logit",
+          "candidates": 20,
+          "diversity": 0.0,
+          "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "device_name": "AMD Radeon RX 6800",
+          "context_tokens": 2048,
+          "batch_tokens": 2048,
+          "gpu_layers": 99,
+          "prompt_cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+        },
+        "passage_selection": null,
+        "information_selection": null
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "59652f998f6848e44d1355d0277f220dc0728fc93169bf933f29a50ecb865903",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": null,
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "summaries": {
+        "4": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 26,
+            "complete_evidence_rate": 0.7222222222222222,
+            "complete_evidence_ci95": [
+              0.548138854932161,
+              0.857997552736598
+            ],
+            "mean_group_coverage": 0.8027777777777778,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.8928571428571429
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6923076923076923
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 936.4722222222222,
+              "median": 912.0,
+              "min": 688,
+              "max": 1218,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3682.0555555555557
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 28,
+            "complete_evidence_rate": 0.7777777777777778,
+            "complete_evidence_ci95": [
+              0.6084823508426185,
+              0.8988494696550873
+            ],
+            "mean_group_coverage": 0.8305555555555556,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.9285714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7307692307692307
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 936.4722222222222,
+              "median": 912.0,
+              "min": 688,
+              "max": 1218,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3682.0555555555557
+          }
+        }
+      },
+      "cases_archived_count": 50,
+      "per_question_input_tokens_estimate": {
+        "tech-glass-exact": {
+          "4": 695
+        },
+        "tech-glass-paraphrase": {
+          "4": 767
+        },
+        "tech-painted-exact": {
+          "4": 952
+        },
+        "tech-wafer-exact": {
+          "4": 893
+        },
+        "tech-wafer-paraphrase": {
+          "4": 1216
+        },
+        "tech-autoencoder-exact": {
+          "4": 1150
+        },
+        "tech-compare-fusion": {
+          "4": 1087
+        },
+        "tech-unrelated": {
+          "4": 633
+        },
+        "tech-missing-shared-cpu-cost": {
+          "4": 841
+        },
+        "tech-obb": {
+          "4": 714
+        },
+        "tech-annotation-tools": {
+          "4": 725
+        },
+        "tech-rgb-channel-assignment": {
+          "4": 688
+        },
+        "tech-amff-layers": {
+          "4": 747
+        },
+        "tech-stripe-frequencies": {
+          "4": 757
+        },
+        "tech-adaptive-binarization": {
+          "4": 1032
+        },
+        "tech-imagenet-initialization": {
+          "4": 856
+        },
+        "tech-tdi-motion-sync": {
+          "4": 1173
+        },
+        "tech-aw-ssim-combination": {
+          "4": 1116
+        },
+        "tech-adga-shapes": {
+          "4": 1017
+        },
+        "tech-stable-camera": {
+          "4": 816
+        },
+        "tech-turn-and-flip-labels": {
+          "4": 1057
+        },
+        "tech-manual-outline-union": {
+          "4": 788
+        },
+        "tech-small-photo-supply": {
+          "4": 1020
+        },
+        "tech-both-checks-clean": {
+          "4": 839
+        },
+        "tech-daylight-interference": {
+          "4": 926
+        },
+        "tech-bright-specks-dark-background": {
+          "4": 1195
+        },
+        "tech-moving-signal-addition": {
+          "4": 989
+        },
+        "tech-too-many-shortcuts": {
+          "4": 1080
+        },
+        "tech-changing-neighborhood": {
+          "4": 1125
+        },
+        "tech-damaged-clean-pairs": {
+          "4": 993
+        },
+        "tech-compare-localization-outputs": {
+          "4": 1020
+        },
+        "tech-compare-training-splits": {
+          "4": 892
+        },
+        "tech-compare-training-computers": {
+          "4": 764
+        },
+        "tech-compare-data-expansion": {
+          "4": 796
+        },
+        "tech-compare-evaluation-metrics": {
+          "4": 846
+        },
+        "tech-compare-optical-cues": {
+          "4": 1218
+        },
+        "tech-compare-network-inputs": {
+          "4": 898
+        },
+        "tech-compare-network-roles": {
+          "4": 866
+        },
+        "tech-unrelated-recipe": {
+          "4": 901
+        },
+        "tech-unrelated-inheritance-law": {
+          "4": 1003
+        },
+        "tech-unrelated-planet-moons": {
+          "4": 808
+        },
+        "tech-unrelated-exchange-rate": {
+          "4": 850
+        },
+        "tech-unrelated-database-isolation": {
+          "4": 749
+        },
+        "tech-unrelated-vaccination": {
+          "4": 714
+        },
+        "tech-missing-canopy-service-life": {
+          "4": 718
+        },
+        "tech-missing-heater-energy": {
+          "4": 898
+        },
+        "tech-missing-wafer-live-cells": {
+          "4": 1075
+        },
+        "tech-missing-autoencoder-ct": {
+          "4": 1052
+        },
+        "tech-missing-factory-warranty": {
+          "4": 798
+        },
+        "tech-missing-canopy-confidence-bounds": {
+          "4": 930
+        }
+      }
+    },
+    "bge-m3-bge-rerank40": {
+      "archive_provenance": {
+        "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\bge-m3-bge-rerank40\\run.json",
+        "sha256": "98999d32d2d683dfbfb3d93d273b4665b8da7776270db5f9c31ac9680afc702e",
+        "run_id": "cf0684f1-99bc-4d3e-9b3f-5e7702cae8da"
+      },
+      "corpus": {
+        "source_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+        "embedding_artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 204
+      },
+      "retrieval": {
+        "implementation": "researchlens.context_experiments.ArchivedRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "95f89f6a213ec4e2b282d5922e716e456811916f6cbabb2d41c0dbb6de473b29",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": {
+          "model": "BAAI/bge-reranker-v2-m3",
+          "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+          "runtime": "llama.cpp",
+          "runtime_version": "b11327",
+          "device": "Vulkan0",
+          "precision": "float16",
+          "quantization": "none",
+          "weights": "bge-f16.gguf",
+          "tokenizer": "pinned-Hugging-Face-tokenizer",
+          "max_tokens": 511,
+          "truncation": "reject-overflow",
+          "batch_size": 4,
+          "intra_op_threads": 8,
+          "inter_op_threads": 1,
+          "pair_order": "question-passage",
+          "score": "raw-relevance-logit",
+          "candidates": 40,
+          "diversity": 0.0,
+          "weights_sha256": "e4ba5c95a896a28197fd35d83034d0d886de543f4e90b1e1a0fe4c2ae0c86fd2",
+          "runtime_binary_sha256": "32d43779061d318ab36d0cf8156f314f81ac7e5b805298b7fe9facf3cf0cc82d",
+          "runtime_commit": "552f18f912a32ea86edf82e2b76431cb7131538d",
+          "device_name": "AMD Radeon RX 6800",
+          "context_tokens": 2048,
+          "batch_tokens": 2048,
+          "gpu_layers": 99,
+          "prompt_cache_ram_mib": 0,
+          "server_private_limit_bytes": 6442450944,
+          "prompt_template_sha256": "27d3845a1bc8c6d350e12fc67363ee44c5bd2e5e40db430ff423661ae32538bc"
+        },
+        "passage_selection": null,
+        "information_selection": null
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "59652f998f6848e44d1355d0277f220dc0728fc93169bf933f29a50ecb865903",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": null,
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "summaries": {
+        "4": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 25,
+            "complete_evidence_rate": 0.6944444444444444,
+            "complete_evidence_ci95": [
+              0.5189293699999202,
+              0.8365260153715064
+            ],
+            "mean_group_coverage": 0.7935185185185185,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.7851851851851852
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 11,
+                "complete_evidence_rate": 0.7857142857142857,
+                "complete_evidence_ci95": [
+                  0.4920243229515281,
+                  0.9534207121101327
+                ],
+                "mean_group_coverage": 0.8928571428571429
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.6923076923076923
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 944.4444444444445,
+              "median": 939.0,
+              "min": 688,
+              "max": 1218,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3717.277777777778
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 27,
+            "complete_evidence_rate": 0.75,
+            "complete_evidence_ci95": [
+              0.577970415421856,
+              0.8787967058761648
+            ],
+            "mean_group_coverage": 0.8212962962962963,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 6,
+                "complete_evidence_rate": 0.6666666666666666,
+                "complete_evidence_ci95": [
+                  0.29929505620854036,
+                  0.9251453685803082
+                ],
+                "mean_group_coverage": 0.7851851851851852
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.9285714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7307692307692307
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 944.4444444444445,
+              "median": 939.0,
+              "min": 688,
+              "max": 1218,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 4,
+            "mean_serialized_chars": 3717.277777777778
+          }
+        },
+        "8000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 27,
+            "complete_evidence_rate": 0.75,
+            "complete_evidence_ci95": [
+              0.577970415421856,
+              0.8787967058761648
+            ],
+            "mean_group_coverage": 0.8305555555555556,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 12,
+                "complete_evidence_rate": 0.8571428571428571,
+                "complete_evidence_ci95": [
+                  0.5718708390903011,
+                  0.9822054845168084
+                ],
+                "mean_group_coverage": 0.9285714285714286
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.6153846153846154,
+                "complete_evidence_ci95": [
+                  0.31577760291406304,
+                  0.8614206611098394
+                ],
+                "mean_group_coverage": 0.7307692307692307
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1710.9166666666667,
+              "median": 1714.0,
+              "min": 1505,
+              "max": 1887,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 8.583333333333334,
+            "mean_serialized_chars": 7454.916666666667
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8583333333333333,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8222222222222222
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.7692307692307693
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 1710.9166666666667,
+              "median": 1714.0,
+              "min": 1505,
+              "max": 1887,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 8.583333333333334,
+            "mean_serialized_chars": 7454.916666666667
+          }
+        },
+        "12000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 29,
+            "complete_evidence_rate": 0.8055555555555556,
+            "complete_evidence_ci95": [
+              0.6397519838249748,
+              0.9180563602347911
+            ],
+            "mean_group_coverage": 0.8777777777777778,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2531.8888888888887,
+              "median": 2537.5,
+              "min": 2296,
+              "max": 2791,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 13.472222222222221,
+            "mean_serialized_chars": 11510.75
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 31,
+            "complete_evidence_rate": 0.8611111111111112,
+            "complete_evidence_ci95": [
+              0.7050250518893684,
+              0.9533223393969097
+            ],
+            "mean_group_coverage": 0.9055555555555556,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 7,
+                "complete_evidence_rate": 0.7777777777777778,
+                "complete_evidence_ci95": [
+                  0.39990642628368783,
+                  0.9718550265221018
+                ],
+                "mean_group_coverage": 0.8444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8461538461538461
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 2531.8888888888887,
+              "median": 2537.5,
+              "min": 2296,
+              "max": 2791,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 13.472222222222221,
+            "mean_serialized_chars": 11510.75
+          }
+        },
+        "16000": {
+          "all_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 30,
+            "complete_evidence_rate": 0.8333333333333334,
+            "complete_evidence_ci95": [
+              0.671884067957082,
+              0.9362798663916143
+            ],
+            "mean_group_coverage": 0.9027777777777778,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 13,
+                "complete_evidence_rate": 0.9285714285714286,
+                "complete_evidence_ci95": [
+                  0.6613155100681788,
+                  0.9981932193408746
+                ],
+                "mean_group_coverage": 0.9642857142857143
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 9,
+                "complete_evidence_rate": 0.6923076923076923,
+                "complete_evidence_ci95": [
+                  0.3857383382492956,
+                  0.9090796054279033
+                ],
+                "mean_group_coverage": 0.8076923076923077
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3340.4444444444443,
+              "median": 3330.0,
+              "min": 3123,
+              "max": 3574,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 18.055555555555557,
+            "mean_serialized_chars": 15494.472222222223
+          },
+          "asked_groups": {
+            "available": true,
+            "total_cases": 50,
+            "unscored_abstention_cases": 14,
+            "labeled_cases": 36,
+            "complete_evidence_cases": 32,
+            "complete_evidence_rate": 0.8888888888888888,
+            "complete_evidence_ci95": [
+              0.7393890794891708,
+              0.9688838600549847
+            ],
+            "mean_group_coverage": 0.9305555555555556,
+            "cohorts": {
+              "cross-document": {
+                "case_count": 9,
+                "labeled_cases": 9,
+                "complete_evidence_cases": 8,
+                "complete_evidence_rate": 0.8888888888888888,
+                "complete_evidence_ci95": [
+                  0.517503485082663,
+                  0.9971908632534008
+                ],
+                "mean_group_coverage": 0.9444444444444444
+              },
+              "exact-terminology": {
+                "case_count": 14,
+                "labeled_cases": 14,
+                "complete_evidence_cases": 14,
+                "complete_evidence_rate": 1.0,
+                "complete_evidence_ci95": [
+                  0.7683642383498834,
+                  1.0
+                ],
+                "mean_group_coverage": 1.0
+              },
+              "missing-evidence": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              },
+              "paraphrase": {
+                "case_count": 13,
+                "labeled_cases": 13,
+                "complete_evidence_cases": 10,
+                "complete_evidence_rate": 0.7692307692307693,
+                "complete_evidence_ci95": [
+                  0.461868460765959,
+                  0.9496189265088485
+                ],
+                "mean_group_coverage": 0.8461538461538461
+              },
+              "unrelated": {
+                "case_count": 7,
+                "labeled_cases": 0,
+                "complete_evidence_cases": 0,
+                "complete_evidence_rate": null,
+                "complete_evidence_ci95": null,
+                "mean_group_coverage": null
+              }
+            },
+            "input_tokens_estimate": {
+              "mean": 3340.4444444444443,
+              "median": 3330.0,
+              "min": 3123,
+              "max": 3574,
+              "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
+              "population": "answerable development questions"
+            },
+            "mean_passages": 18.055555555555557,
+            "mean_serialized_chars": 15494.472222222223
+          }
+        }
+      },
+      "cases_archived_count": 50,
+      "per_question_input_tokens_estimate": {
+        "tech-glass-exact": {
+          "4": 695,
+          "8000": 1862,
+          "12000": 2649,
+          "16000": 3322
+        },
+        "tech-glass-paraphrase": {
+          "4": 767,
+          "8000": 1800,
+          "12000": 2544,
+          "16000": 3457
+        },
+        "tech-painted-exact": {
+          "4": 952,
+          "8000": 1540,
+          "12000": 2525,
+          "16000": 3418
+        },
+        "tech-wafer-exact": {
+          "4": 893,
+          "8000": 1841,
+          "12000": 2615,
+          "16000": 3459
+        },
+        "tech-wafer-paraphrase": {
+          "4": 1216,
+          "8000": 1635,
+          "12000": 2662,
+          "16000": 3527
+        },
+        "tech-autoencoder-exact": {
+          "4": 1150,
+          "8000": 1506,
+          "12000": 2548,
+          "16000": 3246
+        },
+        "tech-compare-fusion": {
+          "4": 1087,
+          "8000": 1567,
+          "12000": 2296,
+          "16000": 3268
+        },
+        "tech-unrelated": {
+          "4": 633,
+          "8000": 1854,
+          "12000": 2658,
+          "16000": 3355
+        },
+        "tech-missing-shared-cpu-cost": {
+          "4": 907,
+          "8000": 1656,
+          "12000": 2469,
+          "16000": 3369
+        },
+        "tech-obb": {
+          "4": 748,
+          "8000": 1718,
+          "12000": 2581,
+          "16000": 3421
+        },
+        "tech-annotation-tools": {
+          "4": 725,
+          "8000": 1707,
+          "12000": 2621,
+          "16000": 3327
+        },
+        "tech-rgb-channel-assignment": {
+          "4": 688,
+          "8000": 1788,
+          "12000": 2529,
+          "16000": 3371
+        },
+        "tech-amff-layers": {
+          "4": 747,
+          "8000": 1616,
+          "12000": 2515,
+          "16000": 3345
+        },
+        "tech-stripe-frequencies": {
+          "4": 757,
+          "8000": 1723,
+          "12000": 2605,
+          "16000": 3403
+        },
+        "tech-adaptive-binarization": {
+          "4": 1032,
+          "8000": 1650,
+          "12000": 2512,
+          "16000": 3276
+        },
+        "tech-imagenet-initialization": {
+          "4": 856,
+          "8000": 1887,
+          "12000": 2618,
+          "16000": 3425
+        },
+        "tech-tdi-motion-sync": {
+          "4": 1173,
+          "8000": 1865,
+          "12000": 2791,
+          "16000": 3574
+        },
+        "tech-aw-ssim-combination": {
+          "4": 1116,
+          "8000": 1775,
+          "12000": 2606,
+          "16000": 3211
+        },
+        "tech-adga-shapes": {
+          "4": 1017,
+          "8000": 1684,
+          "12000": 2459,
+          "16000": 3328
+        },
+        "tech-stable-camera": {
+          "4": 865,
+          "8000": 1805,
+          "12000": 2723,
+          "16000": 3420
+        },
+        "tech-turn-and-flip-labels": {
+          "4": 1041,
+          "8000": 1794,
+          "12000": 2401,
+          "16000": 3158
+        },
+        "tech-manual-outline-union": {
+          "4": 788,
+          "8000": 1876,
+          "12000": 2572,
+          "16000": 3483
+        },
+        "tech-small-photo-supply": {
+          "4": 1020,
+          "8000": 1780,
+          "12000": 2366,
+          "16000": 3172
+        },
+        "tech-both-checks-clean": {
+          "4": 839,
+          "8000": 1592,
+          "12000": 2378,
+          "16000": 3242
+        },
+        "tech-daylight-interference": {
+          "4": 926,
+          "8000": 1670,
+          "12000": 2370,
+          "16000": 3123
+        },
+        "tech-bright-specks-dark-background": {
+          "4": 1195,
+          "8000": 1632,
+          "12000": 2488,
+          "16000": 3313
+        },
+        "tech-moving-signal-addition": {
+          "4": 989,
+          "8000": 1692,
+          "12000": 2510,
+          "16000": 3332
+        },
+        "tech-too-many-shortcuts": {
+          "4": 1080,
+          "8000": 1505,
+          "12000": 2454,
+          "16000": 3291
+        },
+        "tech-changing-neighborhood": {
+          "4": 1125,
+          "8000": 1587,
+          "12000": 2557,
+          "16000": 3317
+        },
+        "tech-damaged-clean-pairs": {
+          "4": 885,
+          "8000": 1597,
+          "12000": 2307,
+          "16000": 3287
+        },
+        "tech-compare-localization-outputs": {
+          "4": 982,
+          "8000": 1742,
+          "12000": 2531,
+          "16000": 3397
+        },
+        "tech-compare-training-splits": {
+          "4": 892,
+          "8000": 1813,
+          "12000": 2505,
+          "16000": 3371
+        },
+        "tech-compare-training-computers": {
+          "4": 956,
+          "8000": 1638,
+          "12000": 2652,
+          "16000": 3350
+        },
+        "tech-compare-data-expansion": {
+          "4": 970,
+          "8000": 1805,
+          "12000": 2411,
+          "16000": 3374
+        },
+        "tech-compare-evaluation-metrics": {
+          "4": 846,
+          "8000": 1731,
+          "12000": 2672,
+          "16000": 3540
+        },
+        "tech-compare-optical-cues": {
+          "4": 1218,
+          "8000": 1710,
+          "12000": 2449,
+          "16000": 3194
+        },
+        "tech-compare-network-inputs": {
+          "4": 898,
+          "8000": 1823,
+          "12000": 2565,
+          "16000": 3296
+        },
+        "tech-compare-network-roles": {
+          "4": 866,
+          "8000": 1637,
+          "12000": 2561,
+          "16000": 3218
+        },
+        "tech-unrelated-recipe": {
+          "4": 902,
+          "8000": 1856,
+          "12000": 2770,
+          "16000": 3439
+        },
+        "tech-unrelated-inheritance-law": {
+          "4": 990,
+          "8000": 1706,
+          "12000": 2464,
+          "16000": 3041
+        },
+        "tech-unrelated-planet-moons": {
+          "4": 836,
+          "8000": 1807,
+          "12000": 2681,
+          "16000": 3648
+        },
+        "tech-unrelated-exchange-rate": {
+          "4": 954,
+          "8000": 1922,
+          "12000": 2770,
+          "16000": 3619
+        },
+        "tech-unrelated-database-isolation": {
+          "4": 696,
+          "8000": 1950,
+          "12000": 2673,
+          "16000": 3408
+        },
+        "tech-unrelated-vaccination": {
+          "4": 628,
+          "8000": 1999,
+          "12000": 2876,
+          "16000": 3769
+        },
+        "tech-missing-canopy-service-life": {
+          "4": 718,
+          "8000": 1705,
+          "12000": 2562,
+          "16000": 3453
+        },
+        "tech-missing-heater-energy": {
+          "4": 898,
+          "8000": 1825,
+          "12000": 2673,
+          "16000": 3429
+        },
+        "tech-missing-wafer-live-cells": {
+          "4": 1075,
+          "8000": 1722,
+          "12000": 2541,
+          "16000": 3530
+        },
+        "tech-missing-autoencoder-ct": {
+          "4": 1079,
+          "8000": 1695,
+          "12000": 2521,
+          "16000": 3369
+        },
+        "tech-missing-factory-warranty": {
+          "4": 798,
+          "8000": 1747,
+          "12000": 2526,
+          "16000": 3420
+        },
+        "tech-missing-canopy-confidence-bounds": {
+          "4": 930,
+          "8000": 1950,
+          "12000": 2810,
+          "16000": 3650
+        }
+      }
+    }
+  },
+  "paired": [
+    {
+      "baseline": "tfidf",
+      "candidate": "tfidf",
+      "before_budget": 4,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 10,
+          "losses": 0,
+          "both_complete": 15,
+          "neither_complete": 11,
+          "p_two_sided": 0.001953125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 11,
+          "losses": 0,
+          "both_complete": 17,
+          "neither_complete": 8,
+          "p_two_sided": 0.0009765625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "tfidf",
+      "before_budget": 4,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 11,
+          "losses": 0,
+          "both_complete": 15,
+          "neither_complete": 10,
+          "p_two_sided": 0.0009765625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 0,
+          "both_complete": 17,
+          "neither_complete": 7,
+          "p_two_sided": 0.00048828125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "tfidf",
+      "before_budget": 4,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 11,
+          "losses": 0,
+          "both_complete": 15,
+          "neither_complete": 10,
+          "p_two_sided": 0.0009765625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 0,
+          "both_complete": 17,
+          "neither_complete": 7,
+          "p_two_sided": 0.00048828125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 4,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 10,
+          "p_two_sided": 0.5,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 8,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 4,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 6,
+          "p_two_sided": 0.03125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 5,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 4,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 9,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 3,
+          "p_two_sided": 0.00390625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 7,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 2,
+          "p_two_sided": 0.015625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 4,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 0,
+          "both_complete": 22,
+          "neither_complete": 9,
+          "p_two_sided": 0.0625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 7,
+          "p_two_sided": 0.0625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 4,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 7,
+          "losses": 0,
+          "both_complete": 22,
+          "neither_complete": 7,
+          "p_two_sided": 0.015625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 6,
+          "p_two_sided": 0.03125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 4,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 8,
+          "losses": 0,
+          "both_complete": 22,
+          "neither_complete": 6,
+          "p_two_sided": 0.0078125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 7,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 5,
+          "p_two_sided": 0.015625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-bge-rerank40",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 0,
+          "both_complete": 25,
+          "neither_complete": 9,
+          "p_two_sided": 0.5,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 7,
+          "p_two_sided": 0.5,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-bge-rerank40",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 0,
+          "both_complete": 25,
+          "neither_complete": 7,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 5,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-bge-rerank40",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 0,
+          "both_complete": 25,
+          "neither_complete": 6,
+          "p_two_sided": 0.0625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 0,
+          "both_complete": 27,
+          "neither_complete": 4,
+          "p_two_sided": 0.0625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 4,
+          "both_complete": 21,
+          "neither_complete": 6,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 5,
+          "both_complete": 23,
+          "neither_complete": 3,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 2,
+          "both_complete": 24,
+          "neither_complete": 4,
+          "p_two_sided": 0.2890625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 3,
+          "both_complete": 26,
+          "neither_complete": 2,
+          "p_two_sided": 0.7265625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 3,
+          "both_complete": 12,
+          "neither_complete": 9,
+          "p_two_sided": 0.03515625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 2,
+          "both_complete": 15,
+          "neither_complete": 7,
+          "p_two_sided": 0.012939453125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "qwen3-4b-dense",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 7,
+          "losses": 0,
+          "both_complete": 26,
+          "neither_complete": 3,
+          "p_two_sided": 0.015625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 1,
+          "both_complete": 28,
+          "neither_complete": 1,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-dense",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 4,
+          "both_complete": 21,
+          "neither_complete": 5,
+          "p_two_sided": 0.75390625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 5,
+          "both_complete": 23,
+          "neither_complete": 2,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-dense",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 3,
+          "both_complete": 23,
+          "neither_complete": 4,
+          "p_two_sided": 0.5078125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 4,
+          "both_complete": 25,
+          "neither_complete": 2,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-dense",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 10,
+          "losses": 3,
+          "both_complete": 12,
+          "neither_complete": 11,
+          "p_two_sided": 0.09228515625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 10,
+          "losses": 3,
+          "both_complete": 14,
+          "neither_complete": 9,
+          "p_two_sided": 0.09228515625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-dense",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 6,
+          "losses": 2,
+          "both_complete": 24,
+          "neither_complete": 4,
+          "p_two_sided": 0.2890625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 3,
+          "both_complete": 26,
+          "neither_complete": 2,
+          "p_two_sided": 0.7265625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-bge-rerank20",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 1,
+          "both_complete": 14,
+          "neither_complete": 9,
+          "p_two_sided": 0.00341796875,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 12,
+          "losses": 1,
+          "both_complete": 16,
+          "neither_complete": 7,
+          "p_two_sided": 0.00341796875,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 3,
+          "both_complete": 22,
+          "neither_complete": 6,
+          "p_two_sided": 0.7265625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 4,
+          "both_complete": 24,
+          "neither_complete": 3,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 2,
+          "both_complete": 24,
+          "neither_complete": 5,
+          "p_two_sided": 0.453125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 3,
+          "both_complete": 26,
+          "neither_complete": 2,
+          "p_two_sided": 0.7265625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 11,
+          "losses": 1,
+          "both_complete": 14,
+          "neither_complete": 10,
+          "p_two_sided": 0.00634765625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 11,
+          "losses": 1,
+          "both_complete": 16,
+          "neither_complete": 8,
+          "p_two_sided": 0.00634765625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "tfidf",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 1,
+          "both_complete": 25,
+          "neither_complete": 5,
+          "p_two_sided": 0.21875,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 5,
+          "losses": 2,
+          "both_complete": 27,
+          "neither_complete": 2,
+          "p_two_sided": 0.453125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 1,
+          "both_complete": 25,
+          "neither_complete": 8,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 1,
+          "both_complete": 27,
+          "neither_complete": 6,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 3,
+          "losses": 4,
+          "both_complete": 26,
+          "neither_complete": 3,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 3,
+          "both_complete": 28,
+          "neither_complete": 3,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 3,
+          "both_complete": 21,
+          "neither_complete": 11,
+          "p_two_sided": 0.625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 4,
+          "both_complete": 23,
+          "neither_complete": 8,
+          "p_two_sided": 0.375,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-dense",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 4,
+          "both_complete": 29,
+          "neither_complete": 2,
+          "p_two_sided": 0.375,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 0,
+          "losses": 3,
+          "both_complete": 31,
+          "neither_complete": 2,
+          "p_two_sided": 0.25,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-bge-rerank20",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 3,
+          "losses": 1,
+          "both_complete": 23,
+          "neither_complete": 9,
+          "p_two_sided": 0.625,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 1,
+          "both_complete": 26,
+          "neither_complete": 7,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 3,
+          "losses": 2,
+          "both_complete": 24,
+          "neither_complete": 7,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 3,
+          "losses": 2,
+          "both_complete": 26,
+          "neither_complete": 5,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 3,
+          "both_complete": 27,
+          "neither_complete": 4,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 2,
+          "both_complete": 29,
+          "neither_complete": 3,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 3,
+          "losses": 2,
+          "both_complete": 22,
+          "neither_complete": 9,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 2,
+          "losses": 2,
+          "both_complete": 25,
+          "neither_complete": 7,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "qwen3-4b-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 0,
+          "losses": 3,
+          "both_complete": 30,
+          "neither_complete": 3,
+          "p_two_sided": 0.25,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 0,
+          "losses": 2,
+          "both_complete": 32,
+          "neither_complete": 2,
+          "p_two_sided": 0.5,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-bge-rerank20",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 0,
+          "both_complete": 22,
+          "neither_complete": 10,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 0,
+          "both_complete": 24,
+          "neither_complete": 8,
+          "p_two_sided": 0.125,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 8000,
+      "after_budget": 8000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 1,
+          "both_complete": 26,
+          "neither_complete": 8,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 1,
+          "both_complete": 28,
+          "neither_complete": 6,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 12000,
+      "after_budget": 12000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 1,
+          "both_complete": 28,
+          "neither_complete": 6,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 0,
+          "both_complete": 30,
+          "neither_complete": 5,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 1,
+          "both_complete": 21,
+          "neither_complete": 10,
+          "p_two_sided": 0.375,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 4,
+          "losses": 1,
+          "both_complete": 23,
+          "neither_complete": 8,
+          "p_two_sided": 0.375,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-dense",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 16000,
+      "after_budget": 16000,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 1,
+          "both_complete": 29,
+          "neither_complete": 5,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 1,
+          "losses": 0,
+          "both_complete": 31,
+          "neither_complete": 4,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    },
+    {
+      "baseline": "bge-m3-bge-rerank20",
+      "candidate": "bge-m3-bge-rerank40",
+      "before_budget": 4,
+      "after_budget": 4,
+      "views": {
+        "all_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 0,
+          "losses": 1,
+          "both_complete": 25,
+          "neither_complete": 10,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        },
+        "asked_groups": {
+          "paired_cases": 36,
+          "excluded_unscored_cases": 14,
+          "gains": 0,
+          "losses": 1,
+          "both_complete": 27,
+          "neither_complete": 8,
+          "p_two_sided": 1.0,
+          "method": "exact-mcnemar-two-sided-binomial"
+        }
+      }
+    }
+  ],
+  "qualification_differences": [
+    {
+      "case_id": "tech-wafer-exact",
+      "excluded_group_ids": [
+        "efficiency-scope"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "excluded_group_ids": [
+        "cds-incomplete"
+      ]
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "excluded_group_ids": [
+        "architecture-conflict"
+      ]
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "excluded_group_ids": [
+        "component-calculations"
+      ]
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "excluded_group_ids": [
+        "visibility-scope"
+      ]
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "excluded_group_ids": [
+        "containment-scope"
+      ]
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "excluded_group_ids": [
+        "residual-purpose"
+      ]
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "excluded_group_ids": [
+        "gaussian-spread",
+        "fixed-footprint"
+      ]
+    }
+  ],
+  "archive_provenance": {
+    "format": "research-summary-v1",
+    "full_archive_sha256": "f96c97c2262ebe59b573c55d950d4f10d190490eb0c7d23880d6c00c3e427a3f",
+    "path": "evaluation\\runs\\context-budget-reviewed-2026-10-13\\summary.json",
+    "scope": "Summary and per-question token estimates; full context/group records remain in run archives."
+  }
+}

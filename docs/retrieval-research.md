@@ -17,6 +17,7 @@ named `development-selected-*` record study selections; startup does not load th
 | [Complementary selection](complementary-selection.md) | Query splitting and metadata reranking; tested variants regress. |
 | [Information needs](information-needs-experiments.md) | Fixed-pool selectors and contextual vectors; no better study winner. |
 | [Selection diagnostics](selection-diagnostics.md) | Candidate ceilings, label-assisted diagnostics and a slow repair pilot. |
+| [Serialized context budgets](context-budget.md) | Qwen dense at 12k/16k characters meets all five development retrieval targets; answer quality remains unmeasured. |
 | [Historical CPU comparison](model-comparison.md) | Earlier draft-label results; not comparable with approved-label scores. |
 
 ## Result archives
@@ -24,7 +25,8 @@ named `development-selected-*` record study selections; startup does not load th
 Checked-in result JSON files contain summaries with protocol, provenance, scores,
 cohorts and cost measurements. Repeated per-case scoring, inference matrices and
 passage/group details remain in full archives. Each summary's `archive_provenance`
-records the full archive hash and an immutable Git link to the original version.
+records the full archive hash and its recovery location. Historical summaries also
+link to their original full versions in Git.
 This preserves auditability while keeping the PR and future documentation readable.
 
 Generated runs, vectors, weights and logs belong in ignored `evaluation/runs/` or
@@ -33,9 +35,16 @@ archives and create summaries without changing the shared scoring framework.
 
 ## Remaining work
 
-The five retrieval targets have not all been reached. These small, correlated
-four-paper development studies also do not establish held-out quality,
+Measured on the supplied answer context, Qwen dense meets all five development
+retrieval targets at 12k and 16k serialized characters; see the
+[context budget study](context-budget.md). The application default remains four
+passages until answer quality with larger contexts is measured. These small,
+correlated four-paper development studies do not establish held-out quality,
 generated-answer correctness, citation support or abstention behavior.
+
+Separate follow-up PRs cover hardware-dependent model tiers with a startup memory
+check (Qwen3-4B peaks at about 8 GiB of RAM), readable formula rendering in the
+corpus, held-out confirmation of the frozen settings and answer-quality evaluation.
 
 Performance optimization is postponed until the stronger machine is available.
 Keep the current approved datasets, labels and source texts fixed for comparisons.

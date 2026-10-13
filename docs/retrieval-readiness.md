@@ -1,8 +1,7 @@
 # Retrieval evaluation readiness, 2026-10-01
 
-PR #9 is rebased onto PR #8's approved-evidence commit
-`f079ed1ad4c76c280d090c0b905fc23b0af3074a`. It is ready for local development
-comparisons. PR #8 remains open, so this is a stack, not a merge to main.
+This readiness check ran on PR #8's approved-evidence commit
+`f079ed1ad4c76c280d090c0b905fc23b0af3074a`, before PR #8 merged into `main`.
 
 The foundation has 50 approved development questions and 36 approved frozen held-out
 questions. Separate owner approval covers the revised development labels: 92 groups,
