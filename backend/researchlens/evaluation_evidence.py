@@ -214,12 +214,16 @@ def span_visible(span: EvidenceSpan, ranges: list[TextRange]) -> bool:
 def evidence_coverage(
     entry: CaseEvidence | None,
     visible: dict[str, list[TextRange] | None],
+    *,
+    asked_only: bool = False,
 ) -> dict:
     """Unknown encoder ranges remain unknown; lack of a retrieved passage is a miss."""
     if entry is None:
         return {"groups": [], "group_coverage": None, "complete_evidence": None}
     groups = []
     for group in entry.groups:
+        if asked_only and not group.id.startswith("part-"):
+            continue
         alternatives = []
         for option in group.alternatives:
             states = [
@@ -232,6 +236,8 @@ def evidence_coverage(
         covered = True if True in alternatives else None if None in alternatives else False
         groups.append({"group_id": group.id, "claim_index": group.claim_index, "covered": covered})
     states = [g["covered"] for g in groups]
+    if not states:
+        return {"groups": [], "group_coverage": None, "complete_evidence": None}
     return {
         "groups": groups,
         "group_coverage": None if None in states else sum(states) / len(states),

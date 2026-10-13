@@ -98,6 +98,49 @@ class Fixed:
         return self.hits[:limit]
 
 
+def test_runner_scores_provider_context_budgets_with_failures(sample):
+    dataset, artifact, hits = sample
+    selected = list(hits.values())
+    config = RetrievalConfig(implementation="test.Fixed", version="1", limit=40)
+    result = run_evaluation(
+        dataset,
+        artifact,
+        Fixed(selected),
+        config,
+        evidence_labels=labels(sample),
+        context_budgets=[4, 8000, 12000, 16000],
+    )
+    row = next(r for r in result["results"] if r["case_id"] == "dev-compare-imaging")
+    assert set(row["context_profiles"]) == {"4", "8000", "12000", "16000"}
+    assert row["context_profiles"]["16000"]["all_groups"]["complete_evidence"] is True
+    assert row["context_profiles"]["16000"]["asked_groups"]["complete_evidence"] is None
+    assert "95% binomial CI" in comparison_report([result], [None])
+
+    class Failed:
+        def search(self, question, limit=4):
+            raise ValueError("Failure")
+
+    failed = run_evaluation(
+        dataset,
+        artifact,
+        Failed(),
+        config,
+        evidence_labels=labels(sample),
+        context_budgets=[4, 8000],
+    )
+    row = next(r for r in failed["results"] if r["case_id"] == "dev-compare-imaging")
+    assert row["context_profiles"]["8000"]["all_groups"]["complete_evidence"] is False
+    assert row["context_profiles"]["8000"]["context"]["passage_ids"] == []
+    with pytest.raises(ValueError, match="40 ranked candidates"):
+        run_evaluation(
+            dataset,
+            artifact,
+            Fixed(selected),
+            config.model_copy(update={"limit": 4}),
+            context_budgets=[8000],
+        )
+
+
 def run(sample, ordered, **kwargs):
     return run_evaluation(
         sample[0],

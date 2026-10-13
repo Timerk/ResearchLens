@@ -28,6 +28,11 @@ from researchlens.artifacts import (
     passage_identity,
     validate_passage_artifact,
 )
+from researchlens.context_evaluation import (
+    STANDARD_BUDGETS,
+    context_profile,
+    context_report_details,
+)
 from researchlens.evaluation_evidence import (
     EncodingDiagnostics,
     EvidenceLabels,
@@ -43,6 +48,7 @@ from researchlens.evaluation_memory import process_peak_rss_bytes
 from researchlens.evaluation_metrics import (
     comparison_details,
     cutoff_summary,
+    exact_mcnemar,
     paired_changes,
     percentile_nearest_rank,
 )
@@ -226,6 +232,8 @@ def installed_versions() -> dict:
         "transformers",
         "safetensors",
         "sentence-transformers",
+        "tiktoken",
+        "scipy",
     ):
         try:
             packages[name] = version(name)
@@ -279,6 +287,7 @@ def run_evaluation(
     evidence_labels: EvidenceLabels | None = None,
     encoding_diagnostics: EncodingDiagnostics | None = None,
     cutoffs: list[int] | None = None,
+    context_budgets: list[int] | None = None,
 ) -> dict:
     """Injected implementations own their resources; never serialize clients/settings.
 
@@ -287,6 +296,14 @@ def run_evaluation(
     """
     passages = validate_artifact(dataset, artifact)
     retrieval = validate_retrieval_config(retrieval, artifact)
+    if context_budgets is not None and (
+        not context_budgets
+        or any(b not in STANDARD_BUDGETS for b in context_budgets)
+        or (any(b != 4 for b in context_budgets) and retrieval.limit < 40)
+    ):
+        raise ValueError(
+            "Context profiles require standard budgets and at least 40 ranked candidates"
+        )
     cutoffs = (
         cutoffs
         if cutoffs is not None
@@ -460,12 +477,18 @@ def run_evaluation(
                 row["embedding_truncation_loss_at_k"][str(k)] = coverage_loss(
                     row["metrics_at_k"][str(k)], row["embedding_coverage_at_k"][str(k)]
                 )
+        if context_budgets:
+            row["context_profiles"] = {
+                str(b): context_profile(case.question, scored_hits, entry, b)
+                for b in context_budgets
+            }
         if hits is not None:
             budget = (
                 {
                     "max_passages": provider.MAX_PASSAGES,
                     "max_passage_chars": provider.MAX_PASSAGE_CHARS,
                     "max_context_chars": provider.MAX_CONTEXT_CHARS,
+                    "mode": provider.context_mode,
                 }
                 if isinstance(provider, OpenAIProvider)
                 else {}
@@ -508,8 +531,13 @@ def run_evaluation(
             if evidence_labels
             else None,
             "percentile_method": "nearest-rank",
+            "context_scoring": "serialized-provider-prefix-v1",
+            "asked_group_rule": "group-id-starts-with-part-",
+            "confidence_interval": "Clopper-Pearson-two-sided-95-percent",
+            "paired_test": "exact-McNemar-two-sided-binomial",
         },
         "cutoffs": cutoffs,
+        "context_budgets": context_budgets,
         "evidence_labels": evidence_labels.model_dump(mode="json") if evidence_labels else None,
         "encoding_diagnostics": encoding_diagnostics.model_dump(mode="json")
         if encoding_diagnostics
@@ -792,6 +820,8 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
         "Query timings exclude setup/warmups; setup is recorded separately. Peak RSS is a "
         "process-lifetime high-water mark: use a fresh process per model. "
         "Small unreviewed samples do not establish model superiority.",
+        "Differences of 1-3 complete questions out of 36 are not significant at 5% "
+        "under the exact paired McNemar test. Context coverage is not answer quality.",
         "",
         f"Dataset SHA-256: {runs[0]['dataset_sha256']}",
         f"Shared passage identity SHA-256: {runs[0]['corpus'][identity_field]}",
@@ -802,6 +832,7 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
     for key in summaries[0]:
         lines.append("| " + key + " | " + " | ".join(str(s[key]) for s in summaries) + " |")
     lines.extend(comparison_details(runs))
+    lines.extend(context_report_details(runs))
     lines.extend(
         [
             "",
@@ -890,6 +921,7 @@ def main() -> None:
     )
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--limit", type=int)
+    run.add_argument("--context-budgets", type=int, nargs="+", choices=STANDARD_BUDGETS)
     run.add_argument("--cutoffs", type=int, nargs="+", help="Ranking prefixes; use 1 4 10")
     run.add_argument(
         "--evidence-labels", type=Path, help="Pinned alternative/complete-evidence labels"
@@ -982,6 +1014,7 @@ def main() -> None:
                 generation=GenerationConfig(provider="local-preview" if provider else "none"),
                 execution=execution,
                 cutoffs=args.cutoffs,
+                context_budgets=args.context_budgets,
                 evidence_labels=EvidenceLabels.model_validate_json(
                     args.evidence_labels.read_bytes()
                 )
@@ -1026,6 +1059,23 @@ def main() -> None:
                     "baseline_run_id": runs[0]["run_id"],
                     "candidate_run_id": candidate["run_id"],
                     "changes": {str(k): paired_changes(runs[0], candidate, k) for k in (1, 4, 10)},
+                    "complete_evidence_statistics": {
+                        str(k): exact_mcnemar(
+                            {
+                                r["case_id"]: r.get("metrics_at_k", {})
+                                .get(str(k), {})
+                                .get("complete_evidence")
+                                for r in runs[0]["results"]
+                            },
+                            {
+                                r["case_id"]: r.get("metrics_at_k", {})
+                                .get(str(k), {})
+                                .get("complete_evidence")
+                                for r in candidate["results"]
+                            },
+                        )
+                        for k in (1, 4, 10)
+                    },
                 }
                 for candidate in runs[1:]
             ]

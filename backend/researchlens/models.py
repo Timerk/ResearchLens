@@ -83,7 +83,8 @@ class GeneratedAnswer(BaseModel):
 class AnswerContext(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    max_passages: int
+    mode: Literal["passages", "characters"] = "passages"
+    max_passages: int | None
     max_passage_chars: int
     max_context_chars: int
     serialized_chars: int
