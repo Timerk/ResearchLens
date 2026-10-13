@@ -70,6 +70,13 @@ when the answer context is budgeted by characters (`ANSWER_CONTEXT_MODE=characte
 `ANSWER_CONTEXT_CHARS=12000`, `ANSWER_CONTEXT_CANDIDATES=40`). The default stays at
 four passages. Held-out evaluation and answer quality remain unfinished.
 
+For hardware selection, set `RETRIEVAL_TIER=auto` and remove explicit
+`RETRIEVAL_BACKEND`/`EMBEDDING_MODEL` values. Auto selects full, standard, light or
+minimal using available physical RAM and separate prebuilt tier artifacts.
+Build each desired artifact with `python -m researchlens.ingest --tier <name>`;
+see [tier requirements and setup](docs/embeddings.md#hardware-retrieval-tiers).
+Without a tier, TF-IDF and four passages remain the defaults.
+
 ### Enable document-only OpenAI answers
 
 Create `.env` using `.env.example` as a guide (preserve your existing key if present):
