@@ -6,7 +6,8 @@ from fastapi import FastAPI, HTTPException
 from researchlens.answers import AnswerProvider, LocalPreview, OpenAIProvider, ProviderError
 from researchlens.config import Settings
 from researchlens.models import Answer, Question
-from researchlens.retrieval import PassageRetriever, load_retriever
+from researchlens.retrieval import PassageRetriever
+from researchlens.retrieval_tiers import load_configured_retriever
 
 
 def create_app(
@@ -18,16 +19,13 @@ def create_app(
     async def lifespan(app: FastAPI):
         active_settings = settings if settings is not None else Settings.from_env()
         app.state.retriever = retriever
+        app.state.retrieval_tier = None
         if app.state.retriever is None:
             try:
-                app.state.retriever = load_retriever(
-                    active_settings.retrieval,
-                    active_settings.index_path,
-                    source=active_settings.corpus_path,
-                    expected_model=active_settings.embedding_model,
-                    **active_settings.retriever_options(),
+                app.state.retriever, active_settings, app.state.retrieval_tier = (
+                    load_configured_retriever(active_settings)
                 )
-            except ValueError as exc:
+            except (ValueError, MemoryError, RuntimeError) as exc:
                 raise RuntimeError(str(exc)) from exc
         app.state.mode = "openai" if active_settings.provider == "openai" else "local_preview"
         app.state.retrieval_limit = (
@@ -53,8 +51,12 @@ def create_app(
     app = FastAPI(title="ResearchLens", version="0.1.0", lifespan=lifespan)
 
     @app.get("/api/health")
-    def health() -> dict[str, str]:
-        return {"status": "ok", "mode": app.state.mode}
+    def health() -> dict[str, str | None]:
+        return {
+            "status": "ok",
+            "mode": app.state.mode,
+            "retrieval_tier": app.state.retrieval_tier,
+        }
 
     @app.post("/api/ask", response_model=Answer)
     def ask(request: Question) -> Answer:

@@ -141,9 +141,12 @@ def create_encoder(
     threads: int | None = None,
     precision: str | None = None,
 ) -> Encoder:
+    from researchlens.memory import check_model_memory
+
     metadata = encoding_metadata(
         model, max_tokens=max_tokens, batch_size=batch_size, threads=threads, precision=precision
     )
+    check_model_memory(model)
     if model == "minilm":
         encoder = LocalEncoder(
             download=download,
@@ -214,6 +217,11 @@ class TorchEncoder:
                 .to("cpu")
                 .eval()
             )
+        except (MemoryError, RuntimeError) as exc:
+            raise RuntimeError(
+                f"Embedding model {encoding['model']} failed during loading; "
+                "try a lower RETRIEVAL_TIER or free physical RAM."
+            ) from exc
         except Exception:
             raise ValueError(
                 "Pinned CPU embedding model could not be loaded. Check available RAM, installed "

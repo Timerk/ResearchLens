@@ -113,6 +113,49 @@ matching corpus/model/settings, then restart; do not relabel metadata to bypass 
 Checksums detect corruption, not malicious tampering. Schema 1 stays usable by TF-IDF.
 Old incomplete embedding contracts and changed recorded runtime versions require rebuilding.
 
+## Hardware retrieval tiers
+
+Tiers are opt-in via `RETRIEVAL_TIER=auto|full|standard|light|minimal`.
+Remove explicit `RETRIEVAL_BACKEND` and `EMBEDDING_MODEL` values, including those
+copied from `.env.example`: either takes precedence and uses the existing manual
+configuration and `RETRIEVAL_INDEX`. With no tier, TF-IDF/four passages is unchanged.
+
+| Tier | Retrieval | Context characters | Required available RAM | Artifact |
+| --- | --- | ---: | ---: | --- |
+| full | Qwen3-4B dense | 12,000 | 10 GiB | `data/tiers/full.json` |
+| standard | BGE-M3 dense | 16,000 | 5 GiB | `data/tiers/standard.json` |
+| light | Qwen3-0.6B dense | 16,000 | 2.5 GiB | `data/tiers/light.json` |
+| minimal | TF-IDF | 16,000 | 0.25 GiB | `data/tiers/minimal.json` |
+
+Each tier uses character context and 40 candidates. Requirements add headroom to
+the measured CPU peaks of 8.1/3.9/1.7/~0.15 GiB, using the pinned encoder defaults
+for dense tiers: bfloat16, 512 tokens, batch 1, 8 threads. Manual MiniLM requires
+0.5 GiB against its measured 0.3 GiB peak. These are startup estimates, not limits
+or guarantees for larger corpora or custom runtime settings. `psutil` reads available
+physical memory on Windows/Linux/macOS, excluding swap. Embedding loads in manual
+mode and ingestion also check RAM before constructing the encoder.
+
+```sh
+rtk proxy uv sync --locked --extra embedding-models --python 3.13
+rtk proxy uv run --no-sync --directory backend python -m researchlens.ingest --tier full
+rtk proxy uv run --no-sync --directory backend python -m researchlens.ingest --tier minimal
+```
+
+Build standard/light similarly for intermediate fallbacks. The helper fixes the
+model/runtime defaults and preserves the corpus; `--source`/`--corpus` select an
+existing corpus. `RETRIEVAL_TIER_INDEX_DIR` or ingestion's `--tier-index-dir` changes
+the artifact directory. Query and passage encoders must match; startup retains
+model, runtime, corpus and checksum validation. No artifact is built at startup.
+
+Auto tries full, standard, light, minimal in order, skipping insufficient RAM or
+missing artifacts. It logs and falls back after incompatible artifacts, missing
+cached models, or caught `MemoryError`/`RuntimeError` load failures. An explicit tier
+fails instead, naming required/available RAM and the next tier when memory is short.
+No usable tier stops startup with build instructions. OS termination by an OOM
+killer cannot be caught. `/api/health` reports `retrieval_tier`, or `null` for manual
+configuration. Only full meets all five measured development targets; standard/light
+miss MRR, and minimal misses more. No new quality measurements are claimed here.
+
 ## Hybrid and runner integration
 
 Hybrid combines up to 20 positive-score lexical candidates and 20 dense neighbors with

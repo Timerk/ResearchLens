@@ -127,13 +127,23 @@ class EmbeddingRetriever:
                 "embeddings",
             ) from exc
         # Startup is cache-only. Only explicit ingestion can download model files.
-        encoder = create_encoder(
-            model,
-            max_tokens=encoding["max_tokens"],
-            batch_size=encoding["batch_size"],
-            threads=encoding["intra_op_threads"],
-            precision=encoding["precision"],
-        )
+        try:
+            encoder = create_encoder(
+                model,
+                max_tokens=encoding["max_tokens"],
+                batch_size=encoding["batch_size"],
+                threads=encoding["intra_op_threads"],
+                precision=encoding["precision"],
+            )
+        except (MemoryError, RuntimeError) as exc:
+            from researchlens.memory import MODEL_REQUIRED_GIB, available_memory_gib, next_tier
+
+            raise RuntimeError(
+                f"Embedding model {model} could not load: needs at least "
+                f"{MODEL_REQUIRED_GIB[model]:.2f} GiB available physical RAM; "
+                f"available {available_memory_gib():.2f} GiB. "
+                f"Try RETRIEVAL_TIER={next_tier(model)}."
+            ) from exc
         retriever = cls(passages, vectors, encoder, encoding)
         retriever._artifact = artifact
         return retriever
