@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "artifact_version": "mathml-readable-v2",
+  "prototype_script_sha256": "c9b0780ac4526676567cf6ec6dc771989867e5c5846022c3a33b485ee45b6717",
+  "implementation_sha256": {
+    "formula_prototype.py": "c9b0780ac4526676567cf6ec6dc771989867e5c5846022c3a33b485ee45b6717",
+    "formula_remapping.py": "6541ab70bc79f3056b7317569e25f76a334eaea3b334772c17c5e800c9ae45b3"
+  },
+  "protected_inputs_sha256": {
+    "data/technical/documents.json": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "data/technical/manifest.json": "508bb5c5f00982c4f80a341cc2b49db6728c62575366067b60579875696e4376",
+    "evaluation/labels/technical-development.json": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+    "evaluation/datasets/technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "evaluation/datasets/held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
+  },
+  "status": "proposal_only_owner_approval_required",
+  "canonical_documents_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "approved_development_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "scope": "candidate corpus; offline label remapping; development-only local retrieval",
+  "chunking": {
+    "method": "paragraph-word-windows",
+    "max_words": 180
+  },
+  "sources": [
+    {
+      "document_id": "pmc11510794",
+      "original_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24",
+      "mathml_elements_in_original": 21,
+      "paragraphs_changed": 5,
+      "rendered_formulas": 20
+    },
+    {
+      "document_id": "pmc11768589",
+      "original_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807",
+      "mathml_elements_in_original": 0,
+      "paragraphs_changed": 0
+    },
+    {
+      "document_id": "pmc10934137",
+      "original_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482",
+      "mathml_elements_in_original": 22,
+      "paragraphs_changed": 7,
+      "rendered_formulas": 22
+    },
+    {
+      "document_id": "pmc11121878",
+      "original_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1",
+      "mathml_elements_in_original": 95,
+      "paragraphs_changed": 22,
+      "rendered_formulas": 80,
+      "unsupported_formulas": 4,
+      "remaining_placeholders": 4
+    }
+  ],
+  "prototype_documents_sha256": "fe1c769f0ab662ac36cafd55982dbcc19c390b53f81fedff7852cc02aae23d26",
+  "candidate_index_sha256": "260a15c0367bf2149c59b84d2d8b76179ad0cb839d9b2689a6d618a91ae56477",
+  "label_remapping": {
+    "outputs": {
+      "development": {
+        "approved_labels_file": "evaluation\\labels\\technical-development.json",
+        "approved_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+        "candidate_labels_sha256": "1c0c5d3919b10c1adb9ad91fb6751f6813c05797ad2142cf6cc73e65beffc871",
+        "candidate_dataset_sha256": "1526480037b107111161699a2cd233882cf4e0dc21b25ea07cb106a118c7c644",
+        "counts": {
+          "unchanged": 132,
+          "shifted only": 14,
+          "quote text changed": 19
+        }
+      }
+    },
+    "held_out_inventory": {
+      "approved_span_occurrences": 0,
+      "reference_occurrences": 62,
+      "counts": {
+        "text changed": 7,
+        "unchanged": 51,
+        "ID changed": 4
+      },
+      "freeze_check": {
+        "frozen_corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+        "candidate_corpus_sha256": "fe1c769f0ab662ac36cafd55982dbcc19c390b53f81fedff7852cc02aae23d26",
+        "corpus_pin_matches": false,
+        "source_versions_match": true,
+        "owner_decision": "Adoption requires a new held-out dataset version and owner approval."
+      },
+      "notes": "Held-out has references only. Every reference was checked offline by source paragraph alignment and candidate window coverage. ID changed takes precedence when the old window's content now requires different or multiple IDs. Text changed means the same ID covers the aligned range but its passage text differs. Questions, answers and claims did not guide rendering. No held-out retrieval ran.",
+      "dataset_sha256": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
+    },
+    "total": 165,
+    "counts": {
+      "unchanged": 132,
+      "shifted only": 14,
+      "quote text changed": 19
+    }
+  },
+  "candidate_artifacts": {
+    "directory": "evaluation/runs/readable-formulas-v2-final",
+    "proposed_labels": "evaluation/runs/readable-formulas-v2-final/development-labels.json",
+    "exact_remapping": "evaluation/runs/readable-formulas-v2-final/remapping.json",
+    "exact_remapping_sha256": "6ceba103f21c87d5a6991c3af2333a01c1a45f0e136749a55dca2ac2ffb9ec30"
+  }
+}
