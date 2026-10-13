@@ -1,0 +1,494 @@
+{
+  "reviewer": "Codex GPT-6.1-Sol, independent label audit; not a human review",
+  "method": "Read generated sections and cited visible passages against approved case requirements before inspecting judge scores. Qualification preservation accepts a correctly scoped claim without requiring verbatim caveat wording.",
+  "reviews": {
+    "tfidf4": {
+      "tech-autoencoder-exact": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Sections cover normal-only stage one, normal plus artificial defects in stage two, and transferred stage-one weights. Cited p44:w0 states normal-only training and weight transfer; p46:w0 states both stage-two sample types and the combined loss. The answer does not claim real defects train stage one."
+      },
+      "tech-imagenet-initialization": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "The answer identifies transferred classifiers as pretrained on ImageNet and gives 450 by 450 study inputs. Cited p26:w0 contains both approved evidence groups. It does not claim the study collected a million heater images or newly trained on all ImageNet."
+      },
+      "tech-stable-camera": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. No sections convey the flexible arm holder keeping lens and sample fixed; fixture qualification is absent."
+      },
+      "tech-compare-localization-outputs": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. Neither required localization output nor the different-task qualifications is conveyed."
+      },
+      "tech-compare-training-splits": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. The 1576/176 image-pair split and 80/20 painted-surface split are both absent, as are the counting-unit and independent-benchmark qualifications."
+      },
+      "tech-moving-signal-addition": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": false,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "The answer states ideal square-root SNR gain but does not explain charge following and accumulating through sensor stages. The first section adds following a moving spot across more rows, whereas its cited p8:w180 and p1:w0 support signal gain and the application without explaining that motion/tracking mechanism. The ideal qualification is explicit; no linear-growth claim is asserted."
+      },
+      "tech-missing-factory-warranty": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-missing-autoencoder-ct": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-database-isolation": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-exchange-rate": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      }
+    },
+    "qwen4": {
+      "tech-autoencoder-exact": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "All required stage-one, stage-two and transferred-weight claims are explicit. p17:w0 supports paired artificial-defect/normal references; p8:w0 and p44:w0 support weight initialization. Stage one is normal-only, with no claim of real-defect training."
+      },
+      "tech-imagenet-initialization": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Transferred classifiers are correctly described as pretrained on ImageNet with 450 by 450 inputs, supported by p26:w0. The million-image clause is attributed to ImageNet rather than new heater collection or new complete-dataset study training."
+      },
+      "tech-stable-camera": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "The flexible arm holder maintains fixed lens/sample positions between the two captures, matching p27:w0. No measured registration-error bound or active stabilization algorithm is invented."
+      },
+      "tech-moving-signal-addition": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. No section explains moving charge accumulation or ideal square-root SNR gain."
+      },
+      "tech-compare-localization-outputs": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. Neither required localization output nor different-task qualifications is given."
+      },
+      "tech-compare-training-splits": {
+        "scores": {
+          "answer_correct": false,
+          "required_claims_met": false,
+          "qualifications_preserved": false,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "False abstention. Neither required numerical split nor counting-unit/comparison qualifiers is given."
+      },
+      "tech-missing-factory-warranty": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-missing-autoencoder-ct": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-database-isolation": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-exchange-rate": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      }
+    },
+    "qwen12k": {
+      "tech-autoencoder-exact": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "The answer explicitly covers normal-only stage one, stage-two artificial-defect and normal reference pairs, and transferred initialization weights. p17:w0 and p44:w0 jointly support every clause including the AW-SSIM loss; neither stage is described as requiring labeled real defects."
+      },
+      "tech-imagenet-initialization": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Pretrained ImageNet classifiers and 450 by 450 inputs are stated separately and correctly, both supported by p26:w0. The million-image clause concerns pretraining, not new heater collection or new study-wide ImageNet training."
+      },
+      "tech-stable-camera": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "A flexible arm holder keeps camera lens and sample fixed for the two captures. p27:w0 supports this fixture role; no numerical registration bound or active algorithm is asserted."
+      },
+      "tech-moving-signal-addition": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "p7:w0 explicitly supports transferred and accumulated charge following a moving object, contrast and low-light SNR gain. p8:w180 supports the explicitly ideal square-root scaling. No linear scaling or universal measured guarantee is asserted."
+      },
+      "tech-compare-localization-outputs": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Canopy oriented bounding boxes are supported by p58:w0; its extra defect-point/sample counts are also present there. Autoencoder residual localization is supported by p40:w0. The answer distinguishes the two representations and makes no shared-data performance ranking."
+      },
+      "tech-compare-training-splits": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "p36:w0 supports 1576/176 image pairs and 9:1; p23:w0 supports 80/20 individual images. The answer preserves the different counting units and datasets and asserts neither leakage-free independence nor a head-to-head performance ranking."
+      },
+      "tech-missing-factory-warranty": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-missing-autoencoder-ct": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-database-isolation": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-exchange-rate": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      }
+    },
+    "qwen16k": {
+      "tech-autoencoder-exact": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Normal-only stage one, artificial-defect/normal-reference pairs in stage two, and transferred weights are explicit. p17:w0 supports sample pairing and references; p46:w0 supports normal-only training; p16:w0 supports ADGA creating stage-two defect images; p8:w0 and p44:w0 support weight transfer. Every cited passage supports at least part of its section, with no real-defect stage-one assertion."
+      },
+      "tech-imagenet-initialization": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Pretrained transferred classifiers, at least one million ImageNet pretraining images and 450 by 450 study inputs are all supported by p26:w0. This is not a claim of new heater collection or study-wide retraining on all ImageNet."
+      },
+      "tech-stable-camera": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "The flexible arm holder maintains fixed camera-lens/sample geometry for two captures, supported by p27:w0. No active stabilization algorithm or measured registration-error bound is invented."
+      },
+      "tech-moving-signal-addition": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "Charge transfer and accumulation following image motion, contrast and low-light SNR gains match p7:w0; explicitly ideal square-root scaling matches p8:w180. No linear scaling or universal noise-condition guarantee is asserted."
+      },
+      "tech-compare-localization-outputs": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "OBB-format canopy annotations are supported by p58:w0 and the approved oriented-box evidence label. Autoencoder residual localization and failed defective-region reconstruction are supported by p40:w0. The two output representations are distinguished without claiming identical tasks/data or a performance ranking."
+      },
+      "tech-compare-training-splits": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": true,
+          "qualifications_preserved": true,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": true,
+          "citation_support": true,
+          "negative_abstention_correct": null
+        },
+        "evidence_notes": "1576/176 image pairs and 9:1 are supported by p36:w0; 80/20 individual images by p23:w0. The arithmetic comparison of training/test shares follows those ratios. Distinct counting units and datasets are retained; no leakage-free or head-to-head performance claim is made."
+      },
+      "tech-missing-factory-warranty": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-missing-autoencoder-ct": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-database-isolation": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      },
+      "tech-unrelated-exchange-rate": {
+        "scores": {
+          "answer_correct": true,
+          "required_claims_met": null,
+          "qualifications_preserved": null,
+          "no_forbidden_claims": true,
+          "citation_ids_valid": null,
+          "citation_support": null,
+          "negative_abstention_correct": true
+        },
+        "evidence_notes": "Correct section-free insufficient_evidence status for the approved negative. No requested result or forbidden assertion is supplied."
+      }
+    }
+  }
+}

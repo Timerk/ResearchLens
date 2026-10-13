@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "prices": {
+    "model": "gpt-6-luna",
+    "date": "2026-10-13",
+    "provenance": "Owner-supplied GPT-6 Luna pricing screenshot in the answer evaluation thread",
+    "input_per_million": 0.1,
+    "output_per_million": 0.5
+  },
+  "model": "gpt-6-luna",
+  "generation_prompt_sha256": "2f4906713f881e7d8351df1e57e5d4dc5fc436d86867965557f5b1eb0a458f99",
+  "generation_schema_sha256": "5878a32c1c70e74d7773c301ecf1538d34607d870ee91a8016d871ddeccafcd8",
+  "judge_prompt_sha256": "d9c2cfacda210e3331e433d2ef7dec11b417f1496067184137e3eef7973b463a",
+  "judge_schema_sha256": "bfb94bcc4df82a33144ddfae0bb85ec2aff9c3aa0bd78aae8dd96901e0338d5b",
+  "dataset_sha256": "e35f9222af3a9a69f5f7899c374d486ad46784e5354dfc04031309bdafc96523",
+  "configurations": [
+    {
+      "configuration": "tfidf4",
+      "budget": 4,
+      "ranking_sha256": "18c4585e5deba3d3767bac27d5cd0666aa2271cb3b559b603e4b11d926460726",
+      "generation_calls": 49,
+      "judge_calls_upper_bound": 49,
+      "generation_input_tokens_estimate": 38896,
+      "generation_input_tokens_reserved": 595621,
+      "judge_input_tokens_reserved": 3037992,
+      "generation_cost_estimate_usd": 0.0528896,
+      "judge_cost_estimate_usd": 0.1139492,
+      "generation_cost_reserved_usd": 0.10856210000000001,
+      "judge_cost_reserved_usd": 0.4017992
+    },
+    {
+      "configuration": "qwen4",
+      "budget": 4,
+      "ranking_sha256": "42f6a779429546052302f8cc2fe4af08e9901f3a3a02dc36f5baac4111530eb0",
+      "generation_calls": 50,
+      "judge_calls_upper_bound": 50,
+      "generation_input_tokens_estimate": 43098,
+      "generation_input_tokens_reserved": 622132,
+      "judge_input_tokens_reserved": 3113052,
+      "generation_cost_estimate_usd": 0.054309800000000005,
+      "judge_cost_estimate_usd": 0.11658160000000001,
+      "generation_cost_reserved_usd": 0.11221320000000001,
+      "judge_cost_reserved_usd": 0.41130520000000004
+    },
+    {
+      "configuration": "qwen12k",
+      "budget": 12000,
+      "ranking_sha256": "42f6a779429546052302f8cc2fe4af08e9901f3a3a02dc36f5baac4111530eb0",
+      "generation_calls": 50,
+      "judge_calls_upper_bound": 50,
+      "generation_input_tokens_estimate": 130309,
+      "generation_input_tokens_reserved": 1039387,
+      "judge_input_tokens_reserved": 3530307,
+      "generation_cost_estimate_usd": 0.0630309,
+      "judge_cost_estimate_usd": 0.1253022,
+      "generation_cost_reserved_usd": 0.1539387,
+      "judge_cost_reserved_usd": 0.4530307
+    },
+    {
+      "configuration": "qwen16k",
+      "budget": 16000,
+      "ranking_sha256": "42f6a779429546052302f8cc2fe4af08e9901f3a3a02dc36f5baac4111530eb0",
+      "generation_calls": 50,
+      "judge_calls_upper_bound": 50,
+      "generation_input_tokens_estimate": 171990,
+      "generation_input_tokens_reserved": 1240487,
+      "judge_input_tokens_reserved": 3731407,
+      "generation_cost_estimate_usd": 0.067199,
+      "judge_cost_estimate_usd": 0.1294703,
+      "generation_cost_reserved_usd": 0.1740487,
+      "judge_cost_reserved_usd": 0.4731407
+    }
+  ],
+  "total_reserved_usd": 2.2880385,
+  "scope": "Uncached rates; full output caps including reasoning; no retries. UTF-8 input reservation plus schema/framing allowance. Not billed usage."
+}

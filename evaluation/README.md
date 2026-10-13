@@ -43,8 +43,10 @@ publish evaluation artifacts. The default CLI makes zero paid API calls regardle
 of `.env` or `ANSWER_PROVIDER`. `--mode local-preview` also records the app's preview,
 which does not generate answers. Each new output directory receives `run.json`,
 `review.json` and `report.md`. Existing outputs are never overwritten.
-`evaluation/runs/` is ignored by Git; archive deliberately selected, reviewed artifacts
-when publishing results. Review licensed/private passage text before sharing it.
+`evaluation/runs/` is ignored by Git. Keep raw generation receipts, judgments and
+compressed evidence bundles there. Publish compact summary reports, audit notes
+and checksum manifests in source control. Review licensed/private passage text
+before sharing raw artifacts separately.
 Never save API credentials.
 
 `--cutoffs 1 4 10` queries once at limit 10 and scores prefixes of that ranking. It
@@ -366,22 +368,31 @@ and full/partial/no abstention. Complete reviews require identity/date and all j
 Valid citation IDs never automatically earn factual-support scores. Reports separate
 automatic statuses from human judgments and expose review completion and errors.
 
-There is no paid CLI mode. Injecting the existing OpenAIProvider requires reviewed
+The development-only `answer-plan` and `answer-run` commands add guarded paid
+generation and semantic judging. See [generated answer quality](../docs/answer-quality.md)
+for the four-way study, pricing, approval hash, hard `--max-cost-usd` cap and
+independent spot-check workflow. `answer-rank` creates free development rankings
+without loading the held-out split. Existing `run` defaults remain free.
+
+Injecting the existing OpenAIProvider requires reviewed
 cases, gpt-6-luna/medium, the matching bounded output limit (currently 2,000), zero
 client retries, the prompt hash and a positive dated cost estimate before any call.
-The provider supplies at most four 3,000-character passages within 16,000 serialized
-context characters; returned references retain full originals. Review truncation when
+The provider defaults to four 3,000-character passages within 16,000 serialized
+context characters; the answer study also measures ranked prefixes within 12k/16k
+serialized characters. Returned references retain full originals. Review truncation when
 assessing evidence available to the model. Retrieval k may exceed model context size.
 
 Before a deliberately authorized live pilot, obtain current rates and conservatively
 estimate `(input_tokens * input_rate + max_output_tokens * output_rate) / 1_000_000`
 over all planned requests, including prompt/context/schema overhead. Record assumptions,
-date and budget. Estimates are not spend caps or billing totals. Prefer mocks/local
+date and budget. The answer CLI reserves costs before each call within its hard cap;
+token estimates and recorded token costs are not billing totals. Prefer mocks/local
 retrieval; no paid generation is needed for embedding comparisons.
 
 Errors retain stable stage/code fields instead of exception strings that may expose
-credentials. Failed paid requests can leave usage/cost unknown, including invalid
-answers whose usage the current provider cannot return. Known sums and unknown counts
+credentials. Failed paid requests can leave usage/cost unknown. The answer commands
+retain known generation receipts even if provider validation rejects the answer.
+Known sums and unknown counts
 stay separate; no-call requests cost zero. Do not claim statistical certainty from a
 small dataset. Dirty-worktree results require archived corresponding code before being
 published as a reproducible baseline.
