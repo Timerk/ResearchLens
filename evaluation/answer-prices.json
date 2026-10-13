@@ -1,0 +1,7 @@
+{
+  "model": "gpt-6-luna",
+  "date": "2026-10-13",
+  "provenance": "Owner-supplied GPT-6 Luna pricing screenshot in the answer evaluation thread",
+  "input_per_million": 0.10,
+  "output_per_million": 0.50
+}

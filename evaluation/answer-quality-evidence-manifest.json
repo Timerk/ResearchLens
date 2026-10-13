@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "study_id": "answer-quality-2026-10-13",
+  "split": "development",
+  "archive": {
+    "path": "evaluation/runs/answer-quality-2026-10-13/evidence.json.gz",
+    "storage": "local ignored run artifact; not included in the source checkout",
+    "format": "gzip-compressed JSON",
+    "sha256": "4ac385031e32826141aaa2b7c3072a883f0f2198aa605664697407f3554df9ea",
+    "bytes": 4854385
+  },
+  "structured_hash_method": "researchlens.artifacts.canonical_hash",
+  "report_path": "docs/answer-quality-results.json",
+  "report_sha256": "04506f2ffd8563e3785a4fdcd0bcd2ea441dc1135dbafffdf851931b0598a3de",
+  "plan_sha256": "41b56efedc14712441a1e12952227a1cf8e0d8708fb67d02c9e57b9b3bb00daf",
+  "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
+  "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
+  "generation_prompt_sha256": "2f4906713f881e7d8351df1e57e5d4dc5fc436d86867965557f5b1eb0a458f99",
+  "judge_prompt_sha256": "d9c2cfacda210e3331e433d2ef7dec11b417f1496067184137e3eef7973b463a",
+  "runs": [
+    {
+      "configuration": "tfidf4",
+      "run_id": "answer-tfidf4-41b56efedc14",
+      "run_path": "evaluation/runs/answer-quality-2026-10-13/tfidf4/run.json",
+      "run_sha256": "d794f1359ce0f0a9f1c93597ee3987e38b7ca0f8ad674e2a978183ef5674e76d",
+      "review_path": "evaluation/runs/answer-quality-2026-10-13/tfidf4/spot-check-complete.json",
+      "review_sha256": "8d84d63e1fca10a9a366ad9964484ebb2aa03b0a71c07ac40fc40b68c676d81e",
+      "case_count": 50,
+      "raw_judge_count": 22
+    },
+    {
+      "configuration": "qwen4",
+      "run_id": "answer-qwen4-41b56efedc14",
+      "run_path": "evaluation/runs/answer-quality-2026-10-13/qwen4/run.json",
+      "run_sha256": "f0d51fe5cc6d8220e100346a4adbfed8d539ac5e6717b5f2a7e742f0532c897d",
+      "review_path": "evaluation/runs/answer-quality-2026-10-13/qwen4/spot-check-complete.json",
+      "review_sha256": "81df8934ce25caefdeba15bd4aa4856481e8b34bdd90d7048122257db78b656c",
+      "case_count": 50,
+      "raw_judge_count": 29
+    },
+    {
+      "configuration": "qwen12k",
+      "run_id": "answer-qwen12k-41b56efedc14",
+      "run_path": "evaluation/runs/answer-quality-2026-10-13/qwen12k/run.json",
+      "run_sha256": "c120f86b6b911e0f14f30d1c078b2ce979833e7f00ce2cdfee4fce5208019c92",
+      "review_path": "evaluation/runs/answer-quality-2026-10-13/qwen12k/spot-check-complete.json",
+      "review_sha256": "aaf6a2eb77d7f27651863c8a8714151f266088a6058c0cf6e90fcd650d07069e",
+      "case_count": 50,
+      "raw_judge_count": 35
+    },
+    {
+      "configuration": "qwen16k",
+      "run_id": "answer-qwen16k-41b56efedc14",
+      "run_path": "evaluation/runs/answer-quality-2026-10-13/qwen16k/run.json",
+      "run_sha256": "41c8221f6d57193c9f1f384fb7a536e11e904427de7a8bc430c24f095e680180",
+      "review_path": "evaluation/runs/answer-quality-2026-10-13/qwen16k/spot-check-complete.json",
+      "review_sha256": "9531f2308eb96bc336049117e3d4d4ab8964fdc8d88f90e772ae2897cac54985",
+      "case_count": 50,
+      "raw_judge_count": 36
+    }
+  ],
+  "dataset_hash_method": "researchlens.evaluation_evidence.dataset_digest of the validated Dataset",
+  "evidence_labels_hash_method": "researchlens.artifacts.canonical_hash of validated EvidenceLabels JSON"
+}

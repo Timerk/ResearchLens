@@ -908,6 +908,9 @@ def comparison_report(runs: list[dict], reviews: list[Review | None]) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    from researchlens.answer_evaluation import add_answer_commands, answer_command
+
+    add_answer_commands(commands)
     run = commands.add_parser("run", help="Free retrieval or local-preview evaluation")
     run.add_argument("--dataset", type=Path, required=True)
     run.add_argument("--other-split", type=Path, required=True)
@@ -948,7 +951,9 @@ def main() -> None:
     )
     args = parser.parse_args()
     try:
-        if args.command == "run":
+        if args.command.startswith("answer-"):
+            answer_command(args)
+        elif args.command == "run":
             dataset, other = load_dataset(args.dataset), load_dataset(args.other_split)
             validate_splits(
                 *((dataset, other) if dataset.split == "development" else (other, dataset))
