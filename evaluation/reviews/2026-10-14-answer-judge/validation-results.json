@@ -1,0 +1,196 @@
+{
+  "validation_sha256": "6d1aa7682786e95bb5e58d415f2e8dbc09cefbeac9708970405adc7cbbe721e1",
+  "frozen_contract_sha256": "b6a56c854bb2c23657dd98dae3ed634904789a39a991bd46edf858f456bbec3f",
+  "items": 30,
+  "owner_uncertain": 1,
+  "archived_baseline": {
+    "required_claim": {
+      "items": 6,
+      "agreed": 5,
+      "accuracy_all_items": 0.8333333333333334,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 0.8333333333333334,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 1,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 1
+      },
+      "cohens_kappa": 0.5714285714285715,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": false
+    },
+    "qualification": {
+      "items": 6,
+      "agreed": 2,
+      "accuracy_all_items": 0.3333333333333333,
+      "binary_pairs": 5,
+      "accuracy_decidable_pairs": 0.4,
+      "owner_uncertain": 1,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 2,
+        "human_pass_judge_fail": 3,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": 0.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": false
+    },
+    "forbidden_claim": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    },
+    "abstention": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 2
+      },
+      "cohens_kappa": 1.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": true
+    },
+    "citation": {
+      "items": 6,
+      "agreed": 4,
+      "accuracy_all_items": 0.6666666666666666,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 0.6666666666666666,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 2,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": 0.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": false
+    }
+  },
+  "frozen_judge": {
+    "required_claim": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 5,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 1
+      },
+      "cohens_kappa": 1.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": true
+    },
+    "qualification": {
+      "items": 6,
+      "agreed": 3,
+      "accuracy_all_items": 0.5,
+      "binary_pairs": 5,
+      "accuracy_decidable_pairs": 0.6,
+      "owner_uncertain": 1,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 3,
+        "human_pass_judge_fail": 2,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": 0.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": false
+    },
+    "forbidden_claim": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    },
+    "abstention": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 2
+      },
+      "cohens_kappa": 1.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": true
+    },
+    "citation": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    }
+  },
+  "validation_evaluation_count": 1,
+  "uncertainty_policy": "UNCERTAIN and unknown get no success credit in all-item accuracy; kappa uses decidable binary pairs with exclusions reported.",
+  "reliable_types": [
+    "required_claim",
+    "abstention"
+  ]
+}
