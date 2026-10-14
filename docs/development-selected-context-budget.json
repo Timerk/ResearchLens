@@ -54,7 +54,7 @@
   "evidence_labels_sha256": "7556636731185cef0dac7cf612ea26137503e13817236da0ff9620319e86f23e",
   "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
   "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
-  "study_summary_sha256": "f0ffd9177850607f7f861ae2630c17dc35ba8d2531577f7d266ec552a749205b",
+  "study_summary_sha256": "a6d4978a1636c518ef2e27066e88b67f080f67c6eef43cedc15ed31f876b43d0",
   "development_result": {
     "available": true,
     "total_cases": 50,

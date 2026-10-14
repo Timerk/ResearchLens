@@ -5799,9 +5799,10 @@
   "historical_answer_quality": "2026-10-13 answer-quality evidence remains pinned to the previous corpus; no new paid answer evaluation.",
   "qwen_meets_all_five_at_12k_and_16k": true,
   "implementation_sha256": {
-    "formula_experiments.py": "250fd045d51a5e777c85bb38bffde565a7c72b240a91f34b5f0e9ff24e2bbde5",
-    "formula_report.py": "a445bc455fa87e4fdc89ef75a37070acb961df52ff0c9cdcf1b30a282fcc42a1",
+    "formula_experiments.py": "b84ce51dd4a74e55a62ad4f4c5240f3ddf5395fc6e8fac3c30b9bf7309bb2f6b",
+    "formula_report.py": "d52f05984ffce40058bed0dfa24bbaa615f5ce1ba56712e0debe1391d12a270a",
     "mathml.py": "d1fc8ba1842be9f3651f41e97aa6c76425ca2ef0e24edf6961ae31ceac7359c5",
-    "corpus.py": "bd9131d90849d64b9b72fa2d7000b3b0bce59d4273c53d12b1165fec339f1534"
-  }
+    "corpus.py": "1c08b34e2380308f03ed89a385501e92ea91f6ca7158ab1fc1fcbb4baafb1068"
+  },
+  "implementation_hash_method": "SHA-256 of source bytes with CRLF normalized to LF"
 }

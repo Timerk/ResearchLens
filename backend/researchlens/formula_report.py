@@ -1,6 +1,7 @@
 """Summarize an explicitly authorized corpus intervention, not a same-corpus model trial."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from statistics import mean
@@ -14,6 +15,14 @@ from researchlens.evaluation_schema import Case
 from researchlens.formula_prototype import digest
 from researchlens.ingest import ROOT
 from researchlens.models import SearchHit
+
+
+def implementation_hashes(directory: Path, names: tuple[str, ...]) -> dict[str, str]:
+    """Pin source code using LF bytes, independent of checkout line endings."""
+    return {
+        name: hashlib.sha256((directory / name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+        for name in names
+    }
 
 
 def scored_context(run: dict, budget: int) -> dict:
@@ -211,10 +220,11 @@ def adopted_report(output: Path):
             "",
         ]
     )
-    current["implementation_sha256"] = {
-        name: digest(Path(__file__).with_name(name))
-        for name in ("formula_experiments.py", "formula_report.py", "mathml.py", "corpus.py")
-    }
+    current["implementation_sha256"] = implementation_hashes(
+        Path(__file__).parent,
+        ("formula_experiments.py", "formula_report.py", "mathml.py", "corpus.py"),
+    )
+    current["implementation_hash_method"] = "SHA-256 of source bytes with CRLF normalized to LF"
     docs = ROOT / "docs"
     (output / "adoption-summary.json").write_bytes(encoded(current))
     (docs / "formula-adoption-results.json").write_bytes(encoded(current))
@@ -474,10 +484,10 @@ def report(candidate: Path, output: Path, publish: bool = False):
                         if row["changed_metrics"] or row["case_id"] == "tech-changing-neighborhood"
                     ],
                 }
-        small["implementation_sha256"] = {
-            name: digest(Path(__file__).with_name(name))
-            for name in ("formula_experiments.py", "formula_report.py")
-        }
+        small["implementation_sha256"] = implementation_hashes(
+            Path(__file__).parent, ("formula_experiments.py", "formula_report.py")
+        )
+        small["implementation_hash_method"] = "SHA-256 of source bytes with CRLF normalized to LF"
         (docs / "formula-rendering-results.json").write_bytes(encoded(small))
         corpus_summary = compact["candidate_summary"]
         corpus_summary["label_remapping"]["held_out_inventory"].pop("references", None)
