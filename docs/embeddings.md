@@ -116,6 +116,12 @@ Old incomplete embedding contracts and changed recorded runtime versions require
 ## Hardware retrieval tiers
 
 Tiers are opt-in via `RETRIEVAL_TIER=auto|full|standard|light|minimal`.
+All tier artifacts were rebuilt against the owner-approved readable-formula corpus
+on 2026-10-14. Corpus adoption invalidates older indexes; regenerate each desired
+tier with the commands below. [Current results](formula-adoption-results.md) show
+full/Qwen12k meets all five targets with 29/36 complete, standard/BGE16k has 30/36,
+and minimal/TF-IDF16k has 26/36. The light index was rebuilt and validated, but its
+retrieval quality has not been remeasured on this corpus.
 Remove explicit `RETRIEVAL_BACKEND` and `EMBEDDING_MODEL` values, including those
 copied from `.env.example`: either takes precedence and uses the existing manual
 configuration and `RETRIEVAL_INDEX`. With no tier, TF-IDF/four passages is unchanged.
@@ -154,7 +160,8 @@ fails instead, naming required/available RAM and the next tier when memory is sh
 No usable tier stops startup with build instructions. OS termination by an OOM
 killer cannot be caught. `/api/health` reports `retrieval_tier`, or `null` for manual
 configuration. Only full meets all five measured development targets; standard/light
-miss MRR, and minimal misses more. No new quality measurements are claimed here.
+miss MRR, and minimal misses more. Use the current adoption results above for the
+three remeasured configurations; earlier tier estimates describe the previous corpus.
 
 ## Hybrid and runner integration
 

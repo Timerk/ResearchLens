@@ -2,6 +2,7 @@
 
 import argparse
 import copy
+import hashlib
 import json
 from pathlib import Path
 
@@ -19,6 +20,11 @@ REVIEW = ROOT / "evaluation/reviews/2026-10-14-pr15"
 REVIEWER = "Project owner (human reviewer; approval in PR #15 thread)"
 DATE = "2026-10-14"
 REASON = "source text change from formula rendering"
+HISTORICAL_LF_PATHS = (
+    "evaluation/reviews/2026-10-01-pr8/README.md",
+    "evaluation/answer-quality-evidence-manifest.json",
+    "docs/answer-quality-results.json",
+)
 
 
 def migrate_references(dataset: dict, records: list[dict]) -> tuple[dict, list[dict]]:
@@ -131,6 +137,10 @@ def adopt(candidate: Path) -> dict:
         "docs/answer-quality-results.json",
     ):
         historical[path] = digest(ROOT / path)
+    for path in HISTORICAL_LF_PATHS:
+        # These tracked text files have LF Git blobs but may be CRLF in a Windows checkout.
+        raw = (ROOT / path).read_bytes().replace(b"\r\n", b"\n")
+        historical[path] = hashlib.sha256(raw).hexdigest()
 
     build_corpus()
     corpus_sha = digest(DIRECTORY / "documents.json")
@@ -238,6 +248,10 @@ def adopt(candidate: Path) -> dict:
         },
         "preserved_archive_sha256": preserved,
         "historical_evidence_preserved_sha256": historical,
+        "historical_evidence_lf_normalized_paths": list(HISTORICAL_LF_PATHS),
+        "historical_evidence_hash_method": (
+            "LF-normalized bytes for declared text paths; exact bytes for all other paths."
+        ),
         "held_out_retrieval_executed": False,
         "held_out_answers_inspected": False,
         "paid_api_calls": 0,

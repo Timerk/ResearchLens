@@ -2,6 +2,7 @@
 
 import argparse
 import hashlib
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -14,6 +15,115 @@ from researchlens.embedding_models import create_encoder, model_for_encoding
 from researchlens.embeddings import validate_vectors
 from researchlens.evaluation import encoded, load_dataset
 from researchlens.ingest import ROOT, TECHNICAL_CORPUS
+
+
+def adopted_experiment(output: Path):
+    """Rebuild all application tiers, then retrieve only approved development questions."""
+    from researchlens.config import RETRIEVAL_TIERS
+
+    dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
+    if dataset.split != "development" or any(c.review_status != "approved" for c in dataset.cases):
+        raise ValueError("Use approved development questions only")
+    output.mkdir(parents=True, exist_ok=False)
+    manifest = {
+        "schema_version": 1,
+        "status": "approved_and_adopted",
+        "context_budgets": [4, 12000, 16000],
+        "limit": 40,
+        "repeats": 1,
+        "warmups": 0,
+        "api_calls": 0,
+        "held_out_searches": 0,
+        "generation": "none",
+        "stages": [],
+        "indexes": {},
+        "index_build": "All passage vectors freshly encoded through ingest --tier; no vector reuse",
+        "source_sha256": hashlib.sha256(TECHNICAL_CORPUS.read_bytes()).hexdigest(),
+    }
+    environment = {**os.environ, "HF_HUB_OFFLINE": "1"}
+
+    def stage(name, module, arguments):
+        print(f"Starting {name}", flush=True)
+        started = perf_counter()
+        result = subprocess.run(
+            [sys.executable, "-m", module, *map(str, arguments)],
+            cwd=ROOT / "backend",
+            env=environment,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        (output / f"{name}.log").write_bytes(result.stdout)
+        manifest["stages"].append(
+            {
+                "name": name,
+                "returncode": result.returncode,
+                "duration_seconds": round(perf_counter() - started, 3),
+            }
+        )
+        (output / "manifest.json").write_bytes(encoded(manifest))
+        print(f"{name}: exit {result.returncode}", flush=True)
+        if result.returncode:
+            raise ValueError(f"Stage failed: {name}; inspect local log")
+
+    for name in reversed(RETRIEVAL_TIERS):
+        stage(f"build-{name}", "researchlens.ingest", ["--tier", name])
+        index = ROOT / "data/tiers" / f"{name}.json"
+        artifact, passages = load_artifact(index, source=TECHNICAL_CORPUS)
+        manifest["indexes"][name] = {
+            "path": index.relative_to(ROOT).as_posix(),
+            "passages": len(passages),
+            "sha256": hashlib.sha256(index.read_bytes()).hexdigest(),
+            "artifact_sha256": canonical_hash(artifact),
+            "source_sha256": artifact["source_sha256"],
+            "encoding": (artifact.get("embeddings") or {}).get("encoding"),
+        }
+        (output / "manifest.json").write_bytes(encoded(manifest))
+    for name, tier in (("tfidf", "minimal"), ("bge-m3", "standard"), ("qwen3-4b", "full")):
+        stage(
+            name,
+            "researchlens.evaluation",
+            [
+                "run",
+                "--dataset",
+                ROOT / "evaluation/datasets/technical-development.json",
+                "--other-split",
+                ROOT / "evaluation/datasets/held-out.json",
+                "--source",
+                TECHNICAL_CORPUS,
+                "--index",
+                ROOT / "data/tiers" / f"{tier}.json",
+                "--retriever",
+                "tfidf" if name == "tfidf" else "embeddings",
+                "--evidence-labels",
+                ROOT / "evaluation/labels/technical-development.json",
+                "--output",
+                output / name,
+                "--limit",
+                40,
+                "--context-budgets",
+                4,
+                12000,
+                16000,
+                "--repeats",
+                1,
+                "--warmups",
+                0,
+                "--measure-memory",
+            ],
+        )
+    stage(
+        "comparison",
+        "researchlens.evaluation",
+        [
+            "report",
+            *(output / name for name in ("tfidf", "bge-m3", "qwen3-4b")),
+            "--output",
+            output / "comparison.md",
+            "--paired-output",
+            output / "paired.json",
+        ],
+    )
 
 
 def candidate_index(candidate: Path, canonical_index: Path, model: str) -> dict:
@@ -174,11 +284,20 @@ def experiment(candidate: Path, indexes: Path, output: Path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--candidate", type=Path, required=True)
-    parser.add_argument("--indexes", type=Path, required=True)
+    parser.add_argument("--candidate", type=Path)
+    parser.add_argument("--indexes", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--build-index", choices=("bge-m3", "qwen3-4b"))
+    parser.add_argument("--adopted", action="store_true")
     args = parser.parse_args()
+    if args.adopted:
+        output = args.output.resolve()
+        if not output.is_relative_to(ROOT / "evaluation/runs"):
+            raise ValueError("Full outputs must remain in ignored evaluation/runs")
+        adopted_experiment(output)
+        return
+    if args.candidate is None or args.indexes is None:
+        parser.error("Historical candidate experiments require --candidate and --indexes")
     candidate, indexes, output = (p.resolve() for p in (args.candidate, args.indexes, args.output))
     if not candidate.is_relative_to(ROOT / "evaluation/runs") or not output.is_relative_to(
         ROOT / "evaluation/runs"

@@ -17,7 +17,7 @@ evaluation/labels/*.json text eol=lf
 docs/*.json text eol=lf
 backend/researchlens/*.py text eol=lf
 # Preserve prior approved versions and migration approvals under their exact byte hashes.
-evaluation/reviews/2026-10-14-pr15/** -text
+evaluation/reviews/2026-10-14-pr15/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 data/technical/originals/*.xml -text
 data/technical/*.json text eol=lf
 data/technical/NOTICE.txt text eol=lf

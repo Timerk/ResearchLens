@@ -1,9 +1,16 @@
 # Development evidence labels
 
-`technical-development.json` contains 92 approved evidence groups for the 36 answerable
-development questions. Both approved datasets and their review records are unchanged.
-The project owner explicitly approved the revised groups in the PR #8 thread on
-2026-10-01. This separate evidence approval is recorded in
+`technical-development.json` contains 92 approved evidence groups, 140 alternatives
+and 167 exact span fragments for the 36 answerable development questions. The owner
+approved the readable-formula migration on 2026-10-14 for the source text change
+from formula rendering. [The new approval](../reviews/2026-10-14-pr15/approval.json)
+records current and previous pins, all approved groups and the 33 remapped original
+span occurrences. Two original spans now require AND fragments across windows.
+No group or alternative was removed. Held-out received an offline reference and
+corpus-pin version update only; it has no span labels and no retrieval was run.
+
+The owner originally approved these evidence requirements in PR #8 on 2026-10-01.
+That separate evidence approval remains unchanged in
 [evidence-human-review.json](../reviews/2026-10-01-pr8/evidence-human-review.json), with
 the previous/current label hashes and unchanged evidence-content hash. No group,
 description, alternative, quote, offset or pin changed during approval. No held-out
@@ -13,7 +20,9 @@ The [AI evidence audit](../reviews/2026-10-01-pr8/evidence-review.md) reviewed t
 original 83 groups and identified semantic/context fixes. The
 [fix record](../reviews/2026-10-01-pr8/evidence-fixes.md) records the source checks,
 changes and decisions on all 41 recommendations. The revised labels contain 140
-alternatives and 165 exact span occurrences. Both audit files remain unchanged.
+alternatives and 165 original span occurrences, before formula rendering produced
+the two required splits. The previous labels and datasets are preserved in
+`evaluation/reviews/2026-10-14-pr15/`. Both audit files remain unchanged.
 The AI corrections and the subsequent human approval have separate provenance.
 
 The labels use exact sentences or sentence fragments from the pinned extracted

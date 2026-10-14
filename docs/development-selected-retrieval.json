@@ -5,7 +5,7 @@
   "backend": "embeddings",
   "model": "Qwen/Qwen3-Embedding-4B",
   "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
-  "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+  "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
   "normalization": "l2",
   "score_threshold": null,
   "runtime": "torch+transformers",
