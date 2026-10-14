@@ -7,16 +7,30 @@ from researchlens.reference_evaluation import (
 
 
 def fixture():
-    hits = [SearchHit(
-        id=f"fixture:p{i}:w0", document_id="a" if i < 5 else "b", title="Fixture",
-        source_url=None, license="CC0", kind="synthetic", paragraph=i,
-        text="evidence", score=1 / i,
-    ).model_dump() for i in range(1, 7)]
-    case = {"id": "positive", "expected_abstention": False,
-            "expected_source_ids": ["a", "b"],
-            "references": [{"passage_id": "fixture:p1:w0"},
-                           {"passage_id": "fixture:p5:w0"},
-                           {"passage_id": "fixture:p5:w0"}]}
+    hits = [
+        SearchHit(
+            id=f"fixture:p{i}:w0",
+            document_id="a" if i < 5 else "b",
+            title="Fixture",
+            source_url=None,
+            license="CC0",
+            kind="synthetic",
+            paragraph=i,
+            text="evidence",
+            score=1 / i,
+        ).model_dump()
+        for i in range(1, 7)
+    ]
+    case = {
+        "id": "positive",
+        "expected_abstention": False,
+        "expected_source_ids": ["a", "b"],
+        "references": [
+            {"passage_id": "fixture:p1:w0"},
+            {"passage_id": "fixture:p5:w0"},
+            {"passage_id": "fixture:p5:w0"},
+        ],
+    }
     return case, {"case_id": "positive", "error": None, "retrieved_passages": hits}
 
 
@@ -53,8 +67,7 @@ def test_negatives_errors_and_empty_visible_text():
 def test_nonbinomial_intervals_and_paired_denominators():
     case, row = fixture()
     negative = {**case, "id": "negative", "expected_abstention": True}
-    run = {"dataset": {"cases": [case, negative]},
-           "results": [row, {**row, "case_id": "negative"}]}
+    run = {"dataset": {"cases": [case, negative]}, "results": [row, {**row, "case_id": "negative"}]}
     first, a = summarize_references(run, 4)
     second, b = summarize_references(run, 12000)
     assert first["metrics"]["complete_evidence"]["denominator"] == 1
