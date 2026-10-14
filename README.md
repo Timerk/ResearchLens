@@ -68,8 +68,8 @@ and [comparison commands](https://github.com/Timerk/ResearchLens/blob/research/r
 and remaining limitations. Qwen3-4B dense meets the development retrieval targets
 when the answer context is budgeted by characters (`ANSWER_CONTEXT_MODE=characters`,
 `ANSWER_CONTEXT_CHARS=12000`, `ANSWER_CONTEXT_CANDIDATES=40`). The default stays at
-four passages. Held-out confirmation and answer-quality measurements on the
-adopted corpus remain pending.
+four passages. Answer-quality measurements on the adopted corpus remain pending.
+One-time [held-out confirmation](docs/held-out-results.md): Qwen12k/16k passes 4/5 literal targets, with 21/26 complete cases; recall@4 misses at 77.6%, while whole-context recall is 91.0%/92.0%.
 
 The owner approved readable formula extraction and evidence migration on 2026-10-14.
 On the adopted corpus, Qwen meets all five targets at 12k and 16k characters, with
