@@ -1,0 +1,103 @@
+{
+  "archived_score_records_replayed": 200,
+  "independent_model_audit": {
+    "required_claims_met": {
+      "deterministic_compared": 6,
+      "deterministic_agreed": 6,
+      "semantic_compared": 18,
+      "semantic_agreed": 18
+    },
+    "qualifications_preserved": {
+      "deterministic_compared": 6,
+      "deterministic_agreed": 6,
+      "semantic_compared": 18,
+      "semantic_agreed": 4
+    },
+    "no_forbidden_claims": {
+      "deterministic_compared": 22,
+      "deterministic_agreed": 22,
+      "semantic_compared": 18,
+      "semantic_agreed": 18
+    },
+    "citation_support": {
+      "semantic_compared": 17,
+      "semantic_agreed": 17,
+      "semantic_unresolved": 1
+    },
+    "negative_abstention_correct": {
+      "deterministic_compared": 16,
+      "deterministic_agreed": 16
+    },
+    "citation_ids_valid": {
+      "deterministic_compared": 18,
+      "deterministic_agreed": 18
+    }
+  },
+  "pool_counts": {
+    "abstention/qwen12k/False": 1,
+    "abstention/qwen12k/True": 49,
+    "abstention/qwen16k/True": 50,
+    "abstention/qwen4/False": 7,
+    "abstention/qwen4/True": 43,
+    "abstention/tfidf4/False": 15,
+    "abstention/tfidf4/True": 35,
+    "citation/qwen12k/False": 7,
+    "citation/qwen12k/None": 1,
+    "citation/qwen12k/True": 121,
+    "citation/qwen16k/False": 8,
+    "citation/qwen16k/None": 1,
+    "citation/qwen16k/True": 121,
+    "citation/qwen4/False": 9,
+    "citation/qwen4/True": 91,
+    "citation/tfidf4/False": 5,
+    "citation/tfidf4/True": 68,
+    "forbidden_claim/qwen12k/True": 44,
+    "forbidden_claim/qwen16k/True": 46,
+    "forbidden_claim/qwen4/True": 34,
+    "forbidden_claim/tfidf4/True": 25,
+    "qualification/qwen12k/False": 35,
+    "qualification/qwen12k/True": 11,
+    "qualification/qwen16k/False": 38,
+    "qualification/qwen16k/True": 10,
+    "qualification/qwen4/False": 26,
+    "qualification/qwen4/True": 9,
+    "qualification/tfidf4/False": 17,
+    "qualification/tfidf4/True": 10,
+    "required_claim/qwen12k/False": 7,
+    "required_claim/qwen12k/True": 37,
+    "required_claim/qwen16k/False": 4,
+    "required_claim/qwen16k/True": 42,
+    "required_claim/qwen4/False": 4,
+    "required_claim/qwen4/True": 30,
+    "required_claim/tfidf4/False": 8,
+    "required_claim/tfidf4/True": 16
+  },
+  "sample_counts": {
+    "calibration/abstention/False": 2,
+    "calibration/abstention/True": 4,
+    "calibration/citation/False": 2,
+    "calibration/citation/None": 2,
+    "calibration/citation/True": 2,
+    "calibration/forbidden_claim/True": 6,
+    "calibration/qualification/False": 4,
+    "calibration/qualification/True": 2,
+    "calibration/required_claim/False": 2,
+    "calibration/required_claim/True": 4,
+    "validation/abstention/False": 2,
+    "validation/abstention/True": 4,
+    "validation/citation/False": 2,
+    "validation/citation/True": 4,
+    "validation/forbidden_claim/True": 6,
+    "validation/qualification/False": 4,
+    "validation/qualification/True": 2,
+    "validation/required_claim/False": 2,
+    "validation/required_claim/True": 4
+  },
+  "configuration_counts": {
+    "qwen12k": 15,
+    "qwen16k": 15,
+    "qwen4": 15,
+    "tfidf4": 15
+  },
+  "sample_question_count": 37
+}

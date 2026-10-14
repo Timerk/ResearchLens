@@ -100,6 +100,16 @@ conservatively; missing or unexpected citations still fail validation.
 
 ## Judge reliability
 
+The [Phase 1 owner grading packet](../evaluation/reviews/2026-10-14-answer-judge/owner-grading.md)
+contains 60 blind, individual judgment items from the archived development
+outputs. It splits questions between 30 calibration and 30 validation items,
+with all five judgment types and all four configurations in each half.
+The owner should read only that packet before grading. The separate review
+README, scoring key and diagnosis reveal model outcomes. Owner grades are pending;
+the judge and application defaults remain unchanged. Validation grades will stay
+sealed until the revised judge is frozen. The archive has no predicted forbidden
+violations or invalid citation IDs, so those failure strata cannot be supplied.
+
 Each completed configuration produces `spot-check.json` with two preselected
 cases per cohort, ten cases total. Sampling uses a stable case-ID hash and does
 not depend on judge outcomes. An independent reviewer scores the saved answers
