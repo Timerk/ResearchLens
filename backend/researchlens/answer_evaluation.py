@@ -430,6 +430,10 @@ def execute(args, dataset, entries, runs, plan, prices):
     resuming = getattr(args, "resume", False)
     if args.output.exists() and not resuming:
         raise ValueError("Output exists; never overwrite or silently repeat paid calls")
+    if getattr(args, "jobs", 1) > 1:
+        from researchlens.answer_parallel import execute_parallel
+
+        return execute_parallel(args, dataset, entries, runs, plan, prices)
     if resuming:
         if canonical_hash(json.loads((args.output / "plan.json").read_bytes())) != plan_hash:
             raise ValueError("Resume requires the exact approved plan")
@@ -514,6 +518,13 @@ def execute(args, dataset, entries, runs, plan, prices):
                 client=recorder,
             )
             for original_row in original["results"]:
+                if getattr(args, "stop_event", None) is not None and args.stop_event.is_set():
+                    raise ValueError("Another worker stopped; no further paid calls")
+                if (
+                    getattr(args, "case_ids", None) is not None
+                    and original_row["case_id"] not in args.case_ids
+                ):
+                    continue
                 if original_row["case_id"] in cached:
                     row = cached[original_row["case_id"]]
                     case = cases[row["case_id"]]
@@ -536,6 +547,7 @@ def execute(args, dataset, entries, runs, plan, prices):
                 row.update(answer=None, error=None, raw_judgment=None, judge_usage=None)
                 recorder.last = None
                 case = cases[row["case_id"]]
+                print(f"Answer run: {name}/{case.id}", flush=True)
                 prepared = visible_context(row, budget)
                 row["answer_context_preview"] = prepared.diagnostics.model_dump(mode="json")
                 entry = entries.get(case.id)
@@ -595,6 +607,11 @@ def execute(args, dataset, entries, runs, plan, prices):
                     save(folder / f"{case.id}.json", row)
                     if answer.sections:
                         stage = "judge"
+                        if (
+                            getattr(args, "stop_event", None) is not None
+                            and args.stop_event.is_set()
+                        ):
+                            raise ValueError("Another worker stopped before judge call")
                         payload = json.dumps(
                             judge_input(case, row["answer"], prepared, entries.get(case.id))
                         )
@@ -920,6 +937,7 @@ def add_answer_commands(commands):
             parser.add_argument("--approve-plan-sha256", required=True)
             parser.add_argument("--max-cost-usd", type=float, required=True)
             parser.add_argument("--study-ledger", type=Path)
+            parser.add_argument("--jobs", type=int, choices=[1, 2, 3, 4], default=1)
     report = commands.add_parser("answer-report")
     report.add_argument("runs", type=Path, nargs="+")
     report.add_argument("--output", type=Path, required=True)
