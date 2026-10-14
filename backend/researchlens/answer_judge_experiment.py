@@ -211,6 +211,10 @@ def run_review(args, plan, prices):
 
 
 def review_command(args):
+    if args.review_half == "validation":
+        from researchlens.answer_judge_freeze import assert_frozen
+
+        assert_frozen()
     prices = Prices.model_validate_json(args.prices.read_bytes())
     plan = review_plan(args.review_archive, args.review_half, prices)
     print(json.dumps(plan, indent=2), flush=True)

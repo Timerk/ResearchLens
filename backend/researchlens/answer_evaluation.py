@@ -175,6 +175,10 @@ def load_inputs(args):
 
 
 def make_plan(dataset, entries, runs, prices, configurations):
+    from researchlens.answer_judge_freeze import FREEZE, assert_frozen
+
+    if FREEZE.exists():
+        assert_frozen()
     import tiktoken
 
     tokenizer = tiktoken.get_encoding("o200k_base")

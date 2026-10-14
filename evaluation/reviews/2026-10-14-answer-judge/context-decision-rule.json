@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "registered_before_validation_and_current_corpus_generation": true,
+  "split": "development",
+  "primary_comparison": {"baseline": "qwen4", "candidate": "qwen12k"},
+  "required_claim_test": "two-sided paired exact McNemar on all 36 answerable cases",
+  "required_claim_p_threshold": 0.05,
+  "required_claim_gain_must_be_positive": true,
+  "unsupported_guard": "No increase in count of answers with unsupported citations/section claims across 50 cases; unknowns cannot establish this guard",
+  "forbidden_guard": "No increase in count of answers asserting any forbidden claim across 50 cases; unknowns cannot establish this guard",
+  "negative_abstention_guard": "No decrease in correct generated section-free abstentions on the 14 negatives",
+  "judgment_acceptance": {"minimum_cohens_kappa": 0.6, "minimum_all_item_agreement": 0.8},
+  "unreliable_types": "Exclude from decision metrics and composite; an unavailable required safety endpoint is not satisfied and prevents promotion",
+  "other_comparisons": "TF-IDF four, Qwen sixteen and BGE-M3 sixteen are descriptive diagnostics, not substitutes for a failed primary comparison",
+  "if_pass": "Use the existing per-tier character budgets as the application policy; retain TF-IDF four as the explicit no-tier fallback until its larger context is compared directly",
+  "if_fail_or_unassessable": "Keep current application defaults and document the unmet or unmeasurable conditions",
+  "budget_usd_all_phase2_calls": 3,
+  "generation_configurations": ["tfidf4", "qwen4", "qwen12k", "qwen16k", "bge16k"],
+  "validation_evaluations_allowed": 1,
+  "after_validation": "Do not revise prompt, rubric, model, schema or deterministic scoring checks"
+}
