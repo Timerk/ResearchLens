@@ -1,0 +1,36 @@
+{
+  "decision": "keep_defaults",
+  "conditions": {
+    "required_claim_gain_significant": false,
+    "unsupported_claims_do_not_increase": null,
+    "forbidden_claims_do_not_increase": null,
+    "negative_abstention_does_not_worsen": true
+  },
+  "primary_comparison": {
+    "baseline": "qwen4",
+    "candidate": "qwen12k"
+  },
+  "primary_required_claim_comparison": {
+    "paired_cases": 36,
+    "excluded_unscored_cases": 0,
+    "gains": 4,
+    "losses": 3,
+    "both_complete": 23,
+    "neither_complete": 6,
+    "p_two_sided": 1.0,
+    "method": "exact-mcnemar-two-sided-binomial"
+  },
+  "excluded_types": [
+    "qualification",
+    "forbidden_claim",
+    "citation"
+  ],
+  "unassessable_conditions": [
+    "unsupported_claims_do_not_increase",
+    "forbidden_claims_do_not_increase"
+  ],
+  "defaults": "Keep current application defaults and document the unmet or unmeasurable conditions",
+  "secondary_comparisons_used_to_replace_primary": false,
+  "results_sha256": "01f825f9f43ff5c7481f9b6153f54e377500da23fb146822d28e432848138255",
+  "registered_rule_sha256": "78333ae5b952f5ac0b197a41657c8b3f9b06327597144f0e2b213c28949f1c2f"
+}

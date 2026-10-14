@@ -1,5 +1,12 @@
 # Owner grading of the answer judge
 
+Phase 2 is complete. The baseline, calibration revision, freeze, one-time
+validation, generation results and decision were committed in order.
+See `validation.md`, `current-corpus.md` and `context-decision.json`.
+Only required claims and abstention pass validation. The primary context
+comparison fails, and safety endpoints remain uncertified, so defaults stay
+unchanged. The original packet and sampling protocol are retained below.
+
 Owner grading is complete and human reviewed. See [owner-review.md](owner-review.md)
 for the owner's confirmation and integrity hashes. The 30 calibration verdicts
 and notes are in [calibration-grades.csv](calibration-grades.csv). The 30 validation
