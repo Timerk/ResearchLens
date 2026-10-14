@@ -64,8 +64,8 @@ missing references/claims and one-source comparisons fail validation.
 
 - `datasets/development.json`: three AI-authored, unreviewed synthetic smoke cases.
 - `datasets/technical-development.json`: 50 approved technical development cases,
-  version `4-human-reviewed`; the development dataset remains editable (`draft`).
-- `datasets/held-out.json`: 36 approved cases, version `3-human-reviewed-frozen`.
+  version `5-readable-formulas-approved`; the development dataset remains editable (`draft`).
+- `datasets/held-out.json`: 36 approved cases, version `4-readable-formulas-frozen`.
   The accepted subset is `frozen`, with its current file hash in `human-review.json`.
 - [PR 8 review](reviews/2026-10-01-pr8/README.md): all 100 input decisions, 14
   rejected originals, source conflicts, alternative evidence and full-source scope.
@@ -98,6 +98,15 @@ papers and related concepts; remaining partial context reuse is documented in th
 review. All original tables, mathematical markup and 38 publisher figures were
 inspected. No held-out retrieval, rankings, failure reports, model selection or
 settings tuning informed this review. Do not inspect held-out rankings while tuning.
+
+The owner approved formula extraction and the reviewed location migration on
+2026-10-14. [The adoption record](reviews/2026-10-14-pr15/approval.json) pins the
+new canonical corpus and labels. Held-out's 11 changed reference occurrences
+were migrated offline because of corpus changes, not model results. Four split
+windows produce 66 current reference occurrences. All other case content and
+original source versions remain unchanged. The previous frozen dataset, development
+dataset and labels are archived byte-for-byte with their original approvals.
+No held-out retrieval or answer inspection was part of adoption.
 
 Each dataset records split/version/material/status, the source-file hash and original
 source checksums/DOIs/dates. Cases record expected source IDs, specific passage/paragraph

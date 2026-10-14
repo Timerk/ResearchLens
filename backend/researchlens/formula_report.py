@@ -6,7 +6,7 @@ from pathlib import Path
 from statistics import mean
 
 from researchlens.artifacts import canonical_hash
-from researchlens.context_evaluation import context_paired
+from researchlens.context_evaluation import context_paired, context_summary
 from researchlens.evaluation import encoded
 from researchlens.evaluation_evidence import CaseEvidence, ranking_metrics
 from researchlens.evaluation_metrics import exact_mcnemar
@@ -80,6 +80,169 @@ def targets(rows):
         }.items()
     }
     return result
+
+
+def adopted_report(output: Path):
+    """Publish current approved-corpus results and refresh active retrieval selections."""
+    from researchlens.formula_adoption import REVIEW
+
+    approval = json.loads((REVIEW / "approval.json").read_bytes())
+    manifest = json.loads((output / "manifest.json").read_bytes())
+    if any(s["returncode"] for s in manifest["stages"]) or len(manifest["indexes"]) != 4:
+        raise ValueError("All tiers and development runs must complete before publication")
+    current = {
+        "schema_version": 1,
+        "status": "approved_and_adopted",
+        "date": "2026-10-14",
+        "approval_record": "evaluation/reviews/2026-10-14-pr15/approval.json",
+        "approval_record_sha256": digest(REVIEW / "approval.json"),
+        "corpus_sha256": approval["adopted_corpus_sha256"],
+        "pins": approval["pins"],
+        "api_calls": 0,
+        "held_out_searches": 0,
+        "manifest": manifest,
+        "models": {},
+        "scoring": (
+            "Existing runner definitions, supplied context passage IDs, visible all-group spans."
+        ),
+        "historical_answer_quality": (
+            "2026-10-13 answer-quality evidence remains pinned to the previous corpus; "
+            "no new paid answer evaluation."
+        ),
+    }
+    previous = json.loads((REVIEW / "phase1-results.json").read_bytes())
+    lines = [
+        "# Adopted readable formulas retrieval, 2026-10-14",
+        "",
+        "The owner approved and adopted the corpus, development spans and held-out reference "
+        "migration on 2026-10-14. All four application tier indexes were rebuilt with fresh "
+        "vectors against this corpus. TF-IDF, BGE-M3 dense and Qwen3-4B dense ran on all "
+        "50 development questions through the existing runner at 40 candidates and "
+        "`--context-budgets 4 12000 16000`. The 14 negatives are unscored. "
+        "No held-out retrieval, answer generation or paid API call ran.",
+        "",
+        "Five thresholds: mean reference-ID recall ≥80%, evidence hit ≥90%, all-group "
+        "complete evidence ≥80%, both sources ≥90% of nine cross-document questions, "
+        "and MRR ≥0.65. Complete evidence uses visible quote spans, including every "
+        "required AND fragment. Reference recall retains the legacy passage-ID definition.",
+        "",
+        "| Model | Context | Reference recall | Hit /36 | Complete /36 | "
+        "Both sources /9 | MRR | Targets met |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    runs = {}
+    for model in ("tfidf", "bge-m3", "qwen3-4b"):
+        path = output / model / "run.json"
+        run = json.loads(path.read_bytes())
+        if (
+            run["dataset"]["split"] != "development"
+            or run["corpus"]["source_sha256"] != approval["adopted_corpus_sha256"]
+            or run["evaluation_contract"]["evidence_labels_sha256"]
+            != approval["approved_labels_canonical_sha256"]
+        ):
+            raise ValueError("Adopted run pins or split differ from the approval")
+        runs[model] = run
+        entry = {
+            "run": {
+                "path": path.relative_to(ROOT).as_posix(),
+                "sha256": digest(path),
+                "run_id": run["run_id"],
+                "retrieval": run["retrieval"],
+                "runtime": run["runtime"],
+                "evaluation_contract": run["evaluation_contract"],
+            },
+            "budgets": {},
+        }
+        for budget in (4, 12000, 16000):
+            rows = scored_context(run, budget)
+            total = targets(rows)
+            entry["budgets"][str(budget)] = {
+                "totals": total,
+                "context_summary": context_summary(run, budget),
+                "matches_phase1_candidate_totals": total
+                == previous["models"][model]["budgets"][str(budget)]["totals"]["candidate"],
+                "cases": [
+                    {"case_id": cid, **{k: v for k, v in row.items() if k != "passage_ids"}}
+                    for cid, row in rows.items()
+                ],
+            }
+            lines.append(
+                f"| {model} | {budget} | {total['reference_recall']:.1%} | "
+                f"{total['evidence_hit_cases']} | {total['complete_cases']} | "
+                f"{total['both_sources_cases']} | {total['mrr']:.3f} | "
+                f"{sum(total['targets_met'].values())}/5 |"
+            )
+        current["models"][model] = entry
+    qwen = current["models"]["qwen3-4b"]["budgets"]
+    current["qwen_meets_all_five_at_12k_and_16k"] = all(
+        all(qwen[str(b)]["totals"]["targets_met"].values()) for b in (12000, 16000)
+    )
+    lines.extend(
+        [
+            "",
+            "## Tier artifacts",
+            "",
+            "| Tier | Model | Passages | Corpus pin valid |",
+            "| --- | --- | ---: | --- |",
+        ]
+    )
+    for name, index in manifest["indexes"].items():
+        model = index["encoding"]["model"] if index["encoding"] else "TF-IDF"
+        if index["source_sha256"] != current["corpus_sha256"]:
+            raise ValueError("Tier index still pins the previous corpus")
+        lines.append(f"| {name} | {model} | {index['passages']} | yes |")
+    lines.extend(
+        [
+            "",
+            "Qwen retains all five targets at 12k and 16k. Scores reproduce the phase-1 "
+            "candidate totals with approved labels and newly encoded canonical indexes. "
+            "`tech-changing-neighborhood` remains incomplete at every tested context. "
+            "TF-IDF has 80% group coverage but misses the split fixed-footprint evidence; "
+            "BGE and Qwen miss other required groups.",
+            "",
+            "The full per-question records and validated tier manifests remain in ignored "
+            f"`{output.relative_to(ROOT).as_posix()}`. The JSON summary includes all answerable "
+            "question scores, current pins and artifact/run hashes. The light tier was rebuilt "
+            "and validated but its retrieval quality was not remeasured.",
+            "",
+            "The pre-rendering paid answer-quality study remains historical evidence with its "
+            "original pins. These retrieval-only measurements do not update answer correctness, "
+            "citation support or held-out performance claims.",
+            "",
+        ]
+    )
+    current["implementation_sha256"] = {
+        name: digest(Path(__file__).with_name(name))
+        for name in ("formula_experiments.py", "formula_report.py", "mathml.py", "corpus.py")
+    }
+    docs = ROOT / "docs"
+    (output / "adoption-summary.json").write_bytes(encoded(current))
+    (docs / "formula-adoption-results.json").write_bytes(encoded(current))
+    (docs / "formula-adoption-results.md").write_text("\n".join(lines), encoding="utf-8")
+    selected_path = docs / "development-selected-context-budget.json"
+    selected = json.loads(selected_path.read_bytes())
+    selected.update(
+        {
+            "selection_date": "2026-10-14",
+            "status": (
+                "approved readable-formula corpus; Qwen 12k reconfirmed on development; "
+                "default remains four passages"
+            ),
+            "retrieval": runs["qwen3-4b"]["retrieval"],
+            "dataset_sha256": runs["qwen3-4b"]["dataset_sha256"],
+            "evidence_labels_sha256": approval["approved_labels_canonical_sha256"],
+            "corpus_sha256": current["corpus_sha256"],
+            "shared_passage_sha256": approval["pins"]["shared_passage_sha256"],
+            "study_summary_path": "docs/formula-adoption-results.json",
+            "study_summary_sha256": digest(docs / "formula-adoption-results.json"),
+            "development_result": context_summary(runs["qwen3-4b"], 12000),
+        }
+    )
+    selected_path.write_bytes(encoded(selected))
+    retrieval = {**runs["qwen3-4b"]["retrieval"], "limit": 4}
+    (docs / "development-selected-retrieval.json").write_bytes(encoded(retrieval))
+    if not current["qwen_meets_all_five_at_12k_and_16k"]:
+        raise ValueError("Qwen did not retain all five targets; inspect the published measurements")
 
 
 def report(candidate: Path, output: Path, publish: bool = False):
@@ -331,8 +494,14 @@ def report(candidate: Path, output: Path, publish: bool = False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--candidate", type=Path, required=True)
+    parser.add_argument("--candidate", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--publish-summaries", action="store_true")
+    parser.add_argument("--adopted", action="store_true")
     args = parser.parse_args()
-    report(args.candidate.resolve(), args.output.resolve(), args.publish_summaries)
+    if args.adopted:
+        adopted_report(args.output.resolve())
+    elif args.candidate is not None:
+        report(args.candidate.resolve(), args.output.resolve(), args.publish_summaries)
+    else:
+        parser.error("Historical reports require --candidate; current reports use --adopted")

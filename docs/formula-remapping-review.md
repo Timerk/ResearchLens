@@ -1,16 +1,28 @@
-# Candidate span remapping review
+# Formula span and reference remapping, approved and adopted
+
+The project owner approved all proposed development span mappings and the 11
+changed held-out references on 2026-10-14. Reason: source text change from formula
+rendering. [Approval and adoption record](../evaluation/reviews/2026-10-14-pr15/approval.json).
+The tables below preserve the reviewed old/new locations and quotes. Current labels
+contain 167 fragments, including two required AND splits. Held-out is now version
+`4-readable-formulas-frozen`, with 66 references and unchanged question/answer/claim
+content. No held-out retrieval or answer inspection ran.
 
 All offsets are half-open Unicode character offsets. Every occurrence was checked against the canonical quote. Only complete formula placeholders are replaced; all surrounding prose must match exactly. No fuzzy matching or semantic relabeling.
 
 Classification counts: {'unchanged': 132, 'shifted only': 14, 'quote text changed': 19}.
 
-Candidate labels are unreviewed. Splitting one span across windows requires all fragments together in the same alternative. This preserves the approved text requirement but can change retrieval coverage because passage boundaries change.
+The mapped labels are approved and adopted. Splitting one span across windows requires all fragments together in the same alternative. This preserves the approved text requirement but can change retrieval coverage because passage boundaries change.
 
 ## Held-out inventory
 
 Held-out has references only. Every reference was checked offline by source paragraph alignment and candidate window coverage. ID changed takes precedence when the old window's content now requires different or multiple IDs. Text changed means the same ID covers the aligned range but its passage text differs. Questions, answers and claims did not guide rendering. No held-out retrieval ran.
 
-Reference counts: {'text changed': 7, 'unchanged': 51, 'ID changed': 4}. Freeze check: {'frozen_corpus_sha256': 'cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce', 'candidate_corpus_sha256': 'fe1c769f0ab662ac36cafd55982dbcc19c390b53f81fedff7852cc02aae23d26', 'corpus_pin_matches': False, 'source_versions_match': True, 'owner_decision': 'Adoption requires a new held-out dataset version and owner approval.'}.
+Previous reference counts: seven text changes, 51 unchanged and four ID changes.
+The previous frozen corpus pin differed from the candidate, while all original
+source versions matched. The owner approved the new frozen version and canonical
+pin `f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675`.
+The previous freeze and the original reviewed proposal remain in the approval archive.
 
 | Held-out case / reference | Status | Old ID | Proposed IDs | Same source location |
 | --- | --- | --- | --- | --- |

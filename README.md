@@ -68,7 +68,16 @@ and [comparison commands](https://github.com/Timerk/ResearchLens/blob/research/r
 and remaining limitations. Qwen3-4B dense meets the development retrieval targets
 when the answer context is budgeted by characters (`ANSWER_CONTEXT_MODE=characters`,
 `ANSWER_CONTEXT_CHARS=12000`, `ANSWER_CONTEXT_CANDIDATES=40`). The default stays at
-four passages. Held-out evaluation and answer quality remain unfinished.
+four passages. Held-out confirmation and answer-quality measurements on the
+adopted corpus remain pending.
+
+The owner approved readable formula extraction and evidence migration on 2026-10-14.
+On the adopted corpus, Qwen meets all five targets at 12k and 16k characters, with
+29/36 and 33/36 complete development cases and MRR 0.741. BGE reaches 28/36 and
+30/36; TF-IDF reaches 26/36 at both budgets. All four tier indexes were rebuilt.
+See [the current results](docs/formula-adoption-results.md) and
+[approval record](evaluation/reviews/2026-10-14-pr15/approval.json).
+The earlier paid answer-quality results describe the pre-rendering corpus.
 
 For hardware selection, set `RETRIEVAL_TIER=auto` and remove explicit
 `RETRIEVAL_BACKEND`/`EMBEDDING_MODEL` values. Auto selects full, standard, light or
@@ -134,8 +143,10 @@ rtk proxy uv run --directory backend python -m researchlens.ingest --corpus tech
 
 Extraction includes abstract and body prose, preserves section paths and XML paragraph
 locations, and normalizes whitespace. Figures, captions, tables, references and back matter
-are excluded; mathematical markup is replaced with `[formula omitted]`. This is a partial
-extraction. Consult the originals for omitted evidence, equations and numerical tables.
+are excluded. Approved `mathml-readable-v2` extraction restores 122 supported formulas
+as readable symbols, scripts and grouped fractions; four unsupported formulas remain
+`[formula omitted]`. Expressions are transcribed without computing numeric results.
+This is a partial extraction. Consult the originals for omitted evidence and numerical tables.
 Changing extraction or source content can change passage IDs; rebuild the index and review
 evaluation references after such changes. Raw XML files are marked binary for Git line-ending
 purposes so checksums remain valid across Windows and Linux checkouts.

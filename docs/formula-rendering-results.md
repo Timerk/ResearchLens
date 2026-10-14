@@ -1,6 +1,6 @@
-# Readable formulas development results
+# Readable formulas phase-1 intervention results
 
-These are provisional results on unreviewed candidate span mappings. All 36 answerable development cases and 14 unscored negatives ran locally. No generation, paid API call or held-out retrieval ran.
+The owner approved and adopted the candidate mappings on 2026-10-14. These historical phase-1 measurements used the mappings before that approval. [The adopted canonical rerun](formula-adoption-results.md) reproduces every candidate total with approved labels and fresh tier indexes. All 36 answerable development cases and 14 unscored negatives ran locally. No generation, paid API call or held-out retrieval ran.
 
 Reference recall is mean legacy reference-ID recall; hit and MRR use evidence passage IDs within supplied context, as in the existing study. Complete uses visible quote spans, all groups and every AND fragment. Character budgets use exact provider serialization. Candidate reference IDs are retained, validated at the same source locations; legacy reference recall does not establish unchanged window content.
 
@@ -127,6 +127,6 @@ Only changes in recall, hit, complete, source coverage, MRR or group coverage ar
 - bge-m3: canonical {'pmc11121878:p31:w0': 11}; candidate {'pmc11121878:p31:w0': 12}.
 - qwen3-4b: canonical {'pmc11121878:p31:w0': 23}; candidate {'pmc11121878:p31:w0': 20}.
 
-## Approval boundary
+## Approval and adoption
 
-Canonical documents, manifest, hashes, approved labels and frozen held-out dataset remain unchanged. Corpus adoption, label approval and a new held-out dataset version are owner decisions. Retrieval coverage does not establish scientific fidelity, generated-answer quality or held-out performance.
+Corpus adoption, label approval and a new frozen held-out reference version were approved by the owner and applied on 2026-10-14. The phase-1 baseline and original approval records remain archived with their original hashes. Retrieval coverage does not establish generated-answer quality or held-out performance.

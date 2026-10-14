@@ -2,7 +2,7 @@
   "schema_version": 1,
   "api_calls": 0,
   "held_out_searches": 0,
-  "status": "candidate_labels_unreviewed_owner_approval_required",
+  "status": "approved_and_adopted",
   "comparison": "paired development corpus intervention; original evidence requirements retained",
   "scoring": "Reference recall is mean legacy reference-ID recall; hit and MRR use evidence passage IDs within supplied context, as in the existing study. Complete uses visible quote spans, all groups and every AND fragment. Character budgets use exact provider serialization. Candidate reference IDs are retained, validated at the same source locations; legacy reference recall does not establish unchanged window content.",
   "manifest": {
@@ -2828,5 +2828,21 @@
   "implementation_sha256": {
     "formula_experiments.py": "9a79bf230c004e851fa14889e77e4d151fb56e26813fe12262def81fb35a838c",
     "formula_report.py": "902e40682f68c3c7692c6fe050056cd4128658ed991f971212a6616ebf812ca8"
-  }
+  },
+  "measurement_scope": "Historical phase-1 intervention; run pins are preserved as originally measured",
+  "adoption": {
+    "review_date": "2026-10-14",
+    "reason": "source text change from formula rendering",
+    "approval_record": "evaluation/reviews/2026-10-14-pr15/approval.json",
+    "adopted_corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+    "approved_labels_sha256": "a2c89e670eda59ddca4d90e9f9e59caa68e90fc8db6a24aabf9cf02b1776135b",
+    "current_pins": {
+      "dataset_sha256": "74fa3c40691a47c1ae1a20e2863d7b0c2bb4df9be61179b886a6d6ede73de95b",
+      "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+      "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d"
+    },
+    "held_out_version": "4-readable-formulas-frozen",
+    "text_matches_reviewed_candidate": true
+  },
+  "current_results": "docs/formula-adoption-results.json"
 }

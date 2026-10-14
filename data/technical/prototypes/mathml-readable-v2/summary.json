@@ -6,16 +6,7 @@
     "formula_prototype.py": "c9b0780ac4526676567cf6ec6dc771989867e5c5846022c3a33b485ee45b6717",
     "formula_remapping.py": "6541ab70bc79f3056b7317569e25f76a334eaea3b334772c17c5e800c9ae45b3"
   },
-  "protected_inputs_sha256": {
-    "data/technical/documents.json": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
-    "data/technical/manifest.json": "508bb5c5f00982c4f80a341cc2b49db6728c62575366067b60579875696e4376",
-    "evaluation/labels/technical-development.json": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
-    "evaluation/datasets/technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
-    "evaluation/datasets/held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
-  },
-  "status": "proposal_only_owner_approval_required",
-  "canonical_documents_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
-  "approved_development_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "status": "approved_and_adopted",
   "scope": "candidate corpus; offline label remapping; development-only local retrieval",
   "chunking": {
     "method": "paragraph-word-windows",
@@ -81,7 +72,7 @@
         "candidate_corpus_sha256": "fe1c769f0ab662ac36cafd55982dbcc19c390b53f81fedff7852cc02aae23d26",
         "corpus_pin_matches": false,
         "source_versions_match": true,
-        "owner_decision": "Adoption requires a new held-out dataset version and owner approval."
+        "owner_decision": "Approved and adopted on 2026-10-14; previous freeze is archived and new version is frozen."
       },
       "notes": "Held-out has references only. Every reference was checked offline by source paragraph alignment and candidate window coverage. ID changed takes precedence when the old window's content now requires different or multiple IDs. Text changed means the same ID covers the aligned range but its passage text differs. Questions, answers and claims did not guide rendering. No held-out retrieval ran.",
       "dataset_sha256": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
@@ -98,5 +89,28 @@
     "proposed_labels": "evaluation/runs/readable-formulas-v2-final/development-labels.json",
     "exact_remapping": "evaluation/runs/readable-formulas-v2-final/remapping.json",
     "exact_remapping_sha256": "6ceba103f21c87d5a6991c3af2333a01c1a45f0e136749a55dca2ac2ffb9ec30"
+  },
+  "phase1_protected_inputs_sha256": {
+    "data/technical/documents.json": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "data/technical/manifest.json": "508bb5c5f00982c4f80a341cc2b49db6728c62575366067b60579875696e4376",
+    "evaluation/labels/technical-development.json": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+    "evaluation/datasets/technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "evaluation/datasets/held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572"
+  },
+  "previous_canonical_documents_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "previous_approved_development_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "adoption": {
+    "review_date": "2026-10-14",
+    "reason": "source text change from formula rendering",
+    "approval_record": "evaluation/reviews/2026-10-14-pr15/approval.json",
+    "adopted_corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+    "approved_labels_sha256": "a2c89e670eda59ddca4d90e9f9e59caa68e90fc8db6a24aabf9cf02b1776135b",
+    "current_pins": {
+      "dataset_sha256": "74fa3c40691a47c1ae1a20e2863d7b0c2bb4df9be61179b886a6d6ede73de95b",
+      "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+      "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d"
+    },
+    "held_out_version": "4-readable-formulas-frozen",
+    "text_matches_reviewed_candidate": true
   }
 }

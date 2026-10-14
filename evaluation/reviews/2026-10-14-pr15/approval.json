@@ -632,13 +632,19 @@
     "evaluation/reviews/2026-10-01-pr8/evidence-review.json": "4c82d26fcbcbcd4babf55f0bd9a8e82baecbedb43ba3f4cff74de3a7d3da5889",
     "evaluation/reviews/2026-10-01-pr8/evidence-review.md": "17e6a7b6d13b390326137a17ea5246f3f8bcf3c877a7d21d96bf379001e3454d",
     "evaluation/reviews/2026-10-01-pr8/human-review.json": "13c1c902b7d4ac3d01b68c039649d159321396f9f0d1a562335edcece8a5916e",
-    "evaluation/reviews/2026-10-01-pr8/README.md": "afd1f404a501b730a717b08b735b95bd2a4cf703d59e5a064f403cda2efee356",
+    "evaluation/reviews/2026-10-01-pr8/README.md": "fa2a735ed83cdf1d8e7f1759f07c9acaf57a5704fa4a3e4488104a3189d5c3c8",
     "evaluation/reviews/2026-10-01-pr8/rejected-cases.json": "e3c19ad5371202a9bf39a2d55dbf3079e15814a762cfc89a981d1f0d9d624203",
     "evaluation/reviews/2026-10-01-pr8/review.json": "16dc61594f53339efc0fbb43fbac555964f04997010b3da46995c56ac5e996e9",
-    "evaluation/answer-quality-evidence-manifest.json": "bd7d24d4f7c792ae32ab2a234527a8ed33b10f8cdea0aa0a1dedd6c70b6198f3",
-    "docs/answer-quality-results.json": "36120cad773402dc5f5f55a9b2779fee40c7e6e965868488f0e80072ac1ae078"
+    "evaluation/answer-quality-evidence-manifest.json": "46bcae4b625c5705b0f082acd5aee7fd300298523420ff62a912e6cc4ea4eadf",
+    "docs/answer-quality-results.json": "4c4f57ba833efc67168162eb8687f2d8aba13f2fc790543e1c0b5d5faf61e175"
   },
   "held_out_retrieval_executed": false,
   "held_out_answers_inspected": false,
-  "paid_api_calls": 0
+  "paid_api_calls": 0,
+  "historical_evidence_lf_normalized_paths": [
+    "evaluation/reviews/2026-10-01-pr8/README.md",
+    "evaluation/answer-quality-evidence-manifest.json",
+    "docs/answer-quality-results.json"
+  ],
+  "historical_evidence_hash_method": "LF-normalized bytes for declared text paths; exact bytes for all other paths."
 }

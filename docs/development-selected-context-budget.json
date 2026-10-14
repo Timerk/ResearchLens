@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "selection_date": "2026-10-13",
-  "status": "development-selected; application default remains four passages pending review",
+  "selection_date": "2026-10-14",
+  "status": "approved readable-formula corpus; Qwen 12k reconfirmed on development; default remains four passages",
   "selection_rule": "retain incumbent Qwen dense; smallest tested budget reaching 29/36 all-group complete evidence",
   "retrieval": {
     "implementation": "researchlens.retrieval.EmbeddingRetriever",
@@ -10,7 +10,7 @@
     "backend": "embeddings",
     "model": "Qwen/Qwen3-Embedding-4B",
     "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
-    "artifact_sha256": "a55ee309a5431cdb6d7629513b8f77297a7a8bbd0fbfa9b9cae6e03e86a33f67",
+    "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
     "normalization": "l2",
     "score_threshold": null,
     "runtime": "torch+transformers",
@@ -50,23 +50,23 @@
   },
   "scoring_view": "all_groups",
   "asked_groups_view": "diagnostic only; official target decision remains with owner",
-  "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
-  "evidence_labels_sha256": "8e1b118b740f615c5985eda60936b796cf7abb8c2c302b7845ffbcaa93b1973f",
-  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
-  "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157",
-  "study_summary_sha256": "eccad7bc11b69153d56af222d9c690448bf6b5d3df49727caef7ed099af90e5b",
+  "dataset_sha256": "74fa3c40691a47c1ae1a20e2863d7b0c2bb4df9be61179b886a6d6ede73de95b",
+  "evidence_labels_sha256": "7556636731185cef0dac7cf612ea26137503e13817236da0ff9620319e86f23e",
+  "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+  "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
+  "study_summary_sha256": "f0ffd9177850607f7f861ae2630c17dc35ba8d2531577f7d266ec552a749205b",
   "development_result": {
     "available": true,
     "total_cases": 50,
     "unscored_abstention_cases": 14,
     "labeled_cases": 36,
-    "complete_evidence_cases": 30,
-    "complete_evidence_rate": 0.8333333333333334,
+    "complete_evidence_cases": 29,
+    "complete_evidence_rate": 0.8055555555555556,
     "complete_evidence_ci95": [
-      0.671884067957082,
-      0.9362798663916143
+      0.6397519838249748,
+      0.9180563602347911
     ],
-    "mean_group_coverage": 0.8981481481481481,
+    "mean_group_coverage": 0.8842592592592593,
     "cohorts": {
       "cross-document": {
         "case_count": 9,
@@ -101,13 +101,13 @@
       "paraphrase": {
         "case_count": 13,
         "labeled_cases": 13,
-        "complete_evidence_cases": 11,
-        "complete_evidence_rate": 0.8461538461538461,
+        "complete_evidence_cases": 10,
+        "complete_evidence_rate": 0.7692307692307693,
         "complete_evidence_ci95": [
-          0.5455289443234422,
-          0.9807933280174715
+          0.461868460765959,
+          0.9496189265088485
         ],
-        "mean_group_coverage": 0.8846153846153846
+        "mean_group_coverage": 0.8461538461538461
       },
       "unrelated": {
         "case_count": 7,
@@ -119,16 +119,17 @@
       }
     },
     "input_tokens_estimate": {
-      "mean": 2571.8055555555557,
-      "median": 2587.5,
-      "min": 2391,
-      "max": 2822,
+      "mean": 2640.5,
+      "median": 2639.5,
+      "min": 2396,
+      "max": 2870,
       "scope": "o200k_base estimate of instructions plus exact question/passages JSON; excludes Responses framing, output schema and provider-internal tokens; not billed usage",
       "population": "answerable development questions"
     },
-    "mean_passages": 14.88888888888889,
-    "mean_serialized_chars": 11471.944444444445
+    "mean_passages": 14.972222222222221,
+    "mean_serialized_chars": 11549.027777777777
   },
   "held_out_searches": false,
-  "answer_quality_measured": false
+  "answer_quality_measured": false,
+  "study_summary_path": "docs/formula-adoption-results.json"
 }

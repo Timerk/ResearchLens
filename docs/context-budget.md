@@ -1,4 +1,21 @@
-# Serialized answer context study, 2026-10-13
+# Serialized answer context studies
+
+## Adopted formula corpus, 2026-10-14
+
+The owner approved readable MathML extraction and evidence migration on 2026-10-14.
+The [canonical rerun](formula-adoption-results.md) rebuilt all four tier indexes and
+reconfirmed all five targets for Qwen at 12k and 16k. Qwen's complete counts are
+24/36 at four passages, 29/36 at 12k and 33/36 at 16k; MRR is 0.731, 0.741 and
+0.741 respectively. At 12k and 16k, reference recall is 85.2% and 88.6%, evidence
+hit is 35/36, and both sources are present for all nine cross-document questions.
+BGE complete counts are 21/36, 28/36 and 30/36; TF-IDF has 15/36, 26/36 and 26/36.
+
+[Active selection pins](development-selected-context-budget.json) now describe the
+adopted corpus and approved labels. No held-out retrieval or paid API call ran.
+The historical study below and its original hashes remain evidence for the previous
+corpus. Its 30/36 Qwen12k count is superseded by the current 29/36 measurement.
+
+## Historical pre-rendering study, 2026-10-13
 
 The smallest tested character budget that reaches the provisional 80% target is
 12,000 serialized characters. Qwen3-4B dense supplies complete approved evidence

@@ -1,5 +1,11 @@
 # Generated answer quality
 
+The 2026-10-13 results and evidence manifest below describe the pre-rendering corpus.
+Readable formulas and evidence migrations were approved and adopted on 2026-10-14.
+Their [development retrieval rerun](formula-adoption-results.md) does not update
+these paid answer-quality measurements. The original answer-quality corpus, label,
+run and review hashes remain unchanged; no paid rerun was performed during adoption.
+
 ## Recommendation
 
 Keep the application default at four passages. Qwen at 12k improves complete

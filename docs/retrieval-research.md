@@ -7,6 +7,12 @@ for installation and supported configuration.
 
 ## Result
 
+The owner approved and adopted readable formula extraction on 2026-10-14.
+[Current development results](formula-adoption-results.md) confirm Qwen3-4B dense
+still meets all five targets at 12k and 16k, with 29/36 and 33/36 complete evidence
+and MRR 0.741. All four hardware-tier indexes were rebuilt against the adopted corpus.
+The phase-1 intervention and older experiments below retain their original pins.
+
 Retrieval was not the binding constraint. Candidate rankings already contained
 complete approved evidence for 31-34 of 36 answerable development questions. The
 provider, however, received only four short passages, about 3,000 of its 16,000
@@ -43,7 +49,8 @@ contexts is measured. These small, correlated four-paper development studies do 
 establish held-out quality, generated-answer correctness, citation support or
 abstention behavior.
 
-Separate follow-up PRs cover hardware-dependent model tiers with a startup memory
-check (Qwen3-4B peaks at about 8 GiB of RAM), readable formula rendering in the
-corpus, held-out confirmation of the frozen settings and answer-quality evaluation.
-Keep the approved datasets, labels and source texts fixed for comparisons.
+Hardware tiers, startup memory checks and approved readable formula extraction are
+implemented. Held-out confirmation of the frozen settings remains pending. The
+2026-10-13 paid answer-quality study describes the previous corpus and was not rerun
+during adoption. Keep the current approved datasets, labels and source text fixed
+for subsequent comparisons.
