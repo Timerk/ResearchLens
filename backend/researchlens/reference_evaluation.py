@@ -29,7 +29,8 @@ def reference_scores(case: dict, row: dict, budget: int) -> dict:
         raise ValueError("Answerable cases need passage references")
     hits = [] if row["error"] else [SearchHit.model_validate(p) for p in row["retrieved_passages"]]
     prepared = prepare_answer_context(
-        hits, mode="passages" if budget == 4 else "characters",
+        hits,
+        mode="passages" if budget == 4 else "characters",
         max_context_chars=16000 if budget == 4 else budget,
     )
     context = [p for p in prepared.supplied if prepared.diagnostics.visible_chars[p.id] > 0]
@@ -41,7 +42,8 @@ def reference_scores(case: dict, row: dict, budget: int) -> dict:
 
     sources = set(case["expected_source_ids"])
     return {
-        "case_id": case["id"], "scored": True,
+        "case_id": case["id"],
+        "scored": True,
         "passage_recall_at_4": len(references & set(ranked_ids[:4])) / len(references),
         "mrr_at_4": rr(ranked_ids[:4]),
         "context_hit": bool(references & set(context_ids)),
@@ -70,12 +72,17 @@ def summarize_references(run: dict, budget: int) -> tuple[dict, list[dict]]:
         binary = key in ("context_hit", "complete_evidence", "both_documents")
         radius = math.sqrt(math.log(40) / (2 * n)) if n else None
         interval = (
-            binomial_ci(sum(values), n) if binary else
-            [max(0, estimate - radius), min(1, estimate + radius)] if n else None
+            binomial_ci(sum(values), n)
+            if binary
+            else [max(0, estimate - radius), min(1, estimate + radius)]
+            if n
+            else None
         )
         metrics[key] = {
-            "estimate": estimate, "denominator": n,
-            "successes": sum(values) if binary else None, "ci95": interval,
+            "estimate": estimate,
+            "denominator": n,
+            "successes": sum(values) if binary else None,
+            "ci95": interval,
             "interval_method": "Clopper-Pearson" if binary else "Hoeffding bounded mean",
             "target": TARGETS.get(key),
             "pass": estimate >= TARGETS[key] if key in TARGETS and n else None,
@@ -83,12 +90,15 @@ def summarize_references(run: dict, budget: int) -> tuple[dict, list[dict]]:
     total_refs = sum(r["reference_count"] for r in positives)
     found = sum(r["references_found_at_4"] for r in positives)
     return {
-        "budget": budget, "total_cases": len(records), "answerable_cases": len(positives),
+        "budget": budget,
+        "total_cases": len(records),
+        "answerable_cases": len(positives),
         "excluded_abstention_cases": len(records) - len(positives),
         "technical_errors": sum(bool(r["error"]) for r in rows),
         "metrics": metrics,
         "micro_recall_at_4": {
-            "successes": found, "denominator": total_refs,
+            "successes": found,
+            "denominator": total_refs,
             "estimate": found / total_refs if total_refs else None,
             "ci95": binomial_ci(found, total_refs),
             "caveat": "Dependent references within cases; diagnostic only, not macro target",
@@ -101,12 +111,18 @@ def compare_references(profiles: list[tuple[str, dict, list[dict]]]) -> list[dic
     baseline = profiles[0][2]
     for name, _, records in profiles[1:]:
         for metric in ("complete_evidence", "context_hit", "both_documents"):
+
             def states(rows, metric=metric):
                 return {r["case_id"]: r.get(metric) for r in rows}
-            comparisons.append({
-                "candidate": name, "baseline": profiles[0][0], "metric": metric,
-                **exact_mcnemar(states(baseline), states(records)),
-            })
+
+            comparisons.append(
+                {
+                    "candidate": name,
+                    "baseline": profiles[0][0],
+                    "metric": metric,
+                    **exact_mcnemar(states(baseline), states(records)),
+                }
+            )
     running = 0.0
     for rank, row in enumerate(sorted(comparisons, key=lambda r: r["p_two_sided"])):
         running = max(running, min(1.0, (len(comparisons) - rank) * row["p_two_sided"]))
@@ -116,8 +132,9 @@ def compare_references(profiles: list[tuple[str, dict, list[dict]]]) -> list[dic
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", action="append", nargs=3, required=True,
-                        metavar=("NAME", "RUN_JSON", "BUDGET"))
+    parser.add_argument(
+        "--profile", action="append", nargs=3, required=True, metavar=("NAME", "RUN_JSON", "BUDGET")
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
@@ -129,8 +146,10 @@ def main():
         summary, records = summarize_references(run, int(budget))
         profiles.append((name, summary, records))
         provenance[name] = {
-            "path": path, "sha256": hashlib.sha256(raw).hexdigest(),
-            "run_id": run["run_id"], "retrieval": run["retrieval"],
+            "path": path,
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "run_id": run["run_id"],
+            "retrieval": run["retrieval"],
             "code": run.get("code"),
         }
     # Paired inference requires identical frozen datasets, not merely matching IDs.
@@ -138,7 +157,8 @@ def main():
     if any(d != datasets[0] for d in datasets[1:]):
         parser.error("Profiles must use identical datasets")
     result = {
-        "schema_version": 1, "scoring": "passage-reference-presence",
+        "schema_version": 1,
+        "scoring": "passage-reference-presence",
         "source_sha256": hashlib.sha256(
             Path(__file__).read_bytes().replace(b"\r\n", b"\n")
         ).hexdigest(),
