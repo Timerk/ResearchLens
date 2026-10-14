@@ -2,9 +2,15 @@
 
 Review status: human reviewed. Reviewer: project owner. Confirmed 2026-10-15.
 
-The owner reviewed and graded all 60 items and confirmed the final verdicts.
-The draft was prepared with Codex assistance; the owner approved the final
-judgments and authorized this review record.
+The owner and Codex graded all 60 items independently. They agreed on 58/60
+(96.7%). The owner adjudicated the 2 disagreements after reviewing both
+rationales and adopted Codex's verdict on both. The owner approved all final
+verdicts and authorized this review record. The pre-adjudication grades and the
+IDs of the 2 disagreements were not preserved.
+
+Treat the 96.7% inter-rater agreement as the realistic ceiling for automated
+judge agreement. Because the final grades include Codex verdicts, a judge from
+the same model family may be biased toward them.
 
 ## Committed calibration results
 
