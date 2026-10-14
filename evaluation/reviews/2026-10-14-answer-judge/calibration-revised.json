@@ -1,0 +1,96 @@
+{
+  "half": "calibration",
+  "plan_sha256": "67d479a5bf5e025dacfc84dca585a68470f70d2fb4f85c864cf45100c47f8178",
+  "metrics": {
+    "required_claim": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 2
+      },
+      "cohens_kappa": 1.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": true
+    },
+    "qualification": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    },
+    "forbidden_claim": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    },
+    "abstention": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 4,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 2
+      },
+      "cohens_kappa": 1.0,
+      "kappa_undefined_reason": null,
+      "acceptance_bar_met": true
+    },
+    "citation": {
+      "items": 6,
+      "agreed": 6,
+      "accuracy_all_items": 1.0,
+      "binary_pairs": 6,
+      "accuracy_decidable_pairs": 1.0,
+      "owner_uncertain": 0,
+      "judge_unknown": 0,
+      "confusion": {
+        "human_pass_judge_pass": 6,
+        "human_pass_judge_fail": 0,
+        "human_fail_judge_pass": 0,
+        "human_fail_judge_fail": 0
+      },
+      "cohens_kappa": null,
+      "kappa_undefined_reason": "Both raters assign the same single class",
+      "acceptance_bar_met": false
+    }
+  }
+}
