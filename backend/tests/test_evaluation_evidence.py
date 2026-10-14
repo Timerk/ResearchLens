@@ -572,7 +572,7 @@ def test_cli_cutoffs_and_paired_json_are_reproducible(sample, tmp_path, monkeypa
     assert not (tmp_path / "bad").exists()
 
 
-def test_development_labels_are_human_reviewed_and_dataset_hashes_are_unchanged(tmp_path):
+def test_development_labels_are_human_reviewed_and_previous_dataset_hashes_preserved(tmp_path):
     expected = {
         "technical-development.json": (
             "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2"
@@ -581,7 +581,9 @@ def test_development_labels_are_human_reviewed_and_dataset_hashes_are_unchanged(
     }
     for name, checksum in expected.items():
         assert (
-            hashlib.sha256((ROOT / "evaluation/datasets" / name).read_bytes()).hexdigest()
+            hashlib.sha256(
+                (ROOT / "evaluation/reviews/2026-10-14-pr15/datasets" / name).read_bytes()
+            ).hexdigest()
             == checksum
         )
     index = tmp_path / "technical.json"
@@ -595,6 +597,6 @@ def test_development_labels_are_human_reviewed_and_dataset_hashes_are_unchanged(
     assert set(approved) == {c.id for c in dataset.cases if not c.expected_abstention}
     assert len(approved) == 36
     assert evidence.review_status == "approved"
-    assert evidence.reviewer == "Project owner (human reviewer; approval in PR #8 thread)"
-    assert evidence.review_date.isoformat() == "2026-10-01"
+    assert evidence.reviewer == "Project owner (human reviewer; approval in PR #15 thread)"
+    assert evidence.review_date.isoformat() == "2026-10-14"
     assert sum(c.query_style == "missing-evidence" for c in dataset.cases) == 7

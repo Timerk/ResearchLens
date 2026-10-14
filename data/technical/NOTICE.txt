@@ -8,7 +8,7 @@ License: https://creativecommons.org/licenses/by/4.0/
 
 Article licenses do not automatically cover separately licensed third-party material or external image datasets. No external figure images or datasets are bundled.
 
-Extraction changes: Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. This is a partial text extraction; consult the original article for omitted material.
+Extraction changes: Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.
 
 Extracted text and questions have not received human scientific review.
 

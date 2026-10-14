@@ -49,13 +49,12 @@ def test_ai_fix_record_preserves_review_pins_and_separate_approval(evidence):
     record = json.loads((directory / "evidence-fixes.json").read_bytes())
     review = json.loads((directory / "evidence-review.json").read_bytes())
     approval = json.loads((directory / "evidence-human-review.json").read_bytes())
-    labels = evidence[0]
+    archived_labels = ROOT / "evaluation/reviews/2026-10-14-pr15/labels/technical-development.json"
+    labels = EvidenceLabels.model_validate_json(archived_labels.read_bytes())
     assert record["input_labels_sha256"] == review["labels_file_sha256"]
     assert (
         approval["approved_labels_sha256"]
-        == hashlib.sha256(
-            (ROOT / "evaluation/labels/technical-development.json").read_bytes()
-        ).hexdigest()
+        == hashlib.sha256(archived_labels.read_bytes()).hexdigest()
     )
     assert approval["previous_labels_sha256"] == record["output_labels_sha256"]
     previous = labels.model_dump(mode="json")
@@ -117,7 +116,10 @@ def test_stage_two_sample_types_do_not_require_optional_clean_targets(evidence):
         assert "normal" in text and "artificially defective" in text
         assert "references" not in text and "counterparts" not in text
     assert entry.alternatives[-1][0].passage_id == "pmc11121878:p1:w0"
-    assert entry.alternatives[-1][1].passage_id == "pmc11121878:p1:w180"
+    assert entry.alternatives[-1][1].passage_id == "pmc11121878:p1:w0"
+    assert entry.alternatives[-1][1].quote == "training"
+    assert entry.alternatives[-1][2].passage_id == "pmc11121878:p1:w180"
+    assert entry.alternatives[-1][2].quote == "samples."
 
 
 def test_rgb_channels_keep_ordered_antecedent_without_requiring_it_for_blue(evidence):
@@ -174,6 +176,17 @@ def test_dynamic_gaussian_coverage_requires_identity_and_fixed_footprint(evidenc
         coverage(evidence, case, "pmc11121878:p31:w0", "pmc11121878:p30:w0", "pmc11121878:p29:w0")[
             "complete_evidence"
         ]
+        is False
+    )
+    assert (
+        coverage(
+            evidence,
+            case,
+            "pmc11121878:p31:w0",
+            "pmc11121878:p30:w0",
+            "pmc11121878:p29:w0",
+            "pmc11121878:p29:w180",
+        )["complete_evidence"]
         is True
     )
     for gid in ("part-1", "part-2", "part-3"):

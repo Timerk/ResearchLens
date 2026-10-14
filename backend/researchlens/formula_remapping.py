@@ -271,16 +271,24 @@ def build_remapping(destination: Path, canonical, proposed, alignments) -> dict:
         destination / "index.json", source=destination / "documents.json"
     )
     old_passages = chunk_documents(canonical)
+    adoption = ROOT / "evaluation/reviews/2026-10-14-pr15"
+    historical = (adoption / "approval.json").exists()
+    input_root = adoption if historical else ROOT / "evaluation"
+    canonical_sha = (
+        json.loads((adoption / "approval.json").read_bytes())["previous_corpus_sha256"]
+        if historical
+        else digest(ROOT / "data/technical/documents.json")
+    )
     baseline_artifact = {
         **artifact,
-        "source_sha256": digest(ROOT / "data/technical/documents.json"),
+        "source_sha256": canonical_sha,
         "passages": [p.model_dump(mode="json") for p in old_passages],
     }
     records = []
     outputs = {}
-    label_paths = [ROOT / "evaluation/labels/technical-development.json"]
+    label_paths = [input_root / "labels/technical-development.json"]
     datasets = [
-        load_dataset(ROOT / "evaluation/datasets" / f"{name}.json")
+        load_dataset(input_root / "datasets" / f"{name}.json")
         for name in ("technical-development",)
     ]
     for dataset in datasets:
@@ -330,7 +338,7 @@ def build_remapping(destination: Path, canonical, proposed, alignments) -> dict:
                 "candidate_dataset_sha256": digest(dataset_path),
                 "counts": dict(Counter(r["status"] for r in rows)),
             }
-    held_out_path = ROOT / "evaluation/datasets/held-out.json"
+    held_out_path = input_root / "datasets/held-out.json"
     inventory = held_out_reference_review(
         json.loads(held_out_path.read_bytes()), old_passages, passages, artifact, alignments
     )

@@ -8,6 +8,7 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 from researchlens.artifacts import canonical_hash, load_artifact, validate_passage_artifact
+from researchlens.corpus import DIRECTORY, SOURCES, extract
 from researchlens.evaluation import (
     comparison_report,
     default_retrieval_config,
@@ -21,7 +22,7 @@ from researchlens.evaluation import (
     validate_splits,
 )
 from researchlens.evaluation_schema import ExecutionConfig, RetrievalConfig
-from researchlens.ingest import CORPUS, ROOT, TECHNICAL_CORPUS, build_index
+from researchlens.ingest import CORPUS, ROOT, build_index
 from researchlens.models import SearchHit
 from researchlens.retrieval import Retriever
 
@@ -280,10 +281,20 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
 
 def test_source_review_pins_originals_and_locations_without_running_held_out(tmp_path):
     path = tmp_path / "technical.json"
-    build_index(TECHNICAL_CORPUS, path)
+    # The 2026-10-01 audit applies to the preserved pre-formula dataset and corpus.
+    legacy = [
+        extract(
+            (DIRECTORY / "originals" / f"{pmcid}.xml").read_bytes(), pmcid, readable_formulas=False
+        )[0].model_dump()
+        for pmcid in SOURCES
+    ]
+    source = tmp_path / "legacy-documents.json"
+    source.write_bytes((json.dumps(legacy, indent=2, ensure_ascii=False) + "\n").encode())
+    build_index(source, path)
     artifact = json.loads(path.read_bytes())
-    dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
-    held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")
+    archive = ROOT / "evaluation/reviews/2026-10-14-pr15/datasets"
+    dataset = load_dataset(archive / "technical-development.json")
+    held_out = load_dataset(archive / "held-out.json")
     validate_splits(dataset, held_out)
     review = json.loads((ROOT / "evaluation/reviews/2026-10-01-pr8/review.json").read_bytes())
     assert review["reviewer_kind"] == "ai" and review["human_sign_off"] is False
@@ -316,7 +327,10 @@ def test_source_review_pins_originals_and_locations_without_running_held_out(tmp
         assert [c.id for c in candidate.cases] == pin["approved_case_ids"]
         assert len(candidate.source_versions) == 4
         assert len(candidate.cases) == pin["accepted_count"]
-        assert hashlib.sha256((ROOT / pin["path"]).read_bytes()).hexdigest() == pin["output_sha256"]
+        preserved = archive / (
+            "held-out.json" if candidate.split == "held-out" else "technical-development.json"
+        )
+        assert hashlib.sha256(preserved.read_bytes()).hexdigest() == pin["output_sha256"]
         styles = Counter(
             "unanswerable" if c.expected_abstention else c.query_style for c in candidate.cases
         )
@@ -372,7 +386,9 @@ def test_question_review_covers_inputs_and_excludes_rejected_cases():
     accepted = {
         c.id: c
         for name in ("technical-development", "held-out")
-        for c in load_dataset(ROOT / f"evaluation/datasets/{name}.json").cases
+        for c in load_dataset(
+            ROOT / f"evaluation/reviews/2026-10-14-pr15/datasets/{name}.json"
+        ).cases
     }
     rejected = {r["case"]["id"] for r in archive}
     assert len(rejected) == len(archive) == 14
