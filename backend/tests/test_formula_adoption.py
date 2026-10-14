@@ -10,11 +10,22 @@ from researchlens.corpus import DIRECTORY
 from researchlens.evaluation import load_dataset, validate_dataset_references
 from researchlens.evaluation_evidence import EvidenceLabels, validate_labels
 from researchlens.formula_adoption import REVIEW, adopt
+from researchlens.formula_report import implementation_hashes
 from researchlens.ingest import ROOT, build_index
 
 
 def read(path):
     return json.loads(path.read_bytes())
+
+
+@pytest.mark.parametrize("newline", [b"\n", b"\r\n"])
+def test_report_source_hashes_match_fresh_lf_checkout(tmp_path, newline):
+    committed = b"def answer():\n    return 42\n"
+    (tmp_path / "module.py").write_bytes(committed.replace(b"\n", newline))
+    # The report must pin the same code in Windows and Linux checkouts.
+    assert implementation_hashes(tmp_path, ("module.py",)) == {
+        "module.py": hashlib.sha256(committed).hexdigest()
+    }
 
 
 def test_approval_and_archives_pin_current_and_previous_versions(tmp_path):
@@ -135,9 +146,14 @@ def test_active_retrieval_selection_and_tier_summaries_use_adopted_pins():
     )
     for name, expected in summary["implementation_sha256"].items():
         assert (
-            hashlib.sha256((ROOT / "backend/researchlens" / name).read_bytes()).hexdigest()
+            hashlib.sha256(
+                (ROOT / "backend/researchlens" / name).read_bytes().replace(b"\r\n", b"\n")
+            ).hexdigest()
             == expected
         )
+    assert summary["implementation_hash_method"] == (
+        "SHA-256 of source bytes with CRLF normalized to LF"
+    )
     assert summary["qwen_meets_all_five_at_12k_and_16k"] is True
     assert summary["api_calls"] == 0
     assert summary["held_out_searches"] == 0
