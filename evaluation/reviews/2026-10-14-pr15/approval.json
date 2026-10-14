@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "review_status": "approved",
+  "reviewer_type": "human",
+  "reviewer": "Project owner (human reviewer; approval in PR #15 thread)",
+  "review_date": "2026-10-14",
+  "reason": "source text change from formula rendering",
+  "approval_source": "Explicit project-owner approval in the PR #15 conversation",
+  "approval_statement": "The owner has reviewed docs/formula-remapping-review.md and approves all development span remappings and held-out reference changes as proposed.",
+  "status": "approved_and_adopted",
+  "scope": "Formula source text, development spans, held-out references and corpus pins only.",
+  "phase1_commit": "e6237c2",
+  "rebased_phase1_commit": "b398004",
+  "main_base_commit": "051381c",
+  "previous_corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "approved_candidate_corpus_sha256": "fe1c769f0ab662ac36cafd55982dbcc19c390b53f81fedff7852cc02aae23d26",
+  "adopted_corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+  "corpus_byte_change_from_candidate": "Approved attribution replaces proposal-only status; all document text is identical.",
+  "previous_labels_sha256": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+  "proposed_labels_sha256": "1c0c5d3919b10c1adb9ad91fb6751f6813c05797ad2142cf6cc73e65beffc871",
+  "approved_labels_sha256": "a2c89e670eda59ddca4d90e9f9e59caa68e90fc8db6a24aabf9cf02b1776135b",
+  "approved_labels_canonical_sha256": "7556636731185cef0dac7cf612ea26137503e13817236da0ff9620319e86f23e",
+  "previous_pins": {
+    "dataset_sha256": "0bd3499a71d908b7482d55e87110115b428b0ede5a7803b0c9e86ba0d8feb5df",
+    "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+    "shared_passage_sha256": "c7bf2f1f6b9c866573669f946866b5b0635ae4afcee1d06511e3109ab47c1157"
+  },
+  "pins": {
+    "dataset_sha256": "74fa3c40691a47c1ae1a20e2863d7b0c2bb4df9be61179b886a6d6ede73de95b",
+    "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+    "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d"
+  },
+  "development_remapping_counts": {
+    "unchanged": 132,
+    "shifted only": 14,
+    "quote text changed": 19
+  },
+  "counts": {
+    "cases": 36,
+    "groups": 92,
+    "alternatives": 140,
+    "span_occurrences": 167
+  },
+  "approved_cases": [
+    {
+      "case_id": "tech-glass-exact",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-glass-paraphrase",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-painted-exact",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-exact",
+      "group_ids": [
+        "part-1",
+        "efficiency-scope"
+      ]
+    },
+    {
+      "case_id": "tech-wafer-paraphrase",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "cds-incomplete"
+      ]
+    },
+    {
+      "case_id": "tech-autoencoder-exact",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-compare-fusion",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "part-4",
+        "part-5"
+      ]
+    },
+    {
+      "case_id": "tech-obb",
+      "group_ids": [
+        "part-1"
+      ]
+    },
+    {
+      "case_id": "tech-annotation-tools",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-rgb-channel-assignment",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-amff-layers",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "architecture-conflict"
+      ]
+    },
+    {
+      "case_id": "tech-stripe-frequencies",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-adaptive-binarization",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-imagenet-initialization",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-tdi-motion-sync",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-aw-ssim-combination",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "component-calculations"
+      ]
+    },
+    {
+      "case_id": "tech-adga-shapes",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "part-4"
+      ]
+    },
+    {
+      "case_id": "tech-stable-camera",
+      "group_ids": [
+        "part-1"
+      ]
+    },
+    {
+      "case_id": "tech-turn-and-flip-labels",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-manual-outline-union",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "visibility-scope"
+      ]
+    },
+    {
+      "case_id": "tech-small-photo-supply",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-both-checks-clean",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-daylight-interference",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "containment-scope"
+      ]
+    },
+    {
+      "case_id": "tech-bright-specks-dark-background",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-moving-signal-addition",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-too-many-shortcuts",
+      "group_ids": [
+        "part-1",
+        "residual-purpose"
+      ]
+    },
+    {
+      "case_id": "tech-changing-neighborhood",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3",
+        "gaussian-spread",
+        "fixed-footprint"
+      ]
+    },
+    {
+      "case_id": "tech-damaged-clean-pairs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-localization-outputs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-splits",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-training-computers",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    },
+    {
+      "case_id": "tech-compare-data-expansion",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-evaluation-metrics",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-optical-cues",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-inputs",
+      "group_ids": [
+        "part-1",
+        "part-2"
+      ]
+    },
+    {
+      "case_id": "tech-compare-network-roles",
+      "group_ids": [
+        "part-1",
+        "part-2",
+        "part-3"
+      ]
+    }
+  ],
+  "held_out": {
+    "previous_version": "3-human-reviewed-frozen",
+    "version": "4-readable-formulas-frozen",
+    "previous_file_sha256": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572",
+    "file_sha256": "920f1415d14d974ce489e91386227d3f306837f22944958763d8235495ea9312",
+    "reference_changes": [
+      {
+        "case_id": "hold-microscope-settings",
+        "reference_index": 0,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11510794",
+          "passage_id": "pmc11510794:p26:w0",
+          "paragraph": 26,
+          "page": null,
+          "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+          "source_locator": "./body/sec[3]/sec[2]/p[3]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11510794",
+            "passage_id": "pmc11510794:p26:w0",
+            "paragraph": 26,
+            "page": null,
+            "source_section": "3. Methodology > 3.2. Image Acquisition Platform",
+            "source_locator": "./body/sec[3]/sec[2]/p[3]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-ssim-window",
+        "reference_index": 0,
+        "status": "ID changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[10]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p29:w0",
+            "paragraph": 29,
+            "page": null,
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[10]"
+          },
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p29:w180",
+            "paragraph": 29,
+            "page": null,
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[10]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-ssim-window",
+        "reference_index": 1,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p30:w0",
+          "paragraph": 30,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[11]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p30:w0",
+            "paragraph": 30,
+            "page": null,
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[11]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-production-scan-projection",
+        "reference_index": 0,
+        "status": "ID changed",
+        "old_reference": {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[4]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p16:w0",
+            "paragraph": 16,
+            "page": null,
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[4]"
+          },
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p16:w180",
+            "paragraph": 16,
+            "page": null,
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[4]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-material-dependent-loss",
+        "reference_index": 1,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p27:w0",
+          "paragraph": 27,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[8]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p27:w0",
+            "paragraph": 27,
+            "page": null,
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[8]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-two-loss-priorities",
+        "reference_index": 0,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p35:w0",
+          "paragraph": 35,
+          "page": null,
+          "source_section": "3. Methodology > 3.4. Combined AW-SSIM and LPIPS Loss for Stage Two of Training",
+          "source_locator": "./body/sec[3]/sec[4]/p[3]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p35:w0",
+            "paragraph": 35,
+            "page": null,
+            "source_section": "3. Methodology > 3.4. Combined AW-SSIM and LPIPS Loss for Stage Two of Training",
+            "source_locator": "./body/sec[3]/sec[4]/p[3]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-two-loss-priorities",
+        "reference_index": 1,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "1. Introduction",
+          "source_locator": "./body/sec[1]/p[9]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p10:w0",
+            "paragraph": 10,
+            "page": null,
+            "source_section": "1. Introduction",
+            "source_locator": "./body/sec[1]/p[9]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-compare-size-evidence",
+        "reference_index": 2,
+        "status": "ID changed",
+        "old_reference": {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "3. Experimental Setup",
+          "source_locator": "./body/sec[3]/p[2]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p10:w0",
+            "paragraph": 10,
+            "page": null,
+            "source_section": "3. Experimental Setup",
+            "source_locator": "./body/sec[3]/p[2]"
+          },
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p10:w180",
+            "paragraph": 10,
+            "page": null,
+            "source_section": "3. Experimental Setup",
+            "source_locator": "./body/sec[3]/p[2]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-compare-intensity-assumptions",
+        "reference_index": 1,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p11:w0",
+          "paragraph": 11,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.1. Linearity Assessment of the TDI Image Sensor",
+          "source_locator": "./body/sec[4]/sec[1]/p[1]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p11:w0",
+            "paragraph": 11,
+            "page": null,
+            "source_section": "4. Experimental Results and Discussions > 4.1. Linearity Assessment of the TDI Image Sensor",
+            "source_locator": "./body/sec[4]/sec[1]/p[1]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-missing-embedding-ranking",
+        "reference_index": 3,
+        "status": "text changed",
+        "old_reference": {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p1:w0",
+          "paragraph": 1,
+          "page": null,
+          "source_section": "Abstract",
+          "source_locator": "./front/article-meta/abstract[1]/p[1]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc11121878",
+            "passage_id": "pmc11121878:p1:w0",
+            "paragraph": 1,
+            "page": null,
+            "source_section": "Abstract",
+            "source_locator": "./front/article-meta/abstract[1]/p[1]"
+          }
+        ]
+      },
+      {
+        "case_id": "hold-missing-wafer-damage-threshold",
+        "reference_index": 1,
+        "status": "ID changed",
+        "old_reference": {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[4]"
+        },
+        "new_references": [
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p16:w0",
+            "paragraph": 16,
+            "page": null,
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[4]"
+          },
+          {
+            "source_id": "pmc10934137",
+            "passage_id": "pmc10934137:p16:w180",
+            "paragraph": 16,
+            "page": null,
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[4]"
+          }
+        ]
+      }
+    ],
+    "reference_change_counts": {
+      "text changed": 7,
+      "unchanged": 51,
+      "ID changed": 4
+    },
+    "question_answer_claim_content_unchanged": true,
+    "source_versions_unchanged": true,
+    "origin": "Offline corpus alignment, not held-out model results"
+  },
+  "preserved_archive_sha256": {
+    "datasets/technical-development.json": "32e76c99d650b994c03e8e3f32da921633b0a636f2f1afe2c833db7e513e85a2",
+    "datasets/held-out.json": "19304c0bf72e39dd5563868ac90c0ee153e85d5ffbdf33eff81e3bbf1cd67572",
+    "labels/technical-development.json": "4c8a9aaf952b78125d3effcf75a365bedec4950c451bc64510cc410c87ea5b72",
+    "phase1-remapping-review.md": "d91a18f0c52fcc26f3613d5fad32369db23a85e60ba53ad386c43695be01bf99",
+    "phase1-results.json": "604abbbbaf2e073e7c40a51c0b29c35e9526d2b307d38e7422671258f9cc3414",
+    "previous-selected-retrieval.json": "75b5383d7e528885a9f984bc17dc7685eb0bf42c86a8fbb3711cc6c0b1243212",
+    "previous-selected-context.json": "cdb9690aa17efea0eda311af02e08d4f9738a4db81ece8779f956682ef3dbb3d"
+  },
+  "historical_evidence_preserved_sha256": {
+    "evaluation/reviews/2026-10-01-pr8/evidence-fixes.json": "c8a4efc33cdbea7f02982ca1f9d5f3a6d180e7075df27dd4d65a2d3342d385aa",
+    "evaluation/reviews/2026-10-01-pr8/evidence-fixes.md": "62d59e6d470bc2145b69088094b83a17135de5d3042a575688628f520907d71a",
+    "evaluation/reviews/2026-10-01-pr8/evidence-human-review.json": "ac6f8fa358e94e8eae7ca6b22d5c4d7393ebab0ee9e91a8a998d6af0f18995ae",
+    "evaluation/reviews/2026-10-01-pr8/evidence-review.json": "4c82d26fcbcbcd4babf55f0bd9a8e82baecbedb43ba3f4cff74de3a7d3da5889",
+    "evaluation/reviews/2026-10-01-pr8/evidence-review.md": "17e6a7b6d13b390326137a17ea5246f3f8bcf3c877a7d21d96bf379001e3454d",
+    "evaluation/reviews/2026-10-01-pr8/human-review.json": "13c1c902b7d4ac3d01b68c039649d159321396f9f0d1a562335edcece8a5916e",
+    "evaluation/reviews/2026-10-01-pr8/README.md": "afd1f404a501b730a717b08b735b95bd2a4cf703d59e5a064f403cda2efee356",
+    "evaluation/reviews/2026-10-01-pr8/rejected-cases.json": "e3c19ad5371202a9bf39a2d55dbf3079e15814a762cfc89a981d1f0d9d624203",
+    "evaluation/reviews/2026-10-01-pr8/review.json": "16dc61594f53339efc0fbb43fbac555964f04997010b3da46995c56ac5e996e9",
+    "evaluation/answer-quality-evidence-manifest.json": "bd7d24d4f7c792ae32ab2a234527a8ed33b10f8cdea0aa0a1dedd6c70b6198f3",
+    "docs/answer-quality-results.json": "36120cad773402dc5f5f55a9b2779fee40c7e6e965868488f0e80072ac1ae078"
+  },
+  "held_out_retrieval_executed": false,
+  "held_out_answers_inspected": false,
+  "paid_api_calls": 0
+}

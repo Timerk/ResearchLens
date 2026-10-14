@@ -97,9 +97,12 @@ def test_manifest_matches_document_metadata():
         assert "creativecommons.org/licenses/by/4.0" in record["permission_evidence"]
 
 
-def test_prose_retains_formula_context_without_flattening_math():
+def test_prose_retains_formula_context_without_computing_or_concatenating_numbers():
     node = ET.fromstring(
         "<p>Noise is <inline-formula><math><mi>x</mi><mn>2</mn></math>"
         "</inline-formula> under these conditions.</p>"
     )
-    assert prose_text(node) == "Noise is [formula omitted] under these conditions."
+    assert prose_text(node) == "Noise is x 2 under these conditions."
+    assert prose_text(node, readable_formulas=False) == (
+        "Noise is [formula omitted] under these conditions."
+    )

@@ -22,7 +22,7 @@ from researchlens.ingest import TECHNICAL_CORPUS, chunk_documents
 from researchlens.models import Document
 
 
-def test_symbol_restores_gaussian_sigma_and_preserves_canonical_behavior():
+def test_symbol_restores_gaussian_sigma_in_canonical_and_preserves_legacy_behavior():
     node = ET.fromstring(
         '<p>Gaussian deviation (<inline-formula><math xmlns="http://www.w3.org/1998/Math/MathML">'
         "<mi>σ</mi></math></inline-formula>) determines the window.</p>"
@@ -30,7 +30,10 @@ def test_symbol_restores_gaussian_sigma_and_preserves_canonical_behavior():
     counts = Counter()
     assert readable_prose(node, counts) == "Gaussian deviation ( σ ) determines the window."
     assert counts == {"rendered_formulas": 1}
-    assert prose_text(node) == "Gaussian deviation ( [formula omitted] ) determines the window."
+    assert prose_text(node) == "Gaussian deviation ( σ ) determines the window."
+    assert prose_text(node, readable_formulas=False) == (
+        "Gaussian deviation ( [formula omitted] ) determines the window."
+    )
 
 
 def test_fraction_and_scripts_preserve_grouping():

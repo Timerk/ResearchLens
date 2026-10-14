@@ -9,10 +9,12 @@ import hashlib
 import json
 import urllib.request
 import xml.etree.ElementTree as ET
+from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 
 from researchlens.ingest import ROOT
+from researchlens.mathml import readable_prose
 from researchlens.models import Attribution, Document, ParagraphSource
 
 DIRECTORY = ROOT / "data" / "technical"
@@ -23,11 +25,19 @@ SOURCES = {
     "PMC11121878": "10.3390/jimaging10050111",
 }
 LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
-CHANGES = (
+LEGACY_CHANGES = (
     "Prose extracted from article XML; whitespace normalized; section and XML locations retained; "
     "split into paragraphs and word-window passages. Figures, tables, captions, references, "
     "and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. "
     "This is a partial text extraction; consult the original article for omitted material."
+)
+EXTRACTION_VERSION = "mathml-readable-v2"
+CHANGES = LEGACY_CHANGES.replace(
+    "Mathematical formula markup is replaced with [formula omitted]. ",
+    "Supported presentation MathML is rendered as grouped readable text with symbols, "
+    "scripts and fractions; unsupported formulas remain [formula omitted]. "
+    "Formula rendering and evidence-location migration were approved by the project owner "
+    "on 2026-10-14 for the source text change. ",
 )
 
 
@@ -35,8 +45,11 @@ def text(element: ET.Element | None) -> str:
     return " ".join("".join(element.itertext()).split()) if element is not None else ""
 
 
-def prose_text(element: ET.Element) -> str:
+def prose_text(element: ET.Element, *, readable_formulas: bool = True) -> str:
     """Keep prose surrounding formulas without flattening MathML into false numeric claims."""
+
+    if readable_formulas:
+        return readable_prose(element, Counter())
 
     def parts(node: ET.Element) -> str:
         if node.tag.rsplit("}", 1)[-1] in {"math", "inline-formula", "disp-formula"}:
@@ -46,7 +59,7 @@ def prose_text(element: ET.Element) -> str:
     return " ".join(parts(element).split())
 
 
-def extract(raw: bytes, pmcid: str) -> tuple[Document, dict]:
+def extract(raw: bytes, pmcid: str, *, readable_formulas: bool = True) -> tuple[Document, dict]:
     root = ET.fromstring(raw)
     meta = root.find("./front/article-meta")
     if meta is None:
@@ -117,7 +130,7 @@ def extract(raw: bytes, pmcid: str) -> tuple[Document, dict]:
                 return
             headings = [*headings, heading] if heading else headings
         if node.tag == "p":
-            paragraph = prose_text(node)
+            paragraph = prose_text(node, readable_formulas=readable_formulas)
             if paragraph:
                 paragraphs.append(paragraph)
                 provenance.append(ParagraphSource(section=" > ".join(headings), locator=path))
@@ -141,7 +154,7 @@ def extract(raw: bytes, pmcid: str) -> tuple[Document, dict]:
         doi=doi,
         license_url=LICENSE_URL,
         copyright=copyright_notice,
-        changes=CHANGES,
+        changes=CHANGES if readable_formulas else LEGACY_CHANGES,
         source_sha256=digest,
     )
     document = Document(
@@ -199,8 +212,19 @@ def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
         documents.append(document.model_dump())
         records.append(record)
     directory.mkdir(parents=True, exist_ok=True)
+    corpus_bytes = (json.dumps(documents, ensure_ascii=False, indent=2) + "\n").encode()
     for path, data in (
-        (manifest_path, {"schema_version": 1, "sources": records}),
+        (
+            manifest_path,
+            {
+                "schema_version": 1,
+                "extraction_version": EXTRACTION_VERSION,
+                "documents_sha256": hashlib.sha256(corpus_bytes).hexdigest(),
+                "formula_approval_date": "2026-10-14",
+                "formula_approval_record": "evaluation/reviews/2026-10-14-pr15/approval.json",
+                "sources": records,
+            },
+        ),
         (directory / "documents.json", documents),
     ):
         path.write_text(

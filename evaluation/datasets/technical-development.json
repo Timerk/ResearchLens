@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "id": "technical-development",
-  "version": "4-human-reviewed",
+  "version": "5-readable-formulas-approved",
   "split": "development",
   "material": "real-corpus",
   "status": "draft",
-  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
   "source_versions": [
     {
       "source_id": "pmc11510794",
@@ -32,7 +32,7 @@
       "publication_date": "2024-05-05"
     }
   ],
-  "notes": "The project owner reviewed and approved these accepted questions on 2026-10-01 in the PR #8 thread. The preceding AI full-source review, all 100 original decisions and 14 rejected cases remain archived in evaluation/reviews/2026-10-01-pr8/. Human approval and the new file hashes are recorded in human-review.json. Question wording, expectations, references and dispositions are unchanged from the AI-reviewed accepted set. The owner's confirmation does not claim a new exhaustive scientific source audit or generated-answer review. Development remains editable.",
+  "notes": "The project owner reviewed and approved these accepted questions on 2026-10-01 in the PR #8 thread. The preceding AI full-source review, all 100 original decisions and 14 rejected cases remain archived in evaluation/reviews/2026-10-01-pr8/. Human approval and the new file hashes are recorded in human-review.json. Question wording, expectations, references and dispositions are unchanged from the AI-reviewed accepted set. The owner's confirmation does not claim a new exhaustive scientific source audit or generated-answer review. Development remains editable. Formula extraction and location migration approved by the project owner on 2026-10-14; reason: source text change from formula rendering. Original source versions and all question/answer/claim content are preserved. Held-out reference migration is offline, derived from the corpus change, not model results. No held-out retrieval was executed. Previous frozen/approved version is archived in evaluation/reviews/2026-10-14-pr15.",
   "cases": [
     {
       "id": "tech-glass-exact",

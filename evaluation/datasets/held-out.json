@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "id": "real-corpus-held-out",
-  "version": "3-human-reviewed-frozen",
+  "version": "4-readable-formulas-frozen",
   "split": "held-out",
   "material": "real-corpus",
   "status": "frozen",
-  "corpus_sha256": "cda1b161618373b9c7b9701d3326fda4707f9501bbc3bf29c802d9a000908bce",
+  "corpus_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
   "source_versions": [
     {
       "source_id": "pmc11510794",
@@ -32,7 +32,7 @@
       "publication_date": "2024-05-05"
     }
   ],
-  "notes": "The project owner reviewed and approved these accepted questions on 2026-10-01 in the PR #8 thread. The preceding AI full-source review, all 100 original decisions and 14 rejected cases remain archived in evaluation/reviews/2026-10-01-pr8/. Human approval and the new file hashes are recorded in human-review.json. Question wording, expectations, references and dispositions are unchanged from the AI-reviewed accepted set. The owner's confirmation does not claim a new exhaustive scientific source audit or generated-answer review. Held-out remains frozen; this provenance update creates a new version and freeze hash. No held-out retrieval, rankings or tuning occurred during the update.",
+  "notes": "The project owner reviewed and approved these accepted questions on 2026-10-01 in the PR #8 thread. The preceding AI full-source review, all 100 original decisions and 14 rejected cases remain archived in evaluation/reviews/2026-10-01-pr8/. Human approval and the new file hashes are recorded in human-review.json. Question wording, expectations, references and dispositions are unchanged from the AI-reviewed accepted set. The owner's confirmation does not claim a new exhaustive scientific source audit or generated-answer review. Held-out remains frozen; this provenance update creates a new version and freeze hash. No held-out retrieval, rankings or tuning occurred during the update. Formula extraction and location migration approved by the project owner on 2026-10-14; reason: source text change from formula rendering. Original source versions and all question/answer/claim content are preserved. Held-out reference migration is offline, derived from the corpus change, not model results. No held-out retrieval was executed. Previous frozen/approved version is archived in evaluation/reviews/2026-10-14-pr15.",
   "cases": [
     {
       "id": "hold-microscope-settings",
@@ -278,6 +278,14 @@
         {
           "source_id": "pmc11121878",
           "passage_id": "pmc11121878:p29:w0",
+          "paragraph": 29,
+          "page": null,
+          "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+          "source_locator": "./body/sec[3]/sec[3]/p[10]"
+        },
+        {
+          "source_id": "pmc11121878",
+          "passage_id": "pmc11121878:p29:w180",
           "paragraph": 29,
           "page": null,
           "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
@@ -614,6 +622,14 @@
         },
         {
           "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p16:w180",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
           "passage_id": "pmc10934137:p13:w0",
           "paragraph": 13,
           "page": null,
@@ -828,6 +844,14 @@
         {
           "source_id": "pmc10934137",
           "passage_id": "pmc10934137:p10:w0",
+          "paragraph": 10,
+          "page": null,
+          "source_section": "3. Experimental Setup",
+          "source_locator": "./body/sec[3]/p[2]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p10:w180",
           "paragraph": 10,
           "page": null,
           "source_section": "3. Experimental Setup",
@@ -1342,6 +1366,14 @@
         {
           "source_id": "pmc10934137",
           "passage_id": "pmc10934137:p16:w0",
+          "paragraph": 16,
+          "page": null,
+          "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+          "source_locator": "./body/sec[4]/sec[3]/p[4]"
+        },
+        {
+          "source_id": "pmc10934137",
+          "passage_id": "pmc10934137:p16:w180",
           "paragraph": 16,
           "page": null,
           "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
