@@ -44,3 +44,13 @@ def test_guarded_review_rejects_unapproved_plan_without_a_client(tmp_path, monke
     monkeypatch.setattr(module, "OpenAI", lambda **kw: pytest.fail("Paid client constructed"))
     with pytest.raises(ValueError, match="approval"):
         module.run_review(SimpleNamespace(approve_plan_sha256="wrong"), {"mode": "test"}, None)
+
+
+def test_committed_freeze_detects_prompt_drift(monkeypatch):
+    from researchlens import answer_judge_v2
+    from researchlens.answer_judge_freeze import assert_frozen
+
+    assert assert_frozen()["frozen_before_validation"]
+    monkeypatch.setattr(answer_judge_v2, "PROMPT", answer_judge_v2.PROMPT + " changed")
+    with pytest.raises(ValueError, match="differs from the committed freeze"):
+        assert_frozen()
