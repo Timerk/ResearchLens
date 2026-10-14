@@ -1,5 +1,100 @@
 # Generated answer quality
 
+## Current decision, 2026-10-15
+
+Keep the current application defaults. The no-tier default remains TF-IDF with
+four passages. Explicit hardware tiers retain their existing character budgets;
+this study does not make those budgets the universal application policy.
+
+The owner completed grading before calibration. The revision was committed,
+then its prompt, rubric, `gpt-6-luna` model ID, schema and checks were
+[frozen](../evaluation/reviews/2026-10-14-answer-judge/frozen-judge.json) with the
+[decision rule](../evaluation/reviews/2026-10-14-answer-judge/context-decision-rule.json).
+Only after that commit was the sealed validation CSV opened and its SHA-256
+verified against `owner-review.md`. Validation was evaluated once. No judge
+revision or paid retry followed it.
+
+| Judgment type | Archived calibration accuracy / kappa | Frozen validation accuracy / kappa | Decision use |
+| --- | --- | --- | --- |
+| Required claim | 100% / 1.0 | 100% / 1.0 | Included |
+| Qualification | 33.3% / 0.0 | 50% / 0.0 | Excluded |
+| Forbidden claim | 100% / undefined | 100% / undefined | Excluded |
+| Abstention | 100% / 1.0 | 100% / 1.0 | Included |
+| Citation | 33.3% / 0.0 | 100% / undefined | Excluded |
+
+Each half has six items per type. The validation qualification stratum contains
+one UNCERTAIN owner verdict. It receives no accuracy credit and is excluded from
+binary kappa, leaving 3/5 agreement among decidable pairs. The two old calibration
+unknown citation receipts also receive no accuracy credit. Revised calibration
+agreement is 100% for all types, but qualification/citation/forbidden kappas are
+undefined there because both raters assign only PASS. Citation and forbidden
+validation kappas are likewise undefined, so neither meets the requested
+kappa >= 0.6 AND agreement >= 80% bar. No claim of violation-detection reliability
+follows from their perfect observed agreement.
+
+The owner and Codex graded independently and reported 58/60, 96.7%, agreement
+before adjudication, a realistic automated-agreement ceiling. The owner adopted
+Codex's verdicts in the two disagreements; their original grades and IDs were
+not retained. Final grades may favor a model from the same family. Small-sample
+100% figures against those grades do not remove that limitation.
+Full baseline and frozen metrics, confusion counts and exclusions are in
+the [calibration](../evaluation/reviews/2026-10-14-answer-judge/calibration-baseline.json)
+and [one-time validation](../evaluation/reviews/2026-10-14-answer-judge/validation-results.json)
+records.
+
+All 250 requested current-corpus development evaluations completed without
+provider/scoring errors: 249 generation calls and 155 frozen-judge calls.
+The approved PR #15 development rankings were validated against today's
+readable-formula corpus, dataset and labels; no retrieval was repeated.
+
+| Configuration | Complete required claims /36 | False abstentions /36 | Correct generated negative abstentions /14 |
+| --- | --- | --- | --- |
+| TF-IDF, four passages | 19 | 14 | 13 |
+| Qwen3-4B, four passages | 26 | 7 | 14 |
+| Qwen3-4B, 12k characters | 27 | 3 | 14 |
+| Qwen3-4B, 16k characters | 32 | 1 | 14 |
+| BGE-M3, 16k characters | 32 | 0 | 14 |
+
+The registered primary comparison is Qwen 12k versus Qwen four, which holds
+retrieval fixed and tests the existing full tier's budget. It has four gains and
+three losses across all 36 answerable pairs, with two-sided exact McNemar p=1.0.
+It fails the p < 0.05 improvement condition. Negative abstention remains 14/14.
+The unsupported-claim and forbidden-claim guards are unassessable because their
+judgment types did not pass validation. Excluding them does not satisfy those
+AND conditions. Qualifications and the composite do not enter the decision.
+
+Qwen 16k versus four has six gains, zero losses and nominal p=0.03125. It is a
+descriptive secondary comparison, not a replacement for the registered primary;
+its safety endpoints are also uncertified. The
+[applied decision](../evaluation/reviews/2026-10-14-answer-judge/context-decision.json)
+therefore retains the defaults. The
+[current results](answer-quality-current-results.json) preserve reliable paired
+metrics and separate uncertified diagnostics. Do not interpret changes from the
+old study as a causal estimate of formula rendering: corpus, judge and generated
+responses differ.
+
+`answer-plan` ran before each paid stage. The current-corpus run's conservative
+reservation was $2.9711926. All Phase 2 calls share a persistent $3 ledger,
+with reservation before each request and reconciliation only from reported usage.
+All 449 calls have known usage; total cost at the supplied uncached rates is
+$0.2469009, including calibration and validation. This is not an independently
+verified billing total. There was no held-out generation or retrieval, and no
+dataset, label or corpus edit. Raw receipts remain in local ignored storage;
+the [evidence manifest](../evaluation/reviews/2026-10-14-answer-judge/phase2-evidence-manifest.json)
+pins the bundle, plan, ledger and review predictions.
+
+The guarded commands now also accept `--bge-run` with `bge16k` and
+`--review-archive`/`--review-half` for judging saved answers without generation.
+Paid runs use `--max-cost-usd 3 --study-ledger PATH`. Optional `--jobs 4` runs
+disjoint cases, checks their unique complete coverage, and shares that ledger.
+Resume reuses checkpoints and refuses unresolved or repeated paid calls.
+The frozen contract is verified before validation and current-corpus planning.
+
+## Historical study, 2026-10-13
+
+The remaining sections preserve the original experiment and its recommendation.
+Its counts use the original judge and corpus, not the calibrated results above.
+
 The 2026-10-13 results and evidence manifest below describe the pre-rendering corpus.
 Readable formulas and evidence migrations were approved and adopted on 2026-10-14.
 Their [development retrieval rerun](formula-adoption-results.md) does not update
@@ -104,10 +199,10 @@ The [Phase 1 owner grading packet](../evaluation/reviews/2026-10-14-answer-judge
 contains 60 blind, individual judgment items from the archived development
 outputs. It splits questions between 30 calibration and 30 validation items,
 with all five judgment types and all four configurations in each half.
-The owner should read only that packet before grading. The separate review
-README, scoring key and diagnosis reveal model outcomes. Owner grades are pending;
-the judge and application defaults remain unchanged. Validation grades will stay
-sealed until the revised judge is frozen. The archive has no predicted forbidden
+The owner completed grading, recorded in
+[owner-review.md](../evaluation/reviews/2026-10-14-answer-judge/owner-review.md).
+The packet remains pristine; the separate key and diagnosis reveal model outcomes.
+Calibration, freeze and one-time validation are reported above. The archive has no predicted forbidden
 violations or invalid citation IDs, so those failure strata cannot be supplied.
 
 Each completed configuration produces `spot-check.json` with two preselected

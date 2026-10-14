@@ -117,6 +117,15 @@ the app does not silently fall back to preview mode. Response metadata includes
 model, latency and token usage; `estimated_api_cost_usd` is `null` for paid requests
 because billing rates are not hardcoded, and zero when no API call was made.
 
+The [2026-10-15 answer-quality study](docs/answer-quality.md) keeps the no-tier
+TF-IDF/four-passage default and existing opt-in tier budgets. Qwen3-4B 12k
+completed 27/36 required-claim sets versus 26/36 at four passages; the registered
+paired exact McNemar test gave p=1.0. Only required-claim and abstention judgments
+passed owner validation. Qualification, citation and forbidden-claim judgments
+remain uncertified, so the safety guards cannot justify a default change.
+All five development configurations completed under the shared $3 cap;
+recorded Phase 2 usage cost was $0.2469 at the supplied rates.
+
 Try `Why combine forward and backward lighting for aircraft glass canopy inspection?`
 or `What training data are used in each stage of the autoencoder method?` and inspect
 the source references. Results include author, date, license, section and original XML
