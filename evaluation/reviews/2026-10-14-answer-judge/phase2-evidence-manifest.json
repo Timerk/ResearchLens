@@ -1,0 +1,31 @@
+{
+  "split": "development",
+  "storage": "local ignored evaluation/runs/phase2; no raw bundles committed",
+  "files": {
+    "current_corpus_bundle": {
+      "path": "evaluation/runs/phase2/current-corpus-evidence.json.gz",
+      "sha256": "1d1742e46f09f4cbd1e2d2037b1a82e7b2ff32b5c4d626e09f68f646358f42c4",
+      "bytes": 6988465
+    },
+    "calibration_predictions": {
+      "path": "evaluation/runs/phase2/calibration/predictions.json",
+      "sha256": "b059a4221565155e746b3edaa16cb69bcf1b90b2fd93c40384359fadce581aff",
+      "bytes": 519
+    },
+    "validation_predictions": {
+      "path": "evaluation/runs/phase2/validation/predictions.json",
+      "sha256": "751a5db60364dd06ec62ba7f328d0c8390200c2ccd7fe3da5bfcb2c589311a32",
+      "bytes": 521
+    },
+    "shared_cost_ledger": {
+      "path": "evaluation/runs/phase2/study-cost-ledger.json",
+      "sha256": "2291f5c517d89ad0f903b01c2ba288c717c99c7704cce4074b8d754693d07000",
+      "bytes": 129789
+    },
+    "current_corpus_plan": {
+      "path": "evaluation/runs/phase2/current-corpus-plan.json",
+      "sha256": "4962534b2400d3a9bfb9f2fbb956c9b0b71b179f7458ae6a17535c0f488d87a7",
+      "bytes": 3924
+    }
+  }
+}
