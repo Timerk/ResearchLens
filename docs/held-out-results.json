@@ -1,0 +1,1078 @@
+{
+  "schema_version": 1,
+  "scoring": "passage-reference-presence",
+  "source_sha256": "f85bf4db946be1680d87dfe4e5c10447abd529a8a89236a78f515a1531d36254",
+  "provenance": {
+    "tfidf-4": {
+      "path": "evaluation/runs/held-out-confirmation-2026-10-14/tfidf/run.json",
+      "sha256": "49fb9ede1f9ffd492a408437f1b0a205b748561eadfc557228ad9afdf3caffca",
+      "run_id": "0c801b97-684a-4722-998d-6a17954bac5f",
+      "retrieval": {
+        "implementation": "researchlens.retrieval.TfidfRetriever",
+        "version": "tfidf-word-unigram-bigram-english-stopwords-v1",
+        "limit": 4,
+        "backend": "tfidf",
+        "model": null,
+        "revision": null,
+        "artifact_sha256": "b3a43e4d6b660e9ea7a45d71dd233ba16a8d3153984ff134ecfbdf48e7fadb93",
+        "normalization": null,
+        "score_threshold": null,
+        "runtime": null,
+        "runtime_version": null,
+        "runtime_backend": null,
+        "device": null,
+        "precision": null,
+        "quantization": null,
+        "dimensions": null,
+        "weights": null,
+        "tokenizer": null,
+        "pooling": null,
+        "query_instruction": null,
+        "document_instruction": null,
+        "max_tokens": null,
+        "truncation": null,
+        "batch_size": null,
+        "intra_op_threads": null,
+        "inter_op_threads": null,
+        "text_representation": null,
+        "encoding_version": null,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null
+      },
+      "code": {
+        "commit": "9a176c56e2eaf7ff53dcd2eb80920925e555051f",
+        "dirty": false,
+        "evaluation_code_sha256": "5a9a67b86cee96fe0558fc46116c62edd0d2e91baa52df469f0e1fde5031f386"
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "5f034eb5428620b0085fc7120830c28b5a99d1e9477810d116c100c79817f883",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "execution": {
+        "repeats": 1,
+        "warmups": 0,
+        "measure_memory": false,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 27.295299998513656
+      },
+      "dataset_sha256": "d8457ebc8d04559dc1d6f27e85639bb777156e1bfb4b55cb988007c0cfd329e9",
+      "corpus": {
+        "source_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+        "artifact_sha256": "b3a43e4d6b660e9ea7a45d71dd233ba16a8d3153984ff134ecfbdf48e7fadb93",
+        "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
+        "embedding_artifact_sha256": null,
+        "encoding_sha256": null,
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 207
+      },
+      "created_at": "2026-10-14T14:43:49.124285+00:00",
+      "evaluation_contract": {
+        "metrics_version": 2,
+        "primary_k": 4,
+        "evidence_labels_sha256": null,
+        "percentile_method": "nearest-rank",
+        "context_scoring": "serialized-provider-prefix-v1",
+        "asked_group_rule": "group-id-starts-with-part-",
+        "confidence_interval": "Clopper-Pearson-two-sided-95-percent",
+        "paired_test": "exact-McNemar-two-sided-binomial"
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      }
+    },
+    "bge-m3-16k": {
+      "path": "evaluation/runs/held-out-confirmation-2026-10-14/bge-m3/run.json",
+      "sha256": "30078c7914a751c2397730df78b6abd6c4a0671158e29f7cd4f7d58f2d2894ad",
+      "run_id": "1ac93d53-a05f-4b56-9193-8bd1465318ae",
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "artifact_sha256": "9bef314be772537ae2fb31315e857bf767d67711d959fd410728e98f5a772bea",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 1024,
+        "weights": "pytorch_model.bin",
+        "tokenizer": "tokenizer.json",
+        "pooling": "cls",
+        "query_instruction": "",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null
+      },
+      "code": {
+        "commit": "9a176c56e2eaf7ff53dcd2eb80920925e555051f",
+        "dirty": false,
+        "evaluation_code_sha256": "5a9a67b86cee96fe0558fc46116c62edd0d2e91baa52df469f0e1fde5031f386"
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "5f034eb5428620b0085fc7120830c28b5a99d1e9477810d116c100c79817f883",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "execution": {
+        "repeats": 1,
+        "warmups": 0,
+        "measure_memory": false,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 10558.167399998638
+      },
+      "dataset_sha256": "d8457ebc8d04559dc1d6f27e85639bb777156e1bfb4b55cb988007c0cfd329e9",
+      "corpus": {
+        "source_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+        "artifact_sha256": "9bef314be772537ae2fb31315e857bf767d67711d959fd410728e98f5a772bea",
+        "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
+        "embedding_artifact_sha256": "9bef314be772537ae2fb31315e857bf767d67711d959fd410728e98f5a772bea",
+        "encoding_sha256": "1ad32fe532623f8964c8027c4dde63bc0bbd1c7ae97357ec8461dd1b0ef488c9",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 207
+      },
+      "created_at": "2026-10-14T14:44:09.727570+00:00",
+      "evaluation_contract": {
+        "metrics_version": 2,
+        "primary_k": 4,
+        "evidence_labels_sha256": null,
+        "percentile_method": "nearest-rank",
+        "context_scoring": "serialized-provider-prefix-v1",
+        "asked_group_rule": "group-id-starts-with-part-",
+        "confidence_interval": "Clopper-Pearson-two-sided-95-percent",
+        "paired_test": "exact-McNemar-two-sided-binomial"
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      }
+    },
+    "qwen3-4b-12k": {
+      "path": "evaluation/runs/held-out-confirmation-2026-10-14/qwen3-4b/run.json",
+      "sha256": "eb6daffcbcd77450962c3301a8205a83dcf6a0db0e7a1d41380d6221158a5850",
+      "run_id": "d10231d6-51ed-43d2-8a28-ed1453a0b47b",
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null
+      },
+      "code": {
+        "commit": "9a176c56e2eaf7ff53dcd2eb80920925e555051f",
+        "dirty": false,
+        "evaluation_code_sha256": "5a9a67b86cee96fe0558fc46116c62edd0d2e91baa52df469f0e1fde5031f386"
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "5f034eb5428620b0085fc7120830c28b5a99d1e9477810d116c100c79817f883",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "execution": {
+        "repeats": 1,
+        "warmups": 0,
+        "measure_memory": false,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 13879.087099998287
+      },
+      "dataset_sha256": "d8457ebc8d04559dc1d6f27e85639bb777156e1bfb4b55cb988007c0cfd329e9",
+      "corpus": {
+        "source_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+        "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
+        "embedding_artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 207
+      },
+      "created_at": "2026-10-14T14:44:48.123420+00:00",
+      "evaluation_contract": {
+        "metrics_version": 2,
+        "primary_k": 4,
+        "evidence_labels_sha256": null,
+        "percentile_method": "nearest-rank",
+        "context_scoring": "serialized-provider-prefix-v1",
+        "asked_group_rule": "group-id-starts-with-part-",
+        "confidence_interval": "Clopper-Pearson-two-sided-95-percent",
+        "paired_test": "exact-McNemar-two-sided-binomial"
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      }
+    },
+    "qwen3-4b-16k": {
+      "path": "evaluation/runs/held-out-confirmation-2026-10-14/qwen3-4b/run.json",
+      "sha256": "eb6daffcbcd77450962c3301a8205a83dcf6a0db0e7a1d41380d6221158a5850",
+      "run_id": "d10231d6-51ed-43d2-8a28-ed1453a0b47b",
+      "retrieval": {
+        "implementation": "researchlens.retrieval.EmbeddingRetriever",
+        "version": "encoding-v2",
+        "limit": 40,
+        "backend": "embeddings",
+        "model": "Qwen/Qwen3-Embedding-4B",
+        "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+        "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "normalization": "l2",
+        "score_threshold": null,
+        "runtime": "torch+transformers",
+        "runtime_version": "2.14.1+cpu",
+        "runtime_backend": "pytorch-cpu",
+        "device": "cpu",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "dimensions": 2560,
+        "weights": "model.safetensors.index.json",
+        "tokenizer": "tokenizer.json",
+        "pooling": "last-nonpadding-token",
+        "query_instruction": "Instruct: Given a research question, retrieve relevant passages that answer the question\nQuery: ",
+        "document_instruction": "",
+        "max_tokens": 512,
+        "truncation": "right",
+        "batch_size": 1,
+        "intra_op_threads": 8,
+        "inter_op_threads": 1,
+        "text_representation": "passage-text-only",
+        "encoding_version": 2,
+        "lexical_candidates": null,
+        "embedding_candidates": null,
+        "fusion_method": null,
+        "rrf_k": null,
+        "lexical_weight": null,
+        "embedding_weight": null,
+        "reranker": null
+      },
+      "code": {
+        "commit": "9a176c56e2eaf7ff53dcd2eb80920925e555051f",
+        "dirty": false,
+        "evaluation_code_sha256": "5a9a67b86cee96fe0558fc46116c62edd0d2e91baa52df469f0e1fde5031f386"
+      },
+      "runtime": {
+        "python": "3.14.4",
+        "system": "Windows",
+        "machine": "AMD64",
+        "lockfile_sha256": "5f034eb5428620b0085fc7120830c28b5a99d1e9477810d116c100c79817f883",
+        "packages": {
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1",
+          "pydantic": "2.13.5",
+          "openai": "2.54.0",
+          "onnxruntime": "1.30.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.33.0",
+          "torch": "2.14.1+cpu",
+          "transformers": "5.18.0",
+          "safetensors": "0.8.0",
+          "sentence-transformers": null,
+          "tiktoken": "0.14.0",
+          "scipy": "1.18.1"
+        }
+      },
+      "execution": {
+        "repeats": 1,
+        "warmups": 0,
+        "measure_memory": false,
+        "ingestion_time_ms": null,
+        "index_load_time_ms": 13879.087099998287
+      },
+      "dataset_sha256": "d8457ebc8d04559dc1d6f27e85639bb777156e1bfb4b55cb988007c0cfd329e9",
+      "corpus": {
+        "source_sha256": "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675",
+        "artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "shared_passage_sha256": "887d192cc3f7d500845e42db4ba2139b9be3de74a87da7d902e3e5c9b6a73a5d",
+        "embedding_artifact_sha256": "c2c963d61660b8ffbb3d28fc199de733519e7e5a14158c6c50fec15f493872a7",
+        "encoding_sha256": "185a7ec972b792f33d606f0b6e422ee72a2a8c73e2ce1a8967ac6492870e5bb3",
+        "chunking": {
+          "method": "paragraph-word-windows",
+          "max_words": 180
+        },
+        "passage_count": 207
+      },
+      "created_at": "2026-10-14T14:44:48.123420+00:00",
+      "evaluation_contract": {
+        "metrics_version": 2,
+        "primary_k": 4,
+        "evidence_labels_sha256": null,
+        "percentile_method": "nearest-rank",
+        "context_scoring": "serialized-provider-prefix-v1",
+        "asked_group_rule": "group-id-starts-with-part-",
+        "confidence_interval": "Clopper-Pearson-two-sided-95-percent",
+        "paired_test": "exact-McNemar-two-sided-binomial"
+      },
+      "generation": {
+        "provider": "none",
+        "model": null,
+        "reasoning_effort": null,
+        "max_output_tokens": null,
+        "max_retries": 0,
+        "prompt_sha256": null
+      }
+    }
+  },
+  "profiles": {
+    "tfidf-4": {
+      "budget": 4,
+      "total_cases": 36,
+      "answerable_cases": 26,
+      "excluded_abstention_cases": 10,
+      "technical_errors": 0,
+      "metrics": {
+        "passage_recall_at_4": {
+          "estimate": 0.6198717948717949,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.353526174479435,
+            0.8862174152641548
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.8,
+          "pass": false
+        },
+        "context_hit": {
+          "estimate": 0.7692307692307693,
+          "denominator": 26,
+          "successes": 20,
+          "ci95": [
+            0.5635249030586136,
+            0.9102598891154248
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": false
+        },
+        "complete_evidence": {
+          "estimate": 0.5,
+          "denominator": 26,
+          "successes": 13,
+          "ci95": [
+            0.29927217944159645,
+            0.7007278205584035
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.8,
+          "pass": false
+        },
+        "both_documents": {
+          "estimate": 0.8571428571428571,
+          "denominator": 7,
+          "successes": 6,
+          "ci95": [
+            0.4212768029568048,
+            0.9963897031380994
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": false
+        },
+        "mrr_at_4": {
+          "estimate": 0.6794871794871795,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.41314155909481964,
+            0.9458327998795394
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.65,
+          "pass": true
+        },
+        "context_passage_recall": {
+          "estimate": 0.6198717948717949,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.353526174479435,
+            0.8862174152641548
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        },
+        "context_mrr": {
+          "estimate": 0.6794871794871795,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.41314155909481964,
+            0.9458327998795394
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        }
+      },
+      "micro_recall_at_4": {
+        "successes": 28,
+        "denominator": 54,
+        "estimate": 0.5185185185185185,
+        "ci95": [
+          0.37836508008969466,
+          0.6565704071235272
+        ],
+        "caveat": "Dependent references within cases; diagnostic only, not macro target"
+      }
+    },
+    "bge-m3-16k": {
+      "budget": 16000,
+      "total_cases": 36,
+      "answerable_cases": 26,
+      "excluded_abstention_cases": 10,
+      "technical_errors": 0,
+      "metrics": {
+        "passage_recall_at_4": {
+          "estimate": 0.7384615384615385,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.47211591806917863,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.8,
+          "pass": false
+        },
+        "context_hit": {
+          "estimate": 1,
+          "denominator": 26,
+          "successes": 26,
+          "ci95": [
+            0.8677253955022458,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "complete_evidence": {
+          "estimate": 0.7307692307692307,
+          "denominator": 26,
+          "successes": 19,
+          "ci95": [
+            0.5221252103061685,
+            0.884267786708496
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.8,
+          "pass": false
+        },
+        "both_documents": {
+          "estimate": 1,
+          "denominator": 7,
+          "successes": 7,
+          "ci95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "mrr_at_4": {
+          "estimate": 0.8237179487179487,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5573723283255888,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.65,
+          "pass": true
+        },
+        "context_passage_recall": {
+          "estimate": 0.907051282051282,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.6407056616589222,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        },
+        "context_mrr": {
+          "estimate": 0.8237179487179487,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5573723283255888,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        }
+      },
+      "micro_recall_at_4": {
+        "successes": 33,
+        "denominator": 54,
+        "estimate": 0.6111111111111112,
+        "ci95": [
+          0.468787751321096,
+          0.7408017277669192
+        ],
+        "caveat": "Dependent references within cases; diagnostic only, not macro target"
+      }
+    },
+    "qwen3-4b-12k": {
+      "budget": 12000,
+      "total_cases": 36,
+      "answerable_cases": 26,
+      "excluded_abstention_cases": 10,
+      "technical_errors": 0,
+      "metrics": {
+        "passage_recall_at_4": {
+          "estimate": 0.7762820512820513,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5099364308896914,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.8,
+          "pass": false
+        },
+        "context_hit": {
+          "estimate": 1,
+          "denominator": 26,
+          "successes": 26,
+          "ci95": [
+            0.8677253955022458,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "complete_evidence": {
+          "estimate": 0.8076923076923077,
+          "denominator": 26,
+          "successes": 21,
+          "ci95": [
+            0.6064944720606782,
+            0.9344518912632175
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.8,
+          "pass": true
+        },
+        "both_documents": {
+          "estimate": 1,
+          "denominator": 7,
+          "successes": 7,
+          "ci95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "mrr_at_4": {
+          "estimate": 0.7980769230769231,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5317313026845633,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.65,
+          "pass": true
+        },
+        "context_passage_recall": {
+          "estimate": 0.9102564102564102,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.6439107898640504,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        },
+        "context_mrr": {
+          "estimate": 0.8057692307692308,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5394236103768709,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        }
+      },
+      "micro_recall_at_4": {
+        "successes": 36,
+        "denominator": 54,
+        "estimate": 0.6666666666666666,
+        "ci95": [
+          0.5252550351672982,
+          0.789080094641424
+        ],
+        "caveat": "Dependent references within cases; diagnostic only, not macro target"
+      }
+    },
+    "qwen3-4b-16k": {
+      "budget": 16000,
+      "total_cases": 36,
+      "answerable_cases": 26,
+      "excluded_abstention_cases": 10,
+      "technical_errors": 0,
+      "metrics": {
+        "passage_recall_at_4": {
+          "estimate": 0.7762820512820513,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5099364308896914,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.8,
+          "pass": false
+        },
+        "context_hit": {
+          "estimate": 1,
+          "denominator": 26,
+          "successes": 26,
+          "ci95": [
+            0.8677253955022458,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "complete_evidence": {
+          "estimate": 0.8076923076923077,
+          "denominator": 26,
+          "successes": 21,
+          "ci95": [
+            0.6064944720606782,
+            0.9344518912632175
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.8,
+          "pass": true
+        },
+        "both_documents": {
+          "estimate": 1,
+          "denominator": 7,
+          "successes": 7,
+          "ci95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson",
+          "target": 0.9,
+          "pass": true
+        },
+        "mrr_at_4": {
+          "estimate": 0.7980769230769231,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5317313026845633,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": 0.65,
+          "pass": true
+        },
+        "context_passage_recall": {
+          "estimate": 0.9198717948717948,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.653526174479435,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        },
+        "context_mrr": {
+          "estimate": 0.8057692307692308,
+          "denominator": 26,
+          "successes": null,
+          "ci95": [
+            0.5394236103768709,
+            1
+          ],
+          "interval_method": "Hoeffding bounded mean",
+          "target": null,
+          "pass": null
+        }
+      },
+      "micro_recall_at_4": {
+        "successes": 36,
+        "denominator": 54,
+        "estimate": 0.6666666666666666,
+        "ci95": [
+          0.5252550351672982,
+          0.789080094641424
+        ],
+        "caveat": "Dependent references within cases; diagnostic only, not macro target"
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "candidate": "bge-m3-16k",
+      "baseline": "tfidf-4",
+      "metric": "complete_evidence",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 7,
+      "losses": 1,
+      "both_complete": 12,
+      "neither_complete": 6,
+      "p_two_sided": 0.0703125,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.28125
+    },
+    {
+      "candidate": "bge-m3-16k",
+      "baseline": "tfidf-4",
+      "metric": "context_hit",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 6,
+      "losses": 0,
+      "both_complete": 20,
+      "neither_complete": 0,
+      "p_two_sided": 0.03125,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.21875
+    },
+    {
+      "candidate": "bge-m3-16k",
+      "baseline": "tfidf-4",
+      "metric": "both_documents",
+      "paired_cases": 7,
+      "excluded_unscored_cases": 29,
+      "gains": 1,
+      "losses": 0,
+      "both_complete": 6,
+      "neither_complete": 0,
+      "p_two_sided": 1.0,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 1.0
+    },
+    {
+      "candidate": "qwen3-4b-12k",
+      "baseline": "tfidf-4",
+      "metric": "complete_evidence",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 9,
+      "losses": 1,
+      "both_complete": 12,
+      "neither_complete": 4,
+      "p_two_sided": 0.021484375,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.193359375
+    },
+    {
+      "candidate": "qwen3-4b-12k",
+      "baseline": "tfidf-4",
+      "metric": "context_hit",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 6,
+      "losses": 0,
+      "both_complete": 20,
+      "neither_complete": 0,
+      "p_two_sided": 0.03125,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.21875
+    },
+    {
+      "candidate": "qwen3-4b-12k",
+      "baseline": "tfidf-4",
+      "metric": "both_documents",
+      "paired_cases": 7,
+      "excluded_unscored_cases": 29,
+      "gains": 1,
+      "losses": 0,
+      "both_complete": 6,
+      "neither_complete": 0,
+      "p_two_sided": 1.0,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 1.0
+    },
+    {
+      "candidate": "qwen3-4b-16k",
+      "baseline": "tfidf-4",
+      "metric": "complete_evidence",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 9,
+      "losses": 1,
+      "both_complete": 12,
+      "neither_complete": 4,
+      "p_two_sided": 0.021484375,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.193359375
+    },
+    {
+      "candidate": "qwen3-4b-16k",
+      "baseline": "tfidf-4",
+      "metric": "context_hit",
+      "paired_cases": 26,
+      "excluded_unscored_cases": 10,
+      "gains": 6,
+      "losses": 0,
+      "both_complete": 20,
+      "neither_complete": 0,
+      "p_two_sided": 0.03125,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 0.21875
+    },
+    {
+      "candidate": "qwen3-4b-16k",
+      "baseline": "tfidf-4",
+      "metric": "both_documents",
+      "paired_cases": 7,
+      "excluded_unscored_cases": 29,
+      "gains": 1,
+      "losses": 0,
+      "both_complete": 6,
+      "neither_complete": 0,
+      "p_two_sided": 1.0,
+      "method": "exact-mcnemar-two-sided-binomial",
+      "p_holm": 1.0
+    }
+  ],
+  "development_comparison": {
+    "tfidf-4": {
+      "answerable_cases": 36,
+      "reference_recall": 0.48796296296296293,
+      "evidence_hit_cases": 25,
+      "evidence_hit_rate": 0.6944444444444444,
+      "complete_cases": 15,
+      "complete_rate": 0.4166666666666667,
+      "both_sources_cases": 8,
+      "cross_document_cases": 9,
+      "both_sources_rate": 0.8888888888888888,
+      "mrr": 0.5625,
+      "targets_met": {
+        "reference_recall": false,
+        "evidence_hit_rate": false,
+        "complete_rate": false,
+        "both_sources_rate": false,
+        "mrr": false
+      }
+    },
+    "bge-m3-16k": {
+      "answerable_cases": 36,
+      "reference_recall": 0.8577279202279202,
+      "evidence_hit_cases": 36,
+      "evidence_hit_rate": 1,
+      "complete_cases": 30,
+      "complete_rate": 0.8333333333333334,
+      "both_sources_cases": 9,
+      "cross_document_cases": 9,
+      "both_sources_rate": 1,
+      "mrr": 0.6140084452584452,
+      "targets_met": {
+        "reference_recall": true,
+        "evidence_hit_rate": true,
+        "complete_rate": true,
+        "both_sources_rate": true,
+        "mrr": false
+      }
+    },
+    "qwen3-4b-12k": {
+      "answerable_cases": 36,
+      "reference_recall": 0.851994301994302,
+      "evidence_hit_cases": 35,
+      "evidence_hit_rate": 0.9722222222222222,
+      "complete_cases": 29,
+      "complete_rate": 0.8055555555555556,
+      "both_sources_cases": 9,
+      "cross_document_cases": 9,
+      "both_sources_rate": 1,
+      "mrr": 0.7414472101972102,
+      "targets_met": {
+        "reference_recall": true,
+        "evidence_hit_rate": true,
+        "complete_rate": true,
+        "both_sources_rate": true,
+        "mrr": true
+      }
+    },
+    "qwen3-4b-16k": {
+      "answerable_cases": 36,
+      "reference_recall": 0.8863603988603989,
+      "evidence_hit_cases": 35,
+      "evidence_hit_rate": 0.9722222222222222,
+      "complete_cases": 33,
+      "complete_rate": 0.9166666666666666,
+      "both_sources_cases": 9,
+      "cross_document_cases": 9,
+      "both_sources_rate": 1,
+      "mrr": 0.7414472101972102,
+      "targets_met": {
+        "reference_recall": true,
+        "evidence_hit_rate": true,
+        "complete_rate": true,
+        "both_sources_rate": true,
+        "mrr": true
+      }
+    }
+  },
+  "protocol": {
+    "date": "2026-10-14",
+    "base_commit": "e57ffb2",
+    "preregistration_commit": "227fea2",
+    "runner_commit": "9a176c5",
+    "preregistration_sha256_lf": "653e82c83802098445c792e64ebe66177198fd2e144b63e94bf293ff5a5126eb",
+    "dataset_sha256_lf": "920f1415d14d974ce489e91386227d3f306837f22944958763d8235495ea9312",
+    "dataset_version": "4-readable-formulas-frozen",
+    "search_calls": 108,
+    "backend_runs": 3,
+    "context_configurations": 4,
+    "qwen_profiles_share_single_ranking": true,
+    "technical_failures": 0,
+    "retries": 0,
+    "paid_api_calls": 0,
+    "primary_cutoff": 4,
+    "full_scores": {
+      "path": "evaluation/runs/held-out-confirmation-2026-10-14/reference-scores.json",
+      "sha256": "883998398ec4859aa0537915263f1e6d9f5e0bd69f06b0e5a3efa2cd9f04fff6"
+    },
+    "development_summary_sha256": "a6d4978a1636c518ef2e27066e88b67f080f67c6eef43cedc15ed31f876b43d0",
+    "protected_inputs_unchanged": true
+  }
+}
