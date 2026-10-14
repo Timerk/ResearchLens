@@ -1,10 +1,15 @@
 # Owner grading of the answer judge
 
-Phase 1 is complete. The next action belongs to the owner. Grade only
-[owner-grading.md](owner-grading.md), or return a CSV with `item_id,verdict,notes`.
-Enter PASS, FAIL or UNCERTAIN for all 60 items and give a short reason.
-Allow about 90-150 minutes. Do not read the scoring key, sampling summary,
-diagnosis or previous audit before grading.
+Owner grading is complete and human reviewed. See [owner-review.md](owner-review.md)
+for the owner's confirmation and integrity hashes. The 30 calibration verdicts
+and notes are in [calibration-grades.csv](calibration-grades.csv). The 30 validation
+grades and complete reviewed packet remain in the local sealed archive described
+in the review record. Phase 2 may use only calibration grades during judge revision.
+
+For a new blind review, grade only [owner-grading.md](owner-grading.md), or return
+a CSV with `item_id,verdict,notes`. Enter PASS, FAIL or UNCERTAIN for all 60 items
+and give a short reason. Allow about 90-150 minutes. Do not read existing grades,
+the scoring key, sampling summary, diagnosis or previous audit before grading.
 
 The packet contains each question, its approved requirement, the answer and the
 exact cited visible passages from #16. Claim, qualification and forbidden-claim
