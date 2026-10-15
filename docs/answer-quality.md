@@ -427,6 +427,9 @@ evaluation answer-rank --index PATH_TO_QWEN_INDEX --retriever embeddings --outpu
 ```
 
 Use archived ranking files instead for an exact replay of the context study.
+The one-off scripts that produced `validation-results.json`, `context-decision.json`
+and the current-results summary are removed; reproduce them from tag
+`archive/evaluation-2026-10`.
 Compute a plan before any paid run:
 
 ```text
