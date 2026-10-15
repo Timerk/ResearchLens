@@ -76,6 +76,31 @@ To use the original no-tier default of TF-IDF with four passages, set
 
 ## Fresh-clone check
 
+Run on 2026-10-15 on Windows 11 with Docker Desktop (Engine 29.2.1, Compose 5.1.0).
+The base images were already present locally. On a machine without them, add the
+time to pull `python:3.13-slim`, `node:24-slim` and `nginx:1.29-alpine`.
+
+1. Cloned branch `docs/portfolio-polish` at `cc25579` from GitHub into an empty
+   temporary directory, with no `.env` file.
+2. Ran `docker compose build --no-cache --pull`. It finished in 31 seconds, with every
+   build step executed: `uv sync` installed 30 packages, `npm ci` added 475 packages,
+   the Angular production build ran, and ingestion built both TF-IDF indexes.
+3. Ran `docker compose up -d --wait`. Both containers reported healthy after 8 seconds.
+4. `GET /api/health` returned
+   `{"status":"ok","mode":"local_preview","retrieval_tier":"minimal"}`, both directly
+   on port 8000 and through nginx on port 4200. The frontend returned HTTP 200.
+5. `POST /api/ask` through port 4200 with *Why combine forward and backward lighting
+   for aircraft glass canopy inspection?* returned `passages_found` with 40 ranked
+   passages. The first was `pmc11510794:p58:w0` from section `5. Conclusions`.
+6. Ran `docker compose down`.
+
+The dense-tier override was checked separately with the light tier. Building the
+`embedding-models` image took 1 minute 39 seconds, and `ingest --tier light`
+downloaded Qwen3-0.6B and encoded the corpus in 1 minute 54 seconds. With
+`RETRIEVAL_TIER=auto`, the backend skipped the missing full and standard indexes,
+reported `"retrieval_tier":"light"`, and answered a query. The full and standard tiers
+were not built in Docker.
+
 ## Screenshots
 
 The images in [`docs/images`](images/) were captured on 2026-10-15 with Playwright and
