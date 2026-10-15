@@ -235,7 +235,7 @@ def test_mrr_distinguishes_first_and_third_rank_and_excludes_unanswerable(inputs
 
 def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatch):
     dataset, artifact, retriever = inputs
-    monkeypatch.setattr("researchlens.evaluation.process_peak_rss_bytes", lambda: 123456)
+    monkeypatch.setattr("researchlens.evaluation_runner.process_peak_rss_bytes", lambda: 123456)
     run = run_evaluation(
         dataset,
         artifact,

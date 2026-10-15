@@ -15,6 +15,7 @@ from openai import (
 
 from researchlens.config import Settings
 from researchlens.context_limits import MAX_CONTEXT_CHARS, MAX_PASSAGE_CHARS, MAX_PASSAGES
+from researchlens.defaults import ANSWER_OUTPUT_TOKENS
 from researchlens.models import Answer, AnswerContext, GeneratedAnswer, SearchHit
 
 # Inherit Uvicorn's INFO handler so usage is recorded by the documented server command.
@@ -134,7 +135,7 @@ class LocalPreview:
 
 
 class OpenAIProvider:
-    MAX_OUTPUT_TOKENS = 2000
+    MAX_OUTPUT_TOKENS = ANSWER_OUTPUT_TOKENS
 
     def __init__(self, settings: Settings, client: OpenAI | None = None):
         self.model = settings.model
