@@ -16,6 +16,7 @@ from openai import (
 from researchlens.answers import OpenAIProvider, ProviderError, prepare_answer_context
 from researchlens.api import create_app
 from researchlens.config import Settings
+from researchlens.context_limits import MAX_CONTEXT_CHARS
 from researchlens.models import GeneratedAnswer, SearchHit
 
 
@@ -140,7 +141,7 @@ def test_context_bound_and_only_supplied_citations(sdk, hit):
         provider(sdk).answer("Question", hits)
     context = json.loads(sdk.responses.parse.call_args.kwargs["input"])["passages"]
     assert len(context) == 4
-    assert len(json.dumps(context)) <= OpenAIProvider.MAX_CONTEXT_CHARS
+    assert len(json.dumps(context)) <= MAX_CONTEXT_CHARS
     assert all(len(item["text"]) <= 3000 for item in context)
 
 

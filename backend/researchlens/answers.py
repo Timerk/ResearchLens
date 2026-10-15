@@ -14,6 +14,7 @@ from openai import (
 )
 
 from researchlens.config import Settings
+from researchlens.context_limits import MAX_CONTEXT_CHARS, MAX_PASSAGE_CHARS, MAX_PASSAGES
 from researchlens.models import Answer, AnswerContext, GeneratedAnswer, SearchHit
 
 # Inherit Uvicorn's INFO handler so usage is recorded by the documented server command.
@@ -53,9 +54,9 @@ class PreparedContext:
 def prepare_answer_context(
     passages: list[SearchHit],
     *,
-    max_passages: int = 4,
-    max_passage_chars: int = 3000,
-    max_context_chars: int = 16000,
+    max_passages: int = MAX_PASSAGES,
+    max_passage_chars: int = MAX_PASSAGE_CHARS,
+    max_context_chars: int = MAX_CONTEXT_CHARS,
     mode: str = "passages",
 ) -> PreparedContext:
     """Use the actual provider's context budget, without an API call."""
@@ -99,25 +100,23 @@ def serialize_answer_input(question: str, items: list[dict]) -> str:
 class LocalPreview:
     """Return evidence for inspection without pretending to generate an LLM answer."""
 
-    MAX_PASSAGES = 4
-    MAX_PASSAGE_CHARS = 3000
-    MAX_CONTEXT_CHARS = 16000
-
     def __init__(self, settings: Settings | None = None):
         settings = settings if settings is not None else Settings()
         self.context_mode = settings.answer_context_mode
-        self.MAX_CONTEXT_CHARS = settings.answer_context_chars
+        self.context_chars = settings.answer_context_chars
 
     def answer(self, question: str, passages: list[SearchHit]) -> Answer:
         prepared = prepare_answer_context(
             passages,
-            max_passages=self.MAX_PASSAGES,
-            max_passage_chars=self.MAX_PASSAGE_CHARS,
-            max_context_chars=self.MAX_CONTEXT_CHARS,
+            max_passages=MAX_PASSAGES,
+            max_passage_chars=MAX_PASSAGE_CHARS,
+            max_context_chars=self.context_chars,
             mode=self.context_mode,
         )
         if passages and not prepared.supplied:
-            raise ProviderError("Retrieved passages exceed the supported context size.")
+            raise ProviderError(
+                "Retrieved passages exceed the supported context size.", status_code=422
+            )
         return Answer(
             status="passages_found" if passages else "no_matches",
             message=(
@@ -135,15 +134,12 @@ class LocalPreview:
 
 
 class OpenAIProvider:
-    MAX_PASSAGES = 4
-    MAX_PASSAGE_CHARS = 3000
-    MAX_CONTEXT_CHARS = 16000
     MAX_OUTPUT_TOKENS = 2000
 
     def __init__(self, settings: Settings, client: OpenAI | None = None):
         self.model = settings.model
         self.context_mode = settings.answer_context_mode
-        self.MAX_CONTEXT_CHARS = settings.answer_context_chars
+        self.context_chars = settings.answer_context_chars
         self.client = (
             client
             if client is not None
@@ -174,9 +170,9 @@ class OpenAIProvider:
         # Bound serialized context, including IDs and escaping. Keep references to full originals.
         prepared = prepare_answer_context(
             passages,
-            max_passages=self.MAX_PASSAGES,
-            max_passage_chars=self.MAX_PASSAGE_CHARS,
-            max_context_chars=self.MAX_CONTEXT_CHARS,
+            max_passages=MAX_PASSAGES,
+            max_passage_chars=MAX_PASSAGE_CHARS,
+            max_context_chars=self.context_chars,
             mode=self.context_mode,
         )
         context, supplied = prepared.items, prepared.supplied
