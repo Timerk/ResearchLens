@@ -40,17 +40,21 @@ tiers (`RETRIEVAL_TIER=auto` or `full`) and records a fresh-clone check.
 ## Architecture
 
 ```mermaid
-flowchart LR
-    A["Article XML<br/>4 CC BY 4.0 papers"] --> B["MathML rendered<br/>as readable text"]
-    B --> C["207 passages<br/>with source locations"]
-    C --> D{"Retrieval tier<br/>chosen by free RAM"}
-    D -->|"10 GiB"| E1["full: Qwen3-4B"]
-    D -->|"5 GiB"| E2["standard: BGE-M3"]
-    D -->|"2.5 GiB"| E3["light: Qwen3-0.6B"]
-    D -->|"0.25 GiB"| E4["minimal: TF-IDF"]
-    E1 & E2 & E3 & E4 --> F["Context budget<br/>12k or 16k characters"]
-    F --> G["Answer with citations<br/>or abstention"]
-    G --> H["FastAPI"] --> I["Angular frontend"]
+flowchart TD
+    subgraph ingest["Ingestion"]
+        direction LR
+        A["Article XML<br/>4 CC BY 4.0 papers"] --> B["MathML rendered<br/>as readable text"] --> C["207 passages<br/>with source locations"]
+    end
+    ingest --> D{"Retrieval tier<br/>chosen by free RAM"}
+    D -->|"10 GiB"| E1["full<br/>Qwen3-4B"]
+    D -->|"5 GiB"| E2["standard<br/>BGE-M3"]
+    D -->|"2.5 GiB"| E3["light<br/>Qwen3-0.6B"]
+    D -->|"0.25 GiB"| E4["minimal<br/>TF-IDF"]
+    E1 & E2 & E3 & E4 --> answer
+    subgraph answer["Answering"]
+        direction LR
+        F["Context budget<br/>12k or 16k characters"] --> G["Answer with citations<br/>or abstention"] --> H["FastAPI"] --> I["Angular frontend"]
+    end
 ```
 
 Ingestion turns the papers' XML into passages that keep section paths and paragraph
