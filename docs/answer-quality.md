@@ -68,7 +68,7 @@ descriptive secondary comparison, not a replacement for the registered primary;
 its safety endpoints are also uncertified. The
 [applied decision](../evaluation/reviews/2026-10-14-answer-judge/context-decision.json)
 therefore retains the defaults. The
-[current results](answer-quality-current-results.json) preserve reliable paired
+[current results](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/answer-quality-current-results.json) (archived) preserve reliable paired
 metrics and separate uncertified diagnostics. Do not interpret changes from the
 old study as a causal estimate of formula rendering: corpus, judge and generated
 responses differ.

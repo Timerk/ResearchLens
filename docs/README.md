@@ -21,9 +21,9 @@ These are the current, committed measurements.
 | [formula-adoption-results.md](formula-adoption-results.md) | Development retrieval on the adopted readable-formula corpus |
 | [formula-adoption-results.json](formula-adoption-results.json) | Machine-readable version, with pins and hashes |
 | [held-out-results.md](held-out-results.md) | One-time held-out retrieval confirmation |
-| [held-out-results.json](held-out-results.json) | Estimates, intervals, paired tests and provenance |
+| [held-out-results.json](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/held-out-results.json) | Estimates, intervals, paired tests and provenance (archived) |
 | [answer-quality.md](answer-quality.md) | Generated answer quality, judge validation and the context decision |
-| [answer-quality-current-results.json](answer-quality-current-results.json) | Current-corpus answer metrics from the frozen judge |
+| [answer-quality-current-results.json](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/answer-quality-current-results.json) | Current-corpus answer metrics from the frozen judge (archived) |
 | [context-budget.md](context-budget.md) | Character-budgeted context study, current and historical |
 
 ## Methodology and decisions
