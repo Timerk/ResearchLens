@@ -3,7 +3,8 @@
 import hashlib
 import json
 import os
-import tempfile
+import secrets
+import stat
 from pathlib import Path
 from typing import Literal
 
@@ -15,18 +16,30 @@ from researchlens.models import Document, Passage
 
 
 def atomic_write_text(path: Path, text: str, *, newline: str | None = None) -> None:
-    """Flush a same-directory temporary file before atomically publishing it."""
+    """Atomically publish UTF-8 text, syncing the file and, on POSIX, its directory."""
     temporary = None
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", newline=newline, dir=path.parent, delete=False
-        ) as handle:
-            temporary = Path(handle.name)
+        candidate = path.parent / f".atomic-{secrets.token_hex(16)}.tmp"
+        # Exclusive creation applies 0666 & ~umask without changing the process-wide umask.
+        with candidate.open(mode="x", encoding="utf-8", newline=newline) as handle:
+            temporary = candidate
             handle.write(text)
             handle.flush()
+            if os.name != "nt":
+                try:
+                    mode = stat.S_IMODE(path.stat().st_mode)
+                except FileNotFoundError:
+                    mode = stat.S_IMODE(os.fstat(handle.fileno()).st_mode)
+                os.chmod(temporary, mode)
             os.fsync(handle.fileno())
         # Close before replacement, including on Windows.
         os.replace(temporary, path)
+        if os.name != "nt":
+            directory = os.open(path.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)

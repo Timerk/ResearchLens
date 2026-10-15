@@ -1,5 +1,6 @@
 import json
 import os
+import stat
 from types import SimpleNamespace
 
 import pytest
@@ -55,6 +56,12 @@ def test_save_syncs_same_directory_temporary_before_replace(tmp_path, monkeypatc
     original_fsync, original_replace = os.fsync, os.replace
 
     def sync(fd):
+        if stat.S_ISDIR(os.fstat(fd).st_mode):
+            assert events == ["sync", "replace"]
+            assert os.fstat(fd) == path.parent.stat()
+            events.append("directory_sync")
+            original_fsync(fd)
+            return
         events.append("sync")
         # Reading the file sees the text only after the buffered handle is flushed.
         temporary = next(tmp_path.iterdir())
@@ -71,8 +78,58 @@ def test_save_syncs_same_directory_temporary_before_replace(tmp_path, monkeypatc
     monkeypatch.setattr(artifacts.os, "fsync", sync)
     monkeypatch.setattr(artifacts.os, "replace", replace)
     save(path, {"new": True})
-    assert events == ["sync", "replace"]
+    expected = ["sync", "replace"]
+    if os.name != "nt":
+        expected.append("directory_sync")
+    assert events == expected
     assert list(tmp_path.iterdir()) == [path]
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX file permissions")
+def test_atomic_write_new_file_uses_umask_default_mode(tmp_path, monkeypatch):
+    expected = tmp_path / "expected.txt"
+    expected.write_text("reference", encoding="utf-8")
+
+    def unexpected_umask(*args):
+        pytest.fail("atomic writes must not read or change the process-wide umask")
+
+    monkeypatch.setattr(artifacts.os, "umask", unexpected_umask)
+    path = tmp_path / "new.txt"
+    artifacts.atomic_write_text(path, "new")
+    assert stat.S_IMODE(path.stat().st_mode) == stat.S_IMODE(expected.stat().st_mode)
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX file permissions")
+def test_atomic_write_preserves_existing_mode(tmp_path):
+    path = tmp_path / "state.txt"
+    path.write_text("old", encoding="utf-8")
+    path.chmod(0o640)
+    artifacts.atomic_write_text(path, "new")
+    assert stat.S_IMODE(path.stat().st_mode) == 0o640
+    assert path.read_bytes() == b"new"
+    assert list(tmp_path.iterdir()) == [path]
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX directory fsync")
+def test_atomic_write_directory_sync_failure_closes_descriptor(tmp_path, monkeypatch):
+    original_fsync = os.fsync
+    directories = []
+
+    def sync(fd):
+        if stat.S_ISDIR(os.fstat(fd).st_mode):
+            directories.append(fd)
+            raise OSError("directory sync failed")
+        original_fsync(fd)
+
+    monkeypatch.setattr(artifacts.os, "fsync", sync)
+    path = tmp_path / "state.txt"
+    with pytest.raises(OSError, match="directory sync failed"):
+        artifacts.atomic_write_text(path, "published")
+    assert path.read_bytes() == b"published"
+    assert list(tmp_path.iterdir()) == [path]
+    assert len(directories) == 1
+    with pytest.raises(OSError):
+        os.fstat(directories[0])
 
 
 def test_cost_guard_journal_is_accepted_by_resume(tmp_path, monkeypatch):
