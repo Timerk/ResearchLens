@@ -99,7 +99,25 @@ def serialize_answer_input(question: str, items: list[dict]) -> str:
 class LocalPreview:
     """Return evidence for inspection without pretending to generate an LLM answer."""
 
+    MAX_PASSAGES = 4
+    MAX_PASSAGE_CHARS = 3000
+    MAX_CONTEXT_CHARS = 16000
+
+    def __init__(self, settings: Settings | None = None):
+        settings = settings if settings is not None else Settings()
+        self.context_mode = settings.answer_context_mode
+        self.MAX_CONTEXT_CHARS = settings.answer_context_chars
+
     def answer(self, question: str, passages: list[SearchHit]) -> Answer:
+        prepared = prepare_answer_context(
+            passages,
+            max_passages=self.MAX_PASSAGES,
+            max_passage_chars=self.MAX_PASSAGE_CHARS,
+            max_context_chars=self.MAX_CONTEXT_CHARS,
+            mode=self.context_mode,
+        )
+        if passages and not prepared.supplied:
+            raise ProviderError("Retrieved passages exceed the supported context size.")
         return Answer(
             status="passages_found" if passages else "no_matches",
             message=(
@@ -109,9 +127,10 @@ class LocalPreview:
                 else "No matching passages were found. This does not prove the corpus "
                 "has no answer: retrieval can miss relevant evidence."
             ),
-            passages=passages,
+            passages=prepared.supplied,
             latency_ms=0,
             estimated_api_cost_usd=0,
+            context_diagnostics=prepared.diagnostics if passages else None,
         )
 
 

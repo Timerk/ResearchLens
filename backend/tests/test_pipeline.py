@@ -30,6 +30,12 @@ def test_no_overlap_is_not_presented_as_an_answer(client):
     answer = client.post("/api/ask", json={"question": "Who composed Beethoven symphonies?"}).json()
     assert answer["status"] == "no_matches"
     assert answer["passages"] == []
+    assert answer["message"] == (
+        "No matching passages were found. This does not prove the corpus "
+        "has no answer: retrieval can miss relevant evidence."
+    )
+    assert answer["estimated_api_cost_usd"] == 0
+    assert answer["context_diagnostics"] is None
 
 
 @pytest.mark.parametrize("question", ["   ", "ab", "x" * 2001])

@@ -39,7 +39,7 @@ def create_app(
             else (
                 OpenAIProvider(active_settings)
                 if active_settings.provider == "openai"
-                else LocalPreview()
+                else LocalPreview(active_settings)
             )
         )
         try:

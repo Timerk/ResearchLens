@@ -31,8 +31,9 @@ docker compose up --build
 
 Open <http://127.0.0.1:4200> and ask, for example, *Why combine forward and backward
 lighting for aircraft glass canopy inspection?* This starts the minimal tier, TF-IDF
-retrieval, with no model downloads. Without an API key the app shows ranked passages
-with full source metadata. Generated answers need `OPENAI_API_KEY` in `.env`; see
+retrieval, with no model downloads. Without an API key the app shows the ranked passages
+selected by the same context budget as OpenAI mode, with full text and source metadata.
+Generated answers need `OPENAI_API_KEY` in `.env`; see
 [`.env.example`](.env.example). [docs/docker.md](docs/docker.md) covers the dense
 tiers (`RETRIEVAL_TIER=auto` or `full`) and records a fresh-clone check.
 [docs/development.md](docs/development.md) covers running without Docker.

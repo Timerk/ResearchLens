@@ -29,6 +29,13 @@ The backend reads `.env` from the repository root, and process environment varia
 take precedence. Local preview mode needs no API key. Without a retrieval tier, the
 backend uses TF-IDF and sends four passages to the answer provider.
 
+Local preview lists the same passages that OpenAI mode would receive. With a tier,
+retrieval fetches 40 candidates and context selection keeps a ranked prefix that fits
+the tier's serialized character budget. Selection caps each passage at 3,000 characters;
+both modes return the selected passages' full text for inspection. The response's
+`context_diagnostics` records the selected IDs, visible characters and truncations.
+Local preview makes no API call and reports zero estimated API cost.
+
 ## Retrieval options
 
 ### Local embeddings
