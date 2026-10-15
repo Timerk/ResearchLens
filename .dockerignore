@@ -1,0 +1,16 @@
+# Keep secrets, local environments and generated artifacts out of build contexts.
+.git
+.env
+.venv
+**/__pycache__
+.pytest_cache
+.ruff_cache
+frontend/node_modules
+frontend/dist
+frontend/.angular
+frontend/playwright-report
+frontend/test-results
+data/index.json
+data/tiers
+evaluation
+docs

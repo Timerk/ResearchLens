@@ -7,20 +7,19 @@ focus outlines, request recovery and narrow layouts that jsdom cannot verify.
 Use Node 24 with npm (the repository declares npm 11.17.0). From this directory:
 
 ```sh
-rtk npm ci
-rtk npm run check
-rtk npm test
-rtk npm run build
-rtk npm run test:smoke:install
-rtk npm run test:smoke
+npm ci
+npm run check
+npm test
+npm run build
+npm run test:smoke:install
+npm run test:smoke
 ```
 
-RTK is a command wrapper. If it is unavailable, remove `rtk`. The production build
-is written to `dist/frontend`. `npm run check` checks smoke-test/fixture TypeScript
-and formatting of the changed UI and test files; Angular compilation checks the
-application and component-test TypeScript during build/test.
+The production build is written to `dist/frontend`. `npm run check` checks
+smoke-test/fixture TypeScript and formatting of the changed UI and test files; Angular
+compilation checks the application and component-test TypeScript during build/test.
 
-`npm test` runs once and exits. Use `rtk npm run test:watch` during development.
+`npm test` runs once and exits. Use `npm run test:watch` during development.
 Component tests mock both `/api/health` and `/api/ask` using
 `HttpTestingController`. Smoke tests intercept both endpoints in the browser and
 start their own Angular dev server on port 4300. No backend, API keys or paid
@@ -30,21 +29,22 @@ On Linux CI, `npx playwright install --with-deps chromium` also installs OS depe
 
 The HTML browser report is in `playwright-report/`; screenshots for desktop/mobile
 states and failure traces are in `test-results/`. Open the report with
-`rtk proxy npx playwright show-report`. CI runs checks, component tests, the production
+`npx playwright show-report`. CI runs checks, component tests, the production
 build and smoke tests, and retains browser artifacts for seven days.
 
 For normal development with the local FastAPI backend on port 8000:
 
 ```sh
-rtk npm start
+npm start
 ```
 
-Open <http://127.0.0.1:4200>. See the [repository README](../README.md) for backend setup.
+Open <http://127.0.0.1:4200>. See the [development guide](../docs/development.md) for
+backend setup, or [Docker Compose](../docs/docker.md) to run both parts in containers.
 
 For offline browser inspection of representative responses:
 
 ```sh
-rtk npm run start:mock
+npm run start:mock
 ```
 
 Open <http://127.0.0.1:4300>. This command runs Angular and a separate mock HTTP

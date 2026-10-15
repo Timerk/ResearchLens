@@ -16,6 +16,8 @@ evaluation/datasets/*.json text eol=lf
 evaluation/labels/*.json text eol=lf
 docs/*.json text eol=lf
 backend/researchlens/*.py text eol=lf
+# Hashed review records must keep LF bytes on Windows checkouts.
+evaluation/reviews/2026-10-14-answer-judge/** text eol=lf
 # Preserve prior approved versions and migration approvals under their exact byte hashes.
 evaluation/reviews/2026-10-14-pr15/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 data/technical/originals/*.xml -text
@@ -24,3 +26,8 @@ data/technical/NOTICE.txt text eol=lf
 
 # Match Prettier's LF output on Windows and Linux; keep binary assets untouched.
 frontend/** text=auto eol=lf
+
+# Container files run on Linux; keep LF so line continuations work from Windows checkouts.
+**/Dockerfile text eol=lf
+.dockerignore text eol=lf
+docker-compose*.yml text eol=lf

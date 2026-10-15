@@ -1,0 +1,27 @@
+# One-command start: docker compose up --build, then open http://127.0.0.1:4200.
+# Defaults to the minimal tier (TF-IDF), which downloads no models.
+# For the dense tiers, add docker-compose.models.yml; see docs/docker.md.
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        UV_EXTRAS: ${UV_EXTRAS:-}
+    environment:
+      RETRIEVAL_TIER: ${RETRIEVAL_TIER-minimal}
+      # Only the answer settings are read from .env. Retrieval overrides such as
+      # RETRIEVAL_BACKEND are not passed, so they cannot disable tier selection.
+      ANSWER_PROVIDER: ${ANSWER_PROVIDER:-local}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-6-luna}
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  frontend:
+    build: frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:4200:80"
