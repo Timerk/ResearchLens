@@ -85,7 +85,7 @@ def test_parallel_resume_requires_execution_record_before_workers(tmp_path, monk
     dataset = SimpleNamespace(cases=[SimpleNamespace(id=str(i)) for i in range(4)])
     monkeypatch.setattr(module, "execute", lambda *args: pytest.fail("Worker started"))
     with pytest.raises(ValueError, match="original parallel execution record"):
-        execute_parallel(args, dataset, None, None, plan, None)
+        execute_parallel(args, dataset, None, None, plan, None, execute=module.execute)
     assert (output / "plan.json").read_bytes() == original
 
 

@@ -7,6 +7,7 @@ from typing import Literal
 from dotenv import dotenv_values
 
 from researchlens.context_limits import MAX_CONTEXT_CHARS, MIN_CONTEXT_CHARS
+from researchlens.defaults import DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parents[2]
 ENV_FILE = ROOT / ".env"
@@ -23,9 +24,9 @@ class RetrievalTier:
 # Measured CPU peak RSS plus headroom; see docs/embeddings.md.
 RETRIEVAL_TIERS = {
     "full": RetrievalTier("embeddings", "qwen3-4b", 12000, 10.0),
-    "standard": RetrievalTier("embeddings", "bge-m3", 16000, 5.0),
-    "light": RetrievalTier("embeddings", "qwen3-0.6b", 16000, 2.5),
-    "minimal": RetrievalTier("tfidf", "minilm", 16000, 0.25),
+    "standard": RetrievalTier("embeddings", "bge-m3", MAX_CONTEXT_CHARS, 5.0),
+    "light": RetrievalTier("embeddings", "qwen3-0.6b", MAX_CONTEXT_CHARS, 2.5),
+    "minimal": RetrievalTier("tfidf", "minilm", MAX_CONTEXT_CHARS, 0.25),
 }
 
 
@@ -52,7 +53,7 @@ def retrieval_environment(path: Path = ENV_FILE) -> dict:
 class Settings:
     provider: Literal["local", "openai"] = "local"
     api_key: str = field(default="", repr=False)
-    model: str = "gpt-6-luna"
+    model: str = DEFAULT_MODEL
     retrieval: Literal["tfidf", "embeddings", "hybrid"] = "tfidf"
     embedding_model: str = "minilm"
     index_path: Path = ROOT / "data" / "index.json"
@@ -159,7 +160,7 @@ class Settings:
         return cls(
             provider=(values.get("ANSWER_PROVIDER") or "local").strip(),
             api_key=(values.get("OPENAI_API_KEY") or "").strip(),
-            model=(values.get("OPENAI_MODEL", "gpt-6-luna") or "").strip(),
+            model=(values.get("OPENAI_MODEL", DEFAULT_MODEL) or "").strip(),
             retrieval_tier=(values.get("RETRIEVAL_TIER") or "").strip() or None,
             retrieval_overridden=any(
                 (values.get(name) or "").strip()

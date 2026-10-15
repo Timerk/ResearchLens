@@ -11,7 +11,7 @@ jobs:
       - run: uv sync --locked --python 3.13
       - run: uv run ruff check backend
       - run: uv run ruff format --check backend
-      - run: uv run pytest -q --cov=researchlens --cov-fail-under=75
+      - run: uv run pytest -q --cov=researchlens --cov=researchlens_eval --cov-fail-under=75
       - run: uv run --directory backend python -m researchlens.ingest
   backend-extras:
     runs-on: ubuntu-latest

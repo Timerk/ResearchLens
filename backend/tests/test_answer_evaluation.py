@@ -1,4 +1,6 @@
+import json
 from copy import deepcopy
+from threading import Event
 from types import SimpleNamespace
 
 import pytest
@@ -150,10 +152,10 @@ def test_missing_content_and_forbidden_assertions_fail_quality(scoring):
 
 
 def test_report_keeps_negatives_and_unknown_pairs_separate(monkeypatch):
-    from researchlens import evaluation
+    from researchlens import answer_reporting
     from researchlens.answer_evaluation import METRICS, quality_report
 
-    monkeypatch.setattr(evaluation, "comparison_report", lambda *args: "")
+    monkeypatch.setattr(answer_reporting, "comparison_report", lambda *args: "")
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     rows = []
     for case in dataset.cases:
@@ -316,3 +318,167 @@ def test_duplicate_citation_subclaims_are_conservatively_combined(scoring):
     assert score(case, answer, prepared, judgment)["citation_support"] is True
     duplicate.value = False
     assert score(case, answer, prepared, judgment)["citation_support"] is False
+
+
+@pytest.fixture
+def execution(scoring, tmp_path, monkeypatch):
+    from researchlens import answer_evaluation as module
+    from researchlens.artifacts import canonical_hash
+    from researchlens.models import GeneratedAnswer
+
+    case, prepared, answer, judgment = scoring
+    state = SimpleNamespace(calls=[], fail=None, stop_after_generation=False, closed=False)
+    args = SimpleNamespace(
+        max_cost_usd=1,
+        env_file=tmp_path / ".env",
+        output=tmp_path / "answers",
+        stop_event=Event(),
+    )
+    checkpoint = args.output / "tfidf4" / f"{case.id}.json"
+
+    def parse(**kwargs):
+        stage = "generation" if kwargs["text_format"] is GeneratedAnswer else "judge"
+        ledger = json.loads((args.output / "cost-ledger.json").read_bytes())
+        assert ledger["reserved_usd"] > sum(state.reservations)
+        state.reservations.append(ledger["reserved_usd"] - sum(state.reservations))
+        assert not args.stop_event.is_set()
+        if stage == "judge":
+            saved = json.loads(checkpoint.read_bytes())
+            assert saved["answer"]["status"] == answer["status"]
+            assert saved["answer"]["sections"] == answer["sections"]
+            assert saved["raw_generation"]["status"] == "completed"
+        state.calls.append(stage)
+        if state.fail == stage:
+            raise RuntimeError("provider failed")
+        parsed = GeneratedAnswer.model_validate(answer) if stage == "generation" else judgment
+        if stage == "generation" and state.stop_after_generation:
+            args.stop_event.set()
+        raw = {
+            "status": "completed",
+            "output": [{"content": [{"type": "output_text", "text": parsed.model_dump_json()}]}],
+        }
+        return SimpleNamespace(
+            status="completed", output_parsed=parsed, usage=None, model_dump=lambda **kw: raw
+        )
+
+    def close():
+        state.closed = True
+
+    state.reservations = []
+    client = SimpleNamespace(responses=SimpleNamespace(parse=parse), close=close)
+    monkeypatch.setattr(module, "OpenAI", lambda **kw: client)
+    monkeypatch.setattr(module.Settings, "from_env", lambda *args: SimpleNamespace(api_key="test"))
+    monkeypatch.setattr(module, "spot_check_template", lambda run: {})
+    dataset = SimpleNamespace(cases=[case], model_dump=lambda **kw: {"case": case.id})
+    run = {
+        "run_id": "archived",
+        "code": {"commit": "pinned"},
+        "retrieval": {"backend": "tfidf"},
+        "results": [
+            {"case_id": case.id, "retrieved_passages": [p.model_dump() for p in prepared.supplied]}
+        ],
+    }
+    prices = module.Prices(
+        date="2026-10-13", provenance="test", input_per_million=0.1, output_per_million=0.5
+    )
+    plan = module.make_plan(dataset, {}, [run, run], prices, ["tfidf4"])
+    args.approve_plan_sha256 = canonical_hash(plan)
+    state.args, state.run, state.plan = args, run, plan
+    state.runs = [run, run]
+    state.checkpoint = checkpoint
+    state.execute = lambda: module.execute(args, dataset, {}, state.runs, plan, prices)
+    return state
+
+
+def test_reservations_and_generation_checkpoint_precede_paid_calls(execution):
+    execution.execute()
+    assert execution.calls == ["generation", "judge"]
+    assert execution.closed
+
+
+@pytest.mark.parametrize("stage", ["generation", "judge"])
+def test_error_stops_run_and_resume_never_repeats_paid_call(execution, stage):
+    from researchlens.artifacts import canonical_hash
+
+    execution.fail = stage
+    execution.run["results"] *= 2
+    execution.plan["configurations"][0]["ranking_sha256"] = canonical_hash(execution.run)
+    execution.args.approve_plan_sha256 = canonical_hash(execution.plan)
+    with pytest.raises(ValueError, match="Paid run stopped"):
+        execution.execute()
+    calls = ["generation"] if stage == "generation" else ["generation", "judge"]
+    assert execution.calls == calls
+    assert execution.closed
+    execution.args.resume = True
+    with pytest.raises(ValueError, match="never repeats"):
+        execution.execute()
+    assert execution.calls == calls
+
+
+@pytest.mark.parametrize("after_generation", [False, True])
+def test_cancellation_prevents_next_paid_call(execution, after_generation):
+    execution.stop_after_generation = after_generation
+    if not after_generation:
+        execution.args.stop_event.set()
+    with pytest.raises(ValueError, match="stopped"):
+        execution.execute()
+    assert execution.calls == (["generation"] if after_generation else [])
+    assert execution.closed
+
+
+def test_resume_recovers_saved_judgment_from_newer_checkpoint_without_spending(execution):
+    execution.execute()
+    row = json.loads(execution.checkpoint.read_bytes())
+    row.pop("answer_quality")
+    row["error"] = {"stage": "judge", "code": "judge_failed"}
+    execution.checkpoint.write_text(json.dumps(row))
+    execution.args.resume = True
+    execution.execute()
+    recovered = json.loads(execution.checkpoint.read_bytes())
+    assert recovered["error"] is None
+    assert recovered["recovered_scoring_error"] == row["error"]
+    assert recovered["answer_quality"]["answer_correct"] is True
+    assert execution.calls == ["generation", "judge"]
+
+
+def test_generation_only_checkpoint_is_not_retried_on_resume(execution):
+    execution.execute()
+    row = json.loads(execution.checkpoint.read_bytes())
+    row.pop("answer_quality")
+    row["raw_judgment"] = None
+    execution.checkpoint.write_text(json.dumps(row))
+    execution.args.resume = True
+    with pytest.raises(ValueError, match="never repeats"):
+        execution.execute()
+    assert execution.calls == ["generation", "judge"]
+
+
+def test_configuration_uses_approved_source_independently_of_run_order(execution):
+    other = {**execution.run, "run_id": "different-source"}
+    execution.runs = [other, execution.run]
+    execution.execute()
+    result = json.loads((execution.checkpoint.parent / "run.json").read_bytes())
+    assert result["ranking_provenance"]["run_id"] == "archived"
+
+
+def test_missing_configuration_source_fails_before_client_or_output(execution, monkeypatch):
+    from researchlens import answer_evaluation as module
+
+    execution.runs = []
+    monkeypatch.setattr(module, "OpenAI", lambda **kw: pytest.fail("Paid client constructed"))
+    with pytest.raises(ValueError, match="Missing required source run.*tfidf4"):
+        execution.execute()
+    assert not execution.args.output.exists()
+
+
+@pytest.mark.parametrize("cap, calls", [(0.000001, []), (0.003, ["generation"])])
+def test_exhausted_reservation_stops_before_next_paid_call(execution, cap, calls):
+    from researchlens.artifacts import canonical_hash
+
+    # Exercise the per-call guard independently of the full-plan preflight guard.
+    execution.plan["total_reserved_usd"] = 0
+    execution.args.approve_plan_sha256 = canonical_hash(execution.plan)
+    execution.args.max_cost_usd = cap
+    with pytest.raises(ValueError, match="Paid run stopped"):
+        execution.execute()
+    assert execution.calls == calls

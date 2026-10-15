@@ -1,6 +1,7 @@
 import json
 import os
 import stat
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -172,3 +173,35 @@ def test_study_budget_failure_preserves_ledger_and_lf_bytes(tmp_path, monkeypatc
     assert path.read_bytes() == previous
     assert list(tmp_path.iterdir()) == [path]
     assert StudyBudget(path, 1, prices).read()["calls"][0]["id"] == "first"
+
+
+def test_freeze_publishes_complete_lf_contract_and_refuses_overwrite(tmp_path, monkeypatch):
+    from researchlens_eval import answer_judge_freeze as freeze
+
+    path = tmp_path / "frozen.json"
+    monkeypatch.setattr(freeze, "FREEZE", path)
+    monkeypatch.setattr(sys, "argv", ["freeze", "--revision", "test-revision"])
+    freeze.main()
+    saved = path.read_bytes()
+    assert b"\r" not in saved
+    assert json.loads(saved)["contract"] == freeze.current_contract()
+    with pytest.raises(ValueError, match="Never overwrite"):
+        freeze.main()
+    assert path.read_bytes() == saved
+
+
+def test_freeze_failed_replace_leaves_no_partial_contract(tmp_path, monkeypatch):
+    from researchlens_eval import answer_judge_freeze as freeze
+
+    path = tmp_path / "frozen.json"
+    monkeypatch.setattr(freeze, "FREEZE", path)
+    monkeypatch.setattr(sys, "argv", ["freeze", "--revision", "test-revision"])
+
+    def fail(*args):
+        raise OSError("replace failed")
+
+    monkeypatch.setattr(artifacts.os, "replace", fail)
+    with pytest.raises(OSError, match="replace failed"):
+        freeze.main()
+    assert not path.exists()
+    assert list(tmp_path.iterdir()) == []
