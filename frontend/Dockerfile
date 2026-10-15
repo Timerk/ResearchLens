@@ -1,5 +1,5 @@
 # ResearchLens web UI: production Angular build served by nginx, which proxies /api.
-FROM node:24-slim AS build
+FROM node:25-slim AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
