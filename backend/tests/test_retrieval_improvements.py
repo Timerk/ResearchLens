@@ -2,6 +2,7 @@
 
 import json
 import sys
+from threading import Lock
 from types import SimpleNamespace
 from unittest.mock import Mock
 
@@ -142,6 +143,7 @@ def test_torch_measurements_count_special_tokens_and_actual_character_offsets():
         },
     ]
     encoder = TorchEncoder.__new__(TorchEncoder)
+    encoder._lock = Lock()
     encoder.tokenizer, encoder.encoding = tokenizer, {"max_tokens": 3}
     row = encoder.measure_documents(["αβ γδ"])[0]
     assert row == measurement("αβ γδ", 5, 3, 2)

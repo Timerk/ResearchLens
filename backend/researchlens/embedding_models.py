@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from importlib.metadata import PackageNotFoundError, version
+from threading import Lock
 
 import numpy as np
 
@@ -164,6 +165,8 @@ class TorchEncoder:
 
     def __init__(self, encoding: dict, *, download: bool = False) -> None:
         self.encoding = encoding
+        # Fast tokenizer calls change shared padding/truncation settings.
+        self._lock = Lock()
         try:
             import torch
             from huggingface_hub import snapshot_download
@@ -230,66 +233,68 @@ class TorchEncoder:
             ) from None
 
     def encode(self, texts: list[str]) -> np.ndarray:
-        torch = self.torch
-        batches = []
-        for start in range(0, len(texts), self.encoding["batch_size"]):
-            inputs = self.tokenizer(
-                texts[start : start + self.encoding["batch_size"]],
-                padding=True,
-                truncation=True,
-                max_length=self.encoding["max_tokens"],
-                return_tensors="pt",
+        with self._lock:
+            torch = self.torch
+            batches = []
+            for start in range(0, len(texts), self.encoding["batch_size"]):
+                inputs = self.tokenizer(
+                    texts[start : start + self.encoding["batch_size"]],
+                    padding=True,
+                    truncation=True,
+                    max_length=self.encoding["max_tokens"],
+                    return_tensors="pt",
+                )
+                options = {"use_cache": False} if self.encoding["pooling"] != "cls" else {}
+                with torch.inference_mode():
+                    hidden = self.model(**inputs, **options).last_hidden_state
+                    if self.encoding["pooling"] == "cls":
+                        pooled = hidden[:, 0]
+                    else:
+                        positions = inputs["attention_mask"].sum(dim=1) - 1
+                        pooled = hidden[torch.arange(hidden.shape[0]), positions]
+                    pooled = torch.nn.functional.normalize(pooled.float(), p=2, dim=1)
+                batches.append(pooled.cpu().numpy())
+            return (
+                np.concatenate(batches)
+                if batches
+                else np.empty((0, self.encoding["dimensions"]), dtype=np.float32)
             )
-            options = {"use_cache": False} if self.encoding["pooling"] != "cls" else {}
-            with torch.inference_mode():
-                hidden = self.model(**inputs, **options).last_hidden_state
-                if self.encoding["pooling"] == "cls":
-                    pooled = hidden[:, 0]
-                else:
-                    positions = inputs["attention_mask"].sum(dim=1) - 1
-                    pooled = hidden[torch.arange(hidden.shape[0]), positions]
-                pooled = torch.nn.functional.normalize(pooled.float(), p=2, dim=1)
-            batches.append(pooled.cpu().numpy())
-        return (
-            np.concatenate(batches)
-            if batches
-            else np.empty((0, self.encoding["dimensions"]), dtype=np.float32)
-        )
 
     def measure_documents(self, texts: list[str]) -> list[dict]:
         from researchlens.encoding_diagnostics import measurement
 
-        if not self.tokenizer.is_fast:
-            raise ValueError("Encoding diagnostics require the pinned fast tokenizer's offsets")
-        rows = []
-        for text in texts:
-            original = self.tokenizer(text, truncation=False, padding=False)
-            retained = self.tokenizer(
-                text,
-                truncation=True,
-                max_length=self.encoding["max_tokens"],
-                padding=False,
-                return_offsets_mapping=True,
-                return_special_tokens_mask=True,
-            )
-            end = max(
-                (
-                    offset[1]
-                    for offset, special in zip(
-                        retained["offset_mapping"],
-                        retained["special_tokens_mask"],
-                        strict=True,
-                    )
-                    if not special
-                ),
-                default=0,
-            )
-            rows.append(
-                measurement(
+        with self._lock:
+            if not self.tokenizer.is_fast:
+                raise ValueError("Encoding diagnostics require the pinned fast tokenizer's offsets")
+            rows = []
+            for text in texts:
+                original = self.tokenizer(text, truncation=False, padding=False)
+                retained = self.tokenizer(
                     text,
-                    len(original["input_ids"]),
-                    len(retained["input_ids"]),
-                    end,
+                    truncation=True,
+                    max_length=self.encoding["max_tokens"],
+                    padding=False,
+                    return_offsets_mapping=True,
+                    return_special_tokens_mask=True,
                 )
-            )
-        return rows
+                end = max(
+                    (
+                        offset[1]
+                        for offset, special in zip(
+                            retained["offset_mapping"],
+                            retained["special_tokens_mask"],
+                            strict=True,
+                        )
+                        if not special
+                    ),
+                    default=0,
+                )
+                rows.append(
+                    measurement(
+                        text,
+                        len(original["input_ids"]),
+                        len(retained["input_ids"]),
+                        end,
+                    )
+                )
+            return rows
