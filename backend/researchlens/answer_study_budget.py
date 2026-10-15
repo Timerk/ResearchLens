@@ -6,6 +6,8 @@ from contextlib import contextmanager
 from pathlib import Path
 from time import monotonic, sleep
 
+from researchlens.artifacts import atomic_write_text
+
 
 class StudyBudget:
     def __init__(self, path, maximum, prices):
@@ -48,9 +50,7 @@ class StudyBudget:
         return data
 
     def write(self, data):
-        temporary = self.path.with_suffix(".tmp")
-        temporary.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
-        temporary.replace(self.path)
+        atomic_write_text(self.path, json.dumps(data, indent=2) + "\n", newline="\n")
 
     def reserve(self, identity, amount):
         with self.locked():
