@@ -485,9 +485,7 @@ def run_evaluation(
         if hits is not None:
             budget = (
                 {
-                    "max_passages": provider.MAX_PASSAGES,
-                    "max_passage_chars": provider.MAX_PASSAGE_CHARS,
-                    "max_context_chars": provider.MAX_CONTEXT_CHARS,
+                    "max_context_chars": provider.context_chars,
                     "mode": provider.context_mode,
                 }
                 if isinstance(provider, OpenAIProvider)

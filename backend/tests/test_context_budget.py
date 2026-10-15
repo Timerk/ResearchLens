@@ -15,6 +15,7 @@ from researchlens.answers import (
 from researchlens.api import create_app
 from researchlens.config import Settings
 from researchlens.context_evaluation import context_profile
+from researchlens.context_limits import MAX_PASSAGE_CHARS, MIN_CONTEXT_CHARS
 from researchlens.evaluation_evidence import CaseEvidence
 from researchlens.evaluation_metrics import binomial_ci, exact_mcnemar
 from researchlens.ingest import TECHNICAL_CORPUS, build_tier_index
@@ -162,6 +163,37 @@ def test_minimal_local_preview_matches_openai_context(tmp_path, monkeypatch):
     assert preview["estimated_api_cost_usd"] == 0
 
 
+@pytest.mark.parametrize("mode", ["passages", "characters"])
+@pytest.mark.parametrize("budget", [MIN_CONTEXT_CHARS, 16000])
+@pytest.mark.parametrize("caps", [None, (2, 1000)])
+def test_local_preview_matches_openai_count_and_truncation(mode, budget, caps, monkeypatch):
+    if caps is not None:
+        monkeypatch.setattr("researchlens.answers.MAX_PASSAGES", caps[0])
+        monkeypatch.setattr("researchlens.answers.MAX_PASSAGE_CHARS", caps[1])
+    settings = Settings(answer_context_mode=mode, answer_context_chars=budget)
+    hits = [hit(i, "x" * 3500) for i in range(1, 10)]
+    client = Mock()
+    client.responses.parse.return_value = SimpleNamespace(
+        status="completed",
+        usage=None,
+        output_parsed=GeneratedAnswer(status="insufficient_evidence", sections=[]),
+    )
+    preview = LocalPreview(settings).answer("Question?", hits)
+    answer = OpenAIProvider(settings, client).answer("Question?", hits)
+    actual = json.loads(client.responses.parse.call_args.kwargs["input"])["passages"]
+    expected_count = {(False, 7000): 2, (False, 16000): 5, (True, 7000): 6, (True, 16000): 9}[
+        caps is not None, budget
+    ]
+    if mode == "passages":
+        expected_count = min(expected_count, caps[0] if caps else 4)
+    assert len(actual) == expected_count
+    assert [p.id for p in preview.passages] == [item["id"] for item in actual]
+    assert preview.context_diagnostics == answer.context_diagnostics
+    assert preview.context_diagnostics.truncated_passage_ids == [p.id for p in preview.passages]
+    assert {len(item["text"]) for item in actual} == {caps[1] if caps else 3000}
+    assert preview.passages == answer.passages == hits[:expected_count]
+
+
 @pytest.mark.parametrize("settings", [None, Settings(answer_context_chars=7000)])
 def test_local_preview_passages_mode_preserves_full_text(settings):
     hits = [hit(i, "x" * 3500) for i in range(1, 10)]
@@ -185,9 +217,36 @@ def test_local_preview_api_without_tier_returns_four():
 
 
 def test_local_preview_rejects_context_that_cannot_fit():
-    provider = LocalPreview(Settings(answer_context_mode="characters", answer_context_chars=2))
-    with pytest.raises(ProviderError, match="Retrieved passages exceed the supported context size"):
-        provider.answer("Question?", [hit(1)])
+    settings = Settings(answer_context_mode="characters", answer_context_chars=MIN_CONTEXT_CHARS)
+    passages = [hit(1, "\u00e9" * MAX_PASSAGE_CHARS)]
+    with pytest.raises(
+        ProviderError, match="Retrieved passages exceed the supported context size"
+    ) as error:
+        LocalPreview(settings).answer("Question?", passages)
+    assert error.value.status_code == 422
+    retriever = Mock()
+    retriever.search.return_value = passages
+    with TestClient(create_app(retriever, settings)) as client:
+        response = client.post("/api/ask", json={"question": "Question?"})
+    assert response.status_code == 422
+    assert response.json()["detail"] == str(error.value)
+
+
+@pytest.mark.parametrize("text", ["x", '"', "\\"])
+@pytest.mark.parametrize("mode", ["passages", "characters"])
+def test_minimum_context_budget_fits_maximum_ascii_passage(text, mode):
+    assert MIN_CONTEXT_CHARS <= 8000
+    passage = hit(1, text * MAX_PASSAGE_CHARS)
+    settings = Settings(answer_context_mode=mode, answer_context_chars=MIN_CONTEXT_CHARS)
+    answer = LocalPreview(settings).answer("Question?", [passage])
+    assert answer.passages == [passage]
+    assert answer.context_diagnostics.visible_chars == {passage.id: MAX_PASSAGE_CHARS}
+
+
+@pytest.mark.parametrize("budget", [2, 100, 300, MIN_CONTEXT_CHARS - 1])
+def test_settings_reject_context_below_minimum(budget):
+    with pytest.raises(ValueError, match=f"{MIN_CONTEXT_CHARS}..16000"):
+        Settings(answer_context_chars=budget)
 
 
 @pytest.mark.parametrize(

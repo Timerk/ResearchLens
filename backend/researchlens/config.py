@@ -6,6 +6,8 @@ from typing import Literal
 
 from dotenv import dotenv_values
 
+from researchlens.context_limits import MAX_CONTEXT_CHARS, MIN_CONTEXT_CHARS
+
 ROOT = Path(__file__).resolve().parents[2]
 ENV_FILE = ROOT / ".env"
 
@@ -62,7 +64,7 @@ class Settings:
     hybrid_embedding_weight: float = 1.0
     hybrid_candidates: int = 20
     answer_context_mode: Literal["passages", "characters"] = "passages"
-    answer_context_chars: int = 16000
+    answer_context_chars: int = MAX_CONTEXT_CHARS
     answer_context_candidates: int = 40
     retrieval_tier: str | None = None
     retrieval_overridden: bool = False
@@ -72,10 +74,12 @@ class Settings:
         if self.retrieval_tier not in (None, "auto", *RETRIEVAL_TIERS):
             raise ValueError("RETRIEVAL_TIER must be auto, full, standard, light or minimal")
         if self.answer_context_mode not in ("passages", "characters") or not (
-            2 <= self.answer_context_chars <= 16000 and 40 <= self.answer_context_candidates <= 100
+            MIN_CONTEXT_CHARS <= self.answer_context_chars <= MAX_CONTEXT_CHARS
+            and 40 <= self.answer_context_candidates <= 100
         ):
             raise ValueError(
-                "Answer context needs passages/characters, 2..16000 chars and 40..100 candidates"
+                "Answer context needs passages/characters, "
+                f"{MIN_CONTEXT_CHARS}..{MAX_CONTEXT_CHARS} chars and 40..100 candidates"
             )
         if (
             self.answer_context_mode == "characters"
@@ -145,7 +149,9 @@ class Settings:
                 "hybrid_embedding_weight": float(values.get("HYBRID_EMBEDDING_WEIGHT") or "1"),
                 "hybrid_candidates": int(values.get("HYBRID_CANDIDATES") or "20"),
                 "answer_context_mode": (values.get("ANSWER_CONTEXT_MODE") or "passages").strip(),
-                "answer_context_chars": int(values.get("ANSWER_CONTEXT_CHARS") or "16000"),
+                "answer_context_chars": int(
+                    values.get("ANSWER_CONTEXT_CHARS") or str(MAX_CONTEXT_CHARS)
+                ),
                 "answer_context_candidates": int(values.get("ANSWER_CONTEXT_CANDIDATES") or "40"),
             }
         except ValueError:
