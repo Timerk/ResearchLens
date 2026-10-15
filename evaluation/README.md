@@ -67,13 +67,14 @@ missing references/claims and one-source comparisons fail validation.
   version `5-readable-formulas-approved`; the development dataset remains editable (`draft`).
 - `datasets/held-out.json`: 36 approved cases, version `4-readable-formulas-frozen`.
   The accepted subset is `frozen`, with its current file hash in `human-review.json`.
-- [PR 8 review](reviews/2026-10-01-pr8/README.md): all 100 input decisions, 14
+- [PR 8 review](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/evaluation/reviews/2026-10-01-pr8/README.md) (archived): all 100 input decisions, 14
   rejected originals, source conflicts, alternative evidence and full-source scope.
   The original reviewer is Codex / GPT-6.1-Sol, identified as AI, dated 2026-10-01.
 - [Human approval](reviews/2026-10-01-pr8/human-review.json): the project owner's
   confirmation on 2026-10-01, all 86 accepted case IDs and new version/freeze hashes.
   Case status remains `approved`; reviewer identity now identifies the human owner.
-  The earlier AI review and all 14 rejected originals remain unchanged.
+  The earlier AI review and all 14 rejected originals remain unchanged at tag
+  `archive/evaluation-2026-10`.
 
 | Question type | Development | Held-out |
 | --- | ---: | ---: |
@@ -105,7 +106,7 @@ new canonical corpus and labels. Held-out's 11 changed reference occurrences
 were migrated offline because of corpus changes, not model results. Four split
 windows produce 66 current reference occurrences. All other case content and
 original source versions remain unchanged. The previous frozen dataset, development
-dataset and labels are archived byte-for-byte with their original approvals.
+dataset and labels are archived byte-for-byte at tag `archive/evaluation-2026-10`.
 No held-out retrieval or answer inspection was part of adoption.
 
 Each dataset records split/version/material/status, the source-file hash and original
@@ -181,7 +182,7 @@ question review. [Evidence approval](reviews/2026-10-01-pr8/evidence-human-revie
 records reviewer/date, all approved group IDs and previous/current hashes. Approval
 changed metadata only; every requirement, alternative and span remains unchanged.
 The original evidence audit remains unchanged; separate
-[fix records](reviews/2026-10-01-pr8/evidence-fixes.md) explain semantic/context
+[fix records](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/evaluation/reviews/2026-10-01-pr8/evidence-fixes.md) (archived) explain semantic/context
 corrections and distinguish factual qualifications from unscored answer-review guards.
 
 Each group identifies a required claim index and exact canonical-text character spans.
