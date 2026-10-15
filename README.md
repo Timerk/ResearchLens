@@ -7,9 +7,9 @@
 ResearchLens answers questions about technical papers using only the papers' own text.
 Each part of an answer cites the passages it came from, and each citation opens to
 show the source section, XML location, authors and license. When the passages do not
-support an answer, it returns an explicit insufficient-evidence response. It is built for engineers and researchers who need to
-check where a claim comes from. The bundled corpus is four open-access CC BY 4.0
-papers on optical defect inspection. The retrieval and answer pipeline was evaluated
+support an answer, it returns an explicit insufficient-evidence response. It is built
+for engineers and researchers who need to check where a claim comes from. The bundled
+corpus is four open-access CC BY 4.0 papers on optical defect inspection. The retrieval and answer pipeline was evaluated
 with owner-approved questions, a held-out set run once, and pre-registered decision
 rules.
 
@@ -57,8 +57,8 @@ Ingestion turns the papers' XML into passages that keep section paths and paragr
 locations. At startup, auto mode loads the largest tier that fits in available RAM and
 falls back to the next one if loading fails. The backend fills a character budget with
 the top-ranked passages and sends them to the answer provider. The provider is either
-a free local preview, which lists passages without an answer, or OpenAI. The backend rejects any answer that cites an unknown
-passage or leaves a section uncited. Without a tier setting, the application default
+a free local preview, which lists passages without an answer, or OpenAI. The backend
+rejects any answer that cites an unknown passage or leaves a section uncited. Without a tier setting, the application default
 is TF-IDF with four passages.
 
 ## Results at a glance
@@ -67,7 +67,7 @@ is TF-IDF with four passages.
 | --- | --- | --- |
 | Development retrieval | Qwen3-4B at 12k and 16k characters meets all five retrieval targets | [formula-adoption-results.md](docs/formula-adoption-results.md) |
 | Held-out retrieval, pre-registered, run once | Qwen3-4B meets 4 of 5 strict targets. Recall@4 is 77.6%, below the 80% target. All five pass under the development whole-context convention | [held-out-results.md](docs/held-out-results.md) |
-| Answer quality, development only | Complete required claims rise from 19/36 with TF-IDF to 32/36 with Qwen 16k and BGE 16k | [answer-quality.md](docs/answer-quality.md) |
+| Answer quality, development only | Complete required claims rise from 19/36 with TF-IDF and four passages to 32/36 with Qwen3-4B 16k and BGE-M3 16k | [answer-quality.md](docs/answer-quality.md) |
 | Answer judge | Certified for required claims and abstention only. Application defaults unchanged | [answer-quality.md](docs/answer-quality.md#current-decision-2026-10-15) |
 
 [docs/results.md](docs/results.md) walks through the whole sequence, from the original
