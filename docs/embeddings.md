@@ -163,6 +163,34 @@ configuration. Only full meets all five measured development targets; standard/l
 miss MRR, and minimal misses more. Use the current adoption results above for the
 three remeasured configurations; earlier tier estimates describe the previous corpus.
 
+## Concurrent local inference
+
+`TorchEncoder` holds one lock per instance throughout `encode()` and
+`measure_documents()`. Hugging Face fast tokenizer calls can change the shared
+padding/truncation settings, so queries, model inference and document measurements
+must share the same lock. Exceptions still propagate, and the lock releases on failure.
+Imports still load no models and download no files.
+
+`LocalEncoder` and `LocalReranker` keep their concurrent inference paths. Their raw
+`tokenizers.Tokenizer` settings are fixed during construction, and encoding uses
+shared read access. Document measurements clone the MiniLM tokenizer before changing
+settings; the reranker constructs a separate full tokenizer at startup. ONNX CPU
+sessions support concurrent `run()` calls with separate inputs/outputs. See the
+[tokenizer bindings](https://github.com/huggingface/tokenizers/blob/v0.23.2/bindings/python/src/tokenizer.rs)
+and [ONNX session contract](https://github.com/microsoft/onnxruntime/blob/main/onnxruntime/core/session/inference_session.h).
+The reranker's `last_diagnostics` remains a last-completed-call snapshot, rather than
+request-scoped storage; serializing `score()` alone would not make it request-scoped.
+
+On 2026-10-15, the light-tier reproduction on Windows/Python 3.13.14 used the locked
+CPU Torch 2.14.1, Transformers 5.18.0 and tokenizers 0.23.2. Both the requested extras
+installation and `researchlens.ingest --tier light` completed. Before the fix, 32
+simultaneous TestClient `/api/ask` requests all returned 200. Another 32 all returned
+200 while four diagnostic threads each measured an 8,000-word document 20 times.
+No `RuntimeError: Already borrowed` occurred. The same workloads passed after the fix.
+Offline regression tests inject a tokenizer/model that reject overlapping access;
+they fail against the original code and pass with the shared lock, including mixed
+query/measurement calls and 24 concurrent API requests.
+
 ## Hybrid and runner integration
 
 Hybrid combines up to 20 positive-score lexical candidates and 20 dense neighbors with

@@ -1,10 +1,18 @@
 """Encoding/fusion contract tests; real model quality is measured by the evaluation runner."""
 
 import json
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager, nullcontext
+from threading import Barrier, Lock
+from time import sleep
+from types import SimpleNamespace
 from unittest.mock import Mock
 
 import numpy as np
 import pytest
+from fastapi.testclient import TestClient
+from researchlens.api import create_app
+from researchlens.config import Settings
 from researchlens.embedding_models import (
     MODELS,
     QUERY_INSTRUCTION,
@@ -16,6 +24,136 @@ from researchlens.embeddings import validate_vectors
 from researchlens.ingest import CORPUS, TECHNICAL_CORPUS, build_index, chunk_documents
 from researchlens.models import Document, SearchHit
 from researchlens.retrieval import EmbeddingRetriever, HybridRetriever, load_retriever
+
+
+@pytest.fixture
+def guarded_torch_encoder():
+    class Tensor:
+        def __init__(self, values):
+            self.values = np.asarray(values, dtype=np.float32)
+            self.shape = self.values.shape
+
+        def __getitem__(self, key):
+            return Tensor(self.values[key])
+
+        def sum(self, *, dim):
+            return self.values.sum(axis=dim).astype(int)
+
+        def float(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def numpy(self):
+            return self.values
+
+    active = Lock()
+    calls = []
+
+    @contextmanager
+    def guard(operation):
+        if not active.acquire(blocking=False):
+            raise RuntimeError("Already borrowed")
+        try:
+            calls.append(operation)
+            sleep(0.01)
+            yield
+        finally:
+            active.release()
+
+    def tokenize(texts, **kwargs):
+        with guard("tokenizer"):
+            if kwargs.get("return_tensors") == "pt":
+                return {"attention_mask": Tensor([[1, 1]] * len(texts))}
+            return {
+                "input_ids": [1, 2],
+                "offset_mapping": [(0, len(texts)), (0, 0)],
+                "special_tokens_mask": [0, 1],
+            }
+
+    def model(**inputs):
+        with guard("model"):
+            return SimpleNamespace(
+                last_hidden_state=Tensor([[[1, 0], [0, 1]]] * inputs["attention_mask"].shape[0])
+            )
+
+    encoder = TorchEncoder.__new__(TorchEncoder)
+    encoder._lock = Lock()
+    encoder.encoding = {**encoding_metadata("qwen3-0.6b"), "dimensions": 2}
+    encoder.tokenizer = Mock(side_effect=tokenize, is_fast=True)
+    encoder.model = model
+    encoder.torch = SimpleNamespace(
+        inference_mode=nullcontext,
+        arange=np.arange,
+        nn=SimpleNamespace(functional=SimpleNamespace(normalize=lambda tensor, **kwargs: tensor)),
+    )
+    return encoder, calls
+
+
+@pytest.mark.parametrize(
+    "operations", [("encode",), ("measure_documents",), ("encode", "measure_documents")]
+)
+def test_torch_encoder_serializes_shared_tokenizer_and_model(guarded_torch_encoder, operations):
+    encoder, calls = guarded_torch_encoder
+    start = Barrier(8)
+
+    def run(index):
+        start.wait(timeout=10)
+        operation = operations[index % len(operations)]
+        return getattr(encoder, operation)(["alpha beta", "gamma delta"])
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        results = list(pool.map(run, range(8)))
+    for index, result in enumerate(results):
+        if operations[index % len(operations)] == "encode":
+            assert np.array_equal(result, [[0, 1], [0, 1]])
+        else:
+            assert len(result) == 2
+            assert all(row["input_tokens"] == 2 and not row["truncated"] for row in result)
+    assert calls.count("model") == sum(
+        2 for index in range(8) if operations[index % len(operations)] == "encode"
+    )
+
+
+def test_concurrent_ask_uses_shared_encoder(guarded_torch_encoder):
+    encoder, calls = guarded_torch_encoder
+    start = Barrier(24)
+
+    def search(question, limit):
+        encoder.encode([question])
+        return []
+
+    retriever = SimpleNamespace(search=search)
+    with TestClient(create_app(retriever, settings=Settings())) as client:
+
+        def ask(index):
+            start.wait(timeout=10)
+            return client.post("/api/ask", json={"question": f"Question number {index}?"})
+
+        with ThreadPoolExecutor(max_workers=24) as pool:
+            responses = list(pool.map(ask, range(24)))
+    assert all(response.status_code == 200 for response in responses)
+    assert all(response.json()["status"] == "no_matches" for response in responses)
+    assert calls.count("model") == 24
+
+
+@pytest.mark.parametrize(
+    "operation,component",
+    [("encode", "tokenizer"), ("encode", "model"), ("measure_documents", "tokenizer")],
+)
+def test_torch_encoder_propagates_errors_and_releases_lock(
+    guarded_torch_encoder, operation, component
+):
+    encoder, _ = guarded_torch_encoder
+    original = getattr(encoder, component)
+    setattr(encoder, component, Mock(side_effect=RuntimeError("inference failed")))
+    with pytest.raises(RuntimeError, match="inference failed"):
+        getattr(encoder, operation)(["alpha beta"])
+    assert encoder._lock.acquire(blocking=False)
+    encoder._lock.release()
+    setattr(encoder, component, original)
+    assert len(getattr(encoder, operation)(["alpha beta"])) == 1
 
 
 @pytest.mark.parametrize("name", list(MODELS))
@@ -117,6 +255,7 @@ def test_torch_pooling_excludes_right_padding(name):
     torch = pytest.importorskip("torch")
     encoder = TorchEncoder.__new__(TorchEncoder)
     encoder.torch = torch
+    encoder._lock = Lock()
     encoder.encoding = encoding_metadata(name)
     encoder.tokenizer = Mock(
         return_value={
