@@ -4,23 +4,36 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
           version: "0.11.23"
       - run: uv sync --locked --python 3.13
       - run: uv run ruff check backend
       - run: uv run ruff format --check backend
-      - run: uv run pytest -q
+      - run: uv run pytest -q --cov=researchlens --cov-fail-under=75
       - run: uv run --directory backend python -m researchlens.ingest
+  backend-extras:
+    runs-on: ubuntu-latest
+    env:
+      # The pooling/tokenizer tests use mocks and an in-memory vocabulary.
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          version: "0.11.23"
+      - run: uv sync --locked --extra embeddings --extra embedding-models --python 3.13
+      - run: uv run pytest -q
   frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "24"
           cache: npm
@@ -31,7 +44,7 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:smoke
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: frontend-browser-results
@@ -39,3 +52,18 @@ jobs:
             frontend/playwright-report/
             frontend/test-results/
           retention-days: 7
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: docker compose build
+      - run: docker compose up -d --wait
+      - run: |
+          test "$(curl --silent --show-error --fail --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8000/api/health)" = 200
+          test "$(curl --silent --show-error --fail --output response.json --write-out '%{http_code}' \
+            --header 'Content-Type: application/json' \
+            --data '{"question":"Why combine forward and backward lighting for aircraft glass canopy inspection?"}' \
+            http://127.0.0.1:4200/api/ask)" = 200
+          jq -e '.status == "passages_found"' response.json
+      - run: docker compose down -v
+        if: always()
