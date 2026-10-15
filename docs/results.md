@@ -51,9 +51,9 @@ as placeholders. Because passage text changed, the owner reviewed and approved t
 remapped evidence spans and held-out references before adoption. After all tier
 indexes were rebuilt, Qwen3-4B still met all five development targets, with complete
 evidence for 29 of 36 questions at 12k and 33 of 36 at 16k, and MRR 0.741.
-Details: [proposal](formula-rendering-proposal.md),
-[remapping review](formula-remapping-review.md) and
-[adopted results](formula-adoption-results.md).
+Details: [adoption summary](formula-adoption-results.md), which also links the archived
+proposal and remapping review, and the
+[approval record](../evaluation/reviews/2026-10-14-pr15/approval.json).
 
 ## 6. Held-out confirmation
 
