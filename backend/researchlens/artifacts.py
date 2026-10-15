@@ -2,6 +2,8 @@
 
 import hashlib
 import json
+import os
+import tempfile
 from pathlib import Path
 from typing import Literal
 
@@ -10,6 +12,24 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
 
 from researchlens.ingest import chunk_documents
 from researchlens.models import Document, Passage
+
+
+def atomic_write_text(path: Path, text: str, *, newline: str | None = None) -> None:
+    """Flush a same-directory temporary file before atomically publishing it."""
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline=newline, dir=path.parent, delete=False
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(text)
+            handle.flush()
+            os.fsync(handle.fileno())
+        # Close before replacement, including on Windows.
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def canonical_hash(value: object) -> str:

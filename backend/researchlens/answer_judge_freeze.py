@@ -9,7 +9,7 @@ from pathlib import Path
 from researchlens import answer_judge_v2 as judge
 from researchlens.answer_evaluation import Judgment, all_decided, score
 from researchlens.answer_judge_review import REVIEW
-from researchlens.artifacts import canonical_hash
+from researchlens.artifacts import atomic_write_text, canonical_hash
 
 FREEZE = REVIEW / "frozen-judge.json"
 
@@ -56,9 +56,7 @@ def main():
         "contract": current_contract(),
         "decision_rule": "context-decision-rule.json",
     }
-    FREEZE.write_text(
-        json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
-    )
+    atomic_write_text(FREEZE, json.dumps(value, indent=2, ensure_ascii=False) + "\n", newline="\n")
     print(f"Frozen contract SHA-256: {canonical_hash(value['contract'])}")
 
 

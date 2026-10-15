@@ -24,7 +24,12 @@ from researchlens.answers import (
     prepare_answer_context,
     serialize_answer_input,
 )
-from researchlens.artifacts import canonical_hash, load_artifact, passage_identity
+from researchlens.artifacts import (
+    atomic_write_text,
+    canonical_hash,
+    load_artifact,
+    passage_identity,
+)
 from researchlens.config import ROOT, Settings
 from researchlens.evaluation_evidence import (
     EvidenceLabels,
@@ -86,8 +91,9 @@ class Prices(StrictModel):
 
 
 def save(path, value):
-    path.write_text(
-        json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8"
+    atomic_write_text(
+        path,
+        json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
     )
 
 
