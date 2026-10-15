@@ -3,9 +3,10 @@
 import hashlib
 import json
 import os
-import tempfile
+import stat
 from pathlib import Path
 from typing import Literal
+from uuid import uuid4
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
@@ -15,18 +16,31 @@ from researchlens.models import Document, Passage
 
 
 def atomic_write_text(path: Path, text: str, *, newline: str | None = None) -> None:
-    """Flush a same-directory temporary file before atomically publishing it."""
+    """Atomically publish flushed text and sync the containing directory on POSIX."""
     temporary = None
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", newline=newline, dir=path.parent, delete=False
-        ) as handle:
-            temporary = Path(handle.name)
+        candidate = path.parent / f".atomic-{uuid4().hex}.tmp"
+        # Let the kernel apply the umask without changing it in other threads.
+        fd = os.open(candidate, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
+        temporary = candidate
+        with os.fdopen(fd, "w", encoding="utf-8", newline=newline) as handle:
+            if os.name != "nt":
+                try:
+                    mode = stat.S_IMODE(os.stat(path).st_mode)
+                except FileNotFoundError:
+                    mode = stat.S_IMODE(os.fstat(handle.fileno()).st_mode)
+                os.chmod(temporary, mode)
             handle.write(text)
             handle.flush()
             os.fsync(handle.fileno())
         # Close before replacement, including on Windows.
         os.replace(temporary, path)
+        if os.name != "nt":
+            directory = os.open(path.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
