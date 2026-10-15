@@ -33,7 +33,7 @@ kappa >= 0.6 AND agreement >= 80% bar. No claim of violation-detection reliabili
 follows from their perfect observed agreement.
 
 The owner and Codex graded independently and reported 58/60, 96.7%, agreement
-before adjudication, a realistic automated-agreement ceiling. The owner adopted
+before adjudication. The owner adopted
 Codex's verdicts in the two disagreements; their original grades and IDs were
 not retained. Final grades may favor a model from the same family. Small-sample
 100% figures against those grades do not remove that limitation.
@@ -88,6 +88,10 @@ The guarded commands now also accept `--bge-run` with `bge16k` and
 Paid runs use `--max-cost-usd 3 --study-ledger PATH`. Optional `--jobs 4` runs
 disjoint cases, checks their unique complete coverage, and shares that ledger.
 Resume reuses checkpoints and refuses unresolved or repeated paid calls.
+Parallel resume verifies the saved plan, cost cap, ledger path and worker layout
+before writing files or starting workers. The execution record is saved before
+the first worker starts. Older runs without that record remain readable for
+offline reporting; the CLI refuses to resume them.
 The frozen contract is verified before validation and current-corpus planning.
 
 ## Historical study, 2026-10-13

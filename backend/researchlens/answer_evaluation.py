@@ -430,6 +430,10 @@ def execute(args, dataset, entries, runs, plan, prices):
     resuming = getattr(args, "resume", False)
     if args.output.exists() and not resuming:
         raise ValueError("Output exists; never overwrite or silently repeat paid calls")
+    if getattr(args, "jobs", 1) == 1 and (
+        (args.output / "parallel-execution.json").exists() or (args.output / "workers").is_dir()
+    ):
+        raise ValueError("Resume cannot change the parallel worker layout")
     if getattr(args, "jobs", 1) > 1:
         from researchlens.answer_parallel import execute_parallel
 

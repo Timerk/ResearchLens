@@ -68,7 +68,8 @@ and [comparison commands](https://github.com/Timerk/ResearchLens/blob/research/r
 and remaining limitations. Qwen3-4B dense meets the development retrieval targets
 when the answer context is budgeted by characters (`ANSWER_CONTEXT_MODE=characters`,
 `ANSWER_CONTEXT_CHARS=12000`, `ANSWER_CONTEXT_CANDIDATES=40`). The default stays at
-four passages. Answer-quality measurements on the adopted corpus remain pending.
+four passages; the [current answer-quality study](docs/answer-quality.md) did not
+meet the registered rule for changing it.
 One-time [held-out confirmation](docs/held-out-results.md): Qwen12k/16k passes 4/5 literal targets, with 21/26 complete cases; recall@4 misses at 77.6%, while whole-context recall is 91.0%/92.0%.
 
 The owner approved readable formula extraction and evidence migration on 2026-10-14.
@@ -77,7 +78,8 @@ On the adopted corpus, Qwen meets all five targets at 12k and 16k characters, wi
 30/36; TF-IDF reaches 26/36 at both budgets. All four tier indexes were rebuilt.
 See [the current results](docs/formula-adoption-results.md) and
 [approval record](evaluation/reviews/2026-10-14-pr15/approval.json).
-The earlier paid answer-quality results describe the pre-rendering corpus.
+The [answer-quality report](docs/answer-quality.md) separates the current-corpus
+measurements from the earlier pre-rendering results.
 
 For hardware selection, set `RETRIEVAL_TIER=auto` and remove explicit
 `RETRIEVAL_BACKEND`/`EMBEDDING_MODEL` values. Auto selects full, standard, light or
@@ -104,8 +106,9 @@ The header shows the active mode from `/api/health`.
 
 OpenAI requests use the Responses API with **medium reasoning**, no automatic retries,
 a 45-second network timeout, and at most 2,000 output tokens including reasoning.
-Questions are limited to 2,000 characters. Context is capped at four passages,
-3,000 characters per passage and 16,000 serialized context characters in total.
+Questions are limited to 2,000 characters. The no-tier context default uses four
+passages. Opt-in tiers use their configured character budgets. Both modes cap
+each passage at 3,000 characters; see [context settings](docs/embeddings.md#hardware-retrieval-tiers).
 The question and selected passage text are sent to OpenAI with `store=false`;
 no conversation history, tools, or full-corpus upload is used. Account-level data
 retention rules still apply.
@@ -245,8 +248,9 @@ until a concrete requirement justifies them.
    accepted 50 development and 36 held-out questions, rejected 14 overlapping or
    unsuitable drafts, and froze held-out before model selection. The owner approved
    all 86 accepted questions on 2026-10-01. Human approval and the new freeze hashes
-   are recorded separately from the preserved AI source review. Answer-quality
-   evaluation and a demonstration remain pending.
+   are recorded separately from the preserved AI source review. Development
+   answer-quality evaluation and owner judge grading are complete, with the
+   [reported reliability limits](docs/answer-quality.md). A demonstration remains pending.
 4. Extensions: demonstrate Azure deployment, compare a defined graph approach with
    the same baseline, then expose search/source retrieval through Python MCP.
 
@@ -270,7 +274,8 @@ Explain why lexical matching can behave differently for equivalent questions.
 Then explain why a passage matching `illumination` cannot establish a numerical
 defect-size limit. These are two different problems: retrieval recall and evidence
 sufficiency. See the [local implementation checks](https://github.com/Timerk/ResearchLens/blob/research/retrieval-2026-10/docs/retrieval-checks.md) for observed
-rankings and limitations; reviewed retrieval and answer-quality comparisons are pending.
+rankings and limitations, and [the current answer-quality study](docs/answer-quality.md)
+for the reviewed development comparison and its limits.
 
 ## License
 
@@ -284,9 +289,12 @@ retain their authors' copyright and CC BY 4.0 licenses; see
 The initial code, fixtures, tests, CI configuration and documentation were generated
 with AI assistance. The project owner provided the goals, constraints, technology
 preferences and API budget. The owner reviewed and approved the 86 accepted technical
-evaluation questions on 2026-10-01 after the recorded AI source review. Evaluation
-of generated answers remains pending. Record subsequent contributions accurately;
-do not present generated code as independently authored work.
+evaluation questions on 2026-10-01 after the recorded AI source review. The owner
+and Codex independently graded 60 archived answer judgments, with adjudication
+documented in [the owner review](evaluation/reviews/2026-10-14-answer-judge/owner-review.md).
+The calibrated judge then evaluated 250 current-corpus development answers.
+Record subsequent contributions accurately. Do not present generated code as
+independently authored work.
 
 See [the evaluation workflow](evaluation/README.md) for reproducible free runs,
 the retrieval adapter interface, human review and remaining corpus work.
