@@ -1,0 +1,17 @@
+# Dense retrieval tiers. Use with the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.models.yml ...
+# Model weights and tier indexes persist in named volumes; see docs/docker.md.
+services:
+  backend:
+    build:
+      args:
+        UV_EXTRAS: --extra embedding-models
+    environment:
+      RETRIEVAL_TIER: ${RETRIEVAL_TIER-auto}
+    volumes:
+      - huggingface-cache:/root/.cache/huggingface
+      - tier-indexes:/app/data/tiers
+
+volumes:
+  huggingface-cache:
+  tier-indexes:

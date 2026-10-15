@@ -42,15 +42,12 @@ Summary result JSON files there link to full per-case archives by commit hash.
 Generated runs, vectors, weights and logs belong in ignored `evaluation/runs/` or
 the model cache.
 
-## Remaining work
+## Status
 
-The application default stays at four passages until answer quality with larger
-contexts is measured. These small, correlated four-paper development studies do not
-establish held-out quality, generated-answer correctness, citation support or
-abstention behavior.
-
-Hardware tiers, startup memory checks and approved readable formula extraction are
-implemented. Held-out confirmation of the frozen settings remains pending. The
-2026-10-13 paid answer-quality study describes the previous corpus and was not rerun
-during adoption. Keep the current approved datasets, labels and source text fixed
-for subsequent comparisons.
+Hardware tiers, startup memory checks and readable formula extraction are implemented.
+The one-time [held-out confirmation](held-out-results.md) has run. Qwen3-4B passes four
+of five strict targets and misses recall@4 at 77.6%. The current-corpus
+[answer-quality study](answer-quality.md) kept the four-passage default because the
+registered comparison did not show an improvement. The [results page](results.md)
+summarizes the whole sequence. Keep the approved datasets, labels and source text fixed
+for later comparisons.

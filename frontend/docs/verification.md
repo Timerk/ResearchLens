@@ -1,5 +1,9 @@
 # Frontend verification — 2026-10-01
 
+The screenshots in this record show the interface before the PR #13 redesign. Current
+screenshots are in [`docs/images`](../../docs/images/) and are described in the
+[Docker guide](../../docs/docker.md#screenshots).
+
 This work starts from `origin/main` at `3b7048c` on a separate
 `frontend-verification` branch/worktree. It does not incorporate PR #8 or PR #9.
 Backend APIs, retrieval, evaluation data, corpus files and model configuration are unchanged.

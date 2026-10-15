@@ -24,8 +24,8 @@ MiniLM requires the smaller extra; BGE/Qwen require `embedding-models`, whose uv
 selects CPU PyTorch wheels. Keep the extras on subsequent `uv run`/`uv sync` commands.
 
 ```sh
-rtk proxy uv sync --locked --extra embeddings --extra embedding-models --python 3.13
-rtk proxy uv run --extra embedding-models --directory backend python -m researchlens.ingest --corpus technical --retrieval embeddings --embedding-model bge-m3
+uv sync --locked --extra embeddings --extra embedding-models --python 3.13
+uv run --extra embedding-models --directory backend python -m researchlens.ingest --corpus technical --retrieval embeddings --embedding-model bge-m3
 ```
 
 Configure `.env` without changing an existing API key:
@@ -39,7 +39,7 @@ RETRIEVAL_CORPUS=data/technical/documents.json
 ```
 
 ```sh
-rtk proxy uv run --extra embedding-models --directory backend uvicorn researchlens.api:app --host 127.0.0.1 --port 8000
+uv run --extra embedding-models --directory backend uvicorn researchlens.api:app --host 127.0.0.1 --port 8000
 ```
 
 Use `--extra embeddings`/`--embedding-model minilm` for MiniLM alone. CLI and application
@@ -142,9 +142,9 @@ physical memory on Windows/Linux/macOS, excluding swap. Embedding loads in manua
 mode and ingestion also check RAM before constructing the encoder.
 
 ```sh
-rtk proxy uv sync --locked --extra embedding-models --python 3.13
-rtk proxy uv run --no-sync --directory backend python -m researchlens.ingest --tier full
-rtk proxy uv run --no-sync --directory backend python -m researchlens.ingest --tier minimal
+uv sync --locked --extra embedding-models --python 3.13
+uv run --no-sync --directory backend python -m researchlens.ingest --tier full
+uv run --no-sync --directory backend python -m researchlens.ingest --tier minimal
 ```
 
 Build standard/light similarly for intermediate fallbacks. The helper fixes the
