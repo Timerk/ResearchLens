@@ -99,12 +99,12 @@ problem to the answer-quality decision.
 ## Project structure
 
 ```text
-backend/researchlens/   API, ingestion, retrieval, tiers, answers and evaluation code
-backend/tests/          pytest suite, offline and with no paid calls
-frontend/               Angular app, component tests and Playwright smoke tests
-data/technical/         Four CC BY 4.0 papers: original XML, extracted text, NOTICE
-evaluation/             Approved datasets, evidence labels, review records and plans
-docs/                   Results, methodology and guides; start at docs/README.md
+backend/researchlens/  API, ingestion, retrieval, answers, evaluation
+backend/tests/         Offline pytest suite, no paid calls
+frontend/              Angular app, Vitest and Playwright tests
+data/technical/        Four CC BY 4.0 papers, extracted text, NOTICE
+evaluation/            Approved datasets, labels, reviews, cost plans
+docs/                  Results and guides, start at docs/README.md
 ```
 
 ## Limitations
