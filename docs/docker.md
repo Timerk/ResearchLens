@@ -23,8 +23,12 @@ the backend.
 ## What works without an API key
 
 Without `OPENAI_API_KEY`, the app runs in local preview mode. You can ask questions,
-read the ranked passages, and inspect each source's section, XML location, authors,
-DOI and license. Local preview does not generate answers.
+read the ranked passages selected by the same context budget as OpenAI mode, and
+inspect each source's section, XML location, authors, DOI and license. The minimal
+tier retrieves 40 candidates and keeps the ranked prefix that fits its 16,000-character
+serialized context budget, with each passage capped at 3,000 characters for selection.
+The preview returns the selected passages' full text and context diagnostics.
+Local preview does not generate answers or make API calls.
 
 To get generated answers with citations, create `.env` next to `docker-compose.yml`:
 
@@ -94,6 +98,12 @@ time to pull `python:3.13-slim`, `node:24-slim` and `nginx:1.29-alpine`.
    passages. The first was `pmc11510794:p58:w0` from section `5. Conclusions`.
 6. Ran `docker compose down`.
 
+That check predates local preview context filtering. An offline API recheck with the
+same question and a rebuilt minimal index now returns 26 of the 40 candidates, matching
+OpenAI context selection. The response fell from about 74.6 KB to 49.3 KB, including
+context diagnostics. The selected serialized context uses 14,655 of 16,000 characters;
+the next ranked passage would exceed the budget.
+
 The dense-tier override was checked separately with the light tier. Building the
 `embedding-models` image took 1 minute 39 seconds, and `ingest --tier light`
 downloaded Qwen3-0.6B and encoded the corpus in 1 minute 54 seconds. With
@@ -107,7 +117,9 @@ The images in [`docs/images`](images/) were captured on 2026-10-15 with Playwrig
 Chromium against this Docker stack.
 
 - [`desktop-local-preview.png`](images/desktop-local-preview.png) shows the real backend
-  in local preview mode, using the minimal tier and no API key.
+  in local preview mode, using the minimal tier and no API key. It predates context
+  filtering and was captured from the old 40-passage response. The image shows only
+  the first two passages, which remain selected; it does not show the total count.
 - [`desktop-answer.png`](images/desktop-answer.png),
   [`desktop-answer-full.png`](images/desktop-answer-full.png) and
   [`mobile-answer.png`](images/mobile-answer.png) show a generated answer. No API key
