@@ -10,7 +10,7 @@ reconfirmed all five targets for Qwen at 12k and 16k. Qwen's complete counts are
 hit is 35/36, and both sources are present for all nine cross-document questions.
 BGE complete counts are 21/36, 28/36 and 30/36; TF-IDF has 15/36, 26/36 and 26/36.
 
-[Active selection pins](development-selected-context-budget.json) now describe the
+[Selection pins](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/development-selected-context-budget.json) (archived) describe the
 adopted corpus and approved labels. No held-out retrieval or paid API call ran.
 The historical study below and its original hashes remain evidence for the previous
 corpus. Its 30/36 Qwen12k count is superseded by the current 29/36 measurement.
@@ -256,8 +256,8 @@ held-out result. Evidence availability also does not establish answer quality.
 
 ## Development selection and application settings
 
-[The development-selected configuration](development-selected-context-budget.json)
-pre-registers Qwen dense with 40 retrieval candidates and a 12,000-character
+[The development-selected configuration](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/development-selected-context-budget.json)
+(archived) pre-registers Qwen dense with 40 retrieval candidates and a 12,000-character
 serialized context, retaining the 3,000-character passage cap and all-group
 target. It preserves the incumbent model; the one-question differences at 12k
 do not justify a model-superiority claim. No held-out search has followed this

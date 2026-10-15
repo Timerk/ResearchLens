@@ -119,7 +119,7 @@ question/configuration evaluations completed, using 199 generation calls and
 122 judge calls. Recorded token usage costs $0.1471 at the supplied rates.
 There were no paid retries. The four-passage application settings are unchanged.
 
-The [machine-readable results](answer-quality-results.json) contain all six
+The archived [machine-readable results](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/answer-quality-results.json) contain all six
 paired comparisons and every cohort/metric. The
 [evidence manifest](../evaluation/answer-quality-evidence-manifest.json) records
 checksums for the saved runs, raw-judgment bundle and independent reviews. Raw
