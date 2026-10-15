@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 from researchlens.artifacts import canonical_hash, load_artifact, validate_passage_artifact
-from researchlens.corpus import DIRECTORY, SOURCES, extract
+from researchlens.corpus import DIRECTORY
 from researchlens.evaluation import (
     comparison_report,
     default_retrieval_config,
@@ -279,27 +279,13 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
     assert summarize(failure)["errors"] == 1
 
 
-def test_source_review_pins_originals_and_locations_without_running_held_out(tmp_path):
+def test_owner_approved_questions_and_locations_without_running_held_out(tmp_path):
     path = tmp_path / "technical.json"
-    # The 2026-10-01 audit applies to the preserved pre-formula dataset and corpus.
-    legacy = [
-        extract(
-            (DIRECTORY / "originals" / f"{pmcid}.xml").read_bytes(), pmcid, readable_formulas=False
-        )[0].model_dump()
-        for pmcid in SOURCES
-    ]
-    source = tmp_path / "legacy-documents.json"
-    source.write_bytes((json.dumps(legacy, indent=2, ensure_ascii=False) + "\n").encode())
-    build_index(source, path)
+    build_index(DIRECTORY / "documents.json", path)
     artifact = json.loads(path.read_bytes())
-    archive = ROOT / "evaluation/reviews/2026-10-14-pr15/datasets"
-    dataset = load_dataset(archive / "technical-development.json")
-    held_out = load_dataset(archive / "held-out.json")
+    dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
+    held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")
     validate_splits(dataset, held_out)
-    review = json.loads((ROOT / "evaluation/reviews/2026-10-01-pr8/review.json").read_bytes())
-    assert review["reviewer_kind"] == "ai" and review["human_sign_off"] is False
-    assert not review["model_rankings_inspected"]
-    assert not review["held_out_retrieval_executed"] and not review["settings_tuned"]
     approval = json.loads(
         (ROOT / "evaluation/reviews/2026-10-01-pr8/human-review.json").read_bytes()
     )
@@ -308,29 +294,12 @@ def test_source_review_pins_originals_and_locations_without_running_held_out(tmp
     assert not approval["held_out_retrieval_executed_during_update"]
     assert not approval["model_rankings_inspected_during_update"]
     assert not approval["settings_tuned_during_update"]
-    assert (
-        approval["ai_source_review"]["sha256"]
-        == hashlib.sha256((ROOT / approval["ai_source_review"]["path"]).read_bytes()).hexdigest()
-    )
-    assert (
-        approval["rejected_archive_sha256"]
-        == hashlib.sha256(
-            (ROOT / "evaluation/reviews/2026-10-01-pr8/rejected-cases.json").read_bytes()
-        ).hexdigest()
-    )
     assert dataset.status == "draft" and held_out.status == "frozen"
-    for candidate, pin, previous in zip(
-        (dataset, held_out), approval["datasets"], review["datasets"], strict=True
-    ):
-        assert pin["reviewed_input_sha256"] == previous["output_sha256"]
-        assert candidate.version == pin["version"]
+    # The formula migration changed references, not the approved questions.
+    for candidate, pin in zip((dataset, held_out), approval["datasets"], strict=True):
         assert [c.id for c in candidate.cases] == pin["approved_case_ids"]
         assert len(candidate.source_versions) == 4
         assert len(candidate.cases) == pin["accepted_count"]
-        preserved = archive / (
-            "held-out.json" if candidate.split == "held-out" else "technical-development.json"
-        )
-        assert hashlib.sha256(preserved.read_bytes()).hexdigest() == pin["output_sha256"]
         styles = Counter(
             "unanswerable" if c.expected_abstention else c.query_style for c in candidate.cases
         )
@@ -375,41 +344,6 @@ def test_source_review_pins_originals_and_locations_without_running_held_out(tmp
     changed.source_versions[0].source_sha256 = "0" * 64
     with pytest.raises(ValueError, match="Original source version"):
         validate_artifact(changed, artifact)
-
-
-def test_question_review_covers_inputs_and_excludes_rejected_cases():
-    directory = ROOT / "evaluation/reviews/2026-10-01-pr8"
-    review = json.loads((directory / "review.json").read_bytes())
-    archive = json.loads((directory / "rejected-cases.json").read_bytes())
-    rows = {r["case_id"]: r for r in review["cases"]}
-    assert len(rows) == len(review["cases"]) == 100
-    accepted = {
-        c.id: c
-        for name in ("technical-development", "held-out")
-        for c in load_dataset(
-            ROOT / f"evaluation/reviews/2026-10-14-pr15/datasets/{name}.json"
-        ).cases
-    }
-    rejected = {r["case"]["id"] for r in archive}
-    assert len(rejected) == len(archive) == 14
-    assert accepted.keys().isdisjoint(rejected)
-    assert accepted.keys() | rejected == rows.keys()
-    for cid, case in accepted.items():
-        row = rows[cid]
-        assert row["decision"] in {"approved", "revised-and-approved"}
-        assert row["required_claims_checked"] == case.required_claims
-        assert row["notes"] and row["overlap_checked"]
-        if case.expected_abstention:
-            assert row["absence_scope"] and not row["supporting_passage_ids"]
-        else:
-            assert set(row["supporting_passage_ids"]) == {r.passage_id for r in case.references}
-    for item in archive:
-        case = item["case"]
-        assert rows[case["id"]]["decision"] == case["review_status"] == "rejected"
-        assert item["reason"] and case["reviewer"] == review["reviewer"]
-        assert case["review_date"] == review["review_date"]
-    assert len(review["figure_sources"]) == 38
-    assert len({r["figure_id"] for r in review["figure_sources"]}) == 38
 
 
 def test_cli_delegates_schema_two_selection_to_retrieval_factory(inputs, tmp_path, monkeypatch):

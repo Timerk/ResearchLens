@@ -16,13 +16,13 @@ the previous/current label hashes and unchanged evidence-content hash. No group,
 description, alternative, quote, offset or pin changed during approval. No held-out
 evidence labels, retrieval results or rankings were used to create them.
 
-The [AI evidence audit](../reviews/2026-10-01-pr8/evidence-review.md) reviewed the
+The [AI evidence audit](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/evaluation/reviews/2026-10-01-pr8/evidence-review.md) (archived) reviewed the
 original 83 groups and identified semantic/context fixes. The
-[fix record](../reviews/2026-10-01-pr8/evidence-fixes.md) records the source checks,
+[fix record](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/evaluation/reviews/2026-10-01-pr8/evidence-fixes.md) (archived) records the source checks,
 changes and decisions on all 41 recommendations. The revised labels contain 140
 alternatives and 165 original span occurrences, before formula rendering produced
 the two required splits. The previous labels and datasets are preserved in
-`evaluation/reviews/2026-10-14-pr15/`. Both audit files remain unchanged.
+`evaluation/reviews/2026-10-14-pr15/` at tag `archive/evaluation-2026-10`. Both audit files remain unchanged.
 The AI corrections and the subsequent human approval have separate provenance.
 
 The labels use exact sentences or sentence fragments from the pinned extracted
