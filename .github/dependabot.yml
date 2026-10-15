@@ -1,13 +1,31 @@
 version: 2
 updates:
+  # CI is the only consumer of these actions and exercises every one of them.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+  # Major versions (for example openai 3) need deliberate migration work.
   - package-ecosystem: uv
     directory: /
     schedule:
       interval: weekly
+    groups:
+      python-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+  # Major versions (for example Angular 22, which needs TypeScript 6) are planned upgrades.
   - package-ecosystem: npm
     directory: /frontend
     schedule:
@@ -16,9 +34,32 @@ updates:
       angular:
         patterns:
           - "@angular/*"
+        update-types:
+          - minor
+          - patch
+      npm-minor-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@angular/*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+  # Runtime images follow the Python 3.13 and Node 24 LTS targets used by CI and uv.lock.
   - package-ecosystem: docker
     directories:
       - /backend
       - /frontend
     schedule:
-      interval: weekly
+      interval: monthly
+    ignore:
+      - dependency-name: python
+        versions:
+          - ">=3.14"
+      - dependency-name: node
+        update-types:
+          - version-update:semver-major
