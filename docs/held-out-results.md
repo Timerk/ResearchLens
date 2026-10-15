@@ -91,7 +91,7 @@ Development completeness checked every approved OR/AND evidence group against vi
 
 ## Artifacts and validation
 
-The [summary JSON](held-out-results.json) contains all metric estimates, intervals, target decisions, paired counts, p-values, development values and provenance. Full rankings, question-bearing run outputs and per-case context selections remain in ignored `evaluation/runs/held-out-confirmation-2026-10-14/`.
+The [summary JSON](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/held-out-results.json) (archived) contains all metric estimates, intervals, target decisions, paired counts, p-values, development values and provenance. Full rankings, question-bearing run outputs and per-case context selections remain in ignored `evaluation/runs/held-out-confirmation-2026-10-14/`.
 
 | Backend | Run ID | Archived run |
 | --- | --- | --- |
