@@ -1,63 +1,156 @@
+/*
+ * ResearchLens visual identity: a cyanotype print on a light table.
+ * Cyanotype blue carries structure, a highlighter yellow marks evidence only,
+ * Archivo (narrowed via its width axis) sets the interface and Source Serif 4
+ * sets everything taken from or written about the papers.
+ */
 :root {
-  color-scheme: light dark;
-  --bg: #f6f5f0;
-  --surface: #ffffff;
-  --surface-2: #f1f0ea;
-  --ink: #17241f;
-  --ink-2: #44544d;
-  --ink-3: #5f6e67;
-  --line: #e2e0d7;
-  --line-strong: #cdd3cc;
-  --accent: #1d5c47;
-  --accent-hover: #164a39;
+  color-scheme: light;
+  --paper: #f3f5f9;
+  --sheet: #ffffff;
+  --sheet-2: #eef1f7;
+  --ink: #0e1a3a;
+  --ink-2: #3c4866;
+  --ink-3: #56627f;
+  --line: #d8dde8;
+  --line-strong: #aeb8cd;
+  --field: #1e3f96;
+  --field-2: #2a4fb0;
+  --field-ink: #ffffff;
+  --field-ink-2: #c9d5f5;
+  --accent: #1e3f96;
+  --accent-hover: #142d70;
   --accent-ink: #ffffff;
-  --accent-soft: #e2ede7;
-  --amber: #85601c;
-  --amber-soft: #f5edda;
-  --danger: #9c3723;
-  --danger-soft: #fbe8e3;
-  --focus: #2f7a5f;
-  --shadow: 0 1px 2px rgb(23 36 31 / 0.04), 0 8px 24px -12px rgb(23 36 31 / 0.12);
-  --serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --accent-soft: #e2e8f7;
+  --mark: #ffe45e;
+  --mark-ink: #0e1a3a;
+  --caution: #8f4a06;
+  --caution-soft: #fcefe0;
+  --danger: #a3261b;
+  --danger-soft: #fbe6e3;
+  --focus: #1e3f96;
+  --sheet-shadow: 0 1px 0 rgb(14 26 58 / 0.06), 0 24px 48px -24px rgb(14 26 58 / 0.35);
+  --sans: 'Archivo Variable', 'Arial Narrow', system-ui, sans-serif;
+  --serif: 'Source Serif 4 Variable', 'Iowan Old Style', Georgia, serif;
   --mono: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace;
+  --narrow: 78%;
+  --gutter: clamp(16px, 4vw, 40px);
+  --measure: 1120px;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f1412;
-    --surface: #161d1a;
-    --surface-2: #1c2521;
-    --ink: #e6ebe8;
-    --ink-2: #b0bcb6;
-    --ink-3: #8e9c95;
-    --line: #253029;
-    --line-strong: #34423b;
-    --accent: #7cc4a4;
-    --accent-hover: #95d3b7;
-    --accent-ink: #0b1a14;
-    --accent-soft: #1a2e26;
-    --amber: #e3bc6c;
-    --amber-soft: #29231a;
-    --danger: #f3927d;
-    --danger-soft: #2e1b17;
-    --focus: #8fd3b4;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+    --paper: #0c1530;
+    --sheet: #121d3d;
+    --sheet-2: #18244a;
+    --ink: #e9edf7;
+    --ink-2: #b7c0d8;
+    --ink-3: #95a0bd;
+    --line: #243260;
+    --line-strong: #3a4b84;
+    --field: #19337c;
+    --field-2: #24449c;
+    --field-ink: #ffffff;
+    --field-ink-2: #c3cff2;
+    --accent: #aac0ff;
+    --accent-hover: #c6d4ff;
+    --accent-ink: #0c1530;
+    --accent-soft: #1d2b58;
+    --mark: #f2d74b;
+    --mark-ink: #0e1a3a;
+    --caution: #f0b676;
+    --caution-soft: #2e2316;
+    --danger: #f59a8c;
+    --danger-soft: #331b1d;
+    --focus: #aac0ff;
+    --sheet-shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 24px 48px -24px rgb(0 0 0 / 0.7);
   }
 }
 html {
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
+  font-size: 100%;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 body {
   margin: 0;
+  background: var(--paper);
 }
 * {
   box-sizing: border-box;
 }
 ::selection {
-  background: var(--accent-soft);
-  color: var(--ink);
+  background: var(--mark);
+  color: var(--mark-ink);
+}
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+:is(a, button, summary, textarea):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+code {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Buttons and button-like links, shared by both pages. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.button:hover {
+  background: var(--accent-hover);
+}
+
+/* Evidence highlight: the one place the yellow appears. */
+mark,
+.mark {
+  background: var(--mark);
+  color: var(--mark-ink);
+  padding: 0.05em 0.12em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
 }

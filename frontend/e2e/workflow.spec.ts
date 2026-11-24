@@ -33,11 +33,14 @@ test('desktop keyboard submission, loading, citation expansion and source links'
   });
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/');
+  await page.goto('/ask');
   await expect(page.getByRole('button', { name: 'Ask documents' })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('desktop-initial.png'), fullPage: true });
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('link', { name: 'ResearchLens / lab' })).toBeFocused();
+  await expect(page.getByRole('link', { name: 'ResearchLens' })).toBeFocused();
+  await expectFocusRing(page);
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('link', { name: 'About' })).toBeFocused();
   await expectFocusRing(page);
   await page.keyboard.press('Tab');
   const input = page.getByRole('textbox', { name: 'Your research question' });
@@ -106,7 +109,7 @@ test('API error alert and keyboard retry recover without stale content', async (
       ? route.fulfill({ status: 504, json: { detail: 'OpenAI timed out. Please try again.' } })
       : route.fulfill({ json: responses.insufficient });
   });
-  await page.goto('/');
+  await page.goto('/ask');
   const submit = page.getByRole('button', { name: 'Ask documents' });
   await submit.focus();
   await page.keyboard.press('Enter');
@@ -144,7 +147,7 @@ test('320px mobile validation, long metadata, preview, no matches and answer', a
             : responses.answered,
     });
   });
-  await page.goto('/');
+  await page.goto('/ask');
   const input = page.getByRole('textbox', { name: 'Your research question' });
   const submit = page.getByRole('button', { name: 'Find passages' });
   await input.fill(' a ');
@@ -187,4 +190,36 @@ test('320px mobile validation, long metadata, preview, no matches and answer', a
     path: testInfo.outputPath('mobile-answer-expanded.png'),
     fullPage: true,
   });
+});
+
+test('landing page example citations, section links and route to a prefilled question', async ({
+  page,
+}, testInfo) => {
+  await mockHealth(page);
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Every answer points to the passage it came from.',
+  );
+  const source = page.locator('#example-source');
+  await expect(source).toContainText('5. Conclusions, paragraph 57');
+  const second = page.getByRole('button', { name: 'Show source 2: Abstract, paragraph 1' });
+  await second.focus();
+  await expectFocusRing(page);
+  await page.keyboard.press('Enter');
+  await expect(second).toHaveAttribute('aria-pressed', 'true');
+  await expect(source).toContainText('Abstract, paragraph 1');
+  await page.screenshot({ path: testInfo.outputPath('landing-desktop.png'), fullPage: true });
+  await page.getByRole('link', { name: 'Ask this question yourself' }).click();
+  await expect(page).toHaveURL(/\/ask\?q=/);
+  await expect(page.getByRole('textbox', { name: 'Your research question' })).toHaveValue(
+    'Why combine forward and backward lighting for aircraft glass canopy inspection?',
+  );
+  await page.getByRole('link', { name: 'About' }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await page.setViewportSize({ width: 320, height: 740 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  await page.screenshot({ path: testInfo.outputPath('landing-mobile.png'), fullPage: true });
+  expect(errors).toEqual([]);
 });

@@ -26,12 +26,12 @@ test('demo flow: recorded replay, one live answer, then free preview after the l
   });
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/');
+  await page.goto('/ask');
 
   // 1. Replay: a real recorded answer, clearly labelled, without an ask request.
   await page.getByRole('button', { name: 'Mock recorded example' }).click();
   await expect(page.getByTestId('replay-label')).toContainText(recordedLabel);
-  await expect(page.getByText('Recorded · no API call')).toBeVisible();
+  await expect(page.getByText('Recorded, no API call')).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Your research question' })).toHaveValue(
     demoStatus.examples[0].question,
   );
@@ -57,7 +57,7 @@ test('demo flow: recorded replay, one live answer, then free preview after the l
     page.getByRole('heading', { name: 'Retrieved passages', exact: true }),
   ).toBeVisible();
   await expect(page.getByRole('alert')).toHaveCount(0);
-  await expect(page.getByText('OpenAI · Document-only answers')).toBeVisible();
+  await expect(page.getByText('OpenAI answers from the papers only')).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('demo-limited.png'), fullPage: true });
 
   // 4. A visitor key travels only as a header and is never rendered.

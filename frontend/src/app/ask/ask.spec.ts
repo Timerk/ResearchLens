@@ -1,7 +1,8 @@
+import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { App, type Answer } from './app';
+import { Ask, type Answer } from './ask';
 import {
   demoResponses,
   demoStatus,
@@ -9,10 +10,10 @@ import {
   responses,
   syntheticPassage,
   technicalPassage,
-} from '../../testing/fixtures';
+} from '../../../testing/fixtures';
 
 describe('Research question workflow', () => {
-  let fixture: ComponentFixture<App>;
+  let fixture: ComponentFixture<Ask>;
   let http: HttpTestingController;
   let root: HTMLElement;
 
@@ -49,11 +50,11 @@ describe('Research question workflow', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      imports: [Ask],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
     http = TestBed.inject(HttpTestingController);
-    fixture = TestBed.createComponent(App);
+    fixture = TestBed.createComponent(Ask);
     root = fixture.nativeElement;
     await render();
   });
@@ -72,13 +73,13 @@ describe('Research question workflow', () => {
   }
 
   it('labels the question and exposes connecting, active mode, and input guidance', async () => {
-    expect(root.textContent).toContain('Connecting to backend');
+    expect(root.textContent).toContain('Connecting to the backend');
     expect(root.querySelector('label')?.htmlFor).toBe('question');
     expect(root.querySelector('textarea')?.getAttribute('aria-describedby')).toBe(
       'question-help question-validation',
     );
     await health();
-    expect(root.textContent).toContain('OpenAI · Document-only answers');
+    expect(root.textContent).toContain('OpenAI answers from the papers only');
     expect(root.textContent).toContain('they do not prove factual support');
     expect(root.textContent).not.toContain('Retrieval uses word matching');
   });
@@ -88,7 +89,7 @@ describe('Research question workflow', () => {
     await render();
     expect(root.textContent).toContain('Backend status unavailable');
     await respond(responses.preview);
-    expect(root.textContent).toContain('Local preview · No API charges');
+    expect(root.textContent).toContain('Local preview, no API charges');
   });
 
   it.each(['', '  ', 'ab', ' a ', 'x'.repeat(2001)])(
@@ -169,8 +170,8 @@ describe('Research question workflow', () => {
       expect(link.target).toBe('_blank');
       expect(link.rel).toBe('noopener noreferrer');
     }
-    expect(root.textContent).toContain('mock-model · 900 input tokens ·');
-    expect(root.textContent).toContain('120 output tokens (including reasoning)');
+    expect(root.textContent).toContain('Answered by mock-model using 900 input tokens and');
+    expect(root.textContent).toContain('120 output tokens (including reasoning).');
   });
 
   it('associates each section only with its cited passages', async () => {
@@ -206,7 +207,8 @@ describe('Research question workflow', () => {
     await respond({ ...responses.preview, passages: [syntheticPassage] });
     expect(root.querySelector('h2')?.textContent).toBe('Retrieved passages');
     expect(root.querySelectorAll('article')).toHaveLength(1);
-    expect(root.textContent).toContain('synthetic · Paragraph 1');
+    expect(root.textContent).toContain('Synthetic fixture,');
+    expect(root.textContent).toContain('paragraph 1');
     expect(root.textContent).toContain('Local synthetic fixture; no external publication');
     expect(root.querySelector('section a')).toBeNull();
     expect(root.textContent).not.toContain('input tokens');
@@ -288,10 +290,10 @@ describe('Research question workflow', () => {
     expect(root.querySelector('[data-testid="replay-label"]')?.textContent).toContain(
       recordedLabel,
     );
-    expect(root.textContent).toContain('Recorded · no API call');
+    expect(root.textContent).toContain('Recorded, no API call');
     expect(root.textContent).toContain('Cited passages, as recorded');
     expect(root.textContent).not.toContain('ms server time');
-    expect(root.textContent).toContain('OpenAI · Document-only answers');
+    expect(root.textContent).toContain('OpenAI answers from the papers only');
   });
 
   it('counts down live answers and shows the free preview after the limit', async () => {
@@ -315,7 +317,7 @@ describe('Research question workflow', () => {
     expect(root.querySelector('.results h2')?.textContent).toBe('Retrieved passages');
     expect(root.querySelectorAll('article')).toHaveLength(1);
     // The server is still in OpenAI mode; only this visitor's quota is used up.
-    expect(root.textContent).toContain('OpenAI · Document-only answers');
+    expect(root.textContent).toContain('OpenAI answers from the papers only');
   });
 
   it('explains when live answers are switched off', async () => {
@@ -345,7 +347,7 @@ describe('Research question workflow', () => {
     request.flush(responses.answered);
     await render();
     expect(root.textContent).not.toContain(key);
-    expect(root.textContent).toContain('Local preview · No API charges');
+    expect(root.textContent).toContain('Local preview, no API charges');
     expect(JSON.stringify(localStorage)).not.toContain(key);
     expect(JSON.stringify(sessionStorage)).not.toContain(key);
   });

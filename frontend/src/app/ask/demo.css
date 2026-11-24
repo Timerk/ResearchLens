@@ -3,9 +3,9 @@
   margin: 14px 0 0;
   padding-top: 12px;
   border-top: 1px solid var(--line);
-  font-size: 13px;
-  line-height: 1.55;
   color: var(--ink-2);
+  font-size: 0.8125rem;
+  line-height: 1.55;
 }
 .live-status strong {
   color: var(--ink);
@@ -16,12 +16,13 @@
 }
 .own-key {
   margin-top: 12px;
+  font-size: 0.875rem;
 }
 .own-key summary {
   display: inline-flex;
   align-items: center;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 650;
 }
 .own-key label {
   margin: 14px 0 6px;
@@ -31,87 +32,86 @@
   width: 100%;
   max-width: 34em;
   padding: 10px 12px;
-  font-family: var(--mono);
-  font-size: 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--sheet-2);
   color: var(--ink);
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
 }
 .own-key input:focus {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
-  background: var(--surface);
+  background: var(--sheet);
 }
 .own-key p {
   max-width: 46em;
   margin: 8px 0 0;
-  font-size: 12.5px;
-  line-height: 1.55;
   color: var(--ink-3);
+  font-size: 0.8125rem;
+  line-height: 1.55;
 }
 .examples {
-  margin-top: 28px;
+  margin-top: 32px;
 }
 .examples h2 {
-  font-family: var(--sans);
-  font-size: 12px;
+  font-size: 1.25rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-3);
+  font-stretch: 75%;
 }
 .examples p {
+  max-width: 44em;
   margin: 6px 0 12px;
-  font-size: 13.5px;
-  line-height: 1.55;
   color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.55;
 }
 .examples ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
+  border-top: 1px solid var(--line);
 }
 .example {
-  padding: 9px 14px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: var(--surface);
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
   color: var(--ink);
-  font-size: 13.5px;
-  font-weight: 500;
-  white-space: normal;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.45;
   text-align: left;
+  cursor: pointer;
 }
 .example:hover:not([aria-disabled='true']) {
-  background: var(--accent-soft);
-  border-color: var(--accent);
+  color: var(--accent);
+}
+.example[aria-disabled='true'] {
+  cursor: wait;
 }
 .replay-label {
   display: grid;
   gap: 4px;
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   padding: 12px 16px;
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
-  border-radius: 12px;
+  border-left: 3px solid var(--accent);
   background: var(--accent-soft);
-  font-size: 13px;
-  line-height: 1.5;
   color: var(--ink-2);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 .replay-label strong {
-  color: var(--accent);
+  color: var(--ink);
 }
 .fallback-notice {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   padding: 12px 16px;
-  border-radius: 12px;
-  background: var(--amber-soft);
-  border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+  border-left: 3px solid var(--caution);
+  background: var(--caution-soft);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 0.9375rem;
   line-height: 1.55;
 }
