@@ -24,12 +24,18 @@ flowchart LR
 - Caddy writes no access log, so visitor IP addresses are not stored on disk. The quota
   store keeps only keyed hashes of the address and day.
 
+The server decides whether a typed question gets a live answer or the local preview.
+To try the public demo without using the server's live-answer quota, open a recorded example.
+
 | Request | What happens | Cost |
 | --- | --- | --- |
 | Recorded example (`GET /api/examples/{id}`) | Replays a saved evaluation answer | Free, no API call |
-| Question, live answers off or used up | Local preview: ranked passages, no answer | Free, no API call |
-| Question within the daily limit | Live `gpt-6-luna` answer with citations | Your OpenAI account |
-| Question with a visitor's own key | Live answer on the visitor's key, no quota used | Visitor's OpenAI account |
+| Typed question with live answers enabled, matching passages and quota available | Generates a cited answer or reports insufficient evidence. The default quotas are 5 per visitor and 50 total per UTC day. | Your OpenAI account |
+| Typed question in local mode (the default without a server key), with `DEMO_ONLY=true` or after either quota is exhausted | Returns the local preview with ranked passages. Exhausted quota returns HTTP 429. | Free, no API call |
+| Typed question with a visitor key when visitor keys are enabled | Uses the visitor's key and bypasses the live-answer quota. `DEMO_ONLY=true` disables visitor keys. | Visitor's OpenAI account |
+
+If no passages match a question, the server returns that result without an OpenAI
+call or a quota charge.
 
 ## 1. Before you start
 

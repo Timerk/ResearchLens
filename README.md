@@ -14,7 +14,7 @@ with owner-approved questions, a held-out set run once, and pre-registered decis
 rules.
 
 **Live demo:** <https://204-168-204-171.sslip.io>. See [Try it](#try-it)
-for what the demo does and does not spend.
+for recorded examples and live-answer limits.
 
 ![Desktop view: a generated answer with an expanded citation](docs/images/desktop-answer.png)
 
@@ -43,17 +43,20 @@ tiers (`RETRIEVAL_TIER=auto` or `full`) and records a fresh-clone check.
 
 ## Try it
 
-The public demo offers three ways to ask, and only one of them costs money:
+Open a recorded example to try the demo without using live-answer quota. For typed
+questions without a visitor key, the server automatically selects live answers or
+local preview.
 
-| Mode | What you get | API call |
+| Request | What you get | OpenAI usage |
 | --- | --- | --- |
-| **Recorded answer** | Pick one of five example questions. The page replays a real `gpt-6-luna` answer saved during the 2026-10-13 development evaluation, with its cited passages. Each is labelled, for example *Recorded answer from evaluation run 2026-10-13, model gpt-6-luna, tier full (Qwen3-4B, 16k context)*. | None |
-| **Local preview** | Ask anything. The server retrieves and ranks passages (light tier online) and shows them with source metadata, without writing an answer. | None |
-| **Live answer** | A generated answer with citations or an explicit insufficient-evidence response. Limited to 5 per visitor and 50 in total per day; after that the page falls back to the preview (HTTP 429). | Owner's OpenAI key |
+| **Open a recorded example** | Replays a saved `gpt-6-luna` answer from the 2026-10-13 development evaluation with its cited passages. The label identifies the run, model and retrieval tier. | None |
+| **Submit a question with live answers enabled and quota available** | Generates an answer with citations or reports insufficient evidence. The default limits are 5 per visitor and 50 in total per UTC day. Questions with no matching passages use no quota. | Owner's OpenAI key |
+| **Submit a question in local mode (the default without a server key), with `DEMO_ONLY=true`, or after either quota is exhausted** | Shows the local preview with ranked passages and source metadata. Exhausted quota returns HTTP 429. | None |
 
-Visitors may also paste their own OpenAI API key. It is sent as a request header, used
-for that request only, never stored, logged or returned, and bypasses the daily limits
-but not the input limits. Recorded answers come verbatim from the committed blind-grading
+If visitor keys are enabled, visitors can use their own OpenAI API key. The app sends
+it in a request header for that request only. It bypasses the daily quotas, and the
+input limits still apply. The server never stores, logs or returns the key.
+Recorded answers come verbatim from the committed blind-grading
 packet ([`owner-grading.md`](evaluation/reviews/2026-10-14-answer-judge/owner-grading.md));
 [`researchlens_eval.demo_recordings`](backend/researchlens_eval/demo_recordings.py)
 rebuilds [`data/demo/recorded-answers.json`](data/demo/recorded-answers.json) from it and
