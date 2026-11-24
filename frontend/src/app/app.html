@@ -77,10 +77,79 @@
         @if (pending()) {
           <span class="spinner" aria-hidden="true"></span>
         }
-        {{ pending() ? 'Working…' : mode() === 'openai' ? 'Ask documents →' : 'Find passages →' }}
+        {{ pending() ? 'Working…' : answersAvailable() ? 'Ask documents →' : 'Find passages →' }}
       </button>
     </div>
+    @if (demo(); as status) {
+      @if (status.live_answers === 'enabled' && status.visitor_remaining !== null) {
+        <p class="live-status" data-testid="live-status">
+          @if (status.visitor_remaining > 0 && status.remaining_today !== 0) {
+            Live answers left for you today:
+            <strong>{{ status.visitor_remaining }} of {{ status.visitor_daily_limit }}</strong
+            >. After that, questions show the ranked passages for free.
+          } @else {
+            <strong>No live answers left today</strong> ({{ status.visitor_daily_limit }} per
+            visitor, {{ status.global_daily_limit }} in total). Questions show the ranked passages
+            for free until midnight UTC.
+          }
+        </p>
+      } @else if (status.live_answers === 'demo_only') {
+        <p class="live-status" data-testid="live-status">
+          Live answers are switched off on this demo. Questions show the ranked passages; the
+          recorded examples below show complete answers.
+        </p>
+      }
+      @if (status.turnstile_site_key && !usingVisitorKey()) {
+        <div #turnstile class="turnstile"></div>
+      }
+      @if (status.visitor_keys) {
+        <details class="own-key">
+          <summary>Use your own OpenAI API key</summary>
+          <label for="visitor-key">OpenAI API key</label>
+          <input
+            id="visitor-key"
+            name="visitorKey"
+            type="password"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="sk-…"
+            [(ngModel)]="visitorKey"
+            [readOnly]="pending()"
+            aria-describedby="visitor-key-help"
+          />
+          <p id="visitor-key-help">
+            Sent over HTTPS as a header with each question you ask in this tab. The server uses it
+            for that request only and never stores, logs or returns it. It is kept in memory, not in
+            your browser storage; reloading the page clears it. Answers are billed to your OpenAI
+            account and do not count against the demo's daily limit.
+          </p>
+        </details>
+      }
+    }
   </form>
+  @if (demo()?.examples?.length) {
+    <div class="examples" role="region" aria-labelledby="examples-heading">
+      <h2 id="examples-heading">Replay a recorded answer</h2>
+      <p>
+        Real answers saved from the development evaluation, shown with the passages they cite.
+        Replaying makes no API call.
+      </p>
+      <ul>
+        @for (example of demo()!.examples; track example.id) {
+          <li>
+            <button
+              type="button"
+              class="example"
+              (click)="replayExample(example)"
+              [attr.aria-disabled]="pending()"
+            >
+              {{ example.title }}
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
   <p class="request-status" role="status" aria-live="polite" aria-atomic="true">
     @if (pending()) {
       Searching documents…
@@ -109,8 +178,19 @@
           <span class="status-pill" [attr.data-status]="result.status" aria-hidden="true"></span>
           <h2>{{ heading(result.status) }}</h2>
         </div>
-        <span class="meta">{{ result.latency_ms }} ms server time</span>
+        <span class="meta">{{
+          result.replay ? 'Recorded · no API call' : result.latency_ms + ' ms server time'
+        }}</span>
       </div>
+      @if (result.replay; as replay) {
+        <div class="replay-label" data-testid="replay-label">
+          <strong>{{ replay.label }}</strong>
+          <span>{{ replay.note }}</span>
+        </div>
+      }
+      @if (result.notice) {
+        <p class="fallback-notice" data-testid="fallback-notice">{{ result.notice }}</p>
+      }
       <p class="result-message" [attr.data-status]="result.status">{{ result.message }}</p>
       @for (section of result.sections; track $index) {
         <article class="answer-section">
@@ -138,7 +218,9 @@
         </p>
       }
       @if (result.passages.length && result.mode === 'openai') {
-        <h3 class="list-heading">Retrieved passages</h3>
+        <h3 class="list-heading">
+          {{ result.replay ? 'Cited passages, as recorded' : 'Retrieved passages' }}
+        </h3>
       }
       @for (passage of result.passages; track passage.id; let i = $index) {
         <article class="passage">

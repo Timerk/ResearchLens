@@ -2,7 +2,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App, type Answer } from './app';
-import { responses, syntheticPassage, technicalPassage } from '../../testing/fixtures';
+import {
+  demoResponses,
+  demoStatus,
+  recordedLabel,
+  responses,
+  syntheticPassage,
+  technicalPassage,
+} from '../../testing/fixtures';
 
 describe('Research question workflow', () => {
   let fixture: ComponentFixture<App>;
@@ -51,7 +58,18 @@ describe('Research question workflow', () => {
     await render();
   });
 
-  afterEach(() => http.verify());
+  // Tests that do not exercise the demo endpoint simulate an older backend without it.
+  afterEach(() => {
+    for (const request of http.match('/api/demo')) {
+      request.flush({ detail: 'Not Found' }, { status: 404, statusText: 'Not Found' });
+    }
+    http.verify();
+  });
+
+  async function demo(status: Partial<typeof demoStatus> = {}) {
+    http.expectOne('/api/demo').flush({ ...demoStatus, ...status });
+    await render();
+  }
 
   it('labels the question and exposes connecting, active mode, and input guidance', async () => {
     expect(root.textContent).toContain('Connecting to backend');
@@ -255,4 +273,80 @@ describe('Research question workflow', () => {
       expect(root.querySelector('button')?.getAttribute('aria-disabled')).toBe('false');
     },
   );
+
+  it('replays a recorded example without calling the ask endpoint', async () => {
+    await health();
+    await demo();
+    expect(root.textContent).toContain('Replay a recorded answer');
+    const example = Array.from(root.querySelectorAll<HTMLButtonElement>('button.example'));
+    expect(example.map((button) => button.textContent?.trim())).toEqual(['Mock recorded example']);
+    example[0].click();
+    http.expectOne('/api/examples/mock-example').flush(demoResponses.recorded);
+    http.expectNone('/api/ask');
+    await render();
+    expect(root.querySelector('textarea')?.value).toBe(demoStatus.examples[0].question);
+    expect(root.querySelector('[data-testid="replay-label"]')?.textContent).toContain(
+      recordedLabel,
+    );
+    expect(root.textContent).toContain('Recorded · no API call');
+    expect(root.textContent).toContain('Cited passages, as recorded');
+    expect(root.textContent).not.toContain('ms server time');
+    expect(root.textContent).toContain('OpenAI · Document-only answers');
+  });
+
+  it('counts down live answers and shows the free preview after the limit', async () => {
+    await health();
+    await demo();
+    const status = () => root.querySelector('[data-testid="live-status"]')?.textContent;
+    expect(status()).toContain('1 of 5');
+    await respond(demoResponses.live);
+    expect(status()).toContain('No live answers left today');
+    expect(root.querySelector('button')?.textContent).toContain('Find passages');
+    submit();
+    http.expectOne('/api/ask').flush(demoResponses.limited, {
+      status: 429,
+      statusText: 'Too Many Requests',
+    });
+    await render();
+    expect(root.querySelector('[role="alert"]')).toBeNull();
+    expect(root.querySelector('[data-testid="fallback-notice"]')?.textContent).toContain(
+      "used today's live answers",
+    );
+    expect(root.querySelector('.results h2')?.textContent).toBe('Retrieved passages');
+    expect(root.querySelectorAll('article')).toHaveLength(1);
+    // The server is still in OpenAI mode; only this visitor's quota is used up.
+    expect(root.textContent).toContain('OpenAI · Document-only answers');
+  });
+
+  it('explains when live answers are switched off', async () => {
+    await health('local_preview');
+    await demo({ live_answers: 'demo_only', visitor_remaining: null, visitor_keys: false });
+    expect(root.querySelector('[data-testid="live-status"]')?.textContent).toContain(
+      'switched off',
+    );
+    expect(root.querySelector('#visitor-key')).toBeNull();
+  });
+
+  it('sends a visitor key only as a header and never renders it', async () => {
+    const key = 'sk-test-visitor-key-0123456789abcdef';
+    await health('local_preview');
+    await demo({ live_answers: 'not_configured', visitor_remaining: null });
+    const input = root.querySelector<HTMLInputElement>('#visitor-key')!;
+    expect(input.type).toBe('password');
+    expect(input.autocomplete).toBe('off');
+    input.value = ` ${key} `;
+    input.dispatchEvent(new Event('input'));
+    await render();
+    expect(root.querySelector('button')?.textContent).toContain('Ask documents');
+    submit();
+    const request = http.expectOne('/api/ask');
+    expect(request.request.headers.get('X-OpenAI-API-Key')).toBe(key);
+    expect(request.request.body).toEqual({ question: expect.any(String) });
+    request.flush(responses.answered);
+    await render();
+    expect(root.textContent).not.toContain(key);
+    expect(root.textContent).toContain('Local preview · No API charges');
+    expect(JSON.stringify(localStorage)).not.toContain(key);
+    expect(JSON.stringify(sessionStorage)).not.toContain(key);
+  });
 });

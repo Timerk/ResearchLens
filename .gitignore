@@ -11,3 +11,4 @@ data/tiers/
 evaluation/runs/
 # Raw answer-evaluation bundles belong in ignored run storage.
 /evaluation/*-evidence.json.gz
+data/state/

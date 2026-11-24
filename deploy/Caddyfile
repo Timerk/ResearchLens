@@ -1,0 +1,26 @@
+# Automatic HTTPS for the public demo. SITE_ADDRESS and ACME_EMAIL come from .env.
+{
+	email {$ACME_EMAIL}
+	servers {
+		timeouts {
+			read_header 10s
+			read_body 10s
+			idle 2m
+		}
+	}
+}
+
+{$SITE_ADDRESS} {
+	encode zstd gzip
+	# Questions are small; nginx enforces 16 KB as well.
+	request_body {
+		max_size 32KB
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+	# No access log: visitor IP addresses are not written to disk. Caddy replaces any
+	# client-supplied X-Forwarded-For with the real client address.
+	reverse_proxy frontend:80
+}

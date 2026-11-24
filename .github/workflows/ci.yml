@@ -1,5 +1,12 @@
 name: CI
-on: [push, pull_request]
+on:
+  # Branch pushes only; release tags run these jobs through deploy.yml.
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_call:
+permissions:
+  contents: read
 jobs:
   backend:
     runs-on: ubuntu-latest
@@ -13,6 +20,7 @@ jobs:
       - run: uv run ruff format --check backend
       - run: uv run pytest -q --cov=researchlens --cov=researchlens_eval --cov-fail-under=75
       - run: uv run --directory backend python -m researchlens.ingest
+      - run: uv run --directory backend python -m researchlens_eval.demo_recordings --check
   backend-extras:
     runs-on: ubuntu-latest
     env:
@@ -66,6 +74,30 @@ jobs:
             --data '{"question":"Why combine forward and backward lighting for aircraft glass canopy inspection?"}' \
             http://127.0.0.1:4200/api/ask)" = 200
           jq -e '.status == "passages_found"' response.json
+      - name: Recorded examples and security headers through nginx
+        run: |
+          curl --silent --show-error --fail http://127.0.0.1:4200/api/demo             | jq -e '(.examples | length) >= 3 and .live_answers == "not_configured"'
+          curl --silent --show-error --fail http://127.0.0.1:4200/api/examples/canopy-heater-fusion             | jq -e '.replay.label | startswith("Recorded answer from evaluation run")'
+          curl --silent --show-error --fail --dump-header headers.txt --output /dev/null http://127.0.0.1:4200/
+          grep -qi '^content-security-policy:' headers.txt
+          grep -qi '^x-content-type-options: nosniff' headers.txt
+          if grep -qi '^access-control-allow-origin' headers.txt; then exit 1; fi
+      - name: DEMO_ONLY kill switch makes no paid call even with a key configured
+        env:
+          ANSWER_PROVIDER: openai
+          OPENAI_API_KEY: sk-ci-placeholder-not-a-real-key
+          DEMO_ONLY: "true"
+        run: |
+          docker compose up -d --wait
+          curl --silent --show-error --fail http://127.0.0.1:4200/api/health | jq -e '.mode == "local_preview"'
+          curl --silent --show-error --fail --header 'Content-Type: application/json'             --data '{"question":"Why combine forward and backward lighting for aircraft glass canopy inspection?"}'             http://127.0.0.1:4200/api/ask | jq -e '.status == "passages_found" and .fallback_reason == "demo_only"'
+      - name: Production override and Caddyfile are valid
+        env:
+          SITE_ADDRESS: demo.example.com
+          ACME_EMAIL: ops@example.com
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.models.yml -f docker-compose.prod.yml config --quiet
+          docker run --rm -e SITE_ADDRESS -e ACME_EMAIL             -v "$PWD/deploy/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2.10-alpine             caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
       - run: docker compose logs --no-color
         if: failure()
       - run: docker compose down -v
