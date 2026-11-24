@@ -1,0 +1,190 @@
+<div class="field">
+  <rl-site-header>
+    <nav class="nav" aria-label="Page sections">
+      <a href="#how">How it works</a>
+      <a href="#papers">Papers</a>
+      <a href="#evaluation">Evaluation</a>
+      <a [href]="repository" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+    <a class="button on-field" routerLink="/ask">Ask the papers</a>
+  </rl-site-header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">Every answer points to the passage it came from.</h1>
+      <p class="lede">
+        ResearchLens answers questions about four open-access papers on optical defect inspection.
+        It uses only the papers’ text, cites each claim, and tells you when the papers don’t cover a
+        question.
+      </p>
+      <div class="actions">
+        <a class="button on-field" routerLink="/ask">Ask the papers</a>
+        <a class="quiet-link" href="#evaluation">See how it was evaluated</a>
+      </div>
+    </div>
+
+    <figure class="sheet" aria-labelledby="example-caption">
+      <div class="sheet-row">
+        <p class="sheet-label">Question</p>
+        <p class="question">{{ example.question }}</p>
+      </div>
+      <div class="sheet-row">
+        <p class="sheet-label">Answer</p>
+        <p class="answer">
+          {{ example.answer }}
+          @for (source of example.sources; track source.number; let i = $index) {
+            <button
+              type="button"
+              class="cite"
+              [attr.aria-pressed]="selected() === i"
+              aria-controls="example-source"
+              [attr.aria-label]="
+                'Show source ' +
+                source.number +
+                ': ' +
+                source.section +
+                ', paragraph ' +
+                source.paragraph
+              "
+              (click)="select(i)"
+            >
+              {{ source.number }}
+            </button>
+          }
+        </p>
+      </div>
+      <div class="source" id="example-source" aria-live="polite">
+        @for (source of [example.sources[selected()]]; track source.number) {
+          <p class="source-meta">
+            <span class="source-number" aria-hidden="true">{{ source.number }}</span>
+            <span
+              ><span class="source-paper">{{ example.paper }}</span
+              >{{ source.section }}, paragraph {{ source.paragraph }}</span
+            >
+          </p>
+          <blockquote>
+            @for (segment of source.segments; track $index) {
+              @if (segment.marked) {
+                <mark>{{ segment.text }}</mark>
+              } @else {
+                <span>{{ segment.text }}</span>
+              }
+            }
+          </blockquote>
+        }
+      </div>
+      <figcaption id="example-caption">
+        A real answer from the 15 October 2026 development evaluation, written by gpt-6-luna. The
+        highlights are added on this page to show which words carry the claim.
+        <a routerLink="/ask" [queryParams]="{ q: example.question }">Ask this question yourself</a>
+      </figcaption>
+    </figure>
+  </section>
+</div>
+
+<main>
+  <section class="block" id="how" aria-labelledby="how-title">
+    <h2 id="how-title">How a question gets answered</h2>
+    <ol class="steps">
+      @for (step of steps; track step.title; let i = $index) {
+        <li>
+          <span class="step-number" aria-hidden="true">{{ i + 1 }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="block" id="papers" aria-labelledby="papers-title">
+    <div class="block-head">
+      <h2 id="papers-title">The four papers it reads</h2>
+      <p>
+        Open-access articles from <i>Sensors</i> and the <i>Journal of Imaging</i>, all licensed
+        CC&nbsp;BY&nbsp;4.0. Figures, tables and references are left out; formulas are rendered as
+        readable text.
+      </p>
+    </div>
+    <ul class="papers">
+      @for (paper of papers; track paper.doi) {
+        <li>
+          <p class="paper-title">{{ paper.title }}</p>
+          <p class="paper-meta">
+            {{ paper.authors }}, {{ paper.year }}. <i>{{ paper.journal }}</i
+            >.
+            <a [href]="'https://doi.org/' + paper.doi" target="_blank" rel="noopener noreferrer"
+              >doi:{{ paper.doi }}</a
+            >
+          </p>
+          <p class="paper-count">{{ paper.paragraphs }} paragraphs</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="block" id="evaluation" aria-labelledby="evaluation-title">
+    <div class="block-head">
+      <h2 id="evaluation-title">What the evaluation found</h2>
+      <p>
+        Retrieval and answers were scored on 50 development questions, 14 of which the papers cannot
+        answer. A separate 36-question held-out set was run once, under decision rules written down
+        before the run. The misses are reported too.
+      </p>
+    </div>
+    <table class="results">
+      <thead>
+        <tr>
+          <th scope="col">Study</th>
+          <th scope="col">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of results; track row.study) {
+          <tr>
+            <th scope="row">{{ row.study }}</th>
+            <td>
+              {{ row.result }}
+              <a
+                class="row-link"
+                [href]="repository + '/blob/main/' + row.doc"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="'Details for ' + row.study.toLowerCase() + ' on GitHub'"
+                >Details</a
+              >
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="block-foot">
+      <a
+        [href]="repository + '/blob/main/docs/results.md'"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Read the full evaluation story on GitHub</a
+      >
+    </p>
+  </section>
+
+  <section class="run" aria-labelledby="run-title">
+    <div>
+      <h2 id="run-title">Run it on your own machine</h2>
+      <p>
+        The smallest setup uses TF-IDF and downloads no models. Without an OpenAI key it shows the
+        ranked passages instead of a written answer, so you can still check what it would read.
+      </p>
+    </div>
+    <pre><code>git clone {{ repository }}.git
+cd ResearchLens
+docker compose up --build</code></pre>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>
+    ResearchLens is an independent portfolio project. Code under the MIT license; paper text under
+    CC&nbsp;BY&nbsp;4.0 from the original authors.
+  </p>
+  <a [href]="repository" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+</footer>

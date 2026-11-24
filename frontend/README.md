@@ -1,7 +1,7 @@
 # ResearchLens frontend
 
 Angular 21.2 uses its built-in Vitest builder with jsdom for component tests.
-Three Playwright/Chromium smoke tests cover native keyboard/disclosure behavior,
+Four Playwright/Chromium smoke tests cover the landing page, native keyboard/disclosure behavior,
 focus outlines, request recovery and narrow layouts that jsdom cannot verify.
 
 Use Node 24 with npm (the repository declares npm 11.17.0). From this directory:

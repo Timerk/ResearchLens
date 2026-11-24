@@ -1,47 +1,23 @@
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="/">
-      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <circle cx="13.5" cy="13.5" r="8.5" />
-        <path d="M20 20l7 7" />
-        <path class="brand-mark-lines" d="M9.5 11.5h8M9.5 15.5h5" />
-      </svg>
-      ResearchLens<span> / lab</span>
-    </a>
-    <span class="badge" [attr.data-mode]="mode()"
-      ><span class="badge-dot" aria-hidden="true"></span
-      >{{
-        mode() === 'openai'
-          ? 'OpenAI · Document-only answers'
-          : mode() === 'local_preview'
-            ? 'Local preview · No API charges'
-            : mode() === 'connecting'
-              ? 'Connecting to backend…'
-              : 'Backend status unavailable'
-      }}</span
-    >
-  </div>
-</header>
+<rl-site-header>
+  <a class="about-link" routerLink="/">About</a>
+  <span class="badge" [attr.data-mode]="mode()"
+    ><span class="badge-dot" aria-hidden="true"></span>{{ modeLabel() }}</span
+  >
+</rl-site-header>
 <main>
-  <div class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow">Technical innovation research</p>
-      <h1>Explore the evidence.<br /><span>Inspect the source.</span></h1>
-      <p class="intro">
-        Search a small document collection and read the passages behind each result.
+  <div class="intro">
+    <div>
+      <h1>Ask the papers</h1>
+      <p class="lede">
+        Questions are answered from four papers on optical defect inspection. Each part of an answer
+        cites its passages; open a citation to read the source text.
       </p>
     </div>
     <aside class="notice">
-      <strong
-        ><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-          <circle cx="10" cy="10" r="8" />
-          <path d="M10 9v5M10 6.2v.1" /></svg
-        >Inspect the evidence</strong
-      >
-      Read each source and its experimental conditions before drawing conclusions. Technical papers
-      report their authors' findings; synthetic fixtures, when loaded, are labeled. Retrieval can
-      miss evidence or return unrelated passages. Citation references identify passages; they do not
-      prove factual support.
+      <strong class="notice-title">Read the sources before you rely on an answer.</strong>
+      Technical papers report their authors’ findings under their own experimental conditions;
+      synthetic fixtures, when loaded, are labeled. Retrieval can miss evidence or return unrelated
+      passages. Citation references identify passages; they do not prove factual support.
       @if (mode() === 'openai') {
         Generated answers use retrieved passages as context. OpenAI API charges apply.
       } @else if (mode() === 'local_preview') {
@@ -52,6 +28,7 @@
   <form class="composer" (ngSubmit)="ask()" novalidate [class.is-pending]="pending()">
     <label for="question">Your research question</label>
     <textarea
+      #input
       id="question"
       name="question"
       [(ngModel)]="question"
@@ -71,13 +48,14 @@
       <span class="counter" aria-hidden="true">{{ question.trim().length }} / 2,000</span>
       <button
         type="submit"
+        class="button"
         [disabled]="!!questionError()"
         [attr.aria-disabled]="pending() || !!questionError()"
       >
         @if (pending()) {
           <span class="spinner" aria-hidden="true"></span>
         }
-        {{ pending() ? 'Working…' : answersAvailable() ? 'Ask documents →' : 'Find passages →' }}
+        {{ pending() ? 'Working…' : answersAvailable() ? 'Ask documents' : 'Find passages' }}
       </button>
     </div>
     @if (demo(); as status) {
@@ -149,6 +127,19 @@
         }
       </ul>
     </div>
+  } @else if (!answer() && !pending()) {
+    <div class="suggestions">
+      <p id="suggestions-label">Or start from one of these</p>
+      <ul aria-labelledby="suggestions-label">
+        @for (text of suggestions; track text) {
+          <li>
+            <button type="button" class="suggestion" (click)="useSuggestion(text, input)">
+              {{ text }}
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
   }
   <p class="request-status" role="status" aria-live="polite" aria-atomic="true">
     @if (pending()) {
@@ -158,7 +149,7 @@
     }
   </p>
   @if (error()) {
-    <p role="alert" class="notice error">{{ error() }}</p>
+    <p role="alert" class="error">{{ error() }}</p>
   }
   <section class="results" aria-label="Research results" [attr.aria-busy]="pending()">
     @if (pending()) {
@@ -174,12 +165,9 @@
     }
     @if (answer(); as result) {
       <div class="result-heading">
-        <div class="result-title">
-          <span class="status-pill" [attr.data-status]="result.status" aria-hidden="true"></span>
-          <h2>{{ heading(result.status) }}</h2>
-        </div>
+        <h2 [attr.data-status]="result.status">{{ heading(result.status) }}</h2>
         <span class="meta">{{
-          result.replay ? 'Recorded · no API call' : result.latency_ms + ' ms server time'
+          result.replay ? 'Recorded, no API call' : result.latency_ms + ' ms on the server'
         }}</span>
       </div>
       @if (result.replay; as replay) {
@@ -202,19 +190,21 @@
                   citationNumber(result, passage.id)
                 }}</span>
                 <span class="citation-label"
-                  >{{ passage.title }} · Paragraph {{ passage.paragraph }}</span
+                  >{{ passage.title }}, paragraph {{ passage.paragraph }}</span
                 >
               </summary>
               <blockquote>{{ passage.text }}</blockquote>
-              <p class="meta">{{ passage.kind }} · {{ passage.id }}</p>
+              <p class="meta">
+                <span class="kind">{{ passage.kind }}</span> <code>{{ passage.id }}</code>
+              </p>
             </details>
           }
         </article>
       }
       @if (result.input_tokens !== null) {
         <p class="usage">
-          {{ result.model }} · {{ result.input_tokens }} input tokens ·
-          {{ result.output_tokens }} output tokens (including reasoning)
+          Answered by {{ result.model }} using {{ result.input_tokens }} input tokens and
+          {{ result.output_tokens }} output tokens (including reasoning).
         </p>
       }
       @if (result.passages.length && result.mode === 'openai') {
@@ -224,69 +214,73 @@
       }
       @for (passage of result.passages; track passage.id; let i = $index) {
         <article class="passage">
-          <div class="passage-head">
-            <span class="ref-number" aria-hidden="true">{{ i + 1 }}</span>
-            <p class="eyebrow" [attr.data-kind]="passage.kind">
-              {{ passage.kind }} · Paragraph {{ passage.paragraph }}
+          <span class="ref-number" aria-hidden="true">{{ i + 1 }}</span>
+          <div class="passage-body">
+            <p class="passage-kind" [attr.data-kind]="passage.kind">
+              {{ passage.kind === 'synthetic' ? 'Synthetic fixture' : 'Technical paper' }},
+              paragraph {{ passage.paragraph }}
             </p>
-          </div>
-          <h3>{{ passage.title }}</h3>
-          <blockquote>{{ passage.text }}</blockquote>
-          <details class="reference">
-            <summary
-              [attr.aria-label]="
-                'Inspect reference: ' + passage.title + ', paragraph ' + passage.paragraph
-              "
-            >
-              Inspect reference
-            </summary>
-            <dl>
-              <dt>Passage ID</dt>
-              <dd>
-                <code>{{ passage.id }}</code>
-              </dd>
-              @if (passage.source_section) {
-                <dt>Section</dt>
-                <dd>{{ passage.source_section }}</dd>
-                <dt>Source XML location</dt>
+            <h3>{{ passage.title }}</h3>
+            <blockquote>{{ passage.text }}</blockquote>
+            <details class="reference">
+              <summary
+                [attr.aria-label]="
+                  'Inspect reference: ' + passage.title + ', paragraph ' + passage.paragraph
+                "
+              >
+                Inspect reference
+              </summary>
+              <dl>
+                <dt>Passage ID</dt>
                 <dd>
-                  <code>{{ passage.source_locator }}</code>
+                  <code>{{ passage.id }}</code>
                 </dd>
-              }
-              @if (passage.attribution; as attribution) {
-                <dt>Authors</dt>
-                <dd>{{ attribution.authors.join(', ') }}</dd>
-                <dt>Published</dt>
-                <dd>{{ attribution.publication_date }}</dd>
-                <dt>DOI</dt>
-                <dd>{{ attribution.doi }}</dd>
-                <dt>Copyright</dt>
-                <dd>{{ attribution.copyright }}</dd>
-                <dt>License</dt>
-                <dd>
-                  <a [href]="attribution.license_url" target="_blank" rel="noopener noreferrer">{{
-                    passage.license
-                  }}</a>
-                </dd>
-                <dt>Text preparation</dt>
-                <dd>{{ attribution.changes }}</dd>
-              } @else {
-                <dt>License</dt>
-                <dd>{{ passage.license }}</dd>
-              }
-              <dt>Source</dt>
-              <dd>
-                @if (passage.source_url; as url) {
-                  <a [href]="url" target="_blank" rel="noopener noreferrer">Original document ↗</a>
-                } @else {
-                  Local synthetic fixture; no external publication
+                @if (passage.source_section) {
+                  <dt>Section</dt>
+                  <dd>{{ passage.source_section }}</dd>
+                  <dt>Source XML location</dt>
+                  <dd>
+                    <code>{{ passage.source_locator }}</code>
+                  </dd>
                 }
-              </dd>
-            </dl>
-          </details>
+                @if (passage.attribution; as attribution) {
+                  <dt>Authors</dt>
+                  <dd>{{ attribution.authors.join(', ') }}</dd>
+                  <dt>Published</dt>
+                  <dd>{{ attribution.publication_date }}</dd>
+                  <dt>DOI</dt>
+                  <dd>{{ attribution.doi }}</dd>
+                  <dt>Copyright</dt>
+                  <dd>{{ attribution.copyright }}</dd>
+                  <dt>License</dt>
+                  <dd>
+                    <a [href]="attribution.license_url" target="_blank" rel="noopener noreferrer">{{
+                      passage.license
+                    }}</a>
+                  </dd>
+                  <dt>Text preparation</dt>
+                  <dd>{{ attribution.changes }}</dd>
+                } @else {
+                  <dt>License</dt>
+                  <dd>{{ passage.license }}</dd>
+                }
+                <dt>Source</dt>
+                <dd>
+                  @if (passage.source_url; as url) {
+                    <a [href]="url" target="_blank" rel="noopener noreferrer">Original document</a>
+                  } @else {
+                    Local synthetic fixture; no external publication
+                  }
+                </dd>
+              </dl>
+            </details>
+          </div>
         </article>
       }
     }
   </section>
-  <footer>Independent portfolio project.</footer>
 </main>
+<footer>
+  <p>ResearchLens is an independent portfolio project.</p>
+  <a routerLink="/">How it works</a>
+</footer>

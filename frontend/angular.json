@@ -58,6 +58,9 @@
               }
             ],
             "styles": [
+              "@fontsource-variable/archivo/wdth.css",
+              "@fontsource-variable/source-serif-4/opsz.css",
+              "@fontsource-variable/source-serif-4/opsz-italic.css",
               "src/styles.css"
             ]
           },

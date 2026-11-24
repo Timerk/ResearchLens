@@ -1,4 +1,4 @@
-import type { Answer, DemoStatus, Passage } from '../src/app/app';
+import type { Answer, DemoStatus, Passage } from '../src/app/ask/ask';
 
 // Presentation fixtures matching backend/researchlens/models.py on main.
 // These are mocked UI examples, not an evaluation dataset or scientific findings.
