@@ -6,7 +6,7 @@ from copy import deepcopy
 import numpy as np
 import pytest
 from researchlens.artifacts import canonical_hash, passage_identity, validate_passage_artifact
-from researchlens.ingest import CORPUS, ROOT, TECHNICAL_CORPUS, build_index
+from researchlens.ingest import CORPUS, ROOT, build_index
 from researchlens.models import Passage, SearchHit
 from researchlens_eval.evaluation import (
     comparison_report,
@@ -572,9 +572,9 @@ def test_cli_cutoffs_and_paired_json_are_reproducible(sample, tmp_path, monkeypa
     assert not (tmp_path / "bad").exists()
 
 
-def test_development_labels_are_human_reviewed(tmp_path):
+def test_development_labels_are_human_reviewed(tmp_path, adopted_corpus):
     index = tmp_path / "technical.json"
-    build_index(TECHNICAL_CORPUS, index)
+    build_index(adopted_corpus, index)
     artifact = json.loads(index.read_bytes())
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     evidence = EvidenceLabels.model_validate_json(

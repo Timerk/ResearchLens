@@ -2,6 +2,8 @@
 
 Default: rebuild offline from checked-in XML and verify the recorded checksums.
 --download: explicitly refresh originals and manifest from Europe PMC.
+--adopted-corpus PATH: write the pre-block-spacing corpus that the 2026-10 evaluation
+inputs pin, byte-identical to the adopted hash, for reproducing published results.
 """
 
 import argparse
@@ -14,7 +16,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from researchlens.ingest import ROOT
-from researchlens.mathml import readable_prose
+from researchlens.mathml import BLOCK_ELEMENTS, readable_prose
 from researchlens.models import Attribution, Document, ParagraphSource
 
 DIRECTORY = ROOT / "data" / "technical"
@@ -31,35 +33,61 @@ LEGACY_CHANGES = (
     "and back matter are omitted. Mathematical formula markup is replaced with [formula omitted]. "
     "This is a partial text extraction; consult the original article for omitted material."
 )
-EXTRACTION_VERSION = "mathml-readable-v2"
-CHANGES = LEGACY_CHANGES.replace(
+EXTRACTION_VERSION = "mathml-readable-v2+block-spacing"
+FORMULA_CHANGES = LEGACY_CHANGES.replace(
     "Mathematical formula markup is replaced with [formula omitted]. ",
     "Supported presentation MathML is rendered as grouped readable text with symbols, "
     "scripts and fractions; unsupported formulas remain [formula omitted]. "
     "Formula rendering and evidence-location migration were approved by the project owner "
     "on 2026-10-14 for the source text change. ",
 )
+# 2026-11-24: block boundaries inside a paragraph (list items, nested paragraphs) gained a
+# space, a source text change after the formula adoption. The evaluation inputs and
+# published results still pin the adopted corpus; see docs/block-spacing-fix.md.
+BLOCK_SPACING_DATE = "2026-11-24"
+ADOPTED_CORPUS_SHA256 = "f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675"
+
+
+def with_block_spacing(changes: str) -> str:
+    return changes.replace(
+        "whitespace normalized; ",
+        "whitespace normalized, with a space added between list items and other block "
+        f"elements inside a paragraph (source text change of {BLOCK_SPACING_DATE}); ",
+    )
+
+
+CHANGES = with_block_spacing(FORMULA_CHANGES)
 
 
 def text(element: ET.Element | None) -> str:
     return " ".join("".join(element.itertext()).split()) if element is not None else ""
 
 
-def prose_text(element: ET.Element, *, readable_formulas: bool = True) -> str:
-    """Keep prose surrounding formulas without flattening MathML into false numeric claims."""
+def prose_text(
+    element: ET.Element, *, readable_formulas: bool = True, separate_blocks: bool = True
+) -> str:
+    """Keep prose surrounding formulas without flattening MathML into false numeric claims.
+
+    ``separate_blocks`` puts a space at block boundaries such as list items so their words
+    do not run together; inline markup stays unspaced. False reproduces the adopted text.
+    """
 
     if readable_formulas:
-        return readable_prose(element, Counter())
+        return readable_prose(element, Counter(), separate_blocks=separate_blocks)
 
     def parts(node: ET.Element) -> str:
-        if node.tag.rsplit("}", 1)[-1] in {"math", "inline-formula", "disp-formula"}:
+        name = node.tag.rsplit("}", 1)[-1]
+        if name in {"math", "inline-formula", "disp-formula"}:
             return " [formula omitted] "
-        return (node.text or "") + "".join(parts(child) + (child.tail or "") for child in node)
+        inner = (node.text or "") + "".join(parts(child) + (child.tail or "") for child in node)
+        return f" {inner} " if separate_blocks and name in BLOCK_ELEMENTS else inner
 
     return " ".join(parts(element).split())
 
 
-def extract(raw: bytes, pmcid: str, *, readable_formulas: bool = True) -> tuple[Document, dict]:
+def extract(
+    raw: bytes, pmcid: str, *, readable_formulas: bool = True, separate_blocks: bool = True
+) -> tuple[Document, dict]:
     root = ET.fromstring(raw)
     meta = root.find("./front/article-meta")
     if meta is None:
@@ -130,7 +158,9 @@ def extract(raw: bytes, pmcid: str, *, readable_formulas: bool = True) -> tuple[
                 return
             headings = [*headings, heading] if heading else headings
         if node.tag == "p":
-            paragraph = prose_text(node, readable_formulas=readable_formulas)
+            paragraph = prose_text(
+                node, readable_formulas=readable_formulas, separate_blocks=separate_blocks
+            )
             if paragraph:
                 paragraphs.append(paragraph)
                 provenance.append(ParagraphSource(section=" > ".join(headings), locator=path))
@@ -148,13 +178,14 @@ def extract(raw: bytes, pmcid: str, *, readable_formulas: bool = True) -> tuple[
     visit(body, "./body", [])
     if not paragraphs:
         raise ValueError(f"No prose extracted for {pmcid}")
+    changes = FORMULA_CHANGES if readable_formulas else LEGACY_CHANGES
     attribution = Attribution(
         authors=authors,
         publication_date=published,
         doi=doi,
         license_url=LICENSE_URL,
         copyright=copyright_notice,
-        changes=CHANGES if readable_formulas else LEGACY_CHANGES,
+        changes=with_block_spacing(changes) if separate_blocks else changes,
         source_sha256=digest,
     )
     document = Document(
@@ -181,6 +212,26 @@ def extract(raw: bytes, pmcid: str, *, readable_formulas: bool = True) -> tuple[
         "review_status": "not_human_reviewed",
     }
     return document, record
+
+
+def corpus_json(documents: list[dict]) -> bytes:
+    return (json.dumps(documents, ensure_ascii=False, indent=2) + "\n").encode()
+
+
+def adopted_corpus_bytes(directory: Path = DIRECTORY) -> bytes:
+    """Rebuild the adopted 2026-10-14 documents.json that the evaluation inputs pin."""
+    manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
+    documents = []
+    for pmcid in SOURCES:
+        raw = (directory / "originals" / f"{pmcid}.xml").read_bytes()
+        record = next((r for r in manifest["sources"] if r["pmcid"] == pmcid), None)
+        if record is None or record["source_sha256"] != hashlib.sha256(raw).hexdigest():
+            raise ValueError(f"Original checksum missing or changed for {pmcid}")
+        documents.append(extract(raw, pmcid, separate_blocks=False)[0].model_dump())
+    data = corpus_json(documents)
+    if hashlib.sha256(data).hexdigest() != ADOPTED_CORPUS_SHA256:
+        raise ValueError("Rebuilt corpus does not match the adopted 2026-10-14 hash")
+    return data
 
 
 def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
@@ -212,7 +263,7 @@ def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
         documents.append(document.model_dump())
         records.append(record)
     directory.mkdir(parents=True, exist_ok=True)
-    corpus_bytes = (json.dumps(documents, ensure_ascii=False, indent=2) + "\n").encode()
+    corpus_bytes = corpus_json(documents)
     for path, data in (
         (
             manifest_path,
@@ -222,6 +273,10 @@ def build_corpus(directory: Path = DIRECTORY, download: bool = False) -> None:
                 "documents_sha256": hashlib.sha256(corpus_bytes).hexdigest(),
                 "formula_approval_date": "2026-10-14",
                 "formula_approval_record": "evaluation/reviews/2026-10-14-pr15/approval.json",
+                "block_spacing_date": BLOCK_SPACING_DATE,
+                "block_spacing_record": "docs/block-spacing-fix.md",
+                # Evaluation inputs and published results pin the pre-block-spacing corpus.
+                "evaluation_corpus_sha256": ADOPTED_CORPUS_SHA256,
                 "sources": records,
             },
         ),
@@ -264,5 +319,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--download", action="store_true", help="Refresh originals over the network"
     )
-    build_corpus(download=parser.parse_args().download)
-    print(f"Built four licensed articles in {DIRECTORY}")
+    parser.add_argument(
+        "--adopted-corpus",
+        type=Path,
+        metavar="PATH",
+        help="Only write the adopted 2026-10-14 corpus that evaluation inputs pin",
+    )
+    args = parser.parse_args()
+    if args.adopted_corpus:
+        args.adopted_corpus.write_bytes(adopted_corpus_bytes())
+        print(f"Wrote adopted corpus {ADOPTED_CORPUS_SHA256} to {args.adopted_corpus}")
+    else:
+        build_corpus(download=args.download)
+        print(f"Built four licensed articles in {DIRECTORY}")

@@ -2,7 +2,7 @@
 
 import pytest
 from pydantic import TypeAdapter
-from researchlens.ingest import ROOT, TECHNICAL_CORPUS, chunk_documents
+from researchlens.ingest import ROOT, chunk_documents
 from researchlens.models import Document
 from researchlens_eval.evaluation import load_dataset
 from researchlens_eval.evaluation_evidence import (
@@ -14,10 +14,10 @@ from researchlens_eval.evaluation_evidence import (
 
 
 @pytest.fixture(scope="module")
-def evidence():
+def evidence(adopted_corpus):
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     passages = chunk_documents(
-        TypeAdapter(list[Document]).validate_json(TECHNICAL_CORPUS.read_bytes())
+        TypeAdapter(list[Document]).validate_json(adopted_corpus.read_bytes())
     )
     labels = EvidenceLabels.model_validate_json(
         (ROOT / "evaluation/labels/technical-development.json").read_bytes()

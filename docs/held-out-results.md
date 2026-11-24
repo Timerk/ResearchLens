@@ -1,5 +1,7 @@
 # One-time held-out retrieval results
 
+These results predate the 2026-11-24 [list-item spacing fix](block-spacing-fix.md). It changed whitespace in six of 207 passages, one of them a held-out reference passage whose ID is unchanged. The frozen held-out file still pins the adopted corpus, and no held-out search ran for the fix.
+
 Qwen3-4B at both 12k and 16k passes four of the five literal targets. Its passage recall@4 is 77.6%, below 80%. Complete evidence is 21/26, or 80.8%; context evidence hit is 26/26; both documents are present for 7/7 cross-document cases; MRR@4 is 0.798. BGE-M3 at 16k passes three targets and misses recall@4 and complete evidence. TF-IDF passes MRR@4 alone. No configuration passes all five literal targets.
 
 The predeclared whole-context diagnostic gives Qwen recall of 91.0% at 12k and 92.0% at 16k. With the historical development convention of whole-context recall and MRR, both Qwen contexts reach all five point thresholds. This does not change the recall@4 miss.

@@ -8,7 +8,6 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 from researchlens.artifacts import canonical_hash, load_artifact, validate_passage_artifact
-from researchlens.corpus import DIRECTORY
 from researchlens.ingest import CORPUS, ROOT, build_index
 from researchlens.models import SearchHit
 from researchlens.retrieval import Retriever
@@ -235,9 +234,7 @@ def test_mrr_distinguishes_first_and_third_rank_and_excludes_unanswerable(inputs
 
 def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatch):
     dataset, artifact, retriever = inputs
-    monkeypatch.setattr(
-        "researchlens_eval.evaluation_runner.process_peak_rss_bytes", lambda: 123456
-    )
+    monkeypatch.setattr("researchlens_eval.evaluation_runner.process_peak_rss_bytes", lambda: 123456)
     run = run_evaluation(
         dataset,
         artifact,
@@ -281,9 +278,9 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
     assert summarize(failure)["errors"] == 1
 
 
-def test_owner_approved_questions_and_locations_without_running_held_out(tmp_path):
+def test_owner_approved_questions_and_locations_without_running_held_out(tmp_path, adopted_corpus):
     path = tmp_path / "technical.json"
-    build_index(DIRECTORY / "documents.json", path)
+    build_index(adopted_corpus, path)
     artifact = json.loads(path.read_bytes())
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")

@@ -3,6 +3,28 @@
 import xml.etree.ElementTree as ET
 from collections import Counter
 
+# JATS block-level elements that can occur inside a prose <p>, e.g. <list>/<list-item><p>.
+# Their boundaries separate words; inline markup such as <italic>, <sub> or <xref> does not.
+BLOCK_ELEMENTS = frozenset(
+    {
+        "attrib",
+        "def",
+        "def-item",
+        "def-list",
+        "disp-quote",
+        "label",
+        "list",
+        "list-item",
+        "p",
+        "speech",
+        "statement",
+        "term",
+        "title",
+        "verse-group",
+        "verse-line",
+    }
+)
+
 
 def local_name(node: ET.Element) -> str:
     return node.tag.rsplit("}", 1)[-1]
@@ -69,8 +91,14 @@ def render_math(node: ET.Element) -> str:
 
 
 def readable_prose(
-    element: ET.Element, counts: Counter, replacements: list[str] | None = None
+    element: ET.Element,
+    counts: Counter,
+    replacements: list[str] | None = None,
+    *,
+    separate_blocks: bool = True,
 ) -> str:
+    """Flatten prose; ``separate_blocks=False`` reproduces the 2026-10-14 adopted text."""
+
     def parts(node: ET.Element) -> str:
         if local_name(node) in {"math", "inline-formula", "disp-formula"}:
             math = next((child for child in node.iter() if local_name(child) == "math"), None)
@@ -89,6 +117,7 @@ def readable_prose(
             if replacements is not None:
                 replacements.append("[formula omitted]")
             return " [formula omitted] "
-        return (node.text or "") + "".join(parts(child) + (child.tail or "") for child in node)
+        inner = (node.text or "") + "".join(parts(child) + (child.tail or "") for child in node)
+        return f" {inner} " if separate_blocks and local_name(node) in BLOCK_ELEMENTS else inner
 
     return " ".join(parts(element).split())
