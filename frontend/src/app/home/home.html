@@ -110,8 +110,7 @@
         <li>
           <p class="paper-title">{{ paper.title }}</p>
           <p class="paper-meta">
-            {{ paper.authors }}, {{ paper.year }}. <i>{{ paper.journal }}</i
-            >.
+            {{ paper.authors }}, {{ paper.year }}. <i>{{ paper.journal }}</i>.
             <a [href]="'https://doi.org/' + paper.doi" target="_blank" rel="noopener noreferrer"
               >doi:{{ paper.doi }}</a
             >
@@ -183,8 +182,9 @@ docker compose up --build</code></pre>
 
 <footer class="foot">
   <p>
-    ResearchLens is an independent portfolio project. Code under the MIT license; paper text under
-    CC&nbsp;BY&nbsp;4.0 from the original authors.
+    ResearchLens is an independent portfolio project, built by
+    <a [href]="author.url" target="_blank" rel="noopener noreferrer">{{ author.name }}</a>. Code
+    under the MIT license; paper text under CC&nbsp;BY&nbsp;4.0 from the original authors.
   </p>
   <a [href]="repository" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
 </footer>

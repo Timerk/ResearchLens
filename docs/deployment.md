@@ -156,6 +156,12 @@ LIVE_ANSWERS_PER_DAY=50
 ALLOW_VISITOR_API_KEYS=true
 ```
 
+`SITE_ADDRESS` is also passed to the frontend container. At start it rewrites the
+absolute URLs in the link-preview tags (`og:url`, `og:image`, `twitter:image` and the
+canonical link) to `https://SITE_ADDRESS/`, so moving to a new domain needs only a new
+`SITE_ADDRESS` and `dc up -d`. Without it (plain `docker compose up`), they point at
+`http://localhost:4200`.
+
 Compose passes only the answer, demo and tier settings to the backend. The retrieval
 lines from `.env.example` (`RETRIEVAL_BACKEND` and so on) are ignored in Docker. `.env`
 never enters an image (`.dockerignore`) and is never committed (`.gitignore`).
@@ -216,6 +222,13 @@ Security headers:
 
 ```sh
 curl -sI https://researchlens.example.com/ | grep -iE 'strict-transport|content-security|x-content-type'
+```
+
+Link previews point at the public hostname:
+
+```sh
+curl -s https://researchlens.example.com/ | grep -o 'og:image" content="[^"]*'
+# og:image" content="https://researchlens.example.com/og-image.png
 ```
 
 One live answer, once the budget from step 2 is in place: set `DEMO_ONLY=false` in `.env`,

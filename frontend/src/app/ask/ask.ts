@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { author } from '../shared/author';
 import { SiteHeader } from '../shared/site-header';
 
 export interface Passage {
@@ -94,6 +95,7 @@ const defaultQuestion = 'Which surface inspection methods report limitations fro
 })
 export class Ask {
   private readonly http = inject(HttpClient);
+  protected readonly author = author;
   private readonly turnstileHost = viewChild<ElementRef<HTMLElement>>('turnstile');
   private turnstileWidget: string | null = null;
   private turnstileToken = '';
@@ -158,6 +160,11 @@ export class Ask {
       status?.live_answers === 'enabled' &&
       (status.visitor_remaining === 0 || status.remaining_today === 0);
     return this.mode() === 'openai' && !exhausted;
+  }
+
+  /** Synthetic test fixtures are labeled only when the current result contains one. */
+  protected showsSyntheticPassages(): boolean {
+    return !!this.answer()?.passages.some((passage) => passage.kind === 'synthetic');
   }
 
   protected usingVisitorKey(): boolean {

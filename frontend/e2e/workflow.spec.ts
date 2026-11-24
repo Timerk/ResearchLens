@@ -34,7 +34,7 @@ test('desktop keyboard submission, loading, citation expansion and source links'
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/ask');
-  await expect(page.getByRole('button', { name: 'Ask documents' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Ask the papers' })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('desktop-initial.png'), fullPage: true });
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'ResearchLens' })).toBeFocused();
@@ -48,7 +48,7 @@ test('desktop keyboard submission, loading, citation expansion and source links'
   await expectFocusRing(page);
   await input.fill('  Which illumination methods have limitations?  ');
   await page.keyboard.press('Tab');
-  const submit = page.getByRole('button', { name: 'Ask documents' });
+  const submit = page.getByRole('button', { name: 'Ask the papers' });
   await expect(submit).toBeFocused();
   await expectFocusRing(page);
   await page.keyboard.press('Enter');
@@ -110,7 +110,7 @@ test('API error alert and keyboard retry recover without stale content', async (
       : route.fulfill({ json: responses.insufficient });
   });
   await page.goto('/ask');
-  const submit = page.getByRole('button', { name: 'Ask documents' });
+  const submit = page.getByRole('button', { name: 'Ask the papers' });
   await submit.focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('alert')).toHaveText('OpenAI timed out. Please try again.');
@@ -216,8 +216,16 @@ test('landing page example citations, section links and route to a prefilled que
   await expect(page.getByRole('textbox', { name: 'Your research question' })).toHaveValue(
     'Why combine forward and backward lighting for aircraft glass canopy inspection?',
   );
+  // The dev server keeps the local default origin; the route follows navigation, the query does not.
+  const canonical = page.locator('link[rel="canonical"]');
+  await expect(canonical).toHaveAttribute('href', 'http://localhost:4200/ask');
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    'http://localhost:4200/ask',
+  );
   await page.getByRole('link', { name: 'About' }).click();
   await expect(page).toHaveURL(/\/$/);
+  await expect(canonical).toHaveAttribute('href', 'http://localhost:4200/');
   await page.setViewportSize({ width: 320, height: 740 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   await page.screenshot({ path: testInfo.outputPath('landing-mobile.png'), fullPage: true });
