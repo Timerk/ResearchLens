@@ -35,13 +35,15 @@ flowchart LR
 
 You need:
 
-- A server: 2 vCPU, 4 GB RAM, 40 GB disk, Ubuntu 24.04 LTS. Hetzner Cloud's smallest
-  shared x86 type (CX22 or its current successor) fits and costs about 4-6 EUR a month
-  including an IPv4 address. Any provider works.
-- A domain or subdomain you control, for example `researchlens.example.com`.
+- A server: 2 vCPU, 4 GB RAM, 40 GB disk, Ubuntu 24.04 LTS, x86. The live demo runs on a
+  Hetzner Cloud CPX22 in Helsinki at about 20 EUR a month including VAT and IPv4, billed
+  hourly; the cheaper cost-optimized CX23 (about 7 EUR) fits too when in stock. Any
+  provider works. With 2 GB, set `RETRIEVAL_TIER=minimal` (TF-IDF, no model download).
+- A hostname: a domain or subdomain you control, or a free `sslip.io` name such as
+  `203-0-113-7.sslip.io`, which resolves to the IP in its name and gets a normal Let's
+  Encrypt certificate.
 - An SSH key pair on your computer (`ssh-keygen -t ed25519` if you have none).
-- Optional: an OpenAI API key for live answers, a Cloudflare account for Turnstile and an
-  UptimeRobot account for monitoring.
+- Optional: an OpenAI API key for live answers and a Cloudflare account for Turnstile.
 
 ## 2. Set the OpenAI budget first
 
@@ -226,15 +228,18 @@ Check the OpenAI usage page afterwards; the call appears within a few minutes.
 
 ## 10. Monitoring
 
-Create an UptimeRobot (or similar) **HTTP(s) - keyword** monitor:
+[`.github/workflows/uptime.yml`](../.github/workflows/uptime.yml) runs every 30 minutes.
+It checks that `/api/health` reports `"status":"ok"` and the expected tier, and that a
+recorded example loads. A failed run sends GitHub's normal failure email to you.
 
-- URL: `https://researchlens.example.com/api/health`
-- Keyword: `"status":"ok"` (alert when missing), interval 5 minutes
-- Alert contact: your email
+1. In GitHub, **Settings > Secrets and variables > Actions > Variables**, add the
+   repository variable `SITE_URL` (for example `https://researchlens.example.com`, no
+   trailing slash). Add `EXPECTED_TIER=minimal` if the server runs the minimal tier.
+2. Run the workflow once from the **Actions** tab to confirm it passes.
 
-A second keyword monitor for `"retrieval_tier":"light"` warns you when the server has
-fallen back to the minimal tier. UptimeRobot also warns before the certificate expires,
-although Caddy renews it automatically.
+GitHub may delay scheduled runs by several minutes and pauses them after 60 days
+without repository activity; any commit re-enables them. For one-minute checks or SMS
+alerts, an external service such as UptimeRobot works on the same URL.
 
 ## 11. Deploy from GitHub Actions (optional)
 

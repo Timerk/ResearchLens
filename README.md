@@ -13,7 +13,7 @@ corpus is four open-access CC BY 4.0 papers on optical defect inspection. The re
 with owner-approved questions, a held-out set run once, and pre-registered decision
 rules.
 
-**Live demo:** _coming soon (link will be added after deployment)_. See [Try it](#try-it)
+**Live demo:** <https://204-168-204-171.sslip.io>. See [Try it](#try-it)
 for what the demo does and does not spend.
 
 ![Desktop view: a generated answer with an expanded citation](docs/images/desktop-answer.png)
@@ -90,7 +90,8 @@ is TF-IDF with four passages.
 
 ## Deployment and operations
 
-The demo runs on one small VPS (2 vCPU, 4 GB RAM, about 4-6 EUR a month) with the same
+The demo runs on one Hetzner Cloud CPX22 in Helsinki (2 vCPU, 4 GB RAM, about 20 EUR a
+month including VAT and IPv4, billed hourly) with the same
 Compose stack as local development plus
 [`docker-compose.prod.yml`](docker-compose.prod.yml): Caddy terminates HTTPS and is the
 only published service, nginx serves the app with security headers and proxies `/api`,
@@ -113,10 +114,13 @@ verification, monitoring and the tag-triggered GitHub Actions deploy.
 - **Budget cap.** A hard monthly budget (for example 5 USD) and a usage alert are set in
   the OpenAI dashboard, with a project key used only by the demo. At the 2026-10-13 rates
   the daily cap bounds spend at roughly 3 USD a month.
-- **Monitoring.** An UptimeRobot keyword monitor on `/api/health` checks `"status":"ok"`
-  and that the tier is still `light`.
-- **Costs.** Server about 4-6 EUR a month; domain optional if you use a subdomain you
-  own; OpenAI a few cents a day at most.
+- **Monitoring.** A scheduled GitHub Actions workflow
+  ([`uptime.yml`](.github/workflows/uptime.yml)) checks every 30 minutes that
+  `/api/health` reports `"status":"ok"` on the light tier and that a recorded example
+  loads; a failed run emails the repository owner.
+- **Costs.** Server about 20 EUR a month (the cheaper CX23 was sold out); a free
+  `sslip.io` hostname instead of a domain; OpenAI a few cents a day at most. The first
+  live test answer used 3,696 input and 192 output tokens, about 0.0005 USD.
 - **Limitations.** Visitors behind one shared address share a quota. The free endpoints
   have no per-visitor rate limit, only a concurrency cap. The online light tier retrieves
   differently from the full tier evaluated in [Results](#results-at-a-glance). Recorded
