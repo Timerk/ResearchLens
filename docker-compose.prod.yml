@@ -52,7 +52,6 @@ services:
       - "443:443/udp"
     environment:
       SITE_ADDRESS: ${SITE_ADDRESS:?Set SITE_ADDRESS in .env, for example demo.example.com}
-      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env for certificate expiry notices}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data

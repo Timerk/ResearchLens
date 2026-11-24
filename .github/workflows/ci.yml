@@ -76,8 +76,10 @@ jobs:
           jq -e '.status == "passages_found"' response.json
       - name: Recorded examples and security headers through nginx
         run: |
-          curl --silent --show-error --fail http://127.0.0.1:4200/api/demo             | jq -e '(.examples | length) >= 3 and .live_answers == "not_configured"'
-          curl --silent --show-error --fail http://127.0.0.1:4200/api/examples/canopy-heater-fusion             | jq -e '.replay.label | startswith("Recorded answer from evaluation run")'
+          curl --silent --show-error --fail http://127.0.0.1:4200/api/demo \
+            | jq -e '(.examples | length) >= 3 and .live_answers == "not_configured"'
+          curl --silent --show-error --fail http://127.0.0.1:4200/api/examples/canopy-heater-fusion \
+            | jq -e '.replay.label | startswith("Recorded answer from evaluation run")'
           curl --silent --show-error --fail --dump-header headers.txt --output /dev/null http://127.0.0.1:4200/
           grep -qi '^content-security-policy:' headers.txt
           grep -qi '^x-content-type-options: nosniff' headers.txt
@@ -90,14 +92,18 @@ jobs:
         run: |
           docker compose up -d --wait
           curl --silent --show-error --fail http://127.0.0.1:4200/api/health | jq -e '.mode == "local_preview"'
-          curl --silent --show-error --fail --header 'Content-Type: application/json'             --data '{"question":"Why combine forward and backward lighting for aircraft glass canopy inspection?"}'             http://127.0.0.1:4200/api/ask | jq -e '.status == "passages_found" and .fallback_reason == "demo_only"'
+          curl --silent --show-error --fail --header 'Content-Type: application/json' \
+            --data '{"question":"Why combine forward and backward lighting for aircraft glass canopy inspection?"}' \
+            http://127.0.0.1:4200/api/ask \
+            | jq -e '.status == "passages_found" and .fallback_reason == "demo_only"'
       - name: Production override and Caddyfile are valid
         env:
           SITE_ADDRESS: demo.example.com
-          ACME_EMAIL: ops@example.com
         run: |
           docker compose -f docker-compose.yml -f docker-compose.models.yml -f docker-compose.prod.yml config --quiet
-          docker run --rm -e SITE_ADDRESS -e ACME_EMAIL             -v "$PWD/deploy/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2.10-alpine             caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+          docker run --rm -e SITE_ADDRESS \
+            -v "$PWD/deploy/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2.10-alpine \
+            caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
       - run: docker compose logs --no-color
         if: failure()
       - run: docker compose down -v

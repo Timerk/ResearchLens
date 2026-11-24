@@ -34,17 +34,23 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/opt/researchlens' }}
+          # minimal on a 2 GB server, light on 4 GB or more.
+          EXPECTED_TIER: ${{ vars.EXPECTED_TIER || 'light' }}
           REF: ${{ github.ref_name }}
         run: |
           [[ "$REF" =~ ^v[0-9A-Za-z._-]+$ ]] || { echo "Unexpected tag $REF"; exit 1; }
+          [[ "$EXPECTED_TIER" =~ ^(minimal|light|standard|full)$ ]] || { echo "Bad tier"; exit 1; }
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
-            "$DEPLOY_USER@$DEPLOY_HOST" "cd '$DEPLOY_PATH' && ./deploy/deploy.sh '$REF'"
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH' && EXPECTED_TIER='$EXPECTED_TIER' ./deploy/deploy.sh '$REF'"
       - name: Public health check
         env:
           SITE_URL: ${{ vars.SITE_URL }}
+          EXPECTED_TIER: ${{ vars.EXPECTED_TIER || 'light' }}
         run: |
           curl --silent --show-error --fail --retry 10 --retry-delay 5 --retry-all-errors \
-            "$SITE_URL/api/health" | jq -e '.status == "ok" and .retrieval_tier == "light"'
+            "$SITE_URL/api/health" \
+            | jq -e --arg tier "$EXPECTED_TIER" '.status == "ok" and .retrieval_tier == $tier'
       - name: Remove the SSH key
         if: always()
         run: rm -f ~/.ssh/deploy_key

@@ -1,6 +1,6 @@
-# Automatic HTTPS for the public demo. SITE_ADDRESS and ACME_EMAIL come from .env.
+# Automatic HTTPS for the public demo. SITE_ADDRESS comes from .env. No account email is
+# configured: Let's Encrypt no longer sends expiry notices, and Caddy renews automatically.
 {
-	email {$ACME_EMAIL}
 	servers {
 		timeouts {
 			read_header 10s

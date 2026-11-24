@@ -138,7 +138,6 @@ until you have checked the site:
 
 ```dotenv
 SITE_ADDRESS=researchlens.example.com
-ACME_EMAIL=you@example.com
 RETRIEVAL_TIER=auto
 ANSWER_PROVIDER=openai
 OPENAI_API_KEY=sk-proj-...
