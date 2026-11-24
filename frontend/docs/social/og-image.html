@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- Source of public/og-image.png (1200x630). Regenerate from frontend/ with:
+     node docs/social/render.mjs -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: 'Archivo Variable';
+    src: url('../../node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2') format('woff2-variations');
+    font-weight: 100 900; font-stretch: 62% 125%;
+  }
+  @font-face {
+    font-family: 'Source Serif 4 Variable';
+    src: url('../../node_modules/@fontsource-variable/source-serif-4/files/source-serif-4-latin-opsz-normal.woff2') format('woff2-variations');
+    font-weight: 200 900;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden; position: relative;
+    background: #1e3f96; color: #fff;
+    font-family: 'Archivo Variable', sans-serif;
+  }
+  .brand {
+    position: absolute; left: 72px; top: 60px;
+    display: flex; align-items: center; gap: 16px;
+    font-size: 34px; font-weight: 700; font-stretch: 78%; letter-spacing: 0.005em;
+  }
+  .brand svg { width: 46px; height: 46px; }
+  h1 {
+    position: absolute; left: 72px; top: 158px; width: 520px; margin: 0;
+    font-size: 80px; line-height: 0.97; font-weight: 720; font-stretch: 72%;
+    letter-spacing: -0.012em;
+  }
+  .foot {
+    position: absolute; left: 72px; bottom: 58px; width: 500px; margin: 0;
+    color: #c9d5f5; font-size: 23px; line-height: 1.4; font-stretch: 85%;
+  }
+  .sheet {
+    position: absolute; left: 652px; top: 92px; width: 488px;
+    padding: 30px 32px 30px; background: #fff; color: #0e1a3a; border-radius: 4px;
+    box-shadow: 0 1px 0 rgb(5 14 45 / 0.2), 0 40px 70px -30px rgb(5 14 45 / 0.7);
+  }
+  .label {
+    margin: 0 0 6px; color: #56627f; font-size: 15px; font-weight: 600; font-stretch: 78%;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .q { margin: 0 0 22px; font-family: 'Source Serif 4 Variable', serif; font-size: 24px; line-height: 1.35; font-weight: 580; }
+  .a { margin: 0; font-family: 'Source Serif 4 Variable', serif; font-size: 20px; line-height: 1.55; color: #3c4866; }
+  .cite {
+    display: inline-grid; place-items: center; min-width: 28px; height: 28px; margin-left: 6px;
+    vertical-align: 2px; border-radius: 3px; background: #ffe45e; color: #0e1a3a;
+    font-family: 'Archivo Variable', sans-serif; font-size: 16px; font-weight: 700;
+  }
+  .source {
+    margin-top: 22px; padding: 16px 18px; background: #eef1f7; border-radius: 3px;
+    font-family: 'Source Serif 4 Variable', serif; font-size: 17px; line-height: 1.55; color: #0e1a3a;
+  }
+  .source .meta { display: block; margin-bottom: 6px; font-family: 'Archivo Variable', sans-serif; font-size: 14px; font-weight: 600; font-stretch: 80%; color: #56627f; }
+  mark { background: #ffe45e; color: #0e1a3a; padding: 0 2px; }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="3" fill="#fff"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#1e3f96" stroke-width="2.2"/><rect x="4" y="13.5" width="24" height="5" rx="1" fill="#ffe45e"/></svg>
+    ResearchLens
+  </div>
+  <h1>Every answer points to the passage it came from.</h1>
+  <p class="foot">Questions answered from four open-access papers on optical defect inspection, with a citation for every claim.</p>
+  <div class="sheet">
+    <p class="label">Question</p>
+    <p class="q">Why combine forward and backward lighting for aircraft glass canopy inspection?</p>
+    <p class="label">Answer</p>
+    <p class="a">Defects can become visible under one lighting direction but not the other; using both helps avoid missed or false detections.<span class="cite">1</span></p>
+    <div class="source"><span class="meta">1 · Conclusions, paragraph 57</span>…where <mark>relying on a single-modal lighting condition often leads to missed or false detections</mark>, we have proposed a dual-modal illumination system…</div>
+  </div>
+</body>
+</html>

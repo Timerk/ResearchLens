@@ -216,8 +216,16 @@ test('landing page example citations, section links and route to a prefilled que
   await expect(page.getByRole('textbox', { name: 'Your research question' })).toHaveValue(
     'Why combine forward and backward lighting for aircraft glass canopy inspection?',
   );
+  // The dev server keeps the local default origin; the route follows navigation, the query does not.
+  const canonical = page.locator('link[rel="canonical"]');
+  await expect(canonical).toHaveAttribute('href', 'http://localhost:4200/ask');
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    'http://localhost:4200/ask',
+  );
   await page.getByRole('link', { name: 'About' }).click();
   await expect(page).toHaveURL(/\/$/);
+  await expect(canonical).toHaveAttribute('href', 'http://localhost:4200/');
   await page.setViewportSize({ width: 320, height: 740 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   await page.screenshot({ path: testInfo.outputPath('landing-mobile.png'), fullPage: true });
