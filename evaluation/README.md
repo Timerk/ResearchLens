@@ -21,6 +21,12 @@ evaluation inputs; do not replace them with experiment outputs.
 
 ## Run free development diagnostics
 
+The datasets and labels pin the adopted 2026-10-14 corpus. The live corpus has had
+block spacing since 2026-11-24, so the runner refuses it. Write the adopted corpus with
+`python -m researchlens.corpus --adopted-corpus PATH`, ingest it with `--source`, and
+pass both files to the runner with `--source` and `--index`. See
+[block-spacing-fix.md](../docs/block-spacing-fix.md).
+
 From the repository root (Python 3.13 and committed `uv.lock`):
 
 ```sh

@@ -1,5 +1,7 @@
 # Generated answer quality
 
+These studies predate the 2026-11-24 [list-item spacing fix](block-spacing-fix.md), which changed whitespace in six of 207 passages. Recorded answers and their excerpts are kept verbatim.
+
 ## Current decision, 2026-10-15
 
 Keep the current application defaults. The no-tier default remains TF-IDF with

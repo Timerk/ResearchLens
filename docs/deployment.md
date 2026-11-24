@@ -276,6 +276,11 @@ To deploy by hand instead, run `./deploy/deploy.sh v1.0.0` on the server.
 | Rebuild the light index after a corpus change | `./deploy/deploy.sh <tag> --reingest`, plus `dc run --rm --no-deps backend python -m researchlens.ingest --tier minimal` |
 | Update the OS | `unattended-upgrades` installs security updates; reboot monthly |
 
+A release that changes `data/technical/documents.json`, such as the
+[list-item spacing fix](block-spacing-fix.md), needs that rebuild. The stale light
+index fails the corpus check at startup, and the deploy fails until you rerun with
+`--reingest`.
+
 The volume name prefix is the directory name (`researchlens` for `/opt/researchlens`);
 `docker volume ls` shows it.
 

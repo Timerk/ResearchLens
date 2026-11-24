@@ -26,6 +26,7 @@ These are the current, committed measurements.
 | [answer-quality.md](answer-quality.md) | Generated answer quality, judge validation and the context decision |
 | [answer-quality-current-results.json](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/answer-quality-current-results.json) | Current-corpus answer metrics from the frozen judge (archived) |
 | [context-budget.md](context-budget.md) | Character-budgeted context study, current and historical |
+| [block-spacing-fix.md](block-spacing-fix.md) | 2026-11-24 list-item spacing fix: corpus change, evaluation pins and impact |
 
 ## Methodology and decisions
 
