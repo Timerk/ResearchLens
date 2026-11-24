@@ -1,5 +1,6 @@
 import hashlib
 import json
+import re
 import shutil
 import xml.etree.ElementTree as ET
 
@@ -106,3 +107,58 @@ def test_prose_retains_formula_context_without_computing_or_concatenating_number
     assert prose_text(node, readable_formulas=False) == (
         "Noise is [formula omitted] under these conditions."
     )
+
+
+LIST_PARAGRAPH = (
+    '<p>Our contributions are as follows:<list list-type="order">'
+    "<list-item><p>An automated system is proposed.</p></list-item>"
+    "<list-item><label>2.</label><p>A curated dataset is presented.</p></list-item>"
+    "</list>The remainder follows.</p>"
+)
+
+
+@pytest.mark.parametrize("readable_formulas", [True, False])
+def test_list_items_and_nested_paragraphs_are_separated(readable_formulas):
+    node = ET.fromstring(LIST_PARAGRAPH)
+    assert prose_text(node, readable_formulas=readable_formulas) == (
+        "Our contributions are as follows: An automated system is proposed. "
+        "2. A curated dataset is presented. The remainder follows."
+    )
+    quote = ET.fromstring("<p>Intro.<disp-quote><p>Quoted.</p></disp-quote>After.</p>")
+    assert prose_text(quote, readable_formulas=readable_formulas) == "Intro. Quoted. After."
+
+
+def test_without_block_spacing_reproduces_the_adopted_joined_text():
+    node = ET.fromstring(LIST_PARAGRAPH)
+    assert prose_text(node, separate_blocks=False) == (
+        "Our contributions are as follows:An automated system is proposed."
+        "2.A curated dataset is presented.The remainder follows."
+    )
+
+
+@pytest.mark.parametrize("readable_formulas", [True, False])
+def test_inline_markup_gains_no_spaces(readable_formulas):
+    node = ET.fromstring(
+        '<p>The CO<sub>2</sub> laser in Ref.<xref ref-type="bibr">12</xref> uses '
+        "<italic>in</italic>-line <bold>Fig</bold>s; x<sup>2</sup>-fits stay "
+        "<sc>unchanged</sc>.</p>"
+    )
+    assert prose_text(node, readable_formulas=readable_formulas) == (
+        "The CO2 laser in Ref.12 uses in-line Figs; x2-fits stay unchanged."
+    )
+
+
+def test_formula_inside_a_list_item_is_rendered_and_separated():
+    node = ET.fromstring(
+        "<p>Steps:<list><list-item><p>Set <inline-formula><math><mi>k</mi></math>"
+        "</inline-formula>.</p></list-item><list-item><p>Stop.</p></list-item></list></p>"
+    )
+    assert prose_text(node) == "Steps: Set k . Stop."
+
+
+def test_checked_in_corpus_has_no_words_joined_across_list_items():
+    documents = TypeAdapter(list[Document]).validate_json(TECHNICAL_CORPUS.read_bytes())
+    text = "\n\n".join(d.text for d in documents)
+    assert not re.search(r"[a-z)\]][.:;][A-Z]", text)
+    assert "summarized as follows: An automated prototype system" in text
+    assert "two main challenges: Partial defect reconstruction" in text

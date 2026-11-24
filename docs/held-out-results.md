@@ -1,5 +1,7 @@
 # One-time held-out retrieval results
 
+These results predate the 2026-11-24 [list-item spacing fix](block-spacing-fix.md). It changed whitespace in six of 207 passages, one of them a held-out reference passage whose ID is unchanged. The frozen held-out file still pins the adopted corpus, and no held-out search ran for the fix.
+
 Qwen3-4B at both 12k and 16k passes four of the five literal targets. Its passage recall@4 is 77.6%, below 80%. Complete evidence is 21/26, or 80.8%; context evidence hit is 26/26; both documents are present for 7/7 cross-document cases; MRR@4 is 0.798. BGE-M3 at 16k passes three targets and misses recall@4 and complete evidence. TF-IDF passes MRR@4 alone. No configuration passes all five literal targets.
 
 The predeclared whole-context diagnostic gives Qwen recall of 91.0% at 12k and 92.0% at 16k. With the historical development convention of whole-context recall and MRR, both Qwen contexts reach all five point thresholds. This does not change the recall@4 miss.
@@ -101,4 +103,4 @@ The [summary JSON](https://github.com/Timerk/ResearchLens/blob/archive/evaluatio
 
 The Qwen16k profile refers to the same Qwen run. Archive hashes, dataset/corpus pins, installed versions, execution parameters and scorer source hash are in the summary. The dataset LF hash is `920f1415d14d974ce489e91386227d3f306837f22944958763d8235495ea9312`; the corpus hash is `f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675`.
 
-Ruff passed and all 280 backend tests passed, including the general reference scorer tests. No dataset, label, corpus or application setting changed. This one-time evaluation is complete; do not rerun held-out retrieval. `researchlens.reference_evaluation` can score existing archived outputs offline without any search.
+Ruff passed and all 280 backend tests passed, including the general reference scorer tests. No dataset, label, corpus or application setting changed. This one-time evaluation is complete; do not rerun held-out retrieval. `researchlens_eval.reference_evaluation` can score existing archived outputs offline without any search.

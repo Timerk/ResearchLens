@@ -13,6 +13,13 @@ links to each detailed document below.
 | [development.md](development.md) | Local setup without Docker, OpenAI mode, corpus, tests and code layout |
 | [embeddings.md](embeddings.md) | Embedding models, encoding contract, hardware tiers and hybrid retrieval |
 
+On the public demo, open a recorded example to avoid using live-answer quota.
+With live answers enabled, typed questions with matching passages use that quota
+unless the visitor supplies their own key.
+The server returns the local preview automatically in local mode (the default
+without a server key), with `DEMO_ONLY=true`, or after either quota is exhausted. See the
+[deployment guide](deployment.md#architecture) for limits and visitor keys.
+
 ## Results
 
 These are the current, committed measurements.
@@ -26,6 +33,7 @@ These are the current, committed measurements.
 | [answer-quality.md](answer-quality.md) | Generated answer quality, judge validation and the context decision |
 | [answer-quality-current-results.json](https://github.com/Timerk/ResearchLens/blob/archive/evaluation-2026-10/docs/answer-quality-current-results.json) | Current-corpus answer metrics from the frozen judge (archived) |
 | [context-budget.md](context-budget.md) | Character-budgeted context study, current and historical |
+| [block-spacing-fix.md](block-spacing-fix.md) | 2026-11-24 list-item spacing fix: corpus change, evaluation pins and impact |
 
 ## Methodology and decisions
 

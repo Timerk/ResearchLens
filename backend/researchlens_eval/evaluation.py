@@ -1,4 +1,4 @@
-"""Offline-first evaluation: python -m researchlens.evaluation --help."""
+"""Offline-first evaluation: python -m researchlens_eval.evaluation --help."""
 
 import argparse
 import json

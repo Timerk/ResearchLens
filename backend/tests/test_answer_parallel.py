@@ -2,8 +2,8 @@ import json
 from types import SimpleNamespace
 
 import pytest
-from researchlens.answer_parallel import merged_results
 from researchlens.artifacts import canonical_hash
+from researchlens_eval.answer_parallel import merged_results
 
 
 def test_worker_merge_rejects_duplicate_missing_and_failed_cases():
@@ -27,7 +27,7 @@ def test_worker_merge_rejects_duplicate_missing_and_failed_cases():
 
 @pytest.mark.parametrize("changed", ["plan", "cap", "jobs", "serial", "ledger", "cases"])
 def test_parallel_resume_rejects_changes_before_writes_or_workers(tmp_path, monkeypatch, changed):
-    from researchlens import answer_evaluation as module
+    from researchlens_eval import answer_evaluation as module
 
     execute = module.execute
     plan = {"total_reserved_usd": 0.1}
@@ -71,8 +71,8 @@ def test_parallel_resume_rejects_changes_before_writes_or_workers(tmp_path, monk
 
 
 def test_parallel_resume_requires_execution_record_before_workers(tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
-    from researchlens.answer_parallel import execute_parallel
+    from researchlens_eval import answer_evaluation as module
+    from researchlens_eval.answer_parallel import execute_parallel
 
     plan = {"total_reserved_usd": 0.1}
     output = tmp_path / "answers"
@@ -90,7 +90,7 @@ def test_parallel_resume_requires_execution_record_before_workers(tmp_path, monk
 
 
 def test_legacy_parallel_output_cannot_resume_as_serial(tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
+    from researchlens_eval import answer_evaluation as module
 
     output = tmp_path / "answers"
     (output / "workers").mkdir(parents=True)
@@ -107,9 +107,9 @@ def test_legacy_parallel_output_cannot_resume_as_serial(tmp_path, monkeypatch):
 
 
 def test_parallel_resume_preserves_disjoint_worker_assignments(tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
-    from researchlens import answer_parallel
-    from researchlens.answer_evaluation import save
+    from researchlens_eval import answer_evaluation as module
+    from researchlens_eval import answer_parallel
+    from researchlens_eval.answer_evaluation import save
 
     execute = module.execute
     plan = {"total_reserved_usd": 0.1, "configurations": [{"configuration": "tfidf4"}]}

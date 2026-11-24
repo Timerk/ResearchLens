@@ -21,14 +21,20 @@ evaluation inputs; do not replace them with experiment outputs.
 
 ## Run free development diagnostics
 
+The datasets and labels pin the adopted 2026-10-14 corpus. The live corpus has had
+block spacing since 2026-11-24, so the runner refuses it. Write the adopted corpus with
+`python -m researchlens.corpus --adopted-corpus PATH`, ingest it with `--source`, and
+pass both files to the runner with `--source` and `--index`. See
+[block-spacing-fix.md](../docs/block-spacing-fix.md).
+
 From the repository root (Python 3.13 and committed `uv.lock`):
 
 ```sh
 rtk proxy uv sync --locked --python 3.13
 rtk proxy uv run --directory backend python -m researchlens.ingest --corpus technical
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --cutoffs 1 4 10 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-ranking
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --limit 4 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k4
-rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-ranking --output ../evaluation/runs/technical-comparison.md --paired-output ../evaluation/runs/technical-paired.json
+rtk proxy uv run --directory backend python -m researchlens_eval.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --cutoffs 1 4 10 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-ranking
+rtk proxy uv run --directory backend python -m researchlens_eval.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --retriever tfidf --evidence-labels ../evaluation/labels/technical-development.json --limit 4 --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-k4
+rtk proxy uv run --directory backend python -m researchlens_eval.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-ranking --output ../evaluation/runs/technical-comparison.md --paired-output ../evaluation/runs/technical-paired.json
 ```
 
 To run the original smoke tests, ingest `--corpus sample`, select
@@ -248,8 +254,8 @@ not measured model results in this PR.
 After the retrieval adapter and a separate schema-2 technical index are available:
 
 ```sh
-rtk proxy uv run --directory backend python -m researchlens.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --source ../data/technical/documents.json --index ../data/minilm-index.json --retriever embeddings --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-minilm
-rtk proxy uv run --directory backend python -m researchlens.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-minilm --output ../evaluation/runs/model-comparison.md
+rtk proxy uv run --directory backend python -m researchlens_eval.evaluation run --dataset ../evaluation/datasets/technical-development.json --other-split ../evaluation/datasets/held-out.json --source ../data/technical/documents.json --index ../data/minilm-index.json --retriever embeddings --repeats 5 --warmups 1 --measure-memory --output ../evaluation/runs/technical-minilm
+rtk proxy uv run --directory backend python -m researchlens_eval.evaluation report ../evaluation/runs/technical-k4 ../evaluation/runs/technical-minilm --output ../evaluation/runs/model-comparison.md
 ```
 
 Strict `RetrievalConfig` records implementation/version/k, model/pinned revision,

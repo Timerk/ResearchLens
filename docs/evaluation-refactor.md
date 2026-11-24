@@ -240,3 +240,7 @@ and the frozen judge/reference scorer digests above remain unchanged. The
 retrieval runner is now 314 lines after porting main's shared-context call.
 CI measures both packages with
 `--cov=researchlens --cov=researchlens_eval --cov-fail-under=75`.
+
+The compatibility entry points have since been removed. Run historical evaluation
+commands with `python -m researchlens_eval.<module>` on current checkouts. The judge
+verifier accounts for the relocated import when checking the original scoring digest.

@@ -24,12 +24,18 @@ flowchart LR
 - Caddy writes no access log, so visitor IP addresses are not stored on disk. The quota
   store keeps only keyed hashes of the address and day.
 
+The server decides whether a typed question gets a live answer or the local preview.
+To try the public demo without using the server's live-answer quota, open a recorded example.
+
 | Request | What happens | Cost |
 | --- | --- | --- |
 | Recorded example (`GET /api/examples/{id}`) | Replays a saved evaluation answer | Free, no API call |
-| Question, live answers off or used up | Local preview: ranked passages, no answer | Free, no API call |
-| Question within the daily limit | Live `gpt-6-luna` answer with citations | Your OpenAI account |
-| Question with a visitor's own key | Live answer on the visitor's key, no quota used | Visitor's OpenAI account |
+| Typed question with live answers enabled, matching passages and quota available | Generates a cited answer or reports insufficient evidence. The default quotas are 5 per visitor and 50 total per UTC day. | Your OpenAI account |
+| Typed question in local mode (the default without a server key), with `DEMO_ONLY=true` or after either quota is exhausted | Returns the local preview with ranked passages. Exhausted quota returns HTTP 429. | Free, no API call |
+| Typed question with a visitor key when visitor keys are enabled | Uses the visitor's key and bypasses the live-answer quota. `DEMO_ONLY=true` disables visitor keys. | Visitor's OpenAI account |
+
+If no passages match a question, the server returns that result without an OpenAI
+call or a quota charge.
 
 ## 1. Before you start
 
@@ -150,6 +156,12 @@ LIVE_ANSWERS_PER_DAY=50
 ALLOW_VISITOR_API_KEYS=true
 ```
 
+`SITE_ADDRESS` is also passed to the frontend container. At start it rewrites the
+absolute URLs in the link-preview tags (`og:url`, `og:image`, `twitter:image` and the
+canonical link) to `https://SITE_ADDRESS/`, so moving to a new domain needs only a new
+`SITE_ADDRESS` and `dc up -d`. Without it (plain `docker compose up`), they point at
+`http://localhost:4200`.
+
 Compose passes only the answer, demo and tier settings to the backend. The retrieval
 lines from `.env.example` (`RETRIEVAL_BACKEND` and so on) are ignored in Docker. `.env`
 never enters an image (`.dockerignore`) and is never committed (`.gitignore`).
@@ -210,6 +222,13 @@ Security headers:
 
 ```sh
 curl -sI https://researchlens.example.com/ | grep -iE 'strict-transport|content-security|x-content-type'
+```
+
+Link previews point at the public hostname:
+
+```sh
+curl -s https://researchlens.example.com/ | grep -o 'og:image" content="[^"]*'
+# og:image" content="https://researchlens.example.com/og-image.png
 ```
 
 One live answer, once the budget from step 2 is in place: set `DEMO_ONLY=false` in `.env`,
@@ -275,6 +294,11 @@ To deploy by hand instead, run `./deploy/deploy.sh v1.0.0` on the server.
 | Reset today's counts | `dc down && docker volume rm researchlens_live-quota && dc up -d` |
 | Rebuild the light index after a corpus change | `./deploy/deploy.sh <tag> --reingest`, plus `dc run --rm --no-deps backend python -m researchlens.ingest --tier minimal` |
 | Update the OS | `unattended-upgrades` installs security updates; reboot monthly |
+
+A release that changes `data/technical/documents.json`, such as the
+[list-item spacing fix](block-spacing-fix.md), needs that rebuild. The stale light
+index fails the corpus check at startup, and the deploy fails until you rerun with
+`--reingest`.
 
 The volume name prefix is the directory name (`researchlens` for `/opt/researchlens`);
 `docker volume ls` shows it.

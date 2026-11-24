@@ -1,5 +1,5 @@
 from researchlens.models import SearchHit
-from researchlens.reference_evaluation import (
+from researchlens_eval.reference_evaluation import (
     compare_references,
     reference_scores,
     summarize_references,

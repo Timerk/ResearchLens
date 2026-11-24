@@ -52,4 +52,12 @@ describe('Landing page', () => {
     expect(root.querySelectorAll('.results tbody tr')).toHaveLength(4);
     expect(root.textContent).toContain('77.6%');
   });
+
+  it('credits the author in the footer', () => {
+    const link = root.querySelector<HTMLAnchorElement>(
+      'footer a[href="https://github.com/Timerk"]',
+    )!;
+    expect(link.textContent).toBe('Tim Berk');
+    expect(root.querySelector('footer')?.textContent).toContain('built by');
+  });
 });

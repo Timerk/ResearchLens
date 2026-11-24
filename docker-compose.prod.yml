@@ -32,6 +32,9 @@ services:
   frontend:
     restart: unless-stopped
     ports: !reset []
+    environment:
+      # Absolute URLs in the link-preview tags (og:url, og:image, canonical).
+      SITE_ADDRESS: ${SITE_ADDRESS:?Set SITE_ADDRESS in .env, for example demo.example.com}
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
       interval: 30s

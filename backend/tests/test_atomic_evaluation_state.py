@@ -6,9 +6,9 @@ from types import SimpleNamespace
 
 import pytest
 from researchlens import artifacts
-from researchlens.answer_evaluation import CostGuard, execute, save
-from researchlens.answer_study_budget import StudyBudget
 from researchlens.artifacts import canonical_hash
+from researchlens_eval.answer_evaluation import CostGuard, execute, save
+from researchlens_eval.answer_study_budget import StudyBudget
 
 
 def test_save_preserves_write_text_bytes(tmp_path):
@@ -133,7 +133,7 @@ def test_atomic_write_directory_sync_failure_closes_descriptor(tmp_path, monkeyp
 
 
 def test_cost_guard_journal_is_accepted_by_resume(tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
+    from researchlens_eval import answer_evaluation as module
 
     plan = {"total_reserved_usd": 0.1, "configurations": []}
     save(tmp_path / "plan.json", plan)

@@ -1,9 +1,9 @@
 from types import SimpleNamespace
 
 import pytest
-from researchlens.answer_evaluation import Prices
-from researchlens.answer_judge_v2 import quote_verified
-from researchlens.answer_study_budget import StudyBudget
+from researchlens_eval.answer_evaluation import Prices
+from researchlens_eval.answer_judge_v2 import quote_verified
+from researchlens_eval.answer_study_budget import StudyBudget
 
 
 def test_receipt_normalization_preserves_substantive_text():
@@ -39,7 +39,7 @@ def test_shared_cap_keeps_unknown_costs_and_releases_only_verified_usage(tmp_pat
 
 
 def test_guarded_review_rejects_unapproved_plan_without_a_client(tmp_path, monkeypatch):
-    from researchlens import answer_judge_experiment as module
+    from researchlens_eval import answer_judge_experiment as module
 
     monkeypatch.setattr(module, "OpenAI", lambda **kw: pytest.fail("Paid client constructed"))
     with pytest.raises(ValueError, match="approval"):
@@ -47,8 +47,8 @@ def test_guarded_review_rejects_unapproved_plan_without_a_client(tmp_path, monke
 
 
 def test_committed_freeze_detects_prompt_drift(monkeypatch):
-    from researchlens import answer_judge_v2
-    from researchlens.answer_judge_freeze import assert_frozen
+    from researchlens_eval import answer_judge_v2
+    from researchlens_eval.answer_judge_freeze import assert_frozen
 
     assert assert_frozen()["frozen_before_validation"]
     monkeypatch.setattr(answer_judge_v2, "PROMPT", answer_judge_v2.PROMPT + " changed")

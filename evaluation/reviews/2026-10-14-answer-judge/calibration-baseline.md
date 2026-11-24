@@ -31,5 +31,5 @@ confusion counts, both accuracy denominators and the uncertainty policy.
 Reproduce from the repository root into a new output file:
 
 ```powershell
-rtk proxy uv run --directory backend python -m researchlens.answer_judge_review --output ../evaluation/runs/calibration-baseline-replay.json
+rtk proxy uv run --directory backend python -m researchlens_eval.answer_judge_review --output ../evaluation/runs/calibration-baseline-replay.json
 ```

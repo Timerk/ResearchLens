@@ -6,7 +6,9 @@ from copy import deepcopy
 import numpy as np
 import pytest
 from researchlens.artifacts import canonical_hash, passage_identity, validate_passage_artifact
-from researchlens.evaluation import (
+from researchlens.ingest import CORPUS, ROOT, build_index
+from researchlens.models import Passage, SearchHit
+from researchlens_eval.evaluation import (
     comparison_report,
     default_retrieval_config,
     load_dataset,
@@ -14,7 +16,7 @@ from researchlens.evaluation import (
     run_evaluation,
     summarize,
 )
-from researchlens.evaluation_evidence import (
+from researchlens_eval.evaluation_evidence import (
     CaseEvidence,
     EncodingDiagnostics,
     EvidenceLabels,
@@ -25,10 +27,8 @@ from researchlens.evaluation_evidence import (
     validate_encoding_diagnostics,
     validate_labels,
 )
-from researchlens.evaluation_metrics import paired_changes, percentile_nearest_rank
-from researchlens.evaluation_schema import ExecutionConfig, RetrievalConfig
-from researchlens.ingest import CORPUS, ROOT, TECHNICAL_CORPUS, build_index
-from researchlens.models import Passage, SearchHit
+from researchlens_eval.evaluation_metrics import paired_changes, percentile_nearest_rank
+from researchlens_eval.evaluation_schema import ExecutionConfig, RetrievalConfig
 
 
 @pytest.fixture
@@ -572,9 +572,9 @@ def test_cli_cutoffs_and_paired_json_are_reproducible(sample, tmp_path, monkeypa
     assert not (tmp_path / "bad").exists()
 
 
-def test_development_labels_are_human_reviewed(tmp_path):
+def test_development_labels_are_human_reviewed(tmp_path, adopted_corpus):
     index = tmp_path / "technical.json"
-    build_index(TECHNICAL_CORPUS, index)
+    build_index(adopted_corpus, index)
     artifact = json.loads(index.read_bytes())
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     evidence = EvidenceLabels.model_validate_json(

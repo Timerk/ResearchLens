@@ -10,6 +10,8 @@ The retrieval studies use five targets. Reference recall must reach 80%, evidenc
 90%, complete evidence 80%, both sources 90% of the nine cross-document questions,
 and MRR 0.65.
 
+All numbers on this page were measured before the 2026-11-24 [list-item spacing fix](block-spacing-fix.md), which added missing spaces between list items in six of 207 passages. The evaluation inputs stay pinned to the earlier corpus, which still rebuilds byte for byte. A TF-IDF comparison kept the top four passages identical for all 50 development questions; dense tiers were not re-measured.
+
 ## 1. The problem
 
 At the application default of four passages, retrieval missed the targets. Across

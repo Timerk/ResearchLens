@@ -8,8 +8,9 @@ from pathlib import Path
 from statistics import mean
 
 from researchlens.answers import prepare_answer_context
-from researchlens.evaluation_metrics import binomial_ci, exact_mcnemar
 from researchlens.models import SearchHit
+
+from researchlens_eval.evaluation_metrics import binomial_ci, exact_mcnemar
 
 TARGETS = {
     "passage_recall_at_4": 0.8,

@@ -1,5 +1,7 @@
 # Serialized answer context studies
 
+These studies predate the 2026-11-24 [list-item spacing fix](block-spacing-fix.md). It changed six of 207 passages by −11 to +15 characters, which can move a character-budget cut only where it falls on one of them.
+
 ## Adopted formula corpus, 2026-10-14
 
 The owner approved readable MathML extraction and evidence migration on 2026-10-14.

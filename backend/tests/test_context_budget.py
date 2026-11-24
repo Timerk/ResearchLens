@@ -14,13 +14,13 @@ from researchlens.answers import (
 )
 from researchlens.api import create_app
 from researchlens.config import Settings
-from researchlens.context_evaluation import context_profile
 from researchlens.context_limits import MAX_PASSAGE_CHARS, MIN_CONTEXT_CHARS
-from researchlens.evaluation_evidence import CaseEvidence
-from researchlens.evaluation_metrics import binomial_ci, exact_mcnemar
 from researchlens.ingest import TECHNICAL_CORPUS, build_tier_index
 from researchlens.models import GeneratedAnswer, SearchHit
 from researchlens.retrieval_tiers import tier_settings
+from researchlens_eval.context_evaluation import context_profile
+from researchlens_eval.evaluation_evidence import CaseEvidence
+from researchlens_eval.evaluation_metrics import binomial_ci, exact_mcnemar
 
 
 def hit(i, text="evidence"):

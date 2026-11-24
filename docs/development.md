@@ -140,11 +140,16 @@ uv run --directory backend python -m researchlens.ingest --corpus technical
 ```
 
 Extraction keeps abstract and body prose, section paths and XML paragraph locations,
-and normalizes whitespace. It drops figures, captions, tables, references and back
+and normalizes whitespace. List items and other block elements inside a paragraph are
+separated by a space; inline markup is not. It drops figures, captions, tables, references and back
 matter. The approved `mathml-readable-v2` renderer restores 122 formulas as readable
 symbols, scripts and grouped fractions. Four unsupported formulas remain
 `[formula omitted]`. This is a partial extraction, so consult the originals for
 omitted evidence and numerical tables.
+
+The evaluation inputs pin the adopted 2026-10-14 corpus, from before block spacing.
+`python -m researchlens.corpus --adopted-corpus PATH` rebuilds it byte for byte; see
+[block-spacing-fix.md](block-spacing-fix.md).
 
 Changes to extraction or source content can change passage IDs. Rebuild the index and
 review evaluation references after such a change. Git treats the raw XML files as
@@ -200,8 +205,8 @@ the [frontend instructions](../frontend/README.md) and the
 - `config.py` reads backend-only configuration without changing the process environment.
 - `api.py` handles HTTP validation and request timing. A missing or corrupt index stops
   startup with an actionable message.
-- `evaluation.py` and the `answer_*` modules run the retrieval and answer-quality
-  studies. See the [evaluation workflow](../evaluation/README.md).
+- `backend/researchlens_eval/` contains the retrieval and answer-quality evaluation
+  tools. See the [evaluation workflow](../evaluation/README.md).
 - The Angular app shows plain text and expandable reference metadata. Its development
   proxy sends `/api` to FastAPI, so there is no CORS configuration.
 

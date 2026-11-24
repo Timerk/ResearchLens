@@ -119,7 +119,7 @@ def score(case, answer, prepared, judgment=None, *, judge_version=1):
         citation_values = []
         for citation in judgment.citations:
             if judge_version == 2:
-                from researchlens.answer_judge_v2 import citation_value
+                from researchlens_eval.answer_judge_v2 import citation_value
 
                 citation_values.append(
                     citation_value(citation, sections[citation.section_index], visible)

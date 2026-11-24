@@ -34,7 +34,7 @@ need separate correctness, qualification, citation-support and abstention review
 ## Evidence format and review
 
 The allowlisted schema is `EvidenceLabels.model_json_schema()` in
-`backend/researchlens/evaluation_evidence.py`. Pins use the runner's canonical
+`backend/researchlens_eval/evaluation_evidence.py`. Pins use the runner's canonical
 serialized dataset hash, raw corpus hash and shared passage hash, not a model-specific
 vector artifact hash. The file has its own review status, reviewer and date.
 

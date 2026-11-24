@@ -45,7 +45,7 @@ test('demo flow: recorded replay, one live answer, then free preview after the l
   const status = page.getByTestId('live-status');
   await expect(status).toContainText('1 of 5');
   await page.getByRole('textbox', { name: 'Your research question' }).fill('What limits glass?');
-  await page.getByRole('button', { name: 'Ask documents' }).click();
+  await page.getByRole('button', { name: 'Ask the papers' }).click();
   await expect(page.getByRole('heading', { name: 'Answer with source references' })).toBeVisible();
   await expect(status).toContainText('No live answers left today');
   await expect(page.getByTestId('replay-label')).toHaveCount(0);
@@ -64,7 +64,7 @@ test('demo flow: recorded replay, one live answer, then free preview after the l
   const key = 'sk-test-visitor-key-0123456789abcdef';
   await page.getByText('Use your own OpenAI API key').click();
   await page.getByLabel('OpenAI API key').fill(key);
-  await page.getByRole('button', { name: 'Ask documents' }).click();
+  await page.getByRole('button', { name: 'Ask the papers' }).click();
   await expect(page.getByTestId('fallback-notice')).toBeVisible();
   expect(asks.map((ask) => ask.headers['x-openai-api-key'])).toEqual([undefined, undefined, key]);
   expect(JSON.stringify(asks.map((ask) => ask.body))).not.toContain(key);

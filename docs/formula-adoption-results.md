@@ -1,5 +1,7 @@
 # Readable formulas: adoption and retrieval, 2026-10-14
 
+These results were measured before the 2026-11-24 [list-item spacing fix](block-spacing-fix.md), which added missing spaces between list items in six of 207 passages. The adopted hash below is still the evaluation pin and rebuilds byte for byte with `python -m researchlens.corpus --adopted-corpus PATH`. A TF-IDF comparison kept the top four passages identical for all 50 development questions; dense tiers were not re-measured.
+
 This is the summary of the formula rendering study. The proposal, the reviewed span
 remapping, phase-1 results and the migration tooling are archived in the
 [`archive/evaluation-2026-10`](https://github.com/Timerk/ResearchLens/tree/archive/evaluation-2026-10)
@@ -88,4 +90,5 @@ Reproduce from tag `archive/evaluation-2026-10`. The `formula_experiments` and
 `formula_report` drivers that rebuilt the tier indexes and wrote these results, and
 the one-time `formula_adoption` migration, were removed from main after adoption.
 Backend tests on main still check the renderer, offline corpus reproducibility and
-that the active corpus, labels and held-out file match the approval record.
+that the adopted corpus, labels and held-out file match the approval record. The live
+corpus has differed from the adopted one by block spacing since 2026-11-24.

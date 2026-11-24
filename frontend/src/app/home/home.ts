@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { author } from '../shared/author';
 import { SiteHeader } from '../shared/site-header';
 
 interface Segment {
@@ -77,6 +78,7 @@ const example = {
 })
 export class Home {
   protected readonly repository = repository;
+  protected readonly author = author;
   protected readonly example = example;
   protected readonly selected = signal(0);
 
