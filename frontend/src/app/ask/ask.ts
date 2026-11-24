@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { author } from '../shared/author';
 import { SiteHeader } from '../shared/site-header';
 
 export interface Passage {
@@ -94,6 +95,7 @@ const defaultQuestion = 'Which surface inspection methods report limitations fro
 })
 export class Ask {
   private readonly http = inject(HttpClient);
+  protected readonly author = author;
   private readonly turnstileHost = viewChild<ElementRef<HTMLElement>>('turnstile');
   private turnstileWidget: string | null = null;
   private turnstileToken = '';

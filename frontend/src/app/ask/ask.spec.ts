@@ -111,6 +111,14 @@ describe('Research question workflow', () => {
     expect(disclaimer()).toContain('“Synthetic fixture” are invented test text');
   });
 
+  it('credits the author in the footer', async () => {
+    await health();
+    const link = root.querySelector<HTMLAnchorElement>('footer a[href^="https://github.com"]')!;
+    expect(link.textContent).toBe('Tim Berk');
+    expect(link.href).toBe('https://github.com/Timerk');
+    expect(link.rel).toBe('noopener noreferrer');
+  });
+
   it('reports a failed health check and still permits a request', async () => {
     http.expectOne('/api/health').flush({}, { status: 503, statusText: 'Unavailable' });
     await render();
