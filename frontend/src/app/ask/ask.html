@@ -13,15 +13,23 @@
         cites its passages; open a citation to read the source text.
       </p>
     </div>
-    <aside class="notice">
+    <aside class="notice" data-testid="disclaimer">
       <strong class="notice-title">Read the sources before you rely on an answer.</strong>
-      Technical papers report their authors’ findings under their own experimental conditions;
-      synthetic fixtures, when loaded, are labeled. Retrieval can miss evidence or return unrelated
-      passages. Citation references identify passages; they do not prove factual support.
-      @if (mode() === 'openai') {
-        Generated answers use retrieved passages as context. OpenAI API charges apply.
+      Each paper reports its authors’ findings under their own test conditions. Retrieval can miss
+      evidence or surface unrelated passages, and a citation shows where a claim came from, not that
+      the passage proves it.
+      @if (showsSyntheticPassages()) {
+        Passages marked “Synthetic fixture” are invented test text, not taken from the papers.
+      }
+      @if (mode() === 'openai' && demo()?.live_answers !== 'demo_only') {
+        Live answers are written by an OpenAI model from the retrieved passages and paid for from
+        the project owner’s capped API budget, so asking costs you nothing{{
+          demo()?.visitor_keys ? ' unless you use your own key' : ''
+        }}.
+      } @else if (mode() === 'openai') {
+        Recorded answers replay without an API call, so trying them costs nothing.
       } @else if (mode() === 'local_preview') {
-        Local preview displays passages without generating answers.
+        This server shows the ranked passages without writing an answer, so no API is called.
       }
     </aside>
   </div>
@@ -55,7 +63,7 @@
         @if (pending()) {
           <span class="spinner" aria-hidden="true"></span>
         }
-        {{ pending() ? 'Working…' : answersAvailable() ? 'Ask documents' : 'Find passages' }}
+        {{ pending() ? 'Working…' : answersAvailable() ? 'Ask the papers' : 'Find passages' }}
       </button>
     </div>
     @if (demo(); as status) {

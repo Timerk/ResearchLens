@@ -80,8 +80,35 @@ describe('Research question workflow', () => {
     );
     await health();
     expect(root.textContent).toContain('OpenAI answers from the papers only');
-    expect(root.textContent).toContain('they do not prove factual support');
+    expect(root.textContent).toContain('not that the passage proves it');
     expect(root.textContent).not.toContain('Retrieval uses word matching');
+  });
+
+  it('explains who pays for live answers without suggesting the visitor is charged', async () => {
+    const disclaimer = () => root.querySelector('[data-testid="disclaimer"]')!.textContent!;
+    await health();
+    await demo();
+    expect(disclaimer()).toContain('paid for from the project owner’s capped API budget');
+    expect(disclaimer()).toContain('costs you nothing unless you use your own key');
+    expect(disclaimer()).not.toContain('charges apply');
+    expect(disclaimer()).not.toMatch(/synthetic/i);
+  });
+
+  it('drops the budget note when live answers are switched off', async () => {
+    const disclaimer = () => root.querySelector('[data-testid="disclaimer"]')!.textContent!;
+    await health();
+    await demo({ live_answers: 'demo_only', visitor_remaining: null, visitor_keys: false });
+    expect(disclaimer()).not.toContain('budget');
+    expect(disclaimer()).toContain('Recorded answers replay without an API call');
+  });
+
+  it('labels synthetic fixtures in the disclaimer only when a result contains one', async () => {
+    const disclaimer = () => root.querySelector('[data-testid="disclaimer"]')!.textContent!;
+    await health('local_preview');
+    expect(disclaimer()).toContain('no API is called');
+    expect(disclaimer()).not.toMatch(/synthetic/i);
+    await respond({ ...responses.preview, passages: [syntheticPassage] });
+    expect(disclaimer()).toContain('“Synthetic fixture” are invented test text');
   });
 
   it('reports a failed health check and still permits a request', async () => {
@@ -339,7 +366,7 @@ describe('Research question workflow', () => {
     input.value = ` ${key} `;
     input.dispatchEvent(new Event('input'));
     await render();
-    expect(root.querySelector('button')?.textContent).toContain('Ask documents');
+    expect(root.querySelector('button')?.textContent).toContain('Ask the papers');
     submit();
     const request = http.expectOne('/api/ask');
     expect(request.request.headers.get('X-OpenAI-API-Key')).toBe(key);

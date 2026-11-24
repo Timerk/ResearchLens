@@ -160,6 +160,11 @@ export class Ask {
     return this.mode() === 'openai' && !exhausted;
   }
 
+  /** Synthetic test fixtures are labeled only when the current result contains one. */
+  protected showsSyntheticPassages(): boolean {
+    return !!this.answer()?.passages.some((passage) => passage.kind === 'synthetic');
+  }
+
   protected usingVisitorKey(): boolean {
     return !!this.demo()?.visitor_keys && this.visitorKey.trim().length > 0;
   }
