@@ -8,7 +8,6 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 from researchlens.artifacts import canonical_hash, load_artifact, validate_passage_artifact
-from researchlens.corpus import DIRECTORY
 from researchlens.evaluation import (
     comparison_report,
     default_retrieval_config,
@@ -279,9 +278,9 @@ def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatc
     assert summarize(failure)["errors"] == 1
 
 
-def test_owner_approved_questions_and_locations_without_running_held_out(tmp_path):
+def test_owner_approved_questions_and_locations_without_running_held_out(tmp_path, adopted_corpus):
     path = tmp_path / "technical.json"
-    build_index(DIRECTORY / "documents.json", path)
+    build_index(adopted_corpus, path)
     artifact = json.loads(path.read_bytes())
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
     held_out = load_dataset(ROOT / "evaluation/datasets/held-out.json")

@@ -65,7 +65,7 @@
               "doi": "10.3390/s24206717",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
             },
             "source_section": "1. Introduction",
@@ -92,7 +92,7 @@
               "doi": "10.3390/s24206717",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
             },
             "source_section": "5. Conclusions",
@@ -120,7 +120,7 @@
               "doi": "10.3390/s25020527",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2025 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807"
             },
             "source_section": "1. Introduction",
@@ -148,7 +148,7 @@
               "doi": "10.3390/s25020527",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2025 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807"
             },
             "source_section": "2. Related Work > 2.1. Illumination Strategies for the Image Acquisition Module",
@@ -216,7 +216,7 @@
               "doi": "10.3390/s24051622",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
             },
             "source_section": "Abstract",
@@ -244,7 +244,7 @@
               "doi": "10.3390/s24051622",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
             },
             "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
@@ -272,7 +272,7 @@
               "doi": "10.3390/s24051622",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
             },
             "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
@@ -332,7 +332,7 @@
               "doi": "10.3390/jimaging10050111",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
             },
             "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
@@ -357,7 +357,7 @@
               "doi": "10.3390/jimaging10050111",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
             },
             "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
@@ -382,7 +382,7 @@
               "doi": "10.3390/jimaging10050111",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
             },
             "source_section": "1. Introduction",
@@ -443,7 +443,7 @@
               "doi": "10.3390/s24206717",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
             },
             "source_section": "3. Methodology > 3.3. Dataset Construction",
@@ -470,7 +470,7 @@
               "doi": "10.3390/s24206717",
               "license_url": "https://creativecommons.org/licenses/by/4.0/",
               "copyright": "© 2024 by the authors.",
-              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "changes": "Prose extracted from article XML; whitespace normalized, with a space added between list items and other block elements inside a paragraph (source text change of 2026-11-24); section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
               "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
             },
             "source_section": "3. Methodology > 3.3. Dataset Construction",
