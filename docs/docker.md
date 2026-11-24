@@ -38,9 +38,12 @@ OPENAI_API_KEY=your-key-here
 OPENAI_MODEL=gpt-6-luna
 ```
 
-Then run `docker compose up -d` again. Each question is a paid OpenAI request. Compose
-reads `.env` only to fill in `ANSWER_PROVIDER`, `OPENAI_API_KEY`, `OPENAI_MODEL` and
-`RETRIEVAL_TIER`. It does not pass the retrieval settings from `.env.example`, so they
+Then run `docker compose up -d` again. Each live question is a paid OpenAI request,
+limited by default to 5 per visitor and 50 per day; recorded examples and previews are
+free. Compose reads `.env` only to fill in `ANSWER_PROVIDER`, `OPENAI_API_KEY`,
+`OPENAI_MODEL`, `RETRIEVAL_TIER` and the public-demo controls (`DEMO_ONLY`, the
+`LIVE_ANSWERS_*` limits, `ALLOW_VISITOR_API_KEYS`, Turnstile keys and
+`TRUSTED_PROXY_HOPS`). For a public HTTPS deployment, see [deployment.md](deployment.md). It does not pass the retrieval settings from `.env.example`, so they
 cannot turn off tier selection. The `.dockerignore` file keeps `.env` out of the images.
 
 ## Switch retrieval tiers

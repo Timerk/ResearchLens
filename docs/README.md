@@ -9,6 +9,7 @@ links to each detailed document below.
 | --- | --- |
 | [results.md](results.md) | One-page summary of every study, in order |
 | [docker.md](docker.md) | Docker Compose setup, tier switching and the fresh-clone check |
+| [deployment.md](deployment.md) | Public demo on a VPS: HTTPS, limits, kill switch, budget, monitoring and deploys |
 | [development.md](development.md) | Local setup without Docker, OpenAI mode, corpus, tests and code layout |
 | [embeddings.md](embeddings.md) | Embedding models, encoding contract, hardware tiers and hybrid retrieval |
 

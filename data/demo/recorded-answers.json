@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "description": "Recorded gpt-6-luna answers from the development answer-quality study, copied verbatim from the committed blind-grading packet. Passage text is the excerpt the model saw, before readable formulas were adopted. Section, location and attribution come from the current corpus by passage ID. Only cited passages were recorded in the packet; other supplied passages are not shown.",
+  "source": {
+    "packet": "evaluation/reviews/2026-10-14-answer-judge/owner-grading.md",
+    "packet_sha256": "b1594cf0cb6b2ca5a12335343cbafa4e98e4a94a503f3163f621b22b3d51007b",
+    "scoring_key": "evaluation/reviews/2026-10-14-answer-judge/scoring-key.json",
+    "archive_sha256": "4ac385031e32826141aaa2b7c3072a883f0f2198aa605664697407f3554df9ea"
+  },
+  "examples": [
+    {
+      "id": "canopy-heater-fusion",
+      "title": "Compare illumination and fusion across two studies",
+      "question": "How do the canopy and painted heating-device studies differ in their illumination modalities and fusion levels?",
+      "recorded": {
+        "study_id": "answer-quality-2026-10-13",
+        "recorded_on": "2026-10-13",
+        "model": "gpt-6-luna",
+        "configuration": "qwen16k",
+        "retrieval_tier": "full",
+        "retrieval_model": "Qwen3-4B",
+        "context_chars": 16000,
+        "case_id": "tech-compare-fusion",
+        "packet_item": "G048",
+        "run_sha256": "41c8221f6d57193c9f1f384fb7a536e11e904427de7a8bc430c24f095e680180"
+      },
+      "answer": {
+        "status": "answered",
+        "mode": "openai",
+        "message": "Answer based on the supplied passages.",
+        "sections": [
+          {
+            "text": "The canopy study used forward and backward lighting, with data-level RGB Channel Fusion and a separate feature-level fusion network (ADMF-Net).",
+            "citation_ids": [
+              "pmc11510794:p5:w0",
+              "pmc11510794:p59:w0"
+            ]
+          },
+          {
+            "text": "The painted heating-device study used bright-field and deflectometry-based structured illumination, combining the modalities at the decision level.",
+            "citation_ids": [
+              "pmc11768589:p5:w0",
+              "pmc11768589:p11:w0"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "pmc11510794:p5:w0",
+            "document_id": "pmc11510794",
+            "title": "Dual-Modal Illumination System for Defect Detection of Aircraft Glass Canopies",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11510794/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 5,
+            "text": "Our contributions can be summarized as follows:An automated prototype system with a dual-modal illumination structure is proposed. For the same sampling point, the system sequentially uses forward lighting and backward lighting to capture defect images. By integrating the information from both types of images, more accurate defect detection is achieved.A curated dataset is presented, which, to the best of our knowledge, is the first benchmark in the field of defect detection for aircraft transparent materials.A dual-modal baseline is designed and proved to be competitive, in which we designed two fusion detection methods: a data-level fusion method named RGB Channel Fusion, and an attention-based dual-branch modal fusion network using feature-level fusion. Both methods achieved excellent results on our dataset.",
+            "attribution": {
+              "authors": [
+                "Zijian Li",
+                "Yong Yao",
+                "Runyuan Wen",
+                "Qiyang Liu"
+              ],
+              "publication_date": "2024-10-18",
+              "doi": "10.3390/s24206717",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
+            },
+            "source_section": "1. Introduction",
+            "source_locator": "./body/sec[1]/p[4]",
+            "score": null
+          },
+          {
+            "id": "pmc11510794:p59:w0",
+            "document_id": "pmc11510794",
+            "title": "Dual-Modal Illumination System for Defect Detection of Aircraft Glass Canopies",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11510794/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 59,
+            "text": "Furthermore, we proposed a data-level fusion method named RGB Channel Fusion, and a feature-level fusion model, the attention-based dual-branch modal fusion network (ADMF-Net). The model uses two feature extraction backbones to independently extract multi-scale features from the forward and backward lighting modalities. Next, through the attention-based multi-modal feature fusion block (AMFF) and improved SPPF module, the network adaptively integrates the multi-scale features from the two modalities. Finally, the features are fed into the detection layers, where an OBB detection head is used to provide the rotated bounding boxes of defects.",
+            "attribution": {
+              "authors": [
+                "Zijian Li",
+                "Yong Yao",
+                "Runyuan Wen",
+                "Qiyang Liu"
+              ],
+              "publication_date": "2024-10-18",
+              "doi": "10.3390/s24206717",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
+            },
+            "source_section": "5. Conclusions",
+            "source_locator": "./body/sec[5]/p[3]",
+            "score": null
+          },
+          {
+            "id": "pmc11768589:p5:w0",
+            "document_id": "pmc11768589",
+            "title": "Improving Industrial Quality Control: A Transfer Learning Approach to Surface Defect Detection",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11768589/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 5,
+            "text": "Heating devices, such as water heaters (electric and gas), boilers, and heat pumps, usually require a paint coating for aesthetic and protection purposes. Despite the extensive vision-based deep learning reports for surface defect detection, to the best of the authors’ knowledge, only a few reports applied this technology to the heating products [15]. The components of these products usually have different topographical features (specular and diffuse) that require a detection system with different illumination modes to effectively identify all possible defects on their surface. Hence, in the present work, an automatic vision inspection system was proposed for the detection and classification of defects on the painted surfaces of heating devices, which included the following: (1) an image acquisition module for dataset generation employing two illumination strategies (bright field and deflectometry-based lighting), (2) DL models for defect detection and classification with decision-level fusion, (3) painted surface information dispatching to a designed server, and (4) image graphical display. Regarding the feature extraction and decision-making performed by the DL models, two approaches were compared: (1) a CNN built and trained from scratch; and",
+            "attribution": {
+              "authors": [
+                "Ângela Semitela",
+                "Miguel Pereira",
+                "António Completo",
+                "Nuno Lau",
+                "José P Santos"
+              ],
+              "publication_date": "2025-01-17",
+              "doi": "10.3390/s25020527",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2025 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807"
+            },
+            "source_section": "1. Introduction",
+            "source_locator": "./body/sec[1]/p[3]",
+            "score": null
+          },
+          {
+            "id": "pmc11768589:p11:w0",
+            "document_id": "pmc11768589",
+            "title": "Improving Industrial Quality Control: A Transfer Learning Approach to Surface Defect Detection",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11768589/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 11,
+            "text": "Conversely, the decision-level fusion employs two different decision-making models for each acquisition source for defect detection, whose outputs are then combined [9]. In this instance, besides being compatible with feature extraction of the information obtained from different illumination strategies/sources, this fusion method has low computational complexity and is suitable for real-time applications [21]. Using this approach, Hu et al. proposed an object detection system combining the output of two models classifying information retrieved from bright field and infrared imaging. The results indicated that this system effectively fuses the information from multiple decision-making models to improve the overall performance of the object detection [21]. Similarly, Cong et al. also employed a decision-level fusion method of bright field and infrared-based light that exhibited higher precision and robustness for object detection than single-modal methods [22]. Despite its more prevalent use with infrared imaging, this type of information fusion can be easily employed for other illumination strategies. Addressing this gap, this work will explore decision-level fusion in images retrieved from bright field and deflectometry-based structured illumination.",
+            "attribution": {
+              "authors": [
+                "Ângela Semitela",
+                "Miguel Pereira",
+                "António Completo",
+                "Nuno Lau",
+                "José P Santos"
+              ],
+              "publication_date": "2025-01-17",
+              "doi": "10.3390/s25020527",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2025 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "0077badd88f18b7fc09283eb940255d27fbb63b93a4456eb55714415765ed807"
+            },
+            "source_section": "2. Related Work > 2.1. Illumination Strategies for the Image Acquisition Module",
+            "source_locator": "./body/sec[2]/sec[1]/p[5]",
+            "score": null
+          }
+        ],
+        "model": "gpt-6-luna"
+      }
+    },
+    {
+      "id": "wafer-tdi-noise",
+      "title": "TDI stages and fixed-pattern noise in wafer inspection",
+      "question": "What changes to TDI stages and column fixed pattern noise improve particle-defect SNR in the non-patterned wafer study?",
+      "recorded": {
+        "study_id": "answer-quality-2026-10-13",
+        "recorded_on": "2026-10-13",
+        "model": "gpt-6-luna",
+        "configuration": "qwen12k",
+        "retrieval_tier": "full",
+        "retrieval_model": "Qwen3-4B",
+        "context_chars": 12000,
+        "case_id": "tech-wafer-exact",
+        "packet_item": "G020",
+        "run_sha256": "c120f86b6b911e0f14f30d1c078b2ce979833e7f00ce2cdfee4fce5208019c92"
+      },
+      "answer": {
+        "status": "answered",
+        "mode": "openai",
+        "message": "Answer based on the supplied passages.",
+        "sections": [
+          {
+            "text": "Increasing the number of TDI stages improves particle-defect SNR; the study reports that this does not sacrifice detection efficiency because line frequency remains unchanged.",
+            "citation_ids": [
+              "pmc10934137:p1:w0",
+              "pmc10934137:p14:w180"
+            ]
+          },
+          {
+            "text": "Reduce column fixed-pattern noise (CFPN) by subtracting particle-free background images from particle images. Changing TDI stages did not significantly alter the CFPN distribution, while image differencing reduced background-image standard deviations by almost 50%.",
+            "citation_ids": [
+              "pmc10934137:p15:w0"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "pmc10934137:p1:w0",
+            "document_id": "pmc10934137",
+            "title": "Balancing the Efficiency and Sensitivity of Defect Inspection of Non-Patterned Wafers with TDI-Based Dark-Field Scattering Microscopy",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10934137/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 1,
+            "text": "In semiconductor manufacturing, defect inspection in non-patterned wafer production lines is essential to ensure high-quality integrated circuits. However, in actual production lines, achieving both high efficiency and high sensitivity at the same time is a significant challenge due to their mutual constraints. To achieve a reasonable trade-off between detection efficiency and sensitivity, this paper integrates the time delay integration (TDI) technology into dark-field microscopy. The TDI image sensor is utilized instead of a photomultiplier tube to realize multi-point simultaneous scanning. Experiments illustrate that the increase in the number of TDI stages and reduction in the column fixed pattern noise effectively improve the signal-to-noise ratio of particle defects without sacrificing the detecting efficiency.",
+            "attribution": {
+              "authors": [
+                "Fei Yu",
+                "Min Xu",
+                "Junhua Wang",
+                "Xiangchao Zhang",
+                "Xinlan Tang"
+              ],
+              "publication_date": "2024-03-01",
+              "doi": "10.3390/s24051622",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
+            },
+            "source_section": "Abstract",
+            "source_locator": "./front/article-meta/abstract[1]/p[1]",
+            "score": null
+          },
+          {
+            "id": "pmc10934137:p14:w180",
+            "document_id": "pmc10934137",
+            "title": "Balancing the Efficiency and Sensitivity of Defect Inspection of Non-Patterned Wafers with TDI-Based Dark-Field Scattering Microscopy",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10934137/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 14,
+            "text": "increasing TDI stages. Similar results are obtained through multiple experiments. Without considering the data transmission time, the imaging time is only related to line frequency. Therefore, the increase in the number of TDI stages does not affect the line frequency, thus improving the SNR without sacrificing detection efficiency.",
+            "attribution": {
+              "authors": [
+                "Fei Yu",
+                "Min Xu",
+                "Junhua Wang",
+                "Xiangchao Zhang",
+                "Xinlan Tang"
+              ],
+              "publication_date": "2024-03-01",
+              "doi": "10.3390/s24051622",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
+            },
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[2]",
+            "score": null
+          },
+          {
+            "id": "pmc10934137:p15:w0",
+            "document_id": "pmc10934137",
+            "title": "Balancing the Efficiency and Sensitivity of Defect Inspection of Non-Patterned Wafers with TDI-Based Dark-Field Scattering Microscopy",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10934137/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 15,
+            "text": "It should be noted that in Figure 9e, when the signal intensity of particles is weak at low TDI stages, the presence of stripe-like column fixed pattern noise (CFPN) in the background can impact particle detection. This CFPN is caused by a mismatch between the readout circuits of different columns. Although the correlated dual sampling circuit structure is an effective method to eliminate CFPN, this elimination is incomplete. Figure 11 shows the average CFPN distribution of background images. It is obtained by calculating the average DN value of 200 rows of pixels in the defect-free red dashed area corresponding to different TDI stages in Figure 9. Changing the number of TDI stages does not significantly alter the distribution of CFPN, but only varies in the amplitude of the background signal. Image difference is a simple and effective method to reduce the CFPN. The background images without particles are subtracted from the particle images taken at different TDI stages. Table 4 shows the standard deviations of background images at different TDI stages after CFPN reduction, which are reduced by almost 50%",
+            "attribution": {
+              "authors": [
+                "Fei Yu",
+                "Min Xu",
+                "Junhua Wang",
+                "Xiangchao Zhang",
+                "Xinlan Tang"
+              ],
+              "publication_date": "2024-03-01",
+              "doi": "10.3390/s24051622",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "a22c7ee300e05855e878b94f8700b4c4487487a37f7e145d56ae43be61f6d482"
+            },
+            "source_section": "4. Experimental Results and Discussions > 4.3. Particle Inspection on Non-Patterned Wafer",
+            "source_locator": "./body/sec[4]/sec[3]/p[3]",
+            "score": null
+          }
+        ],
+        "model": "gpt-6-luna"
+      }
+    },
+    {
+      "id": "aw-ssim-loss",
+      "title": "How AW-SSIM differs from standard SSIM",
+      "question": "How does AW-SSIM combine the luminance, contrast and structure sub-functions differently from standard SSIM?",
+      "recorded": {
+        "study_id": "answer-quality-2026-10-13",
+        "recorded_on": "2026-10-13",
+        "model": "gpt-6-luna",
+        "configuration": "qwen16k",
+        "retrieval_tier": "full",
+        "retrieval_model": "Qwen3-4B",
+        "context_chars": 16000,
+        "case_id": "tech-aw-ssim-combination",
+        "packet_item": "G021",
+        "run_sha256": "41c8221f6d57193c9f1f384fb7a536e11e904427de7a8bc430c24f095e680180"
+      },
+      "answer": {
+        "status": "answered",
+        "mode": "openai",
+        "message": "Answer based on the supplied passages.",
+        "sections": [
+          {
+            "text": "Standard SSIM multiplies its luminance, contrast, and structure sub-functions, treating them as independent. AW-SSIM instead adds the three sub-functions and applies a separate constant weight to each, allowing their relative importance to vary and removing their independence. The individual sub-function calculations remain the same as in standard SSIM.",
+            "citation_ids": [
+              "pmc11121878:p25:w0",
+              "pmc11121878:p26:w0",
+              "pmc11121878:p8:w0"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "pmc11121878:p25:w0",
+            "document_id": "pmc11121878",
+            "title": "Autoencoder-Based Unsupervised Surface Defect Detection Using Two-Stage Training",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11121878/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 25,
+            "text": "The SSIM loss calculation uses multiplication between the three sub-functions to bring independence between these factors, as shown in Equation (6). As demonstrated in [25], the mean used to measure the difference in luminance limits the SSIM’s ability to differentiate between an image with high light–dark variance and an image with more consistent light and dark if the two images have the same mean luminance value. To compensate for the mean with the variance and co-variance values, we should remove the independence between the luminance and other sub-functions through using addition instead of multiplication. [formula omitted]",
+            "attribution": {
+              "authors": [
+                "Tesfaye Getachew Shiferaw",
+                "Li Yao"
+              ],
+              "publication_date": "2024-05-05",
+              "doi": "10.3390/jimaging10050111",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
+            },
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[6]",
+            "score": null
+          },
+          {
+            "id": "pmc11121878:p26:w0",
+            "document_id": "pmc11121878",
+            "title": "Autoencoder-Based Unsupervised Surface Defect Detection Using Two-Stage Training",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11121878/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 26,
+            "text": "For AW-SSIM, we apply addition between the three sub-functions, as shown in Equation (6). In addition, we multiply each sub-function, luminance, contrast, and structure, by a constant [formula omitted] , [formula omitted] , and [formula omitted] , respectively. This multiplication with a constant determines the relative importance of each sub-function in the overall AW-SSIM calculation. In weighting the influences of the luminance, contrast, and structure based on the training data content, the model’s robustness and generalization ability are improved. According to our experiment, using different weights based on each sub-function’s importance for a specific training samples, as shown in Figure 4, shows a better result than using equal weights for all sub-functions. The calculations of the luminance, contrast, and structure values in AW-SSIM are the same as in the standard SSIM.",
+            "attribution": {
+              "authors": [
+                "Tesfaye Getachew Shiferaw",
+                "Li Yao"
+              ],
+              "publication_date": "2024-05-05",
+              "doi": "10.3390/jimaging10050111",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
+            },
+            "source_section": "3. Methodology > 3.3. SSIM Loss Function Improvement",
+            "source_locator": "./body/sec[3]/sec[3]/p[7]",
+            "score": null
+          },
+          {
+            "id": "pmc11121878:p8:w0",
+            "document_id": "pmc11121878",
+            "title": "Autoencoder-Based Unsupervised Surface Defect Detection Using Two-Stage Training",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11121878/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 8,
+            "text": "In this paper, we propose an autoencoder-based method with training in two stages. The first stage of training is exclusively conducted only on normal samples, and the second stage is training on normal and artificially defective samples using the model weight from the first stage. Experiments in [25] demonstrated that using the mean difference for the luminance calculation in the structural similarity (SSIM) metric [28] can be problematic when used as a loss function for image reconstruction tasks. This is because the mean is insensitive to the range of pixel values within a local area, leading to identical SSIM scores for images with the same average brightness but significantly different light–dark variations. Inspired by this, we propose an adaptive weighted structural similarity (AW-SSIM) loss by introducing addition instead of multiplication between the luminance, contrast, and structure sub-functions. This allows for the removal of the independence between the three sub-functions to compensate for the luminance’s limitations through contrast or structure. Additionally, we dynamically adjust the standard deviation ( [formula omitted] ) for the Gaussian window. This parameter governs the spread of",
+            "attribution": {
+              "authors": [
+                "Tesfaye Getachew Shiferaw",
+                "Li Yao"
+              ],
+              "publication_date": "2024-05-05",
+              "doi": "10.3390/jimaging10050111",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "f9f3b4eed5d04f9a8597b33fb21c76f944f659614e6b931f0913e352d1fa60a1"
+            },
+            "source_section": "1. Introduction",
+            "source_locator": "./body/sec[1]/p[7]",
+            "score": null
+          }
+        ],
+        "model": "gpt-6-luna"
+      }
+    },
+    {
+      "id": "rotation-augmentation",
+      "title": "Rotating labelled canopy images without relabelling",
+      "question": "How can the aircraft-cover training pictures be turned and reflected without drawing their defect outlines again?",
+      "recorded": {
+        "study_id": "answer-quality-2026-10-13",
+        "recorded_on": "2026-10-13",
+        "model": "gpt-6-luna",
+        "configuration": "qwen16k",
+        "retrieval_tier": "full",
+        "retrieval_model": "Qwen3-4B",
+        "context_chars": 16000,
+        "case_id": "tech-turn-and-flip-labels",
+        "packet_item": "G001",
+        "run_sha256": "41c8221f6d57193c9f1f384fb7a536e11e904427de7a8bc430c24f095e680180"
+      },
+      "answer": {
+        "status": "answered",
+        "mode": "openai",
+        "message": "Answer based on the supplied passages.",
+        "sections": [
+          {
+            "text": "Apply rotation and mirroring to each training image and its defect labels together, so the outlines are transformed with the image rather than redrawn. Adjust the rotation-angle step to control how many augmented versions are generated; for labels that extend beyond the image, adjust or delete them as needed.",
+            "citation_ids": [
+              "pmc11510794:p34:w0",
+              "pmc11510794:p34:w180"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "pmc11510794:p34:w0",
+            "document_id": "pmc11510794",
+            "title": "Dual-Modal Illumination System for Defect Detection of Aircraft Glass Canopies",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11510794/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 34,
+            "text": "To address the limited number of defect images available for aviation transparent parts, we also adopted several data augmentation methods. In order to improve the defect detection performance under any rotation angle, we performed pre-rotation augmentation on the defect samples. In this process, rotation and mirroring operations are simultaneously applied to the images and their labels to avoid redundant annotation work. By adjusting the step size of the rotation angle, the augmentation rate can be controlled. For example, using 90-degree rotations and mirroring operations, an 8× augmentation can be achieved without information loss. For general angles, the background color RGB(114, 114, 0) is filled in the blank areas to reduce interference. Moreover, since the standard OBB format does not allow point coordinates to be located outside the image boundaries, labels that overflow during the rotation process need to be adjusted or deleted. The correction method for overflow labels is as follows:If all four points of the bounding box are outside the field of view, delete the target (process ends), otherwise go to step 2.If all four points of the bounding",
+            "attribution": {
+              "authors": [
+                "Zijian Li",
+                "Yong Yao",
+                "Runyuan Wen",
+                "Qiyang Liu"
+              ],
+              "publication_date": "2024-10-18",
+              "doi": "10.3390/s24206717",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
+            },
+            "source_section": "3. Methodology > 3.3. Dataset Construction",
+            "source_locator": "./body/sec[3]/sec[3]/p[6]",
+            "score": null
+          },
+          {
+            "id": "pmc11510794:p34:w180",
+            "document_id": "pmc11510794",
+            "title": "Dual-Modal Illumination System for Defect Detection of Aircraft Glass Canopies",
+            "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11510794/",
+            "license": "CC-BY-4.0",
+            "kind": "technical",
+            "paragraph": 34,
+            "text": "box are within the field of view, no adjustment is required (process ends), otherwise go to step 3.Select a point that is outside the field of view. Calculate the distance between the point and its adjacent two points to find the long and short sides connected to the point on the rectangle. Translate the short side along the direction of the long side until the point falls on the image boundary. The translation amount is determined by solving a linear programming problem. After adjustment, return to step 2 to re-evaluate.",
+            "attribution": {
+              "authors": [
+                "Zijian Li",
+                "Yong Yao",
+                "Runyuan Wen",
+                "Qiyang Liu"
+              ],
+              "publication_date": "2024-10-18",
+              "doi": "10.3390/s24206717",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "copyright": "© 2024 by the authors.",
+              "changes": "Prose extracted from article XML; whitespace normalized; section and XML locations retained; split into paragraphs and word-window passages. Figures, tables, captions, references, and back matter are omitted. Supported presentation MathML is rendered as grouped readable text with symbols, scripts and fractions; unsupported formulas remain [formula omitted]. Formula rendering and evidence-location migration were approved by the project owner on 2026-10-14 for the source text change. This is a partial text extraction; consult the original article for omitted material.",
+              "source_sha256": "31f8405e3cd752a53e1b30247defef69104a562ad312052d68ce72fef1f1df24"
+            },
+            "source_section": "3. Methodology > 3.3. Dataset Construction",
+            "source_locator": "./body/sec[3]/sec[3]/p[6]",
+            "score": null
+          }
+        ],
+        "model": "gpt-6-luna"
+      }
+    },
+    {
+      "id": "unsupported-trial",
+      "title": "A question the papers cannot answer",
+      "question": "Which of the four systems reduced warranty returns most in a randomized trial across the same factories?",
+      "recorded": {
+        "study_id": "answer-quality-2026-10-13",
+        "recorded_on": "2026-10-13",
+        "model": "gpt-6-luna",
+        "configuration": "qwen16k",
+        "retrieval_tier": "full",
+        "retrieval_model": "Qwen3-4B",
+        "context_chars": 16000,
+        "case_id": "tech-missing-factory-warranty",
+        "packet_item": "G010",
+        "run_sha256": "41c8221f6d57193c9f1f384fb7a536e11e904427de7a8bc430c24f095e680180"
+      },
+      "answer": {
+        "status": "insufficient_evidence",
+        "mode": "openai",
+        "message": "The retrieved passages do not provide enough evidence to answer this question.",
+        "sections": [],
+        "passages": [],
+        "model": "gpt-6-luna"
+      }
+    }
+  ]
+}

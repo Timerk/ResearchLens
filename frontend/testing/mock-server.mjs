@@ -2,12 +2,20 @@
 // This server never contacts the backend or an answer provider.
 import { createServer } from 'node:http';
 import { spawn } from 'node:child_process';
-import { responses } from './fixtures.ts';
+import { demoResponses, demoStatus, responses } from './fixtures.ts';
 
 const api = createServer((request, response) => {
   response.setHeader('Content-Type', 'application/json');
   if (request.url === '/api/health' && request.method === 'GET') {
     response.end(JSON.stringify({ status: 'ok', mode: 'openai' }));
+    return;
+  }
+  if (request.url === '/api/demo' && request.method === 'GET') {
+    response.end(JSON.stringify(demoStatus));
+    return;
+  }
+  if (request.url === '/api/examples/mock-example' && request.method === 'GET') {
+    response.end(JSON.stringify(demoResponses.recorded));
     return;
   }
   if (request.url !== '/api/ask' || request.method !== 'POST') {
@@ -37,6 +45,14 @@ const api = createServer((request, response) => {
     const query = question.toLowerCase();
     setTimeout(
       () => {
+        if (query.includes('limit')) {
+          response
+            .writeHead(429)
+            .end(
+              JSON.stringify({ ...demoResponses.limited, detail: demoResponses.limited.notice }),
+            );
+          return;
+        }
         if (query.includes('error')) {
           response
             .writeHead(504)
@@ -59,7 +75,7 @@ const api = createServer((request, response) => {
 
 api.listen(4301, '127.0.0.1', () => {
   console.log(
-    'OFFLINE MOCK API on 4301. Questions: preview, no matches, insufficient, error, slow; otherwise answered.',
+    'OFFLINE MOCK API on 4301. Questions: preview, no matches, insufficient, limit, error, slow; otherwise answered.',
   );
 });
 const angular = spawn(

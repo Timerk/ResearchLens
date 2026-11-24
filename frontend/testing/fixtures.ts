@@ -1,4 +1,4 @@
-import type { Answer, Passage } from '../src/app/app';
+import type { Answer, DemoStatus, Passage } from '../src/app/app';
 
 // Presentation fixtures matching backend/researchlens/models.py on main.
 // These are mocked UI examples, not an evaluation dataset or scientific findings.
@@ -88,5 +88,57 @@ export const responses = {
     input_tokens: 800,
     output_tokens: 40,
     estimated_api_cost_usd: null,
+  },
+} satisfies Record<string, Answer>;
+
+export const recordedLabel =
+  'Recorded answer from evaluation run 2026-10-13, model gpt-6-luna, tier full (Qwen3-4B, 16k context)';
+
+export const demoStatus: DemoStatus = {
+  live_answers: 'enabled',
+  visitor_daily_limit: 5,
+  global_daily_limit: 50,
+  visitor_remaining: 1,
+  remaining_today: 40,
+  visitor_keys: true,
+  turnstile_site_key: null,
+  examples: [
+    {
+      id: 'mock-example',
+      title: 'Mock recorded example',
+      question: 'Why combine forward and backward lighting?',
+      label: recordedLabel,
+    },
+  ],
+};
+
+export const demoResponses = {
+  recorded: {
+    ...responses.answered,
+    passages: [{ ...technicalPassage, score: null }],
+    latency_ms: null,
+    model: 'gpt-6-luna',
+    input_tokens: null,
+    output_tokens: null,
+    estimated_api_cost_usd: 0,
+    replay: {
+      example_id: 'mock-example',
+      label: recordedLabel,
+      note: 'Replayed from a saved development evaluation run; no API call was made.',
+      recorded: {
+        study_id: 'answer-quality-2026-10-13',
+        recorded_on: '2026-10-13',
+        model: 'gpt-6-luna',
+        configuration: 'qwen16k',
+      },
+    },
+  },
+  live: { ...responses.answered, live_answers_remaining: 0 },
+  limited: {
+    ...responses.preview,
+    notice:
+      "You have used today's live answers for this demo. Here are the ranked passages instead.",
+    fallback_reason: 'visitor_limit',
+    live_answers_remaining: 0,
   },
 } satisfies Record<string, Answer>;
