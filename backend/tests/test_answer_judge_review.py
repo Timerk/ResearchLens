@@ -1,4 +1,4 @@
-from researchlens.answer_judge_review import agreement
+from researchlens_eval.answer_judge_review import agreement
 
 
 def test_unknown_and_uncertain_do_not_inflate_accuracy():

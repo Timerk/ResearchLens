@@ -6,7 +6,7 @@ import re
 from collections import Counter, defaultdict
 
 import pytest
-from researchlens.answer_grading import ROOT, TYPES, write_sample
+from researchlens_eval.answer_grading import ROOT, TYPES, write_sample
 
 REVIEW = ROOT / "evaluation/reviews/2026-10-14-answer-judge"
 

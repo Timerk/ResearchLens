@@ -2,15 +2,15 @@
 
 import pytest
 from pydantic import TypeAdapter
-from researchlens.evaluation import load_dataset
-from researchlens.evaluation_evidence import (
+from researchlens.ingest import ROOT, TECHNICAL_CORPUS, chunk_documents
+from researchlens.models import Document
+from researchlens_eval.evaluation import load_dataset
+from researchlens_eval.evaluation_evidence import (
     EvidenceLabels,
     TextRange,
     evidence_coverage,
     validate_labels,
 )
-from researchlens.ingest import ROOT, TECHNICAL_CORPUS, chunk_documents
-from researchlens.models import Document
 
 
 @pytest.fixture(scope="module")

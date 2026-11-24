@@ -12,17 +12,17 @@ from researchlens.config import Settings
 from researchlens.embedding_models import TorchEncoder, encoding_metadata
 from researchlens.embeddings import LocalEncoder
 from researchlens.encoding_diagnostics import measurement
-from researchlens.evaluation import default_retrieval_config
-from researchlens.evaluation_evidence import (
-    EncodingDiagnostics,
-    validate_encoding_diagnostics,
-    validate_pair_diagnostics,
-)
-from researchlens.evaluation_schema import RetrievalConfig
 from researchlens.ingest import CORPUS, build_index, chunk_documents
 from researchlens.models import Document, Passage, SearchHit
 from researchlens.reranking import LocalReranker, RerankedRetriever, reranker_metadata
 from researchlens.retrieval import EmbeddingRetriever, HybridRetriever, load_retriever
+from researchlens_eval.evaluation import default_retrieval_config
+from researchlens_eval.evaluation_evidence import (
+    EncodingDiagnostics,
+    validate_encoding_diagnostics,
+    validate_pair_diagnostics,
+)
+from researchlens_eval.evaluation_schema import RetrievalConfig
 
 
 def sample_hits():

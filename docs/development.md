@@ -200,8 +200,8 @@ the [frontend instructions](../frontend/README.md) and the
 - `config.py` reads backend-only configuration without changing the process environment.
 - `api.py` handles HTTP validation and request timing. A missing or corrupt index stops
   startup with an actionable message.
-- `evaluation.py` and the `answer_*` modules run the retrieval and answer-quality
-  studies. See the [evaluation workflow](../evaluation/README.md).
+- `backend/researchlens_eval/` contains the retrieval and answer-quality evaluation
+  tools. See the [evaluation workflow](../evaluation/README.md).
 - The Angular app shows plain text and expandable reference metadata. Its development
   proxy sends `/api` to FastAPI, so there is no CORS configuration.
 

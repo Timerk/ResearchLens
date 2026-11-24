@@ -101,4 +101,4 @@ The [summary JSON](https://github.com/Timerk/ResearchLens/blob/archive/evaluatio
 
 The Qwen16k profile refers to the same Qwen run. Archive hashes, dataset/corpus pins, installed versions, execution parameters and scorer source hash are in the summary. The dataset LF hash is `920f1415d14d974ce489e91386227d3f306837f22944958763d8235495ea9312`; the corpus hash is `f293a02c7afaf38f06ec17d6443f7289fd3a7d3091cf11cf0d4f865ee0e3a675`.
 
-Ruff passed and all 280 backend tests passed, including the general reference scorer tests. No dataset, label, corpus or application setting changed. This one-time evaluation is complete; do not rerun held-out retrieval. `researchlens.reference_evaluation` can score existing archived outputs offline without any search.
+Ruff passed and all 280 backend tests passed, including the general reference scorer tests. No dataset, label, corpus or application setting changed. This one-time evaluation is complete; do not rerun held-out retrieval. `researchlens_eval.reference_evaluation` can score existing archived outputs offline without any search.

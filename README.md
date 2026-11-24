@@ -170,7 +170,8 @@ problem to the answer-quality decision.
 ## Project structure
 
 ```text
-backend/researchlens/  API, ingestion, retrieval, answers, evaluation
+backend/researchlens/  API, ingestion, retrieval, answers
+backend/researchlens_eval/  Offline evaluation toolkit and demo recording builder
 backend/tests/         Offline pytest suite, no paid calls
 frontend/              Angular app, Vitest and Playwright tests
 data/technical/        Four CC BY 4.0 papers, extracted text, NOTICE

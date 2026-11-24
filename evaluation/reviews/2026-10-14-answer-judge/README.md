@@ -117,7 +117,7 @@ Use the path in `evaluation/answer-quality-evidence-manifest.json`, or the same
 archive in another worktree. From the repository root, with RTK on PATH:
 
 ```powershell
-rtk proxy uv run --directory backend python -m researchlens.answer_grading --archive ABSOLUTE_ARCHIVE_PATH --output ../evaluation/runs/new-owner-grading-replay
+rtk proxy uv run --directory backend python -m researchlens_eval.answer_grading --archive ABSOLUTE_ARCHIVE_PATH --output ../evaluation/runs/new-owner-grading-replay
 ```
 
 The command verifies the compressed archive and each run/review hash, asserts

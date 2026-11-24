@@ -13,11 +13,19 @@ from researchlens_eval.answer_judge_review import REVIEW
 from researchlens_eval.answer_scoring import Judgment, all_decided, score
 
 FREEZE = REVIEW / "frozen-judge.json"
+PRE_RELOCATION_SCORING_SHA256 = "c8ae5f7947517223d249c72fc8e016e9cea6129afaad62895ea9d01eefbd14aa"
 
 
-def current_contract():
+def current_contract(*, pre_relocation_scoring: bool = False):
     implementation = Path(judge.__file__).read_bytes().replace(b"\r\n", b"\n")
     scoring = inspect.getsource(score) + inspect.getsource(all_decided)
+    if pre_relocation_scoring:
+        # The 2026-10-14 freeze pinned the import before the package move.
+        scoring = scoring.replace(
+            "                from researchlens_eval.answer_judge_v2 import citation_value\n",
+            "                from researchlens.answer_judge_v2 import citation_value\n",
+            1,
+        )
     return {
         "version": judge.VERSION,
         "model": judge.MODEL,
@@ -40,7 +48,11 @@ def current_contract():
 
 def assert_frozen():
     frozen = json.loads(FREEZE.read_bytes())
-    if frozen["contract"] != current_contract():
+    contract = frozen["contract"]
+    if contract != current_contract(
+        pre_relocation_scoring=contract["scoring_implementation_sha256"]
+        == PRE_RELOCATION_SCORING_SHA256
+    ):
         raise ValueError("Judge differs from the committed freeze; do not spend or evaluate")
     return frozen
 

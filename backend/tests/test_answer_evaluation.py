@@ -4,7 +4,10 @@ from threading import Event
 from types import SimpleNamespace
 
 import pytest
-from researchlens.answer_evaluation import (
+from researchlens.answers import prepare_answer_context
+from researchlens.ingest import ROOT
+from researchlens.models import SearchHit
+from researchlens_eval.answer_evaluation import (
     CitationDecision,
     CostGuard,
     Decision,
@@ -13,10 +16,7 @@ from researchlens.answer_evaluation import (
     execute,
     score,
 )
-from researchlens.answers import prepare_answer_context
-from researchlens.evaluation import load_dataset
-from researchlens.ingest import ROOT
-from researchlens.models import SearchHit
+from researchlens_eval.evaluation import load_dataset
 
 
 @pytest.fixture
@@ -118,8 +118,8 @@ def test_cost_cap_reserves_failed_calls_and_rejects_invalid_caps():
 
 
 def test_approval_and_cap_checked_before_client_creation(tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
     from researchlens.artifacts import canonical_hash
+    from researchlens_eval import answer_evaluation as module
 
     monkeypatch.setattr(module, "OpenAI", lambda **kw: pytest.fail("Paid client constructed"))
     plan = {"total_reserved_usd": 1}
@@ -152,8 +152,8 @@ def test_missing_content_and_forbidden_assertions_fail_quality(scoring):
 
 
 def test_report_keeps_negatives_and_unknown_pairs_separate(monkeypatch):
-    from researchlens import answer_reporting
-    from researchlens.answer_evaluation import METRICS, quality_report
+    from researchlens_eval import answer_reporting
+    from researchlens_eval.answer_evaluation import METRICS, quality_report
 
     monkeypatch.setattr(answer_reporting, "comparison_report", lambda *args: "")
     dataset = load_dataset(ROOT / "evaluation/datasets/technical-development.json")
@@ -201,7 +201,7 @@ def test_report_keeps_negatives_and_unknown_pairs_separate(monkeypatch):
 
 
 def test_plan_has_generation_and_judge_without_creating_paid_client(scoring, monkeypatch):
-    from researchlens import answer_evaluation as module
+    from researchlens_eval import answer_evaluation as module
 
     monkeypatch.setattr(module, "OpenAI", lambda **kwargs: pytest.fail("Paid client"))
     case, prepared, *_ = scoring
@@ -227,9 +227,9 @@ def test_execution_calls_real_provider_and_checkpoints_raw_judge(
 ):
     import json
 
-    from researchlens import answer_evaluation as module
     from researchlens.artifacts import canonical_hash
     from researchlens.models import AnswerSection, GeneratedAnswer
+    from researchlens_eval import answer_evaluation as module
 
     case, prepared, _, judgment = scoring
     calls = []
@@ -322,9 +322,9 @@ def test_duplicate_citation_subclaims_are_conservatively_combined(scoring):
 
 @pytest.fixture
 def execution(scoring, tmp_path, monkeypatch):
-    from researchlens import answer_evaluation as module
     from researchlens.artifacts import canonical_hash
     from researchlens.models import GeneratedAnswer
+    from researchlens_eval import answer_evaluation as module
 
     case, prepared, answer, judgment = scoring
     state = SimpleNamespace(calls=[], fail=None, stop_after_generation=False, closed=False)
@@ -462,7 +462,7 @@ def test_configuration_uses_approved_source_independently_of_run_order(execution
 
 
 def test_missing_configuration_source_fails_before_client_or_output(execution, monkeypatch):
-    from researchlens import answer_evaluation as module
+    from researchlens_eval import answer_evaluation as module
 
     execution.runs = []
     monkeypatch.setattr(module, "OpenAI", lambda **kw: pytest.fail("Paid client constructed"))

@@ -2,7 +2,6 @@
 
 import ast
 import hashlib
-import importlib
 import os
 import re
 import subprocess
@@ -19,12 +18,6 @@ MODULES = sorted(
     for path in (BACKEND / package).rglob("*.py")
     if path.name != "__init__.py"
 )
-LEGACY_MODULES = [
-    name
-    for name in MODULES
-    if name.startswith("researchlens.")
-    and BACKEND.joinpath("researchlens_eval", name.split(".")[-1] + ".py").exists()
-]
 
 
 @pytest.mark.parametrize("reverse", [False, True], ids=["forward", "reverse"])
@@ -50,24 +43,15 @@ for name in sys.argv[1:]:
     assert result.returncode == 0, result.stderr
 
 
-@pytest.mark.parametrize("module", LEGACY_MODULES)
-def test_legacy_imports_share_module_identity(module):
-    assert importlib.import_module(module) is importlib.import_module(
-        module.replace("researchlens.", "researchlens_eval.", 1)
-    )
-
-
 def test_importing_api_does_not_load_evaluation_modules():
     code = """
 import sys
 import researchlens.api
-legacy_modules = set(sys.argv[1:])
-loaded = sorted(name for name in sys.modules
-                if name.startswith('researchlens_eval') or name in legacy_modules)
+loaded = sorted(name for name in sys.modules if name.startswith('researchlens_eval'))
 assert not loaded, loaded
 """
     result = subprocess.run(
-        [sys.executable, "-c", code, *LEGACY_MODULES],
+        [sys.executable, "-c", code],
         env={**os.environ, "PYTHONPATH": str(BACKEND)},
         capture_output=True,
         text=True,
@@ -79,14 +63,23 @@ assert not loaded, loaded
 def documented_cli_modules():
     repository = BACKEND.parent
     documents = [repository / "README.md", repository / "evaluation/README.md"]
-    documents.extend((repository / "docs").rglob("*.md"))
+    documents.extend(
+        path
+        for path in (repository / "docs").rglob("*.md")
+        if path.name != "evaluation-refactor.md"
+    )
     names = set()
     for path in documents:
         names.update(
-            re.findall(r"python\s+-m\s+(researchlens\.[a-z_]+)", path.read_text(encoding="utf-8"))
+            re.findall(
+                r"python\s+-m\s+(researchlens(?:_eval)?\.[a-z_]+)",
+                path.read_text(encoding="utf-8"),
+            )
         )
-    for name in LEGACY_MODULES:
-        implementation = BACKEND / "researchlens_eval" / (name.split(".")[-1] + ".py")
+    for name in MODULES:
+        if not name.startswith("researchlens_eval."):
+            continue
+        implementation = BACKEND.joinpath(*name.split(".")).with_suffix(".py")
         if any(
             isinstance(node, ast.FunctionDef) and node.name == "main"
             for node in ast.parse(implementation.read_text(encoding="utf-8")).body
@@ -96,7 +89,7 @@ def documented_cli_modules():
 
 
 @pytest.mark.parametrize("module", documented_cli_modules())
-def test_documented_and_legacy_cli_entry_points(module):
+def test_documented_and_evaluation_cli_entry_points(module):
     result = subprocess.run(
         [sys.executable, "-m", module, "--help"],
         env={**os.environ, "PYTHONPATH": str(BACKEND)},
@@ -108,30 +101,24 @@ def test_documented_and_legacy_cli_entry_points(module):
     assert "usage:" in result.stdout
 
 
-def test_reference_scorer_preserves_recorded_source_digest():
+def test_reference_scorer_source_only_changed_import_location():
     from researchlens_eval import reference_evaluation
 
     source = Path(reference_evaluation.__file__).read_bytes().replace(b"\r\n", b"\n")
-    assert hashlib.sha256(source).hexdigest() == (
+    before_relocation = source.replace(
+        b"from researchlens.models import SearchHit\n\n"
+        b"from researchlens_eval.evaluation_metrics import binomial_ci, exact_mcnemar\n",
+        b"from researchlens.evaluation_metrics import binomial_ci, exact_mcnemar\n"
+        b"from researchlens.models import SearchHit\n",
+        1,
+    )
+    assert hashlib.sha256(before_relocation).hexdigest() == (
         "b6dc86b250a51b2bd3579ebb3c45cc86924a0deb9394aec390faa69a048f9717"
     )
 
 
 def test_research_import_graph_is_acyclic_including_deferred_imports():
-    modules = {
-        name
-        for name in MODULES
-        if name.startswith("researchlens_eval.")
-        or name.rsplit(".", 1)[-1].startswith(
-            (
-                "answer_",
-                "evaluation",
-                "context_evaluation",
-                "reference_evaluation",
-                "compare_retrieval",
-            )
-        )
-    }
+    modules = {name for name in MODULES if name.startswith("researchlens_eval.")}
     graph = {}
     for name in modules:
         path = BACKEND.joinpath(*name.split(".")).with_suffix(".py")
@@ -158,7 +145,7 @@ def test_research_import_graph_is_acyclic_including_deferred_imports():
 
 
 def test_code_identity_covers_extracted_modules_and_normalizes_newlines(tmp_path, monkeypatch):
-    from researchlens import evaluation_core
+    from researchlens_eval import evaluation_core
 
     monkeypatch.setattr(evaluation_core, "ROOT", tmp_path)
     monkeypatch.setattr(evaluation_core.subprocess, "check_output", lambda *a, **kw: "")

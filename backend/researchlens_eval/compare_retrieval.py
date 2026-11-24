@@ -137,13 +137,13 @@ def compare(
                 arguments += ["--evidence-labels", str(evidence_labels.resolve())]
             if cutoffs is not None:
                 arguments += ["--cutoffs", *(str(k) for k in sorted(set(cutoffs)))]
-            completed = execute(f"{alias}/{mode}", "researchlens.evaluation", arguments)
+            completed = execute(f"{alias}/{mode}", "researchlens_eval.evaluation", arguments)
             if completed is not None:
                 successful.append(run_dir)
     if successful:
         execute(
             "comparison/report",
-            "researchlens.evaluation",
+            "researchlens_eval.evaluation",
             [
                 "report",
                 *(str(path.resolve()) for path in successful),

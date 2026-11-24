@@ -9,7 +9,10 @@ import pytest
 from pydantic import ValidationError
 from researchlens.artifacts import canonical_hash, load_artifact, validate_passage_artifact
 from researchlens.corpus import DIRECTORY
-from researchlens.evaluation import (
+from researchlens.ingest import CORPUS, ROOT, build_index
+from researchlens.models import SearchHit
+from researchlens.retrieval import Retriever
+from researchlens_eval.evaluation import (
     comparison_report,
     default_retrieval_config,
     load_dataset,
@@ -21,10 +24,7 @@ from researchlens.evaluation import (
     validate_dataset_references,
     validate_splits,
 )
-from researchlens.evaluation_schema import ExecutionConfig, RetrievalConfig
-from researchlens.ingest import CORPUS, ROOT, build_index
-from researchlens.models import SearchHit
-from researchlens.retrieval import Retriever
+from researchlens_eval.evaluation_schema import ExecutionConfig, RetrievalConfig
 
 
 @pytest.fixture
@@ -235,7 +235,9 @@ def test_mrr_distinguishes_first_and_third_rank_and_excludes_unanswerable(inputs
 
 def test_repeated_timings_separate_warmups_setup_and_failures(inputs, monkeypatch):
     dataset, artifact, retriever = inputs
-    monkeypatch.setattr("researchlens.evaluation_runner.process_peak_rss_bytes", lambda: 123456)
+    monkeypatch.setattr(
+        "researchlens_eval.evaluation_runner.process_peak_rss_bytes", lambda: 123456
+    )
     run = run_evaluation(
         dataset,
         artifact,
@@ -357,7 +359,7 @@ def test_cli_delegates_schema_two_selection_to_retrieval_factory(inputs, tmp_pat
         selected.append((backend, index, source))
         return inputs[2]  # Explicit mocked integration, not a real model quality result.
 
-    monkeypatch.setattr("researchlens.evaluation.load_retriever", factory)
+    monkeypatch.setattr("researchlens_eval.evaluation.load_retriever", factory)
     monkeypatch.setattr(
         sys,
         "argv",

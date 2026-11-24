@@ -417,7 +417,7 @@ retrieval selection and are not a frozen held-out result.
 
 ## Reproduction and validation
 
-All commands are part of `python -m researchlens.evaluation`, with `PYTHONPATH=backend`.
+All commands are part of `python -m researchlens_eval.evaluation`, with `PYTHONPATH=backend`.
 Prepare canonical lexical and pinned Qwen embedding indexes using the existing
 ingestion workflow. To create free rankings without loading another split:
 

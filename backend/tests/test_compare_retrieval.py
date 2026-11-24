@@ -3,8 +3,8 @@ import subprocess
 from unittest.mock import Mock
 
 import pytest
-from researchlens.compare_retrieval import compare
 from researchlens.ingest import ROOT, TECHNICAL_CORPUS
+from researchlens_eval.compare_retrieval import compare
 
 DATASET = ROOT / "evaluation/datasets/technical-development.json"
 OTHER = ROOT / "evaluation/datasets/held-out.json"
@@ -15,7 +15,7 @@ def test_comparison_delegates_to_existing_runner_in_fresh_processes(tmp_path, mo
     process = Mock(
         return_value=Mock(returncode=0, stdout=b"private child output", stderr=b"secret")
     )
-    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    monkeypatch.setattr("researchlens_eval.compare_retrieval.subprocess.run", process)
     output = tmp_path / "comparison"
     manifest = compare(
         output, models=["minilm"], source=TECHNICAL_CORPUS, dataset=DATASET, other_split=OTHER
@@ -23,11 +23,11 @@ def test_comparison_delegates_to_existing_runner_in_fresh_processes(tmp_path, mo
     calls = [call.args[0] for call in process.call_args_list]
     assert [call[2] for call in calls] == [
         "researchlens.ingest",
-        "researchlens.evaluation",
+        "researchlens_eval.evaluation",
         "researchlens.ingest",
-        "researchlens.evaluation",
-        "researchlens.evaluation",
-        "researchlens.evaluation",
+        "researchlens_eval.evaluation",
+        "researchlens_eval.evaluation",
+        "researchlens_eval.evaluation",
     ]
     assert "hybrid" in calls[4] and "embeddings" in calls[3]
     assert all("--measure-memory" in calls[i] for i in (1, 3, 4))
@@ -44,7 +44,7 @@ def test_comparison_delegates_to_existing_runner_in_fresh_processes(tmp_path, mo
 
 def test_comparison_uses_same_evidence_and_cutoffs_for_every_mode(tmp_path, monkeypatch):
     process = Mock(return_value=Mock(returncode=0))
-    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    monkeypatch.setattr("researchlens_eval.compare_retrieval.subprocess.run", process)
     manifest = compare(
         tmp_path / "labeled",
         models=["minilm"],
@@ -67,7 +67,7 @@ def test_comparison_uses_same_evidence_and_cutoffs_for_every_mode(tmp_path, monk
 
 def test_stale_labels_and_unavailable_cutoffs_fail_before_ingestion(tmp_path, monkeypatch):
     process = Mock()
-    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    monkeypatch.setattr("researchlens_eval.compare_retrieval.subprocess.run", process)
     labels = json.loads(LABELS.read_bytes())
     labels["dataset_sha256"] = "0" * 64
     stale = tmp_path / "stale.json"
@@ -92,7 +92,7 @@ def test_stale_labels_and_unavailable_cutoffs_fail_before_ingestion(tmp_path, mo
 
 def test_failed_ingestion_is_recorded_and_not_retried(tmp_path, monkeypatch):
     process = Mock(side_effect=[subprocess.TimeoutExpired("local", 1), Mock(returncode=1)])
-    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    monkeypatch.setattr("researchlens_eval.compare_retrieval.subprocess.run", process)
     output = tmp_path / "failed"
     manifest = compare(
         output,
@@ -109,7 +109,7 @@ def test_failed_ingestion_is_recorded_and_not_retried(tmp_path, monkeypatch):
 
 def test_comparison_rejects_held_out_and_unknown_models_before_work(tmp_path, monkeypatch):
     process = Mock()
-    monkeypatch.setattr("researchlens.compare_retrieval.subprocess.run", process)
+    monkeypatch.setattr("researchlens_eval.compare_retrieval.subprocess.run", process)
     with pytest.raises(ValueError, match="development"):
         compare(
             tmp_path / "held-out",

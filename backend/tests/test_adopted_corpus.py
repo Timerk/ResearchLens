@@ -6,9 +6,9 @@ from collections import Counter
 
 from researchlens.artifacts import canonical_hash, load_artifact
 from researchlens.corpus import DIRECTORY
-from researchlens.evaluation import load_dataset, validate_dataset_references
-from researchlens.evaluation_evidence import EvidenceLabels, validate_labels
 from researchlens.ingest import ROOT, build_index
+from researchlens_eval.evaluation import load_dataset, validate_dataset_references
+from researchlens_eval.evaluation_evidence import EvidenceLabels, validate_labels
 
 APPROVAL = ROOT / "evaluation/reviews/2026-10-14-pr15/approval.json"
 # Pinned historical files moved to the archive/evaluation-2026-10 tag; the rest stay on main.

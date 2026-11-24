@@ -7,7 +7,10 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 from researchlens.answers import INSTRUCTIONS, LocalPreview, OpenAIProvider
-from researchlens.evaluation import (
+from researchlens.ingest import CORPUS, ROOT, build_index
+from researchlens.models import Answer, AnswerSection
+from researchlens.retrieval import Retriever
+from researchlens_eval.evaluation import (
     comparison_report,
     digest,
     load_dataset,
@@ -18,10 +21,7 @@ from researchlens.evaluation import (
     validate_artifact,
     validate_splits,
 )
-from researchlens.evaluation_schema import Dataset, GenerationConfig, RetrievalConfig, Review
-from researchlens.ingest import CORPUS, ROOT, build_index
-from researchlens.models import Answer, AnswerSection
-from researchlens.retrieval import Retriever
+from researchlens_eval.evaluation_schema import Dataset, GenerationConfig, RetrievalConfig, Review
 
 
 @pytest.fixture
