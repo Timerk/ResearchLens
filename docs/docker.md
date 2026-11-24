@@ -123,11 +123,11 @@ Chromium against this Docker stack, started with `docker compose up --build` and
 
 - [`desktop-answer.png`](images/desktop-answer.png),
   [`desktop-answer-full.png`](images/desktop-answer-full.png) and
-  [`mobile-answer.png`](images/mobile-answer.png) show the recorded example "Compare
-  illumination and fusion across two studies", replayed by the backend from
-  `GET /api/examples/canopy-heater-fusion`. `gpt-6-luna` wrote the answer during the
+  [`mobile-answer.png`](images/mobile-answer.png) show the recorded example "TDI stages
+  and fixed-pattern noise in wafer inspection", replayed by the backend from
+  `GET /api/examples/wafer-tdi-noise`. `gpt-6-luna` wrote the answer during the
   2026-10-13 development evaluation (`answer-quality-2026-10-13`, case
-  `tech-compare-fusion`, Qwen3-4B with 16,000 context characters). Replays make no API
+  `tech-wafer-exact`, Qwen3-4B with 12,000 context characters). Replays make no API
   call; the header shows local preview because that is the server's own mode.
 - [`desktop-local-preview.png`](images/desktop-local-preview.png) shows a typed question
   answered in local preview mode: the ranked passages, no written answer, no API call.

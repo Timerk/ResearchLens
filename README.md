@@ -20,7 +20,7 @@ for recorded examples and live-answer limits.
 
 *A recorded answer replayed on the question page with its first citation open. `gpt-6-luna`
 wrote it during the 2026-10-13 development evaluation run (`answer-quality-2026-10-13`,
-case `tech-compare-fusion`, Qwen3-4B retrieval with 16,000 context characters); the
+case `tech-wafer-exact`, Qwen3-4B retrieval with 12,000 context characters); the
 backend replays the saved run, so no API call was made. The stack ran locally without an
 API key, which is why the header shows local preview.
 More screenshots: [landing page](docs/images/landing.png),

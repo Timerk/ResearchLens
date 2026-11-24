@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const base = process.env['BASE_URL'] ?? 'http://127.0.0.1:4200';
 const out = (name) => fileURLToPath(new URL(`../../docs/images/${name}`, import.meta.url));
-const example = 'Compare illumination and fusion across two studies';
+const example = 'TDI stages and fixed-pattern noise in wafer inspection';
 const question = 'Why combine forward and backward lighting for aircraft glass canopy inspection?';
 
 const browser = await chromium.launch();
